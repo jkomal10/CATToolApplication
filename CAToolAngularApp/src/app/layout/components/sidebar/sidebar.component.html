@@ -1,0 +1,66 @@
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
+    <div class="list-group">
+        <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>Dashboard</span>
+        </a>
+
+        <a routerLink="/user" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>Users</span>
+        </a>
+
+        <a routerLink="/assessment-questions" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>Assessment Questions</span>
+        </a>
+
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('pages')">
+                <i class="fa fa-plus"></i>&nbsp;
+                <span>Decision Tree</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'pages'">
+                <ul class="submenu">
+                    <li>
+                        <a routerLink="/for-cloudable" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <span>For Cloudable</span>
+                        </a>
+
+                    </li>
+                    <li>
+                        <a routerLink="/for-migration-pattern" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <span>For Migration Pattern</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/for-cloud-provider" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <span>For Cloud Provider</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/reassessment" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <span>Reassessment</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+        </div>
+
+        <a routerLink="/application" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>Application</span>
+        </a>
+
+        <a routerLink="/report" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>Report</span>
+        </a>
+    </div>
+
+    <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
+        <i class="fa fa-fw fa-angle-double-left"></i>&nbsp;
+        <span>Collapse Sidebar</span>
+    </div>
+</nav>
