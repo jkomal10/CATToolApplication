@@ -5,8 +5,13 @@ import { UserComponent } from './user.component';
 const routes: Routes = [
     {
         path: '',
-        component: UserComponent
+        component: UserComponent,
+        children: [
+            { path: 'adduser', loadChildren: './adduser/adduser.module#AdduserModule' }
+        ]
+        
     }
+    
 ];
 
 @NgModule({

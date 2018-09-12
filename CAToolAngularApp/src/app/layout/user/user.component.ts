@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient, HttpResponse,HttpHeaders } from '@angular/common/http';
 
 class Person {
@@ -24,7 +25,15 @@ export class UserComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   persons: Person[];
 
-  constructor(private http: HttpClient) { }
+  constructor(public router: Router,private http: HttpClient) { }
+
+  //private loadcomponent=false;
+
+  addusers()
+  {
+   // this.loadcomponent=true;
+    this.router.navigate(['/adduser']);
+  }
 
   ngOnInit() {
     const that = this;
