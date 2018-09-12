@@ -1,4 +1,4 @@
-package com.cattool.CATToolApp;
+package com.cattool.application.CATToolApp;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

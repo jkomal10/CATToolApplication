@@ -1,12 +1,12 @@
-package com.cattool.cattool.service;
+package com.cattool.application.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cattool.cattool.entity.Users;
-import com.cattool.cattool.repository.UserRepository;
+import com.cattool.application.entity.Users;
+import com.cattool.application.repository.UserRepository;
 
 @Service
 public class CattoolService {
