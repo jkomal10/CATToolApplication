@@ -14,13 +14,18 @@ public class CattoolService {
 	@Autowired
 	UserRepository userRepository;
 	
-	public List<Users> getAllUsers() {
+	public List<Users> getUsers() {
 		return userRepository.findAll();
 	}
 		
-	public Users findByUserName(String userName) {
+	public Users findById(String userName) {
 		return userRepository.findByUserName(userName);
 		
+	}
+	
+	public Users addUser(Users user)
+	{
+		return userRepository.save(user);
 	}
 	
 }

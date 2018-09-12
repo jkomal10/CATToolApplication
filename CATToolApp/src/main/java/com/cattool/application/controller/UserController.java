@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cattool.application.entity.Users;
 import com.cattool.application.repository.UserRepository;
+import com.cattool.application.service.CattoolService;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
 	@Autowired
-	UserRepository	userRepository; 
+	CattoolService	userService; 
 	
 	 @GetMapping("/getuser")
 		public String getuser() {
@@ -29,22 +30,22 @@ public class UserController {
 	 @PostMapping("/addUser")
 		public Users saveUser(@RequestBody Users user){
 		 
-			return userRepository.save(user);
+			return userService.addUser(user);
 		}
 	 
 	 @GetMapping("/getAllUsers")
 		public List<Users> getAllUsers() {
-			return userRepository.findAll();
+			return userService.getUsers();
 			
 	  }
 	 
 	 @PostMapping("/getbyUserName/{firstName}")
 		public Users getUserByName(@PathVariable String firstName) {
 		 	Users user=new Users();
-		 	user=userRepository.findByUserName(firstName);
+		 	user=userService.findById(firstName);
 		 	if(user!=null)
 		 	{
-		 		return userRepository.findByUserName(firstName);
+		 		return userService.findById(firstName);
 		 	}
 		 	else
 		 	{
