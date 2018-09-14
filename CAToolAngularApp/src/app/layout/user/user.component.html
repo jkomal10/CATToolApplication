@@ -9,7 +9,7 @@
   </div>
   <br>
   <div class="container">
-    <table datatable id="user-list" class="table table-bordered table-striped ">
+    <table datatable="bootstrap" id="user-list" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped ">
         <thead>
           <tr>
             <th>Username</th>
@@ -20,27 +20,36 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Mary</td>
-            <td>Moe</td>
-            <td>mary@example.com</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>July</td>
-            <td>Dooley</td>
-            <td>july@example.com</td>
-            <td></td>
-            <td></td>
-          </tr>
+            <tr *ngFor = "let size of AllData">
+                <td>{{size.userName}}</td>
+                <td>{{size.ipAddress}}</td>
+                <td>{{size.company}}</td>
+                <td>{{size.lastLogin}}</td>
+                <td>
+                <!-- <div class="btn-group"> -->
+                <a routerLink="/users" [routerLinkActive]="['router-link-active']" class="btn btn-info" style="margin-right: 2px">
+                <i class="fa fa-key"></i>&nbsp;
+                <span></span>
+                </a>
+                <a routerLink="/editusers" [routerLinkActive]="['router-link-active']" class="btn btn-success" style="margin-right: 2px">
+                <i class="fa fa-edit"></i>&nbsp;
+                <span></span>
+                </a>
+                <a routerLink="/deleteusers" [routerLinkActive]="['router-link-active']" class="btn btn-danger" style="margin-right: 2px">
+                <i class="fa fa-trash-o"></i>&nbsp;
+                <span></span>
+                </a>
+                <!-- </div> -->
+                <!-- <div class="btn-group" role="group" aria-label="..."> -->
+                <!-- <button type="button" class="btn btn-info" style="margin-right: 5px">q<i class="glyphicon glyphicon-search">
+                </i></button>
+                <button type="button" class="btn btn-success" style="margin-right: 5px">q<i class="glyphicon glyphicon-pencil">
+                </i></button>
+                <button type="button" class="btn btn-danger" style="margin-right: 5px" >q<i class="glyphicon glyphicon-trash">
+                </i></button> -->
+                <!-- </div> -->
+                </td>
+                </tr> 
         </tbody>
       </table>
 </div>
