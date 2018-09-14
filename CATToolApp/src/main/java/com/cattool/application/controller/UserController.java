@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cattool.application.entity.Users;
 import com.cattool.application.repository.UserRepository;
-import com.cattool.application.service.CattoolService;
+import com.cattool.application.service.UserService;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
 	@Autowired
-	CattoolService	userService; 
+	UserService	userService; 
 	
 	 @GetMapping("/getuser")
 		public String getuser() {
