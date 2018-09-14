@@ -9,7 +9,7 @@ import com.cattool.application.entity.Users;
 import com.cattool.application.repository.UserRepository;
 
 @Service
-public class CattoolService {
+public class UserService {
 	
 	@Autowired
 	UserRepository userRepository;

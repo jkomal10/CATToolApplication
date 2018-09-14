@@ -7,6 +7,7 @@ const routes: Routes = [
         path: '',
         component: UserComponent,
         children: [
+            { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' },
             { path: 'adduser', loadChildren: './adduser/adduser.module#AdduserModule' }
         ]
         
