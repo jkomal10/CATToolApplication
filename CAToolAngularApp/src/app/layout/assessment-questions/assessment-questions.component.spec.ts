@@ -1,6 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { RouterTestingModule } from '@angular/router/testing'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
-import { AssessmentQuestionsComponent } from './assessment-questions.component';
+import { AssessmentQuestionsComponent } from './assessment-questions.component'
+import {AssessmentQuestionsModule} from './assessment-questions.module'
 
 describe('AssessmentQuestionsComponent', () => {
   let component: AssessmentQuestionsComponent;
@@ -8,7 +11,11 @@ describe('AssessmentQuestionsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AssessmentQuestionsComponent ]
+      imports: [
+        AssessmentQuestionsModule,
+        RouterTestingModule,
+        BrowserAnimationsModule,
+      ],
     })
     .compileComponents();
   }));
