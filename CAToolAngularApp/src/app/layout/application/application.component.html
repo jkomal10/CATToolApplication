@@ -1,3 +1,70 @@
-<p>
-  application works!
-</p>
+<div>
+  <div>
+    <h2 class="text-muted">Users <small>list of users</small></h2>
+  </div>
+  <div>
+    <button type="button" class="btn btn-info btn-md" style="margin-right: 5px" >Add User</button>
+    <!-- <adduser *ngif="loadcomponent"></adduser> -->
+    <button type="button" class="btn btn-info btn-md">Upload user Info</button>
+    </div>
+    <br>
+    <div class="container">
+      <table datatable id="user-list" class="table table-bordered table-striped ">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Ip Address(s)</th>
+              <th>Company</th>
+              <th>LastLogin</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John</td>
+              <td>Doe</td>
+              <td>john@example.com</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Mary</td>
+              <td>Moe</td>
+              <td>mary@example.com</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>July</td>
+              <td>Dooley</td>
+              <td>july@example.com</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+  
+  </div>
+  
+  
+  
+  <!-- <table datatable [dtOptions]="dtOptions" class="row-border hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of persons">
+        <td>{{ person.id }}</td>
+        <td>{{ person.first_name }}</td>
+        <td>{{ person.last_name }}</td>
+      </tr>
+      <tr *ngIf="persons?.length == 0">
+        <td colspan="3" class="no-data-available">No data!</td>
+      </tr>
+    </tbody>
+  </table> -->
