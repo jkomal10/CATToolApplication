@@ -1,23 +1,19 @@
 <div>
-    <div>
       <h2 class="text-muted">Users <small>list of users</small></h2>
-    </div>
-    <div>
-        <form role="form" (ngSubmit)="onLoggedin()">
-      <button type="button" class="btn btn-info btn-md" style="margin-right: 5px" >Add User</button>
-      <!-- <adduser *ngif="loadcomponent"></adduser> -->
-      <button type="button" class="btn btn-info btn-md">Upload user Info</button>
-        </form>    
-      </div>
       <br>
-      <div class="container">
+      <p>
+      <form role="form" #loginForm="ngForm" (ngSubmit)="form()">
+      <input type="submit"class="btn btn-info btn-md" value="import Questions">&ngsp;&ngsp;
+      </form><br>
+      <form role="form" #loginForm="ngForm" (ngSubmit)="myFunction()">
+      <input type="submit"class="btn btn-info btn-md" value="Add Assessment Questions"><br>
+      <br>
         <table datatable id="user-list" class="table table-bordered table-striped ">
             <thead>
               <tr>
-                <th>Username</th>
-                <th>Ip Address(s)</th>
-                <th>Company</th>
-                <th>LastLogin</th>
+                <th>Assessment Type</th>
+                <th>Questions</th>
+                <th>Question Display Order</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -27,13 +23,11 @@
                 <td>Doe</td>
                 <td>john@example.com</td>
                 <td></td>
-                <td></td>
               </tr>
               <tr>
                 <td>Mary</td>
                 <td>Moe</td>
                 <td>mary@example.com</td>
-                <td></td>
                 <td></td>
               </tr>
               <tr>
@@ -41,32 +35,8 @@
                 <td>Dooley</td>
                 <td>july@example.com</td>
                 <td></td>
-                <td></td>
               </tr>
             </tbody>
           </table>
+        </form>
     </div>
-    
-    </div>
-    
-    
-    
-    <!-- <table datatable [dtOptions]="dtOptions" class="row-border hover">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>First name</th>
-          <th>Last name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let person of persons">
-          <td>{{ person.id }}</td>
-          <td>{{ person.first_name }}</td>
-          <td>{{ person.last_name }}</td>
-        </tr>
-        <tr *ngIf="persons?.length == 0">
-          <td colspan="3" class="no-data-available">No data!</td>
-        </tr>
-      </tbody>
-    </table> -->

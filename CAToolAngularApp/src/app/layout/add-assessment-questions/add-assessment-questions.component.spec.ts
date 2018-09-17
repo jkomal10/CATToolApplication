@@ -2,27 +2,27 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
-import { AssessmentQuestionsComponent } from './assessment-questions.component'
-import { AssessmentQuestionsModule } from './assessment-questions.module'
+import { AddAssessmentQuestionsComponent } from './add-assessment-questions.component'
+import { AddAssessmentQuestionsModule } from './add-assessment-questions.module'
 
-describe('AssessmentQuestionsComponent', () => {
-  let component: AssessmentQuestionsComponent;
-  let fixture: ComponentFixture<AssessmentQuestionsComponent>;
+describe('AddAssessmentQuestionsComponent', () => {
+  let component: AddAssessmentQuestionsComponent;
+  let fixture: ComponentFixture<AddAssessmentQuestionsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        AssessmentQuestionsModule,
+        AddAssessmentQuestionsModule,
         RouterTestingModule,
         BrowserAnimationsModule,
       ],
-      declarations: [ AssessmentQuestionsComponent ],
+      declarations: [ AddAssessmentQuestionsComponent ],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AssessmentQuestionsComponent);
+    fixture = TestBed.createComponent(AddAssessmentQuestionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
