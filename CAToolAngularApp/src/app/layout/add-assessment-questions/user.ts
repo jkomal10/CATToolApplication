@@ -1,11 +1,14 @@
-export interface IUser{
-    qid : number,
-    questionType : string,
-    isDeleted : number,
-    question : string,
-    displayOrder : number,
-    numberOfOptions : number,
-    description : string,
-    assessmentType : string,
-    isActive : number    
+export interface IUser{   
+
+     questionId : number;
+	 questionText : string;
+	 questionDescription : string;
+	 questionType : string;
+	 questionDisplayOrder : number;
+	 numberOfOption : number;
+	 isActive : boolean;
+	 isDelete : boolean;
+	 assessmentTypeForMigration : string;
+	 assessmentTypeForCloudProvider : string;
+	 assessmentTypeForCloudable : string;
 }

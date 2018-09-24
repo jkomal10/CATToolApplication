@@ -2,41 +2,31 @@
       <h2 class="text-muted">Users <small>list of users</small></h2>
       <br>
       <p>
-      <form role="form" #loginForm="ngForm" (ngSubmit)="form()">
+      <form role="form" #addAssessmentQuestionsForm="ngForm" (ngSubmit)="importQuestions()">
       <input type="submit"class="btn btn-info btn-md" value="import Questions">&ngsp;&ngsp;
       </form><br>
-      <form role="form" #loginForm="ngForm" (ngSubmit)="myFunction()">
+      <form role="form" #addAssessmentQuestionsForm="ngForm" (ngSubmit)="addQuestions(addAssessmentQuestionsForm.value)">
       <input type="submit"class="btn btn-info btn-md" value="Add Assessment Questions"><br>
       <br>
         <table datatable id="user-list" class="table table-bordered table-striped ">
             <thead>
               <tr>
-                <th>Assessment Type</th>
                 <th>Questions</th>
+                <th>questionDescription</th>
+                <th>questionType</th>
                 <th>Question Display Order</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>mary@example.com</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>july@example.com</td>
-                <td></td>
-              </tr>
-            </tbody>
+              <tr *ngFor = "let size of AllData">
+                  <td>{{size.questionText}}</td>
+                  <td>{{size.questionDescription}}</td>
+                  <td>{{size.questionType}}</td>
+                  <td>{{size.questionDisplayOrder}}</td>
+                  <td></td>
+                  </tr> 
+          </tbody>
           </table>
         </form>
     </div>

@@ -1,7 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient, HttpResponse,HttpHeaders } from '@angular/common/http';
+import { AssessmentQuestionsService } from './assessment-questions.service';
+import { Subject } from '../../../../node_modules/rxjs';
 
-import{AssessmentQuestionsService} from './assessment-questions.service';
+class Person {
+  id: number;
+  first_name: string;
+  last_name: string;
+}
+
+class DataTablesResponse {
+  data: any[];
+  draw: number;
+  recordsFiltered: number;
+  recordsTotal: number;
+}
 
 @Component({
   selector: 'app-assessment-questions',
@@ -9,26 +23,39 @@ import{AssessmentQuestionsService} from './assessment-questions.service';
   styleUrls: ['./assessment-questions.component.scss']
 })
 export class AssessmentQuestionsComponent implements OnInit {
-  public user;
-  password : string = "pass";
-  username : string = "user";
-  constructor(public router: Router,private loginservice : AssessmentQuestionsService) {}
 
-  ngOnInit() {}
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
 
-  myFunction() {
-    localStorage.setItem('isLoggedin', 'true');   
-    this.router.navigate(['/add-assessment-questions']);
-    console.log(this.username); 
-  }
- 
+  persons: Person[];
+  AllData : any = [];
+  constructor(private getData :AssessmentQuestionsService,public router: Router,private http: HttpClient) { 
 
-  form() {
-    localStorage.setItem('isLoggedin', 'true');   
-    this.router.navigate(['/import-questions']);
-    console.log(this.username);   
   }
 
-}
+  ngOnInit() {
 
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 2,
+      responsive: true};
 
+    this.getData.CollectData().subscribe(result => 
+      {
+      this.AllData = result ;
+      this.dtTrigger.next();
+      console.log(this.AllData);
+      }); 
+
+  }
+
+  importQuestions() {
+       this.router.navigate(['/import-questions']);
+       }
+
+  addQuestions(formValues) {
+    console.log(formValues.questionText+" && "+formValues.questionDescription);
+        this.router.navigate(['/add-assessment-questions']);
+        }
+
+  }

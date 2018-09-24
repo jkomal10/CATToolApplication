@@ -15,14 +15,8 @@ export class AssessmentQuestionsService {
      }
 
      CollectData(){
-        const url = 'http://localhost:8090/users/getAllUsers';
+        const url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';
+        console.log('*********************************************'+url+'***********************');
         return this.http.get(url);
         }
-
-    getUserByID(username : string):Observable<IUser>{
-        let headers = new HttpHeaders();
-        headers.append("Authorization", "Basic " + btoa("Nirav" + ":" + "password"));
-        headers.append('Content-Type', 'application/json; charset=utf-8');
-        return this.http.get<IUser>(this.getUserByID_url+username); 
-    }
 }
