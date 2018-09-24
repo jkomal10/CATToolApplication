@@ -5,10 +5,16 @@ import { FormsModule } from '@angular/forms';
 
 import { ApplicationRoutingModule } from './application-routing.module';
 import { ApplicationComponent } from './application.component';
+import { AddApplicationComponent } from './add-application/add-application.component';
+import { ImportApplicationComponent } from './import-application/import-application.component';
 
 @NgModule({
     imports: [CommonModule, ApplicationRoutingModule,DataTablesModule],
-    declarations: [ApplicationComponent]
+    declarations: [
+        ApplicationComponent,
+         AddApplicationComponent,
+          ImportApplicationComponent
+        ]
 })
 
 export class ApplicationModule {}

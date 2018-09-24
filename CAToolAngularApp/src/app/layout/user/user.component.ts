@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpResponse,HttpHeaders } from '@angular/common/http';
 import { UsersService } from './user.service';
 import { Subject } from '../../../../node_modules/rxjs';
@@ -29,7 +29,10 @@ export class UserComponent implements OnInit {
 
   persons: Person[];
   AllData : any = [];
-  constructor(private getData : UsersService,public router: Router,private http: HttpClient) { 
+  constructor(private getData : UsersService,
+    private _activatedRouter: ActivatedRoute,
+    public router: Router,
+    private http: HttpClient) { 
 
   }
 

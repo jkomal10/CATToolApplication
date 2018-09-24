@@ -1,0 +1,44 @@
+<div>
+    <h2 class="text-muted"> <small>Application</small></h2>
+    <form role="form">
+    <div class="form-content">
+        <div class="form-group">
+            <label><font color="green"><b>Application Name</b></font></label>
+            <input type="text"  [ngModel]="appName" class="form-control input-underline input-lg" name="appName" placeholder="Application Name" required/>
+        </div>
+        <div class="form-group">
+                <label><font color="green"><b>Application Description</b></font></label>
+                <input type="text"  [ngModel]="appDescription" class="form-control input-underline input-lg" name="appDescription" placeholder="Application Description" required/>
+            </div>
+        <div class="form-group">
+            <label><font color="green"><b>Application Id</b></font></label>
+            <input type="text"  [ngModel]="appId" class="form-control input-underline input-lg" name="appId" placeholder="Application Id" required/>
+        </div>
+        <div class="form-group">
+            <label><font color="green"><b>Application Type</b></font></label>
+            <input type="text"  [ngModel]="appType" class="form-control input-underline input-lg" name="appType" placeholder="Application Type" required/>
+        </div>
+        <div class="form-group">
+            <label><font color="green"><b>Department</b></font></label>
+            <input type="text" [ngModel]="department" name="department" class="form-control input-underline input-lg" placeholder="Department" required/>
+        </div>
+        <div class="form-group">
+            <label><font color="green"><b>Application count</b></font></label>
+            <input type="text"  [ngModel]="appCount" class="form-control input-underline input-lg" name="appCount" placeholder="application count" required/>
+        </div>
+        <div class="form-group">
+            <label><font color="green"><b>List of Applications</b></font></label>
+            <input type="text"  [ngModel]="listOfApplication" class="form-control input-underline input-lg" name="listOfApplication" placeholder="listOfApplication" required/>
+        </div>
+        <div class="form-group">
+            <label><font color="green"><b>Application Owner</b></font></label>
+            <input type="text"  [ngModel]="appOwner" class="form-control input-underline input-lg" name="appOwner" placeholder="Application Owner" required/>
+        </div>
+        <div class="form-group">
+            <label><font color="green"><b>Iteration Number</b></font></label>
+            <input type="number"  [ngModel]="iterationNumber" class="form-control input-underline input-lg" name="iterationNumber" placeholder="Iteration Number" required/>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-info btn-md" value="Add Assessment Questions" ><br>
+</form>
+</div>

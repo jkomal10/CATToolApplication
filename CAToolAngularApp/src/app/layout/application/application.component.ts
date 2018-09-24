@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-application',
   templateUrl: './application.component.html',
@@ -7,8 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicationComponent implements OnInit {
 
-  constructor() { }
+  constructor(public router:Router) { }
 
+  form(){
+    this.router.navigate(['/application/add-application']);
+  }
+  myFunction()
+  {
+    this.router.navigate(['/application/import-application']);
+  }
+  
   ngOnInit() {
   }
 
