@@ -1,4 +1,4 @@
-export class Customer{
+export class Question{
 
     questionId : number;
     questionText : string;
@@ -6,4 +6,7 @@ export class Customer{
     questionType : string;
     questionDisplayOrder : number;
     numberOfOption : number;
+    assessmentTypeForMigration : string;
+    assessmentTypeForCloudProvider : string;
+    assessmentTypeForCloudable : string;
 }

@@ -12,4 +12,9 @@ export class ImportQuestionComponent implements OnInit {
   ngOnInit() {
   }
 
+  newQuestions(): void {
+    console.log('questions');
+    
+  }
+
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Customer } from './Customer';
+import { Question } from './Question';
 import { AddAssessmentQuestionService } from './add-assessment-question.service';
 
 @Component({
@@ -9,23 +9,23 @@ import { AddAssessmentQuestionService } from './add-assessment-question.service'
 })
 export class AddAssessmentQuestionComponent implements OnInit {
 
-  customer: Customer = new Customer();
+  question: Question = new Question();
   submitted = false;
 
-  constructor(private customerService: AddAssessmentQuestionService) { }
+  constructor(private questionService: AddAssessmentQuestionService) { }
 
   ngOnInit() {
   }
 
-  newCustomer(): void {
+  newQuestion(): void {
     this.submitted = false;
-    this.customer = new Customer();
+    this.question = new Question();
   }
 
   save() {
-    this.customerService.createCustomer(this.customer)
+    this.questionService.createQuestion(this.question)
       .subscribe(data => console.log(data), error => console.log(error));
-    this.customer = new Customer();
+    this.question = new Question();
   }
 
   onSubmit() {

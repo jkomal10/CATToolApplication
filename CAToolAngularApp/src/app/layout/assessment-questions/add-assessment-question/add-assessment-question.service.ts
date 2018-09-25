@@ -15,10 +15,6 @@ export class AddAssessmentQuestionService {
     
    }
 
-  createCustomer(customer: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}` + `/create`, customer);
-  }
-
   createQuestion(question: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}` + `/create`, question);
   }

@@ -1,15 +1,43 @@
-<h3>Add Questions</h3>
+<h3>Assessment Questions</h3>
 <div [hidden]="submitted" style="width: 300px;">
   <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+          <br>
+          <label for="questionType"><b>Assessment Type</b></label><br>
+          <input type="checkbox" [(ngModel)]="question.assessmentTypeForMigration" name="assessmentTypeForMigration" >&ngsp;<label>Migration</label><br/>
+          <input type="checkbox" [(ngModel)]="question.assessmentTypeForCloudProvider" name="assessmentTypeForCloudProvider">&ngsp;<label>cloud provider</label><br/>
+          <input type="checkbox" [(ngModel)]="question.assessmentTypeForCloudable" name="assessmentTypeForCloudable">&ngsp;<label>Cloudable</label><br/>
+        </div>
     <div class="form-group">
-      <label for="questionText">Question</label>
-      <input type="text" class="form-control" id="questionText" required [(ngModel)]="customer.questionText" name="questionText">
-    </div>
+        <label for="questionType">Question Type</label>
+        <select  [(ngModel)]="question.questionType" class="form-control" name="questionType">
+            <option value="Multiple Choice Single Question">Multiple Choice Single Question</option>
+            <option value="Multiple Choice Multiple Answer">Multiple Choice Multiple Answer</option>
+            <option value="Short Answer">Short Answer</option>
+            <option value="Long Answer">Long Answer</option>
+        </select>
+      
+      </div>
 
     <div class="form-group">
-      <label for="numberOfOption">number of option</label>
-      <input type="text" class="form-control" id="numberOfOption" required [(ngModel)]="customer.numberOfOption" name="numberOfOption">
-    </div>
+        <label for="questionDisplayOrder">Question Display Order</label>
+        <input type="text" class="form-control" id="questionDisplayOrder" required [(ngModel)]="question.questionDisplayOrder" name="questionDisplayOrder">
+      </div>
+
+    <div class="form-group">
+          <label for="numberOfOption">number of option</label>
+          <input type="text" class="form-control" id="numberOfOption" required [(ngModel)]="question.numberOfOption" name="numberOfOption">
+        </div>
+
+    <div class="form-group">
+      <label for="questionText">Question</label>
+      <input type="text" class="form-control" id="questionText" required [(ngModel)]="question.questionText" name="questionText">
+    </div> 
+
+    <div class="form-group">
+        <label for="questionDescription">Question Description</label>
+        <input type="text" class="form-control" id="questionDescription" required [(ngModel)]="question.questionDescription" name="questionDescription">
+      </div> 
 
     <button type="submit" class="btn btn-success">Submit</button>
   </form>
@@ -17,5 +45,5 @@
 
 <div [hidden]="!submitted">
   <h4>You submitted successfully!</h4>
-  <button class="btn btn-success" (click)="newCustomer()">Add</button>
+  <button class="btn btn-success" (click)="newQuestion()">Add</button>
 </div>

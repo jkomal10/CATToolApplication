@@ -5,7 +5,7 @@
           <input type="submit"class="btn btn-info btn-md" value="add Questions" (click)="addQuestions()">&ngsp;&ngsp;
         <input type="submit"class="btn btn-info btn-md" value="import Questions" (click)="importQuestions()"><br>
       <br>
-      <table datatable="bootstrap" id="user-list" [dtOptions]="dtOptions" class="table table-bordered table-striped ">
+      <table datatable="bootstrap" id="user-list" [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-bordered table-striped ">
         <thead>
               <tr>
                 <th>Questions</th>
@@ -21,7 +21,18 @@
                   <td>{{size.questionDescription}}</td>
                   <td>{{size.questionType}}</td>
                   <td>{{size.questionDisplayOrder}}</td>
-                  <td></td>
+                  <td><a routerLink="/users" [routerLinkActive]="['router-link-active']" class="btn btn-info" style="margin-right: 2px">
+                    <i class="fa fa-key"></i>&nbsp;
+                    <span></span>
+                    </a>
+                    <a routerLink="/editusers" [routerLinkActive]="['router-link-active']" class="btn btn-success" style="margin-right: 2px">
+                    <i class="fa fa-edit"></i>&nbsp;
+                    <span></span>
+                    </a>
+                    <a routerLink="/deleteusers" [routerLinkActive]="['router-link-active']" class="btn btn-danger" style="margin-right: 2px">
+                    <i class="fa fa-trash-o"></i>&nbsp;
+                    <span></span>
+                    </a></td>
                   </tr> 
           </tbody>
           </table>
