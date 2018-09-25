@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { AddApplicationService } from './add-application.service';
+import { Application } from '../Application';
 
 @Component({
   selector: 'app-add-application',
@@ -7,9 +12,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddApplicationComponent implements OnInit {
 
-  constructor() { }
+  application: Application = new Application();
+  submitted = false;
+  constructor(private router:Router,private addapplicationService:AddApplicationService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+
+    newCustomer(): void {
+      this.submitted = false;
+      this.application = new Application();
+    }
+   
+    save() {
+      this.addapplicationService.createApplication(this.application)
+        .subscribe(data => console.log(data), error => console.log(error));
+      this.application = new Application();
+    }
+   
+    onSubmit() {
+      this.submitted = true;
+      this.save();
+    }
 
 }

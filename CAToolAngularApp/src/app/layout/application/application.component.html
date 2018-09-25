@@ -19,7 +19,7 @@
        </div>
       <br>
     <div class="container">
-      <table datatable id="app-list" class="table table-bordered table-striped ">
+        <table datatable id="user-list" class="table table-bordered table-striped ">
           <thead>
             <tr>
               <th>Application name</th>
@@ -32,34 +32,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Priyanjali</td>
-              <td>111111</td>
-              <td>john@example.com</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>July</td>
-              <td>Dooley</td>
-              <td>july@example.com</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
+            <tr *ngFor = "let size of AllData">
+                <td>{{size.applicationName}}</td>
+                <td>{{size.applicationDescription}}</td>
+                <td>{{size.applicationList}}</td>
+                <td>{{size.cloudable}}</td>
+                <td>{{size.migrationMethod}}</td>
+                <td>{{size.cloudProvider}}</td>
+                <td></td>
+                </tr> 
+        </tbody>
         </table>
   </div>
   

@@ -1,18 +1,55 @@
-<!-- <div>
+	
+<h2 class="text-muted">Application <small>Add new Applictaion</small></h2>
+<div [hidden]="submitted" style="width: 300px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-content">
+        <div class="form-group">
+            <label for="applicationName"><font color="green">Application Name</font></label>
+            <input type="text" class="form-control" id="applicationName" required [(ngModel)]="application.applicationName" name="applicationName">
+            
+        </div>
+        <div class="form-group">
+                <label><font color="green">Application Description</font></label>
+                <input type="text" class="form-control" id="applicationDescription" required [(ngModel)]="application.applicationDescription" name="applicationDescription">
+               
+            </div>
+        <div class="form-group">
+            <label><font color="green">Application Id</font></label>
+            <input type="text" class="form-control" id="applicationId" required [(ngModel)]="application.applicationId" name="applicationId">
+            
+        </div>
+        <div class="form-group">
+            <label><font color="green">Application Type</font></label>
+            <input type="text" class="form-control" id="applicationType" required [(ngModel)]="application.applicationType" name="applicationType">
+            
+        </div>
+        
+    </div>
+ 
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+ 
+<div [hidden]="!submitted">
+  <h4>You submitted successfully!</h4>
+  <button class="btn btn-info" (click)="newCustomer()">Add</button>
+</div>
+<!-- <p>
+ <div>
     <h2 class="text-muted"> <small>Application</small></h2>
-    <form role="form">
+    <form role="form" #AddApplicationsForm="ngForm" (ngSubmit)="form(AddApplicationsForm.value)">
     <div class="form-content">
         <div class="form-group">
             <label><font color="green"><b>Application Name</b></font></label>
-            <input type="text"  [ngModel]="appName" class="form-control input-underline input-lg" name="appName" placeholder="Application Name" required/>
+            <input type="text"  [ngModel]="appName" class="form-control input-underline input-lg" name="appName" placeholder="appName" required/>
         </div>
         <div class="form-group">
                 <label><font color="green"><b>Application Description</b></font></label>
-                <input type="text"  [ngModel]="appDescription" class="form-control input-underline input-lg" name="appDescription" placeholder="Application Description" required/>
+                <input type="text"  [ngModel]="appDescription" class="form-control input-underline input-lg" name="appDescription" placeholder="appDescription" required/>
             </div>
         <div class="form-group">
             <label><font color="green"><b>Application Id</b></font></label>
-            <input type="text"  [ngModel]="appId" class="form-control input-underline input-lg" name="appId" placeholder="Application Id" required/>
+            <input type="text"  [ngModel]="appId" class="form-control input-underline input-lg" name="appId" placeholder="appId" required/>
         </div>
         <div class="form-group">
             <label><font color="green"><b>Application Type</b></font></label>
@@ -41,4 +78,4 @@
     </div>
     <input type="submit" class="btn btn-info btn-md" value="Add Assessment Questions" ><br>
 </form>
-</div> -->
+</div>  -->

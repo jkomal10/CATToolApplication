@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpResponse,HttpHeaders } from '@angular/common/http';
 import { UsersService } from './user.service';
-import { Subject } from 'rxjs';
+import { Subject } from '../../../../node_modules/rxjs';
 
 class Person {
   id: number;

@@ -16,6 +16,7 @@ const routes: Routes = [
             { path: 'application', loadChildren: './application/application.module#ApplicationModule' },
             { path: 'assessment-questions', loadChildren: './assessment-questions/assessment-questions.module#AssessmentQuestionsModule' },
             { path: 'import-questions', loadChildren: './import-questions/import-questions.module#ImportQuestionsModule' },
+            { path: 'add-assessment-questions', loadChildren: './add-assessment-questions/add-assessment-questions.module#AddAssessmentQuestionsModule' },
             { path: 'report', loadChildren: './report/report.module#ReportModule' },
             { path: 'for-cloud-provider', loadChildren: './decision-tree/for-cloud-provider/for-cloud-provider.module#ForCloudProviderModule' },
             { path: 'for-cloudable', loadChildren: './decision-tree/for-cloudable/for-cloudable.module#ForCloudableModule' },
