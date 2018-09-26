@@ -2,14 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpResponse,HttpHeaders } from '@angular/common/http';
 import { AssessmentQuestionsService } from './assessment-questions.service';
-import { Subject } from '../../../../node_modules/rxjs';
-
-class Person {
-  id: number;
-  first_name: string;
-  last_name: string;
-}
-
+import { Subject } from 'rxjs';
 class DataTablesResponse {
   data: any[];
   draw: number;
@@ -26,8 +19,6 @@ export class AssessmentQuestionsComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
-
-  persons: Person[];
   AllData : any = [];
   constructor(private getData :AssessmentQuestionsService,public router: Router,private http: HttpClient) { 
 
@@ -37,7 +28,7 @@ export class AssessmentQuestionsComponent implements OnInit {
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2,
+      pageLength: 10,
       responsive: true};
 
     this.getData.CollectData().subscribe(result => 
@@ -50,12 +41,25 @@ export class AssessmentQuestionsComponent implements OnInit {
   }
 
   importQuestions() {
-       this.router.navigate(['/import-questions']);
+       this.router.navigate(['/assessment-questions/import-question']);
        }
 
-  addQuestions(formValues) {
-    console.log(formValues.questionText+" && "+formValues.questionDescription);
-        this.router.navigate(['/add-assessment-questions']);
+  addQuestions() {
+        this.router.navigate(['/assessment-questions/add-assessment-question']);
         }
+
+  deleteQuestions(formvalues) {
+    this.getData.deleteQuestion(formvalues)
+    .subscribe(
+      data => {
+        console.log(data);
+      },
+      error => console.log('ERROR: ' + error));
+      this.router.navigate(['/assessment-questions']);
+  }
+
+  updateQuestions(formvalues){
+    this.router.navigate(['/dashboard']);
+  }
 
   }

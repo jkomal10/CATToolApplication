@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Question } from './Question';
 import { AddAssessmentQuestionService } from './add-assessment-question.service';
 
@@ -12,7 +13,7 @@ export class AddAssessmentQuestionComponent implements OnInit {
   question: Question = new Question();
   submitted = false;
 
-  constructor(private questionService: AddAssessmentQuestionService) { }
+  constructor(private questionService: AddAssessmentQuestionService,public router: Router) { }
 
   ngOnInit() {
   }
@@ -31,5 +32,9 @@ export class AddAssessmentQuestionComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.save();
+  }
+
+  addAssessment(){
+    this.router.navigate(['/assessment-questions']);
   }
 }

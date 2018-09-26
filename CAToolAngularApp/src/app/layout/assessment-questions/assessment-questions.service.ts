@@ -7,16 +7,18 @@ import {IUser} from './user';
 
 @Injectable()
 export class AssessmentQuestionsService {
-
-  private getUserByID_url: string = "http://localhost:8090/user/findByusername/";
-
     constructor(private http: HttpClient) {
        
      }
 
+     private baseUrl='http://localhost:8090/assessmentQuestions/deleteQuestions';
+
      CollectData(){
         const url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';
-        console.log('*********************************************'+url+'***********************');
         return this.http.get(url);
         }
+
+        deleteQuestion(questionId: number): Observable<any> {
+            return this.http.delete(`${this.baseUrl}/${questionId}`, { responseType: 'text' });
+          }
 }

@@ -1,15 +1,12 @@
 <div>
       <h2 class="text-muted">Users <small>list of users</small></h2>
       <br>
-      <p>
-      <form role="form" #addAssessmentQuestionsForm="ngForm" (ngSubmit)="importQuestions()">
-      <input type="submit"class="btn btn-info btn-md" value="import Questions">&ngsp;&ngsp;
-      </form><br>
-      <form role="form" #addAssessmentQuestionsForm="ngForm" (ngSubmit)="addQuestions(addAssessmentQuestionsForm.value)">
-      <input type="submit"class="btn btn-info btn-md" value="Add Assessment Questions"><br>
+      <form role="form" #addAssessmentQuestionsForm="ngForm" (ngSubmit)="addQuestions()">
+          <input type="submit"class="btn btn-info btn-md" value="add Questions" (click)="addQuestions()">&ngsp;&ngsp;
+        <input type="submit"class="btn btn-info btn-md" value="import Questions" (click)="importQuestions()"><br>
       <br>
-        <table datatable id="user-list" class="table table-bordered table-striped ">
-            <thead>
+      <table datatable="bootstrap" id="user-list" [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-bordered table-striped ">
+        <thead>
               <tr>
                 <th>Questions</th>
                 <th>questionDescription</th>
@@ -19,12 +16,18 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor = "let size of AllData">
-                  <td>{{size.questionText}}</td>
-                  <td>{{size.questionDescription}}</td>
-                  <td>{{size.questionType}}</td>
-                  <td>{{size.questionDisplayOrder}}</td>
-                  <td></td>
+              <tr *ngFor = "let row of AllData">
+                  <td>{{row.questionText}}</td>
+                  <td>{{row.questionDescription}}</td>
+                  <td>{{row.questionType}}</td>
+                  <td>{{row.questionDisplayOrder}}</td>
+                  <td><a routerLink="/users" [routerLinkActive]="['router-link-active']" class="btn btn-info" style="margin-right: 2px">
+                    <i class="fa fa-key"></i>&nbsp;
+                    <span></span>
+                    </a>
+                    <button (click)="updateQuestions(row.questionId)"  style="font-size:16px" class="btn btn-success"><i class="fa fa-edit"></i></button>
+                    <button (click)="deleteQuestions(row.questionId)" type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    </td>
                   </tr> 
           </tbody>
           </table>
