@@ -8,11 +8,12 @@ import { AssessmentQuestionsComponent } from './assessment-questions.component';
 import { AssessmentQuestionsService } from './assessment-questions.service';
 import { ImportQuestionComponent } from './import-question/import-question.component';
 import { AddAssessmentQuestionComponent } from './add-assessment-question/add-assessment-question.component';
+import { UpdateQuestionComponent } from './update-question/update-question.component';
 
 
 @NgModule({
     imports: [CommonModule, AssessmentQuestionsRoutingModule,DataTablesModule,FormsModule,ReactiveFormsModule],
-    declarations: [AssessmentQuestionsComponent, ImportQuestionComponent, AddAssessmentQuestionComponent],
+    declarations: [AssessmentQuestionsComponent, ImportQuestionComponent, AddAssessmentQuestionComponent, UpdateQuestionComponent],
     providers: [AssessmentQuestionsService]
 })
 

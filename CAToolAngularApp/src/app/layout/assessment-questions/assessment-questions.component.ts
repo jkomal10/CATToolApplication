@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpResponse,HttpHeaders } from '@angular/common/http';
 import { AssessmentQuestionsService } from './assessment-questions.service';
+import { Question } from './Question';
 import { Subject } from 'rxjs';
 class DataTablesResponse {
   data: any[];
@@ -17,10 +18,15 @@ class DataTablesResponse {
 })
 export class AssessmentQuestionsComponent implements OnInit {
 
+  question: Question = new Question();
+  questionId : number;
+  submitted = false;
+
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+ 
   AllData : any = [];
-  constructor(private getData :AssessmentQuestionsService,public router: Router,private http: HttpClient) { 
+  constructor(private assessmentQuestionsService :AssessmentQuestionsService,public router: Router,private http: HttpClient) { 
 
   }
 
@@ -31,7 +37,7 @@ export class AssessmentQuestionsComponent implements OnInit {
       pageLength: 10,
       responsive: true};
 
-    this.getData.CollectData().subscribe(result => 
+    this.assessmentQuestionsService.CollectData().subscribe(result => 
       {
       this.AllData = result ;
       this.dtTrigger.next();
@@ -49,7 +55,7 @@ export class AssessmentQuestionsComponent implements OnInit {
         }
 
   deleteQuestions(formvalues) {
-    this.getData.deleteQuestion(formvalues)
+    this.assessmentQuestionsService.deleteQuestion(formvalues)
     .subscribe(
       data => {
         console.log(data);
@@ -59,7 +65,10 @@ export class AssessmentQuestionsComponent implements OnInit {
   }
 
   updateQuestions(formvalues){
-    this.router.navigate(['/dashboard']);
+    this.assessmentQuestionsService.sendMsgtoOtherComponent(formvalues);
+    this.questionId=formvalues;
+    console.log(formvalues);
+    this.router.navigate(['/assessment-questions/update-question']);
   }
-
+    
   }
