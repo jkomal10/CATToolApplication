@@ -14,11 +14,12 @@ export class AddApplicationComponent implements OnInit {
 
   application: Application = new Application();
   submitted = false;
+  
   constructor(private router:Router,private addapplicationService:AddApplicationService) { }
 
   ngOnInit() {}
 
-    newCustomer(): void {
+  createApplication(): void {
       this.submitted = false;
       this.application = new Application();
     }

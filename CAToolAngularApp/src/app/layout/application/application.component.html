@@ -12,14 +12,14 @@
           </form> -->
 
           <nav>
-            <input type="button" value="Add application" (click)="form()">
-            <input type="button" value="Import application" (click)="myFunction()">
+            <input type="button" class="btn  btn-info" value="Add application" (click)="form()">&nbsp;
+            <input type="button" class="btn btn-info" value="Import application" (click)="myFunction()">
           </nav>
       
        </div>
       <br>
-    <div class="container">
-        <table datatable id="user-list" class="table table-bordered table-striped ">
+    <div>
+        <table datatable id="app-list" class="table table-bordered table-striped ">
           <thead>
             <tr>
               <th>Application name</th>
@@ -32,14 +32,22 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor = "let size of AllData">
-                <td>{{size.applicationName}}</td>
-                <td>{{size.applicationDescription}}</td>
-                <td>{{size.applicationList}}</td>
-                <td>{{size.cloudable}}</td>
-                <td>{{size.migrationMethod}}</td>
-                <td>{{size.cloudProvider}}</td>
-                <td></td>
+            <tr *ngFor = "let row of AllData">
+                <td>{{row.applicationName}}</td>
+                <td>{{row.applicationDescription}}</td>
+                <td>{{row.applicationList}}</td>
+                <td>{{row.cloudable}}</td>
+                <td>{{row.migrationMethod}}</td>
+                <td>{{row.cloudProvider}}</td>
+               <td> <!-- <a routerLink="/application" [routerLinkActive]="['router-link-active']" class="btn btn-info" style="margin-right: 2px">
+                  <i class="fa fa-key"></i>&nbsp;
+                  <span></span>
+                  </a> -->
+                  <button (click)="ViewApplication(row)"  style="font-size:16px" class="btn btn-info"><i class="fa fa-info-circle"></i></button>&nbsp;
+                  <button (click)="assessApplication()"  style="font-size:16px" class="btn btn-info"><i class="fa fa-hourglass-start"></i></button>&nbsp;
+                  <button (click)="updateApplication(row.applicationId)"  style="font-size:16px" class="btn btn-success"><i class="fa fa-edit"></i></button>&nbsp;
+                  <button (click)="deleteApplication(row.applicationId)" style="font-size:16px"  class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                  </td>
                 </tr> 
         </tbody>
         </table>
