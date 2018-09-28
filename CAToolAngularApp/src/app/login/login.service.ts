@@ -9,16 +9,14 @@ import {IUser} from './user';
 
 @Injectable()
 export class LoginService{
-    private getUserByID_url: string = "http://localhost:8090/user/findByusername/";
+    private getUserByID_url: string = "http://localhost:8090/user/getById";
 
     constructor(private http: HttpClient) {
        
      }
 
-    getUserByID(username : string):Observable<IUser>{
-        let headers = new HttpHeaders();
-        headers.append("Authorization", "Basic " + btoa("Nirav" + ":" + "password"));
-        headers.append('Content-Type', 'application/json; charset=utf-8');
-        return this.http.get<IUser>(this.getUserByID_url+username); 
+    getUserByUserNamePassword(username : string,password : string):Observable<any>{
+        console.log(`${this.getUserByID_url}/${username}/${password}`)
+        return this.http.get<IUser>(`${this.getUserByID_url}/${username}/${password}`);  
     }
 }

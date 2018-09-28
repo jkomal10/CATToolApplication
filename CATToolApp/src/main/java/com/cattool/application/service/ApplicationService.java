@@ -39,4 +39,16 @@ public class ApplicationService {
 	public Application GetSingleApplication(int applicationId) {
 		return applicationRepository.findByApplicationId(applicationId);
 	}
+	
+	public Application updateApplication(int applicationId,Application application)
+	{
+		Application app=new Application();
+		app.setApplicationId(application.getApplicationId());
+		app.setApplicationName(application.getApplicationName());
+		app.setApplicationDescription(application.getApplicationDescription());
+		app.setMigration(application.isMigration());
+		app.setUserId(application.getUserId());
+		return applicationRepository.save(application);
+	}
 }
+

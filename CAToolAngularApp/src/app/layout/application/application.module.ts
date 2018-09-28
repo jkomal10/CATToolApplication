@@ -10,6 +10,7 @@ import { AddApplicationComponent } from './add-application/add-application.compo
 import { ImportApplicationComponent } from './import-application/import-application.component';
 import { ViewApplicationComponent } from './view-application/view-application.component';
 import { AssesstApplicationComponent } from './assesst-application/assesst-application.component';
+import { UpdateApplicationComponent } from './update-application/update-application.component';
 
 @NgModule({
     imports: [CommonModule, ApplicationRoutingModule,DataTablesModule,FormsModule],
@@ -18,7 +19,8 @@ import { AssesstApplicationComponent } from './assesst-application/assesst-appli
          AddApplicationComponent,
           ImportApplicationComponent,
           ViewApplicationComponent,
-          AssesstApplicationComponent
+          AssesstApplicationComponent,
+          UpdateApplicationComponent
         ]
 })
 

@@ -3,6 +3,8 @@ package com.cattool.application.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,21 +15,39 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cattool.application.entity.Users;
 import com.cattool.application.repository.UserRepository;
 import com.cattool.application.service.UserService;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
 	UserService	userService; 
 	
-	 @GetMapping("/getuser")
-		public String getuser() {
-			return "Welcome to user controller!!!!!";
-			
-	  }
+	@GetMapping("/getAll")
+	public List<Users> findAllUsers()
+	{
+		return userService.findAllUsers();
+	}
+	
+	@GetMapping("/getById/{userName}/{password}")
+	public Users findById(@PathVariable String userName,@PathVariable String password)
+	{
+		return userService.findById(userName,password);
+	}
+	
+	@PostMapping("/addUser/create")
+	public Users saveUser(@RequestBody Users user)
+	{
+		System.out.println("post method*****************");
+		return userService.saveUser(user);
+	}
 	 
-	 @PostMapping("/addUser")
+	@DeleteMapping("/deleteUserById/{userId}")
+	public void deleteById(@PathVariable int userId)
+	{
+		userService.deleteById(userId);
+	}
+	/* @PostMapping("/addUser")
 		public Users saveUser(@RequestBody Users user){
 		 
 			return userService.addUser(user);
@@ -52,6 +72,6 @@ public class UserController {
 		 		System.out.println("Username or password is wrong!!");
 		 		return null;
 		 	}
-	  }
+	  }*/
 	 
 }

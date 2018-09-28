@@ -3,7 +3,15 @@
     <h2 class="text-muted">Detailed Assessment</h2>
   </div>
   <div>
-    
+      <table datatable id="question-list" class="table table-bordered table-striped ">
+      <tbody>
+      <tr *ngFor = "let row of AllData">
+          <td>{{row.questionId}}</td>
+        <td>{{row.questionText}}</td>
+        <td><input type="text"></td>
+      </tr>
+    </tbody>
+    </table>
   </div>
   <div>
     <button type="button" class="btn btn-info">Save</button>&nbsp;

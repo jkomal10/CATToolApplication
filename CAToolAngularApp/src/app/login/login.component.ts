@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
 
 import{LoginService} from './login.service';
+import { Users } from './Users';
 
 @Component({
     selector: 'app-login',
@@ -11,36 +12,29 @@ import{LoginService} from './login.service';
     animations: [routerTransition()]
 })
 export class LoginComponent implements OnInit {
-    public user;
-    password : string = "pass";
-    username : string = "user";
+    users= new Users();
+    // password : string = "pass";
+    // username : string = "user";
     constructor(public router: Router,private loginservice : LoginService) {}
 
     ngOnInit() {}
 
     onLoggedin(formValues) {
-         console.log(formValues.username+" && "+formValues.password);
          localStorage.setItem('isLoggedin', 'true');   
-         if(formValues.password==this.password)
-         {
-            this.router.navigate(['/dashboard']);
-            console.log(this.username);
-         }    
-        //  this.loginservice.getUserByID(formValues.username).subscribe((data) => {
-        //     this.user = data;
-        //     if(this.user.password != null){
-        //         if(formValues.password == this.user.password){
-        //             console.log(this.user.password);
-        //             this.router.navigate(['/dashboard']);
-        //         }
-                else{
-                     alert("invalid Password");
-                }
+         this.loginservice.getUserByUserNamePassword(formValues.userName,formValues.password).subscribe((data)=>{
+         this.users=data;
+         console.log(this.users);
+            if( this.users!=null)
+            {
+                this.router.navigate(['/dashboard']);
             }
-            // else{
-            //     alert("invalid UserName");
-            // }});
-    
-        //this.router.navigate(['/dashboard']);
-    //}
+            else
+            {
+                this.router.navigate(['/login']);
+            }
+            
+        }
+        
+        );
+}
 }

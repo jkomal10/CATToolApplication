@@ -26,7 +26,7 @@ export class ViewApplicationComponent implements OnInit {
   //Application AllData =new Application();
   //id=11;
   message:String;
-  constructor(private router:Router, private http:HttpClient,private getData:ApplicationService) { }
+  constructor(private router:Router, private http:HttpClient,private applicationService:ApplicationService) { }
  //constructor(private getData:ApplicationService,private app:ApplicationComponent){}
   ngOnInit() {
     this.dtOptions = {
@@ -42,7 +42,7 @@ export class ViewApplicationComponent implements OnInit {
       //   console.log(this.AllData);
       //   });
 
-        this.getData.question.subscribe(data => this.message = data); 
+        this.applicationService.question.subscribe(data => this.message = data); 
   }
 //}
 

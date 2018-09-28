@@ -3,18 +3,15 @@
   <h2 class="text-muted">Users <small>list of users</small></h2>
 </div>
 <div>
-  <input type="button" class="btn btn-primary" style="margin-right: 5px" value="Add User" (click)="addusers()" />
-  <!-- <adduser *ngif="loadcomponent"></adduser> -->
+  <button type="button" class="btn btn-info" style="margin-right: 5px" (click)="addUser()">Add User</button>
   <button type="button" class="btn btn-info btn-md">Upload user Info</button>
   </div>
 
 
 <div>
-  <!-- <app-adduser></app-adduser> -->
-
   <br>
   <div class="container">
-    <table datatable="bootstrap" id="user-list" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped ">
+    <table datatable="bootstrap" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped ">
         <thead>
           <tr>
             <th>Username</th>
@@ -31,28 +28,8 @@
                 <td>{{size.company}}</td>
                 <td>{{size.lastLogin}}</td>
                 <td>
-                <!-- <div class="btn-group"> -->
-                <a routerLink="/users" [routerLinkActive]="['router-link-active']" class="btn btn-info" style="margin-right: 2px">
-                <i class="fa fa-key"></i>&nbsp;
-                <span></span>
-                </a>
-                <a routerLink="/editusers" [routerLinkActive]="['router-link-active']" class="btn btn-success" style="margin-right: 2px">
-                <i class="fa fa-edit"></i>&nbsp;
-                <span></span>
-                </a>
-                <a routerLink="/deleteusers" [routerLinkActive]="['router-link-active']" class="btn btn-danger" style="margin-right: 2px">
-                <i class="fa fa-trash-o"></i>&nbsp;
-                <span></span>
-                </a>
-                <!-- </div> -->
-                <!-- <div class="btn-group" role="group" aria-label="..."> -->
-                <!-- <button type="button" class="btn btn-info" style="margin-right: 5px">q<i class="glyphicon glyphicon-search">
-                </i></button>
-                <button type="button" class="btn btn-success" style="margin-right: 5px">q<i class="glyphicon glyphicon-pencil">
-                </i></button>
-                <button type="button" class="btn btn-danger" style="margin-right: 5px" >q<i class="glyphicon glyphicon-trash">
-                </i></button> -->
-                <!-- </div> -->
+                <button type="button" (click)="viewUser()" class="btn btn-info" title="User Details" style="font-size:16px"> <i class="fa fa-key"></i>&nbsp;</button>
+               
                 </td>
                 </tr> 
         </tbody>

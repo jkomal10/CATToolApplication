@@ -4,13 +4,6 @@
   </div>
   <br>
       <div>
-        <!-- <form role="form" (ngSubmit)="form()">
-          <input type="submit" class="btn btn-info btn-md" value="Add Application">&ngsp;&ngsp;
-        </form>  
-         <form role="form" (ngSubmit)="myFunction()">
-           <input type="submit" class="btn btn-info btn-md" value="Import Application">
-          </form> -->
-
           <nav>
             <input type="button" class="btn  btn-info" value="Add application" (click)="form()">&nbsp;
             <input type="button" class="btn btn-info" value="Import application" (click)="myFunction()">
@@ -19,8 +12,8 @@
        </div>
       <br>
     <div>
-        <table datatable id="app-list" class="table table-bordered table-striped ">
-          <thead>
+        <table datatable id="app-list" class="row-border hover">
+          <thead class = "thead-dark">
             <tr>
               <th>Application name</th>
               <th>Application Description</th>
@@ -45,7 +38,7 @@
                   </a> -->
                   <button (click)="ViewApplication(row)"  style="font-size:16px" class="btn btn-info"><i class="fa fa-info-circle"></i></button>&nbsp;
                   <button (click)="assessApplication()"  style="font-size:16px" class="btn btn-info"><i class="fa fa-hourglass-start"></i></button>&nbsp;
-                  <button (click)="updateApplication(row.applicationId)"  style="font-size:16px" class="btn btn-success"><i class="fa fa-edit"></i></button>&nbsp;
+                  <button (click)="editApplication(row)"  style="font-size:16px" class="btn btn-success"><i class="fa fa-edit"></i></button>&nbsp;
                   <button (click)="deleteApplication(row.applicationId)" style="font-size:16px"  class="btn btn-danger"><i class="fa fa-trash"></i></button>
                   </td>
                 </tr> 
@@ -54,3 +47,5 @@
   </div>
   
   </div>
+
+  

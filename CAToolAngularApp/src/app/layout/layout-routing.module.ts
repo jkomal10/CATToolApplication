@@ -11,8 +11,6 @@ const routes: Routes = [
             { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' },
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
             { path: 'user', loadChildren: './user/user.module#UserModule' },
-            // { path: 'adduser',loadChildren: './adduser/adduser.module#AdduserModule'},
-            //{ path: 'application/add-application', loadChildren: './application/add-application/add-application.module#AddApplicationModule'},
             { path: 'application', loadChildren: './application/application.module#ApplicationModule' },
             { path: 'assessment-questions', loadChildren: './assessment-questions/assessment-questions.module#AssessmentQuestionsModule' },
             { path: 'import-questions', loadChildren: './import-questions/import-questions.module#ImportQuestionsModule' },

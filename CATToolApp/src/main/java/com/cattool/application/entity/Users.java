@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="users")
+@Table(name="users_table")
 public class Users {
 	
 	@Id
@@ -21,9 +21,11 @@ public class Users {
 	private String ipAddress;
 	private int lastLogin;
 	private String company;
-	private Date createdOn;
 	private int isDeleted;
-	private int languageId;
+	private String createdBy;
+	private Date createdDateTime;
+	private String modifiedBy;
+	private Date modifiedDateTime;
 	public int getUserId() {
 		return userId;
 	}
@@ -72,49 +74,50 @@ public class Users {
 	public void setCompany(String company) {
 		this.company = company;
 	}
-	public Date getCreatedOn() {
-		return createdOn;
-	}
-	public void setCreatedOn(Date createdOn) {
-		this.createdOn = createdOn;
-	}
 	public int getIsDeleted() {
 		return isDeleted;
 	}
 	public void setIsDeleted(int isDeleted) {
 		this.isDeleted = isDeleted;
 	}
-	public int getLanguageId() {
-		return languageId;
+	public String getCreatedBy() {
+		return createdBy;
 	}
-	public void setLanguageId(int languageId) {
-		this.languageId = languageId;
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
+	public Date getCreatedDateTime() {
+		return createdDateTime;
+	}
+	public void setCreatedDateTime(Date createdDateTime) {
+		this.createdDateTime = createdDateTime;
+	}
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+	public Date getModifiedDateTime() {
+		return modifiedDateTime;
+	}
+	public void setModifiedDateTime(Date modifiedDateTime) {
+		this.modifiedDateTime = modifiedDateTime;
+	}
+	
+	
 	public Users() {
 		super();
-	}
-	public Users(int userId, String userName, String firstName, String lastName, String password, String ipAddress,
-			int lastLogin, String company, Date createdOn, int isDeleted, int languageId) {
-		super();
-		this.userId = userId;
-		this.userName = userName;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.ipAddress = ipAddress;
-		this.lastLogin = lastLogin;
-		this.company = company;
-		this.createdOn = createdOn;
-		this.isDeleted = isDeleted;
-		this.languageId = languageId;
 	}
 	@Override
 	public String toString() {
 		return "Users [userId=" + userId + ", userName=" + userName + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", password=" + password + ", ipAddress=" + ipAddress + ", lastLogin=" + lastLogin
-				+ ", company=" + company + ", createdOn=" + createdOn + ", isDeleted=" + isDeleted + ", languageId="
-				+ languageId + "]";
+				+ ", company=" + company + ", isDeleted=" + isDeleted + ", createdBy=" + createdBy
+				+ ", createdDateTime=" + createdDateTime + ", modifiedBy=" + modifiedBy + ", modifiedDateTime="
+				+ modifiedDateTime + "]";
 	}
+	
 	
 	
 	

@@ -1,18 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        component: UserComponent,
-        children: [
-            { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' },
-         { path: 'adduser', loadChildren: './adduser/adduser.module#AdduserModule' }
-        ]
-        
-    }
-    
+    { path: '',component: UserComponent},
+    { path: 'add-user',component: AddUserComponent}
 ];
 
 @NgModule({

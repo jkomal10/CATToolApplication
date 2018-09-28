@@ -21,7 +21,7 @@ export class ApplicationComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
-
+  message = '';
   //applictaions: Observable<Application[]>;
   AllData : any = [];
   constructor(public router:Router, private applicationService:ApplicationService,private http:HttpClient) { }
@@ -30,7 +30,18 @@ export class ApplicationComponent implements OnInit {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 2,
-      responsive: true};
+      responsive: true,
+      rowCallback: (row: Node, data: any[] | Object, index: number) => {
+        const self = this;
+        // Unbind first in order to avoid any duplicate handler
+        // (see https://github.com/l-lin/angular-datatables/issues/87)
+        $('td', row).unbind('click');
+        $('td', row).bind('click', () => {
+          self.someClickHandler(data);
+        });
+        return row;
+    }
+  };
 
     this.applicationService.CollectData().subscribe(result => 
       {
@@ -38,18 +49,28 @@ export class ApplicationComponent implements OnInit {
       this.dtTrigger.next();
       console.log(this.AllData);
       });
+
+
   }
   form(){
     this.router.navigate(['/application/add-application']);
   }
+
+  someClickHandler(info: any): void {
+    this.message = info.id + ' - ' + info.firstName;
+  }
+
   myFunction()
   {
     this.router.navigate(['/application/import-application']);
   }
-
-  updateApplication(){
-
+  editApplication(application: Application): void {
+    console.log(JSON.stringify(application));
+    this.applicationService.sendMsgtoOtherComponent(application);
+    this.router.navigate(['/application/update-application']);
   }
+  
+
   
   deleteApplication(formvalues) {
     this.applicationService.deleteApplications(formvalues)
