@@ -11,7 +11,8 @@ export class AssessmentQuestionsService {
        
      }
      private baseUrl='http://localhost:8090/assessmentQuestions/deleteQuestions';
-     private updateUrl='http://localhost:8090/assessmentQuestions/updateQuestions';
+     private updateUrl='http://localhost:8090/assessmentQuestions/updateQuestions/update';
+     private addUrl = 'http://localhost:8090/assessmentQuestions/saveAssessmentQuestions';
 
      CollectData(){
         const url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';
@@ -26,11 +27,21 @@ export class AssessmentQuestionsService {
           return this.http.put(`${this.updateUrl}`,+ `/update`, question);
         }
 
-        private comptransfer = new BehaviorSubject("Hello");
-        question = this.comptransfer.asObservable();
+        private comptransfer = new BehaviorSubject("Hello");
+        question = this.comptransfer.asObservable();
+        
+        sendMsgtoOtherComponent(messsage){
+        this.comptransfer.next(messsage);
+        } 
 
-        sendMsgtoOtherComponent(messsage:string){
-            this.comptransfer.next(messsage);
+        createQuestion(question: Object): Observable<Object> {
+          return this.http.post(`${this.addUrl}` + `/create`, question);
+        }
+
+        updateAssessmentQuestions(value: any): Observable<Object> {
+          console.log('################assessmentQuestions.service.');
+          console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~'+`${this.updateUrl}`+'~~~~~~~~~~~~~~~~~~~~~~~');
+          return this.http.put(`${this.updateUrl}`, value);
         }
 
        

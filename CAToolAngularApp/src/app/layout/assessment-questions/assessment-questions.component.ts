@@ -34,7 +34,7 @@ export class AssessmentQuestionsComponent implements OnInit {
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10,
+      pageLength: 5,
       responsive: true};
 
     this.assessmentQuestionsService.CollectData().subscribe(result => 
@@ -64,10 +64,12 @@ export class AssessmentQuestionsComponent implements OnInit {
       this.router.navigate(['/assessment-questions']);
   }
 
-  updateQuestions(formvalues){
-    this.assessmentQuestionsService.sendMsgtoOtherComponent(formvalues);
-    this.questionId=formvalues;
-    console.log(formvalues);
+  updateQuestions(questions: Question){
+    this.assessmentQuestionsService.sendMsgtoOtherComponent(questions);
+    this.router.navigate(['/assessment-questions/update-question']);
+  }
+
+  deactivate(){
     this.router.navigate(['/assessment-questions/update-question']);
   }
     

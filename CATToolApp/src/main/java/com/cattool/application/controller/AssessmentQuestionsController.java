@@ -46,7 +46,8 @@ public class AssessmentQuestionsController {
 	
 	@PutMapping("/updateQuestions/update")
 	public void updateQuestionById(@RequestBody AssessmentQuestions assessmentQuestions) {
-		System.out.println("****************Update question******************");
+		System.out.println("***************Update question******************");
+		System.out.println("########"+assessmentQuestions.getQuestionId());
 		assessmentQuestionsService.updateQuestions(assessmentQuestions);
 	}
 	

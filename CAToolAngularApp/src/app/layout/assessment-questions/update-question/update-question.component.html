@@ -1,38 +1,45 @@
-
-<h3>Assessment Questions</h3>
-<div>
-        <label>Assessment Type</label><br>
-        <input type="checkbox" [(ngModel)]="assessmentQuestionData.assessmentTypeForMigration" name="assessmentTypeForMigration" >&ngsp;<label>Migration</label><br/>
-        <input type="checkbox" [(ngModel)]="assessmentQuestionData.assessmentTypeForCloudProvider" name="assessmentTypeForCloudProvider">&ngsp;<label>cloud provider</label><br/>
-        <input type="checkbox" [(ngModel)]="assessmentQuestionData.assessmentTypeForCloudable" name="assessmentTypeForCloudable">&ngsp;<label>Cloudable</label><br/>
+<h2 class="text-muted">Application <small>Add new Applictaion</small></h2>
+<div [hidden]="submitted" style="width: 300px;">
+  <form #form="ngForm" (ngSubmit)="onSubmit(que)">
+    <div class="form-content">
+            <div class="form-group">
+                <label><font color="green">Assessment Type</font></label>
+                <br>
+                <input type="checkbox" [(ngModel)]="que.assessmentTypeForMigration" name="assessmentTypeForMigration" >&ngsp;<label>Migration</label><br/>
+                <input type="checkbox" [(ngModel)]="que.assessmentTypeForCloudProvider" name="assessmentTypeForCloudProvider">&ngsp;<label>cloud provider</label><br/>
+                <input type="checkbox" [(ngModel)]="que.assessmentTypeForCloudable" name="assessmentTypeForCloudable">&ngsp;<label>Cloudable</label><br/>         
+          </div>
+          <div class="form-group">
+          <label color="green" for="questionType">Question Type</label>
+          <select  [(ngModel)]="que.questionType" class="form-control" value="que.questionType" name="que.questionType">
+                <option value="Multiple Choice Single Question">Multiple Choice Single Question</option>
+                <option value="Multiple Choice Multiple Answer">Multiple Choice Multiple Answer</option>
+                <option value="Short Answer">Short Answer</option>
+                <option value="Long Answer">Long Answer</option>
+          </select>   
+          </div>
+          </div> 
+          <div class="form-group">
+                <label color="green" for="questionDisplayOrder">Question Display Order</label>
+                <input type="text" class="form-control" id="questionDisplayOrder" required [(ngModel)]="que.questionDisplayOrder" name="questionDisplayOrder">
+          </div>
+          <div class="form-group">
+                <label color="green" for="numberOfOption">number of option</label>
+                <input type="text" class="form-control" id="numberOfOption" required [(ngModel)]="que.numberOfOption" name="numberOfOption">
+          </div>
+          <div class="form-group">
+                <label color="green" for="questionText">Question</label>
+                <input type="text" class="form-control" id="questionText" required [(ngModel)]="que.questionText" name="questionText">
+          </div> 
+          <div class="form-group">
+                <label color="green" for="questionDescription">Question Description</label>
+                <input type="text" class="form-control" id="questionDescription" required [(ngModel)]="que.questionDescription" name="questionDescription">
+          </div> 
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
 </div>
-<div>
-        <label for="questionType">Question Type</label>
-        <select  [(ngModel)]="assessmentQuestionData.questionType" class="form-control" name=".questionType">
-            <option value="Multiple Choice Single Question">Multiple Choice Single Question</option>
-            <option value="Multiple Choice Multiple Answer">Multiple Choice Multiple Answer</option>
-            <option value="Short Answer">Short Answer</option>
-            <option value="Long Answer">Long Answer</option>
-        </select>
+ 
+<div [hidden]="!submitted">
+  <h4>You submitted successfully!</h4>
+  <button class="btn btn-info" (click)="createApplication()">Add</button>
 </div>
-<div class="form-group">
-        <label for="questionDisplayOrder">Question Display Order</label>
-        <input type="text" class="form-control" id="questionDisplayOrder" required [(ngModel)]="assessmentQuestionData.questionDisplayOrder" name="questionDisplayOrder">
-      </div>
-
-<div class="form-group">
-            <label for="numberOfOption">number of option</label>
-            <input type="text" class="form-control" id="numberOfOption" required [(ngModel)]="assessmentQuestionData.numberOfOption" name="numberOfOption">
-    </div>
-
-<div>
-        <label for="questionText">Question</label>
-        <input type="text" class="form-control" id="questionText" required [(ngModel)]="assessmentQuestionData.questionText" name="questionText">
-    
-</div>
-
-<div class="form-group">
-        <label for="questionDescription">Question Description</label>
-        <input type="text" class="form-control" id="questionDescription" required [(ngModel)]="assessmentQuestionData.questionDescription" name="questionDescription">
-      </div> 
-

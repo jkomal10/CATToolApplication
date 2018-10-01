@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Question } from './Question';
-import { AddAssessmentQuestionService } from './add-assessment-question.service';
+import { Question } from '../Question';
+import { AssessmentQuestionsService } from '../assessment-questions.service';
 
 @Component({
   selector: 'app-add-assessment-question',
@@ -13,7 +13,7 @@ export class AddAssessmentQuestionComponent implements OnInit {
   question: Question = new Question();
   submitted = false;
 
-  constructor(private questionService: AddAssessmentQuestionService,public router: Router) { }
+  constructor(private questionService: AssessmentQuestionsService,public router: Router) { }
 
   ngOnInit() {
   }
@@ -26,7 +26,7 @@ export class AddAssessmentQuestionComponent implements OnInit {
   save() {
     this.questionService.createQuestion(this.question)
       .subscribe(data => console.log(data), error => console.log(error));
-    this.question = new Question();
+      this.router.navigate(['/assessment-questions']);
   }
 
   onSubmit() {
@@ -34,7 +34,4 @@ export class AddAssessmentQuestionComponent implements OnInit {
     this.save();
   }
 
-  addAssessment(){
-    this.router.navigate(['/assessment-questions']);
-  }
 }
