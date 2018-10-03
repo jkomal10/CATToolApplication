@@ -2,12 +2,15 @@ package com.cattool.application.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cattool.application.entity.Users;
 import com.cattool.application.repository.UserRepository;
 
+@Transactional
 @Service
 public class UserService {
 	
@@ -51,6 +54,28 @@ public class UserService {
 	public void deleteById(int userId) {
 		userRepository.deleteByUserId(userId);
 	}
+
+	public void updateUsers(Users user) {
+		
+		Users users = new Users();
+		users = userRepository.findByUserId(user.getUserId());
+		System.out.println(users.getUserId());
+		users.setUserId(user.getUserId());
+		users.setUserName(user.getUserName());
+		users.setFirstName(user.getFirstName());
+		users.setLastName(user.getLastName());
+		users.setPassword(user.getPassword());
+		users.setIpAddress(user.getIpAddress());
+		users.setLastLogin(user.getLastLogin());
+		users.setCompany(user.getCompany());
+		users.setIsDeleted(user.getIsDeleted());
+		users.setCreatedBy(user.getCreatedBy());
+		users.setCreatedDateTime(users.getCreatedDateTime());
+		users.setModifiedBy(user.getModifiedBy());
+		users.setModifiedDateTime(user.getModifiedDateTime());
+		userRepository.save(users);
+	}
+
 	
 	
 	

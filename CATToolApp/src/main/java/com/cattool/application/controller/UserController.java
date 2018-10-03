@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.Users;
 import com.cattool.application.repository.UserRepository;
 import com.cattool.application.service.UserService;
@@ -45,8 +47,17 @@ public class UserController {
 	@DeleteMapping("/deleteUserById/{userId}")
 	public void deleteById(@PathVariable int userId)
 	{
+		System.out.println("delete method*****************");
 		userService.deleteById(userId);
 	}
+	
+	@PutMapping("/updateUser/update")
+	public void updateUserId(@RequestBody Users user) {
+		System.out.println("***************Update question******************");
+		userService.updateUsers(user);
+	}
+	
+	
 	/* @PostMapping("/addUser")
 		public Users saveUser(@RequestBody Users user){
 		 

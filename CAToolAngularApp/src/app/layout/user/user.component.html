@@ -28,8 +28,9 @@
                 <td>{{size.company}}</td>
                 <td>{{size.lastLogin}}</td>
                 <td>
-                <button type="button" (click)="viewUser()" class="btn btn-info" title="User Details" style="font-size:16px"> <i class="fa fa-key"></i>&nbsp;</button>
-               
+                <button (click)="viewUser()" title="User Details" style="font-size:16px" class="button button"> <i style="color:black" class="fa fa-key"></i>&nbsp;</button>
+                <button (click)="updateUser(size)" title=" Update User Details" style="font-size:16px"  class="button button"><i style="color:black" class="fa fa-edit"></i>&nbsp;</button>
+                <button (click)="deleteUser(size.userId)" type="button" class="button button"><i style="color:black" class="fa fa-trash"></i>&nbsp;</button>
                 </td>
                 </tr> 
         </tbody>

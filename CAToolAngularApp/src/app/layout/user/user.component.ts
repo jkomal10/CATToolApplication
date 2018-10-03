@@ -3,6 +3,7 @@ import {ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpResponse,HttpHeaders } from '@angular/common/http';
 import { UsersService } from './user.service';
 import { Subject } from 'rxjs';
+import { Users } from './Users';
 
 // class Person {
 //   id: number;
@@ -24,12 +25,15 @@ class DataTablesResponse {
 })
 export class UserComponent implements OnInit {
 
+  user: Users;
+  public IpAddress;
+ 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
   // persons: Person[];
   AllData : any = [];
-  constructor(private getData : UsersService,
+  constructor(private userService : UsersService,
       public router: Router,
     private http: HttpClient) { 
 
@@ -37,22 +41,55 @@ export class UserComponent implements OnInit {
   addUser()
   {
     console.log("This is user component");
+    console.log(this.IpAddress);
+    this.userService.sendIpAddresstoOtherComponent(this.IpAddress);
     this.router.navigate(['/user/add-user']);
   }
 
+  updateUser(user:Users){
+    console.log(user);
+     this.userService.sendMsgtoOtherComponent(user);
+     this.router.navigate(['/user/update-user']);
+  }
+
+  deleteUser(formvalues){
+    console.log(formvalues);
+    this.userService.deleteUser(formvalues).subscribe(data => {
+      console.log(data);
+    },
+    error => console.log('ERROR: ' + error));
+    this.router.navigate(['/user']);
+    
+
+  }
   ngOnInit() {
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2,
+      pageLength: 10,
       responsive: true};
 
-    this.getData.CollectData().subscribe(result => 
+    this.userService.CollectData().subscribe(result => 
       {
       this.AllData = result ;
       this.dtTrigger.next();
-      console.log(this.AllData);
+      //console.log(this.AllData);
       }); 
+      
+      console.log("ip");
+      this.userService.getIpAddress().subscribe(data => {
+      this.IpAddress=data['ip'];
+      console.log(data['ip']);
+      console.log(this.IpAddress);
+      console.log(data);
+    });
+
+  //   this.http.get('https://api.ipify.org?format=json').subscribe(data => {
+  //     this.publicIP=data['ip'];
+  //    // console.log(this.publicIP);
+  //   });
+  //  // console.log(this.publicIP);
+     
 
   }
   
