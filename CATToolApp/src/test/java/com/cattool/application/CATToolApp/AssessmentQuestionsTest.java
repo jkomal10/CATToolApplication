@@ -26,7 +26,7 @@ public class AssessmentQuestionsTest {
 	
 	int questionId=101;
 	
-	AssessmentQuestions questions=new AssessmentQuestions(1,"text","description","questionType",1,3,true,true,"true","false","false");
+	//AssessmentQuestions questions= new AssessmentQuestions(1,"text","description","questionType",1,3,true,true,"true","false","false");
 	List<AssessmentQuestions> list;
 	
 	@Test
@@ -51,7 +51,7 @@ public class AssessmentQuestionsTest {
  	@Test
 	public void updateQuestions()
 	{
- 		AssessmentQuestions que=assessmentQuestionsRepository.getByQuestionId(questions.getQuestionId());
+ 		//AssessmentQuestions que=assessmentQuestionsRepository.getByQuestionId(questions.getQuestionId());
  		//assessmentQuestionsService.updateQuestions(que);
 	}
 	
