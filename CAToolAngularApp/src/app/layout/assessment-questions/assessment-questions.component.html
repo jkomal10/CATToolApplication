@@ -1,33 +1,48 @@
 <div>
-      <h2 class="text-muted">Assessment Questions <small>list of questions</small></h2>
-      <br>
-      <form role="form" #addAssessmentQuestionsForm="ngForm" (ngSubmit)="addQuestions()">
-          <input type="submit"class="button button btn btn-info btn-md" value="add Questions" (click)="addQuestions()">&ngsp;&ngsp;
-        <input type="submit"class="button button btn btn-info btn-md" value="import Questions" (click)="importQuestions()"><br>
-      <br>
-      <table width="100%" datatable="bootstrap" id="user-list" [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-bordered table-striped ">
-        <thead>
-              <tr bgcolor="gray">
-                <th><font color="black">Questions</font></th>
-                <th><font color="black">questionDescription</font></th>
-                <th><font color="black">questionType</font></th>
-                <th><font color="black">Display Order</font></th>
-                <th><font color="black">Action</font></th>
-              </tr>
-            </thead>
-            <tbody >
-              <tr *ngFor = "let row of AllData">
-                  <td  width="20%">{{row.questionText}}</td>
-                  <td  width="20%">{{row.questionDescription}}</td>
-                  <td  width="15%">{{row.questionType}}</td>
-                  <td  width="10%">{{row.questionDisplayOrder}}</td>
-                  <td  width="11%">
-                    <button (click)="deactivate()" type="button"  class="button button"><i style="color:black" class="fa fa-key"></i></button>
-                    <button (click)="updateQuestions(row)" style="font-size:16px"  class="button button"><i style="color:black" class="fa fa-edit"></i></button>
-                    <button (click)="deleteQuestions(row.questionId)" type="button" class="button button"><i style="color:black" class="fa fa-trash"></i></button>
-                    </td>
-                  </tr> 
-          </tbody>
-          </table>  
-        </form>
-    </div>
+  <form role="form" #addAssessmentQuestionsForm="ngForm" (ngSubmit)="addQuestions()">
+    <input type="submit" class="button button btn btn-outline" value="add Questions" (click)="addQuestions()">&ngsp;&ngsp;
+    <input type="submit" class="button button btn btn-outline" value="import Questions" (click)="importQuestions()">
+    <br>
+    <br>
+    <table width="100%" datatable="bootstrap" id="user-list" [dtTrigger]="dtTrigger" [dtOptions]="dtOptions"  class="table table-hover table-sm ">
+      <thead bgcolor="#E0E0E0">
+        <tr >
+          <th>
+            <font color="black">Questions</font>
+          </th>
+          <th>
+            <font color="black">questionDescription</font>
+          </th>
+          <th>
+            <font color="black">questionType</font>
+          </th>
+          <th>
+            <font color="black">Display Order</font>
+          </th>
+          <th>
+            <font color="black">Action</font>
+          </th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr *ngFor =  "let row of AllData" >
+          <td  width="20%">{{row.questionText}}</td>
+          <td width="20%">{{row.questionDescription}}</td>
+          <td width="15%">{{row.questionType}}</td>
+          <td width="10%">{{row.questionDisplayOrder}}</td>
+          <td width="11%">
+            <button (click)="deactivate()" type="button" class="btn btn-light">
+              <i style="color:black" class="fa fa-key"></i>
+            </button>
+            <button (click)="updateQuestions(row)" style="font-size:16px" class="btn btn-light">
+              <i style="color:black" class="fa fa-edit"></i>
+            </button>
+            <button (click)="deleteQuestions(row.questionId)" class="btn btn-light">
+              <i style="color:black" class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

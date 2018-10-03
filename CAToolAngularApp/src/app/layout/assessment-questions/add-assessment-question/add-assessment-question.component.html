@@ -1,8 +1,8 @@
 <h3>Assessment Questions</h3>
+<h1><hr width="100%" size="80"></h1>
 <div [hidden]="submitted" style="width: 300px;">
   <form (ngSubmit)="onSubmit()">
       <div class="form-group">
-          <label>Migration Type</label>
           <br>
           <label for="questionType"><b>Assessment Type</b></label><br>
           <input type="checkbox" [(ngModel)]="question.assessmentTypeForMigration" name="assessmentTypeForMigration" >&ngsp;<label>Migration</label><br/>

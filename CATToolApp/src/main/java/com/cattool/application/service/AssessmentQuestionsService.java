@@ -20,6 +20,7 @@ public class AssessmentQuestionsService {
 	
 	public AssessmentQuestions saveQuestions(AssessmentQuestions assessmentQuestions)
 	{
+		System.out.println(assessmentQuestions);
 		return assessmentQuestionsRepository.save(assessmentQuestions);
 	}
 	
