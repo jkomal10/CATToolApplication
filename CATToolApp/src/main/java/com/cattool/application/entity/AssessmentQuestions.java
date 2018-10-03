@@ -1,5 +1,7 @@
 package com.cattool.application.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +23,10 @@ public class AssessmentQuestions {
 	private String assessmentTypeForMigration;
 	private String assessmentTypeForCloudProvider;
 	private String assessmentTypeForCloudable;
+	private String createdBy;
+	private Date cteatedTime;
+	private String modifiedBy;
+	private Date modifiedTime;
 	public int getQuestionId() {
 		return questionId;
 	}
@@ -87,14 +93,38 @@ public class AssessmentQuestions {
 	public void setAssessmentTypeForCloudable(String assessmentTypeForCloudable) {
 		this.assessmentTypeForCloudable = assessmentTypeForCloudable;
 	}
+	public String getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+	public Date getCteatedTime() {
+		return cteatedTime;
+	}
+	public void setCteatedTime(Date cteatedTime) {
+		this.cteatedTime = cteatedTime;
+	}
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+	public Date getModifiedTime() {
+		return modifiedTime;
+	}
+	public void setModifiedTime(Date modifiedTime) {
+		this.modifiedTime = modifiedTime;
+	}
 	
 	public AssessmentQuestions() {
 		super();
 	}
 	public AssessmentQuestions(int questionId, String questionText, String questionDescription, String questionType,
 			int questionDisplayOrder, int numberOfOption, boolean isActive, boolean isDelete,
-			String assessmentTypeForMigration, String assessmentTypeForCloudProvider,
-			String assessmentTypeForCloudable) {
+			String assessmentTypeForMigration, String assessmentTypeForCloudProvider, String assessmentTypeForCloudable,
+			String createdBy, Date cteatedTime, String modifiedBy, Date modifiedTime) {
 		super();
 		this.questionId = questionId;
 		this.questionText = questionText;
@@ -107,6 +137,10 @@ public class AssessmentQuestions {
 		this.assessmentTypeForMigration = assessmentTypeForMigration;
 		this.assessmentTypeForCloudProvider = assessmentTypeForCloudProvider;
 		this.assessmentTypeForCloudable = assessmentTypeForCloudable;
+		this.createdBy = createdBy;
+		this.cteatedTime = cteatedTime;
+		this.modifiedBy = modifiedBy;
+		this.modifiedTime = modifiedTime;
 	}
 	@Override
 	public String toString() {
@@ -115,11 +149,11 @@ public class AssessmentQuestions {
 				+ ", questionDisplayOrder=" + questionDisplayOrder + ", numberOfOption=" + numberOfOption
 				+ ", isActive=" + isActive + ", isDelete=" + isDelete + ", assessmentTypeForMigration="
 				+ assessmentTypeForMigration + ", assessmentTypeForCloudProvider=" + assessmentTypeForCloudProvider
-				+ ", assessmentTypeForCloudable=" + assessmentTypeForCloudable + "]";
+				+ ", assessmentTypeForCloudable=" + assessmentTypeForCloudable + ", createdBy=" + createdBy
+				+ ", cteatedTime=" + cteatedTime + ", modifiedBy=" + modifiedBy + ", modifiedTime=" + modifiedTime
+				+ "]";
 	}
 	
 	
 	
-	
-
 }

@@ -9,4 +9,8 @@ export class Question{
     assessmentTypeForMigration : string;
     assessmentTypeForCloudProvider : string;
     assessmentTypeForCloudable : string;
+    createdBy : string;
+    cteatedTime : Date;
+    modifiedBy : string;
+    modifiedTime : Date;
 }
