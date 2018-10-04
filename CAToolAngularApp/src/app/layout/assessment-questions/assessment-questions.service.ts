@@ -13,6 +13,7 @@ export class AssessmentQuestionsService {
   private baseUrl = 'http://localhost:8090/assessmentQuestions/deleteQuestions';
   private updateUrl = 'http://localhost:8090/assessmentQuestions/updateQuestions/update';
   private addUrl = 'http://localhost:8090/assessmentQuestions/saveAssessmentQuestions';
+  //private addUrl ='http://localhost:8090/option/save/create';
 
   CollectData() {
     const  url  =  'http://localhost:8090/assessmentQuestions/getAllQuestions';
