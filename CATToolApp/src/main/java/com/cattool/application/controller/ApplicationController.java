@@ -57,14 +57,6 @@ public class ApplicationController {
 	}
 	
 	
-//	@PutMapping("/updateApplictaion/{applicationId}")
-//	public void updateApplication (@PathVariable String applicationId, @RequestBody Application application) {
-//		System.out.println("*******update*******");
-//		int appId=Integer.parseInt(applicationId);
-//		System.out.println(appId);
-//		applicationService.updateApplication(appId,application);
-//	}
-	
 	@DeleteMapping("/deleteApplicationById/{applicationId}")
 	public void  deleteApplication(@PathVariable("applicationId") int id) {
 		applicationService.deleteApplicationById(id);
@@ -74,5 +66,11 @@ public class ApplicationController {
 	public void resetApplication (@PathVariable("applicationId") int applicationId) {
 		System.out.println("*******Reset*******");
 		applicationService.resetApplicationById(applicationId);
+	}
+	
+	@PutMapping("/deactivateApplicationById/{applicationId}")
+	public void deactivateApplication(@PathVariable("applicationId") int applicationId) {
+		System.out.println("*******deactivate*******");
+		applicationService.deactivateApplicationById(applicationId);
 	}
 }
