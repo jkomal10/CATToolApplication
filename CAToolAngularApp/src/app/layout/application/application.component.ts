@@ -86,6 +86,11 @@ export class ApplicationComponent implements OnInit {
       // this.router.navigate(['/applictaion']);
   }
 
+  resetApplication(formvalues){
+    this.applicationService.resetApplication(formvalues)
+    .subscribe();
+  }
+
    reloadData() {
      this.applicationService.CollectData();
    }
