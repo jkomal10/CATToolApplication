@@ -1,5 +1,6 @@
 package com.cattool.application.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,14 @@ public class ApplicationService {
 		app.setMigration(application.isMigration());
 		app.setUserId(application.getUserId());
 		return applicationRepository.save(application);
+	}
+	
+	public void resetApplicationById(int applicationId)
+	{
+		Application app=new Application();
+		app.setApplicationId(applicationId);
+		app.setUserId(applicationRepository.findByApplicationId(applicationId).getUserId());
+		applicationRepository.save(app);
 	}
 }
 

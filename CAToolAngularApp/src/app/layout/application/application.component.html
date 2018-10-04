@@ -40,7 +40,8 @@
                   <button (click)="assessApplication()"  style="font-size:16px" class="btn btn-info"><i class="fa fa-hourglass-start"></i></button>&nbsp;
                   <button (click)="editApplication(row)"  style="font-size:16px" class="btn btn-success"><i class="fa fa-edit"></i></button>&nbsp;
                   <button (click)="deleteApplication(row.applicationId)" style="font-size:16px"  class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                  </td>
+                  <button (click)="resetApplication(row.applicationId)" style="font-size:16px"><i class="fa fa-refresh" aria-hidden="true"></i></button>  
+                </td>
                 </tr> 
         </tbody>
         </table>

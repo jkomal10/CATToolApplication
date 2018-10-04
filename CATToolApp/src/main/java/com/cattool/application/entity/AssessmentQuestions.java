@@ -1,11 +1,14 @@
 package com.cattool.application.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class AssessmentQuestions {
@@ -27,6 +30,17 @@ public class AssessmentQuestions {
 	private Date cteatedTime;
 	private String modifiedBy;
 	private Date modifiedTime;
+	
+//	@OneToMany
+//	@JoinColumn(name="questionId", referencedColumnName="questionId")
+//	private List<Option> option;
+//	
+//	public List<Option> getOption() {
+//		return option;
+//	}
+//	public void setOption(List<Option> option) {
+//		this.option = option;
+//	}
 	public int getQuestionId() {
 		return questionId;
 	}
