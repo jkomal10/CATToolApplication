@@ -25,9 +25,28 @@
         <input type="text" class="form-control" id="questionDisplayOrder" required [(ngModel)]="question.questionDisplayOrder" name="questionDisplayOrder">
       </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
           <label for="numberOfOption">number of option</label>
-          <input type="text" class="form-control" id="numberOfOption" required [(ngModel)]="question.numberOfOption" name="numberOfOption">
+          <input type="text" class="form-control" id="numberOfOption" (onClick)="options()" required [(ngModel)]="question.numberOfOption" name="numberOfOption">
+        </div> -->
+
+        <div class="form-group">
+            <!-- <h1>Angular Get Selected Option Value</h1> -->
+            <span>number of option</span>&ngsp;
+            <select (change)="selectChangeHandler($event)" required [(ngModel)]="question.numberOfOption" name="numberOfOption">
+                <option class='option' *ngFor='let option of optionsValues' [value]="option">{{option}}</option>
+                <!-- <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option> -->
+            </select>
+            <!-- <p><span>You selected: </span><b>{{selectedDay}}</b></p> -->
         </div>
 
     <div class="form-group">
@@ -40,6 +59,22 @@
         <input type="text" class="form-control" id="questionDescription" required [(ngModel)]="question.questionDescription" name="questionDescription">
       </div> 
 
+      <div class="form-group" *ngIf="question.numberOfOption">
+        <div *ngFor="let size of Options;let first  = first  ">
+          <!-- <div *ngIf = "size = 10"></div> -->
+          <!-- {{first }} -->
+          <div *ngIf = "first ; else notfirst" >
+            </div>
+              <ng-template #notfirst>
+                  <label for="answers">Answer{{size}}</label>
+                  <input type="text" class="form-control" id="answerValues" required [(ngModel)]="answerValues" name="answerValues">
+                </ng-template>
+       
+      
+    </div>
+    </div>
+
     <button type="submit" class="btn btn-success">Submit</button>
+    
   </form>
 </div>
