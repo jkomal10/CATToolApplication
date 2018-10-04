@@ -69,4 +69,10 @@ public class ApplicationController {
 	public void  deleteApplication(@PathVariable("applicationId") int id) {
 		applicationService.deleteApplicationById(id);
 	}
+	
+	@PutMapping("/resetApplicationById/{applicationId}")
+	public void resetApplication (@PathVariable("applicationId") int applicationId) {
+		System.out.println("*******Reset*******");
+		applicationService.resetApplicationById(applicationId);
+	}
 }

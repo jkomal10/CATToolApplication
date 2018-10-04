@@ -192,6 +192,31 @@ public class Application {
 	public Application() {
 		super();
 	}
+	
+	
+
+	public Application(int applicationId, String applicationName, String applicationDescription, boolean isCloudable,
+			boolean isMigration, boolean cloudProvider, boolean isAssessment, boolean isFinalize, boolean isDeleted,
+			Date deletedDateTime, boolean isVerified, Date createdDate, Date modifiedDateTime, String createdBy,
+			String modifiedBy, int userId) {
+		super();
+		this.applicationId = applicationId;
+		this.applicationName = applicationName;
+		this.applicationDescription = applicationDescription;
+		this.isCloudable = isCloudable;
+		this.isMigration = isMigration;
+		this.cloudProvider = cloudProvider;
+		this.isAssessment = isAssessment;
+		this.isFinalize = isFinalize;
+		this.isDeleted = isDeleted;
+		this.deletedDateTime = deletedDateTime;
+		this.isVerified = isVerified;
+		this.createdDate = createdDate;
+		this.modifiedDateTime = modifiedDateTime;
+		this.createdBy = createdBy;
+		this.modifiedBy = modifiedBy;
+		this.userId = userId;
+	}
 
 	@Override
 	public String toString() {
