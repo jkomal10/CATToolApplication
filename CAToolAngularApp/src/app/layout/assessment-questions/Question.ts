@@ -13,4 +13,5 @@ export class Question{
     cteatedTime : Date;
     modifiedBy : string;
     modifiedTime : Date;
+    answerValues : string  [10];
 }
