@@ -1,20 +1,15 @@
 export class Users{
     userId : number;
-    ipAddress : string;
     userName : string;
-    language : string;
-    password : string;
-    salt : string;
-    email : string;
-    activation_code : string;
-    forgotten_password_code: string;
-    forgotten_password_time : number;
-    remember_code : string;
-    created_on : number;
-    last_login : number;
-    active : number;
     firstName : string;
     lastName : string;
+    password : string;
+    ipAddress : string;
+    lastLogin : number;
     company : string;
-    phone : string
+    isDeleted: number;
+    createdBy : string;
+    createdDateTime : Date;
+    modifiedBy : string;
+    modifiedDateTime : Date;
 }
