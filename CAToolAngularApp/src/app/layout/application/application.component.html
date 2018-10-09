@@ -12,8 +12,9 @@
        </div>
       <br>
     <div>
-        <table datatable id="app-list" class="row-border hover">
-          <thead class = "thead-dark">
+        <!-- <table datatable id="app-list" class="row-border hover"> -->
+            <table width="100%" datatable="bootstrap" id="user-list" [dtTrigger]="dtTrigger" [dtOptions]="dtOptions"  class="table table-hover table-sm ">
+          <thead bgcolor="#E0E0E0">
             <tr>
               <th>Application name</th>
               <th>Application Description</th>
@@ -32,15 +33,13 @@
                 <td>{{row.cloudable}}</td>
                 <td>{{row.migrationMethod}}</td>
                 <td>{{row.cloudProvider}}</td>
-               <td> <!-- <a routerLink="/application" [routerLinkActive]="['router-link-active']" class="btn btn-info" style="margin-right: 2px">
-                  <i class="fa fa-key"></i>&nbsp;
-                  <span></span>
-                  </a> -->
-                  <button (click)="ViewApplication(row)"  style="font-size:16px" class="btn btn-info"><i class="fa fa-info-circle"></i></button>&nbsp;
-                  <button (click)="assessApplication()"  style="font-size:16px" class="btn btn-info"><i class="fa fa-hourglass-start"></i></button>&nbsp;
-                  <button (click)="editApplication(row)"  style="font-size:16px" class="btn btn-success"><i class="fa fa-edit"></i></button>&nbsp;
-                  <button (click)="deleteApplication(row.applicationId)" style="font-size:16px"  class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                  <button (click)="resetApplication(row.applicationId)" style="font-size:16px"><i class="fa fa-refresh" aria-hidden="true"></i></button>  
+               <td width="24%">
+                  <button (click)="deactivate(row.applicationId)" style="font-size:16px" class="btn btn-light"><i class="fa fa-refresh" aria-hidden="true"></i></button>  
+                  <button (click)="ViewApplication(row)" class="btn btn-light" ><i class="fa fa-info-circle"></i></button>&nbsp;
+                  <button (click)="assessApplication()"  class="btn btn-light" ><i class="fa fa-hourglass-start"></i></button>&nbsp;
+                  <button (click)="editApplication(row)" class="btn btn-light" ><i class="fa fa-edit"></i></button>&nbsp;
+                  <button (click)="deleteApplication(row.applicationId)" class="btn btn-light" ><i class="fa fa-trash"></i></button>
+                  <button (click)="resetApplication(row.applicationId)" style="font-size:16px" class="btn btn-light"><i class="fa fa-refresh" aria-hidden="true"></i></button>  
                 </td>
                 </tr> 
         </tbody>

@@ -9,12 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class AssessmentQuestions {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@SequenceGenerator(name="book_generator", sequenceName = "book_seq", allocationSize=50)
 	private int questionId;
 	private String questionText;
 	private String questionDescription;

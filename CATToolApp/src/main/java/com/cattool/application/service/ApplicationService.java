@@ -1,6 +1,5 @@
 package com.cattool.application.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,10 +53,18 @@ public class ApplicationService {
 	
 	public void resetApplicationById(int applicationId)
 	{
-		Application app=new Application();
-		app.setApplicationId(applicationId);
-		app.setUserId(applicationRepository.findByApplicationId(applicationId).getUserId());
-		applicationRepository.save(app);
+		Application application=new Application();
+		application.setApplicationId(applicationId);
+		application.setUserId(applicationRepository.findByApplicationId(applicationId).getUserId());
+		applicationRepository.save(application);
 	}
-}
+	
+	public void deactivateApplicationById(int applicationId) {
+		Application application=new Application();
+		application = applicationRepository.findByApplicationId(applicationId);
+		//application.setde
+		application.setUserId(applicationRepository.findByApplicationId(applicationId).getUserId());
+		applicationRepository.save(application);
+	}
 
+}
