@@ -40,6 +40,9 @@ public class Application {
 	private boolean isDeleted;
 	
 	@Column
+	private boolean isDeactivate;
+	
+	@Column
 	private Date deletedDateTime;
 	
 	@Column
@@ -59,7 +62,7 @@ public class Application {
 	
 	@Column
 	private int userId;
-
+	
 	public int getApplicationId() {
 		return applicationId;
 	}
@@ -132,6 +135,14 @@ public class Application {
 		this.isDeleted = isDeleted;
 	}
 
+	public boolean isDeactivate() {
+		return isDeactivate;
+	}
+
+	public void setDeactivate(boolean isDeactivate) {
+		this.isDeactivate = isDeactivate;
+	}
+
 	public Date getDeletedDateTime() {
 		return deletedDateTime;
 	}
@@ -188,17 +199,14 @@ public class Application {
 		this.userId = userId;
 	}
 
-	
 	public Application() {
 		super();
 	}
-	
-	
 
 	public Application(int applicationId, String applicationName, String applicationDescription, boolean isCloudable,
 			boolean isMigration, boolean cloudProvider, boolean isAssessment, boolean isFinalize, boolean isDeleted,
-			Date deletedDateTime, boolean isVerified, Date createdDate, Date modifiedDateTime, String createdBy,
-			String modifiedBy, int userId) {
+			boolean isDeactivate, Date deletedDateTime, boolean isVerified, Date createdDate, Date modifiedDateTime,
+			String createdBy, String modifiedBy, int userId) {
 		super();
 		this.applicationId = applicationId;
 		this.applicationName = applicationName;
@@ -209,6 +217,7 @@ public class Application {
 		this.isAssessment = isAssessment;
 		this.isFinalize = isFinalize;
 		this.isDeleted = isDeleted;
+		this.isDeactivate = isDeactivate;
 		this.deletedDateTime = deletedDateTime;
 		this.isVerified = isVerified;
 		this.createdDate = createdDate;
@@ -223,12 +232,13 @@ public class Application {
 		return "Application [applicationId=" + applicationId + ", applicationName=" + applicationName
 				+ ", applicationDescription=" + applicationDescription + ", isCloudable=" + isCloudable
 				+ ", isMigration=" + isMigration + ", cloudProvider=" + cloudProvider + ", isAssessment=" + isAssessment
-				+ ", isFinalize=" + isFinalize + ", isDeleted=" + isDeleted + ", deletedDateTime=" + deletedDateTime
-				+ ", isVerified=" + isVerified + ", createdDate=" + createdDate + ", modifiedDateTime="
-				+ modifiedDateTime + ", createdBy=" + createdBy + ", modifiedBy=" + modifiedBy + ", userId=" + userId
-				+ "]";
+				+ ", isFinalize=" + isFinalize + ", isDeleted=" + isDeleted + ", isDeactivate=" + isDeactivate
+				+ ", deletedDateTime=" + deletedDateTime + ", isVerified=" + isVerified + ", createdDate=" + createdDate
+				+ ", modifiedDateTime=" + modifiedDateTime + ", createdBy=" + createdBy + ", modifiedBy=" + modifiedBy
+				+ ", userId=" + userId + "]";
 	}
 
 	
 
+	
 }

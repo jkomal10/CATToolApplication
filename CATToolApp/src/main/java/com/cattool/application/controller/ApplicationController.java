@@ -2,6 +2,7 @@ package com.cattool.application.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -59,6 +60,7 @@ public class ApplicationController {
 	
 	@DeleteMapping("/deleteApplicationById/{applicationId}")
 	public void  deleteApplication(@PathVariable("applicationId") int id) {
+		System.out.println("*******delete*******");
 		applicationService.deleteApplicationById(id);
 	}
 	
@@ -70,7 +72,7 @@ public class ApplicationController {
 	
 	@PutMapping("/deactivateApplicationById/{applicationId}")
 	public void deactivateApplication(@PathVariable("applicationId") int applicationId) {
-		System.out.println("*******deactivate*******");
+		System.out.println("*******deactivate*******"+applicationId);
 		applicationService.deactivateApplicationById(applicationId);
 	}
 }
