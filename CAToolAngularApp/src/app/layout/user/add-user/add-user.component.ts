@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AddUserService } from './add-user.service';
 import { Users } from '../../../login/Users';
 import { UsersService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-user',
@@ -10,7 +11,7 @@ import { UsersService } from '../user.service';
 })
 export class AddUserComponent implements OnInit {
  user =new Users();
-  constructor(private userService:UsersService) { }
+  constructor(private userService:UsersService,public router: Router) { }
 
   ngOnInit() {
   }
@@ -20,6 +21,7 @@ export class AddUserComponent implements OnInit {
     this.user=formvalues;
     console.log(formvalues);
   this.userService.addUser(this.user).subscribe();
+  this.router.navigate(['/user']);
     //console.log("********8888"+formvalues);
     
   }
