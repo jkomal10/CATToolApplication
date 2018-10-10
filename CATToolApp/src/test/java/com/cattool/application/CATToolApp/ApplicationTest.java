@@ -21,7 +21,7 @@ public class ApplicationTest {
 	@Autowired
 	ApplicationRepository applicationRepository;
 	
-	Application application=new Application();
+	
 	
 	@Test
 	public void getAllApplication()
@@ -32,6 +32,7 @@ public class ApplicationTest {
 	@Test
 	public void saveApplication()
 	{
+		Application application=new Application();
 		applicationRepository.save(application);
 	}
 	
@@ -48,6 +49,7 @@ public class ApplicationTest {
 	@Test
 	public void updateApplication()
 	{
+		Application application=new Application();
 		applicationRepository.saveAndFlush(application);
 	}
 	

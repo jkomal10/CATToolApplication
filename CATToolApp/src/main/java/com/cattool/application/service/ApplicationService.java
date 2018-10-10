@@ -62,7 +62,7 @@ public class ApplicationService {
 	public void deactivateApplicationById(int applicationId) {
 		Application application=new Application();
 		application = applicationRepository.findByApplicationId(applicationId);
-		//application.setde
+		application.setDeactivate(true);
 		application.setUserId(applicationRepository.findByApplicationId(applicationId).getUserId());
 		applicationRepository.save(application);
 	}

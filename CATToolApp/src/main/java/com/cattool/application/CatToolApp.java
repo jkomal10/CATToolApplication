@@ -1,5 +1,12 @@
 package com.cattool.application;
 
+
+import java.io.IOException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -12,14 +19,13 @@ public class CatToolApp {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CatToolApp.class, args);
-		/*OptionService service=new OptionService();
-		System.out.println("mainnnnnnnnnnnnnnnnn");
-		AssessmentQuestions abc=new AssessmentQuestions(1,"text","description","questionType",1,3,true,true,"true","false","false",null,null,null,null);
-		System.out.println("service questionnnnnnnnnnnnnnnnnnnnnnnn");
-		QuestionOption que=new QuestionOption(1,"s","s",abc);
-		System.out.println("optionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
-		System.out.println(que);
-		service.saveQuestionOption(que);
-		System.out.println("endddddddddddddddddddddddddddddddddd");*/
+		System.out.println("***************************");
+		FileSystem fileSystem = FileSystems.getDefault();
+		Path path = fileSystem.getPath("C:\\Users\\priyanj\\Desktop\\priyanjali_sonarqube\\file.txt"); // Noncompliant
+		System.out.println(path);
+		path.toAbsolutePath();
+		 Path p1 = Paths.get("C:\\Users\\priyanj\\Desktop\\priyanjali_sonarqube\\file.txt");
+		 System.out.println(path.toAbsolutePath());
+		 
 	}
 }

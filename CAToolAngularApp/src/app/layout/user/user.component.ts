@@ -62,6 +62,12 @@ export class UserComponent implements OnInit {
     
 
   }
+  uploadUserInfo()
+  {
+    console.log(this.IpAddress);
+    this.userService.sendIpAddresstoOtherComponent(this.IpAddress);
+    this.router.navigate(['/user/upload-user']);
+  }
   ngOnInit() {
 
     this.dtOptions = {
