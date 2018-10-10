@@ -29,13 +29,11 @@ public class OptionController {
 	}
    
 	@PostMapping("/save/create")
-	public QuestionOption saveQuestionOption(@RequestBody QuestionOption questionOption)
+	public void saveQuestionOption(@RequestBody QuestionOption questionOption)
 	{
-		//AssessmentQuestions assessmentQuestions=new AssessmentQuestions();
-		//questionOption.setAssessmentQuestions(questionOption.getAssessmentQuestions());
-		System.out.println(questionOption);
-		System.out.println("save create in option i=api");
-		
-		return optionService.saveQuestionOption(questionOption);
+		System.out.println("************8create ");
+		questionOption.setAssessmentQuestions(questionOption.getAssessmentQuestions());
+		questionOption.setQuestionText(questionOption.getAssessmentQuestions().getQuestionText());
+		optionService.saveQuestionOption(questionOption);
 	}
 }

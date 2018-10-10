@@ -34,7 +34,7 @@
             <!-- <h1>Angular Get Selected Option Value</h1> -->
             <span>number of option</span>&ngsp;
             <select (change)="selectChangeHandler($event)" required [(ngModel)]="question.numberOfOption" name="numberOfOption">
-                <option class='option' *ngFor='let option of optionsValues' [value]="option">{{option}}</option>
+                <option class='option' *ngFor='let option of optionsValues' >{{option}}</option>
                 <!-- <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -72,7 +72,9 @@
             </div>
               <ng-template #notfirst>
                   <label for="answers">Answer{{size}}</label>
-                  <input type="text" class="form-control" id="answerValues'+'{{size}}" required [(ngModel)]="answerValues" name="answerValues">
+                 
+                  <!-- <input type="text" class="form-control" id="answerValues'+'{{size}}" required [(ngModel)]="answerValues" name="answerValues"> -->
+                  <br><input type="text" [(ngModel)]="optionText[i-1]" name="optionText[i-1]"/>
                 </ng-template>
        
       

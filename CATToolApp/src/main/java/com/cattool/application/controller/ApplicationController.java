@@ -37,6 +37,7 @@ public class ApplicationController {
 	public Application saveApplication(@RequestBody Application application)
 	{
 		System.out.println("add application");
+		System.out.println(application);
 		return applicationService.saveApplication(application);
 	}
 	

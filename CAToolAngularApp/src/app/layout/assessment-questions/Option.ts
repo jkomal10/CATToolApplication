@@ -4,7 +4,8 @@ export class Option{
 
     optionId:number;
     questionText:String;
-    optionText:String;
+    //optionText:String;
+    optionText : Array<string>=[];
     public assessmentQuestions?:AssessmentQuestions;
     
     // constructor(optionId:number,questionText:String,optionText:String,question:Question)

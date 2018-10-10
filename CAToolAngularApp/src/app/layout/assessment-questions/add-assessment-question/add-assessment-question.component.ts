@@ -5,6 +5,7 @@ import { AssessmentQuestions } from '../Question';
 import { AssessmentQuestionsService } from '../assessment-questions.service';
 import { Option } from '../Option';
 import { JsonpModule } from '@angular/http';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-add-assessment-question',
@@ -14,13 +15,16 @@ import { JsonpModule } from '@angular/http';
 export class AddAssessmentQuestionComponent implements OnInit {
 
   answerValues : string;
+  value : string
+  //answerArray : Array<string>=[];
+  optionText : Array<string>=[];
   Options : Array<number>=[10];
   //Options : number[];
   question: AssessmentQuestions = new AssessmentQuestions();
   option: Option = new Option();
   submitted = false;
   numberOfOptions : number;
-  optionsValues = [1, 2, 3,4,5,6,7,8,9,10];
+  optionsValues = [0,1, 2, 3,4,5,6,7,8,9];
   
   
   constructor(private questionService: AssessmentQuestionsService,public router: Router) { }
@@ -31,9 +35,11 @@ export class AddAssessmentQuestionComponent implements OnInit {
   }
 
   selectChangeHandler(event:any){
+    console.log('rrrrrrrrrrrrrrrrr'+this.optionText[0]);
     console.log(event);
     this.numberOfOptions=parseInt(event.target.value,10);
    // this.numberOfOption=event;
+   
     console.log(this.numberOfOptions);
     console.log(event.target.value);
    // this.numberOfOption1 = Array.of(this.numberOfOptions);
@@ -46,7 +52,9 @@ export class AddAssessmentQuestionComponent implements OnInit {
        this.Options[index] = index;
        console.log(this.Options);
        console.log(this.Options.length);
+
     }
+    console.log('************************************&&&&&&&&&&&&'+this.optionText+'  &&&&&&&&&&&&&&&&');
     // for (const key in event) {
     //   if (event.hasOwnProperty(key)) {
     //     const element = event[key];
@@ -70,7 +78,10 @@ export class AddAssessmentQuestionComponent implements OnInit {
     obj2 : JsonpModule;
    save() {
     this.option.assessmentQuestions=this.question;
-    //console.log("**********************"+this.option.question+"***********");
+    console.log('************************************&&&&&&&&&&&&'+this.optionText[2]+'  &&&&&&&&&&&&&&&&');
+    this.option.optionText=this.optionText;
+    console.log("**********************"+this.option.optionText+"***********");
+    
     console.log(JSON.stringify(this.option));
     this.questionService.createOption(this.option).subscribe(
       

@@ -12,10 +12,10 @@ import { Users } from './Users';
     animations: [routerTransition()]
 })
 export class LoginComponent implements OnInit {
-    users= new Users();
+   users: Users = new Users();
     // password : string = "pass";
     // username : string = "user";
-    constructor(public router: Router,private loginservice : LoginService) {}
+    constructor(private loginService :LoginService,public router: Router,private loginservice : LoginService) {}
 
     ngOnInit() {}
 
@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
          console.log(this.users);
             if( this.users!=null)
             {
+                this.loginService.sendMsgtoOtherComponent(this.users);
                 this.router.navigate(['/dashboard']);
             }
             else
