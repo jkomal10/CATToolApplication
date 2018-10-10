@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AddUserService } from './add-user.service';
+import { Users } from '../../../login/Users';
 import { UsersService } from '../user.service';
-import { Users } from '../Users';
 
 @Component({
   selector: 'app-add-user',
@@ -9,24 +9,25 @@ import { Users } from '../Users';
   styleUrls: ['./add-user.component.scss']
 })
 export class AddUserComponent implements OnInit {
-  user : Users=new Users();
-  ipAddress : any;
-
-  constructor(private userservice : UsersService,public router: Router) { }
+ user =new Users();
+  constructor(private userService:UsersService) { }
 
   ngOnInit() {
-    this.userservice.users.subscribe(data => {this.ipAddress= data;}); 
   }
 
   addUserComponent(formvalues)
   {
-
     this.user=formvalues;
-    console.log("********8888"+formvalues+"******************"+this.user);
-    this.userservice.addUser(formvalues)
-    .subscribe();
-    this.router.navigate(['/user']);
-
+    console.log(formvalues);
+  this.userService.addUser(this.user).subscribe();
+    //console.log("********8888"+formvalues);
     
   }
+
+  // save() {
+  //   this.addapplicationService.createApplication(this.application)
+  //     .subscribe(data => console.log(data), error => console.log(error));
+  //   this.application = new Application();
+  // }
+ 
 }

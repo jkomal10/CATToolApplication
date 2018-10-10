@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Question } from '../Question';
+import { AssessmentQuestions } from '../Question';
 import { AssessmentQuestionsService } from '../assessment-questions.service';
+import { Option } from '../Option';
+import { JsonpModule } from '@angular/http';
 
 @Component({
   selector: 'app-add-assessment-question',
@@ -14,7 +16,8 @@ export class AddAssessmentQuestionComponent implements OnInit {
   answerValues : string;
   Options : Array<number>=[10];
   //Options : number[];
-  question: Question = new Question();
+  question: AssessmentQuestions = new AssessmentQuestions();
+  option: Option = new Option();
   submitted = false;
   numberOfOptions : number;
   optionsValues = [1, 2, 3,4,5,6,7,8,9,10];
@@ -61,16 +64,32 @@ export class AddAssessmentQuestionComponent implements OnInit {
 
   newQuestion(): void {
     this.submitted = false;
-    this.question = new Question();
+    this.question = new AssessmentQuestions();
   }
+    obj : JsonpModule;
+    obj2 : JsonpModule;
+   save() {
+    this.option.assessmentQuestions=this.question;
+    //console.log("**********************"+this.option.question+"***********");
+    console.log(JSON.stringify(this.option));
+    this.questionService.createOption(this.option).subscribe(
+      
+    );
 
-  save() {
-    this.questionService.createQuestion(this.question)
-      .subscribe(data => console.log(data), error => console.log(error));
-      this.router.navigate(['/assessment-questions']);
-  }
+    // this.questionService.createQuestion(this.option)
+    //       .subscribe(data => console.log(data), error => console.log(error));
+    //    this.option.question=this.question;
+    //   //console.log(this.question.questionText+"***********");
+    //   // console.log(this.option.optionText+"***********");
+    //   console.log(this.option.question.questionText+"***********");
+    //    this.router.navigate(['/assessment-questions']);
+   }
 
+  
+ 
   onSubmit() {
+
+   
     this.submitted = true
     this.save();
   }

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpResponse,HttpHeaders } from '@angular/common/http';
 import { AssessmentQuestionsService } from './assessment-questions.service';
-import { Question } from './Question';
 import { Subject } from 'rxjs';
+import { AssessmentQuestions } from './Question';
 class DataTablesResponse {
   data: any[];
   draw: number;
@@ -18,7 +18,7 @@ class DataTablesResponse {
 })
 export class AssessmentQuestionsComponent implements OnInit {
 
-  question: Question = new Question();
+  question: AssessmentQuestions = new AssessmentQuestions();
   questionId : number;
   submitted = false;
 
@@ -64,7 +64,7 @@ export class AssessmentQuestionsComponent implements OnInit {
       this.router.navigate(['/assessment-questions']);
   }
 
-  updateQuestions(questions: Question){
+  updateQuestions(questions: AssessmentQuestions){
     this.assessmentQuestionsService.sendMsgtoOtherComponent(questions);
     this.router.navigate(['/assessment-questions/update-question']);
   }

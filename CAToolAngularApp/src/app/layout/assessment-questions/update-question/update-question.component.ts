@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Question } from '../Question';
+import { AssessmentQuestions } from '../Question';
 import { AssessmentQuestionsService } from '../assessment-questions.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { AssessmentQuestionsService } from '../assessment-questions.service';
 })
 export class UpdateQuestionComponent implements OnInit {
 
-  question = new Question();
+  question = new AssessmentQuestions();
   que : any;
   submitted = false;
 

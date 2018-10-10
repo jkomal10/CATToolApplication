@@ -1,4 +1,85 @@
-<h2 class="text-muted">Application <small>Add new Applictaion</small></h2>
+<h3>Assessment Questions</h3>
+<h1><hr width="100%" size="80"></h1>
+<div [hidden]="submitted" style="width: 300px;">
+  <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+          <br>
+          <label for="questionType"><b>Assessment Type</b></label><br>
+          <input type="checkbox" [(ngModel)]="question.assessmentTypeForMigration" name="assessmentTypeForMigration" >&ngsp;<label>Migration</label><br/>
+          <input type="checkbox" [(ngModel)]="question.assessmentTypeForCloudProvider" name="assessmentTypeForCloudProvider">&ngsp;<label>cloud provider</label><br/>
+          <input type="checkbox" [(ngModel)]="question.assessmentTypeForCloudable" name="assessmentTypeForCloudable">&ngsp;<label>Cloudable</label><br/>
+        </div>
+    <div class="form-group">
+        <label for="questionType">Question Type</label>
+        <select  [(ngModel)]="question.questionType" class="form-control" name="questionType">
+            <option value="Multiple Choice Single Question">Multiple Choice Single Question</option>
+            <option value="Multiple Choice Multiple Answer">Multiple Choice Multiple Answer</option>
+            <option value="Short Answer">Short Answer</option>
+            <option value="Long Answer">Long Answer</option>
+        </select>
+      
+      </div>
+
+    <div class="form-group">
+        <label for="questionDisplayOrder">Question Display Order</label>
+        <input type="text" class="form-control" id="questionDisplayOrder" required [(ngModel)]="question.questionDisplayOrder" name="questionDisplayOrder">
+      </div>
+
+    <!-- <div class="form-group">
+          <label for="numberOfOption">number of option</label>
+          <input type="text" class="form-control" id="numberOfOption" (onClick)="options()" required [(ngModel)]="question.numberOfOption" name="numberOfOption">
+        </div> -->
+
+        <div class="form-group">
+            <!-- <h1>Angular Get Selected Option Value</h1> -->
+            <span>number of option</span>&ngsp;
+            <select (change)="selectChangeHandler($event)" required [(ngModel)]="question.numberOfOption" name="numberOfOption">
+                <option class='option' *ngFor='let option of optionsValues' [value]="option">{{option}}</option>
+                <!-- <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option> -->
+            </select>
+            <!-- <p><span>You selected: </span><b>{{selectedDay}}</b></p> -->
+        </div>
+
+    <div class="form-group">
+      <label for="questionText">Question</label>
+      <input type="text" class="form-control" id="questionText" required [(ngModel)]="question.questionText" name="questionText">
+    </div> 
+
+    <div class="form-group">
+        <label for="questionDescription">Question Description</label>
+        <input type="text" class="form-control" id="questionDescription" required [(ngModel)]="question.questionDescription" name="questionDescription">
+      </div> 
+
+      <div class="form-group" *ngIf="question.numberOfOption">
+        <div *ngFor="let size of Options;let first  = first;let i = index">
+          <!-- <div *ngIf = "size = 10"></div> -->
+          <!-- {{first }} -->
+          <div *ngIf = "first ; else notfirst" >
+            </div>
+              <ng-template #notfirst>
+                  <label for="answers">Answer{{size}}</label>
+                  <input type="text" class="form-control" id="answerValues'+'{{size}}" required [(ngModel)]="answerValues" name="answerValues">
+                </ng-template>
+       
+      
+    </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+    
+  </form>
+</div>
+
+<!-- <h2 class="text-muted">Application <small>Add new Applictaion</small></h2>
 <div [hidden]="submitted" style="width: 300px;">
   <form #form="ngForm" (ngSubmit)="onSubmit(que)">
     <div class="form-content">
@@ -42,4 +123,4 @@
 <div [hidden]="!submitted">
   <h4>You submitted successfully!</h4>
   <button class="btn btn-info" (click)="createApplication()">Add</button>
-</div>
+</div> -->

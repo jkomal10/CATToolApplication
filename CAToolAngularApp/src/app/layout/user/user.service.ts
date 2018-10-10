@@ -12,7 +12,6 @@ export class UsersService {
    private addUrl = 'http://localhost:8090/user/addUser';
    private updateUrl = 'http://localhost:8090/user/updateUser';
    private deleteUrl = 'http://localhost:8090/user/deleteUserById';
-
 constructor(private http:HttpClient) { }
 
 CollectData(){
@@ -21,9 +20,11 @@ const url = 'http://localhost:8090/user/getAll';
 return this.http.get(url);
 }
 
-addUser(user : Object):Observable<Object>{
-   
-    return this.http.post(`${this.addUrl}` + `/create`, user);
+newAddURL: string = 'http://localhost:8090/user/addUser';
+  
+addUser(application: Object): Observable<Object> {
+  console.log(`${this.newAddURL}/create`);
+  return this.http.post(`${this.newAddURL}` + `/create`, application);
 }
 
 private comptransfer = new BehaviorSubject("Hello");

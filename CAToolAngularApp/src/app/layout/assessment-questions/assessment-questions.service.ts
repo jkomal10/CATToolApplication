@@ -13,7 +13,7 @@ export class AssessmentQuestionsService {
   private baseUrl = 'http://localhost:8090/assessmentQuestions/deleteQuestions';
   private updateUrl = 'http://localhost:8090/assessmentQuestions/updateQuestions/update';
   private addUrl = 'http://localhost:8090/assessmentQuestions/saveAssessmentQuestions';
-  //private addUrl ='http://localhost:8090/option/save/create';
+  private addUrl1 ='http://localhost:8090/option/save';
 
   CollectData() {
     const  url  =  'http://localhost:8090/assessmentQuestions/getAllQuestions';
@@ -38,7 +38,14 @@ export class AssessmentQuestionsService {
   createQuestion(question: Object): Observable<Object> {
     return this.http.post(`${this.addUrl}` + `/create`, question);
   }
-
+  createOption(option: Object): Observable<Object> {
+    // let headers = new Headers({ 'Content-Type': 'application/json' });
+    // let options = new RequestOptions({ headers: headers });
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8'); 
+    console.log(JSON.stringify(option));
+    return this.http.post(`${this.addUrl1}` + `/create`, JSON.stringify(option),{headers:headers});
+  }
   updateAssessmentQuestions(value: any): Observable<Object> {
     console.log('################assessmentQuestions.service.');
     console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~' + `${this.updateUrl}` + '~~~~~~~~~~~~~~~~~~~~~~~');

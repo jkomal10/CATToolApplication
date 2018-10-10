@@ -1,4 +1,4 @@
-export class Question{
+export class AssessmentQuestions{
 
     questionId : number;
     questionText : string;

@@ -35,6 +35,7 @@ public class ApplicationController {
 	@PostMapping("/saveApplication/create")
 	public Application saveApplication(@RequestBody Application application)
 	{
+		System.out.println("add application");
 		return applicationService.saveApplication(application);
 	}
 	
