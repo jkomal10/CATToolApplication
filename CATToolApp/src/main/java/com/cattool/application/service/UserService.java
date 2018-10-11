@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class UserService {
 
 	public Users findById(String userName,String password) {
 		Users userDb=userRepository.findByUserName(userName);
+		
 		if(userDb!=null)
 		{
 			System.out.println(password);

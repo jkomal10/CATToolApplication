@@ -2,6 +2,10 @@ package com.cattool.application.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,8 +36,12 @@ public class UserController {
 	}
 	
 	@GetMapping("/getById/{userName}/{password}")
-	public Users findById(@PathVariable String userName,@PathVariable String password)
+	public Users findById(@PathVariable String userName,HttpServletRequest request,HttpServletResponse response, @PathVariable String password)
 	{
+		HttpSession session=request.getSession();
+		session.setAttribute("userName", userName);
+		session.getAttribute("userName");
+		System.out.println(session.getAttribute("userName"));
 		return userService.findById(userName,password);
 	}
 	

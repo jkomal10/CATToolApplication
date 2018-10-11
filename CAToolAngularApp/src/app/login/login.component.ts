@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
          console.log(this.users);
             if( this.users!=null)
             {
+                localStorage.setItem('userName',formValues.userName);
                 this.loginService.sendMsgtoOtherComponent(this.users);
                 this.router.navigate(['/dashboard']);
             }
