@@ -104,4 +104,9 @@ export class ApplicationComponent implements OnInit {
      this.router.navigate(['/application/assesst-application']);
    }
 
+   deactivate(formvalues){
+     this.applicationService.deactivate(formvalues).subscribe();
+   }
+   
+
 }

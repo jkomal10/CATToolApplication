@@ -8,6 +8,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class ApplicationService {
   
   constructor(private http:HttpClient) { }
+  deactivateUrl:String ='http://localhost:8090/application/deactivateApplicationById';
    Baseurl:String = 'http://localhost:8090/application/deleteApplicationById';
    deleteUrl:String ='http://localhost:8090/application/resetApplicationById';
   //url:String= 'http://localhost:8090/application/getApplicationById';
@@ -29,6 +30,12 @@ export class ApplicationService {
       console.log('################application.service.');
       console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~'+`${this.url1}`+'~~~~~~~~~~~~~~~~~~~~~~~');
       return this.http.put(`${this.url1}`, value);
+    }
+
+    deactivate(applicationId: number): Observable<any> {
+      console.log('################application.service.');
+      console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~'+`${this.deactivateUrl}`+'~~~~~~~~~~~~~~~~~~~~~~~');
+      return this.http.put(`${this.deactivateUrl}/${applicationId}`,  { responseType: 'text' });
     }
 
     private comptransfer = new BehaviorSubject("Hello");
