@@ -77,4 +77,10 @@ public class ApplicationController {
 		System.out.println("*******deactivate*******"+applicationId);
 		applicationService.deactivateApplicationById(applicationId);
 	}
+	
+	@GetMapping("/getAllReassessment")
+	public List<Application>getAllReassessment()
+	{
+		return applicationService.getAllReassessment();
+	}
 }
