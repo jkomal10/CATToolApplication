@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { ForCloudableService } from './for-cloudable.service';
 import { Subject } from 'rxjs';
 import { Option } from '../../assessment-questions/Option';
+import { Router } from '@angular/router';
+import { CloudableRule } from './cloudable';
 class DataTablesResponse {
   data: any[];
   draw: number;
@@ -19,12 +21,12 @@ export class ForCloudableComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   AllData : any;
-  //option: Option=new Option();
-  option:any;
+  option: Option=new Option();
+ // option:any;
   assessmentQuestions : object [];
   message = '';
   user_data: any;
-  constructor(private http:HttpClient,private forCloudableService:ForCloudableService) { }
+  constructor(private http:HttpClient,private forCloudableService:ForCloudableService,private router:Router) { }
 
   ngOnInit() {
     this.dtOptions = {
@@ -46,41 +48,38 @@ export class ForCloudableComponent implements OnInit {
 
     this.forCloudableService.CollectData().subscribe(result => {
 
-      // let user = result [0]["assessmentQuestions"];
-      //           let user_data = user["data"];
-      //           console.log(user_data["name"]);
-      //           this.user_data = user_data; // here
-      //           console.log();
-      // {this.AllData=result as Object[];
-      //    // FILL THE ARRAY WITH DATA.
-      //   console.log(this.AllData)
-      //  let res=result[4];
-      //    this.assessmentQuestions = res ['assessmentQuestions'] ;
-      //   console.log(this.assessmentQuestions[0]['questionType']+"******************")
-
-        // let assessmentQuestions=result["assessmentQuestions"];
-        // let AllData=assessmentQuestions[0];
-        // console.log(AllData["questionType"])
-
-        //previous
        this.AllData = result;
        //this.option=this.AllData.assessmentQuestions;
        this.dtTrigger.next();
        console.log(this.AllData);
+     console.log(this.AllData[0].assessmentQuestions);
+     console.log(this.AllData[2].assessmentQuestions.questionType);
 
-       console.log(this.AllData[28].questionType);
-       console.log(this.AllData[28].assessmentQuestions);
-       console.log(this.AllData[28].assessmentQuestions.questionType);
-      console.log(this.option+"***********************");
+        // this.option=this.AllData.optionId;
+        // this.option=this.AllData.optionText;
+        // this.option=this.AllData.assessmentQuestions;
+     // console.log(this.option+"*************"+this.AllData+"**********");
       
       });
 
   }
-  //   getGFValues(ob): any[] {
-  //     return Object.values(ob);
-  //     }
   someClickHandler(info: any): void {
     this.message = info.id + ' - ' + info.firstName;
   }
 
+  addCloudableRule(option){
+    console.log(option+"llllllllllllllllllllllllllllllllll");
+    console.log("jjjjjjjjjjjjjjjjjjjj");
+    
+    console.log(this.option+"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+    this.forCloudableService.addClodableRule(this.option).subscribe();
+  
+  }
+
+  onSubmit(executionOrder){
+   // let cloudableRule=new CloudableRule(executionOrder);
+    //this.option=formvalues;
+    console.log(this.option+"ooooooooooooooooooooo");
+    this.addCloudableRule(this.option);
+  }
 }

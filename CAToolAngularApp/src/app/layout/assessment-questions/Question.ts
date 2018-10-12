@@ -14,7 +14,7 @@ export class AssessmentQuestions{
     modifiedBy : string;
     modifiedTime : Date;
     answerValues : string;
-  
+    executionOrder:number;
     
  
 //    constructor( questionId : number,

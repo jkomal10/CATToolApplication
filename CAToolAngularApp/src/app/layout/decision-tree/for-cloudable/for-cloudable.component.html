@@ -1,0 +1,37 @@
+ <div>
+    <form (ngSubmit)="onSubmit(executionOrder.value)">
+        
+  <table width="100%" datatable="bootstrap"   class="table table-hover table-sm ">
+     <thead bgcolor="#E0E0E0">
+      <tr>
+        <th>Application name</th>
+        <th>Application Description</th>
+      </tr>
+    </thead> 
+    <tbody>
+      
+        <tr *ngFor="let size of AllData;let i = index">
+            <td>Question
+                <br>Excution Order
+                <br>Question type
+                <br>Options
+             </td>  
+          <td> 
+              <!--<input type="text" class="form-control"  [(ngModel)]="AllData[i].assessmentQuestions.questionText" name="questionText">-->
+             {{AllData[i].assessmentQuestions.questionText}}
+              <br><input type="number" #executionOrder name="executionOrder">
+              <br>{{AllData[i].assessmentQuestions.questionType}}
+              <br>{{AllData[i].optionText}}
+            
+            </td>
+              
+           </tr>
+  </tbody>
+  <tfoot>
+      
+    <button type="submit" class="btn btn-info">Submit</button>&ngsp;&ngsp;
+      <input type="cancel" class="button  btn btn-info" value="Cancel" (click)="Cancel()">&ngsp;&ngsp;
+  </tfoot>
+  </table> 
+</form>
+</div>
