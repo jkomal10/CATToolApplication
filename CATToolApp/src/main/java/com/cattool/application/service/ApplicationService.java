@@ -1,5 +1,6 @@
 package com.cattool.application.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,4 +68,21 @@ public class ApplicationService {
 		applicationRepository.save(application);
 	}
 
+	public List<Application> getAllReassessment() {
+		// TODO Auto-generated method stub
+		 List<Application> appList=new ArrayList<Application>();
+		 
+         for(Application application: applicationRepository.findAll()){
+       	 if(application.isFinalize()==1)
+        	 {
+        		 appList.add(application);
+        		 System.out.println(appList);
+        	 }
+        	 System.out.println(application.getApplicationName());
+         }
+       
+         System.out.println("**************************"+appList+"v  *****************");
+		return appList;
+	}
+	
 }

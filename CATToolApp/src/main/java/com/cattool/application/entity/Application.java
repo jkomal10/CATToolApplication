@@ -34,7 +34,7 @@ public class Application {
 	private boolean isAssessment;
 	
 	@Column
-	private boolean isFinalize;
+	private int isFinalize;
 	
 	@Column
 	private boolean isDeleted;
@@ -119,11 +119,11 @@ public class Application {
 		this.isAssessment = isAssessment;
 	}
 
-	public boolean isFinalize() {
+	public int isFinalize() {
 		return isFinalize;
 	}
 
-	public void setFinalize(boolean isFinalize) {
+	public void setFinalize(int isFinalize) {
 		this.isFinalize = isFinalize;
 	}
 
@@ -204,7 +204,7 @@ public class Application {
 	}
 
 	public Application(int applicationId, String applicationName, String applicationDescription, boolean isCloudable,
-			boolean isMigration, boolean cloudProvider, boolean isAssessment, boolean isFinalize, boolean isDeleted,
+			boolean isMigration, boolean cloudProvider, boolean isAssessment, int isFinalize, boolean isDeleted,
 			boolean isDeactivate, Date deletedDateTime, boolean isVerified, Date createdDate, Date modifiedDateTime,
 			String createdBy, String modifiedBy, int userId) {
 		super();
@@ -237,6 +237,8 @@ public class Application {
 				+ ", modifiedDateTime=" + modifiedDateTime + ", createdBy=" + createdBy + ", modifiedBy=" + modifiedBy
 				+ ", userId=" + userId + "]";
 	}
+
+	
 
 	
 
