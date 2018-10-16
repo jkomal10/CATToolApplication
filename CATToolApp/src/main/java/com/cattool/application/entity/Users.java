@@ -1,6 +1,13 @@
 package com.cattool.application.entity;
 
 import java.util.Date;
+import javax.persistence.EntityListeners;
+
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name="users_table")
 public class Users {
 	
@@ -23,10 +31,15 @@ public class Users {
 	private int lastLogin;
 	private String company;
 	private int isDeleted;
-	private String createdBy;
+	
+	@CreatedDate
 	private Date createdDateTime;
-	private String modifiedBy;
+	@CreatedBy
+	private String createdBy;
+	@LastModifiedDate
 	private Date modifiedDateTime;
+	@LastModifiedBy
+	private String modifiedBy;
 	public int getUserId() {
 		return userId;
 	}

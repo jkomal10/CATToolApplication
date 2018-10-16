@@ -1,16 +1,32 @@
-<h4>Decision Tree</h4>
+<h4>Detailed Decision Tree</h4>
 <br>
 <div>
   <form>
     <h6><b>Configuration for Decision Tree:</b></h6>
-    <h6>Migration Pattern has been configured to Rule Based <input type="button" class="btn  btn-info" value="Add view or edit" (click)="form()">&nbsp;</h6>
-    <label for=">ChangeConfiguration">Change configuration</label>
-    <select class="form-control" name="ChangeConfiguration">
-        <option value="Rule Based">Rule Based</option>
-        <option value="Score Based">Score Based</option>
-    </select>
-    <br>
-    <input type="button" class="btn  btn-info" value="Submit" (click)="form()">
+    <h6><input type="button" class="btn  btn-info" value="Set Order" (click)="ORDER()">&nbsp;</h6>
+    <table width="100%" class="table table-hover table-sm ">
+        <thead bgcolor="#E0E0E0">
+          <tr >
+            <th>
+              <font color="black">Migration Pattern</font>
+            </th>
+            <th>
+              <font color="black">Evaluation Order</font>
+            </th>
+            <th>
+              <font color="black">Action</font>
+            </th>
+          </tr>
+        </thead>
+        <tbody >
+            <tr *ngFor =  "let row of AllData" >
+              <td  width="20%">{{row.migrationId}}</td>
+              <td width="20%">{{row.evaluationOrder}}</td>
+              <td width="15%"><button type="submit"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
+            </tr>
+            <tr><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
   </form>
 
 </div>

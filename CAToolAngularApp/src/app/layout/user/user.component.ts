@@ -74,20 +74,19 @@ export class UserComponent implements OnInit {
       pagingType: 'full_numbers',
       pageLength: 10,
       responsive: true};
+      this.userService.getIpAddress().subscribe(data => {
+        this.IpAddress=data['ip'];
 
     this.userService.CollectData().subscribe(result => 
       {
       this.AllData = result ;
       this.dtTrigger.next();
       //console.log(this.AllData);
-      }); 
-      
-      console.log("ip");
-      this.userService.getIpAddress().subscribe(data => {
-      this.IpAddress=data['ip'];
-      console.log(data['ip']);
-      console.log(this.IpAddress);
-      console.log(data);
+      });
+ 
+      // console.log(data['ip']+'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiippppppppppppppppppppppppppppppp');
+      // console.log(this.IpAddress);
+      // console.log(data);
     });
 
   //   this.http.get('https://api.ipify.org?format=json').subscribe(data => {
