@@ -4,7 +4,10 @@ export class CloudableRule{
     cloudableRule:String;
     executionOrder:number;
     questionText:String;
-    CloudableRule(executionOrder){
+   constructor(questionId,cloudableRule,executionOrder,questionText){
+        this.questionId=questionId;
+       this.cloudableRule=cloudableRule;
         this.executionOrder=executionOrder;
+        this.questionText=questionText;
     }
 }

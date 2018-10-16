@@ -2,21 +2,25 @@ package com.cattool.application.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="assessmentQuestions")
 public class AssessmentQuestions {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@SequenceGenerator(name="book_generator", sequenceName = "book_seq", allocationSize=50)
 	private int questionId;
 	private String questionText;
 	private String questionDescription;
@@ -33,19 +37,14 @@ public class AssessmentQuestions {
 	private String modifiedBy;
 	private Date modifiedTime;
 	
-//	@OneToMany
-//	@JoinColumn(name="questionId", referencedColumnName="questionId")
-//	private List<Option> option;
-//	
-//	public List<Option> getOption() {
-//		return option;
-//	}
-//	public void setOption(List<Option> option) {
-//		this.option = option;
-//	}
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="questionId", referencedColumnName="questionId")
+    private List<QuestionOption> questionOption;
+	    
+	
 	public int getQuestionId() {
 		return questionId;
-	}
+	} 
 	public void setQuestionId(int questionId) {
 		this.questionId = questionId;
 	}
@@ -134,13 +133,23 @@ public class AssessmentQuestions {
 		this.modifiedTime = modifiedTime;
 	}
 	
+	
+	
+	public List<QuestionOption> getQuestionOption() {
+		return questionOption;
+	}
+	public void setQuestionOption(List<QuestionOption> questionOption) {
+		this.questionOption = questionOption;
+	}
+
 	public AssessmentQuestions() {
 		super();
 	}
 	public AssessmentQuestions(int questionId, String questionText, String questionDescription, String questionType,
 			int questionDisplayOrder, int numberOfOption, boolean isActive, boolean isDelete,
 			String assessmentTypeForMigration, String assessmentTypeForCloudProvider, String assessmentTypeForCloudable,
-			String createdBy, Date cteatedTime, String modifiedBy, Date modifiedTime) {
+			String createdBy, Date cteatedTime, String modifiedBy, Date modifiedTime,
+			List<QuestionOption> questionOption) {
 		super();
 		this.questionId = questionId;
 		this.questionText = questionText;
@@ -157,6 +166,7 @@ public class AssessmentQuestions {
 		this.cteatedTime = cteatedTime;
 		this.modifiedBy = modifiedBy;
 		this.modifiedTime = modifiedTime;
+		this.questionOption = questionOption;
 	}
 	@Override
 	public String toString() {
@@ -167,7 +177,7 @@ public class AssessmentQuestions {
 				+ assessmentTypeForMigration + ", assessmentTypeForCloudProvider=" + assessmentTypeForCloudProvider
 				+ ", assessmentTypeForCloudable=" + assessmentTypeForCloudable + ", createdBy=" + createdBy
 				+ ", cteatedTime=" + cteatedTime + ", modifiedBy=" + modifiedBy + ", modifiedTime=" + modifiedTime
-				+ "]";
+				+ ", questionOption=" + questionOption + "]";
 	}
 	
 	
