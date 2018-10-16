@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 
 import { AssessmentQuestions } from '../Question';
 import { AssessmentQuestionsService } from '../assessment-questions.service';
-import { Option } from '../Option';
 import { JsonpModule } from '@angular/http';
 import { stringify } from '@angular/compiler/src/util';
+import { QuestionOption } from '../Option';
 
 @Component({
   selector: 'app-add-assessment-question',
@@ -21,7 +21,7 @@ export class AddAssessmentQuestionComponent implements OnInit {
   Options : Array<number>=[10];
   //Options : number[];
   question: AssessmentQuestions = new AssessmentQuestions();
-  option: Option = new Option();
+  option: QuestionOption = new QuestionOption();
   submitted = false;
   numberOfOptions : number;
   optionsValues = [0,1, 2, 3,4,5,6,7,8,9];
@@ -73,17 +73,19 @@ export class AddAssessmentQuestionComponent implements OnInit {
   newQuestion(): void {
     this.submitted = false;
     this.question = new AssessmentQuestions();
+    this.option=new QuestionOption();
   }
     obj : JsonpModule;
     obj2 : JsonpModule;
    save() {
-    this.option.assessmentQuestions=this.question;
-    console.log('************************************&&&&&&&&&&&&'+this.optionText[2]+'  &&&&&&&&&&&&&&&&');
-    this.option.optionText=this.optionText;
-    console.log("**********************"+this.option.optionText+"***********");
-    
-    console.log(JSON.stringify(this.option));
-    this.questionService.createOption(this.option).subscribe(
+    // this.option.assessmentQuestions=this.question;
+    // console.log('************************************&&&&&&&&&&&&'+this.optionText[2]+'  &&&&&&&&&&&&&&&&');
+    // this.option.optionText=this.optionText;
+    this.question.questionOption=this.option;
+    console.log(this.option.optionText+"ppppppppppppppppppppppppppp")
+    console.log(this.question.questionOption.optionText+"ssssssssssssssssssssssssssssss");
+    console.log('************************************&&&&&&&&&&&&'+this.question+'  &&&&&&&&&&&&&&&&');
+    this.questionService.createQuestion(this.question).subscribe(
       
     );
 

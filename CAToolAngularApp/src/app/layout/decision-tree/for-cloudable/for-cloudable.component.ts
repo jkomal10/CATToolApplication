@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ForCloudableService } from './for-cloudable.service';
 import { Subject } from 'rxjs';
-import { Option } from '../../assessment-questions/Option';
+
 import { Router } from '@angular/router';
 import { CloudableRule } from './cloudable';
+import { QuestionOption } from '../../assessment-questions/Option';
 class DataTablesResponse {
   data: any[];
   draw: number;
@@ -21,12 +22,15 @@ export class ForCloudableComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   AllData : any;
-  option: Option=new Option();
+  option: QuestionOption=new QuestionOption();
  // option:any;
   assessmentQuestions : object [];
   message = '';
   user_data: any;
-  constructor(private http:HttpClient,private forCloudableService:ForCloudableService,private router:Router) { }
+  cloudableRules:Array<CloudableRule>;
+  constructor(private http:HttpClient,private forCloudableService:ForCloudableService,private router:Router) {
+    this.cloudableRules=[];
+   }
 
   ngOnInit() {
     this.dtOptions = {
@@ -67,19 +71,21 @@ export class ForCloudableComponent implements OnInit {
     this.message = info.id + ' - ' + info.firstName;
   }
 
-  addCloudableRule(option){
-    console.log(option+"llllllllllllllllllllllllllllllllll");
+  addCloudableRule(cloudableRules){
+    console.log(cloudableRules+"llllllllllllllllllllllllllllllllll");
     console.log("jjjjjjjjjjjjjjjjjjjj");
     
-    console.log(this.option+"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
-    this.forCloudableService.addClodableRule(this.option).subscribe();
+    //console.log(this.option+"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+    this.forCloudableService.addClodableRule(this.cloudableRules).subscribe();
   
   }
 
-  onSubmit(executionOrder){
-   // let cloudableRule=new CloudableRule(executionOrder);
+  onSubmit(questionText,executionOrder,questionType,optionText){
+    let cloudableRule=new CloudableRule(questionText,executionOrder,questionType,optionText);
+   console.log(cloudableRule+"6666666666666666")
     //this.option=formvalues;
+    this.cloudableRules.push(cloudableRule);
     console.log(this.option+"ooooooooooooooooooooo");
-    this.addCloudableRule(this.option);
+    this.addCloudableRule(this.cloudableRules);
   }
 }

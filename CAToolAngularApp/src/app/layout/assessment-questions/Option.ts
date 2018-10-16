@@ -1,6 +1,6 @@
 import { AssessmentQuestions } from "./Question";
 
-export class Option{
+export class QuestionOption{
 
     optionId:number;
     questionText:String;
