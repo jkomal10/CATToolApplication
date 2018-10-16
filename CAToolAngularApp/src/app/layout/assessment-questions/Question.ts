@@ -1,3 +1,6 @@
+import { QuestionOption } from "./Option";
+
+
 export class AssessmentQuestions{
 
     questionId : number;
@@ -15,6 +18,7 @@ export class AssessmentQuestions{
     modifiedTime : Date;
     answerValues : string;
     executionOrder:number;
+    public questionOption?:QuestionOption;
     
  
 //    constructor( questionId : number,

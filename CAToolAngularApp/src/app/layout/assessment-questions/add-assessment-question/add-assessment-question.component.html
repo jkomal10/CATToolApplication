@@ -1,7 +1,7 @@
 <h3>Assessment Questions</h3>
 <h1><hr width="100%" size="80"></h1>
 <div [hidden]="submitted" style="width: 300px;">
-  <form role="form" #add="ngForm" (ngSubmit)="onSubmit(add.value)">
+  <form role="form" #add="ngForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
           <br>
           <label for="questionType"><b>Assessment Type</b></label><br>
@@ -59,10 +59,10 @@
         <input type="text" class="form-control" id="questionDescription" required [(ngModel)]="question.questionDescription" name="questionDescription">
       </div> 
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="questionDescription">optionText Description</label>
         <input type="text" class="form-control" id="optionText" required [(ngModel)]="option.optionText" name="optionText">
-      </div> 
+      </div>  -->
 
       <div class="form-group" *ngIf="question.numberOfOption">
         <div *ngFor="let size of Options;let first  = first;let i = index">
@@ -75,7 +75,7 @@
                  
                   <!-- <input type="text" class="form-control" id="answerValues'+'{{size}}" required [(ngModel)]="answerValues" name="answerValues"> -->
                   <br><input type="text" [(ngModel)]="optionText[i-1]" name="optionText[i-1]"/>
-                </ng-template>
+              </ng-template>
        
       
     </div>
