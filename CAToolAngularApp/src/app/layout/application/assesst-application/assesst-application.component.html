@@ -30,17 +30,24 @@
           <div>
              <table datatable id="question-list" class="table table-bordered table-striped ">
               <tbody>
-              <tr *ngFor = "let row of AllData;let i = index">
-                  <td>{{i+1}}</td>
-                <td>{{row.questionText}}</td>
+              <tr  *ngFor = "let row of AllData;let i = index">
+                  <!-- <td >{{i+1}}</td> -->
+                <td width="60px">Question{{i+1}}. {{row.questionText}}</td>
+                
                 <!-- <td>{{AllData[i].optionText}}</td> -->
-                <td *ngIf="AllData[i].assessmentQuestions.questionType==='Multiple Choice Multiple Answer'; else dropdownbox">
+                <td width="40px" *ngIf="AllData[i].assessmentQuestions.questionType==='Multiple Choice Multiple Answer'; else dropdownbox">
                     <!-- <span>number of option</span>&ngsp; -->
+                    
+                    <div  *ngFor='let option of AllData[i].optionText;let j = index'>
+                    <input  type="checkbox" (click)="selectChangeHandler(option,j)" [(ngModel)]="temp[j]" name="temp[j]">{{option}}
+                  
+                  </div>
                   </td>
                   <ng-template #dropdownbox>
-                    <select (change)="selectChangeHandler($event)" required [(ngModel)]="numberOfOption" name="numberOfOption">
-                        <option class='option' *ngFor='let option of AllData[i].optionText' >{{option}}</option>
+                    <select style="padding-top: 10px ; width: 100%" required [(ngModel)]="numberOfOption[k-1]"  name="numberOfOption[k-1]">
+                        <option  class='option' *ngFor='let option of AllData[i].optionText;let k = index' >{{option}}</option>
                     </select> 
+                    
                   </ng-template>       
                 <!-- </td> -->
                

@@ -15,7 +15,10 @@ export class AssesstApplicationComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   AllData : any;
   assessmentQuestions : object [];
-  numberOfOption : any;
+  numberOfOption : Array<string>=[];
+  theCheckboxOptions : Array<string>=[];
+  theCheckbox : Array<string> = new Array<string>();
+  temp : Array<string>=[];
   constructor(private router:Router,private assessmentService:AssesstApplicationService) { }
 
   ngOnInit() {
@@ -37,6 +40,17 @@ export class AssesstApplicationComponent implements OnInit {
       
 
       });
+      console.log(this.numberOfOption);
+      console.log(this.theCheckboxOptions);
    } 
+   selectChangeHandler(event: any,index : any){
+   
+    this.theCheckbox[index] = event;
+        console.log(this.theCheckbox);
+    // this.theCheckboxOptions = event;
+    // console.log("this.theCheckboxOptions"+this.theCheckboxOptions[0]);
+    console.log(event);
+   }
+   
 
 }
