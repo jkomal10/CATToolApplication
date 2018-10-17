@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.Users;
 import com.cattool.application.service.UserService;
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -58,38 +58,10 @@ public class UserController {
 		userService.deleteById(userId);
 	}
 	
-	@PutMapping("/updateUser/update")
-	public void updateUserId(@RequestBody Users user) {
-		System.out.println("***************Update question******************");
-		userService.updateUsers(user);
+	@PutMapping("/updateUser/update/{modifiedBy}")
+	public void updateUserId(@RequestBody Users user,@PathVariable String modifiedBy) {
+		System.out.println("***************Update question******************"+modifiedBy);
+		userService.updateUsers(user,modifiedBy);
 	}
 	
-	
-	/* @PostMapping("/addUser")
-		public Users saveUser(@RequestBody Users user){
-		 
-			return userService.addUser(user);
-		}
-	 
-	 @GetMapping("/getAllUsers")
-		public List<Users> getAllUsers() {
-			return userService.getUsers();
-			
-	  }
-	 
-	 @PostMapping("/getbyUserName/{firstName}")
-		public Users getUserByName(@PathVariable String firstName) {
-		 	Users user=new Users();
-		 	user=userService.findById(firstName);
-		 	if(user!=null)
-		 	{
-		 		return userService.findById(firstName);
-		 	}
-		 	else
-		 	{
-		 		System.out.println("Username or password is wrong!!");
-		 		return null;
-		 	}
-	  }*/
-	 
 }

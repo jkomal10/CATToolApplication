@@ -1,5 +1,6 @@
 package com.cattool.application.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -25,13 +26,13 @@ public class UserService {
 
 	public Users findById(String userName,String password) {
 		Users userDb=userRepository.findByUserName(userName);
-		
+		System.out.println(userDb.getUserName());
+		int lastLogInDateInInt=(int) (new Date().getTime()/1000);
 		if(userDb!=null)
 		{
-			System.out.println(password);
-			System.out.println(userDb.getPassword());
 			if(password.equals(userDb.getPassword()))
 			{
+				userDb.setLastLogin(lastLogInDateInInt);
 				return userDb;
 			}
 			else
@@ -58,9 +59,10 @@ public class UserService {
 		userRepository.deleteByUserId(userId);
 	}
 
-	public void updateUsers(Users user) {
-		
+	public void updateUsers(Users user,String modifiedBy) {
+		System.out.println("service");
 		Users users = new Users();
+		System.out.println(user.getUserId()+" it is user id *********");
 		users = userRepository.findByUserId(user.getUserId());
 		System.out.println(users.getUserId());
 		users.setUserId(user.getUserId());
@@ -74,7 +76,7 @@ public class UserService {
 		users.setIsDeleted(user.getIsDeleted());
 		users.setCreatedBy(user.getCreatedBy());
 		users.setCreatedDateTime(users.getCreatedDateTime());
-		users.setModifiedBy(user.getModifiedBy());
+		users.setModifiedBy(modifiedBy);
 		users.setModifiedDateTime(user.getModifiedDateTime());
 		userRepository.save(users);
 	}

@@ -8,6 +8,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 providedIn: 'root'
 })
 export class UsersService {
+  ipAddress : string;
+  
    private addUserURL ='http://localhost:8090/user/addUser';
    private addUrl = 'http://localhost:8090/user/addUser';
    private updateUrl = 'http://localhost:8090/user/updateUser';
@@ -23,9 +25,8 @@ return this.http.get(url);
 newAddURL: string = 'http://localhost:8090/user/addUser';
   
 addUser(application: Object): Observable<Object> {
-  localStorage.getItem('userName');
-  console.log(`${this.newAddURL}/create`);
-  return this.http.post(`${this.newAddURL}` + `/create`, application);
+  
+  return this.http.post(`${this.newAddURL}` + `/create/`+localStorage.getItem('userName'), application);
 }
 
 private comptransfer = new BehaviorSubject("Hello");
@@ -41,7 +42,7 @@ private comptransfer = new BehaviorSubject("Hello");
         }
 
       updateUser(user: Object): Observable<Object> {
-        return this.http.put(`${this.updateUrl}`+ `/update`, user);
+        return this.http.put(`${this.updateUrl}`+ `/update/`+localStorage.getItem('userName'), user);
       }
 
       deleteUser(userId: number): Observable<any> {
@@ -51,14 +52,7 @@ private comptransfer = new BehaviorSubject("Hello");
       getIpAddress() : Observable<any>{
         // const headers = new HttpHeaders({ 'Content-Type': 'application/json' ,'Origin' : 'http://localhost:3000', "Access-Control-Allow-Origin" : "*" });
        const headers = new HttpHeaders({ "Access-Control-Allow-Origin" : "*" });
-        return this.http
-             //.get('http://freegeoip.net/json/?callback', { headers: headers });
-              // .get('http://freegeoip.net/json/?callback');
-                  .get('http://ipinfo.io');
-                // .get('https://jsonip.com');
-              //  .get('http://freegeoip.net/json/',{ headers: headers });
-             // .map(response => response || {})
-              //.catch(this.handleError);
+        return this.http.get('http://ipinfo.io');
     }
 
     private handleError(error: HttpErrorResponse):
