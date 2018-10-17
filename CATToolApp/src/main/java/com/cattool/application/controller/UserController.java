@@ -19,9 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.Users;
-import com.cattool.application.repository.UserRepository;
 import com.cattool.application.service.UserService;
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -45,11 +44,11 @@ public class UserController {
 		return userService.findById(userName,password);
 	}
 	
-	@PostMapping("/addUser/create")
-	public Users saveUser(@RequestBody Users user)
+	@PostMapping("/addUser/create/{createdBy}")
+	public Users saveUser(@RequestBody Users user,@PathVariable String createdBy)
 	{
 		System.out.println("post method*****************");
-		return userService.saveUser(user);
+		return userService.saveUser(user,createdBy);
 	}
 	 
 	@DeleteMapping("/deleteUserById/{userId}")

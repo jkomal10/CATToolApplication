@@ -4,11 +4,19 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Application {
 	
 	@Id
@@ -49,15 +57,19 @@ public class Application {
 	private boolean isVerified;
 	
 	@Column
+	@CreatedDate
 	private Date createdDate;
 	
 	@Column 
+	@LastModifiedDate
 	private Date modifiedDateTime;
 	
 	@Column
+	@CreatedBy
 	private String createdBy;
 	
 	@Column
+	@LastModifiedBy
 	private String modifiedBy;
 	
 	@Column

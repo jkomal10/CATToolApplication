@@ -48,8 +48,9 @@ public class UserService {
 		
 	}
 
-	public Users saveUser(Users user) {
-		System.out.println(user);
+	public Users saveUser(Users user,String createdBy) {
+		System.out.println(user+createdBy);
+		user.setCreatedBy(createdBy);
 		return userRepository.save(user);
 	}
 
