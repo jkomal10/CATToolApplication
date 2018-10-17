@@ -5,12 +5,6 @@ import { UsersService } from './user.service';
 import { Subject } from 'rxjs';
 import { Users } from './Users';
 
-// class Person {
-//   id: number;
-//   first_name: string;
-//   last_name: string;
-// }
-
 class DataTablesResponse {
   data: any[];
   draw: number;
@@ -26,7 +20,7 @@ class DataTablesResponse {
 export class UserComponent implements OnInit {
 
   user: Users;
-  public IpAddress;
+  IpAddress : string;
  
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -81,19 +75,9 @@ export class UserComponent implements OnInit {
       {
       this.AllData = result ;
       this.dtTrigger.next();
-      //console.log(this.AllData);
       });
  
-      // console.log(data['ip']+'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiippppppppppppppppppppppppppppppp');
-      // console.log(this.IpAddress);
-      // console.log(data);
     });
-
-  //   this.http.get('https://api.ipify.org?format=json').subscribe(data => {
-  //     this.publicIP=data['ip'];
-  //    // console.log(this.publicIP);
-  //   });
-  //  // console.log(this.publicIP);
      
 
   }

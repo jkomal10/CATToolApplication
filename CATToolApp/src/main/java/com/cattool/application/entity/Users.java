@@ -26,7 +26,7 @@ public class Users {
 	private String userName;
 	private String firstName;
 	private String lastName;
-	private String password;
+	private String password="Cg@123";
 	private String ipAddress;
 	private int lastLogin;
 	private String company;
