@@ -23,6 +23,7 @@ return this.http.get(url);
 newAddURL: string = 'http://localhost:8090/user/addUser';
   
 addUser(application: Object): Observable<Object> {
+  localStorage.getItem('userName');
   console.log(`${this.newAddURL}/create`);
   return this.http.post(`${this.newAddURL}` + `/create`, application);
 }
