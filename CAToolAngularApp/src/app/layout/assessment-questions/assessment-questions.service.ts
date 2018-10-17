@@ -47,10 +47,12 @@ export class AssessmentQuestionsService {
   createQuestion(questionobj: Object): Observable<Object> {
     //let headers = new Headers({ 'Content-Type': 'application/json' });
    // let options = new RequestOptions({ headers: headers });
-   let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: cpHeaders });
+  //  let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
+        // let options = new RequestOptions({ headers: cpHeaders });
+        let headers = new HttpHeaders();
+        headers = headers.set('Content-Type','application/json ; charset=uft-8');
     console.log(`${this.addUrl1}/create`);
-    console.log(JSON.stringify(questionobj)+"kkkkkkkkkkkkkkkkkkk")
+    // console.log(JSON.stringify(questionobj)+"kkkkkkkkkkkkkkkkkkk")
     return this.http.post(`${this.addUrl1}` + `/create`,JSON.stringify(questionobj) ,{headers:headers});
   }
 
