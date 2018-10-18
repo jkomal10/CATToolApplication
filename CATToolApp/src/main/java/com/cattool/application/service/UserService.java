@@ -26,13 +26,15 @@ public class UserService {
 
 	public Users findById(String userName,String password) {
 		Users userDb=userRepository.findByUserName(userName);
-		System.out.println(userDb.getUserName());
 		int lastLogInDateInInt=(int) (new Date().getTime()/1000);
 		if(userDb!=null)
 		{
+			System.out.println(password);
+			System.out.println(userDb.getPassword());
 			if(password.equals(userDb.getPassword()))
 			{
 				userDb.setLastLogin(lastLogInDateInInt);
+				System.out.println(userDb);
 				return userDb;
 			}
 			else

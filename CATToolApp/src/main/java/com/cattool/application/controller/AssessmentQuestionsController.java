@@ -35,7 +35,7 @@ public class AssessmentQuestionsController {
 	@PostMapping("/saveAssessmentQuestions/create")
 	public void saveAssessmentQuestions(@RequestBody AssessmentQuestions assessmentQuestions)
 	{
-		System.out.println("****************save all question******************"+assessmentQuestions);
+		System.out.println("***********save all question******************"+assessmentQuestions);
 		System.out.println(assessmentQuestions.getQuestionOption());
 		
 		List<QuestionOption> questionOptionList =new ArrayList<>();
