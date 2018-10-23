@@ -1,11 +1,27 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ForCloudProviderComponent } from './for-cloud-provider.component';
+import { AwsComponent } from './aws/aws.component';
+import { GitcComponent } from './gitc/gitc.component';
+import { SetEvaluationOrderComponent } from './set-evaluation-order/set-evaluation-order.component';
+import { CloudProviderRuleComponent } from './cloud-provider-rule/cloud-provider-rule.component';
 
 const routes: Routes = [
     {
         path: '',
         component: ForCloudProviderComponent
+    },
+    {
+        path:'app-aws',component: AwsComponent
+    },
+    {
+        path:'app-gitc',component: GitcComponent
+    },
+    {
+        path:'app-set-evaluation-order',component: SetEvaluationOrderComponent
+    },
+    {
+        path:'app-cloud-provider-rule' , component : CloudProviderRuleComponent
     }
 ];
 

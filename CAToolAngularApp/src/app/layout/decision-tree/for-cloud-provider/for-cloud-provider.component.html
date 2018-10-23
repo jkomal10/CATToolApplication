@@ -1,5 +1,4 @@
-Cloud provider
-
+<button (click)="setEvaluationOrder()" title="Set Order" style="font-size:16px" class="button button; btn btn-danger">Set Evaluation Order</button>
 <div>
     <br>
     <div class="container">
@@ -12,10 +11,15 @@ Cloud provider
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor = "let size of AllData">
+            <tr *ngFor = "let size of AllData;let i = index">
+                <!-- <td>hello</td>
+                <td>hi</td> -->
+                
                 <td>{{size.cloudProviders}}</td>
                 <td>{{size.evaluationOrder}}</td>
-                <td><button (click)="action()" title="User Details" style="font-size:16px" class="button button">Add Rule</button></td>
+                <td><button (click)="action(size)" title="For Cloudable" style="font-size:16px" class="button button; btn btn-danger">Add Rule</button></td>
+               <!-- (click)={{size.cloudProviderId}} -->
+                <!-- <td>something</td> -->
             </tr> 
         </tbody>
       </table>

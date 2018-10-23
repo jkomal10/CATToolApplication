@@ -1,0 +1,27 @@
+<!-- <p>
+  set-evaluation-order works!
+</p> -->
+
+<div>
+  <br>
+  <div class="container">
+    <table datatable="bootstrap" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped ">
+        <thead>
+          <tr>
+            <th>Cloud Provider</th>
+            <th>Evaluation Order</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor = "let size of AllData;let i = index">
+              <td>{{size.cloudProviders}}</td>
+              <td><input type="text" [(ngModel)]="size.evaluationOrder" name="evaluationOrder{{i}}"></td>
+          </tr> 
+      </tbody>
+    </table>
+    <button type="submit" class="btn btn-success" (click)="setEvaluationOrder()">Submit</button>
+</div>
+</div>
+
+
+
