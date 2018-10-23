@@ -1,2 +1,25 @@
 Cloud provider
 
+<div>
+    <br>
+    <div class="container">
+      <table datatable="bootstrap" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped ">
+          <thead>
+            <tr>
+              <th>Cloud Provider</th>
+              <th>Evaluation Order</th>
+              <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let size of AllData">
+                <td>{{size.cloudProviders}}</td>
+                <td>{{size.evaluationOrder}}</td>
+                <td><button (click)="action()" title="User Details" style="font-size:16px" class="button button">Add Rule</button></td>
+            </tr> 
+        </tbody>
+      </table>
+</div>
+</div>
+
+
