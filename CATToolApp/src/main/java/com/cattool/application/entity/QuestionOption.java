@@ -28,7 +28,9 @@ public class QuestionOption {
    private String questionId;
 	
 	@Column
-	private String[] optionText;	
+
+	private String optionText;
+
 	
 	public int getOptionId() {
 		return optionId;
@@ -36,10 +38,10 @@ public class QuestionOption {
 	public void setOptionId(int optionId) {
 		this.optionId = optionId;
 	}
-	public String[] getOptionText() {
-		return optionText;
-	}
-	public void setOptionText(String optionText[]) {
+
+
+	public void setOptionText(String optionText) {
+
 		this.optionText = optionText;
 	}
 	public String getQuestionId() {
@@ -52,7 +54,9 @@ public class QuestionOption {
 	public QuestionOption() {
 		super();
 	}
-	public QuestionOption(int optionId, String questionId, String[] optionText) {
+
+	public QuestionOption(int optionId, String questionId, String optionText) {
+
 		super();
 		this.optionId = optionId;
 		this.questionId = questionId;
@@ -60,12 +64,13 @@ public class QuestionOption {
 	}
 	@Override
 	public String toString() {
-		return "QuestionOption [optionId=" + optionId + ", questionId=" + questionId + ", optionText="
-				+ Arrays.toString(optionText) + "]";
+
+		return "QuestionOption [optionId=" + optionId + ", questionId=" + questionId + ", optionText=" + optionText
+				+ "]";
 	}
 	
 	
-	 
+	
 	
 	
 }
