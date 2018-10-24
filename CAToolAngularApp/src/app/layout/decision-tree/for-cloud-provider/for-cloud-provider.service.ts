@@ -8,6 +8,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class ForCloudProviderService {
 
   private evaluationOrder = 'http://localhost:8090/cloudProvider';
+  private cloudProviderRuleUrl = 'http://localhost:8090/cloudProvider';
 
   constructor(private http:HttpClient) { }
 
@@ -40,8 +41,8 @@ CollectData(){
     this.comptransfer.next(messsage);
   }
 
-  CollectCloudableRuleQuestions(cloudproviderId : any){
-    return null;
+  CollectCloudableRuleQuestions(cloudproviderId : number){
+    return this.http.get(`${this.cloudProviderRuleUrl}/${cloudproviderId}`);
 
   }
 

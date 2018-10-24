@@ -17,9 +17,9 @@ public class CloudableRuleService {
 		
 		return cloudableRuleRepository.findAll();
 	}
-	public void createClodableRule(CloudableRule cloudableRule) {
+	public void createClodableRule(List<CloudableRule> cloudableRule) {
 		
-		cloudableRuleRepository.save(cloudableRule);
+		cloudableRuleRepository.saveAll(cloudableRule);
 	}
 
 }

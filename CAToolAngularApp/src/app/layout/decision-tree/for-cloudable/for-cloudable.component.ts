@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ForCloudableService } from './for-cloudable.service';
 import { Subject } from 'rxjs';
-
 import { Router } from '@angular/router';
-import { CloudableRule } from './cloudable';
-import { QuestionOption } from '../../assessment-questions/Option';
+import { FormsModule }    from '@angular/forms';
+import { CloudableRule } from './CloudableRule';
+
 class DataTablesResponse {
   data: any[];
   draw: number;
@@ -22,14 +22,18 @@ export class ForCloudableComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   AllData : any;
-  option: QuestionOption=new QuestionOption();
- // option:any;
-  assessmentQuestions : object [];
+  //option: QuestionOption=new QuestionOption();
+  //op :object [];
+  //assessmentQuestions : object [];
   message = '';
   user_data: any;
-  cloudableRules:Array<CloudableRule>;
+
+  //length = this.AllData.length;
+  executionOrders : Array<number> = [];
+  cloudableRulesText : Array<String> = [];
+  cloudableRules : Array<CloudableRule> = [];
   constructor(private http:HttpClient,private forCloudableService:ForCloudableService,private router:Router) {
-    this.cloudableRules=[];
+  this.cloudableRules = [];
    }
 
   ngOnInit() {
@@ -53,17 +57,11 @@ export class ForCloudableComponent implements OnInit {
     this.forCloudableService.CollectData().subscribe(result => {
 
        this.AllData = result;
-       //this.option=this.AllData.assessmentQuestions;
        this.dtTrigger.next();
        console.log(this.AllData);
-     console.log(this.AllData[0].assessmentQuestions);
-     console.log(this.AllData[2].assessmentQuestions.questionType);
-
-        // this.option=this.AllData.optionId;
-        // this.option=this.AllData.optionText;
-        // this.option=this.AllData.assessmentQuestions;
-     // console.log(this.option+"*************"+this.AllData+"**********");
-      
+       let abc=result[0];
+        //this.op = abc['questionOption'];
+       //console.log(this.op[0]['optionText']+"komalll");
       });
 
   }
@@ -71,21 +69,34 @@ export class ForCloudableComponent implements OnInit {
     this.message = info.id + ' - ' + info.firstName;
   }
 
-  addCloudableRule(cloudableRules){
-    console.log(cloudableRules+"llllllllllllllllllllllllllllllllll");
+  addCloudableRule(){
+    for (let index = 0; index < this.AllData.length; index++) {
+      console.log(this.AllData[index].questionId+"Alldata");
+      var cRule : CloudableRule = new CloudableRule();
+      cRule.questionId= this.AllData[index].questionId;
+      console.log(cRule.questionId+"rule");
+      cRule.cloudableRule=this.cloudableRulesText[index];
+      cRule.executionOrder=this.executionOrders[index];
+      cRule.questionText=this.AllData[index].questionText
+      this.cloudableRules[index]=cRule;
+    }
+    
+    //console.log(cloudableRules+"llllllllllllllllllllllllllllllllll");
     console.log("jjjjjjjjjjjjjjjjjjjj");
     
-    //console.log(this.option+"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+    console.log(JSON.stringify(this.cloudableRules[0])+"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
     this.forCloudableService.addClodableRule(this.cloudableRules).subscribe();
   
   }
 
-  onSubmit(questionText,executionOrder,questionType,optionText){
-    let cloudableRule=new CloudableRule(questionText,executionOrder,questionType,optionText);
-   console.log(cloudableRule+"6666666666666666")
+  onSubmit(){
+   // console.log(formvalues[0]);
+    //console.log(JSON.stringify(formvalues[0])+"formmmmmmmmmmmmmmmmmmmmm");
+    let cRule=new CloudableRule();
+   //console.log(cloudableRule+"6666666666666666")
     //this.option=formvalues;
-    this.cloudableRules.push(cloudableRule);
-    console.log(this.option+"ooooooooooooooooooooo");
-    this.addCloudableRule(this.cloudableRules);
+    //this.cloudableRules.push(cloudableRule);
+    
+    this.addCloudableRule();
   }
 }

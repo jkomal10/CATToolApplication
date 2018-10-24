@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { ForCloudableRoutingModule } from './for-cloudable-routing.module';
 import { ForCloudableComponent } from './for-cloudable.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-    imports: [CommonModule, ForCloudableRoutingModule],
+    imports: [CommonModule, ForCloudableRoutingModule,FormsModule],
     declarations: [ForCloudableComponent]
 })
 
