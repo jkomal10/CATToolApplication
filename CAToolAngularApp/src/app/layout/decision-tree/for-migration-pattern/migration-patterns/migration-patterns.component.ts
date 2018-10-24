@@ -16,16 +16,14 @@ export class MigrationPatternsComponent implements OnInit {
   patternValue : any;
 
   ngOnInit() {
+    this.forMigrationPatternService.getAssessmentQuestions().subscribe(result => 
+      {
+      this.migrationAllData= result ;
+      console.log(this.migrationAllData);
+      console.log(JSON.stringify(this.migrationAllData));
+      });
     this.forMigrationPatternService.question.subscribe(data => {this.patternValue= data;}); 
     console.log(this.patternValue);
-  }
-
-  getAllAssessmentQuestion(){
-      this.forMigrationPatternService.CollectData().subscribe(result => 
-        {
-        this.migrationAllData= result ;
-        console.log(JSON.stringify(this.migrationAllData));
-        });
   }
 
 }
