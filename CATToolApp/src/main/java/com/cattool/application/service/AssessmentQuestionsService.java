@@ -21,7 +21,6 @@ public class AssessmentQuestionsService {
 	public AssessmentQuestions saveQuestions(AssessmentQuestions assessmentQuestions)
 	{
 		System.out.println(assessmentQuestions);
-		//this.assessmentQuestionsRepository.saveAndFlush(assessmentQuestions);
 		return assessmentQuestionsRepository.save(assessmentQuestions);
 	}
 	

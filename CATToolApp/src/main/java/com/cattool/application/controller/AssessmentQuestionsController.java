@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.cattool.application.entity.AssessmentQuestions;
+import com.cattool.application.entity.MigrationRule;
 import com.cattool.application.entity.QuestionOption;
 import com.cattool.application.service.AssessmentQuestionsService;
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/assessmentQuestions")
 public class AssessmentQuestionsController {
@@ -36,8 +37,12 @@ public class AssessmentQuestionsController {
 	public void saveAssessmentQuestions(@RequestBody AssessmentQuestions assessmentQuestions)
 	{
 		System.out.println("****************save all question******************"+assessmentQuestions);
-//		System.out.println(assessmentQuestions.getQuestionOption());
-//		
+		System.out.println("migration rule +++++++++++++++++"+assessmentQuestions.getMigrationRule());
+//		List<MigrationRule> migrationRuleList =new ArrayList<>();
+//		migrationRuleList=assessmentQuestions.getMigrationRule();
+//		assessmentQuestions.setMigrationRule(migrationRuleList);
+		//assessmentQuestions.setMigrationRule(assessmentQuestions.getMigrationRule());
+
 	//List<QuestionOption> questionOptionList =new ArrayList<>();
 	//questionOptionList=assessmentQuestions.getQuestionOption();
   // assessmentQuestions.setQuestionOption(assessmentQuestions.getQuestionOption());

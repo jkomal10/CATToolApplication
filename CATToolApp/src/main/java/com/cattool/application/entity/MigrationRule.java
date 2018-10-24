@@ -1,5 +1,4 @@
 package com.cattool.application.entity;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,9 +8,9 @@ import javax.persistence.Id;
 public class MigrationRule {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int migrationRuleId;
-	private int questionId;
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	private int migrationRuleId;	
+	private String questionId;
 	private int migrationId;
 	private String migrationRule;
 	private int executionOrder;
@@ -22,10 +21,10 @@ public class MigrationRule {
 	public void setMigrationRuleId(int migrationRuleId) {
 		this.migrationRuleId = migrationRuleId;
 	}
-	public int getQuestionId() {
+	public String getQuestionId() {
 		return questionId;
 	}
-	public void setQuestionId(int questionId) {
+	public void setQuestionId(String questionId) {
 		this.questionId = questionId;
 	}
 	public int getMigrationId() {
@@ -56,7 +55,7 @@ public class MigrationRule {
 	public MigrationRule() {
 		super();
 	}
-	public MigrationRule(int migrationRuleId, int questionId, int migrationId, String migrationRule, int executionOrder,
+	public MigrationRule(int migrationRuleId, String questionId, int migrationId, String migrationRule, int executionOrder,
 			String questionText) {
 		super();
 		this.migrationRuleId = migrationRuleId;
