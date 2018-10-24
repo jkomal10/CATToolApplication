@@ -17,7 +17,6 @@ public class QuestionOption {
    private String questionId;
 	
 	@Column
-
 	private String optionText;
 
 	
@@ -29,6 +28,9 @@ public class QuestionOption {
 	}
 
 
+	public String getOptionText() {
+		return optionText;
+	}
 	public void setOptionText(String optionText) {
 
 		this.optionText = optionText;

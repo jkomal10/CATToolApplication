@@ -1,6 +1,6 @@
- <div>
+
     <!--<form (ngSubmit)="onSubmit(questionText.value,executionOrder.value,questionType.value,optionText.value)">-->
-    
+      <form #productForm="ngForm" (ngSubmit)="onSubmit()">
           
             <div class="form-group">
   <table width="100%" datatable="bootstrap"   class="table table-hover table-sm ">
@@ -30,24 +30,26 @@
                 <br>Excution Order
                 <br>Question type
                 <br>Options
+                <br>Cloudable Rule
              </td>  
           <td> 
-            <!-- <input type="text" class="form-control"  [(ngModel)]="AllData[i].assessmentQuestions.questionText" name="questionText"> -->
-            <span #questionText> {{AllData[i].assessmentQuestions.questionText}}</span>
-              <br><input type="number" #executionOrder name="executionOrder">
-              <br><span #questionType>{{AllData[i].assessmentQuestions.questionType}}</span>
-              <br><span #optionText>{{AllData[i].optionText}}</span>
-            
+           <!-- <input type="text" class="form-control"  [(ngModel)]="AllData[i].assessmentQuestions.questionText" name="questionText"> -->
+               <span name="questionText" > {{AllData[i].questionText}}</span> 
+              <br><input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrders[i]" />
+              <br><span name="questionType">{{AllData[i].questionType}}</span>
+              <br><span *ngFor="let option of AllData[i]['questionOption'] ; let op = index" name="optionText">{{AllData[i].questionOption[op]['optionText']+" , "}}</span>
+              <br><input type="text" #cloudableRule name="cloudableRule{{i}}" [(ngModel)]="cloudableRulesText[i]"/>
             </td>
               
            </tr>
   </tbody>
   <tfoot>
-      
-    <button type="submit" (click)="onSubmit(questionText.value,executionOrder.value,questionType.value,optionText.value)" class="btn btn-info">Submit</button>&ngsp;&ngsp;
+    <!-- executionOrder.value,cloudableRule.value -->
+    <button type="submit">Submit</button>
+    <!-- <button (click)="onSubmit()" class="btn btn-info">Submit</button>&ngsp;&ngsp; -->
       <input type="cancel" class="button  btn btn-info" value="Cancel" (click)="Cancel()">&ngsp;&ngsp;
   </tfoot>
   </table> 
   </div>
-<!-- </form> -->
-</div>
+ </form>
+<!-- </div> -->
