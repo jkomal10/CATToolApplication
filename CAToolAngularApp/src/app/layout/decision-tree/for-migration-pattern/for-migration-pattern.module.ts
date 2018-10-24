@@ -4,12 +4,12 @@ import { FormsModule,ReactiveFormsModule} from '@angular/forms';
 
 import { ForMigrationPatternRoutingModule } from './for-migration-pattern-routing.module';
 import { ForMigrationPatternComponent } from './for-migration-pattern.component';
-import { PublicPassComponent } from './public-pass/public-pass.component';
 import { EvaluationOrderComponent } from './evaluation-order/evaluation-order.component';
+import { MigrationPatternsComponent } from './migration-patterns/migration-patterns.component';
 
 @NgModule({
     imports: [CommonModule, ForMigrationPatternRoutingModule, FormsModule,ReactiveFormsModule],
-    declarations: [ForMigrationPatternComponent, PublicPassComponent, EvaluationOrderComponent]
+    declarations: [ForMigrationPatternComponent, EvaluationOrderComponent, MigrationPatternsComponent]
 })
 
 export class ForMigrationPatternModule {}

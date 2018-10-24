@@ -1,5 +1,6 @@
 import { QuestionOption } from "./Option";
-
+import { MigrationRule } from "./MigrationRule";
+import { CloudProviderRule } from "./CloudProviderRule";
 export class AssessmentQuestions{
 
     questionId : number;
@@ -18,5 +19,7 @@ export class AssessmentQuestions{
     answerValues : string;
     executionOrder:number;
     public questionOption : Array<QuestionOption> = [];
+    public migrationRule : Array<MigrationRule> = [];
+    public cloudProviderRules : Array<CloudProviderRule> = [];
  // public questionOption: {optionId:number,questionId : number,optionText : String}[];
 }

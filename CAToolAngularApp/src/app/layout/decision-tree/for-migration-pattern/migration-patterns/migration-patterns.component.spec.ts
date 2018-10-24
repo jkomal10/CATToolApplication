@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PublicPassComponent } from './public-pass.component';
+import { MigrationPatternsComponent } from './migration-patterns.component';
 
-describe('PublicPassComponent', () => {
-  let component: PublicPassComponent;
-  let fixture: ComponentFixture<PublicPassComponent>;
+describe('MigrationPatternsComponent', () => {
+  let component: MigrationPatternsComponent;
+  let fixture: ComponentFixture<MigrationPatternsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PublicPassComponent ]
+      declarations: [ MigrationPatternsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PublicPassComponent);
+    fixture = TestBed.createComponent(MigrationPatternsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

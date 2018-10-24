@@ -16,7 +16,6 @@ export class ForCloudProviderService {
 CollectData(){
   const url = 'http://localhost:8090/cloudProvider/getAll';
   return this.http.get(url);
-  
   }
 
   private comptransfer = new BehaviorSubject("Hello");

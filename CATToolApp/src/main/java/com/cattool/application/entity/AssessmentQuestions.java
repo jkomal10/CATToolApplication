@@ -40,6 +40,10 @@ public class AssessmentQuestions {
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="questionId", referencedColumnName="questionId")
     private List<QuestionOption> questionOption;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="questionId", referencedColumnName="questionId")
+    private List<CloudProviderRule> cloudProviderRules;
 
 	public int getQuestionId() {
 		return questionId;
@@ -176,6 +180,14 @@ public class AssessmentQuestions {
 	public void setQuestionOption(List<QuestionOption> questionOption) {
 		this.questionOption = questionOption;
 	}
+	
+	public List<CloudProviderRule> getCloudProviderRules() {
+		return cloudProviderRules;
+	}
+
+	public void setCloudProviderRules(List<CloudProviderRule> cloudProviderRules) {
+		this.cloudProviderRules = cloudProviderRules;
+	}
 
 	public AssessmentQuestions() {
 		super();
@@ -190,8 +202,10 @@ public class AssessmentQuestions {
 				+ assessmentTypeForMigration + ", assessmentTypeForCloudProvider=" + assessmentTypeForCloudProvider
 				+ ", assessmentTypeForCloudable=" + assessmentTypeForCloudable + ", createdBy=" + createdBy
 				+ ", cteatedTime=" + cteatedTime + ", modifiedBy=" + modifiedBy + ", modifiedTime=" + modifiedTime
-				+ ", migrationRule=" + migrationRule + ", questionOption=" + questionOption + "]";
+				+ ", migrationRule=" + migrationRule + ", questionOption=" + questionOption + ", cloudProviderRules="
+				+ cloudProviderRules + "]";
 	}
-	    
+	
+	
 	
 }
