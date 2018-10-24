@@ -31,9 +31,9 @@ export class ForMigrationPatternComponent implements OnInit {
   }
 
   questions(index){
-    console.log('**************'+index);
+    console.log('**************'+index);//rehost
     this.forMigrationPatternService.sendMsgtoOtherComponent(index);
-    this.router.navigate(['/for-migration-pattern/public-pass']);
+    this.router.navigate(['/for-migration-pattern/migration-patterns']);
   }
 
   evaluationOrder(){

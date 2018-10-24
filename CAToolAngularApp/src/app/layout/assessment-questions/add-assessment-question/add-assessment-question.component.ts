@@ -6,6 +6,10 @@ import { AssessmentQuestionsService } from '../assessment-questions.service';
 import { QuestionOption } from '../Option';
 import { JsonpModule } from '@angular/http';
 import { stringify } from '@angular/compiler/src/util';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { MigrationRule } from '../MigrationRule';
+import { CloudProviderRule } from '../CloudProviderRule';
 
 @Component({
   selector: 'app-add-assessment-question',
@@ -13,7 +17,8 @@ import { stringify } from '@angular/compiler/src/util';
   styleUrls: ['./add-assessment-question.component.scss']
 })
 export class AddAssessmentQuestionComponent implements OnInit {
-
+  assessmentTypeForMigrationValue : boolean;
+  assessmentTypeForCloudProvider : boolean;
   answerValues : string;
   value : string
   optionText : Array<string>=[];
@@ -23,14 +28,16 @@ export class AddAssessmentQuestionComponent implements OnInit {
  public optionList : Array<QuestionOption>=[];
   submitted = false;
   numberOfOptions : number;
-  optionsValues = [0,1, 2, 3,4,5,6,7,8,9];
+  optionsValues = [1, 2, 3,4,5,6,7,8,9];
+  MigrationData : any = [];
+  CloudProviderData : any = [];
+  MigrationDataArray : any=[];
+  CloudProviderDataArray : any=[];
   
-  
-  constructor(private questionService: AssessmentQuestionsService,public router: Router) { }
+  constructor(private questionService: AssessmentQuestionsService,public router: Router,private http: HttpClient) { }
 
   ngOnInit() {
 
-   
   }
 
   selectChangeHandler(event:any){
@@ -63,25 +70,60 @@ export class AddAssessmentQuestionComponent implements OnInit {
   }
     save() {
        for (let index = 0; index < this.optionText.length; index++) {
-         console.log(this.optionText[index]+"option text original")
          var option : QuestionOption = new QuestionOption();
          option.optionText=this.optionText[index];
          this.question.questionOption[index]=option;
       }
-      console.log(this.question.questionOption[0].optionText+"option text of zero position");
-      // console.log(this.question.questionOption[1].optionText+"option text of zero position");
-      console.log(JSON.stringify(this.question)+"component add questions ************");
-       this.questionService.createQuestionn(this.question).subscribe(
+      for(let index = 0; index < this.MigrationData.length; index++){
+        if(this.MigrationData[index].migrationPattern!=false){
+          var migration : MigrationRule = new MigrationRule();
+          migration.migrationId=this.MigrationData[index].migrationId;
+          migration.questionText=this.question.questionText;
+          this.question.migrationRule[index]=migration;
+        }
+      }
+      for(let index = 0; index < this.CloudProviderData.length; index++){
+        if(this.CloudProviderData[index].cloudProviders!=false){
+          var cloudProvider : CloudProviderRule = new CloudProviderRule();
+          cloudProvider.cloudProviderId=this.CloudProviderData[index].cloudProviderId;
+          cloudProvider.questionText=this.question.questionText;
+          this.question.cloudProviderRules[index]=cloudProvider;
+        }
+      }
+      console.log(JSON.stringify(this.question));
+      this.questionService.createQuestionn(this.question).subscribe(
       );
    }
 
-  
- 
-  onSubmit() {
-
-   
+  onSubmit() {   
     this.submitted = true
     this.save();
+  }
+
+  assessmentTypeForMigrationClick(event){
+    console.log(event.target.checked);
+    this.assessmentTypeForMigrationValue=event.target.checked;
+    this.questionService.getMigrationData().subscribe(result => 
+      {
+          this.MigrationData = result ;
+          console.log(this.MigrationData );
+          for (let index = 0; index < this.MigrationData.length ; index++) {
+          this.MigrationDataArray[index] = this.MigrationData[index].migrationPattern; 
+      }
+      });
+  }
+
+  assessmentTypeForCloudProviderClick(event){
+    console.log(event.target.checked);
+    this.assessmentTypeForCloudProvider=event.target.checked;
+    this.questionService.getCloudProviderData().subscribe(result => 
+      {
+          this.CloudProviderData = result ;
+          console.log(this.CloudProviderData);
+          for (let index = 0; index < this.CloudProviderData.length ; index++) {
+          this.CloudProviderDataArray[index] = this.CloudProviderData[index].cloudProviders; 
+      }
+      });
   }
 
 }

@@ -30,6 +30,7 @@ public class AssessmentQuestionsController {
 	public List<AssessmentQuestions> getAllquestions()
 	{
 		System.out.println("****************get all question******************");
+		System.out.println(assessmentQuestionsService.getAllquestions());
 		return assessmentQuestionsService.getAllquestions();
 	}
 	

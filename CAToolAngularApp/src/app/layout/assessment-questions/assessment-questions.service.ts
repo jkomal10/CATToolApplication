@@ -36,28 +36,24 @@ export class AssessmentQuestionsService {
     this.comptransfer.next(messsage);
   }
 
-  // createQuestion(question: Object): Observable<Object> {
-  //   return this.http.post(`${this.addUrl}` + `/create`, question);
-  // }
+  getMigrationData(){
+    const  url  =  'http://localhost:8090/migrationRule/getAll';
+    return  this.http.get(url);
+  }
+
+  getCloudProviderData(){
+    const url = 'http://localhost:8090/cloudProvider/getAll';
+    return this.http.get(url);
+  }
+
   createQuestionn(question: Object): Observable<Object> {
    // return this.http.post(`${this.addUrl}` + `/create`, question);
    let headers = new HttpHeaders();
    headers = headers.set('Content-Type', 'application/json; charset=utf-8'); 
-   console.log(JSON.stringify(question));
-   console.log(`${this.addUrl1}` + `/create`+ "ye create question haiiiiiiiiiiiiiiiiii");
    //return this.http.post(`${this.addUrl1}` + `/create`, JSON.stringify(question),{headers:headers});
    return this.http.post(`${this.addUrl1}` + `/create`,question);
 
   }
-
-  // createOption(option: Object): Observable<Object> {
-  //   // let headers = new Headers({ 'Content-Type': 'application/json' });
-  //   // let options = new RequestOptions({ headers: headers });
-  //   let headers = new HttpHeaders();
-  //   headers = headers.set('Content-Type', 'application/json; charset=utf-8'); 
-  //   console.log(JSON.stringify(option));
-  //   return this.http.post(`${this.addUrl1}` + `/create`, JSON.stringify(option),{headers:headers});
-  // }
   
   updateAssessmentQuestions(value: any): Observable<Object> {
     console.log('################assessmentQuestions.service.');
