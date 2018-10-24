@@ -1,6 +1,25 @@
 Migration Pattern Decision
-<hr size=8 noshade>
 <div>
     <form role="form" #addAssessmentQuestionsForm="ngForm" (ngSubmit)="getAllAssessmentQuestion()">
+      {{migrationAllData}}
+      <table *ngFor =  "let row of migrationAllData;let i=index">
+            <tr>
+                <td>Question : </td><td>{{row.questionText}}</td>
+            </tr>
+            <tr>
+                <td>Execution Order</td><td width="20%"><input type="text" [(ngModel)]="row.executionOrder" name="executionOrder{{i}}" value="row.executionOrder"></td>
+            </tr>
+            <tr>
+                <td>Question Type : </td><td>{{row.questionType}}</td>
+            </tr>
+            <tr>
+                <td>Options : </td>
+                <td>{{row.questionOption}}</td>
+            </tr>
+            <tr>
+                <td>Options : </td><td>{{row.questionType}}</td>
+            </tr>
+            <hr size=100 noshade>
+    </table>
     </form>
 </div>

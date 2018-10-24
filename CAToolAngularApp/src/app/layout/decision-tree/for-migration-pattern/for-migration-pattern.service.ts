@@ -16,6 +16,11 @@ export class ForMigrationPatternService {
     return  this.http.get(url);
   }
 
+  getAssessmentQuestions(){
+    const  url  =  'http://localhost:8090/assessmentQuestions/getAllQuestions';
+    return  this.http.get(url);
+  }
+
   saveEvaluationOrder(migration: Object): Observable<Object> {
     return this.http.post(`${this.migrationUrl}` + `/create`, migration);
   }

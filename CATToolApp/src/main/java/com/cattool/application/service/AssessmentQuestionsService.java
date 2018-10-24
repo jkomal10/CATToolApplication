@@ -1,5 +1,6 @@
 package com.cattool.application.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,17 @@ public class AssessmentQuestionsService {
 		assessmentQuestion.setAssessmentTypeForCloudProvider(assessmentQuestions.getAssessmentTypeForCloudProvider());
 		assessmentQuestion.setAssessmentTypeForCloudable(assessmentQuestions.getAssessmentTypeForCloudProvider());
 		assessmentQuestionsRepository.save(assessmentQuestion);
+	}
+	
+	public List<AssessmentQuestions> getCloudableQuestions(){
+		List<AssessmentQuestions> list=new ArrayList<AssessmentQuestions>();
+		for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
+			if(assessmentQuestions.getAssessmentTypeForCloudable().equals("true"))
+			{
+				list.add(assessmentQuestions);
+			}
+		}
+		return list;
 	}
 	
 
