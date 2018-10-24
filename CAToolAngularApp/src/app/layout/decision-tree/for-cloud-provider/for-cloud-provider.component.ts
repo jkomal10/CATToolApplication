@@ -40,6 +40,8 @@ export class ForCloudProviderComponent implements OnInit {
 
   action(cloudProvider){
  
+    console.log(cloudProvider.cloudProviderId);
+    this.forCloudProviderService.sendCloudProviderIdtoOtherComponent(cloudProvider.cloudProviderId);
     this.router.navigate(['/for-cloud-provider/app-cloud-provider-rule']);
 
     // let value : string = "AWS";
