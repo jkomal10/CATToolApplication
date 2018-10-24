@@ -26,6 +26,7 @@ public class ApplicationController {
 	@GetMapping("/getAll")
 	public List<Application>getAllApplication()
 	{
+
 		return applicationService.getAllApplication();
 	}
 	@GetMapping("/getApplicationById/{applicationId}")
