@@ -18,7 +18,7 @@ import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.MigrationRule;
 import com.cattool.application.entity.QuestionOption;
 import com.cattool.application.service.AssessmentQuestionsService;
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/assessmentQuestions")
 public class AssessmentQuestionsController {

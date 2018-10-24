@@ -1,4 +1,4 @@
-<!-- <div>
+ <div>
   <div>
     <h2 class="text-muted">Detailed Assessment</h2>
   </div>
@@ -10,7 +10,7 @@
         <td>{{row.questionText}}</td>
 
         
-          <input type="text"></td>
+         <td> <input type="text"></td>
       </tr>
     </tbody>
     </table>
@@ -20,48 +20,6 @@
     <button type="button" class="btn btn-info">Finalize</button>&nbsp;
     <button type="button" class="btn btn-info">Cancel</button>&nbsp;
   </div>
-</div> -->
+</div> 
 
-<div>
-    <form role="form" #add="ngForm" (ngSubmit)="onSubmit(add.value)">
-        <div>
-            <h2 class="text-muted">Detailed Assessment</h2>
-          </div>
-          <div>
-             <table datatable id="question-list" class="table table-bordered table-striped ">
-              <tbody>
-              <tr  *ngFor = "let row of AllData;let i = index">
-                  <!-- <td >{{i+1}}</td> -->
-                <td width="60px">Question{{i+1}}. {{row.questionText}}</td>
-                
-                <!-- <td>{{AllData[i].optionText}}</td> -->
-                <td width="40px" *ngIf="AllData[i].assessmentQuestions.questionType==='Multiple Choice Multiple Answer'; else dropdownbox">
-                    <!-- <span>number of option</span>&ngsp; -->
-                    
-                    <div  *ngFor='let option of AllData[i].optionText;let j = index'>
-                    <input  type="checkbox" (click)="selectChangeHandler(option,j)" [(ngModel)]="temp[j]" name="temp[j]">{{option}}
-                  
-                  </div>
-                  </td>
-                  <ng-template #dropdownbox>
-                    <select style="padding-top: 10px ; width: 100%" required [(ngModel)]="numberOfOption[k-1]"  name="numberOfOption[k-1]">
-                        <option  class='option' *ngFor='let option of AllData[i].optionText;let k = index' >{{option}}</option>
-                    </select> 
-                    
-                  </ng-template>       
-                <!-- </td> -->
-               
-        
-                <!-- <td *ngFor = "let size of AllData> -->
-                  <!-- <input type="text"> -->
-              </tr>
-            </tbody>
-            </table>
-          </div>
-          <div>
-            <button type="button" class="btn btn-info">Save</button>&nbsp;
-            <button type="button" class="btn btn-info">Finalize</button>&nbsp;
-            <button type="button" class="btn btn-info">Cancel</button>&nbsp;
-          </div>
-      </form>
-</div>
+

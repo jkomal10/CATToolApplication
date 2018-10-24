@@ -9,7 +9,7 @@ export class AssesstApplicationService {
   constructor(private http:HttpClient) { }
 
   CollecOptiontData(){
-    const url = 'http://localhost:8090/option/getAll';
+    const url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';
     return this.http.get(url);
      }
 }

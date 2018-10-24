@@ -33,10 +33,10 @@ export class AssesstApplicationComponent implements OnInit {
       this.dtTrigger.next();
       console.log(this.AllData);
       
-      console.log(this.AllData[0].optionText);
-      console.log(this.AllData[1].optionText);
-      console.log(this.AllData[0].assessmentQuestions.questionType);
-      console.log(this.AllData[0].assessmentQuestions.questionText);
+      // console.log(this.AllData[0].optionText);
+      // console.log(this.AllData[1].optionText);
+      // console.log(this.AllData[0].assessmentQuestions.questionType);
+      // console.log(this.AllData[0].assessmentQuestions.questionText);
       
 
       });
