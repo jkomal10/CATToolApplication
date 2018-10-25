@@ -13,17 +13,19 @@ export class MigrationPatternsComponent implements OnInit {
   migrationAllData : any = [];
 
   constructor(private forMigrationPatternService : ForMigrationPatternService,public router: Router,private http: HttpClient) { }
-  patternValue : any;
-
+  migrationIdValue : any;
+  
   ngOnInit() {
+    this.forMigrationPatternService.question.subscribe(data => {this.migrationIdValue= data;});
     this.forMigrationPatternService.getAssessmentQuestions().subscribe(result => 
       {
       this.migrationAllData= result ;
       console.log(this.migrationAllData);
       console.log(JSON.stringify(this.migrationAllData));
       });
-    this.forMigrationPatternService.question.subscribe(data => {this.patternValue= data;}); 
-    console.log(this.patternValue);
+     
+    console.log(this.migrationIdValue);
+    console.log(this.migrationAllData.migrationRule[0].migrationId[0]);
   }
 
 }
