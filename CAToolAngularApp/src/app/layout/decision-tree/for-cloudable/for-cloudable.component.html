@@ -6,8 +6,8 @@
   <table width="100%" datatable="bootstrap"   class="table table-hover table-sm ">
      <thead bgcolor="#E0E0E0">
       <tr>
-        <th>Application name</th>
-        <th>Application Description</th>
+        <th>Cloudable Decision</th>
+        <th></th>
       </tr>
     </thead> 
     <tbody>
@@ -35,7 +35,7 @@
           <td> 
            <!-- <input type="text" class="form-control"  [(ngModel)]="AllData[i].assessmentQuestions.questionText" name="questionText"> -->
                <span name="questionText" > {{AllData[i].questionText}}</span> 
-              <br><input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrders[i]" />
+              <br><input type="number" #executionOrder name="executionOrder{{i}}" [(ngModel)]="executionOrders[i]" />
               <br><span name="questionType">{{AllData[i].questionType}}</span>
               <br><span *ngFor="let option of AllData[i]['questionOption'] ; let op = index" name="optionText">{{AllData[i].questionOption[op]['optionText']+" , "}}</span>
               <br><input type="text" #cloudProviderRule name="cloudProviderRule{{i}}" [(ngModel)]="cloudProviderRulesText[i]"/>
@@ -45,7 +45,7 @@
   </tbody>
   <tfoot>
     <!-- executionOrder.value,cloudableRule.value -->
-    <button type="submit">Submit</button>
+    <button type="submit" class="btn btn-info">Submit</button>&ngsp;&ngsp;
     <!-- <button (click)="onSubmit()" class="btn btn-info">Submit</button>&ngsp;&ngsp; -->
       <input type="cancel" class="button  btn btn-info" value="Cancel" (click)="Cancel()">&ngsp;&ngsp;
   </tfoot>

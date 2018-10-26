@@ -100,7 +100,9 @@ export class ApplicationComponent implements OnInit {
      console.log(formvalues);
     this.router.navigate(['/application/view-application']);
    }
-   assessApplication(){
+   assessApplication(appId){
+     console.log(appId)
+    this.applicationService.sendMsgtoOtherComponent(appId);
      this.router.navigate(['/application/assesst-application']);
    }
 

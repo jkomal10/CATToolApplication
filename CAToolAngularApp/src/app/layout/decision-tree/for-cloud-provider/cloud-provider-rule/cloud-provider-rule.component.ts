@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ForCloudProviderService } from '../for-cloud-provider.service';
 import { CloudProviderRule } from '../CloudProviderRule';
+import { Router } from '../../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-cloud-provider-rule',
@@ -14,14 +15,14 @@ export class CloudProviderRuleComponent implements OnInit {
   executionOrders : Array<number> = [];
   cloudProviderRulesText : Array<string> = [];
   cloudProviderRule : Array<CloudProviderRule> = [];
-  constructor(private forCloudProviderService:ForCloudProviderService) { }
+  constructor(private forCloudProviderService:ForCloudProviderService,public router: Router) { }
 
   ngOnInit() {
     this.forCloudProviderService.cloudProviderId.subscribe(data=>{this.cloudproviderId=data;});
     console.log(this.cloudproviderId+"Cloud Provider rule component");
 
     // this.forCloudProviderService.CollectCloudableRuleQuestions(this.cloudproviderId).subscribe( result=>{
-      this.forCloudProviderService.CollectCloudableRuleQuestions().subscribe( result=>{
+      this.forCloudProviderService.CollectCloudableRuleQuestions(this.cloudproviderId).subscribe( result=>{
       this.CloudProviderAllData = result;
       console.log(this.CloudProviderAllData);
       console.log("*****CloudProviderAllData");
@@ -38,10 +39,36 @@ export class CloudProviderRuleComponent implements OnInit {
   addCloudeProviderRule(){
     for (let index = 0; index < this.CloudProviderAllData.length; index++) {
       
-      console.log(this.CloudProviderAllData[index].cloudProviderRules['cloudProviderId']);
+      var cloudproRules : CloudProviderRule = new CloudProviderRule();
+        cloudproRules.questionId = this.CloudProviderAllData[index].questionId;
+        cloudproRules.cloudProviderId = this.cloudproviderId;
+        cloudproRules.cloudProviderRule = this.cloudProviderRulesText[index];
+        cloudproRules.executionOrder = this.executionOrders[index];
+        cloudproRules.questionText = this.CloudProviderAllData[index].questionText;
+       
+      for (let index1 = 0; index1 < this.CloudProviderAllData[index].cloudProviderRules.length; index1++) {
+       
+        if(this.CloudProviderAllData[index].cloudProviderRules[index1].cloudProviderId===this.cloudproviderId)
+        {
+          cloudproRules.cloudProviderRuleId=this.CloudProviderAllData[index].cloudProviderRules[index1].cloudProviderRuleId;
+        }
+        
+      }
+      this.cloudProviderRule[index]= cloudproRules; 
+    }
+    console.log(JSON.stringify(this.cloudProviderRule));
+    this.forCloudProviderService.updateCloudProviderRule(this.cloudProviderRule).subscribe();
+    this.router.navigate(['/for-cloud-provider']);
+  }
 
-      // console.log("length"+this.CloudProviderAllData[index].cloudProviderRules.length);
-      // for (let index1 = 0; index1 < this.CloudProviderAllData[index].cloudProviderRules.length; index1++) {
+  Cancel(){
+    this.router.navigate(['/for-cloud-provider']);
+  }
+  
+}
+
+
+// for (let index1 = 0; index1 < this.CloudProviderAllData[index].cloudProviderRules.length; index1++) {
       //   console.log("id*******"+this.CloudProviderAllData[index].cloudProviderRules[index1].cloudProviderId)
 
       //   // if(this.cloudproviderId==this.CloudProviderAllData[index].cloudProviderRules.cloudProviderId)
@@ -59,17 +86,3 @@ export class CloudProviderRuleComponent implements OnInit {
       // // }
         
       // }
-     
-    }
-    console.log(JSON.stringify(this.cloudProviderRule));
-    
-    
-     
-
-  }
-
-
-
-  
-  
-}

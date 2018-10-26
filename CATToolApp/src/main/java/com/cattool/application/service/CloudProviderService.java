@@ -12,6 +12,7 @@ import com.cattool.application.entity.CloudProvider;
 import com.cattool.application.entity.CloudProviderRule;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
 import com.cattool.application.repository.CloudProviderRepository;
+import com.cattool.application.repository.CloudProviderRuleRepository;
 
 @Service
 @Transactional
@@ -19,6 +20,9 @@ public class CloudProviderService {
 	
 	@Autowired
 	CloudProviderRepository cloudProviderRepository;
+	
+	@Autowired
+	CloudProviderRuleRepository cloudProviderRuleRepository;
 	
 	@Autowired
 	AssessmentQuestionsRepository assessmentQuestionsRepository;
@@ -31,6 +35,18 @@ public class CloudProviderService {
 	public void setEvaluationOrder(List<CloudProvider> cloudProvider) {
 		
 		cloudProviderRepository.saveAll(cloudProvider);
+	}
+
+	public void updateCloudProviderRule(List<CloudProviderRule> cloudProviderRulelist) {
+		
+		CloudProviderRule cloudProviderRules = new CloudProviderRule();
+		for (CloudProviderRule cloudProviderRule : cloudProviderRulelist) {
+			cloudProviderRules = cloudProviderRule;
+			cloudProviderRules.setCloudProviderRuleId(cloudProviderRule.getCloudProviderRuleId());
+			cloudProviderRuleRepository.save(cloudProviderRules);
+		}
+		
+
 	}
 
 //	public List<AssessmentQuestions> getCloudProviderQuestion(int cloudProviderId) {

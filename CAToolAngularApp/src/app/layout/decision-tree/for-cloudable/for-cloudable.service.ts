@@ -12,7 +12,7 @@ export class ForCloudableService {
    baseUrl = 'http://localhost:8090/cloudableRule/save';
    CollectData(){
    //const url = 'http://localhost:8090/option/getAll';
-   const url= 'http://localhost:8090/assessmentQuestions/getAllQuestions';
+   const url= 'http://localhost:8090/assessmentQuestions/getAllCloudableQuestions';
    return this.http.get(url);
     }
 

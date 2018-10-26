@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AssessmentQuestionsService } from '../../assessment-questions/assessment-questions.service';
 import { Subject } from 'rxjs';
-import { Question } from './Question';
+import { AssessmentQuestions } from '../../assessment-questions/Question'
 import { AssesstApplicationService } from './assesst-application.service';
+import { DataTablesModule } from 'angular-datatables';
+import { Answers } from './Answers';
+import { ApplicationService } from '../application.service';
 
 @Component({
   selector: 'app-assesst-application',
@@ -17,9 +20,17 @@ export class AssesstApplicationComponent implements OnInit {
   assessmentQuestions : object [];
   numberOfOption : Array<string>=[];
   theCheckboxOptions : Array<string>=[];
-  theCheckbox : Array<string> = new Array<string>();
-  temp : Array<string>=[];
-  constructor(private router:Router,private assessmentService:AssesstApplicationService) { }
+  theCheckbox : Array<string>=[];
+ public tempp : Array<string>=[];
+  answers : Array<Answers>=[];
+  multi=0;
+  single=0;
+  singlee=0;
+  result="";
+   queId1=0;
+i=-1;
+  applicationIdValue:number;
+  constructor(private router:Router,private assessmentService:AssesstApplicationService,private applicationService:ApplicationService) { }
 
   ngOnInit() {
     this.dtOptions = {
@@ -27,29 +38,107 @@ export class AssesstApplicationComponent implements OnInit {
       pageLength: 2,
       responsive: true}; 
 
+      this.applicationService.question.subscribe(data =>{ this.applicationIdValue= data;
+        console.log(this.applicationIdValue+"aaaaaaaaaaaaaaaaaaaaaaaa");
+      }); 
+      
    this.assessmentService.CollecOptiontData().subscribe(result => 
       {
       this.AllData = result ;
       this.dtTrigger.next();
       console.log(this.AllData);
       
-      console.log(this.AllData[0].optionText);
-      console.log(this.AllData[1].optionText);
-      console.log(this.AllData[0].assessmentQuestions.questionType);
-      console.log(this.AllData[0].assessmentQuestions.questionText);
-      
-
       });
       console.log(this.numberOfOption);
       console.log(this.theCheckboxOptions);
    } 
-   selectChangeHandler(event: any,index : any){
+   selectChange( args) {
+
+   this.tempp[this.single] = args.target.options[args.target.selectedIndex].text; 
+    this.single++;
+    console.log(this.tempp[0]+"ooooooooooooo");
+    console.log(this.tempp[1]+"ooooooooooooo");
+      }
+
+   selectChangeHandler(optionnnnnn,event,id){
+    // var queId1=0,i=-1; 
+    if(event.target.checked)
+    {
+    console.log(id+"idddddddd"+this.queId1);  
    
-    this.theCheckbox[index] = event;
-        console.log(this.theCheckbox);
+       if(this.queId1 === id )
+       {
+         
+        console.log(id);
+        var text1=optionnnnnn.optionText;
+        var text2="";
+        this.result=this.result+text1;
+        console.log(text1+"iiiiiiiiii");
+        //console.log(text1+"iiiiiiiiii");
+         this.theCheckbox[this.i]=this.result;
+         console.log(this.i+"if");
+         console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrr'+this.result);
+       }else{
+         if(queId!=id)
+         {
+           this.result="";
+         }
+       this.i++;
+       this.result=this.result+","+optionnnnnn.optionText;
+        this.theCheckbox[this.i]=optionnnnnn.optionText;
+        console.log("else"+this.i);
+       }
+       var queId=id;
+       this.queId1=queId;
+     
+      
+    console.log(optionnnnnn.optionText);
+    console.log(event);
+    console.log(event.target.form.id);
+  //  for (let index = 0; index < optionnnnnn.length; index++) {
+  //   console.log(optionnnnnn.optionText);
+  //   //  console.log(event[index]['optionText']+"ccccccccc")
+  //   // this.theCheckbox[index] = event[index]['optionText'];
+     
+  //  }
+   console.log(this.theCheckbox[0]+"kkkkkkkkkkkk")
+   console.log(this.theCheckbox[1]+"kkkkkkkkkkkk")
+   console.log(this.theCheckbox[1]+"kkkkkkkkkkkk")
+    // = event;
+       /// console.log(JSON.stringify(this.theCheckbox[0]['optionText'])+"ccccccccccccccc");
     // this.theCheckboxOptions = event;
     // console.log("this.theCheckboxOptions"+this.theCheckboxOptions[0]);
-    console.log(event);
+    //console.log(JSON.stringify(event)+"***************");
+   // return event;
+      }else{
+
+      }
+   }
+
+   onSubmit(){
+     for (let index = 0; index < this.AllData.length; index++) {
+       //const element = this.AllData[index];
+       console.log(this.applicationIdValue+"appidddddddddddddddddd");
+       let answer : Answers = new Answers();
+        answer.applicationId=this.applicationIdValue;
+        answer.questionId = this.AllData[index].questionId;
+        if(this.AllData[index].questionType == "Multiple Choice Multiple Answer")
+        {
+          //answer.answerText =this.selectChangeHandler() ;
+          answer.answerText = this.theCheckbox[this.multi];
+          this.multi++;
+        }else{
+            answer.answerText= this.tempp[this.singlee];
+            console.log(answer.answerText+"lllllllllllll")
+            this.singlee++ ;
+                
+        }
+        answer.cloudAbility = false;
+         this.answers[index]=answer;
+         console.log(JSON.stringify(answer));
+     }
+     console.log(JSON.stringify(this.answers[0])+"jjjjjjjjjj");
+     this.assessmentService.saveAssessApplication(this.answers).subscribe();
    }
    
 

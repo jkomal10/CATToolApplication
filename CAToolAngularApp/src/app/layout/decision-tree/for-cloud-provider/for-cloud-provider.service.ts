@@ -9,7 +9,9 @@ export class ForCloudProviderService {
 
   private evaluationOrder = 'http://localhost:8090/cloudProvider';
   // private cloudProviderRuleUrl = 'http://localhost:8090/cloudProvider/getAllCloudProviderQuestion';
-  private getAllQuestions='http://localhost:8090/assessmentQuestions/getAllQuestions';
+
+
+  private updateCloudProviderRuleUrl="http://localhost:8090/cloudProvider/updateCloudProviderRule";
 
   constructor(private http:HttpClient) { }
 
@@ -20,13 +22,6 @@ CollectData(){
   return this.http.get(url);
   }
 
-  // private comptransfer = new BehaviorSubject("Hello");
-  //       users = this.comptransfer.asObservable();
-
-  // sendMsgtoOtherComponent(messsage)
-  // {
-
-  // }
 
   saveEvaluationOrder(evaluationOrder: Object): Observable<Object> 
   {
@@ -42,22 +37,12 @@ CollectData(){
     this.comptransfer.next(messsage);
   }
 
-  // CollectCloudableRuleQuestions(cloudproviderId : number){
-  //   console.log(`${this.cloudProviderRuleUrl}/${cloudproviderId}`);
-  //   return this.http.get(`${this.cloudProviderRuleUrl}/${cloudproviderId}`);
-  // }
-
-
-  CollectCloudableRuleQuestions(){
-    // console.log(`${this.cloudProviderRuleUrl}/${cloudproviderId}`);
-    return this.http.get(`${this.getAllQuestions}`);
+  CollectCloudableRuleQuestions(cloudproviderId : number){
+   
+    return this.http.get(`http://localhost:8090/assessmentQuestions/getAllCloudProviderRule/${cloudproviderId}`);
   }
-
-
-  // CollectCloudableRuleQuestions(cloudproviderId : number){
-  //   return this.http.get(`${this.cloudProviderRuleUrl}/${cloudproviderId}`);
-
-  // }
-
-
+  updateCloudProviderRule(cloudableRule:any):Observable<Object>
+  {
+    return this.http.put(`${this.updateCloudProviderRuleUrl}`, cloudableRule);
+  }
 }
