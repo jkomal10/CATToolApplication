@@ -38,7 +38,7 @@
               <br><input type="number" #executionOrder name="executionOrder{{i}}" [(ngModel)]="executionOrders[i]" />
               <br><span name="questionType">{{AllData[i].questionType}}</span>
               <br><span *ngFor="let option of AllData[i]['questionOption'] ; let op = index" name="optionText">{{AllData[i].questionOption[op]['optionText']+" , "}}</span>
-              <br><input type="text" #cloudableRule name="cloudableRule{{i}}" [(ngModel)]="cloudableRulesText[i]"/>
+              <br><input type="text" #cloudProviderRule name="cloudProviderRule{{i}}" [(ngModel)]="cloudProviderRulesText[i]"/>
             </td>
               
            </tr>

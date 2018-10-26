@@ -8,7 +8,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class ForCloudProviderService {
 
   private evaluationOrder = 'http://localhost:8090/cloudProvider';
-  private cloudProviderRuleUrl = 'http://localhost:8090/cloudProvider';
+  // private cloudProviderRuleUrl = 'http://localhost:8090/cloudProvider/getAllCloudProviderQuestion';
+  private getAllQuestions='http://localhost:8090/assessmentQuestions/getAllQuestions';
 
   constructor(private http:HttpClient) { }
 
@@ -41,10 +42,22 @@ CollectData(){
     this.comptransfer.next(messsage);
   }
 
-  CollectCloudableRuleQuestions(cloudproviderId : number){
-    return this.http.get(`${this.cloudProviderRuleUrl}/${cloudproviderId}`);
+  // CollectCloudableRuleQuestions(cloudproviderId : number){
+  //   console.log(`${this.cloudProviderRuleUrl}/${cloudproviderId}`);
+  //   return this.http.get(`${this.cloudProviderRuleUrl}/${cloudproviderId}`);
+  // }
 
+
+  CollectCloudableRuleQuestions(){
+    // console.log(`${this.cloudProviderRuleUrl}/${cloudproviderId}`);
+    return this.http.get(`${this.getAllQuestions}`);
   }
+
+
+  // CollectCloudableRuleQuestions(cloudproviderId : number){
+  //   return this.http.get(`${this.cloudProviderRuleUrl}/${cloudproviderId}`);
+
+  // }
 
 
 }
