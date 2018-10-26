@@ -1,25 +1,40 @@
- <div>
-  <div>
-    <h2 class="text-muted">Detailed Assessment</h2>
-  </div>
-  <div>
-      <table datatable id="question-list" class="table table-bordered table-striped ">
-      <tbody>
-      <tr *ngFor = "let row of AllData;let i = index">
-          <td>{{i}}</td>
-        <td>{{row.questionText}}</td>
-
-        
-         <td> <input type="text"></td>
-      </tr>
-    </tbody>
-    </table>
-  </div>
-  <div>
-    <button type="button" class="btn btn-info">Save</button>&nbsp;
-    <button type="button" class="btn btn-info">Finalize</button>&nbsp;
-    <button type="button" class="btn btn-info">Cancel</button>&nbsp;
-  </div>
-</div> 
+ 
+<div>
+  <form #add="ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+          <h2 class="text-muted">Detailed Assessment</h2>
+        </div>
+        <div>
+           <table datatable id="question-list" class="table table-bordered table-striped ">
+            <tbody>
+            <tr  *ngFor = "let row of AllData;let i = index">
+                  <td width="60px">Question{{i+1}}. {{row.questionText}}</td>
+              
+                  <td width="40px" *ngIf="AllData[i].questionType==='Multiple Choice Multiple Answer'; else dropdownbox">
+                     <div  *ngFor="let option of AllData[i]['questionOption'] ;let j = index">
+                      <input type="checkbox" (change)="selectChangeHandler(option,$event,AllData[i].questionId)">{{AllData[i].questionOption[j]['optionText']}}
+                      <!-- <input  type="checkbox" checked="{{ AllData[i].questionOption[j]['optionText'] && -1 !== this.option.optionText.indexOf(option) ? 'checked' : '' }}" (change)="selectChangeHandler(option,$event,AllData[i].questionId)" [(ngModel)]="numberOfOption[j]" name="{{option.optionId}}" >{{AllData[i].questionOption[j]['optionText']}} -->
+                     <!-- <input  type="checkbox" [checked]="(AllData[i].questionOption[j]['optionId'] && (-1 !== facility.timeslotids.indexOf(numberOfOption[j])) ? 'checked' : '')" (change) ="updateSelectedTimeslots($event)" [(ngModel)]="numberOfOption[j]" name="numberOfOption[j]">{{AllData[i].questionOption[j]['optionText']}} -->
+                     <!-- <input  type="checkbox" checked="{{ AllData[i].questionOption[j]['optionText'] && -1 !== this.data.somes.indexOf(some) ? 'checked' : '' }}"
+                     (change)="updateSome($event)" [(ngModel)]="numberOfOption[j]" name="numberOfOption[j]">{{AllData[i].questionOption[j]['optionText']}} -->
+                      </div>
+                  </td>
+                <ng-template #dropdownbox>
+                  <select style="padding-top: 10px ; width: 100%" (change)="selectChange($event)" [(ngModel)]="tempp[k-1]"  name="tempp[k-1]">
+                      <option  class='option' *ngFor="let optionn of AllData[i]['questionOption'] ; let k = index" [ngValue]="optionn">{{AllData[i].questionOption[k]['optionText']}}</option>
+                  </select> 
+                
+                </ng-template>       
+            </tr>
+          </tbody>
+          </table>
+        </div>
+        <div>
+          <button  type="submit" class="btn btn-info" title="saving application">Save</button>&nbsp;
+          <button type="button" class="btn btn-info">Finalize</button>&nbsp;
+          <button type="button" class="btn btn-info">Cancel</button>&nbsp;
+        </div>
+    </form>
+</div>
 
 
