@@ -26,4 +26,5 @@ public class CloudProviderService {
 		cloudProviderRepository.saveAll(cloudProvider);
 	}
 
+	
 }

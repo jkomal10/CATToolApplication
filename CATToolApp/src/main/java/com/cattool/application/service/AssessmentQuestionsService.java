@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.cattool.application.entity.AssessmentQuestions;
+import com.cattool.application.entity.CloudProviderRule;
+import com.cattool.application.entity.Migration;
+import com.cattool.application.entity.MigrationRule;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
 @Transactional
 @Service
@@ -13,6 +16,9 @@ public class AssessmentQuestionsService {
 	
 	@Autowired
 	AssessmentQuestionsRepository assessmentQuestionsRepository;
+	
+	@Autowired
+	MigrationRepository migrationRepository;
 	
 	public List<AssessmentQuestions> getAllquestions()
 	{
@@ -58,6 +64,36 @@ public class AssessmentQuestionsService {
 		}
 		return list;
 	}
-	
 
+	public List<AssessmentQuestions> getAllMigrationPattern(int migrationId) {
+		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<>();
+		for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
+			List<MigrationRule> migrationRuleList;
+			for(MigrationRule migrationRule:assessmentQuestions.getMigrationRule()) {
+				if(migrationId==migrationRule.getMigrationId()) {
+				System.out.println(migrationRule);
+				
+				assessmentQuestionsList.add(assessmentQuestions);
+				break;}
+			}
+		}
+		return assessmentQuestionsList;
+		
+	}
+
+	public List<AssessmentQuestions> getAllcloudProviderRule(int cloudProviderId) {
+		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<>();
+		for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
+			List<CloudProviderRule> cloudProviderRuleList;
+			for(CloudProviderRule cloudProviderRules : assessmentQuestions.getCloudProviderRules()) {
+				if(cloudProviderId == cloudProviderRules.getCloudProviderId())
+				{
+					System.out.println(cloudProviderRules);
+					assessmentQuestionsList.add(assessmentQuestions);
+					break;
+				}
+			}
+		}
+		return assessmentQuestionsList;
+	}
 }

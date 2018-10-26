@@ -26,7 +26,7 @@
               <td  width="20%">{{row.migrationId}}</td>
               <td width="20%">{{row.migrationPattern}}</td>
               <td width="20%">{{row.evaluationOrder}}</td>
-              <td width="15%"><button type="submit" (click)="questions(AllData[i].migrationId)"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
+              <td width="15%"><button title="Add rule for {{AllData[i].migrationPattern}}" type="submit" (click)="questions(AllData[i].migrationId)"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
             </tr>
             <tr><td></td><td></td><td></td></tr>
         </tbody>

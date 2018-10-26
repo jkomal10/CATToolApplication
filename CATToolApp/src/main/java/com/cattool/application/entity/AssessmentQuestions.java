@@ -23,8 +23,8 @@ public class AssessmentQuestions {
 	private String questionType;
 	private int questionDisplayOrder;
 	private int numberOfOption;
-	private boolean isActive;
-	private boolean isDelete;
+	private int isActive;
+	private int isDelete;
 	private String assessmentTypeForMigration;
 	private String assessmentTypeForCloudProvider;
 	private String assessmentTypeForCloudable;
@@ -93,19 +93,19 @@ public class AssessmentQuestions {
 		this.numberOfOption = numberOfOption;
 	}
 
-	public boolean isActive() {
+	public int isActive() {
 		return isActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(int isActive) {
 		this.isActive = isActive;
 	}
 
-	public boolean isDelete() {
+	public int isDelete() {
 		return isDelete;
 	}
 
-	public void setDelete(boolean isDelete) {
+	public void setDelete(int isDelete) {
 		this.isDelete = isDelete;
 	}
 
@@ -205,7 +205,6 @@ public class AssessmentQuestions {
 				+ ", migrationRule=" + migrationRule + ", questionOption=" + questionOption + ", cloudProviderRules="
 				+ cloudProviderRules + "]";
 	}
-	
 	
 	
 }

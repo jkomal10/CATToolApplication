@@ -1,29 +1,33 @@
-Migration Pattern Decision
-<div>
-    <form role="form" #addAssessmentQuestionsForm="ngForm" (ngSubmit)="getAllAssessmentQuestion()">
-      {{migrationAllData}}
-      <div *ngFor =  "let row of migrationAllData;let i=index">
-          <div *ngFor =  "let migrationRule of row.migrationRule;let i=index">   
-            <table *ngIf="migrationIdValue==migrationRule.migrationId">
-                <tr>
-                    <td>Question : </td><td>{{row.questionText}}</td>
+<form #productForm="ngForm" (ngSubmit)="migrationProviderMethod()">
+    <div class="form-group">
+          <table width="100%" datatable="bootstrap"   class="table table-hover table-sm ">
+             <thead bgcolor="#E0E0E0">
+              <tr>
+                <th>Question</th>
+                <th>Question Description</th>
+              </tr>
+            </thead> 
+            <tbody>
+                <tr *ngFor="let size of migrationAllData;let i = index">
+                    <td>Question
+                        <br>Excution Order
+                        <br>Question type
+                        <br>Options
+                        <br>Cloudable Rule
+                     </td>  
+                    <td> 
+                        <span name="questionText" > {{migrationAllData[i].questionText}}</span> 
+                        <br><input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrderValue[i]" />
+                        <br><span name="questionType">{{migrationAllData[i].questionType}}</span>
+                        <br><span *ngFor="let option of migrationAllData[i]['questionOption'] ; let op = index" name="optionText">{{migrationAllData[i].questionOption[op]['optionText']+" , "}}</span>
+                        <br><input type="text" #cloudableRule name="migrationRule{{i}}" [(ngModel)]="migrationRule[i]"/>
+                    </td>
                 </tr>
-                <tr>
-                    <td>Execution Order</td><td width="20%"><input type="text" [(ngModel)]="row.executionOrder" name="executionOrder{{i}}" value="row.executionOrder"></td>
-                </tr>
-                <tr>
-                    <td>Question Type : </td><td>{{row.questionType}}</td>
-            </tr>
-            <tr>
-                <td>Options : </td>
-                <td>{{row.questionOption}}</td>
-            </tr>
-            <tr>
-                <td>Options : </td><td>{{row.questionType}}</td>
-            </tr>
-            <hr size=100 noshade>
-    </table>
-</div>
-</div>
-    </form>
-</div>
+          </tbody>
+          <tfoot>
+            <button type="submit">Submit</button>
+          </tfoot>
+          </table> 
+          </div>
+         </form>
+        

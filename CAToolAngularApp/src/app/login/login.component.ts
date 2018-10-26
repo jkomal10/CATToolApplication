@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     // username : string = "user";
     constructor(private loginService :LoginService,public router: Router,private loginservice : LoginService) {}
 
-    ngOnInit() {}
+    ngOnInit() {localStorage.setItem('userName',null);}
 
     onLoggedin(formValues) {
          localStorage.setItem('isLoggedin', 'true');   

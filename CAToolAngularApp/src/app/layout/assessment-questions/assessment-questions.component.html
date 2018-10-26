@@ -31,13 +31,13 @@
           <td width="15%">{{row.questionType}}</td>
           <td width="10%">{{row.questionDisplayOrder}}</td>
           <td width="11%">
-            <button (click)="deactivate()" type="button" class="btn btn-light">
+            <button title="deactivate question" (click)="deactivate()" type="button" class="btn btn-light">
               <i style="color:black" class="fa fa-key"></i>
             </button>
-            <button (click)="updateQuestions(row)" style="font-size:16px" class="btn btn-light">
+            <button title="update question" (click)="updateQuestions(row)" style="font-size:16px" class="btn btn-light">
               <i style="color:black" class="fa fa-edit"></i>
             </button>
-            <button (click)="deleteQuestions(row.questionId)" class="btn btn-light">
+            <button title="delete question" (click)="deleteQuestions(row.questionId)" class="btn btn-light">
               <i style="color:black" class="fa fa-trash"></i>
             </button>
           </td>

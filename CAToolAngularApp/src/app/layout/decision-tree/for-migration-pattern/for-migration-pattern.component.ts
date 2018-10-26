@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ForMigrationPatternService } from './for-migration-pattern.service';
-import { AssessmentQuestions } from './AssessmentQuestions';
+import { AssessmentQuestions } from '../../assessment-questions/Question';
 
 @Component({
   selector: 'app-for-migration-pattern',
