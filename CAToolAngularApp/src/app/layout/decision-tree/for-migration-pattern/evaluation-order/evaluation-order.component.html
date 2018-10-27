@@ -3,7 +3,7 @@
 <div>
   <form>
     <table width="100%" class="table table-hover table-sm ">
-        <thead bgcolor="#E0E0E0">
+        <thead bgcolor="#E0E0E0"><input type="text" [(ngModel)]="row.evaluationOrder" name="evaluationOrder{{i}}" value="row.evaluationOrder">
           <tr >
             <th>
               <font color="black">Migration Pattern</font>
@@ -20,7 +20,7 @@
             <div *ngFor =  "let row of AllData;let i=index" >
             <tr>
               <td  width="20%">{{row.migrationId}}</td>
-              <td width="20%"><input type="text" [(ngModel)]="row.evaluationOrder" name="evaluationOrder{{i}}" value="row.evaluationOrder"></td>
+              <td width="20%"></td>
               <td  width="20%">{{row.migrationPattern}}</td>
             </tr>
             <tr><td></td><td></td><td></td></tr>

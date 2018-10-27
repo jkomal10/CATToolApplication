@@ -75,8 +75,27 @@ public class Application {
 	@Column
 	private int userId;
 	
+	@Column
+	private int isSaved;
+	
 	public int getApplicationId() {
 		return applicationId;
+	}
+
+	public int getIsFinalize() {
+		return isFinalize;
+	}
+
+	public void setIsFinalize(int isFinalize) {
+		this.isFinalize = isFinalize;
+	}
+
+	public int getIsSaved() {
+		return isSaved;
+	}
+
+	public void setIsSaved(int isSaved) {
+		this.isSaved = isSaved;
 	}
 
 	public void setApplicationId(int applicationId) {
@@ -215,30 +234,6 @@ public class Application {
 		super();
 	}
 
-	public Application(int applicationId, String applicationName, String applicationDescription, boolean isCloudable,
-			boolean isMigration, boolean cloudProvider, boolean isAssessment, int isFinalize, boolean isDeleted,
-			boolean isDeactivate, Date deletedDateTime, boolean isVerified, Date createdDate, Date modifiedDateTime,
-			String createdBy, String modifiedBy, int userId) {
-		super();
-		this.applicationId = applicationId;
-		this.applicationName = applicationName;
-		this.applicationDescription = applicationDescription;
-		this.isCloudable = isCloudable;
-		this.isMigration = isMigration;
-		this.cloudProvider = cloudProvider;
-		this.isAssessment = isAssessment;
-		this.isFinalize = isFinalize;
-		this.isDeleted = isDeleted;
-		this.isDeactivate = isDeactivate;
-		this.deletedDateTime = deletedDateTime;
-		this.isVerified = isVerified;
-		this.createdDate = createdDate;
-		this.modifiedDateTime = modifiedDateTime;
-		this.createdBy = createdBy;
-		this.modifiedBy = modifiedBy;
-		this.userId = userId;
-	}
-
 	@Override
 	public String toString() {
 		return "Application [applicationId=" + applicationId + ", applicationName=" + applicationName
@@ -247,12 +242,8 @@ public class Application {
 				+ ", isFinalize=" + isFinalize + ", isDeleted=" + isDeleted + ", isDeactivate=" + isDeactivate
 				+ ", deletedDateTime=" + deletedDateTime + ", isVerified=" + isVerified + ", createdDate=" + createdDate
 				+ ", modifiedDateTime=" + modifiedDateTime + ", createdBy=" + createdBy + ", modifiedBy=" + modifiedBy
-				+ ", userId=" + userId + "]";
+				+ ", userId=" + userId + ", isSaved=" + isSaved + "]";
 	}
-
-	
-
-	
 
 	
 }

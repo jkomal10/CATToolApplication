@@ -3,6 +3,6 @@ export class Application{
     applicationName:String;
     applicationDescription:String;
     applicationType:String;
-    
+    isSaved:number;
 
 }
