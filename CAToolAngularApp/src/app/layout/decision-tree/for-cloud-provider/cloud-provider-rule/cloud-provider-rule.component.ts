@@ -66,23 +66,3 @@ export class CloudProviderRuleComponent implements OnInit {
   }
   
 }
-
-
-// for (let index1 = 0; index1 < this.CloudProviderAllData[index].cloudProviderRules.length; index1++) {
-      //   console.log("id*******"+this.CloudProviderAllData[index].cloudProviderRules[index1].cloudProviderId)
-
-      //   // if(this.cloudproviderId==this.CloudProviderAllData[index].cloudProviderRules.cloudProviderId)
-      //   // {
-      //   console.log(this.CloudProviderAllData[index].questionId+"CloudProviderAllData");
-      //   console.log(this.cloudproviderId+"-------this.cloudproviderId");
-      //   console.log(this.CloudProviderAllData[index].cloudProviderRules.cloudProviderId+"**********")
-      //   var cloudproRules : CloudProviderRule = new CloudProviderRule();
-      //   cloudproRules.questionId = this.CloudProviderAllData[index].questionId;
-      //   cloudproRules.cloudProviderId = this.cloudproviderId;
-      //   cloudproRules.cloudProviderRule = this.cloudProviderRulesText[index];
-      //   cloudproRules.executionOrder = this.executionOrders[index];
-      //   cloudproRules.questionText = this.CloudProviderAllData[index].questionText;
-      //   this.cloudProviderRule[index]= cloudproRules;
-      // // }
-        
-      // }

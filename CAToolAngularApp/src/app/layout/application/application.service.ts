@@ -38,7 +38,7 @@ export class ApplicationService {
       return this.http.put(`${this.deactivateUrl}/${applicationId}`,  { responseType: 'text' });
     }
 
-    private comptransfer = new BehaviorSubject(0);
+    private comptransfer = new BehaviorSubject("Hello");
     question = this.comptransfer.asObservable();
   
     sendMsgtoOtherComponent(messsage){
