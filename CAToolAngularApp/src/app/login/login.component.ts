@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
     // username : string = "user";
     constructor(private loginService :LoginService,public router: Router,private loginservice : LoginService) {}
 
-    ngOnInit() {localStorage.setItem('userName',null);}
+    ngOnInit() {localStorage.setItem('userName',null);
+}
 
     onLoggedin(formValues) {
          localStorage.setItem('isLoggedin', 'true');   
@@ -39,4 +40,5 @@ export class LoginComponent implements OnInit {
         
         );
 }
+
 }
