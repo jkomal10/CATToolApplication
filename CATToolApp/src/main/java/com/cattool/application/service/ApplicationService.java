@@ -47,7 +47,7 @@ public class ApplicationService {
 		app.setApplicationId(application.getApplicationId());
 		app.setApplicationName(application.getApplicationName());
 		app.setApplicationDescription(application.getApplicationDescription());
-		app.setMigration(application.isMigration());
+		app.setMigrationPattern(application.getMigrationPattern());
 		app.setUserId(application.getUserId());
 		return applicationRepository.save(application);
 	}
@@ -84,5 +84,18 @@ public class ApplicationService {
          System.out.println("**************************"+appList+"v  *****************");
 		return appList;
 	}
+
+	public void allRuleCheck(int applicationId) {
+		//boolean cloudabilityCheck= cloudableCheck(applicationId);
+		if (cloudableCheck(applicationId)) {
+		migrationCheck(applicationId);
+		cloudProviderCheck(applicationId);
+		}
+	}
+	public boolean cloudableCheck(int applicationId){
+		return true;
+	}
+	public void migrationCheck(int applicationId){}
+	public void cloudProviderCheck(int applicationId){}
 	
 }
