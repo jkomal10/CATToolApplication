@@ -7,6 +7,7 @@ import { AssesstApplicationService } from './assesst-application.service';
 import { DataTablesModule } from 'angular-datatables';
 import { Answers } from './Answers';
 import { ApplicationService } from '../application.service';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-assesst-application',
@@ -29,7 +30,8 @@ export class AssesstApplicationComponent implements OnInit {
   result="";
    queId1=0;
 i=-1;
-  applicationIdValue:number;
+  application:any;
+  UpdateAnswersData:any;
   constructor(private router:Router,private assessmentService:AssesstApplicationService,private applicationService:ApplicationService) { }
 
   ngOnInit() {
@@ -38,10 +40,11 @@ i=-1;
       pageLength: 2,
       responsive: true}; 
 
-      this.applicationService.question.subscribe(data =>{ this.applicationIdValue= data;
-        console.log(this.applicationIdValue+"aaaaaaaaaaaaaaaaaaaaaaaa");
+      this.applicationService.question.subscribe(data =>{ this.application= data;
+        console.log(JSON.stringify(this.application)+"aaaaaaaaaaaaaaaaaaaaaaaa");
       }); 
-      
+      console.log(this.application.isSaved);
+      if(this.application.isSaved==0){
    this.assessmentService.CollecOptiontData().subscribe(result => 
       {
       this.AllData = result ;
@@ -51,7 +54,22 @@ i=-1;
       });
       console.log(this.numberOfOption);
       console.log(this.theCheckboxOptions);
-   } 
+   }
+   else{
+    
+    this.assessmentService.UpdateAnswers(this.application.applicationId).subscribe(result=>{this.UpdateAnswersData=result;
+    console.log(this.UpdateAnswersData+"((((((((((((((())))))))))))))))");
+    });
+
+    console.log("*********************ccccccccccccccc***********"+this.UpdateAnswersData);
+    this.assessmentService.CollecOptiontData().subscribe(result=>{this.AllData = result ;});
+
+    console.log('**************'+this.AllData);
+   }
+  } 
+  AssessApplicationRule(){
+    console.log('rule decide');
+  }
    selectChange( args) {
 
    this.tempp[this.single] = args.target.options[args.target.selectedIndex].text; 
@@ -118,9 +136,9 @@ i=-1;
    onSubmit(){
      for (let index = 0; index < this.AllData.length; index++) {
        //const element = this.AllData[index];
-       console.log(this.applicationIdValue+"appidddddddddddddddddd");
+       console.log(this.application.applicationId+"appidddddddddddddddddd");
        let answer : Answers = new Answers();
-        answer.applicationId=this.applicationIdValue;
+        answer.applicationId=this.application.applicationId;
         answer.questionId = this.AllData[index].questionId;
         if(this.AllData[index].questionType == "Multiple Choice Multiple Answer")
         {
@@ -141,5 +159,33 @@ i=-1;
      this.assessmentService.saveAssessApplication(this.answers).subscribe();
    }
    
+   onSubmitUpdated()
+   {
+    for (let index = 0; index < this.AllData.length; index++) {
+      //const element = this.AllData[index];
+      console.log(this.application.applicationId+"appidddddddddddddddddd");
+      let answer : Answers = new Answers();
+       answer.applicationId=this.application.applicationId;
+       answer.questionId = this.AllData[index].questionId;
+       if(this.AllData[index].questionType == "Multiple Choice Multiple Answer")
+       {
+         //answer.answerText =this.selectChangeHandler() ;
+         answer.answerText = this.theCheckbox[this.multi];
+         this.multi++;
+       }else{
+           answer.answerText= this.tempp[this.singlee];
+           console.log(answer.answerText+"lllllllllllll")
+           this.singlee++ ;
+               
+       }
+       answer.cloudAbility = false;
+        this.answers[index]=answer;
+        console.log(JSON.stringify(answer));
+    }
+    console.log(JSON.stringify(this.answers[0])+"jjjjjjjjjj");
+    this.assessmentService.saveAssessApplicationUpdate(this.answers).subscribe();
+
+   }
+
 
 }

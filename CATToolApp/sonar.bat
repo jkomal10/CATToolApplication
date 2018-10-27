@@ -1,0 +1,1 @@
+mvn sonar:sonar -Dsonar.host.url=http://13.76.198.15:50000 

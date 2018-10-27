@@ -8,4 +8,7 @@ import com.cattool.application.entity.Answers;
 @Repository
 public interface AnswersRepository extends JpaRepository<Answers, Long> {
 
+	Answers findByApplicationId(int applicationId);
+	
 }
+
