@@ -114,12 +114,10 @@ export class AddAssessmentQuestionComponent implements OnInit {
   }
 
   assessmentTypeForCloudProviderClick(event){
-    console.log(event.target.checked);
     this.assessmentTypeForCloudProvider=event.target.checked;
     this.questionService.getCloudProviderData().subscribe(result => 
       {
           this.CloudProviderData = result ;
-          console.log(this.CloudProviderData);
           for (let index = 0; index < this.CloudProviderData.length ; index++) {
           this.CloudProviderDataArray[index] = this.CloudProviderData[index].cloudProviders; 
       }

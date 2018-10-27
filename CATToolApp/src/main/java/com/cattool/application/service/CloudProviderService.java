@@ -12,6 +12,7 @@ import com.cattool.application.entity.CloudProvider;
 import com.cattool.application.entity.CloudProviderRule;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
 import com.cattool.application.repository.CloudProviderRepository;
+import com.cattool.application.repository.CloudProviderRuleRepository;
 
 @Service
 @Transactional
@@ -19,6 +20,9 @@ public class CloudProviderService {
 	
 	@Autowired
 	CloudProviderRepository cloudProviderRepository;
+	
+	@Autowired
+	CloudProviderRuleRepository cloudProviderRuleRepository;
 	
 	@Autowired
 	AssessmentQuestionsRepository assessmentQuestionsRepository;
@@ -33,36 +37,48 @@ public class CloudProviderService {
 		cloudProviderRepository.saveAll(cloudProvider);
 	}
 
-	public List<AssessmentQuestions> getCloudProviderQuestion(int cloudProviderId) {
+	public void updateCloudProviderRule(List<CloudProviderRule> cloudProviderRulelist) {
 		
-		List<AssessmentQuestions> returnAssessmentQuestions = new ArrayList<AssessmentQuestions>();
-		for(AssessmentQuestions questions:assessmentQuestionsRepository.findAll()) {
-			List<CloudProviderRule> cloudProviderRule = questions.getCloudProviderRules();
-			List<CloudProviderRule> cloudProRul = new ArrayList<CloudProviderRule>();
-			for (CloudProviderRule cloudProviderRule2 : cloudProviderRule) {
-				
-				if(cloudProviderId == cloudProviderRule2.getCloudProviderId()) {
-					System.out.println(cloudProviderRule2);
+		CloudProviderRule cloudProviderRules = new CloudProviderRule();
+		for (CloudProviderRule cloudProviderRule : cloudProviderRulelist) {
+			cloudProviderRules = cloudProviderRule;
+			cloudProviderRules.setCloudProviderRuleId(cloudProviderRule.getCloudProviderRuleId());
+			cloudProviderRuleRepository.save(cloudProviderRules);
+		}
+		
 
-					
-					cloudProRul.add(cloudProviderRule2);
-					questions.setCloudProviderRules(cloudProRul);
-					
-					returnAssessmentQuestions.add(questions);
-
-				}
-				else
-				{
-					System.out.println("different");
-				}
-				
-				
-			}
-			questions.setCloudProviderRules(cloudProviderRule);
 	}
 
-		return returnAssessmentQuestions;
-		
-	}
+//	public List<AssessmentQuestions> getCloudProviderQuestion(int cloudProviderId) {
+//		
+//		List<AssessmentQuestions> returnAssessmentQuestions = new ArrayList<AssessmentQuestions>();
+//		for(AssessmentQuestions questions:assessmentQuestionsRepository.findAll()) {
+//			List<CloudProviderRule> cloudProviderRule = questions.getCloudProviderRules();
+//			List<CloudProviderRule> cloudProRul = new ArrayList<CloudProviderRule>();
+//			for (CloudProviderRule cloudProviderRule2 : cloudProviderRule) {
+//				
+//				if(cloudProviderId == cloudProviderRule2.getCloudProviderId()) {
+//					System.out.println(cloudProviderRule2);
+//
+//					
+//					cloudProRul.add(cloudProviderRule2);
+//					questions.setCloudProviderRules(cloudProRul);
+//					
+//					returnAssessmentQuestions.add(questions);
+//
+//				}
+//				else
+//				{
+//					System.out.println("different");
+//				}
+//				
+//				
+//			}
+//			questions.setCloudProviderRules(cloudProviderRule);
+//	}
+//
+//		return returnAssessmentQuestions;
+//		
+//	}
 
 }

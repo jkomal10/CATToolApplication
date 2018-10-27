@@ -9,7 +9,7 @@ public class MigrationRule {
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private int migrationRuleId;	
+	private int migrationRuleId;
 	private String questionId;
 	private int migrationId;
 	private String migrationRule;

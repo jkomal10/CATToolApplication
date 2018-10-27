@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.CloudProvider;
+import com.cattool.application.entity.CloudProviderRule;
 import com.cattool.application.service.AssessmentQuestionsService;
 import com.cattool.application.service.CloudProviderService;
 
@@ -30,13 +31,13 @@ public class CloudProviderController {
 		return cloudProviderService.getAllcloudProvider();
 	}
 	
-	@GetMapping("/getAllCloudProviderQuestion/{cloudProviderId}")
-	public List<AssessmentQuestions> getCloudProviderQuestion(@PathVariable int cloudProviderId)
-	{
-		System.out.println("**********getAllCloudProviderQuestion*********");
-		return cloudProviderService.getCloudProviderQuestion(cloudProviderId);
-	}
-	
+//	@GetMapping("/getAllCloudProviderQuestion/{cloudProviderId}")
+//	public List<AssessmentQuestions> getCloudProviderQuestion(@PathVariable int cloudProviderId)
+//	{
+//		System.out.println("**********getAllCloudProviderQuestion*********");
+//		return cloudProviderService.getCloudProviderQuestion(cloudProviderId);
+//	}
+//	
 	@PutMapping("/setEvaluationOrder")
 	public void setEvaluationOrder(@RequestBody List<CloudProvider> cloudProvider)
 	{
@@ -45,6 +46,13 @@ public class CloudProviderController {
 		
 		cloudProviderService.setEvaluationOrder(cloudProvider);
 		 
+	}
+	@PutMapping("/updateCloudProviderRule")
+	public void updateCloudProviderRule(@RequestBody List<CloudProviderRule> cloudProviderRule)
+	{
+		System.out.println("***************************************");
+		System.out.println(cloudProviderRule);
+		cloudProviderService.updateCloudProviderRule(cloudProviderRule);
 	}
 
 }
