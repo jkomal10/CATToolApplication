@@ -69,6 +69,7 @@ i=-1;
   } 
   AssessApplicationRule(){
     console.log('rule decide');
+    this.assessmentService.AllRuleCheck(this.application.applicationId).subscribe();
   }
    selectChange( args) {
 
@@ -157,6 +158,7 @@ i=-1;
      }
      console.log(JSON.stringify(this.answers[0])+"jjjjjjjjjj");
      this.assessmentService.saveAssessApplication(this.answers).subscribe();
+     this.router.navigate(['/application']);
    }
    
    onSubmitUpdated()

@@ -17,6 +17,8 @@ export class CloudProviderRuleComponent implements OnInit {
   cloudProviderRule : Array<CloudProviderRule> = [];
   constructor(private forCloudProviderService:ForCloudProviderService,public router: Router) { }
 
+  
+
   ngOnInit() {
     this.forCloudProviderService.cloudProviderId.subscribe(data=>{this.cloudproviderId=data;});
     console.log(this.cloudproviderId+"Cloud Provider rule component");
@@ -25,8 +27,18 @@ export class CloudProviderRuleComponent implements OnInit {
       this.forCloudProviderService.CollectCloudableRuleQuestions(this.cloudproviderId).subscribe( result=>{
       this.CloudProviderAllData = result;
       console.log(this.CloudProviderAllData);
+      // for (let index = 0; index < this.CloudProviderAllData.length; index++) {
+      //   for (let index1 = 0; index1 < this.CloudProviderAllData[index].cloudProviderRules.length; index1++) {
+      //     this.executionOrdersCp[index1] = this.CloudProviderAllData[index].cloudProviderRules[index1].executionOrder;
+      //      console.log("**this.executionOrdersCp"+this.executionOrdersCp[index1]);
+
+      //   }
+      // }
       console.log("*****CloudProviderAllData");
+      console.log("&&&&&&"+this.executionOrders);
     });
+
+    
 
      console.log("the cloudproviderid is "+this.cloudproviderId);
     // console.log("the providerid we get "+ this.CloudProviderAllData.cloudProviderRules[0].cloudProviderRuleId);
@@ -34,6 +46,7 @@ export class CloudProviderRuleComponent implements OnInit {
 
   onSubmit(){
     this.addCloudeProviderRule();
+    
   }
 
   addCloudeProviderRule(){

@@ -7,8 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cattool.application.entity.Answers;
 import com.cattool.application.entity.Application;
+import com.cattool.application.entity.CloudProviderRule;
+import com.cattool.application.repository.AnswersRepository;
 import com.cattool.application.repository.ApplicationRepository;
+import com.cattool.application.repository.CloudProviderRuleRepository;
 
 @Service
 @Transactional
@@ -16,6 +20,12 @@ public class ApplicationService {
 
 	@Autowired
 	ApplicationRepository applicationRepository;
+	
+	@Autowired
+	AnswersRepository answersRepository;
+	
+	@Autowired
+	CloudProviderRuleRepository cloudProviderRuleRepository;
 	
 	public List<Application> getAllApplication()
 	{
@@ -47,7 +57,7 @@ public class ApplicationService {
 		app.setApplicationId(application.getApplicationId());
 		app.setApplicationName(application.getApplicationName());
 		app.setApplicationDescription(application.getApplicationDescription());
-		app.setMigration(application.isMigration());
+		app.setMigrationPattern(application.getMigrationPattern());
 		app.setUserId(application.getUserId());
 		return applicationRepository.save(application);
 	}
@@ -84,5 +94,26 @@ public class ApplicationService {
          System.out.println("**************************"+appList+"v  *****************");
 		return appList;
 	}
+
+	public void allRuleCheck(int applicationId) {
+		//boolean cloudabilityCheck= cloudableCheck(applicationId);
+		if (cloudableCheck(applicationId)) {
+//		migrationCheck(applicationId);
+		cloudProviderCheck(applicationId);
+		}
+	}
+	
+	private void cloudProviderCheck(int applicationId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean cloudableCheck(int applicationId){
+		return true;
+	}
+	public void migrationCheck(int applicationId){}
+	
+	
+	
 	
 }
