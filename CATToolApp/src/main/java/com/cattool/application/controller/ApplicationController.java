@@ -86,4 +86,14 @@ public class ApplicationController {
 	}
 	
 
+	@GetMapping("AllRuleCkeck/{applicationId}")
+	public void allRuleCheck(@PathVariable("applicationId") int applicationId) {
+		applicationService.allRuleCheck(applicationId);
+	}
+	
+	@GetMapping("migrationCheck/{applicationId}")
+	public void migrationCheck(@PathVariable int applicationId) {
+		applicationService.migrationCheck(applicationId);
+	}
+
 }

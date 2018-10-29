@@ -81,22 +81,23 @@ public class UserService {
 		userRepository.save(users);
 	}
 
-	
-	
-	
-	
-	/*public List<Users> getUsers() {
-	return userRepository.findAll();
-}
-	
-public Users findById(String userName) {
-	return userRepository.findByUserName(userName);
-	
-}
 
-public Users addUser(Users user)
-{
-	return userRepository.save(user);
-}*/
+	public Users changePassword(String userName,String password,String newPassword) {
+			Users user=new Users();
+			user=userRepository.findByUserName(userName);
+			System.out.println(password+"=="+newPassword+"=="+user.getPassword());
+			if(password.equals(user.getPassword())) {
+				user.setUserId(user.getUserId());
+				user.setPassword(password);
+				userRepository.save(user);
+				System.out.println("Password changed");
+				return user;
+			}
+			else
+			{
+				System.out.println("Please enter correct password!!!");
+				return user;
+			}
+	}
 	
 }
