@@ -20,11 +20,11 @@
                     
                     <div class="form-group">
                         <!-- <input type="password" [ngModel]="password" title="enter correct password" name="password" class="form-control input-underline input-lg" placeholder="Password" required/> -->
-                        <input class="form-control input-underline input-lg" type="password"  #formPassword="ngModel" [(ngModel)]="password"  name="password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" autocomplete="off">
+                        <input class="form-control input-underline input-lg" type="password"  #formPassword="ngModel" [(ngModel)]="password"  name="password" placeholder="Password" required  autocomplete="off">
                     
                         <div *ngIf="formPassword?.touched" >
                             <div *ngIf="formPassword.errors?.required">Password can't be empty</div>
-                            <div *ngIf="formPassword.errors?.pattern">Password should contain at least one number and one uppercase and lowercase letter</div>
+                            <!-- <div *ngIf="formPassword.errors?.pattern">Password should contain at least one number and one uppercase and lowercase letter</div> -->
                             <!-- <div *ngIf=" formPassword.errors?.minlength">Password should be 8 or more characters</div> -->
                          </div>
                     </div>

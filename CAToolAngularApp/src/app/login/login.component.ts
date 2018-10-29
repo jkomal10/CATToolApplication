@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
          localStorage.setItem('isLoggedin', 'true');   
          this.loginservice.getUserByUserNamePassword(formValues.userName,formValues.password).subscribe((data)=>{
          this.users=data;
+         console.log('****************************************'+this.users.password);
          console.log(this.users);
             if( this.users!=null)
             {
@@ -40,8 +41,7 @@ export class LoginComponent implements OnInit {
             }
             else
             {
-                this.message="Enter correct username and password";
-                this.router.navigate(['/login']);
+                alert("Invalid User");
             }
             
         }
