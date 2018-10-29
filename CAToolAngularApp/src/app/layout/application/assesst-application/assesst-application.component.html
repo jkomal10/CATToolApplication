@@ -17,7 +17,7 @@
               <td width="60px">Question{{i+1}}. {{row.questionText}}</td>
 
               <td width="40px" *ngIf="AllData[i].questionType==='Multiple Choice Multiple Answer'; else dropdownbox">
-                <div *ngFor="let option of AllData[i]['questionOption'] ;let j = index" required>
+                <div *ngFor="let option of AllData[i]['questionOption'] ;let j = index" >
                   <input type="checkbox" (change)="selectChangeHandler(option,$event,AllData[i].questionId)"required>{{AllData[i].questionOption[j]['optionText']}}
                   <!-- <input  type="checkbox" checked="{{ AllData[i].questionOption[j]['optionText'] && -1 !== this.option.optionText.indexOf(option) ? 'checked' : '' }}" (change)="selectChangeHandler(option,$event,AllData[i].questionId)" [(ngModel)]="numberOfOption[j]" name="{{option.optionId}}" >{{AllData[i].questionOption[j]['optionText']}} -->
                   <!-- <input  type="checkbox" [checked]="(AllData[i].questionOption[j]['optionId'] && (-1 !== facility.timeslotids.indexOf(numberOfOption[j])) ? 'checked' : '')" (change) ="updateSelectedTimeslots($event)" [(ngModel)]="numberOfOption[j]" name="numberOfOption[j]">{{AllData[i].questionOption[j]['optionText']}} -->

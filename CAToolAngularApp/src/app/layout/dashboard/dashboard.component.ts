@@ -57,6 +57,7 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
         this.firstName=localStorage.getItem('firstName');
         this.lastName=localStorage.getItem('lastName');
+        
     }
 
     public closeAlert(alert: any) {
