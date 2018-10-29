@@ -9,7 +9,7 @@ export class AssesstApplicationService {
 
   constructor(private http:HttpClient) { }
   baseUrl ='http://localhost:8090/answer/save';
-  AllRuleUrl='';
+  AllRuleUrl='http://localhost:8090/application/AllRuleCheck';
   UpdateAnswersUrl='http://localhost:8090/answer/getAnswersByApplicationId/7';
   CollecOptiontData(){
     const url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';
@@ -31,6 +31,7 @@ export class AssesstApplicationService {
     }
 
     AllRuleCheck(applicationId:number): Observable<any>{
-      return this.http.post(`${this.AllRuleUrl}`,applicationId);
+      console.log(`${this.AllRuleUrl}`+`/`+applicationId);
+      return this.http.get(`${this.AllRuleUrl}`+`/`+applicationId);
     }
 }

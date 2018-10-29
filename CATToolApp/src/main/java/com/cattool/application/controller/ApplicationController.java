@@ -85,8 +85,9 @@ public class ApplicationController {
 		return applicationService.getAllReassessment();
 	}
 	
-	@GetMapping("AllRuleCkeck/{applicationId}")
+	@GetMapping("AllRuleCheck/{applicationId}")
 	public void allRuleCheck(@PathVariable("applicationId") int applicationId) {
+		System.out.println("All rule check!!!!");
 		applicationService.allRuleCheck(applicationId);
 	}
 	

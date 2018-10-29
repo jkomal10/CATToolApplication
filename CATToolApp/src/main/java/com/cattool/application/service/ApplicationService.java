@@ -214,6 +214,7 @@ public boolean cloudProviderCheck(int applicationId){
 		if(count == numberOfRules)
 		{
 			application.setCloudProvider("GITC");
+			application.setIsSaved(1);
 			applicationRepository.save(application);
 			System.out.println("CloudProvider is GITC");
 			return false;
@@ -222,6 +223,7 @@ public boolean cloudProviderCheck(int applicationId){
 		else
 		{
 			application.setCloudProvider("AWS");
+			application.setIsSaved(1);
 			applicationRepository.save(application);
 			System.out.println("CloudProvider is AWS");
 			return true;
@@ -231,6 +233,8 @@ public boolean cloudProviderCheck(int applicationId){
 	public void migrationCheck(int applicationId){
 		System.out.println("Migration works");
 		int migrationQuestionIdValue=0;
+		int answerTextCount=0;
+		int answerIdCount=0;
 		boolean publicFalseCheck=true;
 		boolean rehostFalseCheck=true;
 		List<Answers> answerlist=new ArrayList<Answers>();
@@ -243,13 +247,25 @@ public boolean cloudProviderCheck(int applicationId){
 		{
 			if(answers.getApplicationId()==applicationId)
 			{
+				if(answers.getAnswerText()!=null)
+				{
+					answerTextCount++;
+				}
+				answerIdCount++;
 				answerlist.add(answers);
 			}
 		}
+		System.out.println(answerTextCount+")))))))))))))))))))))000000000000000(((((((((((((((((((((");
+		if(answerTextCount==answerIdCount)
+		{
 		for(MigrationRule migrationRule:migrationRulelist)
 		{
 			System.out.println("gitc check "+gitcCheck);
-			if(publicFalseCheck==true && migrationRule.getMigrationId()==1001)//public-pass
+			if(gitcCheck!=0)
+			{
+				publicFalseCheck=false;
+			}
+			if(gitcCheck==0 &&publicFalseCheck==true && migrationRule.getMigrationId()==1001)//public-pass
 			{
 				System.out.println(migrationRule.getMigrationRule()+"^^^^^^^^^^^^^^public pass");
 				for(Answers answers:answerlist) {
@@ -270,6 +286,8 @@ public boolean cloudProviderCheck(int applicationId){
 											System.out.println("**************************public pass");
 											application.setApplicationId(applicationId);
 											application.setMigrationPattern("public-pass");
+											application.setAssessment(true);
+											application.setIsSaved(1);
 											applicationRepository.save(application);
 										}
 								}
@@ -288,8 +306,10 @@ public boolean cloudProviderCheck(int applicationId){
 			else if(publicFalseCheck==false && rehostFalseCheck==true && migrationRule.getMigrationId()==1002)//Rehost
 			{
 				System.out.println(migrationRule.getMigrationRule()+"^^^^^^^^^^^^^^Rehost");
+				System.out.println("answerssssssssss"+answerlist);
 				for(Answers answers:answerlist) {
 					migrationQuestionIdValue=Integer.parseInt(migrationRule.getQuestionId());
+					System.out.println(answers.getAnswerText());
 					if(migrationQuestionIdValue==answers.getQuestionId())
 					{
 						System.out.println(migrationRule.getMigrationRule()+"==="+answers.getAnswerText());
@@ -300,6 +320,8 @@ public boolean cloudProviderCheck(int applicationId){
 										System.out.println("Rehost pass");
 										application2.setApplicationId(applicationId);
 										application2.setMigrationPattern("Rehost");
+										application.setIsSaved(1);
+										application.setAssessment(true);
 										applicationRepository.save(application);
 										System.out.println(application);
 								}
@@ -320,11 +342,19 @@ public boolean cloudProviderCheck(int applicationId){
 				System.out.println(migrationRule.getMigrationRule()+"^^^^^^^^^^^^^^Replateform");
 					System.out.println("replateform");
 					application.setApplicationId(applicationId);
+					application.setIsSaved(1);
+					application.setAssessment(true);
 					application.setMigrationPattern("Re-Plateform");
 					applicationRepository.save(application);
 				}
 			}
-			
+	}else {
+		
+				System.out.println("No answers present for given application!!!!!");
+				application.setApplicationId(applicationId);
+				application.setIsSaved(0);
+				applicationRepository.save(application);
+		  }
 		}
 	
 }
