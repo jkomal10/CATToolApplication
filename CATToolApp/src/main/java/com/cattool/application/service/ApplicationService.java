@@ -20,12 +20,7 @@ public class ApplicationService {
 
 	@Autowired
 	ApplicationRepository applicationRepository;
-	
-	@Autowired
-	AnswersRepository answersRepository;
-	
-	@Autowired
-	CloudProviderRuleRepository cloudProviderRuleRepository;
+
 	
 	public List<Application> getAllApplication()
 	{
@@ -95,25 +90,6 @@ public class ApplicationService {
 		return appList;
 	}
 
-	public void allRuleCheck(int applicationId) {
-		//boolean cloudabilityCheck= cloudableCheck(applicationId);
-		if (cloudableCheck(applicationId)) {
-//		migrationCheck(applicationId);
-		cloudProviderCheck(applicationId);
-		}
-	}
-	
-	private void cloudProviderCheck(int applicationId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public boolean cloudableCheck(int applicationId){
-		return true;
-	}
-	public void migrationCheck(int applicationId){}
-	
-	
 	
 	
 }
