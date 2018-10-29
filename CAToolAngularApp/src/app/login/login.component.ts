@@ -27,8 +27,9 @@ export class LoginComponent implements OnInit {
          localStorage.setItem('isLoggedin', 'true');   
          this.loginservice.getUserByUserNamePassword(formValues.userName,formValues.password).subscribe((data)=>{
          this.users=data;
-         console.log('****************************************'+this.users.password);
-         console.log(this.users);
+        //  console.log('****************************************'+this.users.password);
+
+         console.log(this.users + "asdasdasd");
             if( this.users!=null)
             {
                 localStorage.setItem('firstName',this.users.firstName);
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
             }
             else
             {
-                alert("Invalid User");
+                alert("Please enter correct username and Password");
             }
             
         }

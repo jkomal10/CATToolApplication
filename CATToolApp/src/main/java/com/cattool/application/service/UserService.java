@@ -25,27 +25,36 @@ public class UserService {
 	}
 
 	public Users findById(String userName,String password) {
-		Users userDb=userRepository.findByUserName(userName);
-		System.out.println(userDb.getUserName());
-		int lastLogInDateInInt=(int) (new Date().getTime()/1000);
-		if(userDb!=null)
+		Users userDb = new Users();
+		try
 		{
-			if(password.equals(userDb.getPassword()))
+			 userDb=userRepository.findByUserName(userName);
+			System.out.println(userDb.getUserName());
+			int lastLogInDateInInt=(int) (new Date().getTime()/1000);
+			if(userDb!=null)
 			{
-				userDb.setLastLogin(lastLogInDateInInt);
-				return userDb;
+				if(password.equals(userDb.getPassword()))
+				{
+					userDb.setLastLogin(lastLogInDateInInt);
+					return userDb;
+				}
+				else
+				{
+					System.out.println("password does not exist!!!!!!!");
+					return null;
+				}
 			}
-			else
-			{
-				System.out.println("password does not exist!!!!!!!");
-				return null;
-			}
-		}
-		else
-		{
+//			else
+//			{
+//				System.out.println("User does not exist!!!!");
+//				return null;
+//			}
+		}catch (Exception e) {
 			System.out.println("User does not exist!!!!");
 			return null;
 		}
+		return userDb;
+		
 		
 	}
 
