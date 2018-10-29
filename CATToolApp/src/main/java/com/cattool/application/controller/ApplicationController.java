@@ -84,4 +84,14 @@ public class ApplicationController {
 	{
 		return applicationService.getAllReassessment();
 	}
+	
+	@GetMapping("AllRuleCheck/{applicationId}")
+	public void allRuleCheck(@PathVariable int applicationId) {
+		applicationService.allRuleCheck(applicationId);
+	}
+	
+	@GetMapping("migrationCheck/{applicationId}")
+	public void migrationCheck(@PathVariable int applicationId) {
+		applicationService.migrationCheck(applicationId);
+	}
 }

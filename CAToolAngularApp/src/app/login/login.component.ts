@@ -12,6 +12,7 @@ import { Users } from './Users';
     animations: [routerTransition()]
 })
 export class LoginComponent implements OnInit {
+    message:String;
    users: Users = new Users();
     // password : string = "pass";
     // username : string = "user";
@@ -27,12 +28,14 @@ export class LoginComponent implements OnInit {
          console.log(this.users);
             if( this.users!=null)
             {
+                this.message="uuuu";
                 localStorage.setItem('userName',formValues.userName);
                 this.loginService.sendMsgtoOtherComponent(this.users);
                 this.router.navigate(['/dashboard']);
             }
             else
             {
+                this.message="Enter correct username and password";
                 this.router.navigate(['/login']);
             }
             

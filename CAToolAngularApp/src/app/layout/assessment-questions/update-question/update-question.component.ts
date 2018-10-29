@@ -18,6 +18,7 @@ export class UpdateQuestionComponent implements OnInit {
   assessmentQuestionData : string;
   ngOnInit() {
     this.assessmentQuestionsService.question.subscribe(data => {this.que= data;}); 
+    this.question=this.que;
   }
 
   updateQue(question) {

@@ -14,6 +14,7 @@ export class UsersService {
    private addUrl = 'http://localhost:8090/user/addUser';
    private updateUrl = 'http://localhost:8090/user/updateUser';
    private deleteUrl = 'http://localhost:8090/user/deleteUserById';
+   private changePasswordUrl = 'http://localhost:8090/user/changePassword';
 constructor(private http:HttpClient) { }
 
 CollectData(){
@@ -27,6 +28,11 @@ newAddURL: string = 'http://localhost:8090/user/addUser';
 addUser(application: Object): Observable<Object> {
   
   return this.http.post(`${this.newAddURL}` + `/create/`+localStorage.getItem('userName'), application);
+}
+
+changePassword(userName: String,password: String,newPassword: String){
+  console.log(`${this.changePasswordUrl}`+ `/`+userName+`/`+password+`/`+newPassword);
+  return this.http.get(`${this.changePasswordUrl}`+ `/`+userName+`/`+password+`/`+newPassword);
 }
 
 private comptransfer = new BehaviorSubject("Hello");

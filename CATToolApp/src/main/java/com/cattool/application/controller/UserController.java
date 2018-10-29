@@ -64,9 +64,10 @@ public class UserController {
 		userService.updateUsers(user,modifiedBy);
 	}
 	
-	@GetMapping("changePassword/{userId}/{password}")
-	public void setPassword(@PathVariable int userId,@PathVariable String password) {
+	@GetMapping("changePassword/{userName}/{password}/{company}")
+	public Users setPassword(@PathVariable String userName,@PathVariable String password,@PathVariable String company) {
 		System.out.println("Change password");
-		userService.changePassword(userId, password);
+		return userService.changePassword(userName, password,company);
 	}
+	
 }

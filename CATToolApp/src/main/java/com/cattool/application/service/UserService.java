@@ -82,12 +82,22 @@ public class UserService {
 	}
 
 
-	public void changePassword(int userId,String password) {
-		Users user=new Users();
-		user=userRepository.findByUserId(userId);
-		user.setUserId(userId);
-		user.setPassword(password);
-		userRepository.save(user);
+	public Users changePassword(String userName,String password,String newPassword) {
+			Users user=new Users();
+			user=userRepository.findByUserName(userName);
+			System.out.println(password+"=="+newPassword+"=="+user.getPassword());
+			if(password.equals(user.getPassword())) {
+				user.setUserId(user.getUserId());
+				user.setPassword(password);
+				userRepository.save(user);
+				System.out.println("Password changed");
+				return user;
+			}
+			else
+			{
+				System.out.println("Please enter correct password!!!");
+				return user;
+			}
 	}
 	
 }

@@ -69,6 +69,7 @@ i=-1;
   } 
   AssessApplicationRule(){
     console.log('rule decide');
+    this.assessmentService.AllRuleCheck(this.application.applicationId).subscribe();
   }
    selectChange( args) {
 

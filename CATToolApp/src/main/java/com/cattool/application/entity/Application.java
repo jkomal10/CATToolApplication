@@ -33,10 +33,10 @@ public class Application {
 	private boolean isCloudable;
 	
 	@Column
-	private boolean isMigration;
+	private String MigrationPattern;
 	
 	@Column
-	private boolean cloudProvider;
+	private String cloudProvider;
 	
 	@Column
 	private boolean isAssessment;
@@ -124,22 +124,6 @@ public class Application {
 
 	public void setCloudable(boolean isCloudable) {
 		this.isCloudable = isCloudable;
-	}
-
-	public boolean isMigration() {
-		return isMigration;
-	}
-
-	public void setMigration(boolean isMigration) {
-		this.isMigration = isMigration;
-	}
-
-	public boolean isCloudProvider() {
-		return cloudProvider;
-	}
-
-	public void setCloudProvider(boolean cloudProvider) {
-		this.cloudProvider = cloudProvider;
 	}
 
 	public boolean isAssessment() {
@@ -230,6 +214,22 @@ public class Application {
 		this.userId = userId;
 	}
 
+	public String getMigrationPattern() {
+		return MigrationPattern;
+	}
+
+	public void setMigrationPattern(String migrationPattern) {
+		MigrationPattern = migrationPattern;
+	}
+
+	public String getCloudProvider() {
+		return cloudProvider;
+	}
+
+	public void setCloudProvider(String cloudProvider) {
+		this.cloudProvider = cloudProvider;
+	}
+	
 	public Application() {
 		super();
 	}
@@ -238,12 +238,16 @@ public class Application {
 	public String toString() {
 		return "Application [applicationId=" + applicationId + ", applicationName=" + applicationName
 				+ ", applicationDescription=" + applicationDescription + ", isCloudable=" + isCloudable
-				+ ", isMigration=" + isMigration + ", cloudProvider=" + cloudProvider + ", isAssessment=" + isAssessment
-				+ ", isFinalize=" + isFinalize + ", isDeleted=" + isDeleted + ", isDeactivate=" + isDeactivate
-				+ ", deletedDateTime=" + deletedDateTime + ", isVerified=" + isVerified + ", createdDate=" + createdDate
-				+ ", modifiedDateTime=" + modifiedDateTime + ", createdBy=" + createdBy + ", modifiedBy=" + modifiedBy
-				+ ", userId=" + userId + ", isSaved=" + isSaved + "]";
+				+ ", MigrationPattern=" + MigrationPattern + ", cloudProvider=" + cloudProvider + ", isAssessment="
+				+ isAssessment + ", isFinalize=" + isFinalize + ", isDeleted=" + isDeleted + ", isDeactivate="
+				+ isDeactivate + ", deletedDateTime=" + deletedDateTime + ", isVerified=" + isVerified
+				+ ", createdDate=" + createdDate + ", modifiedDateTime=" + modifiedDateTime + ", createdBy=" + createdBy
+				+ ", modifiedBy=" + modifiedBy + ", userId=" + userId + ", isSaved=" + isSaved + "]";
 	}
+	
+	
 
+	
+	
 	
 }
