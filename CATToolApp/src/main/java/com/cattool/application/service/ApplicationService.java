@@ -25,7 +25,7 @@ public class ApplicationService {
 
 	@Autowired
 	ApplicationRepository applicationRepository;
-	
+
 	@Autowired
 	AnswersRepository answerRepository;
 	
@@ -37,6 +37,7 @@ public class ApplicationService {
 	
 	@Autowired
 	CloudProviderRuleRepository cloudProviderRuleRepository;
+
 	
 	public List<Application> getAllApplication()
 	{
@@ -105,6 +106,7 @@ public class ApplicationService {
          System.out.println("**************************"+appList+"v  *****************");
 		return appList;
 	}
+
 
 	public void allRuleCheck(int applicationId) {
 		boolean cloudabilityCheck= cloudableCheck(applicationId);
@@ -229,6 +231,7 @@ public boolean cloudProviderCheck(int applicationId){
 			return true;
 		}		
 	}
+
 	
 	public void migrationCheck(int applicationId){
 		System.out.println("Migration works");

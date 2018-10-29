@@ -14,8 +14,10 @@ import { Users } from './Users';
 export class LoginComponent implements OnInit {
     message:String;
    users: Users = new Users();
+   userId:number;
     // password : string = "pass";
     // username : string = "user";
+   
     constructor(private loginService :LoginService,public router: Router,private loginservice : LoginService) {}
 
     ngOnInit() {localStorage.setItem('userName',null);
@@ -28,6 +30,9 @@ export class LoginComponent implements OnInit {
          console.log(this.users);
             if( this.users!=null)
             {
+                localStorage.setItem('firstName',this.users.firstName);
+                localStorage.setItem('lastName',this.users.lastName);
+              
                 this.message="uuuu";
                 localStorage.setItem('userName',formValues.userName);
                 this.loginService.sendMsgtoOtherComponent(this.users);
