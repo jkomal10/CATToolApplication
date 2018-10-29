@@ -1,34 +1,35 @@
-<form #productForm="ngForm" (ngSubmit)="addCloudeProviderRule()">
-    <div class="form-group">
-          <table width="100%" datatable="bootstrap"   class="table table-hover table-sm ">
-             <thead bgcolor="#E0E0E0">
-              <tr>
-                <th>Question</th>
-                <th>Question Description</th>
-              </tr>
-            </thead> 
-            <tbody>
-                <tr *ngFor="let size of CloudProviderAllData;let i = index">
-                    <td>Question
-                        <br>Excution Order
-                        <br>Question type
-                        <br>Options
-                        <br>Cloudable Rule
-                     </td>  
-                    <td> 
-                        <span name="questionText" > {{CloudProviderAllData[i].questionText}}</span> 
-                        <br><input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrders[i]" />
-                        <br><span name="questionType">{{CloudProviderAllData[i].questionType}}</span>
-                        <br><span *ngFor="let option of CloudProviderAllData[i]['questionOption'] ; let op = index" name="optionText">{{CloudProviderAllData[i].questionOption[op]['optionText']+" , "}}</span>
-                        <br><input type="text" #cloudableRule name="cloudProviderRule{{i}}" [(ngModel)]="cloudProviderRule[i]"/>
-                    </td>
-                </tr>
-          </tbody>
-          <tfoot>
-            <button type="submit" >Submit</button>
-            <button type="cancel"  value="Cancel"  (click)="Cancel()">Cancle</button>
-          </tfoot>
-          </table> 
-          </div>
-         </form>
-        
+<form #productForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+              <table width="100%" datatable="bootstrap"   class="table table-hover table-sm ">
+                 <thead bgcolor="#E0E0E0">
+                  <tr>
+                    <th>Question</th>
+                    <th>Question Description</th>
+                  </tr>
+                </thead> 
+                <tbody>
+                    <tr *ngFor="let size of CloudProviderAllData;let i = index">
+                        <td>Question
+                            <br>Excution Order
+                            <br>Question type
+                            <br>Options
+                            <br>Cloudable Rule
+                         </td>  
+                        <td> 
+                            <span name="questionText" > {{CloudProviderAllData[i].questionText}}</span>
+                            <br><input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrders[i]" />
+                            <br><span name="questionType">{{CloudProviderAllData[i].questionType}}</span>
+                            <br><span *ngFor="let option of CloudProviderAllData[i]['questionOption'] ; let op = index" name="optionText">{{CloudProviderAllData[i].questionOption[op]['optionText']+" , "}}</span>
+                            <br><input type="text" #cloudableRule name="cloudProviderRulesText{{i}}" [(ngModel)]="cloudProviderRulesText[i]"/>
+                        </td>
+                    </tr>
+              </tbody>
+              <tfoot>
+                <button type="submit" >Submit</button>
+                <button type="cancel"  value="Cancel"  (click)="Cancel()">Cancle</button>
+              </tfoot>
+              </table> 
+              </div>
+             </form>
+            
+    

@@ -158,6 +158,7 @@ i=-1;
      }
      console.log(JSON.stringify(this.answers[0])+"jjjjjjjjjj");
      this.assessmentService.saveAssessApplication(this.answers).subscribe();
+     this.router.navigate(['/application']);
    }
    
    onSubmitUpdated()
