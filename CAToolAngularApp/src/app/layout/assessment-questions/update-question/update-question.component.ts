@@ -14,7 +14,7 @@ export class UpdateQuestionComponent implements OnInit {
   que : any;
   submitted = false;
   numberOfOptions : number;
-  optionsValues = [1, 2, 3,4,5,6,7,8,9];
+  optionsValues = [1,2,3,4,5,6,7,8,9];
   Options : Array<number>=[10];
 
   constructor(private assessmentQuestionsService : AssessmentQuestionsService ,public router: Router) { }
@@ -27,10 +27,8 @@ export class UpdateQuestionComponent implements OnInit {
   }
 
   selectChangeHandler(event:any){
-    //console.log('rrrrrrrrrrrrrrrrr'+this.optionText[0]);
     console.log(event);
     this.numberOfOptions=parseInt(event.target.value,10);
-   // this.numberOfOption=event;
    
     console.log(this.numberOfOptions);
     console.log(event.target.value);
