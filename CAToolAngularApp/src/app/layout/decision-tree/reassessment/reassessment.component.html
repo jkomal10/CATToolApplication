@@ -1,16 +1,17 @@
 <h4>Reassessment</h4>
 <form>
   Run Rules for:<br><br>
-  <input type="button" class="btn  btn-info" value="Run Rules" (click)="form()">&nbsp;
+  <input type="button" class="btn  btn-info" value="Run Rules" (click)="runRule()">&nbsp;
   <br><br>
-  Migration Pattern: <input type="checkbox" id="migrationPattern" (change)="migrationPattern($event)"><br>
-  Cloud.. Provider..   : <input type="checkbox" id="cloudProvider" (change)="cloudProvider($event)">
+  Migration Pattern: <input type="checkbox" id="migrationPattern" (change)="migrationPatternMethod($event)"><br>
+  Cloud.. Provider..   : <input type="checkbox" id="cloudProvider" (change)="cloudProviderMethod($event)">
   <br>
   <br>
   <table  width="100%" class="table table-hover table-sm ">
     <tr bgcolor="#E0E0E0"><td>App</td><td>Application</td></tr>
-    <tr *ngFor = "let row of AllData;let i=index">
-      <td width="20%" widh ><input #appIdValue type="checkbox" id="applicationId"  (change)="appIdMethod(appIdValue.value)"/></td>
+    <tr *ngFor = "let row of AllData">
+      <td width="20%" widh ><input #value type="checkbox" id="applicationId" (change)="applicationNameChange($event,row.applicationId)"></td>
+      <!-- <td width="20%" widh ><input  type="checkbox" id="applicationIdArray" value="{{i}}" name="applicationIdArray{{i}}"></td> -->
       <td  width="80%">{{row.applicationName}}</td>
     </tr> 
     <tr><td><td></td></tr>

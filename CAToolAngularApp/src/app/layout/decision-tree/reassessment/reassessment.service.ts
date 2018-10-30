@@ -13,5 +13,15 @@ export class ServiceService {
     return this.http.get(reassessUrl);
     }
 
-  
+  cloudProvider(applicationId : number){
+    const cloudProviderUrl = 'http://localhost:8090/application/cloudProviderCheck';
+    console.log(cloudProviderUrl+`/`+applicationId);
+    return this.http.get(cloudProviderUrl+`/`+applicationId);
+  }
+
+  migrationPattern(applicationId : number){
+    const migrationPatternUrl = 'http://localhost:8090/application/migrationCheck';
+    console.log(migrationPatternUrl+`/`+applicationId);
+    return this.http.get(migrationPatternUrl+`/`+applicationId);
+  }
 }

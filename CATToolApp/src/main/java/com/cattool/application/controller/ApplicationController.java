@@ -99,7 +99,7 @@ public class ApplicationController {
 	
 	@GetMapping("cloudProviderCheck/{applicationId}")
 	public void cloudProviderCheck(@PathVariable("applicationId") int applicationId) {
-		System.out.println("All rule check!!!!");
+		System.out.println("cloud provider rule check!!!!");
 		applicationService.cloudProviderCheck(applicationId);
 	}
 
