@@ -12,4 +12,6 @@ export class ServiceService {
     const reassessUrl = 'http://localhost:8090/application/getAllReassessment';
     return this.http.get(reassessUrl);
     }
+
+  
 }

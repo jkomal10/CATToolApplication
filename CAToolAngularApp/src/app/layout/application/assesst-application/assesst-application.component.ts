@@ -58,7 +58,6 @@ i=-1;
    else{
     
     this.assessmentService.UpdateAnswers(this.application.applicationId).subscribe(result=>{this.UpdateAnswersData=result;
-    console.log(this.UpdateAnswersData+"((((((((((((((())))))))))))))))");
     });
 
     console.log("*********************ccccccccccccccc***********"+this.UpdateAnswersData);

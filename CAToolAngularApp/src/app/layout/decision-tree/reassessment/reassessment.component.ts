@@ -10,6 +10,7 @@ import { ServiceService } from './reassessment.service';
 })
 export class ReassessmentComponent implements OnInit {
   AllData : any = [];
+  countApplicationId : number[];
 
   constructor(public router:Router,private reassessmentService:ServiceService,private http:HttpClient) { }
 
@@ -18,9 +19,40 @@ export class ReassessmentComponent implements OnInit {
     this.reassessmentService.CollectData().subscribe(result => 
       {
       this.AllData = result ;
-      console.log(this.AllData[2].applicationName+'KKKK(((**************)))JJJJ');
       });
 
     
   }
+
+  runRule(){
+    
+  }
+
+  migrationPattern(e){
+    console.log("hello");
+    if(e.target.checked)
+    {
+      console.log("migration pattern rule run!!!");
+    }
+  }
+
+  cloudProvider(e){
+    if(e.target.checked)
+    {
+      console.log("cloud provider rule run!!!");
+    }
+  }
+
+  // applicationNameChange(values:any){
+  //   console.log("Application name "+values.currentTarget.checked);
+  // }
+
+  appIdMethod(e){
+    if(e.target.checked)
+    {
+      console.log("application id!!!");
+
+    }
+  }
+  
 }

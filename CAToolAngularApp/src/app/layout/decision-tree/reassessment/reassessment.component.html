@@ -3,14 +3,14 @@
   Run Rules for:<br><br>
   <input type="button" class="btn  btn-info" value="Run Rules" (click)="form()">&nbsp;
   <br><br>
-  Migration Pattern: <input type="checkbox" id="migrationPattern" onclick="migrationPattern()"><br>
-  Cloud.. Provider..   : <input type="checkbox" id="migrationPattern" onclick="migrationPattern()">
+  Migration Pattern: <input type="checkbox" id="migrationPattern" (change)="migrationPattern($event)"><br>
+  Cloud.. Provider..   : <input type="checkbox" id="cloudProvider" (change)="cloudProvider($event)">
   <br>
   <br>
   <table  width="100%" class="table table-hover table-sm ">
     <tr bgcolor="#E0E0E0"><td>App</td><td>Application</td></tr>
-    <tr *ngFor = "let row of AllData">
-      <td width="20%" widh ><input type="checkbox" id="migrationPattern" onclick="migrationPattern()"></td>
+    <tr *ngFor = "let row of AllData;let i=index">
+      <td width="20%" widh ><input #appIdValue type="checkbox" id="applicationId"  (change)="appIdMethod(appIdValue.value)"/></td>
       <td  width="80%">{{row.applicationName}}</td>
     </tr> 
     <tr><td><td></td></tr>

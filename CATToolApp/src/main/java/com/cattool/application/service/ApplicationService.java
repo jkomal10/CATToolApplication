@@ -258,7 +258,6 @@ public boolean cloudProviderCheck(int applicationId){
 				answerlist.add(answers);
 			}
 		}
-		System.out.println(answerTextCount+")))))))))))))))))))))000000000000000(((((((((((((((((((((");
 		if(answerTextCount==answerIdCount)
 		{
 		for(MigrationRule migrationRule:migrationRulelist)
@@ -289,6 +288,7 @@ public boolean cloudProviderCheck(int applicationId){
 											System.out.println("**************************public pass");
 											application.setApplicationId(applicationId);
 											application.setMigrationPattern("public-pass");
+											application.setIsFinalize(1);
 											application.setAssessment(true);
 											application.setIsSaved(1);
 											applicationRepository.save(application);
@@ -325,6 +325,7 @@ public boolean cloudProviderCheck(int applicationId){
 										application2.setMigrationPattern("Rehost");
 										application.setIsSaved(1);
 										application.setAssessment(true);
+										application.setIsFinalize(1);
 										applicationRepository.save(application);
 										System.out.println(application);
 								}
@@ -338,6 +339,12 @@ public boolean cloudProviderCheck(int applicationId){
 				if(rehostFalseCheck==false)
 				{
 					System.out.println("break works in rehost");
+					application.setApplicationId(applicationId);
+					application.setIsSaved(1);
+					application.setAssessment(true);
+					application.setIsFinalize(1);
+					application.setMigrationPattern("Re-Plateform");
+					applicationRepository.save(application);
 				}
 			}
 			else if(rehostFalseCheck==false)
@@ -346,6 +353,7 @@ public boolean cloudProviderCheck(int applicationId){
 					System.out.println("replateform");
 					application.setApplicationId(applicationId);
 					application.setIsSaved(1);
+					application.setIsFinalize(1);
 					application.setAssessment(true);
 					application.setMigrationPattern("Re-Plateform");
 					applicationRepository.save(application);
@@ -355,6 +363,7 @@ public boolean cloudProviderCheck(int applicationId){
 		
 				System.out.println("No answers present for given application!!!!!");
 				application.setApplicationId(applicationId);
+				application.setMigrationPattern("Re-Plateform");;
 				application.setIsSaved(0);
 				applicationRepository.save(application);
 		  }

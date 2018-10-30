@@ -90,5 +90,17 @@ public class ApplicationController {
 		System.out.println("All rule check!!!!");
 		applicationService.allRuleCheck(applicationId);
 	}
+	
+	@GetMapping("migrationCheck/{applicationId}")
+	public void migrationCheck(@PathVariable("applicationId") int applicationId) {
+		System.out.println("All rule check!!!!");
+		applicationService.migrationCheck(applicationId);
+	}
+	
+	@GetMapping("cloudProviderCheck/{applicationId}")
+	public void cloudProviderCheck(@PathVariable("applicationId") int applicationId) {
+		System.out.println("All rule check!!!!");
+		applicationService.cloudProviderCheck(applicationId);
+	}
 
 }

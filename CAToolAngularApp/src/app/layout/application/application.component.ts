@@ -43,12 +43,11 @@ export class ApplicationComponent implements OnInit {
     }
   };
 
-    this.applicationService.CollectData().subscribe(result => 
-      {
-      this.AllData = result ;
-      this.dtTrigger.next();
-      console.log(this.AllData);
-      });
+  this.applicationService.CollectData().subscribe(result => 
+    {
+    this.AllData = result ;
+    this.dtTrigger.next();
+    });
 
 
   }
