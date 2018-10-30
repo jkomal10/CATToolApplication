@@ -32,7 +32,7 @@
                 <td width="13%">{{size.modifiedBy}}</td>
                 <td width="13%">{{size.lastLogin}}</td>
                 <td width="13%">
-                <button (click)="viewUser()" title="User Details" style="font-size:16px" class="button button"> <i style="color:black" class="fa fa-key"></i>&nbsp;</button>
+                <button (click)="deactivate(size.userId)" title="User Details" style="font-size:16px" class="button button"> <i style="color:black" class="fa fa-key"></i>&nbsp;</button>
                 <button (click)="updateUser(size)" title=" Update User Details" style="font-size:16px"  class="button button"><i style="color:black" class="fa fa-edit"></i>&nbsp;</button>
                 <button (click)="deleteUser(size.userId)" type="button" class="button button"><i style="color:black" class="fa fa-trash"></i>&nbsp;</button>
                 </td>

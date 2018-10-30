@@ -56,6 +56,12 @@ export class UserComponent implements OnInit {
     
 
   }
+
+  deactivate(formvalues)
+  {
+   this.userService.deactivate(formvalues).subscribe();
+  }
+
   uploadUserInfo()
   {
     console.log(this.IpAddress);

@@ -15,6 +15,7 @@ export class UsersService {
    private updateUrl = 'http://localhost:8090/user/updateUser';
    private deleteUrl = 'http://localhost:8090/user/deleteUserById';
    private changePasswordUrl = 'http://localhost:8090/user/changePassword';
+   private deactivateUrl = 'http://localhost:8090/user/deactivateUser';
 constructor(private http:HttpClient) { }
 
 CollectData(){
@@ -23,11 +24,23 @@ const url = 'http://localhost:8090/user/getAll';
 return this.http.get(url);
 }
 
+countNumberOfUsers()
+{
+  const getCount='http://localhost:8090/user/getUserCount';
+  return this.http.get(getCount);
+}
+
 newAddURL: string = 'http://localhost:8090/user/addUser';
   
 addUser(application: Object): Observable<Object> {
   
   return this.http.post(`${this.newAddURL}` + `/create/`+localStorage.getItem('userName'), application);
+}
+
+deactivate(userId: number)
+{
+  console.log('************deactivate ********');
+  return this.http.put(`${this.deactivateUrl}/${userId}`,  { responseType: 'text' });
 }
 
 changePassword(userName: String,password: String,newPassword: String){

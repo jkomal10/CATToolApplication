@@ -31,6 +31,7 @@ public class Users {
 	private int lastLogin;
 	private String company;
 	private int isDeleted;
+	private boolean isDeactivate;
 	
 	@CreatedDate
 	private Date createdDateTime;
@@ -119,7 +120,13 @@ public class Users {
 		this.modifiedDateTime = modifiedDateTime;
 	}
 	
-	
+	public boolean isDeactivate() {
+		return isDeactivate;
+	}
+	public void setDeactivate(boolean isDeactivate) {
+		this.isDeactivate = isDeactivate;
+	}
+
 	public Users() {
 		super();
 	}
@@ -127,10 +134,12 @@ public class Users {
 	public String toString() {
 		return "Users [userId=" + userId + ", userName=" + userName + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", password=" + password + ", ipAddress=" + ipAddress + ", lastLogin=" + lastLogin
-				+ ", company=" + company + ", isDeleted=" + isDeleted + ", createdBy=" + createdBy
-				+ ", createdDateTime=" + createdDateTime + ", modifiedBy=" + modifiedBy + ", modifiedDateTime="
-				+ modifiedDateTime + "]";
+				+ ", company=" + company + ", isDeleted=" + isDeleted + ", isDeactivate=" + isDeactivate
+				+ ", createdDateTime=" + createdDateTime + ", createdBy=" + createdBy + ", modifiedDateTime="
+				+ modifiedDateTime + ", modifiedBy=" + modifiedBy + "]";
 	}
+	
+	
 	
 	
 	

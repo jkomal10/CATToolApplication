@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
+import { UsersService } from '../user/user.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -12,8 +13,10 @@ export class DashboardComponent implements OnInit {
     public sliders: Array<any> = [];
     firstName: String;
     lastName : String;
+    users : any;
+    application : number;
 
-    constructor() {
+    constructor(private userService:UsersService) {
         this.sliders.push(
             {
                 imagePath: 'assets/images/slider1.jpg',
@@ -57,6 +60,9 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
         this.firstName=localStorage.getItem('firstName');
         this.lastName=localStorage.getItem('lastName');
+        this.userService.countNumberOfUsers().subscribe(data=>{this.users=data});
+        // this.users=10;
+         this.application=10;
         
     }
 

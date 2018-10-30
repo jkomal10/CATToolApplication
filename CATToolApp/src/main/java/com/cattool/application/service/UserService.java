@@ -108,5 +108,28 @@ public class UserService {
 				return user;
 			}
 	}
+
+	public int getUserCount() {
+		
+		List<Users> users = userRepository.findAll();
+		int count = 0;
+		
+		for(Users user : users)
+		{
+			count = count + 1;
+		}
+		
+		System.out.println(count);
+		return count;
+	}
+
+	public void deactivateUser(int userId) {
+		Users users = new Users();
+		users = userRepository.findByUserId(userId);
+		System.out.println("**** "+ users);
+		System.out.println(users.getUserId());
+		users.setDeactivate(true);
+		users.setUserId(users.getUserId());
+	}
 	
 }

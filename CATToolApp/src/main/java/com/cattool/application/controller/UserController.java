@@ -34,6 +34,13 @@ public class UserController {
 		return userService.findAllUsers();
 	}
 	
+	@GetMapping("/getUserCount")
+	public int getUserCount()
+	{
+		return userService.getUserCount();
+		
+	}
+	
 	@GetMapping("/getById/{userName}/{password}")
 	public Users findById(@PathVariable String userName,HttpServletRequest request,HttpServletResponse response, @PathVariable String password)
 	{
@@ -70,4 +77,10 @@ public class UserController {
 		return userService.changePassword(userName, password,company);
 	}
 	
+	@PutMapping("/deactivateUser/{userId}")
+	public void deactivateUser(@PathVariable("userId") int userId)
+	{
+		System.out.println("*****deactivateUser "+ userId);
+		userService.deactivateUser(userId);
+	}
 }
