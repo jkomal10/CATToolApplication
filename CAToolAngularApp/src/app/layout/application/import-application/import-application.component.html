@@ -1,4 +1,12 @@
-<h2 class="text-muted">Application <small>Import Application</small></h2>
-<div>
-  <input type="file">
-</div>
+<form accept-charset="UTF-8" role="form">
+          <div class="form-group">
+              <label class="btn btn-default" for="my-file-selector">
+                  <input id="my-file-selector" (change)="fileChangeListener($event)"  accept=".csv" type="file" onchange="$('#upload-file-info').html(this.files[0].name)"/>
+                  <br><br>
+              </label>
+          </div>
+          <div class="form-group">
+              <button type="submit" class="btn btn-info" (click)="importData()">submit</button>&nbsp;
+              <button type="button" class="btn btn-info" (click)="cancle()">cancle</button>
+          </div>
+</form>

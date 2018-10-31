@@ -9,6 +9,8 @@ export class AssessmentQuestions{
     questionType : string;
     questionDisplayOrder : number;
     numberOfOption : number;
+    isActive : number;
+    isDelete : number;
     assessmentTypeForMigration : string;
     assessmentTypeForCloudProvider : string;
     assessmentTypeForCloudable : string;

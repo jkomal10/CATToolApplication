@@ -18,6 +18,12 @@ export class ApplicationService {
     return this.http.get(url);
     }
 
+    baseUrl: string = 'http://localhost:8090/application/saveApplication';
+  
+    createApplication(application: Object): Observable<Object> {
+      return this.http.post(`${this.baseUrl}` + `/create`, application);
+    }
+
     deleteApplications(applicationId: number): Observable<any> {
       return this.http.delete(`${this. Baseurl}/${applicationId}`, { responseType: 'text' });
     }
