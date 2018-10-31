@@ -41,6 +41,8 @@ public class Users {
 	private Date modifiedDateTime;
 	@LastModifiedBy
 	private String modifiedBy;
+	private int isAdmin;
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -126,7 +128,14 @@ public class Users {
 	public void setDeactivate(boolean isDeactivate) {
 		this.isDeactivate = isDeactivate;
 	}
-
+	
+	public int getIsAdmin() {
+		return isAdmin;
+	}
+	public void setIsAdmin(int isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+	
 	public Users() {
 		super();
 	}
@@ -136,12 +145,6 @@ public class Users {
 				+ lastName + ", password=" + password + ", ipAddress=" + ipAddress + ", lastLogin=" + lastLogin
 				+ ", company=" + company + ", isDeleted=" + isDeleted + ", isDeactivate=" + isDeactivate
 				+ ", createdDateTime=" + createdDateTime + ", createdBy=" + createdBy + ", modifiedDateTime="
-				+ modifiedDateTime + ", modifiedBy=" + modifiedBy + "]";
+				+ modifiedDateTime + ", modifiedBy=" + modifiedBy + ", isAdmin=" + isAdmin + "]";
 	}
-	
-	
-	
-	
-	
-	
 }
