@@ -4,6 +4,7 @@ import { Subject, Observable } from '../../../../node_modules/rxjs';
 import { ApplicationService } from './application.service';
 import { HttpClient } from '@angular/common/http';
 import { Application } from './Application';
+import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 
 class DataTablesResponse {
   data: any[];
@@ -23,6 +24,9 @@ export class ApplicationComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   message = '';
   //applictaions: Observable<Application[]>;
+  application:Array<Application>=[];
+  data: any = [];
+  // application:Application [];
   AllData : any = [];
   constructor(public router:Router, private applicationService:ApplicationService,private http:HttpClient) { }
   
@@ -43,12 +47,20 @@ export class ApplicationComponent implements OnInit {
     }
   };
 
+  // this.applicationService.CollectData().subscribe(result => 
+  //   {
+  //   this.AllData = result ;
+  //   this.dtTrigger.next();
+  //   });
+
+
   this.applicationService.CollectData().subscribe(result => 
     {
-    this.AllData = result ;
+    this.AllData = result;
     this.dtTrigger.next();
     });
 
+    console.log(this.data);
 
   }
   form(){
@@ -68,7 +80,53 @@ export class ApplicationComponent implements OnInit {
     this.applicationService.sendMsgtoOtherComponent(application);
     this.router.navigate(['/application/update-application']);
   }
-  
+  exportCsv(){
+    const csvRows = [];
+    console.log(this.AllData)
+    var filename = "Application";
+    // const headers = this.AllData[0];
+    // console.log("headers****"+headers);
+    // var  DEFAULTFILENAME = 'mycsv.csv';
+    let dateNow:Date=new Date();
+    console.log(dateNow.getDate().toString+" Date");
+    console.log(dateNow.getDay().toString+" day");
+    console.log(dateNow.getMonth().toString+ " month");
+    console.log(dateNow.getFullYear().toString+" year");
+
+
+    for (let index = 0; index < this.AllData.length; index++) {
+      console.log(this.AllData[index].applicationId+"id");
+      this.application[index]=this.AllData[index];
+    //  this.application[index].applicationName=this.AllData[index].applicationName;
+    //  this.application[index].applicationDescription=this.AllData[index].applicationDescription;
+    //  this.application[index].isCloudable=this.AllData[index].isCloudable;
+    //  this.application[index].MigrationPattern=this.AllData[index].MigrationPattern;
+    //  this.application[index].cloudProvider=this.AllData[index].cloudProvider;
+    //  this.application[index].isAssessment=this.AllData[index].isAssessment;
+    //  this.application[index].isFinalize=this.AllData[index].isFinalize;
+    //  this.application[index].isDeleted=this.AllData[index].isDeleted;
+    //  this.application[index].isDeactivate=this.AllData[index].isDeactivate;
+      
+    }
+
+    console.log(this.application);
+    // for (let index = 0; index < this.application.length; index++) {
+     
+    //   console.log(this.application[index]);
+    // }
+
+    
+    var options = {
+
+      // filename:"Application.csv",
+      headers:["ApplicationId","Application Name","Application Description","IsCloudable","MigrationPattern",
+              "CloudProvider","IsAssessment","IsFinalized","IsDeleted","IsDeactivated","DeleteDateAndTime",
+               "Isverified","CreatedDate","ModifiedDateTime","CreatedBy","ModifiedBy","UserId","IsSaved"]
+    };
+
+   new Angular5Csv(this.application, filename, options);
+
+  }
 
   
   deleteApplication(formvalues) {
