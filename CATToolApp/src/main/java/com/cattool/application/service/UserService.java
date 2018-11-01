@@ -36,6 +36,7 @@ public class UserService {
 				if(password.equals(userDb.getPassword()))
 				{
 					userDb.setLastLogin(lastLogInDateInInt);
+					System.out.println("Successfully logged in");
 					return userDb;
 				}
 				else

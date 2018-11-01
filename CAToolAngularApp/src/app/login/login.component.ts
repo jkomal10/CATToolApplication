@@ -14,9 +14,7 @@ import { Users } from './Users';
 export class LoginComponent implements OnInit {
     message:String;
    users: Users = new Users();
-   userId:number;
-    // password : string = "pass";
-    // username : string = "user";
+   userId:string;
    
     constructor(private loginService :LoginService,public router: Router,private loginservice : LoginService) {}
 
@@ -32,13 +30,27 @@ export class LoginComponent implements OnInit {
          console.log(this.users + "asdasdasd");
             if( this.users!=null)
             {
-                localStorage.setItem('firstName',this.users.firstName);
-                localStorage.setItem('lastName',this.users.lastName);
-              
-                this.message="uuuu";
-                localStorage.setItem('userName',formValues.userName);
-                this.loginService.sendMsgtoOtherComponent(this.users);
-                this.router.navigate(['/dashboard']);
+                if(this.users.isAdmin===0)
+                {
+                    localStorage.setItem('isUserActive','true');
+                    console.log("is adminnnnnnnnnnn"+this.users.isAdmin)
+                    localStorage.setItem('firstName',this.users.firstName);
+                    localStorage.setItem('lastName',this.users.lastName);
+                    this.message="uuuu";
+                    localStorage.setItem('userName',formValues.userName);
+                    this.loginService.sendMsgtoOtherComponent(this.users);
+                    this.router.navigate(['/dashboard']);
+                }
+                else if(this.users.isAdmin==1){
+                    localStorage.setItem('isUserActive','false');
+                    console.log(JSON.stringify(this.users));
+                    this.loginService.sendMsgtoOtherComponent(this.users.userId);
+                    localStorage.setItem('firstName',this.users.firstName);
+                    localStorage.setItem('lastName',this.users.lastName);
+                    localStorage.setItem('userName',formValues.userName);
+                    this.loginService.sendMsgtoOtherComponent(this.users);
+                    this.router.navigate(['/dashboard']);
+                }
             }
             else
             {

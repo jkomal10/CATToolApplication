@@ -1,5 +1,5 @@
 export class Users{
-    id : number;
+    userId : number;
     ip_address : string;
     userName : string;
     language : string;
@@ -17,4 +17,5 @@ export class Users{
     lastName : string;
     company : string;
     phone : string
+    isAdmin : number;
 }

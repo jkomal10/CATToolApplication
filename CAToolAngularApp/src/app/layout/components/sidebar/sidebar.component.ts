@@ -8,10 +8,26 @@ import { TranslateService } from '@ngx-translate/core';
     styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
+    userActive : string;
+    userCheck : boolean;
     isActive: boolean = false;
     collapsed: boolean = false;
     showMenu: string = '';
     pushRightClass: string = 'push-right';
+
+    ngOnInit() {
+        this.userActive=localStorage.getItem('isUserActive');
+        if(this.userActive=='false')
+        {
+            this.userCheck=false;
+            console.log(this.userCheck+"*****this.userCheck*******false***********************");
+        }
+        else{
+            this.userCheck=true;
+            console.log(this.userCheck+"*****this.userCheck*******true***********************");
+        }
+        console.log(this.userActive+"****this.userActive*******************************");
+    }
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 

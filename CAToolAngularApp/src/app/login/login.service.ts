@@ -23,9 +23,9 @@ export class LoginService{
     }
 
     private  comptransfer  =  new  BehaviorSubject("Hello");
-    userName  =  this.comptransfer.asObservable();
-  
+    question  =  this.comptransfer.asObservable();
+
     sendMsgtoOtherComponent(messsage) {
-      this.comptransfer.next(messsage);
+        this.comptransfer.next(messsage);
     }
 }

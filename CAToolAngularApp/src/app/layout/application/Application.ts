@@ -4,5 +4,6 @@ export class Application{
     applicationDescription:String;
     applicationType:String;
     isSaved:number;
+    userId:number;
 
 }

@@ -1,5 +1,6 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
     <div class="list-group">
+    <div *ngIf="userCheck; else notShow">
         <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;
             <span>Dashboard</span>
@@ -58,9 +59,20 @@
             <span>Report</span>
         </a>
     </div>
-
     <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
-        <i class="fa fa-fw fa-angle-double-left"></i>&nbsp;
-        <span>Collapse Sidebar</span>
+            <i class="fa fa-fw fa-angle-double-left"></i>&nbsp;
+            <span>Collapse Sidebar</span>
+        </div>
+
     </div>
 </nav>
+<ng-template #notShow>
+        <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>Dashboard</span>
+        </a>
+        <a routerLink="/user/user-role" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>application</span>
+        </a>
+      </ng-template>
