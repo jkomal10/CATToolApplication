@@ -102,5 +102,11 @@ public class ApplicationController {
 		System.out.println("cloud provider rule check!!!!");
 		applicationService.cloudProviderCheck(applicationId);
 	}
+	
+	@GetMapping("/getApplicationByUserName/{userName}")
+	public Application getAppByUser(@PathVariable("userName") String userName) {
+		System.out.println("application get by user name!!!!"+userName);
+		return applicationService.getApplicationByUserName(userName);
+	}
 
 }

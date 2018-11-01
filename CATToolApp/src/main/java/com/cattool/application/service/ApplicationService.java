@@ -11,11 +11,13 @@ import com.cattool.application.entity.Application;
 import com.cattool.application.entity.CloudProviderRule;
 import com.cattool.application.entity.CloudableRule;
 import com.cattool.application.entity.MigrationRule;
+import com.cattool.application.entity.Users;
 import com.cattool.application.repository.AnswersRepository;
 import com.cattool.application.repository.ApplicationRepository;
 import com.cattool.application.repository.CloudProviderRuleRepository;
 import com.cattool.application.repository.CloudableRuleRepository;
 import com.cattool.application.repository.MigrationRuleRepository;
+import com.cattool.application.repository.UserRepository;
 
 @Service
 @Transactional
@@ -37,7 +39,9 @@ public class ApplicationService {
 	
 	@Autowired
 	CloudProviderRuleRepository cloudProviderRuleRepository;
-
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	public List<Application> getAllApplication()
 	{
@@ -61,6 +65,14 @@ public class ApplicationService {
 
 	public Application GetSingleApplication(int applicationId) {
 		return applicationRepository.findByApplicationId(applicationId);
+	}
+	
+	public Application getApplicationByUserName(String userName) {
+		Users user=new Users();
+		user=userRepository.findByUserName(userName);
+		System.out.println(applicationRepository.findByUserId(user.getUserId()));
+		//System.out.println(applicationRepository.findByUserId(user.getUserId()));
+		return applicationRepository.findByUserId(user.getUserId());
 	}
 	
 	public Application updateApplication(int applicationId,Application application)
