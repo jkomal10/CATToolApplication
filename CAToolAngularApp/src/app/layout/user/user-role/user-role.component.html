@@ -1,3 +1,41 @@
-<p>
-  user-role works!
-</p>
+
+<div>
+    <div>
+      <h2 class="text-muted">Application <small>List of applications</small></h2>
+    </div>
+    <br>
+        <br>
+      <div>
+          <!-- <table datatable id="app-list" class="row-border hover"> -->
+              <table width="100%" datatable="bootstrap" id="user-list" [dtTrigger]="dtTrigger" [dtOptions]="dtOptions"  class="table table-hover table-sm ">
+            <thead bgcolor="#E0E0E0">
+              <tr>
+                <th>Application name</th>
+                <th>Application Description</th>
+                <th>Application List</th>
+                <th>Cloudable</th>
+                <th>Migration Method</th>
+                <th>Cloud Provider</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                  <td>{{AllData .applicationName}}</td>
+                  <td>{{AllData .applicationDescription}}</td>
+                  <td>{{AllData .applicationList}}</td>
+                  <td>{{AllData .cloudable}}</td>
+                  <td>{{AllData .migrationPattern}}</td>
+                  <td>{{AllData .cloudProvider}}</td>
+                 <td width="24%"> 
+                    <button (click)="ViewApplication(AllData)" class="btn btn-light" ><i class="fa fa-info-circle"></i></button>&nbsp;
+                    <button (click)="assessApplication(AllData)"  class="btn btn-light" ><i class="fa fa-hourglass-start"></i></button>&nbsp;
+                  </td>
+                  </tr> 
+          </tbody>
+          </table>
+    </div>
+    
+    </div>
+  
+    

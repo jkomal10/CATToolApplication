@@ -15,4 +15,11 @@ export class UserRoleService {
       return this.http.get(`http://localhost:8090/application/getApplicationByUserName`+`/`+userName);
   }
 
+  private comptransfer = new BehaviorSubject("Hello");
+    question = this.comptransfer.asObservable();
+  
+    sendMsgtoOtherComponent(messsage){
+        this.comptransfer.next(messsage);
+    }
+
 }
