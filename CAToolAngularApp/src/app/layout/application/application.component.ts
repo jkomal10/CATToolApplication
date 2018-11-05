@@ -25,7 +25,6 @@ export class ApplicationComponent implements OnInit {
   message = '';
   //applictaions: Observable<Application[]>;
   application:Array<Application>=[];
-  data: any = [];
   // application:Application [];
   AllData : any = [];
   constructor(public router:Router, private applicationService:ApplicationService,private http:HttpClient) { }
@@ -53,14 +52,13 @@ export class ApplicationComponent implements OnInit {
   //   this.dtTrigger.next();
   //   });
 
+    this.applicationService.CollectData().subscribe(result => 
+      {
+      this.AllData = result ;
+      this.dtTrigger.next();
+      console.log("this.AllData___"+this.AllData)
+      });
 
-  this.applicationService.CollectData().subscribe(result => 
-    {
-    this.AllData = result;
-    this.dtTrigger.next();
-    });
-
-    console.log(this.data);
 
   }
   form(){

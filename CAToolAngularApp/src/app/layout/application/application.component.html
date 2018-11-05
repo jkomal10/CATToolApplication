@@ -26,9 +26,9 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
-            <tr *ngFor = "let row of AllData">
-                <td>{{row.applicationName}}</td>
+          <tbody *ngFor = "let row of AllData">
+            <tr  >
+                <td>{{row.applicationName }}{{row.isDeactivate}}</td>
                 <td>{{row.applicationDescription}}</td>
                 <td>{{row.applicationList}}</td>
                 <td>{{row.cloudable}}</td>

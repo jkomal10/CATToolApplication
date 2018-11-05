@@ -41,6 +41,17 @@ public class ApplicationService {
 	
 	public List<Application> getAllApplication()
 	{
+		List<Application> applicationList = new ArrayList<>();
+		for (Application application : applicationRepository.findAll()) {
+			
+			if(!application.isDeactivate())
+			{
+				applicationList.add(application) ;
+			}
+			
+		}
+		
+		System.out.println(applicationList);
 		return applicationRepository.findAll();
 	}
 	
