@@ -18,7 +18,7 @@ export class UsersService {
    private deactivateUrl = 'http://localhost:8090/user/deactivateUser';
 constructor(private http:HttpClient) { }
 
-CollectData(){
+CollectData(): Observable<Object>{
 const url = 'http://localhost:8090/user/getAll';
 
 return this.http.get(url);

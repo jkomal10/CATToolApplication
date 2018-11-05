@@ -56,7 +56,7 @@ public class ApplicationService {
 		}
 		
 		System.out.println(applicationList);
-		return applicationRepository.findAll();
+		return applicationList;
 	}
 	
 	public Application saveApplication(Application application)

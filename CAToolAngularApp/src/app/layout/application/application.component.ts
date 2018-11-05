@@ -32,7 +32,7 @@ export class ApplicationComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2,
+      pageLength: 10,
       responsive: true,
       rowCallback: (row: Node, data: any[] | Object, index: number) => {
         const self = this;
