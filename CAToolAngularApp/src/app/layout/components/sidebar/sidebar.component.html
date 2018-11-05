@@ -17,10 +17,18 @@
         </a>
 
         <div class="nested-menu">
-            <a class="list-group-item" (click)="addExpandClass('pages')">
-                <i class="fa fa-plus"></i>&nbsp;
-                <span>Decision Tree</span>
-            </a>
+            <div *ngIf="col==true">
+                <a class="list-group-item" (click)="addExpandClass('pages')">
+                    <i class="fa fa-plus"></i>&nbsp;
+                    <span>Decision Tree</span>
+                </a>
+            </div>
+            <div *ngIf="col==false">
+                    <a class="list-group-item" (click)="addExpandClass('pages')">
+                        <i class="fa fa-minus"></i>&nbsp;
+                        <span>Decision Tree</span>
+                    </a>
+                </div>
             <li class="nested" [class.expand]="showMenu === 'pages'">
                 <ul class="submenu">
                     <li>

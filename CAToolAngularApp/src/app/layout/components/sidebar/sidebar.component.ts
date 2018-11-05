@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
     styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
+    col:boolean=false;
     userActive : string;
     userCheck : boolean;
     isActive: boolean = false;
@@ -48,8 +49,10 @@ export class SidebarComponent {
 
  addExpandClass(element: any) {
         if (element === this.showMenu) {
+            this.col=true;
             this.showMenu = '0';
         } else {
+            this.col=false;
             this.showMenu = element;
         }
     }

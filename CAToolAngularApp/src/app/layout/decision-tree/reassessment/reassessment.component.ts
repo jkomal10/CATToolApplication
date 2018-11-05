@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ServiceService } from './reassessment.service';
@@ -9,6 +10,10 @@ import { ServiceService } from './reassessment.service';
   styleUrls: ['./reassessment.component.scss']
 })
 export class ReassessmentComponent implements OnInit {
+
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+  value1: string;
   AllData : any = [];
   applicationIdArray : any = [];
   migrationCheckbox : boolean;
@@ -19,10 +24,14 @@ export class ReassessmentComponent implements OnInit {
   constructor(public router:Router,private reassessmentService:ServiceService,private http:HttpClient) { }
 
   ngOnInit() {
-
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      responsive: true};
     this.reassessmentService.CollectData().subscribe(result => 
       {
       this.AllData = result ;
+      this.dtTrigger.next();
       });
 
     

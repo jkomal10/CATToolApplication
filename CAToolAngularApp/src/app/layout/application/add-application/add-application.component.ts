@@ -28,6 +28,7 @@ export class AddApplicationComponent implements OnInit {
       this.addapplicationService.createApplication(this.application)
         .subscribe(data => console.log(data), error => console.log(error));
       this.application = new Application();
+      this.router.navigate(['/application']);
     }
    
     onSubmit() {
