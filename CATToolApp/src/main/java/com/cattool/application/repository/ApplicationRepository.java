@@ -13,4 +13,5 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
 	Application findByApplicationName(String applicationName);
 	void  deleteByApplicationId(int applicationId);
 	Application findByApplicationId(int applicationId);
+	Application findByUserId(int userId);
 }

@@ -30,7 +30,6 @@ export class UserComponent implements OnInit {
   constructor(private userService : UsersService,
       public router: Router,
     private http: HttpClient) { 
-
   }
   addUser()
   {
