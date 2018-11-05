@@ -134,31 +134,36 @@ i=-1;
    }
 
    onSubmit(){
-     for (let index = 0; index < this.AllData.length; index++) {
-       //const element = this.AllData[index];
-       console.log(this.application.applicationId+"appidddddddddddddddddd");
-       let answer : Answers = new Answers();
-        answer.applicationId=this.application.applicationId;
-        answer.questionId = this.AllData[index].questionId;
-        if(this.AllData[index].questionType == "Multiple Choice Multiple Answer")
-        {
-          //answer.answerText =this.selectChangeHandler() ;
-          answer.answerText = this.theCheckbox[this.multi];
-          this.multi++;
-        }else{
-            answer.answerText= this.tempp[this.singlee];
-            console.log(answer.answerText+"lllllllllllll")
-            this.singlee++ ;
-                
-        }
-        answer.cloudAbility = false;
-         this.answers[index]=answer;
-         console.log(JSON.stringify(answer));
-     }
-     console.log(JSON.stringify(this.answers[0])+"jjjjjjjjjj");
-     this.assessmentService.saveAssessApplication(this.answers).subscribe();
-     this.router.navigate(['/application']);
+     alert("Do you want to save");
+     this.submit();
    }
+
+   submit(){
+    for (let index = 0; index < this.AllData.length; index++) {
+      //const element = this.AllData[index];
+      console.log(this.application.applicationId+"appidddddddddddddddddd");
+      let answer : Answers = new Answers();
+       answer.applicationId=this.application.applicationId;
+       answer.questionId = this.AllData[index].questionId;
+       if(this.AllData[index].questionType == "Multiple Choice Multiple Answer")
+       {
+         //answer.answerText =this.selectChangeHandler() ;
+         answer.answerText = this.theCheckbox[this.multi];
+         this.multi++;
+       }else{
+           answer.answerText= this.tempp[this.singlee];
+           console.log(answer.answerText+"lllllllllllll")
+           this.singlee++ ;
+               
+       }
+       answer.cloudAbility = false;
+        this.answers[index]=answer;
+        console.log(JSON.stringify(answer));
+    }
+    console.log(JSON.stringify(this.answers[0])+"jjjjjjjjjj");
+    this.assessmentService.saveAssessApplication(this.answers).subscribe();
+    this.router.navigate(['/application']);
+   };
    
    onSubmitUpdated()
    {
