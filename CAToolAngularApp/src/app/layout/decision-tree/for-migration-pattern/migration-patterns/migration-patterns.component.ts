@@ -50,7 +50,12 @@ export class MigrationPatternsComponent implements OnInit {
         
     }
     this.forMigrationPatternService.updateMigrationRule(this.migrationRuleObject).subscribe();
+    this.router.navigate(['/for-migration-pattern']);
     
+  }
+
+  Cancel(){
+    this.router.navigate(['/for-migration-pattern']);
   }
 
 }

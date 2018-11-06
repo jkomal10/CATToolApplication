@@ -34,7 +34,7 @@ export class AssessmentQuestionsComponent implements OnInit {
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 10,
       responsive: true};
 
     this.assessmentQuestionsService.CollectData().subscribe(result => 

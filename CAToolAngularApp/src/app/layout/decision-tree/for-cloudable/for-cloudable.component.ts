@@ -79,6 +79,7 @@ export class ForCloudableComponent implements OnInit {
       cRule.executionOrder=this.executionOrders[index];
       cRule.questionText=this.AllData[index].questionText
       this.cloudableRules[index]=cRule;
+       this.router.navigate(['/for-cloudable']);
     }
     
     //console.log(cloudableRules+"llllllllllllllllllllllllllllllllll");
@@ -98,5 +99,8 @@ export class ForCloudableComponent implements OnInit {
     //this.cloudableRules.push(cloudableRule);
     
     this.addCloudableRule();
+  }
+  Cancle(){
+    this.router.navigate(['/for-cloudable']);
   }
 }
