@@ -15,14 +15,14 @@
             <tr width="100%" *ngFor =  "let row of AllData;let i = index">
               <td width="50%">Question{{i+1}}. {{row.questionText}}</td>
 
-              <td width="70%" *ngIf="AllData[i].questionType==='Multiple Choice Multiple Answer'; else dropdownbox">
+              <td width="50%" *ngIf="AllData[i].questionType==='Multiple Choice Multiple Answer'; else dropdownbox">
                 <div *ngFor="let option of AllData[i]['questionOption'] ;let j = index" >
                   <input type="checkbox" (change)="selectChangeHandler(option,$event,AllData[i].questionId)"required>{{AllData[i].questionOption[j]['optionText']}}
                  
                 </div>
               </td>
               <ng-template #dropdownbox>
-                <select style="padding-top: 10px ; width: 50%" (change)="selectChange($event)" [(ngModel)]="tempp[k-1]" name="tempp[k-1]" required>
+                <select style="padding-top: 10px ; width: 100%" (change)="selectChange($event)" [(ngModel)]="tempp[k-1]" name="tempp[k-1]" required>
                   <option class='option' *ngFor="let optionn of AllData[i]['questionOption'] ; let k = index" [ngValue]="optionn">{{AllData[i].questionOption[k]['optionText']}}</option>
                 </select>
 
