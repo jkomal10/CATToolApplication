@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.CloudProviderRule;
+import com.cattool.application.entity.CloudableRule;
 import com.cattool.application.entity.Migration;
 import com.cattool.application.entity.MigrationRule;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
+import com.cattool.application.repository.CloudableRuleRepository;
 @Transactional
 @Service
 public class AssessmentQuestionsService {
@@ -20,6 +22,9 @@ public class AssessmentQuestionsService {
 	@Autowired
 	MigrationRepository migrationRepository;
 	
+	@Autowired
+	CloudableRuleRepository cloudableRuleRepository;
+	
 	public List<AssessmentQuestions> getAllquestions()
 	{
 		return assessmentQuestionsRepository.findAll();
@@ -28,7 +33,16 @@ public class AssessmentQuestionsService {
 	public AssessmentQuestions saveQuestions(AssessmentQuestions assessmentQuestions)
 	{
 		System.out.println(assessmentQuestions);
-		return assessmentQuestionsRepository.save(assessmentQuestions);
+		AssessmentQuestions a1=new AssessmentQuestions();
+		a1=assessmentQuestionsRepository.save(assessmentQuestions);
+		if(assessmentQuestions.getAssessmentTypeForCloudable()!=null || assessmentQuestions.getAssessmentTypeForCloudable()!="false")
+		{
+			CloudableRule cloudableRule=new CloudableRule();
+			cloudableRule.setQuestionId(a1.getQuestionId());
+			cloudableRule.setQuestionText(a1.getQuestionText());
+			cloudableRuleRepository.save(cloudableRule);
+		}
+		return a1;
 	}
 	
 	public void deleteQuestions(int questionId)
