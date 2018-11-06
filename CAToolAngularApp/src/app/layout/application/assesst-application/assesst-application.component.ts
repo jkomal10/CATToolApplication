@@ -15,6 +15,7 @@ import { IfStmt } from '@angular/compiler';
   styleUrls: ['./assesst-application.component.scss']
 })
 export class AssesstApplicationComponent implements OnInit {
+  userActive:string;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   AllData : any;
@@ -162,7 +163,13 @@ i=-1;
     }
     console.log(JSON.stringify(this.answers[0])+"jjjjjjjjjj");
     this.assessmentService.saveAssessApplication(this.answers).subscribe();
-    this.router.navigate(['/application']);
+    this.userActive=localStorage.getItem('isUserActive');
+    if(this.userActive=='false')
+    { 
+      this.router.navigate(['/user/user-role']);
+    }
+    else{
+    this.router.navigate(['/application']);}
    };
    
    onSubmitUpdated()
