@@ -43,6 +43,7 @@ public class AssessmentQuestionsService {
 	public AssessmentQuestions saveQuestions(AssessmentQuestions assessmentQuestions)
 	{
 		System.out.println(assessmentQuestions);
+
 		assessmentQuestionsRepository.save(assessmentQuestions);
 		CloudableRule cloudableRule = new CloudableRule();
 		System.out.println("((((((((   "+assessmentQuestions.getAssessmentTypeForCloudable());
@@ -56,6 +57,18 @@ public class AssessmentQuestionsService {
 		}
 //		cloudableRuleRepository .save(cloudableRule);
 		return null;
+
+//		AssessmentQuestions a1=new AssessmentQuestions();
+//		a1=assessmentQuestionsRepository.save(assessmentQuestions);
+//		if(assessmentQuestions.getAssessmentTypeForCloudable()!=null || assessmentQuestions.getAssessmentTypeForCloudable()!="false")
+//		{
+//			CloudableRule cloudableRule=new CloudableRule();
+//			cloudableRule.setQuestionId(a1.getQuestionId());
+//			cloudableRule.setQuestionText(a1.getQuestionText());
+//			cloudableRuleRepository.save(cloudableRule);
+//		}
+//		return a1;
+
 	}
 	
 	public void deleteQuestions(int questionId)
