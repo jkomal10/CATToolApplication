@@ -4,6 +4,7 @@ import { HttpClient, HttpResponse,HttpHeaders } from '@angular/common/http';
 import { AssessmentQuestionsService } from './assessment-questions.service';
 import { Subject } from 'rxjs';
 import { AssessmentQuestions } from './Question';
+import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 class DataTablesResponse {
   data: any[];
   draw: number;
@@ -24,10 +25,24 @@ export class AssessmentQuestionsComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+  assessmentQuestions:Array<AssessmentQuestions>=[]
  
   AllData : any = [];
   constructor(private assessmentQuestionsService :AssessmentQuestionsService,public router: Router,private http: HttpClient) { 
 
+  }
+
+  exportCsv(){
+   var filename = "Assessment Question";
+   for (let index = 0; index < this.AllData.length; index++) {
+    this.assessmentQuestions[index]=this.AllData[index];
+   }
+   var options={
+     headers:["questionId","questionText","questionDescription","questionType","questionDisplayOrder",
+              "numberOfOption","isActive","isDelete","assessmentTypeForMigration","assessmentTypeForCloudProvider",
+               "assessmentTypeForCloudable","createdBy","cteatedTime"]
+   }
+   new Angular5Csv(this.assessmentQuestions, filename, options);
   }
 
   ngOnInit() {

@@ -8,13 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
+var forms_1 = require("@angular/forms");
 var angular_datatables_1 = require("angular-datatables");
 var for_cloud_provider_routing_module_1 = require("./for-cloud-provider-routing.module");
 var for_cloud_provider_component_1 = require("./for-cloud-provider.component");
-var gitc_component_1 = require("./gitc/gitc.component");
-var aws_component_1 = require("./aws/aws.component");
+// import { GitcComponent } from './gitc/gitc.component';
+// import { AwsComponent } from './aws/aws.component';
 var set_evaluation_order_component_1 = require("./set-evaluation-order/set-evaluation-order.component");
-var forms_1 = require("@angular/forms");
 var cloud_provider_rule_component_1 = require("./cloud-provider-rule/cloud-provider-rule.component");
 var ForCloudProviderModule = /** @class */ (function () {
     function ForCloudProviderModule() {
@@ -22,7 +22,7 @@ var ForCloudProviderModule = /** @class */ (function () {
     ForCloudProviderModule = __decorate([
         core_1.NgModule({
             imports: [common_1.CommonModule, for_cloud_provider_routing_module_1.ForCloudProviderRoutingModule, angular_datatables_1.DataTablesModule, forms_1.FormsModule],
-            declarations: [for_cloud_provider_component_1.ForCloudProviderComponent, gitc_component_1.GitcComponent, aws_component_1.AwsComponent, set_evaluation_order_component_1.SetEvaluationOrderComponent, cloud_provider_rule_component_1.CloudProviderRuleComponent]
+            declarations: [for_cloud_provider_component_1.ForCloudProviderComponent, set_evaluation_order_component_1.SetEvaluationOrderComponent, cloud_provider_rule_component_1.CloudProviderRuleComponent]
         })
     ], ForCloudProviderModule);
     return ForCloudProviderModule;

@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
+var angular_datatables_1 = require("angular-datatables");
 var for_cloudable_routing_module_1 = require("./for-cloudable-routing.module");
 var for_cloudable_component_1 = require("./for-cloudable.component");
 var forms_1 = require("@angular/forms");
@@ -16,7 +17,7 @@ var ForCloudableModule = /** @class */ (function () {
     }
     ForCloudableModule = __decorate([
         core_1.NgModule({
-            imports: [common_1.CommonModule, for_cloudable_routing_module_1.ForCloudableRoutingModule, forms_1.FormsModule],
+            imports: [common_1.CommonModule, for_cloudable_routing_module_1.ForCloudableRoutingModule, forms_1.FormsModule, angular_datatables_1.DataTablesModule],
             declarations: [for_cloudable_component_1.ForCloudableComponent]
         })
     ], ForCloudableModule);

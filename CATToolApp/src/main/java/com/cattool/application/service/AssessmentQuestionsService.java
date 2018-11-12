@@ -27,22 +27,48 @@ public class AssessmentQuestionsService {
 	
 	public List<AssessmentQuestions> getAllquestions()
 	{
-		return assessmentQuestionsRepository.findAll();
+		List<AssessmentQuestions> assessmentQuestionsList = new ArrayList<>();
+		for (AssessmentQuestions assessmentQuestions : assessmentQuestionsRepository.findAll()) {
+			
+			if(assessmentQuestions.isActive()==0)
+			{
+				assessmentQuestionsList.add(assessmentQuestions);
+			}
+			
+		}
+		System.out.println(assessmentQuestionsList);
+		return assessmentQuestionsList;
 	}
 	
 	public AssessmentQuestions saveQuestions(AssessmentQuestions assessmentQuestions)
 	{
 		System.out.println(assessmentQuestions);
-		AssessmentQuestions a1=new AssessmentQuestions();
-		a1=assessmentQuestionsRepository.save(assessmentQuestions);
-		if(assessmentQuestions.getAssessmentTypeForCloudable()!=null || assessmentQuestions.getAssessmentTypeForCloudable()!="false")
+
+		assessmentQuestionsRepository.save(assessmentQuestions);
+		CloudableRule cloudableRule = new CloudableRule();
+		System.out.println("((((((((   "+assessmentQuestions.getAssessmentTypeForCloudable());
+		if(assessmentQuestions.getAssessmentTypeForCloudable() != null)
 		{
-			CloudableRule cloudableRule=new CloudableRule();
-			cloudableRule.setQuestionId(a1.getQuestionId());
-			cloudableRule.setQuestionText(a1.getQuestionText());
-			cloudableRuleRepository.save(cloudableRule);
+			System.out.println("*********** "+assessmentQuestions.getAssessmentTypeForCloudable());
+			
+			cloudableRule.setQuestionId(assessmentQuestions.getQuestionId());
+			cloudableRule.setQuestionText(assessmentQuestions.getQuestionText());
+			cloudableRuleRepository .save(cloudableRule);
 		}
-		return a1;
+//		cloudableRuleRepository .save(cloudableRule);
+		return null;
+
+//		AssessmentQuestions a1=new AssessmentQuestions();
+//		a1=assessmentQuestionsRepository.save(assessmentQuestions);
+//		if(assessmentQuestions.getAssessmentTypeForCloudable()!=null || assessmentQuestions.getAssessmentTypeForCloudable()!="false")
+//		{
+//			CloudableRule cloudableRule=new CloudableRule();
+//			cloudableRule.setQuestionId(a1.getQuestionId());
+//			cloudableRule.setQuestionText(a1.getQuestionText());
+//			cloudableRuleRepository.save(cloudableRule);
+//		}
+//		return a1;
+
 	}
 	
 	public void deleteQuestions(int questionId)

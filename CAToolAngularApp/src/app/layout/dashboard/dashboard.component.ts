@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { UsersService } from '../user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-dashboard',
@@ -17,12 +18,13 @@ export class DashboardComponent implements OnInit {
     public sliders: Array<any> = [];
     firstName: String;
     lastName : String;
+    status:string;
     users : any;
     application : number;
 
     
 
-    constructor(private userService:UsersService) {
+    constructor(private userService:UsersService,public router: Router) {
         this.sliders.push(
             {
                 imagePath: 'assets/images/slider1.jpg',
@@ -64,7 +66,10 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-        
+          this.status=localStorage.getItem('isLoggedin');
+          console.log(this.status);
+        if(this.status=='true')
+        {
         this.firstName=localStorage.getItem('firstName');
         this.lastName=localStorage.getItem('lastName');
         this.userService.countNumberOfUsers().subscribe(data=>{this.users=data});
@@ -81,7 +86,10 @@ export class DashboardComponent implements OnInit {
                 console.log(this.userCheck+"*****this.userCheck*******true***********************");
             }
             console.log(this.userActive+"****this.userActive*******************************");
-        
+        }
+        else{
+            this.router.navigate(['/login']);
+        }
     }
 
     public closeAlert(alert: any) {

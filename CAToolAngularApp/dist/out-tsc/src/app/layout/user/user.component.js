@@ -47,6 +47,9 @@ var UserComponent = /** @class */ (function () {
         }, function (error) { return console.log('ERROR: ' + error); });
         this.router.navigate(['/user']);
     };
+    UserComponent.prototype.deactivate = function (formvalues) {
+        this.userService.deactivate(formvalues).subscribe();
+    };
     UserComponent.prototype.uploadUserInfo = function () {
         console.log(this.IpAddress);
         this.userService.sendIpAddresstoOtherComponent(this.IpAddress);

@@ -1,5 +1,6 @@
 package com.cattool.application.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +22,17 @@ public class UserService {
 	
 	public List<Users> findAllUsers() {
 		
-		return userRepository.findAll();
+		List<Users> userList = new ArrayList<>();
+		for (Users users : userRepository.findAll()) {
+			
+			if(!users.isDeactivate())
+			{
+				userList.add(users);
+			}
+			
+		}
+		System.out.println(userList);
+		return userList;
 	}
 
 	public Users findById(String userName,String password) {

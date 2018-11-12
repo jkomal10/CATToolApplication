@@ -11,8 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_animations_1 = require("../../router.animations");
+var user_service_1 = require("../user/user.service");
 var DashboardComponent = /** @class */ (function () {
-    function DashboardComponent() {
+    function DashboardComponent(userService) {
+        this.userService = userService;
+        this.isActive = false;
         this.alerts = [];
         this.sliders = [];
         this.sliders.push({
@@ -38,7 +41,24 @@ var DashboardComponent = /** @class */ (function () {
             message: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.\n                Voluptates est animi quibusdam praesentium quam, et perspiciatis,\n                consectetur velit culpa molestias dignissimos\n                voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum"
         });
     }
-    DashboardComponent.prototype.ngOnInit = function () { };
+    DashboardComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.firstName = localStorage.getItem('firstName');
+        this.lastName = localStorage.getItem('lastName');
+        this.userService.countNumberOfUsers().subscribe(function (data) { _this.users = data; });
+        // this.users=10;
+        this.application = 10;
+        this.userActive = localStorage.getItem('isUserActive');
+        if (this.userActive == 'false') {
+            this.userCheck = false;
+            console.log(this.userCheck + "*****this.userCheck*******false***********************");
+        }
+        else {
+            this.userCheck = true;
+            console.log(this.userCheck + "*****this.userCheck*******true***********************");
+        }
+        console.log(this.userActive + "****this.userActive*******************************");
+    };
     DashboardComponent.prototype.closeAlert = function (alert) {
         var index = this.alerts.indexOf(alert);
         this.alerts.splice(index, 1);
@@ -50,7 +70,7 @@ var DashboardComponent = /** @class */ (function () {
             styleUrls: ['./dashboard.component.scss'],
             animations: [router_animations_1.routerTransition()]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [user_service_1.UsersService])
     ], DashboardComponent);
     return DashboardComponent;
 }());

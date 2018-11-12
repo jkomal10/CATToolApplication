@@ -13,23 +13,47 @@ var core_1 = require("@angular/core");
 var for_migration_pattern_service_1 = require("../for-migration-pattern.service");
 var router_1 = require("../../../../../../node_modules/@angular/router");
 var http_1 = require("@angular/common/http");
+var MigrationRule_1 = require("../../../assessment-questions/MigrationRule");
 var MigrationPatternsComponent = /** @class */ (function () {
     function MigrationPatternsComponent(forMigrationPatternService, router, http) {
         this.forMigrationPatternService = forMigrationPatternService;
         this.router = router;
         this.http = http;
+        this.migrationRuleObject = [];
         this.migrationAllData = [];
+        this.migrationOption = [];
+        this.migrationRule = [];
+        this.executionOrderValue = [];
     }
     MigrationPatternsComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.forMigrationPatternService.question.subscribe(function (data) { _this.migrationIdValue = data; });
-        this.forMigrationPatternService.getAssessmentQuestions().subscribe(function (result) {
+        this.forMigrationPatternService.getMigrationQuestions(this.migrationIdValue).subscribe(function (result) {
             _this.migrationAllData = result;
-            console.log(_this.migrationAllData);
-            console.log(JSON.stringify(_this.migrationAllData));
         });
-        console.log(this.migrationIdValue);
-        console.log(this.migrationAllData.migrationRule[0].migrationId[0]);
+    };
+    MigrationPatternsComponent.prototype.migrationProviderMethod = function () {
+        console.log(JSON.stringify(this.migrationAllData));
+        for (var index = 0; index < this.migrationAllData.length; index++) {
+            var migrationRuleNewObject = new MigrationRule_1.MigrationRule();
+            migrationRuleNewObject.questionId = this.migrationAllData[index].questionId;
+            migrationRuleNewObject.migrationId = this.migrationIdValue;
+            migrationRuleNewObject.migrationRule = this.migrationRule[index];
+            console.log(this.executionOrderValue[index] + "***********%%%%%%%%%%%%%******************");
+            migrationRuleNewObject.executionOrder = this.executionOrderValue[index];
+            migrationRuleNewObject.questionText = this.migrationAllData[index].questionText;
+            for (var i = 0; i < this.migrationAllData[index].migrationRule.length; i++) {
+                if (this.migrationAllData[index].migrationRule[i].migrationId === this.migrationIdValue) {
+                    migrationRuleNewObject.migrationRuleId = this.migrationAllData[index].migrationRule[i].migrationRuleId;
+                }
+            }
+            this.migrationRuleObject[index] = migrationRuleNewObject;
+        }
+        this.forMigrationPatternService.updateMigrationRule(this.migrationRuleObject).subscribe();
+        this.router.navigate(['/for-migration-pattern']);
+    };
+    MigrationPatternsComponent.prototype.Cancel = function () {
+        this.router.navigate(['/for-migration-pattern']);
     };
     MigrationPatternsComponent = __decorate([
         core_1.Component({

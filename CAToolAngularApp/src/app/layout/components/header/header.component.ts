@@ -22,6 +22,7 @@ export class HeaderComponent {
     onLoggedout()
     {
         localStorage.removeItem('userName');
+        localStorage.removeItem('isLoggedin');
     }
     
 }

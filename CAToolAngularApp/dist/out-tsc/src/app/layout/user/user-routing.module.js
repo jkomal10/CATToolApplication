@@ -12,11 +12,15 @@ var user_component_1 = require("./user.component");
 var add_user_component_1 = require("./add-user/add-user.component");
 var update_user_component_1 = require("./update-user/update-user.component");
 var upload_user_component_1 = require("./upload-user/upload-user.component");
+var change_password_component_1 = require("./change-password/change-password.component");
+var user_role_component_1 = require("./user-role/user-role.component");
 var routes = [
     { path: '', component: user_component_1.UserComponent },
     { path: 'add-user', component: add_user_component_1.AddUserComponent },
+    { path: 'user-role', component: user_role_component_1.UserRoleComponent },
     { path: 'update-user', component: update_user_component_1.UpdateUserComponent },
-    { path: 'upload-user', component: upload_user_component_1.UploadUserComponent }
+    { path: 'upload-user', component: upload_user_component_1.UploadUserComponent },
+    { path: 'change-password', component: change_password_component_1.ChangePasswordComponent },
 ];
 var UserRoutingModule = /** @class */ (function () {
     function UserRoutingModule() {

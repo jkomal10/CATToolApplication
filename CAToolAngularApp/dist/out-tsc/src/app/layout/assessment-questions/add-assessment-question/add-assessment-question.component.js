@@ -101,11 +101,9 @@ var AddAssessmentQuestionComponent = /** @class */ (function () {
     };
     AddAssessmentQuestionComponent.prototype.assessmentTypeForCloudProviderClick = function (event) {
         var _this = this;
-        console.log(event.target.checked);
         this.assessmentTypeForCloudProvider = event.target.checked;
         this.questionService.getCloudProviderData().subscribe(function (result) {
             _this.CloudProviderData = result;
-            console.log(_this.CloudProviderData);
             for (var index = 0; index < _this.CloudProviderData.length; index++) {
                 _this.CloudProviderDataArray[index] = _this.CloudProviderData[index].cloudProviders;
             }

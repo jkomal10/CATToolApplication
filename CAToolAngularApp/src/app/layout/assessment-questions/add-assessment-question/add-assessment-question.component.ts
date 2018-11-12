@@ -93,6 +93,7 @@ export class AddAssessmentQuestionComponent implements OnInit {
       console.log(JSON.stringify(this.question));
       this.questionService.createQuestionn(this.question).subscribe(
       );
+      this.router.navigate(['/assessment-questions']);
    }
 
   onSubmit() {   

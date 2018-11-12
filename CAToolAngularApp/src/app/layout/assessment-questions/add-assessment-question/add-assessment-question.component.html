@@ -2,6 +2,7 @@
 <h1><hr width="100%" size="80"></h1>
 <div [hidden]="submitted" style="width: 300px;">
   <form role="form" #add="ngForm" (ngSubmit)="onSubmit(add.value)">
+      <div class="form-content">
       <div class="form-group">
           <br>
           <label for="questionType"><b>Assessment Type</b></label><br>
@@ -29,18 +30,23 @@
         </div>
     <div class="form-group">
         <label for="questionType">Question Type</label>
-        <select  [(ngModel)]="question.questionType" class="form-control" name="questionType">
+        <select  [(ngModel)]="question.questionType" class="form-control" #questionType="ngModel" required name="questionType">
             <option value="Multiple Choice Single Question">Multiple Choice Single Question</option>
             <option value="Multiple Choice Multiple Answer">Multiple Choice Multiple Answer</option>
             <option value="Short Answer">Short Answer</option>
             <option value="Long Answer">Long Answer</option>
         </select>
-      
+        <div *ngIf="questionType?.touched" >
+            <div *ngIf="questionType.errors?.required" class="color">*Question Type can't be empty</div>
+            </div>
       </div>
 
     <div class="form-group">
         <label for="questionDisplayOrder">Question Display Order</label>
-        <input type="text" class="form-control" id="questionDisplayOrder" required [(ngModel)]="question.questionDisplayOrder" name="questionDisplayOrder">
+        <input type="text" class="form-control" id="questionDisplayOrder" required #displayOrder="ngModel" [(ngModel)]="question.questionDisplayOrder" name="questionDisplayOrder">
+        <div *ngIf="displayOrder?.touched" >
+            <div *ngIf="displayOrder.errors?.required" class="color">*Question Display Order can't be empty</div>
+            </div>
       </div>
 
     <!-- <div class="form-group">
@@ -51,7 +57,7 @@
         <div class="form-group">
             <!-- <h1>Angular Get Selected Option Value</h1> -->
             <span>number of option</span>&ngsp;
-            <select (change)="selectChangeHandler($event)" required [(ngModel)]="question.numberOfOption" name="numberOfOption">
+            <select (change)="selectChangeHandler($event)" required #option="ngModel" [(ngModel)]="question.numberOfOption" name="numberOfOption">
                 <option class='option' *ngFor='let option of optionsValues' >{{option}}</option>
                 <!-- <option value="1">1</option>
                 <option value="2">2</option>
@@ -65,16 +71,25 @@
                 <option value="10">10</option> -->
             </select>
             <!-- <p><span>You selected: </span><b>{{selectedDay}}</b></p> -->
+            <div *ngIf="option?.touched" >
+                <div *ngIf="option.errors?.required" class="color">*number of option can't be empty</div>
+                </div>
         </div>
 
     <div class="form-group">
       <label for="questionText">Question</label>
-      <input type="text" class="form-control" id="questionText" required [(ngModel)]="question.questionText" name="questionText">
+      <input type="text" class="form-control" id="questionText" required #questionTest="ngModel" [(ngModel)]="question.questionText" name="questionText">
+      <div *ngIf="questionTest?.touched" >
+          <div *ngIf="questionTest.errors?.required" class="color">*Question can't be empty</div>
+          </div>
     </div> 
 
     <div class="form-group">
         <label for="questionDescription">Question Description</label>
-        <input type="text" class="form-control" id="questionDescription" required [(ngModel)]="question.questionDescription" name="questionDescription">
+        <input type="text" class="form-control" id="questionDescription" required #description="ngModel" [(ngModel)]="question.questionDescription" name="questionDescription">
+        <div *ngIf="description?.touched" >
+            <div *ngIf="description.errors?.required" class="color">*Question Description can't be empty</div>
+            </div>
       </div> 
 
       <!-- <div class="form-group">
@@ -92,14 +107,17 @@
                   <label for="answers">Answer{{size}}</label>
                  
                   <!-- <input type="text" class="form-control" id="answerValues'+'{{size}}" required [(ngModel)]="answerValues" name="answerValues"> -->
-                  <br><input type="text" [(ngModel)]="optionText[i-1]" name="optionText[i-1]"/>
+                  <br><input type="text" [(ngModel)]="optionText[i-1]" name="optionText[i-1]" required #answer="ngModel"/>
+                  <div *ngIf="answer?.touched" >
+                      <div *ngIf="answer.errors?.required" class="color">*answer can't be empty</div>
+                      </div>
                 </ng-template>
        
       
     </div>
     </div>
-
-    <button type="submit" class="btn btn-success">Submit</button>
+  </div>
+    <button type="submit" class="btn btn-success" [disabled]="add.invalid">Submit</button>
     
   </form>
 </div>

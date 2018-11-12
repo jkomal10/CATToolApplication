@@ -25,7 +25,7 @@
             </div>
           </td>
          </tr> -->
-        <tr *ngFor="let size of AllData;let i = index">
+        <tr *ngFor="let size of rules;let i = index">
             <td>Question
                 <br>Excution Order
                 <br>Question type
@@ -34,11 +34,22 @@
              </td>  
           <td> 
            <!-- <input type="text" class="form-control"  [(ngModel)]="AllData[i].assessmentQuestions.questionText" name="questionText"> -->
-               <span name="questionText" > {{AllData[i].questionText}}</span>
-              <br><input type="number" #executionOrder name="executionOrder{{i}}" [(ngModel)]="executionOrders[i]" />
-              <br><span name="questionType">{{AllData[i].questionType}}</span>
-              <br><span *ngFor="let option of AllData[i]['questionOption'] ; let op = index" name="optionText">{{AllData[i].questionOption[op]['optionText']+" , "}}</span>
-              <br><input type="text" #cloudProviderRule name="cloudableRulesText{{i}}" [(ngModel)]="cloudableRulesText[i]"/>
+               <span name="questionText" > {{rules[i].questionText}}</span>
+              <br><input type="number" #executionOrder name="executionOrder{{i}}" [(ngModel)]="executionOrders[i]" placeholder="{{rules[i].executionOrder}}"/>
+              <!-- {{rules[i].executionOrder}} -->
+              <!-- <br><span name="questionType">{{rules[i].questionId}}</span> -->
+              <br><span *ngFor="let question of questions;let k = index">
+                <span *ngIf="rules[i].questionId==questions[k].questionId && rules[i].questionId!=0">{{question.questionType}}</span>
+                </span>
+              <br >
+              <span *ngFor="let option of options; let j = index">
+                <span *ngIf="rules[i].questionId==options[j].questionId">{{option.optionText}},</span>
+              <!-- <span *ngIf="rules[i].questionId==options[j].questionId"> -->
+                <!-- {{option[j].questionId}} -->
+                <!-- {{option}} -->
+              </span>
+              <!-- <br><span *ngFor="let option of AllData[i]['questionOption'] ; let op = index" name="optionText">{{AllData[i].questionOption[op]['optionText']+" , "}}</span> -->
+              <br><input type="text" #cloudableRule name="cloudableRulesText{{i}}" [(ngModel)]="cloudableRulesText[i]" placeholder="{{rules[i].cloudableRule}}"/>
             </td>
               
            </tr>

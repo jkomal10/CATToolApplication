@@ -17,6 +17,7 @@ var SidebarComponent = /** @class */ (function () {
         var _this = this;
         this.translate = translate;
         this.router = router;
+        this.col = true;
         this.isActive = false;
         this.collapsed = false;
         this.showMenu = '';
@@ -31,11 +32,25 @@ var SidebarComponent = /** @class */ (function () {
             }
         });
     }
+    SidebarComponent.prototype.ngOnInit = function () {
+        this.userActive = localStorage.getItem('isUserActive');
+        if (this.userActive == 'false') {
+            this.userCheck = false;
+            console.log(this.userCheck + "*****this.userCheck*******false***********************");
+        }
+        else {
+            this.userCheck = true;
+            console.log(this.userCheck + "*****this.userCheck*******true***********************");
+        }
+        console.log(this.userActive + "****this.userActive*******************************");
+    };
     SidebarComponent.prototype.addExpandClass = function (element) {
         if (element === this.showMenu) {
+            this.col = true;
             this.showMenu = '0';
         }
         else {
+            this.col = false;
             this.showMenu = element;
         }
     };

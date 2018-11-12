@@ -34,16 +34,16 @@ export class ApplicationComponent implements OnInit {
       pagingType: 'full_numbers',
       pageLength: 10,
       responsive: true,
-      rowCallback: (row: Node, data: any[] | Object, index: number) => {
-        const self = this;
-        // Unbind first in order to avoid any duplicate handler
-        // (see https://github.com/l-lin/angular-datatables/issues/87)
-        $('td', row).unbind('click');
-        $('td', row).bind('click', () => {
-          self.someClickHandler(data);
-        });
-        return row;
-    }
+    //   rowCallback: (row: Node, data: any[] | Object, index: number) => {
+    //     const self = this;
+    //     // Unbind first in order to avoid any duplicate handler
+    //     // (see https://github.com/l-lin/angular-datatables/issues/87)
+    //     $('td', row).unbind('click');
+    //     $('td', row).bind('click', () => {
+    //       self.someClickHandler(data);
+    //     });
+    //     return row;
+    // }
   };
 
   // this.applicationService.CollectData().subscribe(result => 

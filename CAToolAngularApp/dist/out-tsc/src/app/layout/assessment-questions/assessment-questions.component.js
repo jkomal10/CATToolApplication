@@ -35,7 +35,7 @@ var AssessmentQuestionsComponent = /** @class */ (function () {
         var _this = this;
         this.dtOptions = {
             pagingType: 'full_numbers',
-            pageLength: 5,
+            pageLength: 10,
             responsive: true
         };
         this.assessmentQuestionsService.CollectData().subscribe(function (result) {

@@ -13,13 +13,13 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var http_1 = require("@angular/common/http");
 var for_migration_pattern_service_1 = require("./for-migration-pattern.service");
-var AssessmentQuestions_1 = require("./AssessmentQuestions");
+var Question_1 = require("../../assessment-questions/Question");
 var ForMigrationPatternComponent = /** @class */ (function () {
     function ForMigrationPatternComponent(forMigrationPatternService, router, http) {
         this.forMigrationPatternService = forMigrationPatternService;
         this.router = router;
         this.http = http;
-        this.assessmentQuestions = new AssessmentQuestions_1.AssessmentQuestions();
+        this.assessmentQuestions = new Question_1.AssessmentQuestions();
         this.dtOptions = {};
         this.AllData = [];
     }

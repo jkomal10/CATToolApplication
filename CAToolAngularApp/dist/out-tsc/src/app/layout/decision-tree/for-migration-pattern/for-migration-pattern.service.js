@@ -16,6 +16,7 @@ var ForMigrationPatternService = /** @class */ (function () {
     function ForMigrationPatternService(http) {
         this.http = http;
         this.migrationUrl = 'http://localhost:8090/migrationRule/setExceutionOrder';
+        this.updateMigrationRuleUrl = 'http://localhost:8090/migrationRule/updateMigrationRule';
         this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
         this.question = this.comptransfer.asObservable();
     }
@@ -26,6 +27,12 @@ var ForMigrationPatternService = /** @class */ (function () {
     ForMigrationPatternService.prototype.getAssessmentQuestions = function () {
         var url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';
         return this.http.get(url);
+    };
+    ForMigrationPatternService.prototype.getMigrationQuestions = function (migrationId) {
+        return this.http.get("http://localhost:8090/assessmentQuestions/getAllMigrationPattern/" + migrationId);
+    };
+    ForMigrationPatternService.prototype.updateMigrationRule = function (value) {
+        return this.http.put("" + this.updateMigrationRuleUrl, value);
     };
     ForMigrationPatternService.prototype.saveEvaluationOrder = function (migration) {
         return this.http.post("" + this.migrationUrl + "/create", migration);

@@ -14,6 +14,7 @@ var router_1 = require("@angular/router");
 var rxjs_1 = require("../../../../node_modules/rxjs");
 var application_service_1 = require("./application.service");
 var http_1 = require("@angular/common/http");
+var Angular5_csv_1 = require("angular5-csv/Angular5-csv");
 var DataTablesResponse = /** @class */ (function () {
     function DataTablesResponse() {
     }
@@ -28,13 +29,15 @@ var ApplicationComponent = /** @class */ (function () {
         this.dtTrigger = new rxjs_1.Subject();
         this.message = '';
         //applictaions: Observable<Application[]>;
+        this.application = [];
+        // application:Application [];
         this.AllData = [];
     }
     ApplicationComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.dtOptions = {
             pagingType: 'full_numbers',
-            pageLength: 2,
+            pageLength: 10,
             responsive: true,
             rowCallback: function (row, data, index) {
                 var self = _this;
@@ -47,10 +50,15 @@ var ApplicationComponent = /** @class */ (function () {
                 return row;
             }
         };
+        // this.applicationService.CollectData().subscribe(result => 
+        //   {
+        //   this.AllData = result ;
+        //   this.dtTrigger.next();
+        //   });
         this.applicationService.CollectData().subscribe(function (result) {
             _this.AllData = result;
             _this.dtTrigger.next();
-            console.log(_this.AllData);
+            console.log("this.AllData___" + _this.AllData);
         });
     };
     ApplicationComponent.prototype.form = function () {
@@ -66,6 +74,43 @@ var ApplicationComponent = /** @class */ (function () {
         console.log(JSON.stringify(application));
         this.applicationService.sendMsgtoOtherComponent(application);
         this.router.navigate(['/application/update-application']);
+    };
+    ApplicationComponent.prototype.exportCsv = function () {
+        var csvRows = [];
+        console.log(this.AllData);
+        var filename = "Application";
+        // const headers = this.AllData[0];
+        // console.log("headers****"+headers);
+        // var  DEFAULTFILENAME = 'mycsv.csv';
+        var dateNow = new Date();
+        console.log(dateNow.getDate().toString + " Date");
+        console.log(dateNow.getDay().toString + " day");
+        console.log(dateNow.getMonth().toString + " month");
+        console.log(dateNow.getFullYear().toString + " year");
+        for (var index = 0; index < this.AllData.length; index++) {
+            console.log(this.AllData[index].applicationId + "id");
+            this.application[index] = this.AllData[index];
+            //  this.application[index].applicationName=this.AllData[index].applicationName;
+            //  this.application[index].applicationDescription=this.AllData[index].applicationDescription;
+            //  this.application[index].isCloudable=this.AllData[index].isCloudable;
+            //  this.application[index].MigrationPattern=this.AllData[index].MigrationPattern;
+            //  this.application[index].cloudProvider=this.AllData[index].cloudProvider;
+            //  this.application[index].isAssessment=this.AllData[index].isAssessment;
+            //  this.application[index].isFinalize=this.AllData[index].isFinalize;
+            //  this.application[index].isDeleted=this.AllData[index].isDeleted;
+            //  this.application[index].isDeactivate=this.AllData[index].isDeactivate;
+        }
+        console.log(this.application);
+        // for (let index = 0; index < this.application.length; index++) {
+        //   console.log(this.application[index]);
+        // }
+        var options = {
+            // filename:"Application.csv",
+            headers: ["ApplicationId", "Application Name", "Application Description", "IsCloudable", "MigrationPattern",
+                "CloudProvider", "IsAssessment", "IsFinalized", "IsDeleted", "IsDeactivated", "DeleteDateAndTime",
+                "Isverified", "CreatedDate", "ModifiedDateTime", "CreatedBy", "ModifiedBy", "UserId", "IsSaved"]
+        };
+        new Angular5_csv_1.Angular5Csv(this.application, filename, options);
     };
     ApplicationComponent.prototype.deleteApplication = function (formvalues) {
         var _this = this;
@@ -91,7 +136,10 @@ var ApplicationComponent = /** @class */ (function () {
         console.log(formvalues);
         this.router.navigate(['/application/view-application']);
     };
-    ApplicationComponent.prototype.assessApplication = function () {
+    ApplicationComponent.prototype.assessApplication = function (formvalues) {
+        console.log(JSON.stringify(formvalues));
+        console.log(formvalues.applicationId);
+        this.applicationService.sendMsgtoOtherComponent(formvalues);
         this.router.navigate(['/application/assesst-application']);
     };
     ApplicationComponent.prototype.deactivate = function (formvalues) {
