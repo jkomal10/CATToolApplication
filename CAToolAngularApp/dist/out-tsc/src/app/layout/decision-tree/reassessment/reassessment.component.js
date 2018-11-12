@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var rxjs_1 = require("rxjs");
 var router_1 = require("@angular/router");
 var http_1 = require("@angular/common/http");
 var reassessment_service_1 = require("./reassessment.service");
@@ -18,14 +19,62 @@ var ReassessmentComponent = /** @class */ (function () {
         this.router = router;
         this.reassessmentService = reassessmentService;
         this.http = http;
+        this.dtOptions = {};
+        this.dtTrigger = new rxjs_1.Subject();
         this.AllData = [];
+        this.applicationIdArray = [];
+        this.i = 0;
+        this.j = 0;
     }
     ReassessmentComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.dtOptions = {
+            pagingType: 'full_numbers',
+            pageLength: 10,
+            responsive: true
+        };
         this.reassessmentService.CollectData().subscribe(function (result) {
             _this.AllData = result;
-            console.log(_this.AllData[2].applicationName + 'KKKK(((**************)))JJJJ');
+            _this.dtTrigger.next();
         });
+    };
+    ReassessmentComponent.prototype.runRule = function () {
+        console.log("run rules++++++++++++++++");
+        for (var index = 0; index < this.applicationIdArray.length; index++) {
+            console.log(this.applicationIdArray[index]);
+            console.log("^^^" + this.migrationCheckbox + "^^^^");
+            if (this.cloudProviderCheckbox) {
+                console.log("cloud provider clicked");
+                this.reassessmentService.cloudProvider(this.applicationIdArray[index]).subscribe();
+            }
+            if (this.migrationCheckbox) {
+                console.log("migration clicked");
+                this.reassessmentService.migrationPattern(this.applicationIdArray[index]).subscribe();
+            }
+        }
+    };
+    ReassessmentComponent.prototype.migrationPatternMethod = function (values) {
+        console.log("migration " + values.currentTarget.checked);
+        this.migrationCheckbox = values.currentTarget.checked;
+    };
+    ReassessmentComponent.prototype.cloudProviderMethod = function (values) {
+        console.log("cloud provider " + values.currentTarget.checked);
+        this.cloudProviderCheckbox = values.currentTarget.checked;
+    };
+    ReassessmentComponent.prototype.applicationNameChange = function (e, applicationId) {
+        if (e.currentTarget.checked) {
+            this.applicationIdArray[this.i] = applicationId;
+            console.log(this.applicationIdArray[this.i]);
+            this.i++;
+            console.log(this.i);
+        }
+        else {
+            for (var index = 0; index < this.applicationIdArray.length; index++) {
+                if (this.applicationIdArray[index] == applicationId) {
+                    this.applicationIdArray.splice(index, 1);
+                }
+            }
+        }
     };
     ReassessmentComponent = __decorate([
         core_1.Component({

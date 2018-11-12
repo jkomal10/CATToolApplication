@@ -26,7 +26,7 @@ var LayoutModule = /** @class */ (function () {
                 core_2.TranslateModule,
                 ng_bootstrap_1.NgbDropdownModule.forRoot()
             ],
-            declarations: [layout_component_1.LayoutComponent, sidebar_component_1.SidebarComponent, header_component_1.HeaderComponent, footer_component_1.FooterComponent]
+            declarations: [layout_component_1.LayoutComponent, sidebar_component_1.SidebarComponent, header_component_1.HeaderComponent, footer_component_1.FooterComponent,]
         })
     ], LayoutModule);
     return LayoutModule;

@@ -14,7 +14,7 @@
       <br>
     <div>
         <!-- <table datatable id="app-list" class="row-border hover"> -->
-            <table width="100%" datatable="bootstrap" id="user-list" [dtTrigger]="dtTrigger" [dtOptions]="dtOptions"  class="table table-hover table-sm table-striped">
+            <table width="100%" datatable="bootstrap" id="user-list" [dtTrigger]="dtTrigger" [dtOptions]="dtOptions"  class="table table-striped table-hover table-sm">
           <thead bgcolor="#E0E0E0">
             <tr>
               <th>Application name</th>
@@ -26,8 +26,8 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody *ngFor = "let row of AllData">
-            <tr  >
+          <tbody >
+            <tr *ngFor = "let row of AllData" >
                 <td>{{row.applicationName }}{{row.isDeactivate}}</td>
                 <td>{{row.applicationDescription}}</td>
                 <td>{{row.applicationList}}</td>

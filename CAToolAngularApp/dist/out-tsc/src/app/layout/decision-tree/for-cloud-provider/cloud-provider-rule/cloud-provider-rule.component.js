@@ -11,10 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var for_cloud_provider_service_1 = require("../for-cloud-provider.service");
-var Question_1 = require("../../../assessment-questions/Question");
+var CloudProviderRule_1 = require("../CloudProviderRule");
+var router_1 = require("../../../../../../node_modules/@angular/router");
 var CloudProviderRuleComponent = /** @class */ (function () {
-    function CloudProviderRuleComponent(forCloudProviderService) {
+    function CloudProviderRuleComponent(forCloudProviderService, router) {
         this.forCloudProviderService = forCloudProviderService;
+        this.router = router;
         this.executionOrders = [];
         this.cloudProviderRulesText = [];
         this.cloudProviderRule = [];
@@ -24,10 +26,17 @@ var CloudProviderRuleComponent = /** @class */ (function () {
         this.forCloudProviderService.cloudProviderId.subscribe(function (data) { _this.cloudproviderId = data; });
         console.log(this.cloudproviderId + "Cloud Provider rule component");
         // this.forCloudProviderService.CollectCloudableRuleQuestions(this.cloudproviderId).subscribe( result=>{
-        this.forCloudProviderService.CollectCloudableRuleQuestions().subscribe(function (result) {
+        this.forCloudProviderService.CollectCloudableRuleQuestions(this.cloudproviderId).subscribe(function (result) {
             _this.CloudProviderAllData = result;
             console.log(_this.CloudProviderAllData);
+            // for (let index = 0; index < this.CloudProviderAllData.length; index++) {
+            //   for (let index1 = 0; index1 < this.CloudProviderAllData[index].cloudProviderRules.length; index1++) {
+            //     this.executionOrdersCp[index1] = this.CloudProviderAllData[index].cloudProviderRules[index1].executionOrder;
+            //      console.log("**this.executionOrdersCp"+this.executionOrdersCp[index1]);
+            //   }
+            // }
             console.log("*****CloudProviderAllData");
+            console.log("&&&&&&" + _this.executionOrders);
         });
         console.log("the cloudproviderid is " + this.cloudproviderId);
         // console.log("the providerid we get "+ this.CloudProviderAllData.cloudProviderRules[0].cloudProviderRuleId);
@@ -37,37 +46,25 @@ var CloudProviderRuleComponent = /** @class */ (function () {
     };
     CloudProviderRuleComponent.prototype.addCloudeProviderRule = function () {
         for (var index = 0; index < this.CloudProviderAllData.length; index++) {
-            var assesmentquestion = new Question_1.AssessmentQuestions;
-            assesmentquestion = this.CloudProviderAllData[index];
-            var cloudProviderRule1;
-            cloudProviderRule1 = this.CloudProviderAllData[index].cloudProviderRules;
-            console.log("Rules******" + cloudProviderRule1);
-            for (var index1 = 0; index1 < cloudProviderRule1.length; index1++) {
-                console.log("ID*******" + assesmentquestion.cloudProviderRules[index1].cloudProviderId);
-                // console.log("ID*******"+cloudProviderRule1[index1].cloudProviderId);
+            var cloudproRules = new CloudProviderRule_1.CloudProviderRule();
+            cloudproRules.questionId = this.CloudProviderAllData[index].questionId;
+            cloudproRules.cloudProviderId = this.cloudproviderId;
+            cloudproRules.cloudProviderRule = this.cloudProviderRulesText[index];
+            cloudproRules.executionOrder = this.executionOrders[index];
+            cloudproRules.questionText = this.CloudProviderAllData[index].questionText;
+            for (var index1 = 0; index1 < this.CloudProviderAllData[index].cloudProviderRules.length; index1++) {
+                if (this.CloudProviderAllData[index].cloudProviderRules[index1].cloudProviderId === this.cloudproviderId) {
+                    cloudproRules.cloudProviderRuleId = this.CloudProviderAllData[index].cloudProviderRules[index1].cloudProviderRuleId;
+                }
             }
-            // console.log("cloudproviderLength*****"+assesmentquestion.cloudProviderRules.length);
-            // console.log("assesmentquestion*********"+assesmentquestion.cloudProviderRules[index].cloudProviderId);
-            // console.log(this.CloudProviderAllData[index].cloudProviderRules[index].cloudProviderId);
-            // console.log("length"+this.CloudProviderAllData[index].cloudProviderRules.length);
-            // for (let index1 = 0; index1 < this.CloudProviderAllData[index].cloudProviderRules.length; index1++) {
-            //   console.log("id*******"+this.CloudProviderAllData[index].cloudProviderRules[index1].cloudProviderId)
-            //   // if(this.cloudproviderId==this.CloudProviderAllData[index].cloudProviderRules.cloudProviderId)
-            //   // {
-            //   console.log(this.CloudProviderAllData[index].questionId+"CloudProviderAllData");
-            //   console.log(this.cloudproviderId+"-------this.cloudproviderId");
-            //   console.log(this.CloudProviderAllData[index].cloudProviderRules.cloudProviderId+"**********")
-            //   var cloudproRules : CloudProviderRule = new CloudProviderRule();
-            //   cloudproRules.questionId = this.CloudProviderAllData[index].questionId;
-            //   cloudproRules.cloudProviderId = this.cloudproviderId;
-            //   cloudproRules.cloudProviderRule = this.cloudProviderRulesText[index];
-            //   cloudproRules.executionOrder = this.executionOrders[index];
-            //   cloudproRules.questionText = this.CloudProviderAllData[index].questionText;
-            //   this.cloudProviderRule[index]= cloudproRules;
-            // // }
-            // }
+            this.cloudProviderRule[index] = cloudproRules;
         }
         console.log(JSON.stringify(this.cloudProviderRule));
+        this.forCloudProviderService.updateCloudProviderRule(this.cloudProviderRule).subscribe();
+        this.router.navigate(['/for-cloud-provider']);
+    };
+    CloudProviderRuleComponent.prototype.Cancel = function () {
+        this.router.navigate(['/for-cloud-provider']);
     };
     CloudProviderRuleComponent = __decorate([
         core_1.Component({
@@ -75,7 +72,7 @@ var CloudProviderRuleComponent = /** @class */ (function () {
             templateUrl: './cloud-provider-rule.component.html',
             styleUrls: ['./cloud-provider-rule.component.scss']
         }),
-        __metadata("design:paramtypes", [for_cloud_provider_service_1.ForCloudProviderService])
+        __metadata("design:paramtypes", [for_cloud_provider_service_1.ForCloudProviderService, router_1.Router])
     ], CloudProviderRuleComponent);
     return CloudProviderRuleComponent;
 }());

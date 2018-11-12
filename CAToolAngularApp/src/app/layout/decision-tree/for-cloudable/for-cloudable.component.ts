@@ -22,6 +22,11 @@ export class ForCloudableComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   AllData : any;
+  rules : any = [];
+  options : any =[];
+  optionValues : any = [];
+  questions:any=[];
+  ops:string;
   //option: QuestionOption=new QuestionOption();
   //op :object [];
   //assessmentQuestions : object [];
@@ -32,6 +37,7 @@ export class ForCloudableComponent implements OnInit {
   executionOrders : Array<number> = [];
   cloudableRulesText : Array<String> = [];
   cloudableRules : Array<CloudableRule> = [];
+  exeorder:any=[];
   constructor(private http:HttpClient,private forCloudableService:ForCloudableService,private router:Router) {
   this.cloudableRules = [];
    }
@@ -64,20 +70,62 @@ export class ForCloudableComponent implements OnInit {
        //console.log(this.op[0]['optionText']+"komalll");
       });
 
+   
+       this.forCloudableService.collectRule().subscribe(result => {
+        this.rules=result;
+        
+       });
+       
+      
+          // for (let index = 0; index < this.rules.length; index++) {
+          //   this.exeorder[index]=this.rules[index].executionOrder;
+            
+          // }
+          // console.log("exeorder***********"+this.exeorder);
+
+       this.forCloudableService.collectQuestion().subscribe(result=>{
+         this.questions=result;
+         console.log(this.questions);
+       });
+
+       this.forCloudableService.collectOptions().subscribe(result =>{
+         this.options=result;
+         console.log(this.options);
+        //  for (let index = 0; index < this.rules.length; index++) {
+        //    var qid=this.rules[index].questionId;
+        //    for (let index = 0; index < this.options.length; index++) {
+        //      if(qid==this.options[index].questionId)
+        //      {
+        //       var ops= ops+""+this.options[index].optionText;
+        //       console.log("&&&&&& **"+ops);
+        //      }
+        //      this.optionValues[index]=this.ops;
+        //     //  console.log("************   "+this.optionValues);
+        //    }
+           
+        //  }
+       })
+
+
   }
   someClickHandler(info: any): void {
     this.message = info.id + ' - ' + info.firstName;
   }
 
   addCloudableRule(){
-    for (let index = 0; index < this.AllData.length; index++) {
-      console.log(this.AllData[index].questionId+"Alldata");
+    for (let index = 0; index < this.rules.length; index++) {
+      console.log(this.rules[index].questionId+"*********  qid");
       var cRule : CloudableRule = new CloudableRule();
-      cRule.questionId= this.AllData[index].questionId;
-      console.log(cRule.questionId+"rule");
+      cRule.questionId= this.rules[index].questionId;
+      console.log(cRule.questionId+"ruleqid");
       cRule.cloudableRule=this.cloudableRulesText[index];
+      console.log("rules***"+cRule.cloudableRule);
       cRule.executionOrder=this.executionOrders[index];
-      cRule.questionText=this.AllData[index].questionText
+      console.log("exeorder****"+ cRule.executionOrder);
+      cRule.questionText=this.rules[index].questionText;
+      console.log("qtext****"+cRule.questionText);
+      cRule.cloudableRuleId=this.rules[index].cloudableRuleId;
+      console.log("ruleId***"+cRule.cloudableRuleId);
       this.cloudableRules[index]=cRule;
        this.router.navigate(['/for-cloudable']);
     }
@@ -85,7 +133,7 @@ export class ForCloudableComponent implements OnInit {
     //console.log(cloudableRules+"llllllllllllllllllllllllllllllllll");
     console.log("jjjjjjjjjjjjjjjjjjjj");
     
-    console.log(JSON.stringify(this.cloudableRules[0])+"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+    console.log(JSON.stringify(this.cloudableRules)+"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
     this.forCloudableService.addClodableRule(this.cloudableRules).subscribe();
   
   }
@@ -101,6 +149,6 @@ export class ForCloudableComponent implements OnInit {
     this.addCloudableRule();
   }
   Cancle(){
-    this.router.navigate(['/for-cloudable']);
+    this.router.navigate(['/decision-tree']);
   }
 }

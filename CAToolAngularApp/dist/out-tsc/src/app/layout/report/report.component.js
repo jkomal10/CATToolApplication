@@ -10,10 +10,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var http_1 = require("@angular/common/http");
+var Angular5_csv_1 = require("angular5-csv/Angular5-csv");
+var application_service_1 = require("../application/application.service");
 var ReportComponent = /** @class */ (function () {
-    function ReportComponent() {
+    function ReportComponent(router, applicationService, http) {
+        this.router = router;
+        this.applicationService = applicationService;
+        this.http = http;
+        this.application = [];
+        this.AllData = [];
     }
     ReportComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.applicationService.CollectData().subscribe(function (result) {
+            _this.AllData = result;
+            console.log(JSON.stringify(_this.AllData));
+        });
+    };
+    ReportComponent.prototype.exportCsv = function () {
+        var csvRows = [];
+        console.log(this.AllData);
+        var filename = "Application";
+        var dateNow = new Date();
+        console.log(dateNow.getDate().toString + " Date");
+        console.log(dateNow.getDay().toString + " day");
+        console.log(dateNow.getMonth().toString + " month");
+        console.log(dateNow.getFullYear().toString + " year");
+        for (var index = 0; index < this.AllData.length; index++) {
+            console.log(this.AllData[index].applicationId + "id");
+            this.application[index] = this.AllData[index];
+        }
+        console.log(this.application);
+        var options = {
+            headers: ["ApplicationId", "Application Name", "Application Description", "IsCloudable", "MigrationPattern",
+                "CloudProvider", "IsAssessment", "IsFinalized", "IsDeleted", "IsDeactivated", "DeleteDateAndTime",
+                "Isverified", "CreatedDate", "ModifiedDateTime", "CreatedBy", "ModifiedBy", "UserId", "IsSaved"]
+        };
+        new Angular5_csv_1.Angular5Csv(this.application, filename, options);
     };
     ReportComponent = __decorate([
         core_1.Component({
@@ -21,7 +56,7 @@ var ReportComponent = /** @class */ (function () {
             templateUrl: './report.component.html',
             styleUrls: ['./report.component.scss']
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [router_1.Router, application_service_1.ApplicationService, http_1.HttpClient])
     ], ReportComponent);
     return ReportComponent;
 }());

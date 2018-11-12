@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
     styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
-    col:boolean=false;
+    col:boolean=true;
     userActive : string;
     userCheck : boolean;
     isActive: boolean = false;

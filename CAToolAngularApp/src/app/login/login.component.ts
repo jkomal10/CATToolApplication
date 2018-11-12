@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 }
 
     onLoggedin(formValues) {
-         localStorage.setItem('isLoggedin', 'true');   
+        //  localStorage.setItem('isLoggedin', 'true');   
          this.loginservice.getUserByUserNamePassword(formValues.userName,formValues.password).subscribe((data)=>{
          this.users=data;
         //  console.log('****************************************'+this.users.password);
@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
          console.log(this.users + "asdasdasd");
             if( this.users!=null)
             {
+                localStorage.setItem('isLoggedin', 'true');   
                 if(this.users.isAdmin===0)
                 {
                     localStorage.setItem('isUserActive','true');

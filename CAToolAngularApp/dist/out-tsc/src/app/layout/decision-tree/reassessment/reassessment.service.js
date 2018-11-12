@@ -19,6 +19,16 @@ var ServiceService = /** @class */ (function () {
         var reassessUrl = 'http://localhost:8090/application/getAllReassessment';
         return this.http.get(reassessUrl);
     };
+    ServiceService.prototype.cloudProvider = function (applicationId) {
+        var cloudProviderUrl = 'http://localhost:8090/application/cloudProviderCheck';
+        console.log(cloudProviderUrl + "/" + applicationId);
+        return this.http.get(cloudProviderUrl + "/" + applicationId);
+    };
+    ServiceService.prototype.migrationPattern = function (applicationId) {
+        var migrationPatternUrl = 'http://localhost:8090/application/migrationCheck';
+        console.log(migrationPatternUrl + "/" + applicationId);
+        return this.http.get(migrationPatternUrl + "/" + applicationId);
+    };
     ServiceService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.CloudProviderRule;
+import com.cattool.application.entity.CloudableRule;
 import com.cattool.application.entity.Migration;
 import com.cattool.application.entity.MigrationRule;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
+import com.cattool.application.repository.CloudableRuleRepository;
 @Transactional
 @Service
 public class AssessmentQuestionsService {
@@ -20,15 +22,40 @@ public class AssessmentQuestionsService {
 	@Autowired
 	MigrationRepository migrationRepository;
 	
+	@Autowired
+	CloudableRuleRepository cloudableRuleRepository;
+	
 	public List<AssessmentQuestions> getAllquestions()
 	{
-		return assessmentQuestionsRepository.findAll();
+		List<AssessmentQuestions> assessmentQuestionsList = new ArrayList<>();
+		for (AssessmentQuestions assessmentQuestions : assessmentQuestionsRepository.findAll()) {
+			
+			if(assessmentQuestions.isActive()==0)
+			{
+				assessmentQuestionsList.add(assessmentQuestions);
+			}
+			
+		}
+		System.out.println(assessmentQuestionsList);
+		return assessmentQuestionsList;
 	}
 	
 	public AssessmentQuestions saveQuestions(AssessmentQuestions assessmentQuestions)
 	{
 		System.out.println(assessmentQuestions);
-		return assessmentQuestionsRepository.save(assessmentQuestions);
+		assessmentQuestionsRepository.save(assessmentQuestions);
+		CloudableRule cloudableRule = new CloudableRule();
+		System.out.println("((((((((   "+assessmentQuestions.getAssessmentTypeForCloudable());
+		if(assessmentQuestions.getAssessmentTypeForCloudable() != null)
+		{
+			System.out.println("*********** "+assessmentQuestions.getAssessmentTypeForCloudable());
+			
+			cloudableRule.setQuestionId(assessmentQuestions.getQuestionId());
+			cloudableRule.setQuestionText(assessmentQuestions.getQuestionText());
+			cloudableRuleRepository .save(cloudableRule);
+		}
+//		cloudableRuleRepository .save(cloudableRule);
+		return null;
 	}
 	
 	public void deleteQuestions(int questionId)

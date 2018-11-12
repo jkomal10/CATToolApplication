@@ -20,12 +20,16 @@ var ApplicationService = /** @class */ (function () {
         this.deleteUrl = 'http://localhost:8090/application/resetApplicationById';
         //url:String= 'http://localhost:8090/application/getApplicationById';
         this.url1 = 'http://localhost:8090/application/updateApplictaion';
+        this.baseUrl = 'http://localhost:8090/application/saveApplication';
         this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
         this.question = this.comptransfer.asObservable();
     }
     ApplicationService.prototype.CollectData = function () {
         var url = 'http://localhost:8090/application/getAll';
         return this.http.get(url);
+    };
+    ApplicationService.prototype.createApplication = function (application) {
+        return this.http.post("" + this.baseUrl + "/create", application);
     };
     ApplicationService.prototype.deleteApplications = function (applicationId) {
         return this.http.delete(this.Baseurl + "/" + applicationId, { responseType: 'text' });

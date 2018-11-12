@@ -18,7 +18,7 @@ var ForCloudableService = /** @class */ (function () {
     }
     ForCloudableService.prototype.CollectData = function () {
         //const url = 'http://localhost:8090/option/getAll';
-        var url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';
+        var url = 'http://localhost:8090/assessmentQuestions/getAllCloudableQuestions';
         return this.http.get(url);
     };
     ForCloudableService.prototype.addClodableRule = function (cloudablerule) {

@@ -17,7 +17,7 @@ var ForCloudProviderService = /** @class */ (function () {
         this.http = http;
         this.evaluationOrder = 'http://localhost:8090/cloudProvider';
         // private cloudProviderRuleUrl = 'http://localhost:8090/cloudProvider/getAllCloudProviderQuestion';
-        this.getAllQuestions = 'http://localhost:8090/assessmentQuestions/getAllQuestions';
+        this.updateCloudProviderRuleUrl = "http://localhost:8090/cloudProvider/updateCloudProviderRule";
         this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
         this.cloudProviderId = this.comptransfer.asObservable();
     }
@@ -25,11 +25,6 @@ var ForCloudProviderService = /** @class */ (function () {
         var url = 'http://localhost:8090/cloudProvider/getAll';
         return this.http.get(url);
     };
-    // private comptransfer = new BehaviorSubject("Hello");
-    //       users = this.comptransfer.asObservable();
-    // sendMsgtoOtherComponent(messsage)
-    // {
-    // }
     ForCloudProviderService.prototype.saveEvaluationOrder = function (evaluationOrder) {
         console.log(this.evaluationOrder);
         return this.http.put("" + this.evaluationOrder + "/setEvaluationOrder", evaluationOrder);
@@ -37,13 +32,11 @@ var ForCloudProviderService = /** @class */ (function () {
     ForCloudProviderService.prototype.sendCloudProviderIdtoOtherComponent = function (messsage) {
         this.comptransfer.next(messsage);
     };
-    // CollectCloudableRuleQuestions(cloudproviderId : number){
-    //   console.log(`${this.cloudProviderRuleUrl}/${cloudproviderId}`);
-    //   return this.http.get(`${this.cloudProviderRuleUrl}/${cloudproviderId}`);
-    // }
-    ForCloudProviderService.prototype.CollectCloudableRuleQuestions = function () {
-        // console.log(`${this.cloudProviderRuleUrl}/${cloudproviderId}`);
-        return this.http.get("" + this.getAllQuestions);
+    ForCloudProviderService.prototype.CollectCloudableRuleQuestions = function (cloudproviderId) {
+        return this.http.get("http://localhost:8090/assessmentQuestions/getAllCloudProviderRule/" + cloudproviderId);
+    };
+    ForCloudProviderService.prototype.updateCloudProviderRule = function (cloudableRule) {
+        return this.http.put("" + this.updateCloudProviderRuleUrl, cloudableRule);
     };
     ForCloudProviderService = __decorate([
         core_1.Injectable({

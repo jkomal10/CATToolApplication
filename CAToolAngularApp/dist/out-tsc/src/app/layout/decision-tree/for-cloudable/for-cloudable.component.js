@@ -76,6 +76,7 @@ var ForCloudableComponent = /** @class */ (function () {
             cRule.executionOrder = this.executionOrders[index];
             cRule.questionText = this.AllData[index].questionText;
             this.cloudableRules[index] = cRule;
+            this.router.navigate(['/for-cloudable']);
         }
         //console.log(cloudableRules+"llllllllllllllllllllllllllllllllll");
         console.log("jjjjjjjjjjjjjjjjjjjj");
@@ -90,6 +91,9 @@ var ForCloudableComponent = /** @class */ (function () {
         //this.option=formvalues;
         //this.cloudableRules.push(cloudableRule);
         this.addCloudableRule();
+    };
+    ForCloudableComponent.prototype.Cancle = function () {
+        this.router.navigate(['/for-cloudable']);
     };
     ForCloudableComponent = __decorate([
         core_1.Component({

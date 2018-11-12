@@ -29,6 +29,7 @@ var AddApplicationComponent = /** @class */ (function () {
         this.addapplicationService.createApplication(this.application)
             .subscribe(function (data) { return console.log(data); }, function (error) { return console.log(error); });
         this.application = new Application_1.Application();
+        this.router.navigate(['/application']);
     };
     AddApplicationComponent.prototype.onSubmit = function () {
         this.submitted = true;

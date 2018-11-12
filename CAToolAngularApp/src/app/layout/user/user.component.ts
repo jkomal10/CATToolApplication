@@ -4,6 +4,7 @@ import { HttpClient, HttpResponse,HttpHeaders } from '@angular/common/http';
 import { UsersService } from './user.service';
 import { Subject } from 'rxjs';
 import { Users } from './Users';
+import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 
 class DataTablesResponse {
   data: any[];
@@ -26,6 +27,7 @@ export class UserComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
 
   // persons: Person[];
+  users:Array<Users>=[];
   AllData : any = [];
   constructor(private userService : UsersService,
       public router: Router,
@@ -67,6 +69,20 @@ export class UserComponent implements OnInit {
     this.userService.sendIpAddresstoOtherComponent(this.IpAddress);
     this.router.navigate(['/user/upload-user']);
   }
+
+  exportCsv(){
+    var filename = "UserDetails";
+   for (let index = 0; index < this.AllData.length; index++) {
+     this.users[index]=this.AllData[index];
+     
+   }
+   var options={
+     headers:["userId","userName","firstName","lastName","password","ipAddress","lastLogin","company","isDeleted",
+              "isDeactivate","createdDateTime","createdBy","modifiedDateTime","modifiedBy","isAdmin"]
+   };
+   new Angular5Csv(this.users, filename, options);
+  }
+
   ngOnInit() {
 
     this.dtOptions = {

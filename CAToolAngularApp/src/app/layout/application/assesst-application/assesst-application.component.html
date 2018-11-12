@@ -1,7 +1,6 @@
 <div *ngIf="application.isSaved===1; else isNotSaved">
   <button type="button" (click)="AssessApplicationRule()">Finalize</button>
-  {{application.isSaved}}
-
+  
 </div>
 <ng-template #isNotSaved>
   <div>

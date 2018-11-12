@@ -9,20 +9,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var for_cloud_provider_component_1 = require("./for-cloud-provider.component");
-var aws_component_1 = require("./aws/aws.component");
-var gitc_component_1 = require("./gitc/gitc.component");
 var set_evaluation_order_component_1 = require("./set-evaluation-order/set-evaluation-order.component");
 var cloud_provider_rule_component_1 = require("./cloud-provider-rule/cloud-provider-rule.component");
 var routes = [
     {
         path: '',
         component: for_cloud_provider_component_1.ForCloudProviderComponent
-    },
-    {
-        path: 'app-aws', component: aws_component_1.AwsComponent
-    },
-    {
-        path: 'app-gitc', component: gitc_component_1.GitcComponent
     },
     {
         path: 'app-set-evaluation-order', component: set_evaluation_order_component_1.SetEvaluationOrderComponent

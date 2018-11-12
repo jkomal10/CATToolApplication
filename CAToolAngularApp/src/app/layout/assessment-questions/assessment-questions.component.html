@@ -1,7 +1,10 @@
 <div>
   <form role="form" #addAssessmentQuestionsForm="ngForm" (ngSubmit)="addQuestions()">
-    <input type="submit" class="button button btn btn-outline" value="Add Questions" (click)="addQuestions()">&ngsp;&ngsp;
-    <input type="submit" class="button button btn btn-outline" value="Import Questions" (click)="importQuestions()">
+    <!-- <input type="submit" class="button button btn btn-outline" value="Add Questions" (click)="addQuestions()">&ngsp;&ngsp; -->
+    <!-- <input type="submit" class="button button btn btn-outline" value="Import Questions" (click)="importQuestions()"> -->
+    <input type="submit" class="btn btn-info" value="Add Questions" (click)="addQuestions()">&ngsp;&ngsp;
+    <input type="submit" class="btn btn-info" value="Import Questions" (click)="importQuestions()">&ngsp;&ngsp;
+    <input type="button" class="btn btn-info" value="Export Questions" (click)="exportCsv()">
     <br>
     <br>
     <table width="100%" datatable="bootstrap" id="user-list" [dtTrigger]="dtTrigger" [dtOptions]="dtOptions"  class="table table-striped table-hover table-sm ">

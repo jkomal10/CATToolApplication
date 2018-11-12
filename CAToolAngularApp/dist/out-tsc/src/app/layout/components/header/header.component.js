@@ -19,6 +19,9 @@ var HeaderComponent = /** @class */ (function () {
         this.userName = localStorage.getItem('userName');
         console.log(this.userName);
     };
+    HeaderComponent.prototype.onLoggedout = function () {
+        localStorage.removeItem('userName');
+    };
     HeaderComponent = __decorate([
         core_1.Component({
             selector: 'app-header',

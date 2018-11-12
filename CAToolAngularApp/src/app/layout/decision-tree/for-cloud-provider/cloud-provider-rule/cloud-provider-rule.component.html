@@ -16,11 +16,26 @@
                             <br>Cloudable Rule
                          </td>  
                         <td> 
+                            <!-- {{size}} {{i}} -->
                             <span name="questionText" > {{CloudProviderAllData[i].questionText}}</span>
-                            <br><input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrders[i]" />
-                            <br><span name="questionType">{{CloudProviderAllData[i].questionType}}</span>
+                            <br>
+                            <span *ngFor="let s of CloudProviderAllData[i].cloudProviderRules">
+                                <!-- <span *ngIf="size.questionId==s.questionId"> -->
+                                        <!-- {{s.executionOrder}} -->
+                                        <input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrders[i]" placeholder="{{s.executionOrder}}" />
+                                  <br><span name="questionType">{{CloudProviderAllData[i].questionType}}</span>
+                                  <br><span *ngFor="let option of CloudProviderAllData[i]['questionOption'] ; let op = index" name="optionText">{{CloudProviderAllData[i].questionOption[op]['optionText']+" , "}}</span>
+                                  <br><input type="text" #cloudableRule name="cloudProviderRulesText{{i}}" [(ngModel)]="cloudProviderRulesText[i]" placeholder="{{s.cloudProviderRule}}"/>
+                                    <!-- </span>  -->
+                            </span>
+                            <!-- <input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrders[i]" placeholder="{{CloudProviderAllData[i].questionId}}" /> -->
+                            <!-- <input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrders[i]" placeholder="{{CloudProviderAllData[i].cloudProviderRules[i]['executionOrder']}}" /> -->
+                            <!-- {{size.questionId}} -->
+                            <!-- {{size.cloudProviderRules[i]['executionOrder']}} -->
+                            <!-- <br><span name="questionType">{{CloudProviderAllData[i].questionType}}</span>
                             <br><span *ngFor="let option of CloudProviderAllData[i]['questionOption'] ; let op = index" name="optionText">{{CloudProviderAllData[i].questionOption[op]['optionText']+" , "}}</span>
-                            <br><input type="text" #cloudableRule name="cloudProviderRulesText{{i}}" [(ngModel)]="cloudProviderRulesText[i]"/>
+                            <br><input type="text" #cloudableRule name="cloudProviderRulesText{{i}}" [(ngModel)]="cloudProviderRulesText[i]" placeholder="{{size.cloudProviderRules[i].cloudProviderRule}}"/> -->
+                            <!-- {{size.cloudProviderRules[i].cloudProviderRule}} -->
                         </td>
                     </tr>
               </tbody>

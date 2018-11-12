@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.cattool.application.entity.AssessmentQuestions;
+import com.cattool.application.entity.CloudableRule;
 import com.cattool.application.entity.MigrationRule;
 import com.cattool.application.entity.QuestionOption;
 import com.cattool.application.service.AssessmentQuestionsService;
@@ -51,7 +52,10 @@ public class AssessmentQuestionsController {
 	//assessmentQuestions.setQuestionOption(questionOptionList);
 //		
 //		System.out.println("secoooooooooooooooooooooooooooooo");
+		
 		assessmentQuestionsService.saveQuestions(assessmentQuestions);
+		
+		
 	}
 	
 	@DeleteMapping("/deleteQuestions/{questionId}")

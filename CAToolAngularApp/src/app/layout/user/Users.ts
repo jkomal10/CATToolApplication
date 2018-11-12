@@ -8,9 +8,10 @@ export class Users{
     lastLogin : number;
     company : string;
     isDeleted: number;
-    createdBy : string;
+    isDeactivate : boolean;
     createdDateTime : Date;
-    modifiedBy : string;
+    createdBy : string;
     modifiedDateTime : Date;
+    modifiedBy : string;
     isAdmin : number;
 }

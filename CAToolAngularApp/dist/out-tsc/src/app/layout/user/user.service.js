@@ -21,6 +21,8 @@ var UsersService = /** @class */ (function () {
         this.addUrl = 'http://localhost:8090/user/addUser';
         this.updateUrl = 'http://localhost:8090/user/updateUser';
         this.deleteUrl = 'http://localhost:8090/user/deleteUserById';
+        this.changePasswordUrl = 'http://localhost:8090/user/changePassword';
+        this.deactivateUrl = 'http://localhost:8090/user/deactivateUser';
         this.newAddURL = 'http://localhost:8090/user/addUser';
         this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
         this.users = this.comptransfer.asObservable();
@@ -29,8 +31,20 @@ var UsersService = /** @class */ (function () {
         var url = 'http://localhost:8090/user/getAll';
         return this.http.get(url);
     };
+    UsersService.prototype.countNumberOfUsers = function () {
+        var getCount = 'http://localhost:8090/user/getUserCount';
+        return this.http.get(getCount);
+    };
     UsersService.prototype.addUser = function (application) {
         return this.http.post("" + this.newAddURL + "/create/" + localStorage.getItem('userName'), application);
+    };
+    UsersService.prototype.deactivate = function (userId) {
+        console.log('************deactivate ********');
+        return this.http.put(this.deactivateUrl + "/" + userId, { responseType: 'text' });
+    };
+    UsersService.prototype.changePassword = function (userName, password, newPassword) {
+        console.log("" + this.changePasswordUrl + "/" + userName + "/" + password + "/" + newPassword);
+        return this.http.get("" + this.changePasswordUrl + "/" + userName + "/" + password + "/" + newPassword);
     };
     UsersService.prototype.sendMsgtoOtherComponent = function (messsage) {
         this.comptransfer.next(messsage);

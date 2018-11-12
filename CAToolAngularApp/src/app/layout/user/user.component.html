@@ -4,13 +4,16 @@
 </div>
 <div>
   <button type="button" class="btn btn-info" style="margin-right: 5px" (click)="addUser()">Add User</button>
-  <button type="button" class="btn btn-info btn-md" (click)="uploadUserInfo()">Upload User Info</button>
+  <button type="button" class="btn btn-info btn-md" (click)="uploadUserInfo()">Upload User Info</button>&nbsp;
+  <!-- s<input type="button" class="btn btn-info" value="Export users" (click)="exportCsv()"> -->
+  <button type="button" class="btn btn-info btn-md" (click)="exportCsv()">Export Users</button>
   </div>
+<br>
+<br>
 
-
-<div>
-  <br>
-  <div class="container">
+<!-- <div> -->
+  <!-- <br> -->
+  <!-- <div class="container"> -->
     <table datatable="bootstrap" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-hover ">
         <thead>
           <tr>
@@ -39,7 +42,7 @@
                 </tr> 
         </tbody>
       </table>
-</div>
+<!-- </div> -->
 
 
   <!-- <nav class="navbar navbar-default">
@@ -53,7 +56,7 @@
     </ul>
   </nav>
 <router-outlet></router-outlet> -->
-</div>
+<!-- </div> -->
 
 <!-- <table datatable [dtOptions]="dtOptions" class="row-border hover">
   <thead>

@@ -19,7 +19,7 @@ var LoginService = /** @class */ (function () {
         this.users = new Users_1.Users();
         this.getUserByID_url = "http://localhost:8090/user/getById";
         this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
-        this.userName = this.comptransfer.asObservable();
+        this.question = this.comptransfer.asObservable();
     }
     LoginService.prototype.getUserByUserNamePassword = function (username, password) {
         console.log(this.getUserByID_url + "/" + username + "/" + password);

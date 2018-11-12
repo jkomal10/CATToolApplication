@@ -14,10 +14,28 @@ var http_1 = require("@angular/common/http");
 var AssesstApplicationService = /** @class */ (function () {
     function AssesstApplicationService(http) {
         this.http = http;
+        this.baseUrl = 'http://localhost:8090/answer/save';
+        this.AllRuleUrl = 'http://localhost:8090/application/AllRuleCheck';
+        this.UpdateAnswersUrl = 'http://localhost:8090/answer/getAnswersByApplicationId/7';
     }
     AssesstApplicationService.prototype.CollecOptiontData = function () {
-        var url = 'http://localhost:8090/option/getAll';
+        var url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';
         return this.http.get(url);
+    };
+    AssesstApplicationService.prototype.saveAssessApplication = function (cloudablerule) {
+        console.log(this.baseUrl + "/create");
+        return this.http.post("" + this.baseUrl + "/create", cloudablerule);
+    };
+    AssesstApplicationService.prototype.UpdateAnswers = function (applicationId) {
+        return this.http.get("" + this.UpdateAnswersUrl);
+    };
+    AssesstApplicationService.prototype.saveAssessApplicationUpdate = function (cloudablerule) {
+        console.log(this.baseUrl + "/create");
+        return this.http.put("" + this.baseUrl + "/create", cloudablerule);
+    };
+    AssesstApplicationService.prototype.AllRuleCheck = function (applicationId) {
+        console.log("" + this.AllRuleUrl + "/" + applicationId);
+        return this.http.get("" + this.AllRuleUrl + "/" + applicationId);
     };
     AssesstApplicationService = __decorate([
         core_1.Injectable({
