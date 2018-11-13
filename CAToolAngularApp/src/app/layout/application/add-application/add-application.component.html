@@ -1,17 +1,22 @@
 	
 <h2 class="text-muted">Application <small>Add new Applictaion</small></h2>
+<font color="red">Given fields with * are mandatory</font><br><br><br>
 <div [hidden]="submitted" style="width: 300px;">
   <form #forms="ngForm" (ngSubmit)="onSubmit()">
     <div class="form-content">
         <div class="form-group">
-            <label for="applicationName"><font color="green">Application Name</font></label>
-            <input type="text" class="form-control" id="applicationName" required [(ngModel)]="application.applicationName" name="applicationName">
-            
+            <label for="applicationName"><font color="green">Application Name<font size="3" color="red">*</font></font></label>
+            <input type="text" class="form-control" id="applicationName" required [(ngModel)]="application.applicationName" #ApplicationName="ngModel" name="applicationName">
+            <div *ngIf="ApplicationName?.touched" >
+                    <div *ngIf="ApplicationName.errors?.required"><i style="color:red">UserId can't be empty</i></div>
+                    </div>
         </div>
         <div class="form-group">
-                <label><font color="green">Application Description</font></label>
-                <input type="text" class="form-control" id="applicationDescription" required [(ngModel)]="application.applicationDescription" name="applicationDescription">
-               
+                <label><font color="green">Application Description<font size="3" color="red">*</font></font></label>
+                <input type="text" class="form-control" id="applicationDescription" required [(ngModel)]="application.applicationDescription" #ApplicationDescription="ngModel" name="applicationDescription">
+                <div *ngIf="ApplicationDescription?.touched" >
+                        <div *ngIf="ApplicationDescription.errors?.required"><i style="color:red">UserId can't be empty</i></div>
+                        </div>
             </div>
         <!-- <div class="form-group">
             <label><font color="green">Application Id</font></label>
@@ -23,7 +28,7 @@
             <input type="text" class="form-control" id="applicationType" required [(ngModel)]="application.applicationType" name="applicationType">  
         </div> -->
         <div class="form-group">
-                <label><font color="green">User Id</font></label><button style="background-color: white; border: aliceblue" title="Specify userId" class="btn btn-light" ><i class="fa fa-question-circle" style="font-size:18px;color:red"></i></button>
+                <label><font color="green">User Id<font size="3" color="red">*</font></font></label><button style="background-color: white; border: aliceblue" title="Specify userId" class="btn btn-light" ><i class="fa fa-question-circle" style="font-size:18px;color:red"></i></button>
                 <input type="text" class="form-control" id="userId" required [(ngModel)]="application.userId" #UserId="ngModel" name="userId">  
                 <div *ngIf="UserId?.touched" >
                     <div *ngIf="UserId.errors?.required"><i style="color:red">UserId can't be empty</i></div>

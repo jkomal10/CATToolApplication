@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { UsersService } from '../user/user.service';
 import { Router } from '@angular/router';
+import { ApplicationService } from '../application/application.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -20,11 +21,11 @@ export class DashboardComponent implements OnInit {
     lastName : String;
     status:string;
     users : any;
-    application : number;
-
+    application : any = [];
+    //applicationCount: number;
     
 
-    constructor(private userService:UsersService,public router: Router) {
+    constructor(private userService:UsersService,private applicationService:ApplicationService,public router: Router) {
         this.sliders.push(
             {
                 imagePath: 'assets/images/slider1.jpg',
@@ -72,9 +73,11 @@ export class DashboardComponent implements OnInit {
         {
         this.firstName=localStorage.getItem('firstName');
         this.lastName=localStorage.getItem('lastName');
-        this.userService.countNumberOfUsers().subscribe(data=>{this.users=data});
+        this.userService.CollectData().subscribe(data=>{this.users=data});
+        this.applicationService.CollectData().subscribe(data=>{this.application=data})
         // this.users=10;
-         this.application=10;
+        // this.applicationCount=this.application.length();
+         //console.log(this.applicationCount+"kkkkkkkkkkkkkk");
             this.userActive=localStorage.getItem('isUserActive');
             if(this.userActive=='false')
             {

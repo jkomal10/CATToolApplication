@@ -26,7 +26,7 @@
                          <!-- <strong> -->
                             <a routerLink="/user" [routerLinkActive]="['router-link-active']" class="list-group-item">
                           <!-- <i class="fa fa-fw fa-dashboard"></i>&nbsp; -->
-                          <strong>Users : </strong> {{ users}}
+                          <strong>Users : </strong> {{ users.length}}
                       </a> 
                     <!-- </strong> -->
                      <!-- {{ users}} -->
@@ -41,7 +41,7 @@
                           <!-- <strong> Applications </strong>{{ application}} -->
                           <a routerLink="/application" [routerLinkActive]="['router-link-active']" class="list-group-item">
                             <!-- <i class="fa fa-fw fa-dashboard"></i>&nbsp; -->
-                            <strong>Application : </strong>{{ application}}
+                            <strong>Application : </strong>{{ application.length}}
                         </a>
                         
                         <!-- </div> -->

@@ -19,12 +19,12 @@
 
           <thead bgcolor="#E0E0E0">
             <tr>
-              <th width="15%">Application Name</th>
-              <th width="15%">Application Description</th>
-              <th width="10%">Cloudable</th>
-              <th width="10%" >Migration Method</th>
-              <th width="10%" >Cloud Provider</th>
-              <th width="24%">Action</th>
+              <th width="15%" style="vertical-align:text-top">Application Name</th>
+              <th width="15%" style="vertical-align:text-top">Application Description</th>
+              <th width="10%" style="vertical-align:text-top">Cloudable</th>
+              <th width="10%" style="vertical-align:text-top">Migration Method</th>
+              <th width="10%" style="vertical-align:text-top">Cloud Provider</th>
+              <th width="24%" style="vertical-align:text-top">Action</th>
             </tr>
           </thead>
           <tbody >
@@ -36,12 +36,12 @@
                 <td>{{row.migrationPattern}}</td>
                 <td>{{row.cloudProvider}}</td>
                <td width="24%">
-                  <button (click)="deactivate(row.applicationId)" title="Deactivate" style="font-size:16px" class="button button"><i style="color:black" class="fa fa-lock" aria-hidden="true"></i></button>&nbsp;  
-                  <button (click)="ViewApplication(row)" title="Application Details" style="font-size:16px" class="button button" ><i style="color:black" class="fa fa-info-circle"></i></button>&nbsp;
-                  <button (click)="assessApplication(row)" title="Assest" style="font-size:16px" class="button button" ><i style="color:black" class="fa fa-hourglass-start"></i></button>&nbsp;
-                  <button (click)="editApplication(row)" title="Edit Application" style="font-size:16px" class="button button" ><i style="color:black" class="fa fa-edit"></i></button>&nbsp;
-                  <button (click)="deleteApplication(row.applicationId)" title="Delete" style="font-size:16px" class="button button" ><i style="color:black" class="fa fa-trash"></i></button>&nbsp;
-                  <button (click)="resetApplication(row.applicationId)" title="Reset" style="font-size:16px" class="button button"><i style="color:black" class="fa fa-refresh" aria-hidden="true"></i></button>  
+                  <button (click)="deactivate(row.applicationId)" title="Deactivate" style="size:16px" class="button button"><i style="color:black;size:16px " class="fa fa-lock" aria-hidden="true"></i></button>&nbsp;  
+                  <button (click)="ViewApplication(row)" title="Details" style="size:16px" class="button button" ><i style="color:black;size:16px " class="fa fa-info-circle"></i></button>&nbsp;
+                  <button (click)="assessApplication(row)" title="Assest" style="size:16px" class="button button" ><i style="color:black" class="fa fa-hourglass-start"></i></button>&nbsp;
+                  <button (click)="editApplication(row)" title="Edit" style="size:16px" class="button button" ><i style="color:black" class="fa fa-edit"></i></button>&nbsp;
+                  <button (click)="deleteApplication(row.applicationId)" title="Delete" style="size:16px" class="button button" ><i style="color:black" class="fa fa-trash"></i></button>&nbsp;
+                  <button (click)="resetApplication(row.applicationId)" title="Reset" style="size:16px" class="button button"><i style="color:black" class="fa fa-refresh" aria-hidden="true"></i></button>  
                 </td>
                 </tr> 
         </tbody>
