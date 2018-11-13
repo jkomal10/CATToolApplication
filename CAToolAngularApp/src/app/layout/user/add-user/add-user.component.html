@@ -1,5 +1,9 @@
 <!-- {{ipAddress}} -->
 <h2 class="text-muted">Users <small> Add User</small></h2>
+<header>
+        <p></p>
+        <p><font size="3" color="red">Given fields with * are mandatory</font></p>
+</header>
 <div [hidden]="submitted" style="width: 300px;">
   <form role="form" #forms="ngForm" (ngSubmit)="addUserComponent(forms.value)">
     <div class="form-content">
@@ -58,7 +62,7 @@
   <h4>You submitted successfully!</h4>
   <button class="btn btn-info" (click)="createApplication()">Add</button>
 </div>
-<footer>
+<!-- <footer>
         <p></p>
         <p><font size="3" color="red">Given fields with * are mandatory</font></p>
-      </footer>
+      </footer> -->

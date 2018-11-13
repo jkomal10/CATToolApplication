@@ -10,8 +10,8 @@ import { Subject } from 'rxjs';
 })
 export class CloudProviderRuleComponent implements OnInit {
 
-  // dtOptions: DataTables.Settings = {};
-  // dtTrigger: Subject<any> = new Subject();
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
   cloudproviderId : any;
   CloudProviderAllData : any;
   executionOrders : Array<number> = [];
@@ -22,6 +22,10 @@ export class CloudProviderRuleComponent implements OnInit {
   
 
   ngOnInit() {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      responsive: true};
     this.forCloudProviderService.cloudProviderId.subscribe(data=>{this.cloudproviderId=data;});
     console.log(this.cloudproviderId+"Cloud Provider rule component");
 
@@ -36,6 +40,8 @@ export class CloudProviderRuleComponent implements OnInit {
 
       //   }
       // }
+      this.dtTrigger.next();
+      
       console.log("*****CloudProviderAllData");
       console.log("&&&&&&"+this.executionOrders);
     });
@@ -78,6 +84,10 @@ export class CloudProviderRuleComponent implements OnInit {
 
   Cancel(){
     this.router.navigate(['/for-cloud-provider']);
+  }
+
+  addQuestion(){
+    this.router.navigate(['/assessment-questions/add-assessment-question']);
   }
   
 }

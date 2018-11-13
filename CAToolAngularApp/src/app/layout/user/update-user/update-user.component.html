@@ -1,5 +1,10 @@
 <!-- {{userdata}} -->
 <h2 class="text-muted">Users <small>Update User Details</small></h2>
+<header>
+    <p></p>
+    <p><font size="3" color="red">Given fields with * are mandatory</font></p>
+</header>
+
 <div [hidden]="submitted" style="width: 300px;">
   <form #form="ngForm" (ngSubmit)="updateUserComponent(userdata)">
     <div class="form-group">
@@ -38,7 +43,12 @@
     <button type="submit" class="btn btn-success" (click)="cancel()">Cancel</button>
   </form>
 </div>
- 
+
+<!-- <footer>
+    <p></p>
+    <p><font size="3" color="red">Given fields with * are mandatory</font></p>
+  </footer> -->
+  
 <div [hidden]="!submitted">
   <h4>You submitted successfully!</h4>
   <button class="btn btn-info" (click)="createApplication()">Add</button>
