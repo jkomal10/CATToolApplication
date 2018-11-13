@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ForCloudProviderService } from '../for-cloud-provider.service';
 import { CloudProviderRule } from '../CloudProviderRule';
 import { Router } from '../../../../../../node_modules/@angular/router';
-
+import { Subject } from 'rxjs';
 @Component({
   selector: 'app-cloud-provider-rule',
   templateUrl: './cloud-provider-rule.component.html',
@@ -10,6 +10,8 @@ import { Router } from '../../../../../../node_modules/@angular/router';
 })
 export class CloudProviderRuleComponent implements OnInit {
 
+  // dtOptions: DataTables.Settings = {};
+  // dtTrigger: Subject<any> = new Subject();
   cloudproviderId : any;
   CloudProviderAllData : any;
   executionOrders : Array<number> = [];

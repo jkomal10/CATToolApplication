@@ -1,32 +1,41 @@
 <!-- {{userdata}} -->
-<h2 class="text-muted">Users <small>Add new User</small></h2>
+<h2 class="text-muted">Users <small>Update User Details</small></h2>
 <div [hidden]="submitted" style="width: 300px;">
   <form #form="ngForm" (ngSubmit)="updateUserComponent(userdata)">
     <div class="form-group">
         <div class="form-group">
-            <label for="userName"><font color="green">User Name</font></label>
-            <input type="text" class="form-control" id="userName" required [(ngModel)]="userdata.userName" name="userName">
-            
+            <label for="userName"><font color="green">User Name</font><font color="red">*</font></label>
+            <input type="text" class="form-control" id="userName" required [(ngModel)]="userdata.userName" #formUName="ngModel" name="userName">
+            <div *ngIf="formUName?.touched" >
+                    <div *ngIf="formUName.errors?.required" class="color">UserName can't be empty</div>
+                    </div>
         </div>
         <div class="form-group">
-                <label><font color="green">First Name</font></label>
-                <input type="text" class="form-control" id="firstName" required [(ngModel)]="userdata.firstName" name="firstName">
-               
+                <label><font color="green">First Name</font><font color="red">*</font></label>
+                <input type="text" class="form-control" id="firstName" required [(ngModel)]="userdata.firstName" #fName="ngModel" name="firstName">
+                <div *ngIf="fName?.touched" >
+                        <div *ngIf="fName.errors?.required" class="color">FirstName can't be empty</div>
+                        </div>
             </div>
         <div class="form-group">
-            <label><font color="green">last Name</font></label>
-            <input type="text" class="form-control" id="lastName" required [(ngModel)]="userdata.lastName" name="lastName">
-            
+            <label><font color="green">last Name</font><font color="red">*</font></label>
+            <input type="text" class="form-control" id="lastName" required [(ngModel)]="userdata.lastName" #lname="ngModel" name="lastName">
+            <div *ngIf="lname?.touched" >
+                    <div *ngIf="lname.errors?.required" class="color">LastName can't be empty</div>
+                    </div>
         </div>
         <div class="form-group">
-            <label><font color="green">Company</font></label>
-            <input type="text" class="form-control" id="company" required [(ngModel)]="userdata.company" name="company">
-            
+            <label><font color="green">Company</font><font color="red">*</font></label>
+            <input type="text" class="form-control" id="company" required [(ngModel)]="userdata.company" #Company="ngModel" name="company">
+            <div *ngIf="Company?.touched" >
+                    <div *ngIf="Company.errors?.required" class="color">Company can't be empty</div>
+                    </div>
         </div>
         
     </div>
  
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="btn btn-success" [disabled]="form.invalid">Submit</button>&nbsp;
+    <button type="submit" class="btn btn-success" (click)="cancel()">Cancel</button>
   </form>
 </div>
  

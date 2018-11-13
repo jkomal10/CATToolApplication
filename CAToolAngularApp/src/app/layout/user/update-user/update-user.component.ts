@@ -26,4 +26,9 @@ export class UpdateUserComponent implements OnInit {
     this.router.navigate(['/user']);
   }
 
+  Cancel()
+  {
+    this.router.navigate(['/user']);
+  }
+
 }
