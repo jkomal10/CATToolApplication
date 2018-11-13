@@ -27,10 +27,13 @@
                 </tr>
           </tbody>
           </table> 
-          <button type="submit" class="btn btn-info div-button">Submit</button>
-            <button type="cancel" class="btn btn-info" value="Cancel"  (click)="Cancel()">Cancel</button>
+            <button type="submit" class="btn btn-sm btn-info div-button">Submit</button>
+            <button type="cancel" class="btn btn-sm btn-info" value="Cancel"  (click)="Cancel()">Cancel</button>
           </div>
          </form>
+         <div *ngIf="migrationQuestionLength==0">
+            <button type="submit" class="btn btn-sm btn-info" (click)="addQuestions()">Add Questions</button>
+         </div>
 <!-- 
          <form #productForm="ngForm" (ngSubmit)="migrationProviderMethod()">
                 <div class="form-group">

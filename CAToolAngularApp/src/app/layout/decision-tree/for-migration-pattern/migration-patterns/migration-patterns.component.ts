@@ -18,6 +18,7 @@ export class MigrationPatternsComponent implements OnInit {
   migrationAllData : any = [];
   migrationOption : any =[];
   migrationRule : Array<string>=[];
+  migrationQuestionLength : number;
   executionOrderValue :Array<number>=[];
   constructor(private forMigrationPatternService : ForMigrationPatternService,public router: Router,private http: HttpClient) { }
   migrationIdValue : any;
@@ -33,6 +34,8 @@ export class MigrationPatternsComponent implements OnInit {
         this.dtTrigger.next();
         this.migrationAllData= result ;
         console.log(this.migrationAllData);
+        this.migrationQuestionLength=this.migrationAllData.length;
+        console.log(this.migrationAllData.length)
       });
   }
 
@@ -63,6 +66,10 @@ export class MigrationPatternsComponent implements OnInit {
 
   Cancel(){
     this.router.navigate(['/for-migration-pattern']);
+  }
+
+  addQuestions(){
+    this.router.navigate(['/assessment-questions/add-assessment-question']);
   }
 
 }
