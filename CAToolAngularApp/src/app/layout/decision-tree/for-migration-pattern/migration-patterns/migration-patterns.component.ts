@@ -4,7 +4,7 @@ import { Router } from '../../../../../../node_modules/@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CloudProviderRule } from '../../../assessment-questions/CloudProviderRule';
 import { MigrationRule } from '../../../assessment-questions/MigrationRule';
-
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-migration-patterns',
@@ -13,7 +13,8 @@ import { MigrationRule } from '../../../assessment-questions/MigrationRule';
 })
 export class MigrationPatternsComponent implements OnInit {
   migrationRuleObject: Array<MigrationRule> = [];
-  
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
   migrationAllData : any = [];
   migrationOption : any =[];
   migrationRule : Array<string>=[];
@@ -22,9 +23,14 @@ export class MigrationPatternsComponent implements OnInit {
   migrationIdValue : any;
   
   ngOnInit() {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      responsive: true};
     this.forMigrationPatternService.question.subscribe(data => {this.migrationIdValue= data;});
     this.forMigrationPatternService.getMigrationQuestions(this.migrationIdValue).subscribe(result => 
       {
+        this.dtTrigger.next();
         this.migrationAllData= result ;
         console.log(this.migrationAllData);
       });
