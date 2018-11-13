@@ -36,7 +36,7 @@
                 <td width="13%" *ngIf="size.isAdmin==1;else user">Admin</td>
                 <ng-template #user><td>User</td></ng-template>
                 <td width="13%">{{size.modifiedBy}}</td>
-                <td width="13%">{{size.lastLogin}}</td>
+                <td width="10%">{{size.lastLogin}}</td>
                 <td width="13%">
                 <button (click)="deactivate(size.userId)" title="Deactivate" style="font-size:16px" class="button button"> <i style="color:black" class="fa fa-key"></i></button>&nbsp;
                 <button (click)="updateUser(size)" title=" Update" style="font-size:16px"  class="button button"><i style="color:black" class="fa fa-edit"></i></button>&nbsp;
