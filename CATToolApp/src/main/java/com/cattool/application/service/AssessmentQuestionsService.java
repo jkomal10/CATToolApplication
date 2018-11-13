@@ -74,6 +74,17 @@ public class AssessmentQuestionsService {
 	public void deleteQuestions(int questionId)
 	{
 		assessmentQuestionsRepository.deleteByQuestionId(questionId);
+		List<CloudableRule>cloudableRuleList=new ArrayList<>();
+		cloudableRuleList=cloudableRuleRepository.findAll();
+		for(CloudableRule cloudableRule : cloudableRuleList)
+		{
+			if(cloudableRule.getQuestionId() == questionId) {
+				int cloudableRuleId=cloudableRule.getCloudableRuleId();
+				cloudableRuleRepository.deleteBycloudableRuleId(cloudableRuleId);
+			}
+			
+		}
+		
 	}
 	
 	public void updateQuestions(AssessmentQuestions assessmentQuestions)

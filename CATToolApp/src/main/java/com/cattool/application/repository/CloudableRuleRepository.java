@@ -7,4 +7,5 @@ import com.cattool.application.entity.CloudableRule;
 @Repository
 public interface CloudableRuleRepository extends JpaRepository<CloudableRule, Long> {
 
+	public void deleteBycloudableRuleId(int cloudableRuleId);
 }

@@ -180,10 +180,10 @@ public class ApplicationService {
 			}
 		}
 		if(cloudableRuleFlag==cloudableRuleList.size()){
-			application.setCloudable(true);
+			application.setCloudable("Yes");
 		return true;}
 		else {
-			application.setCloudable(false);
+			application.setCloudable("No");
 			return false;}
 	}
 	
