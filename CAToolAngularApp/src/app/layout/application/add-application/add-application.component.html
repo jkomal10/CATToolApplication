@@ -1,7 +1,7 @@
 	
 <h2 class="text-muted">Application <small>Add new Applictaion</small></h2>
 <div [hidden]="submitted" style="width: 300px;">
-  <form (ngSubmit)="onSubmit()">
+  <form #forms="ngForm" (ngSubmit)="onSubmit()">
     <div class="form-content">
         <div class="form-group">
             <label for="applicationName"><font color="green">Application Name</font></label>
@@ -13,7 +13,7 @@
                 <input type="text" class="form-control" id="applicationDescription" required [(ngModel)]="application.applicationDescription" name="applicationDescription">
                
             </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label><font color="green">Application Id</font></label>
             <input type="text" class="form-control" id="applicationId" required [(ngModel)]="application.applicationId" name="applicationId">
             
@@ -21,14 +21,17 @@
         <div class="form-group">
             <label><font color="green">Application Type</font></label>
             <input type="text" class="form-control" id="applicationType" required [(ngModel)]="application.applicationType" name="applicationType">  
-        </div>
+        </div> -->
         <div class="form-group">
-                <label><font color="green">User Id</font></label>
-                <input type="text" class="form-control" id="userId" required [(ngModel)]="application.userId" name="userId">  
+                <label><font color="green">User Id</font></label><button style="background-color: white; border: aliceblue" title="Specify userId" class="btn btn-light" ><i class="fa fa-question-circle" style="font-size:18px;color:red"></i></button>
+                <input type="text" class="form-control" id="userId" required [(ngModel)]="application.userId" #UserId="ngModel" name="userId">  
+                <div *ngIf="UserId?.touched" >
+                    <div *ngIf="UserId.errors?.required"><i style="color:red">UserId can't be empty</i></div>
+                    </div>
             </div>
     </div>
  
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="btn btn-success" [disabled]="forms.invalid">Submit</button>
   </form>
 </div>
  

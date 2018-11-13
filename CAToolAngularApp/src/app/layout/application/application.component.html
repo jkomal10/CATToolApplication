@@ -5,9 +5,9 @@
   <br>
       <div>
           <nav>
-            <input type="button" class="btn  btn-info" value="Add application" (click)="form()">&nbsp;
-            <input type="button" class="btn btn-info" value="Import application" (click)="myFunction()">&nbsp;
-            <input type="button" class="btn btn-info" value="Export application" (click)="exportCsv()">
+            <input type="button" class="btn  btn-info" title="Add new application " value="Add Application" (click)="form()">&nbsp;
+            <input type="button" class="btn btn-info" title="Import one or more applications" value="Import Application"  (click)="myFunction()">&nbsp;
+            <input type="button" class="btn btn-info" title="Export all applications" value="Export Application" (click)="exportCsv()">
           </nav>
       
        </div>
@@ -19,9 +19,8 @@
 
           <thead bgcolor="#E0E0E0">
             <tr>
-              <th width="20%">Application name</th>
-              <th width="20%">Application Description</th>
-              <th width="20%">Application List</th>
+              <th width="15%">Application Name</th>
+              <th width="15%">Application Description</th>
               <th width="10%">Cloudable</th>
               <th width="10%" >Migration Method</th>
               <th width="10%" >Cloud Provider</th>
@@ -32,17 +31,17 @@
             <tr *ngFor = "let row of AllData" >
                 <td>{{row.applicationName }}{{row.isDeactivate}}</td>
                 <td>{{row.applicationDescription}}</td>
-                <td>{{row.applicationList}}</td>
+                <!-- <td>{{row.applicationList}}</td> -->
                 <td>{{row.cloudable}}</td>
                 <td>{{row.migrationPattern}}</td>
                 <td>{{row.cloudProvider}}</td>
                <td width="24%">
-                  <button (click)="deactivate(row.applicationId)" title="Deactivate" style="font-size:19px" class="btn btn-light"><i class="fa fa-lock" aria-hidden="true"></i></button>&nbsp;  
-                  <button (click)="ViewApplication(row)" title="Details" class="btn btn-light" ><i class="fa fa-info-circle"></i></button>&nbsp;
-                  <button (click)="assessApplication(row)" title="Assest" class="btn btn-light" ><i class="fa fa-hourglass-start"></i></button>&nbsp;
-                  <button (click)="editApplication(row)" title="Edit" class="btn btn-light" ><i class="fa fa-edit"></i></button>&nbsp;
-                  <button (click)="deleteApplication(row.applicationId)" title="Delete" class="btn btn-light" ><i class="fa fa-trash"></i></button>&nbsp;
-                  <button (click)="resetApplication(row.applicationId)" title="Reset" style="font-size:16px" class="btn btn-light"><i class="fa fa-refresh" aria-hidden="true"></i></button>  
+                  <button (click)="deactivate(row.applicationId)" title="Deactivate" style="font-size:16px" class="button button"><i style="color:black" class="fa fa-lock" aria-hidden="true"></i></button>&nbsp;  
+                  <button (click)="ViewApplication(row)" title="Application Details" style="font-size:16px" class="button button" ><i style="color:black" class="fa fa-info-circle"></i></button>&nbsp;
+                  <button (click)="assessApplication(row)" title="Assest" style="font-size:16px" class="button button" ><i style="color:black" class="fa fa-hourglass-start"></i></button>&nbsp;
+                  <button (click)="editApplication(row)" title="Edit Application" style="font-size:16px" class="button button" ><i style="color:black" class="fa fa-edit"></i></button>&nbsp;
+                  <button (click)="deleteApplication(row.applicationId)" title="Delete" style="font-size:16px" class="button button" ><i style="color:black" class="fa fa-trash"></i></button>&nbsp;
+                  <button (click)="resetApplication(row.applicationId)" title="Reset" style="font-size:16px" class="button button"><i style="color:black" class="fa fa-refresh" aria-hidden="true"></i></button>  
                 </td>
                 </tr> 
         </tbody>

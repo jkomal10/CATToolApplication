@@ -30,7 +30,7 @@ public class Application {
 	private String applicationDescription;
 	
 	@Column
-	private boolean isCloudable;
+	private String isCloudable;
 	
 	@Column
 	private String MigrationPattern;
@@ -118,11 +118,11 @@ public class Application {
 		this.applicationDescription = applicationDescription;
 	}
 
-	public boolean isCloudable() {
+	public String isCloudable() {
 		return isCloudable;
 	}
 
-	public void setCloudable(boolean isCloudable) {
+	public void setCloudable(String isCloudable) {
 		this.isCloudable = isCloudable;
 	}
 
