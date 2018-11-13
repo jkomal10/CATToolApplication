@@ -11,28 +11,28 @@
             <label for="userName"><font color="green">User Name<font size="3" color="red">*</font></font></label>
             <input type="text" placeholder="Username" class="form-control" id="userName" required [(ngModel)]="userName" #formUName="ngModel" name="userName">
             <div *ngIf="formUName?.touched" >
-                    <div *ngIf="formUName.errors?.required" class="color">UserName can't be empty</div>
+                    <div *ngIf="formUName.errors?.required" class="color"><i>UserName can't be empty</i></div>
                     </div>
         </div>
         <div class="form-group">
                 <label><font color="green">First Name<font size="3" color="red">*</font></font></label>
                 <input type="text" placeholder="First Name" class="form-control" id="firstName" required [(ngModel)]="firstName" #fName="ngModel" name="firstName">
                 <div *ngIf="fName?.touched" >
-                        <div *ngIf="fName.errors?.required" class="color">FirstName can't be empty</div>
+                        <div *ngIf="fName.errors?.required" class="color"><i>FirstName can't be empty</i></div>
                         </div>
             </div>
         <div class="form-group">
             <label><font color="green">last Name<font size="3" color="red">*</font></font></label>
             <input type="text" placeholder="Last Name" class="form-control" id="lastName" required [(ngModel)]="lastName" #lname="ngModel" name="lastName">
             <div *ngIf="lname?.touched" >
-                    <div *ngIf="lname.errors?.required" class="color">LastName can't be empty</div>
+                    <div *ngIf="lname.errors?.required" class="color"><i>LastName can't be empty</i></div>
                     </div>
         </div>
         <div class="form-group">
             <label><font color="green">Company<font size="3" color="red">*</font></font></label>
             <input type="text" placeholder="Company" class="form-control" id="company" required [(ngModel)]="company" #Company="ngModel" name="company">
             <div *ngIf="Company?.touched" >
-                    <div *ngIf="Company.errors?.required" class="color">Company can't be empty</div>
+                    <div *ngIf="Company.errors?.required" class="color"><i>Company can't be empty</i></div>
             </div>
         </div>
         <div class="form-group" >
