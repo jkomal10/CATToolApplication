@@ -131,8 +131,8 @@ export class UploadUserComponent implements OnInit {
     console.log("ipAddress ------"+this.ipAddress)
    }
 
-  cancle(){
-
+  cancel(){
+    this.router.navigate(['/user']);
   }
 
   ngOnInit() {

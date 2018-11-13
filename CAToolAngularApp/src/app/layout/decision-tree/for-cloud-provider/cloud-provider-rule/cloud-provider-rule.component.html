@@ -1,6 +1,6 @@
-<form #productForm="ngForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-              <table width="100%" datatable="bootstrap"   class="table table-striped table-hover table-sm ">
+<!-- <form #productForm="ngForm" >
+        <div class="form-group"> -->
+              <table width="100%" datatable="bootstrap" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table table-striped table-hover table-sm ">
                  <thead bgcolor="#E0E0E0">
                   <tr>
                     <th>Question</th>
@@ -39,12 +39,14 @@
                         </td>
                     </tr>
               </tbody>
-              <tfoot>
-                <button type="submit" class="btn btn-info div-button">Submit</button>
+              <!-- <tfoot>
+                <button type="submit" class="btn btn-info div-button" (click)="onSubmit()">Submit</button>
                 <button type="cancel" class="btn btn-info" value="Cancel"  (click)="Cancel()">Cancle</button>
-              </tfoot>
+              </tfoot> -->
               </table> 
-              </div>
-             </form>
+              <button type="submit" class="btn btn-info div-button" (click)="onSubmit()">Submit</button>
+              <button type="cancel" class="btn btn-info" value="Cancel"  (click)="Cancel()">Cancle</button>
+              <!-- </div>
+             </form> -->
             
     

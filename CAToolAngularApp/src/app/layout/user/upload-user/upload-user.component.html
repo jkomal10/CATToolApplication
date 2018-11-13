@@ -1,22 +1,29 @@
 <!-- <p>
   upload-user works!
 </p> -->
+<div>
+    <h2 class="text-muted"><strong>User </strong><small>Import user Information</small></h2>
+</div>
+<br>
+
 <form accept-charset="UTF-8" role="form">
   <!-- <div class="form-row"> -->
       
-          <div class="form-group">
+          <div class="form-group"> 
               <label class="btn btn-default" for="my-file-selector">
+                  <button style="background-color: white; border: aliceblue" title="Select CSV File to Import User Details " class="btn btn-light" ><i class="fa fa-question-circle" style="font-size:18px;color:red"></i></button>
                   <input id="my-file-selector" (change)="fileChangeListener($event)"  accept=".csv" type="file" 
                                                               onchange="$('#upload-file-info').html(this.files[0].name)"/>
                  <!-- <input id="my-file-selector" (change)="fileChangeListener($event)"  accept=".csv" type="file" > -->
                    <!-- <button name="import" (click)="importData(content)">Choose file</button> -->
-                  <br><br>
-                </label>
+                   
+                   <br><br>
+                </label>  
                 <!-- {{filename}} -->
                 </div>
                 <div class="form-group">
                    <button type="submit" class="btn btn-info" (click)="importData()">submit</button>&nbsp;
-                   <button type="button" class="btn btn-info" (click)="cancle()">cancle</button>
+                   <button type="button" class="btn btn-info" (click)="cancel()">cancle</button>
                   
               
           </div>

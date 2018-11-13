@@ -3,10 +3,10 @@
   <h2 class="text-muted">Users <small>list of users</small></h2>
 </div>
 <div>
-  <button type="button" class="btn btn-info" style="margin-right: 5px" (click)="addUser()">Add User</button>
-  <button type="button" class="btn btn-info btn-md" (click)="uploadUserInfo()">Upload User Info</button>&nbsp;
+  <button type="button" class="btn btn-info" title="Add New user" style="margin-right: 5px" (click)="addUser()">Add User</button>
+  <button type="button" class="btn btn-info btn-md" title="Upload Users Information" (click)="uploadUserInfo()">Import User Info</button>&nbsp;
   <!-- s<input type="button" class="btn btn-info" value="Export users" (click)="exportCsv()"> -->
-  <button type="button" class="btn btn-info btn-md" (click)="exportCsv()">Export Users</button>
+  <button type="button" class="btn btn-info btn-md" title="Export All User Details" (click)="exportCsv()">Export Users</button>
   </div>
 <br>
 <br>
@@ -15,12 +15,13 @@
   <!-- <br> -->
   <!-- <div class="container"> -->
     <table datatable="bootstrap" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-hover ">
-        <thead>
+        <thead bgcolor="#E0E0E0">
           <tr>
             <th>Username</th>
             <th>Ip Address(s)</th>
             <th>Company</th>
             <th>Created By</th>
+            <th>User Type</th>
             <th>LastModify</th>
             <th>LastLogin</th>
             <th>Action</th>
@@ -32,12 +33,14 @@
                 <td width="13%">{{size.ipAddress}}</td>
                 <td width="13%">{{size.company}}</td>
                 <td width="13%">{{size.createdBy}}</td>
+                <td width="13%" *ngIf="size.isAdmin==1;else user">Admin</td>
+                <ng-template #user><td>User</td></ng-template>
                 <td width="13%">{{size.modifiedBy}}</td>
                 <td width="13%">{{size.lastLogin}}</td>
                 <td width="13%">
-                <button (click)="deactivate(size.userId)" title="User Details" style="font-size:16px" class="button button"> <i style="color:black" class="fa fa-key"></i>&nbsp;</button>
-                <button (click)="updateUser(size)" title=" Update User Details" style="font-size:16px"  class="button button"><i style="color:black" class="fa fa-edit"></i>&nbsp;</button>
-                <button (click)="deleteUser(size.userId)" type="button" class="button button"><i style="color:black" class="fa fa-trash"></i>&nbsp;</button>
+                <button (click)="deactivate(size.userId)" title="Deactivate" style="font-size:16px" class="button button"> <i style="color:black" class="fa fa-key"></i></button>&nbsp;
+                <button (click)="updateUser(size)" title=" Update" style="font-size:16px"  class="button button"><i style="color:black" class="fa fa-edit"></i></button>&nbsp;
+                <button (click)="deleteUser(size.userId)" title="Delete" type="button" class="button button"><i style="color:black" class="fa fa-trash"></i></button>
                 </td>
                 </tr> 
         </tbody>

@@ -38,5 +38,7 @@ public class SwaggerConfig {
 		return apiInfo;
 	}
 	
+//	http://localhost:8090/swagger-ui.html#/
+	
 }
 
