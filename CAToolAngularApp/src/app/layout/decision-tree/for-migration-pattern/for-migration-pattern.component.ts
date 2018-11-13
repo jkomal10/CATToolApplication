@@ -13,6 +13,7 @@ import { AssessmentQuestions } from '../../assessment-questions/Question';
 export class ForMigrationPatternComponent implements OnInit {
   assessmentQuestions: AssessmentQuestions = new AssessmentQuestions();
   dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
   AllData : any = [];
   constructor(private forMigrationPatternService : ForMigrationPatternService,public router: Router,private http: HttpClient) { }
 
@@ -20,12 +21,12 @@ export class ForMigrationPatternComponent implements OnInit {
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 10,
       responsive: true};
-
     this.forMigrationPatternService.CollectData().subscribe(result => 
       {
       this.AllData = result ;
+      this.dtTrigger.next();
       console.log(this.AllData);
       });
   }

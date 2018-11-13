@@ -25,7 +25,8 @@ export class MigrationPatternsComponent implements OnInit {
     this.forMigrationPatternService.question.subscribe(data => {this.migrationIdValue= data;});
     this.forMigrationPatternService.getMigrationQuestions(this.migrationIdValue).subscribe(result => 
       {
-      this.migrationAllData= result ;
+        this.migrationAllData= result ;
+        console.log(this.migrationAllData);
       });
   }
 

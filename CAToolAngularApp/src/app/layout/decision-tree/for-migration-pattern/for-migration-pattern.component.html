@@ -4,7 +4,7 @@
   <form>
       <h6><input type="button" class="btn  btn-info btn-sm" value="Set Execution Order" (click)="evaluationOrder()">&nbsp;</h6>
     <h6><b>Configuration for Decision Tree:</b></h6>
-    <table width="100%" class="table table-hover table-sm ">
+    <table datatable="bootstrap" width="100%"  [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped ">
         <thead bgcolor="#E0E0E0">
           <tr >
             <th>
@@ -28,7 +28,6 @@
               <td width="20%">{{row.evaluationOrder}}</td>
               <td width="15%"><button title="Add rule for {{AllData[i].migrationPattern}}" type="submit" (click)="questions(AllData[i].migrationId)"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
             </tr>
-            <tr><td></td><td></td><td></td></tr>
         </tbody>
       </table>
   </form>
