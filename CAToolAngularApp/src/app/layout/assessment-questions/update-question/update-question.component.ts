@@ -22,8 +22,12 @@ export class UpdateQuestionComponent implements OnInit {
   ngOnInit() {
     this.assessmentQuestionsService.question.subscribe(data => {this.que= data;}); 
     this.question=this.que;
+    this.numberOfOptions=0;
+    let option =this.optionsValues;
     this.numberOfOptions=this.question.questionOption.length;
-    console.log(JSON.stringify(this.question.questionOption.length));
+    console.log(this.question.questionOption.length+"**************"+option+"*******************");
+    this.selectChangeHandler(this.numberOfOptions);
+    console.log(JSON.stringify(this.question.questionOption));
   }
 
   selectChangeHandler(event:any){
@@ -32,7 +36,7 @@ export class UpdateQuestionComponent implements OnInit {
    
     console.log(this.numberOfOptions);
     console.log(event.target.value);
- 
+    
     for (let index = 1; index <= this.numberOfOptions ; index++) {
       console.log(index);
        this.Options[index] = index;
