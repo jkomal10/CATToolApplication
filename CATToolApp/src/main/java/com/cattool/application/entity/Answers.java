@@ -22,7 +22,7 @@ public class Answers {
 	@Column
 	private String answerText;
 	@Column
-	private boolean cloudAbility;
+	private int cloudAbility;
 	@Column
 	private String createdBy;
 	@Column
@@ -55,10 +55,10 @@ public class Answers {
 	public void setAnswerText(String answerText) {
 		this.answerText = answerText;
 	}
-	public boolean isCloudAbility() {
+	public int isCloudAbility() {
 		return cloudAbility;
 	}
-	public void setCloudAbility(boolean cloudAbility) {
+	public void setCloudAbility(int cloudAbility) {
 		this.cloudAbility = cloudAbility;
 	}
 	public String getCreatedBy() {
@@ -85,23 +85,12 @@ public class Answers {
 	public void setModifiedTime(Date modifiedTime) {
 		this.modifiedTime = modifiedTime;
 	}
-//	@Override
-//	public String toString() {
-//		return "Answers [answerId=" + answerId + ", applicationId=" + applicationId + ", questionId=" + questionId
-//				+ ", answerText=" + Arrays.toString(answerText) + ", cloudAbility=" + cloudAbility + ", createdBy="
-//				+ createdBy + ", cteatedTime=" + cteatedTime + ", modifiedBy=" + modifiedBy + ", modifiedTime="
-//				+ modifiedTime + "]";
-//	}
 	@Override
 	public String toString() {
 		return "Answers [answerId=" + answerId + ", applicationId=" + applicationId + ", questionId=" + questionId
 				+ ", answerText=" + answerText + ", cloudAbility=" + cloudAbility + ", createdBy=" + createdBy
 				+ ", cteatedTime=" + cteatedTime + ", modifiedBy=" + modifiedBy + ", modifiedTime=" + modifiedTime
 				+ "]";
-	}
-	
-	
-	
-	
+	}	
 
 }
