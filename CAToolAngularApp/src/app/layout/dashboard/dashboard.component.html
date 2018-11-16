@@ -18,34 +18,22 @@
                   </form>
                 </div>
 
-                <div class="container-fluid">
+                <!-- <div class="container-fluid">
                   <div class="row my-3">
                     <div class="col-sm-3">
-                    <!-- <div class="card"> -->
-                      <!-- <div class="card-block" > -->
-                         <!-- <strong> -->
                             <a routerLink="/user" [routerLinkActive]="['router-link-active']" class="list-group-item">
-                          <!-- <i class="fa fa-fw fa-dashboard"></i>&nbsp; -->
+                          
                           <strong>Users : </strong> {{ users.length}}
                       </a> 
-                    <!-- </strong> -->
-                     <!-- {{ users}} -->
-
-                      <!-- </div> -->
-                    <!-- </div> -->
+                    
                     <br>
-                    <!-- <br> -->
-                    <!-- <br> -->
-                    <!-- <div class="card"> -->
-                        <!-- <div class="card-block"> -->
-                          <!-- <strong> Applications </strong>{{ application}} -->
+                   
                           <a routerLink="/application" [routerLinkActive]="['router-link-active']" class="list-group-item">
-                            <!-- <i class="fa fa-fw fa-dashboard"></i>&nbsp; -->
+                           
                             <strong>Application : </strong>{{ application.length}}
                         </a>
                         
-                        <!-- </div> -->
-                      <!-- </div> -->
+                       
                   </div>
                   
                   <div class="col">
@@ -57,7 +45,7 @@
                       </div>
                     </div>
                   </div>
-                  </div>
+                  </div> -->
                   
                   <!-- <div class="row my-3">
                       <div class="col-sm-3">
@@ -71,6 +59,37 @@
                         </div> -->
                         
 
+                <!-- </div> -->
+
+                 <div class="container-fluid">
+                  <div class="row my-3">
+                    <div class="col-xs-6 col-sm-6" >
+                      <!-- <h6>hi</h6> -->
+                        <a routerLink="/user" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                         
+                          <strong>Users : </strong> {{ users.length}}
+                      </a> 
+                    </div>
+                    <div class="col-xs-6 col-sm-6" >
+                      <!-- <h6>hi</h6> -->
+                      <a routerLink="/application" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                           
+                        <strong>Application : </strong>{{ application.length}}
+                      </a> 
+                    </div>
+                  </div>
+                  <!-- <br> -->
+                  <div class="row my-3">
+                      <div class="col">
+                          <div class="card">
+                            <div class="card-block">
+                              <h1 class="card-title">About</h1>
+                              <p class="card-text"><strong>Cloud Assessment Tool</strong> can calculate if a application is cloudable or not
+                              ,and it can decide the migration pattern and clpouprovider for the application</p>
+                            </div>
+                          </div>
+                  </div>
+                  </div>
                 </div>
                 
                 </body>
