@@ -20,6 +20,17 @@ class DataTablesResponse {
 })
 export class UserComponent implements OnInit {
 
+  player: YT.Player;
+  private id: string = '0eWrpsCLMJQ';
+
+  savePlayer(player) {
+    this.player = player;
+    console.log('Video Url', player.getVideoUrl());
+  }
+  onStateChange(event) {
+    console.log('player state', event.data);
+  }
+
   user: Users;
   IpAddress : string;
  
@@ -81,6 +92,13 @@ export class UserComponent implements OnInit {
               "isDeactivate","createdDateTime","createdBy","modifiedDateTime","modifiedBy","isAdmin"]
    };
    new Angular5Csv(this.users, filename, options);
+  }
+
+  help()
+  {
+    // this.userService.sendUsertoOtherComponent("user");
+    localStorage.setItem('component', 'user');   
+    this.router.navigate(['/help']);
   }
 
   ngOnInit() {

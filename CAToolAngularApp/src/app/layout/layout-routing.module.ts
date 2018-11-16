@@ -9,7 +9,7 @@ const routes: Routes = [
         path: '',
         component: LayoutComponent,
         children: [
-          //  { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' },
+            { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' },
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
             { path: 'user', loadChildren: './user/user.module#UserModule' },
             { path: 'application', loadChildren: './application/application.module#ApplicationModule' },
@@ -21,7 +21,7 @@ const routes: Routes = [
             { path: 'for-migration-pattern', loadChildren: './decision-tree/for-migration-pattern/for-migration-pattern.module#ForMigrationPatternModule' },
             { path: 'reassessment', loadChildren: './decision-tree/reassessment/reassessment.module#ReassessmentModule' },
             { path: 'feedback', loadChildren: './feedback/feedback.module#FeedbackModule'},
-            { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' }
+            { path: 'help', loadChildren: './help/help.module#HelpModule'}
         ]
     }
 ];

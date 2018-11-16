@@ -50,6 +50,10 @@ changePassword(userName: String,password: String,newPassword: String){
 
 private comptransfer = new BehaviorSubject("Hello");
         users = this.comptransfer.asObservable();
+
+        sendUsertoOtherComponent(messsage){
+         this.comptransfer.next(messsage);
+        }
         
         sendMsgtoOtherComponent(messsage){
         this.comptransfer.next(messsage);

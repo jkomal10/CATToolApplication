@@ -7,8 +7,20 @@
   <button type="button" class="btn btn-info" title="Add New user" style="margin-right: 5px" (click)="addUser()">Add User</button>
   <button type="button" class="btn btn-info btn-md" title="Upload Users Information" (click)="uploadUserInfo()">Import User</button>&nbsp;
   <!-- s<input type="button" class="btn btn-info" value="Export users" (click)="exportCsv()"> -->
-  <button type="button" class="btn btn-info btn-md" title="Export All User Details" (click)="exportCsv()">Export Users</button>
-  </div>
+  <button type="button" class="btn btn-info btn-md" title="Export All User Details" (click)="exportCsv()">Export Users</button>&nbsp;
+  <button type="button" class="btn btn-info btn-md fa fa-hand-o-right sidenav" id="mybtn" title="You can find some videos here" (click)="help()"> Help </button>
+
+  <!-- <a routerLink="/help" [routerLinkActive]="['router-link-active']" id="mybtn" class="btn btn-info btn-md fa fa-hand-o-right sidenav" title="You can find some videos here">
+   
+    <span> Help</span>
+</a> -->
+
+  <!-- <div><youtube-player
+    [videoId]="id"
+    (ready)="savePlayer($event)"
+    (change)="onStateChange($event)"
+  ></youtube-player></div>  -->
+</div>
 <br>
 
 <!-- <div> -->
@@ -17,13 +29,13 @@
     <table datatable="bootstrap" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-hover ">
         <thead bgcolor="#E0E0E0" >
           <tr>
-            <th style="vertical-align:text-top">Username</th>
-            <th style="vertical-align:text-top">Ip Address(s)</th>
+            <th style="vertical-align:text-top">User Name</th>
+            <th style="vertical-align:text-top">IP Address</th>
             <th style="vertical-align:text-top">Company</th>
             <th style="vertical-align:text-top">Created By</th>
             <th style="vertical-align:text-top">User Type</th>
-            <th style="vertical-align:text-top">LastModify</th>
-            <th style="vertical-align:text-top">LastLogin</th>
+            <th style="vertical-align:text-top">Last Modify</th>
+            <th style="vertical-align:text-top">Last Login</th>
             <th style="vertical-align:text-top">Action</th>
           </tr>
         </thead>
