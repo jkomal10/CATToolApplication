@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 import { Application } from '../application/Application';
 import { ApplicationService } from '../application/application.service';
+import { ReportService } from './report.service';
 
 @Component({
   selector: 'app-report',
@@ -14,7 +15,7 @@ import { ApplicationService } from '../application/application.service';
 export class ReportComponent implements OnInit {
   application:Array<Application>=[];
   AllData : any = [];
-  constructor(public router:Router, private applicationService:ApplicationService,private http:HttpClient) { }
+  constructor(public router:Router, private applicationService:ApplicationService,private http:HttpClient, private reportService:ReportService) { }
 
   ngOnInit() {
     this.applicationService.CollectData().subscribe(result => 
@@ -22,6 +23,10 @@ export class ReportComponent implements OnInit {
       this.AllData = result;
       console.log(JSON.stringify(this.AllData));
       });
+  }
+
+  summaryReport(){
+    this.reportService.summaryReport().subscribe();
   }
 
   exportCsv(){

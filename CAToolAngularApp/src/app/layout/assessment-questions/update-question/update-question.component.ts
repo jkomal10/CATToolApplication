@@ -16,23 +16,44 @@ export class UpdateQuestionComponent implements OnInit {
   numberOfOptions : number;
   optionsValues = [1,2,3,4,5,6,7,8,9];
   Options : Array<number>=[10];
+  OptionsArray : Array<String>=[];
 
   constructor(private assessmentQuestionsService : AssessmentQuestionsService ,public router: Router) { }
   assessmentQuestionData : string;
   ngOnInit() {
     this.assessmentQuestionsService.question.subscribe(data => {this.que= data;}); 
     this.question=this.que;
+    this.numberOfOptions=0;
+    let option =this.optionsValues;
     this.numberOfOptions=this.question.questionOption.length;
-    console.log(JSON.stringify(this.question.questionOption.length));
+    console.log(this.question.questionOption.length+"*************");
+    this.selectChangeHandlerDefault(this.numberOfOptions);
+    console.log(JSON.stringify(this.question.questionOption));
+  }
+
+  selectChangeHandlerDefault(value:number){
+    
+    console.log("option value "+value); 
+    this.numberOfOptions=value;
+   
+    console.log(this.numberOfOptions);
+    console.log();
+    
+    for (let index = 1; index <= this.numberOfOptions ; index++) {
+      console.log(index);
+       this.Options[index] = index;
+       console.log(this.Options);
+       console.log(this.Options.length);
+    }
   }
 
   selectChangeHandler(event:any){
-    console.log(event);
+    console.log(event.target.value+"********");
     this.numberOfOptions=parseInt(event.target.value,10);
    
     console.log(this.numberOfOptions);
     console.log(event.target.value);
- 
+    
     for (let index = 1; index <= this.numberOfOptions ; index++) {
       console.log(index);
        this.Options[index] = index;

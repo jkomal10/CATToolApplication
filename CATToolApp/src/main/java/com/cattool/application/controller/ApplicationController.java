@@ -1,5 +1,6 @@
 package com.cattool.application.controller;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 
@@ -107,6 +108,13 @@ public class ApplicationController {
 	public Application getAppByUser(@PathVariable("userName") String userName) {
 		System.out.println("application get by user name!!!!"+userName);
 		return applicationService.getApplicationByUserName(userName);
+	}
+	
+	@GetMapping("/summaryReport")
+	public void summaryRepory() throws FileNotFoundException
+	{
+		System.out.println("Summary report works!!!");
+		applicationService.summaryReport();
 	}
 
 }

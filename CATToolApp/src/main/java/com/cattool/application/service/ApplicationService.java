@@ -8,16 +8,39 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cattool.application.entity.Answers;
 import com.cattool.application.entity.Application;
+import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.CloudProviderRule;
 import com.cattool.application.entity.CloudableRule;
 import com.cattool.application.entity.MigrationRule;
+import com.cattool.application.entity.SummaryReport;
 import com.cattool.application.entity.Users;
 import com.cattool.application.repository.AnswersRepository;
 import com.cattool.application.repository.ApplicationRepository;
+import com.cattool.application.repository.AssessmentQuestionsRepository;
 import com.cattool.application.repository.CloudProviderRuleRepository;
 import com.cattool.application.repository.CloudableRuleRepository;
 import com.cattool.application.repository.MigrationRuleRepository;
 import com.cattool.application.repository.UserRepository;
+
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Service
 @Transactional
@@ -27,6 +50,9 @@ public class ApplicationService {
 
 	@Autowired
 	ApplicationRepository applicationRepository;
+	
+	@Autowired
+	AssessmentQuestionsRepository assessmentQuestionsRepository;
 
 	@Autowired
 	AnswersRepository answerRepository;
@@ -170,6 +196,7 @@ public class ApplicationService {
 					System.out.println("cloudableRule.getQuestionId()"+cloudableRule.getQuestionId());
 					System.out.println("answers.getQuestionId()"+answers.getQuestionId());
 					if(cloudableRule.getCloudableRule().contains(answers.getAnswerText())){
+						answers.setCloudAbility(1);
 						cloudableRuleFlag++;
 						System.out.println(cloudableRule.getCloudableRule()+"cloudableRule.getCloudableRule()");
 					    System.out.println(answers.getAnswerText()+"answers.getAnswerText()");
@@ -181,6 +208,8 @@ public class ApplicationService {
 		}
 		if(cloudableRuleFlag==cloudableRuleList.size()){
 			application.setCloudable("Yes");
+			
+			
 		return true;}
 		else {
 			application.setCloudable("No");
@@ -392,4 +421,142 @@ public boolean cloudProviderCheck(int applicationId){
 		  }
 		}
 	
+	public void summaryReport() throws FileNotFoundException{
+		
+		int summaryReportCount=1;
+		List<SummaryReport> summaryReportList=new ArrayList<SummaryReport>();
+		List<Application> appList=new ArrayList<Application>();
+		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<AssessmentQuestions>();
+		for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll())
+		{
+			if("true".equals(assessmentQuestions.getAssessmentTypeForCloudable()))
+			{
+				assessmentQuestionsList.add(assessmentQuestions);
+			}
+		}
+		
+//   		System.out.println("Question List=="+assessmentQuestionsList);
+//		System.out.println("*********************************************************************************");
+
+			
+		for(Application application:applicationRepository.findAll()) {
+			List<Answers> answerList=new ArrayList<Answers>();
+			
+			
+			if(application.getIsFinalize()==1)
+			{
+				appList.add(application);
+//				System.out.println("appList"+appList);
+//				System.out.println("##################################################");
+				
+				for(AssessmentQuestions assessmentQuestions:assessmentQuestionsList) 
+				{
+						
+						for(Answers answer:answerRepository.findAll())
+						{
+							if(answer.getApplicationId()==application.getApplicationId())
+							{
+								if(answer.getQuestionId()==assessmentQuestions.getQuestionId())
+									{
+										answerList.add(answer);
+									}
+							}
+						}
+//						System.out.println("Answer list"+answerList);
+						
+				}
+				
+				List<String> answerTextList=new ArrayList<String>();
+				for(Answers answer:answerList)
+				{
+					answerTextList.add(answer.getAnswerText());
+				}
+				//summaryReport.setAnswerText(answerTextList);
+				
+				List<String> questionTextList=new ArrayList<String>();
+				for(AssessmentQuestions assessmentQuestions:assessmentQuestionsList)
+				{
+					
+					SummaryReport summaryReport=new SummaryReport();
+					summaryReport.setApplicationName(application.getApplicationName());
+					summaryReport.setApplicationDescription(application.getApplicationDescription());
+					for(Answers answer:answerList)
+					{
+						if(answer.getQuestionId()==assessmentQuestions.getQuestionId())
+						{
+							summaryReport.setAnswerText(answer.getAnswerText());
+							System.out.println("*****");
+							if(answer.isCloudAbility()==1)
+							{
+								summaryReport.setCloudability("1");
+							}
+							else
+							{
+								summaryReport.setCloudability("0");
+							}
+							
+						}
+						
+					}
+					summaryReport.setQuestionText(assessmentQuestions.getQuestionText());
+					
+					
+					summaryReport.setAssessment_type("Yes");
+					summaryReportList.add(summaryReport);
+					System.out.println("summary report*********"+summaryReportList);
+				}
+				
+				JRBeanCollectionDataSource jds=new JRBeanCollectionDataSource(summaryReportList);
+				Map<String,Object> parametres=new HashMap<String,Object>();
+				parametres.put("ItemDataSource", jds);
+				
+				InputStream reportStream = new FileInputStream("\\Users\\priyanj\\Volkswagen\\jasperTemplate\\template.jrxml");
+				JasperReport report;
+				try {
+					report = JasperCompileManager.compileReport(reportStream);
+				System.out.println("compiled");
+						//HashMap jasperParameter = new HashMap();
+					    // jasperParameter.put("reportTitle", "Cloud Survey Report");
+
+					     JasperPrint jasperPrint = JasperFillManager.fillReport(report,parametres, jds);
+					     System.out.println("filled");
+					 JasperExportManager.exportReportToPdfFile(jasperPrint, "/hsjd/CloudRreport"+summaryReportCount+".pdf");
+					 summaryReportCount++;
+					 System.out.println("pdf done");
+				} catch (JRException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+//				summaryReportList.remove(summaryReport);
+				System.out.println("After Removing "+summaryReportList);
+				
+		}
+			summaryReportList.clear();
+			System.out.println(summaryReportList+"**************************");
+		}
+//		JRBeanCollectionDataSource jds=new JRBeanCollectionDataSource(summaryReportList);
+//		Map<String,Object> parametres=new HashMap<String,Object>();
+//		parametres.put("ItemDataSource", jds);
+//		
+//		InputStream reportStream = new FileInputStream("\\Users\\priyanj\\Volkswagen\\jasperTemplate\\template.jrxml");
+//		JasperReport report;
+//		try {
+//			report = JasperCompileManager.compileReport(reportStream);
+//		System.out.println("compiled");
+//				//HashMap jasperParameter = new HashMap();
+//			    // jasperParameter.put("reportTitle", "Cloud Survey Report");
+//
+//			     JasperPrint jasperPrint = JasperFillManager.fillReport(report,parametres, jds);
+//			     System.out.println("filled");
+//			 JasperExportManager.exportReportToPdfFile(jasperPrint, "/hsjd/CloudRreport"+"jk.pdf");
+//			 System.out.println("pdf done");
+//		} catch (JRException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+//		  System.out.println("Application List=="+appList);
+		
+	}
+
 }
