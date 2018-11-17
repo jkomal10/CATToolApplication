@@ -24,6 +24,17 @@ export class DashboardComponent implements OnInit {
     application : any = [];
     //applicationCount: number;
     
+    player: YT.Player;
+    private id: string = '0eWrpsCLMJQ';
+  
+    savePlayer(player) {
+      this.player = player;
+      console.log('Video Url', player.getVideoUrl());
+    }
+    onStateChange(event) {
+      console.log('player state', event.data);
+    }
+
 
     constructor(private userService:UsersService,private applicationService:ApplicationService,public router: Router) {
         this.sliders.push(
