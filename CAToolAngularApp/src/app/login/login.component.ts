@@ -34,6 +34,8 @@ export class LoginComponent implements OnInit {
                 if(this.users.isAdmin===0)
                 {
                     localStorage.setItem('isUserActive','true');
+                    localStorage.setItem('clientName',this.users.clientName);
+                    console.log("client name=="+this.users.clientName);
                     console.log("is adminnnnnnnnnnn"+this.users.isAdmin)
                     localStorage.setItem('firstName',this.users.firstName);
                     localStorage.setItem('lastName',this.users.lastName);
@@ -44,6 +46,8 @@ export class LoginComponent implements OnInit {
                 }
                 else if(this.users.isAdmin==1){
                     localStorage.setItem('isUserActive','false');
+                    localStorage.setItem('clientName',this.users.clientName);
+                    console.log("client name=="+this.users.clientName);
                     console.log(JSON.stringify(this.users));
                     this.loginService.sendMsgtoOtherComponent(this.users.userId);
                     localStorage.setItem('firstName',this.users.firstName);

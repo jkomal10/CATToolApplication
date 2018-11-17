@@ -18,4 +18,5 @@ export class Users{
     company : string;
     phone : string
     isAdmin : number;
+    clientName : string;
 }

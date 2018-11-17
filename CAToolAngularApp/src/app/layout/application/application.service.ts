@@ -13,9 +13,9 @@ export class ApplicationService {
    deleteUrl:String ='http://localhost:8090/application/resetApplicationById';
   //url:String= 'http://localhost:8090/application/getApplicationById';
   url1:String= 'http://localhost:8090/application/updateApplictaion';
-  CollectData(){
+  CollectData(clientName : string){
     const url = 'http://localhost:8090/application/getAll';
-    return this.http.get(url);
+    return this.http.get(url+`/`+clientName);
     }
 
     baseUrl: string = 'http://localhost:8090/application/saveApplication';

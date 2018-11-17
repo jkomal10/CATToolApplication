@@ -32,6 +32,7 @@ public class AssessmentQuestions {
 	private Date cteatedTime;
 	private String modifiedBy;
 	private Date modifiedTime;
+	private String clientName;
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="questionId", referencedColumnName="questionId")
@@ -193,6 +194,30 @@ public class AssessmentQuestions {
 		super();
 	}
 
+	public int getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(int isActive) {
+		this.isActive = isActive;
+	}
+
+	public int getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
+	}
+
+	public String getClientName() {
+		return clientName;
+	}
+
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+
 	@Override
 	public String toString() {
 		return "AssessmentQuestions [questionId=" + questionId + ", questionText=" + questionText
@@ -202,9 +227,8 @@ public class AssessmentQuestions {
 				+ assessmentTypeForMigration + ", assessmentTypeForCloudProvider=" + assessmentTypeForCloudProvider
 				+ ", assessmentTypeForCloudable=" + assessmentTypeForCloudable + ", createdBy=" + createdBy
 				+ ", cteatedTime=" + cteatedTime + ", modifiedBy=" + modifiedBy + ", modifiedTime=" + modifiedTime
-				+ ", migrationRule=" + migrationRule + ", questionOption=" + questionOption + ", cloudProviderRules="
-				+ cloudProviderRules + "]";
+				+ ", clientName=" + clientName + ", migrationRule=" + migrationRule + ", questionOption="
+				+ questionOption + ", cloudProviderRules=" + cloudProviderRules + "]";
 	}
-	
 	
 }

@@ -33,38 +33,37 @@ export class AssesstApplicationComponent implements OnInit {
 i=-1;
   application:any;
   UpdateAnswersData:any;
+  clientNameValue:string;
   constructor(private router:Router,private assessmentService:AssesstApplicationService,private applicationService:ApplicationService) { }
 
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 2,
-      responsive: true}; 
+      responsive: true}; //67 51 changes
 
-      this.applicationService.question.subscribe(data =>{ this.application= data;
+      this.clientNameValue=localStorage.getItem('clientName');
+      this.applicationService.question.subscribe(data =>{ 
+        console.log("Assesssssssssssssssssssssssssss");
+        this.application= data;
         console.log(JSON.stringify(this.application)+"aaaaaaaaaaaaaaaaaaaaaaaa");
       }); 
       console.log(this.application.isSaved);
       if(this.application.isSaved==0){
-   this.assessmentService.CollecOptiontData().subscribe(result => 
+   this.assessmentService.CollecOptiontData(this.clientNameValue).subscribe(result => 
       {
+        console.log("First questionnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
       this.AllData = result ;
       this.dtTrigger.next();
-      console.log(this.AllData);
       
       });
-      console.log(this.numberOfOption);
-      console.log(this.theCheckboxOptions);
    }
    else{
-    
-    this.assessmentService.UpdateAnswers(this.application.applicationId).subscribe(result=>{this.UpdateAnswersData=result;
+        console.log("Secound questionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+        this.assessmentService.UpdateAnswers(this.application.applicationId).subscribe(result=>{this.UpdateAnswersData=result;
     });
 
-    console.log("*********************ccccccccccccccc***********"+this.UpdateAnswersData);
-    this.assessmentService.CollecOptiontData().subscribe(result=>{this.AllData = result ;});
-
-    console.log('**************'+this.AllData);
+    this.assessmentService.CollecOptiontData(this.clientNameValue).subscribe(result=>{this.AllData = result ;});
    }
   } 
   AssessApplicationRule(){

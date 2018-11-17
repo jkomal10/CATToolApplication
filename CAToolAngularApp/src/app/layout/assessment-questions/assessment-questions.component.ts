@@ -19,6 +19,7 @@ class DataTablesResponse {
 })
 export class AssessmentQuestionsComponent implements OnInit {
 
+  clientNameValue:string;
   question: AssessmentQuestions = new AssessmentQuestions();
   questionId : number;
   submitted = false;
@@ -47,12 +48,14 @@ export class AssessmentQuestionsComponent implements OnInit {
 
   ngOnInit() {
 
+    this.clientNameValue=localStorage.getItem('clientName');
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
       responsive: true};
 
-    this.assessmentQuestionsService.CollectData().subscribe(result => 
+    this.assessmentQuestionsService.CollectData(this.clientNameValue).subscribe(result => 
       {
       this.AllData = result ;
       this.dtTrigger.next();

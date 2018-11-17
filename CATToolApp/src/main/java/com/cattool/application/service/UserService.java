@@ -20,12 +20,12 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
-	public List<Users> findAllUsers() {
+	public List<Users> findAllUsers(String clientName) {
 		
 		List<Users> userList = new ArrayList<>();
 		for (Users users : userRepository.findAll()) {
 			
-			if(!users.isDeactivate())
+			if(!users.isDeactivate() && clientName.equals(users.getClientName()))
 			{
 				userList.add(users);
 			}

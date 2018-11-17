@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
     status:string;
     users : any;
     application : any = [];
+    clientNameValue : string;
     //applicationCount: number;
     
 
@@ -67,14 +68,16 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.clientNameValue=localStorage.getItem('clientName');
           this.status=localStorage.getItem('isLoggedin');
           console.log(this.status);
+
         if(this.status=='true')
         {
         this.firstName=localStorage.getItem('firstName');
         this.lastName=localStorage.getItem('lastName');
-        this.userService.CollectData().subscribe(data=>{this.users=data});
-        this.applicationService.CollectData().subscribe(data=>{this.application=data})
+        this.userService.CollectData(this.clientNameValue).subscribe(data=>{this.users=data});
+        this.applicationService.CollectData(this.clientNameValue).subscribe(data=>{this.application=data})
         // this.users=10;
         // this.applicationCount=this.application.length();
          //console.log(this.applicationCount+"kkkkkkkkkkkkkk");

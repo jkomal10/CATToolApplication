@@ -69,12 +69,12 @@ public class ApplicationService {
 	@Autowired
 	UserRepository userRepository;
 	
-	public List<Application> getAllApplication()
+	public List<Application> getAllApplication(String clientName)
 	{
 		List<Application> applicationList = new ArrayList<>();
 		for (Application application : applicationRepository.findAll()) {
-			
-			if(!application.isDeactivate())
+			System.out.println(clientName+"=="+application.getClientName());
+			if(!application.isDeactivate() && clientName.equals(application.getClientName()))
 			{
 				applicationList.add(application) ;
 			}
@@ -87,6 +87,7 @@ public class ApplicationService {
 	
 	public Application saveApplication(Application application)
 	{
+		System.out.println("**********************************************"+application);
 		return applicationRepository.save(application);
 	}
 	

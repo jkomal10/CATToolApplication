@@ -44,6 +44,7 @@ export class UserRoleComponent implements OnInit {
   }
 
   assessApplication(formvalues){
+    console.log("Assessssssssssssss");
     console.log(JSON.stringify(formvalues));
     console.log(formvalues.applicationId)
    this.userRoleService.sendMsgtoOtherComponent(formvalues);

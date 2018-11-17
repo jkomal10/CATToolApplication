@@ -11,9 +11,11 @@ export class AssesstApplicationService {
   baseUrl ='http://localhost:8090/answer/save';
   AllRuleUrl='http://localhost:8090/application/AllRuleCheck';
   UpdateAnswersUrl='http://localhost:8090/answer/getAnswersByApplicationId/7';
-  CollecOptiontData(){
+
+  CollecOptiontData(clientName : string){
+    // const url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';getAllQuestions
     const url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';
-    return this.http.get(url);
+    return this.http.get(url+`/`+clientName);
      }
 
      saveAssessApplication(cloudablerule: Object): Observable<Object> {

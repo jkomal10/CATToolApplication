@@ -78,6 +78,10 @@ public class Application {
 	@Column
 	private int isSaved;
 	
+	
+	private String clientName;
+	
+	
 	public int getApplicationId() {
 		return applicationId;
 	}
@@ -234,6 +238,22 @@ public class Application {
 		super();
 	}
 
+	public String getIsCloudable() {
+		return isCloudable;
+	}
+
+	public void setIsCloudable(String isCloudable) {
+		this.isCloudable = isCloudable;
+	}
+
+	public String getClientName() {
+		return clientName;
+	}
+
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+
 	@Override
 	public String toString() {
 		return "Application [applicationId=" + applicationId + ", applicationName=" + applicationName
@@ -242,12 +262,10 @@ public class Application {
 				+ isAssessment + ", isFinalize=" + isFinalize + ", isDeleted=" + isDeleted + ", isDeactivate="
 				+ isDeactivate + ", deletedDateTime=" + deletedDateTime + ", isVerified=" + isVerified
 				+ ", createdDate=" + createdDate + ", modifiedDateTime=" + modifiedDateTime + ", createdBy=" + createdBy
-				+ ", modifiedBy=" + modifiedBy + ", userId=" + userId + ", isSaved=" + isSaved + "]";
+				+ ", modifiedBy=" + modifiedBy + ", userId=" + userId + ", isSaved=" + isSaved + ", clientName="
+				+ clientName + "]";
 	}
-	
-	
 
-	
 	
 	
 }

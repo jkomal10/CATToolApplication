@@ -33,11 +33,12 @@ export class AddAssessmentQuestionComponent implements OnInit {
   CloudProviderData : any = [];
   MigrationDataArray : any=[];
   CloudProviderDataArray : any=[];
+  clientNameValue : string;
   
   constructor(private questionService: AssessmentQuestionsService,public router: Router,private http: HttpClient) { }
 
   ngOnInit() {
-
+      this.clientNameValue=localStorage.getItem('clientName');
   }
 
   selectChangeHandler(event:any){
@@ -91,6 +92,7 @@ export class AddAssessmentQuestionComponent implements OnInit {
         }
       }
       console.log(JSON.stringify(this.question));
+      this.question.clientName=this.clientNameValue;
       this.questionService.createQuestionn(this.question).subscribe(
       );
       this.router.navigate(['/assessment-questions']);

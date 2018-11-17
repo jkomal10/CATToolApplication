@@ -40,6 +40,21 @@ public class AssessmentQuestionsService {
 		return assessmentQuestionsList;
 	}
 	
+	public List<AssessmentQuestions> getAllquestionsByClientName(String clientName)
+	{
+		List<AssessmentQuestions> assessmentQuestionsList = new ArrayList<>();
+		for (AssessmentQuestions assessmentQuestions : assessmentQuestionsRepository.findAll()) {
+			System.out.println(assessmentQuestions.getClientName()+"=="+clientName);
+			if(assessmentQuestions.isActive()==0 && clientName.equals(assessmentQuestions.getClientName()))
+			{
+				assessmentQuestionsList.add(assessmentQuestions);
+			}
+			
+		}
+		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"+assessmentQuestionsList);
+		return assessmentQuestionsList;
+	}
+	
 	public AssessmentQuestions saveQuestions(AssessmentQuestions assessmentQuestions)
 	{
 		System.out.println(assessmentQuestions);

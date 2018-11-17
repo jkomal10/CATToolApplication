@@ -15,10 +15,12 @@ import { ReportService } from './report.service';
 export class ReportComponent implements OnInit {
   application:Array<Application>=[];
   AllData : any = [];
+  clientNameValue : string;
   constructor(public router:Router, private applicationService:ApplicationService,private http:HttpClient, private reportService:ReportService) { }
 
   ngOnInit() {
-    this.applicationService.CollectData().subscribe(result => 
+    this.clientNameValue=localStorage.getItem('clientName');
+    this.applicationService.CollectData(this.clientNameValue).subscribe(result => 
       {
       this.AllData = result;
       console.log(JSON.stringify(this.AllData));

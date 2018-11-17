@@ -35,6 +35,13 @@ public class AssessmentQuestionsController {
 		return assessmentQuestionsService.getAllquestions();
 	}
 	
+	@GetMapping("/getAllQuestions/{clientName}")
+	public List<AssessmentQuestions> getAllquestionsByClientName(@PathVariable String clientName)
+	{
+		System.out.println("****************get all question by client name******************");
+		return assessmentQuestionsService.getAllquestionsByClientName(clientName);
+	}
+	
 	@PostMapping("/saveAssessmentQuestions/create")
 	public void saveAssessmentQuestions(@RequestBody AssessmentQuestions assessmentQuestions)
 	{

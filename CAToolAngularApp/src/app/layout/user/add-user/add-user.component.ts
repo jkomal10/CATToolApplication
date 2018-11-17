@@ -24,11 +24,12 @@ export class AddUserComponent implements OnInit {
   constructor(private userService:UsersService,public router: Router) { }
 
   ngOnInit() {
+    this.clientNameValue=localStorage.getItem('clientName');
     this.userService.getIpAddress().subscribe(data => {
       localStorage.setItem('ip',data['ip']);
   });
 
-  this.userService.CollectData().subscribe(result => 
+  this.userService.CollectData( this.clientNameValue).subscribe(result => 
     {
     this.AllData = result ;
     console.log(this.AllData);
@@ -73,12 +74,6 @@ export class AddUserComponent implements OnInit {
       this.user.isAdmin=0;
       this.userType="Admin";
     }
-  }
-
-  selectChangeHandlerForClient(event: any){
-    console.log(event.target.value);
-    this.clientNameValue=event.target.value;
-
   }
  
 }

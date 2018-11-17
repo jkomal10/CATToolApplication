@@ -14,10 +14,10 @@
             <font color="black">Questions</font>
           </th>
           <th>
-            <font color="black">questionDescription</font>
+            <font color="black">Question Description</font>
           </th>
           <th>
-            <font color="black">questionType</font>
+            <font color="black">Question Type</font>
           </th>
           <th>
             <font color="black">Display Order</font>
@@ -34,14 +34,14 @@
           <td width="15%">{{row.questionType}}</td>
           <td width="10%">{{row.questionDisplayOrder}}</td>
           <td width="11%">
-            <button title="deactivate question" (click)="deactivate()" type="button" class="btn btn-light">
-              <i style="color:black" class="fa fa-key"></i>
-            </button>
-            <button title="update question" (click)="updateQuestions(row)" style="font-size:16px" class="btn btn-light">
-              <i style="color:black" class="fa fa-edit"></i>
-            </button>
-            <button title="delete question" (click)="deleteQuestions(row.questionId)" class="btn btn-light">
-              <i style="color:black" class="fa fa-trash"></i>
+            <button title="deactivate question" (click)="deactivate()" style="font-size:16px" type="button" class="button button">
+              <i class="fa fa-key"></i>
+            </button>&nbsp;
+            <button title="update question" (click)="updateQuestions(row)" style="font-size:16px" class="button button">
+              <i class="fa fa-edit"></i>
+            </button>&nbsp;
+            <button title="delete question" (click)="deleteQuestions(row.questionId)" style="font-size:16px" class="button button">
+              <i class="fa fa-trash"></i>
             </button>
           </td>
         </tr>

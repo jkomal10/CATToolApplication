@@ -14,10 +14,13 @@ export class AddApplicationComponent implements OnInit {
 
   application: Application = new Application();
   submitted = false;
+  clientNameValue : string;
   
   constructor(private router:Router,private addapplicationService:AddApplicationService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.clientNameValue=localStorage.getItem('clientName');
+  }
 
   createApplication(): void {
       this.submitted = false;
@@ -25,6 +28,7 @@ export class AddApplicationComponent implements OnInit {
     }
    
     save() {
+      this.application.clientName=this.clientNameValue;
       this.addapplicationService.createApplication(this.application)
         .subscribe(data => console.log(data), error => console.log(error));
       this.application = new Application();

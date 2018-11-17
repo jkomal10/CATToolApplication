@@ -28,10 +28,10 @@ public class UserController {
 	@Autowired
 	UserService	userService; 
 	
-	@GetMapping("/getAll")
-	public List<Users> findAllUsers()
+	@GetMapping("/getAll/{clientName}")
+	public List<Users> findAllUsers(@PathVariable String clientName)
 	{
-		return userService.findAllUsers();
+		return userService.findAllUsers(clientName);
 	}
 	
 	@GetMapping("/getUserCount")

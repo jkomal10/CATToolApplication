@@ -16,9 +16,9 @@ export class AssessmentQuestionsService {
  // private addUrl1 ='http://localhost:8090/option/save';
  private addUrl1= 'http://localhost:8090/assessmentQuestions/saveAssessmentQuestions';
 
-  CollectData() {
+  CollectData(clientName : string) {
     const  url  =  'http://localhost:8090/assessmentQuestions/getAllQuestions';
-    return  this.http.get(url);
+    return  this.http.get(url+`/`+clientName);
   }
 
   deleteQuestion(questionId: number): Observable<any> {

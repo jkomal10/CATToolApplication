@@ -24,11 +24,11 @@ public class ApplicationController {
 	@Autowired
 	ApplicationService applicationService;
 	
-	@GetMapping("/getAll")
-	public List<Application>getAllApplication()
+	@GetMapping("/getAll/{clientName}")
+	public List<Application>getAllApplication(@PathVariable String clientName)
 	{
-
-		return applicationService.getAllApplication();
+		System.out.println(clientName+" get all application with this client ");
+		return applicationService.getAllApplication(clientName);
 	}
 	@GetMapping("/getApplicationById/{applicationId}")
 	public Application getApplicationById(@PathVariable("applicationId") int id) {
@@ -38,7 +38,7 @@ public class ApplicationController {
 	@PostMapping("/saveApplication/create")
 	public Application saveApplication(@RequestBody Application application)
 	{
-		System.out.println("add application");
+		System.out.println("******************************************add application*************************");
 		System.out.println(application);
 		return applicationService.saveApplication(application);
 	}

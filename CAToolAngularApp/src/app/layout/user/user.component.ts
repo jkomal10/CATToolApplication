@@ -20,6 +20,7 @@ class DataTablesResponse {
 })
 export class UserComponent implements OnInit {
 
+  clientValue : string;
   player: YT.Player;
   private id: string = '0eWrpsCLMJQ';
 
@@ -103,6 +104,8 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
 
+    this.clientValue=localStorage.getItem("clientName");
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -110,7 +113,7 @@ export class UserComponent implements OnInit {
       this.userService.getIpAddress().subscribe(data => {
         this.IpAddress=data['ip'];
 
-    this.userService.CollectData().subscribe(result => 
+    this.userService.CollectData(this.clientValue).subscribe(result => 
       {
       this.AllData = result ;
       this.dtTrigger.next();

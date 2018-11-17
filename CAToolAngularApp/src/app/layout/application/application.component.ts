@@ -23,6 +23,7 @@ export class ApplicationComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   message = '';
+  clientNameValue : string;
   //applictaions: Observable<Application[]>;
   application:Array<Application>=[];
   // application:Application [];
@@ -30,6 +31,7 @@ export class ApplicationComponent implements OnInit {
   constructor(public router:Router, private applicationService:ApplicationService,private http:HttpClient) { }
   
   ngOnInit() {
+    this.clientNameValue=localStorage.getItem('clientName');
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -52,11 +54,10 @@ export class ApplicationComponent implements OnInit {
   //   this.dtTrigger.next();
   //   });
 
-    this.applicationService.CollectData().subscribe(result => 
+    this.applicationService.CollectData(this.clientNameValue).subscribe(result => 
       {
       this.AllData = result ;
       this.dtTrigger.next();
-      console.log("this.AllData___"+this.AllData)
       });
 
 
@@ -147,7 +148,7 @@ export class ApplicationComponent implements OnInit {
   }
 
    reloadData() {
-     this.applicationService.CollectData();
+     this.applicationService.CollectData(this.clientNameValue);
    }
    
    ViewApplication(formvalues){
