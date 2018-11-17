@@ -50,6 +50,17 @@
             </article>
 
         </div>
+
+        <div>
+                <article>
+                    <label><font color="green">Client Name<font size="3" color="red">*</font></font></label><br>
+                    <select (change)="selectChangeHandlerForClient($event)" required [(ngModel)]="clientName" #ClientName="ngModel" name="clientName">
+                        <option value="c1">c1   </option>
+                        <option selected="selected" value="c2" selected="selected">c2</option> <!-- selected="selected" -->
+                    </select>
+                </article>
+    
+            </div>
         
     </div>
     <br>

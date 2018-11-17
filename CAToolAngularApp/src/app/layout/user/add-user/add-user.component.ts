@@ -17,6 +17,7 @@ export class AddUserComponent implements OnInit {
  status : boolean = true; 
  userTypeValue : number=1;
  userType : string="User";
+ clientNameValue : string;
 
  count:number=0;
  
@@ -50,6 +51,7 @@ export class AddUserComponent implements OnInit {
     if(this.status)
     {
     this.user.ipAddress=localStorage.getItem('ip');
+    this.user.clientName=this.clientNameValue;
     this.userService.addUser(this.user).subscribe();
     this.router.navigate(['/user']);
   }
@@ -71,6 +73,12 @@ export class AddUserComponent implements OnInit {
       this.user.isAdmin=0;
       this.userType="Admin";
     }
+  }
+
+  selectChangeHandlerForClient(event: any){
+    console.log(event.target.value);
+    this.clientNameValue=event.target.value;
+
   }
  
 }

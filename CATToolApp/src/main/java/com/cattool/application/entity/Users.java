@@ -35,7 +35,14 @@ public class Users {
 	private String company;
 	private int isDeleted;
 	private boolean isDeactivate;
+	private String clientName;
 	
+	public String getClientName() {
+		return clientName;
+	}
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
 	@CreatedDate
 	private Date createdDateTime;
 	@CreatedBy
@@ -147,7 +154,10 @@ public class Users {
 		return "Users [userId=" + userId + ", userName=" + userName + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", password=" + password + ", ipAddress=" + ipAddress + ", lastLogin=" + lastLogin
 				+ ", company=" + company + ", isDeleted=" + isDeleted + ", isDeactivate=" + isDeactivate
-				+ ", createdDateTime=" + createdDateTime + ", createdBy=" + createdBy + ", modifiedDateTime="
-				+ modifiedDateTime + ", modifiedBy=" + modifiedBy + ", isAdmin=" + isAdmin + "]";
+				+ ", clientName=" + clientName + ", createdDateTime=" + createdDateTime + ", createdBy=" + createdBy
+				+ ", modifiedDateTime=" + modifiedDateTime + ", modifiedBy=" + modifiedBy + ", isAdmin=" + isAdmin
+				+ "]";
 	}
+
+	
 }

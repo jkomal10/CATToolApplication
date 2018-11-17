@@ -1,5 +1,123 @@
-<p>
-  feedback works!
-</p>
+<div>
+    <h2 class="text-muted">Feedback <small></small></h2>
+  </div>
 
-<h1>Hellommmmmmmm</h1>
+  <head>
+      <title>Font Awesome 5 Icons</title>
+      <meta name='viewport' content='width=device-width, initial-scale=1'>
+      <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
+      </head>
+
+<div class="container">
+  <form action="/action_page.php">
+    <div>
+        <h2 class="text-muted">&nbsp;<img src="assets/images/capgemini-logo.png" alt="Smiley face" width="52" height="52" class="user-avatar" /><b>Capgemini</b></h2>
+      </div>
+
+    <div *ngIf="rating==0">
+     <div id="box">
+      <p align="center"><font size="3" color="black"><b>We Would like your Feedback to improve our Website<i class="fa fa-question-circle" style="font-size:18px;color:red"></i></b></font></p>
+      <p align="center"><font size="3" color="black"><b>What is your Opinion of this Website<i class="fa fa-question-circle" style="font-size:18px;color:red"></i></b></font></p>
+      <p align="center"><font size="3" color="black"><b>
+        <button type="button" class="button button4" title="One Star" value="One Star" (click)="oneStar()"><i class="far fa-frown-o" style="font-size:48px;color:red"></i></button>
+        <button type="button" class="button button4" title="Two Star" value="Two Star" (click)="twoStar()"><i class="far fa-meh-o" style="font-size:48px;color:red"></i></button>
+        <button type="button" class="button button4" title="Three Star" value="Three Star" (click)="threeStar()"><i class="far fa-smile-o" style="font-size:48px;color:red"></i></button>
+        <button type="button" class="button button4" title="Four Star" value="Four Star" (click)="fourStar()"><i class="far fa-grin-wink" style="font-size:48px;color:red"></i></button>
+        <button type="button" class="button button4" title="Five Star" value="Five Star" (click)="fiveStar()"><i class='far fa-grin-stars' style='font-size:48px;color:red'></i></button></b></font></p>
+      <!-- <p align="center"><font size="3" color="black"><b><i class='far fa-sad-cry' style='font-size:48px;color:red'></i><i class='far fa-sad-cry' style='font-size:48px;color:red'></i> <i class="fa fa-frown-o" style="font-size:48px;color:red"></i><i class="fa fa-smile-o" style="font-size:48px;color:red"></i></b></font></p> -->
+     </div>
+   </div>
+   <div *ngIf="rating==1">
+      <div id="box">
+       <p align="center"><font size="3" color="black"><b>We Would like your Feedback to improve our Website<i class="fa fa-question-circle" style="font-size:18px;color:red"></i></b></font></p>
+       <p align="center"><font size="3" color="black"><b>What is your Opinion of this Website<i class="fa fa-question-circle" style="font-size:18px;color:red"></i></b></font></p>
+       <p align="center"><font size="3" color="black"><b>
+         <button type="button" class="button button4" title="One Star" value="One Star" (click)="oneStar()"><i class="fa fa-frown-o" style="font-size:48px;color:red"></i></button>
+         <button type="button" class="button button4" title="Two Star" value="Two Star" (click)="twoStar()"><i class="far fa-meh-o" style="font-size:48px;color:red"></i></button>
+         <button type="button" class="button button4" title="Three Star" value="Three Star" (click)="threeStar()"><i class="far fa-smile-o" style="font-size:48px;color:red"></i></button>
+         <button type="button" class="button button4" title="Four Star" value="Four Star" (click)="fourStar()"><i class="far fa-grin-wink" style="font-size:48px;color:red"></i></button>
+         <button type="button" class="button button4" title="Five Star" value="Five Star" (click)="fiveStar()"><i class='far fa-grin-stars' style='font-size:48px;color:red'></i></button></b></font></p>
+       <!-- <p align="center"><font size="3" color="black"><b><i class='far fa-sad-cry' style='font-size:48px;color:red'></i><i class='far fa-sad-cry' style='font-size:48px;color:red'></i> <i class="fa fa-frown-o" style="font-size:48px;color:red"></i><i class="fa fa-smile-o" style="font-size:48px;color:red"></i></b></font></p> -->
+      </div>
+    </div>
+
+    <div *ngIf="rating==2">
+        <div id="box">
+         <p align="center"><font size="3" color="black"><b>We Would like your Feedback to improve our Website<i class="fa fa-question-circle" style="font-size:18px;color:red"></i></b></font></p>
+         <p align="center"><font size="3" color="black"><b>What is your Opinion of this Website<i class="fa fa-question-circle" style="font-size:18px;color:red"></i></b></font></p>
+         <p align="center"><font size="3" color="black"><b>
+           <button type="button" class="button button4" title="One Star" value="One Star" (click)="oneStar()"><i class="fa fa-frown-o" style="font-size:48px;color:red"></i></button>
+           <button type="button" class="button button4" title="Two Star" value="Two Star" (click)="twoStar()"><i class="fa fa-meh-o" style="font-size:48px;color:red"></i></button>
+           <button type="button" class="button button4" title="Three Star" value="Three Star" (click)="threeStar()"><i class="far fa-smile-o" style="font-size:48px;color:red"></i></button>
+           <button type="button" class="button button4" title="Four Star" value="Four Star" (click)="fourStar()"><i class="far fa-grin-wink" style="font-size:48px;color:red"></i></button>
+           <button type="button" class="button button4" title="Five Star" value="Five Star" (click)="fiveStar()"><i class='far fa-grin-stars' style='font-size:48px;color:red'></i></button></b></font></p>
+         <!-- <p align="center"><font size="3" color="black"><b><i class='far fa-sad-cry' style='font-size:48px;color:red'></i><i class='far fa-sad-cry' style='font-size:48px;color:red'></i> <i class="fa fa-frown-o" style="font-size:48px;color:red"></i><i class="fa fa-smile-o" style="font-size:48px;color:red"></i></b></font></p> -->
+        </div>
+      </div>
+
+      <div *ngIf="rating==3">
+          <div id="box">
+           <p align="center"><font size="3" color="black"><b>We Would like your Feedback to improve our Website<i class="fa fa-question-circle" style="font-size:18px;color:red"></i></b></font></p>
+           <p align="center"><font size="3" color="black"><b>What is your Opinion of this Website<i class="fa fa-question-circle" style="font-size:18px;color:red"></i></b></font></p>
+           <p align="center"><font size="3" color="black"><b>
+             <button type="button" class="button button4" title="One Star" value="One Star" (click)="oneStar()"><i class="fa fa-frown-o" style="font-size:48px;color:red"></i></button>
+             <button type="button" class="button button4" title="Two Star" value="Two Star" (click)="twoStar()"><i class="fa fa-meh-o" style="font-size:48px;color:red"></i></button>
+             <button type="button" class="button button4" title="Three Star" value="Three Star" (click)="threeStar()"><i class="fa fa-smile-o" style="font-size:48px;color:red"></i></button>
+             <button type="button" class="button button4" title="Four Star" value="Four Star" (click)="fourStar()"><i class="far fa-grin-wink" style="font-size:48px;color:red"></i></button>
+             <button type="button" class="button button4" title="Five Star" value="Five Star" (click)="fiveStar()"><i class='far fa-grin-stars' style='font-size:48px;color:red'></i></button></b></font></p>
+           <!-- <p align="center"><font size="3" color="black"><b><i class='far fa-sad-cry' style='font-size:48px;color:red'></i><i class='far fa-sad-cry' style='font-size:48px;color:red'></i> <i class="fa fa-frown-o" style="font-size:48px;color:red"></i><i class="fa fa-smile-o" style="font-size:48px;color:red"></i></b></font></p> -->
+          </div>
+        </div>
+
+        <div *ngIf="rating==4">
+            <div id="box">
+             <p align="center"><font size="3" color="black"><b>We Would like your Feedback to improve our Website<i class="fa fa-question-circle" style="font-size:18px;color:red"></i></b></font></p>
+             <p align="center"><font size="3" color="black"><b>What is your Opinion of this Website<i class="fa fa-question-circle" style="font-size:18px;color:red"></i></b></font></p>
+             <p align="center"><font size="3" color="black"><b>
+               <button type="button" class="button button4" title="One Star" value="One Star" (click)="oneStar()"><i class="fa fa-frown-o" style="font-size:48px;color:red"></i></button>
+               <button type="button" class="button button4" title="Two Star" value="Two Star" (click)="twoStar()"><i class="fa fa-meh-o" style="font-size:48px;color:red"></i></button>
+               <button type="button" class="button button4" title="Three Star" value="Three Star" (click)="threeStar()"><i class="fa fa-smile-o" style="font-size:48px;color:red"></i></button>
+               <button type="button" class="button button4" title="Four Star" value="Four Star" (click)="fourStar()"><i class="fa fa-grin-wink" style="font-size:48px;color:red"></i></button>
+               <button type="button" class="button button4" title="Five Star" value="Five Star" (click)="fiveStar()"><i class='far fa-grin-stars' style='font-size:48px;color:red'></i></button></b></font></p>
+             <!-- <p align="center"><font size="3" color="black"><b><i class='far fa-sad-cry' style='font-size:48px;color:red'></i><i class='far fa-sad-cry' style='font-size:48px;color:red'></i> <i class="fa fa-frown-o" style="font-size:48px;color:red"></i><i class="fa fa-smile-o" style="font-size:48px;color:red"></i></b></font></p> -->
+            </div>
+          </div>
+
+          <div *ngIf="rating==5">
+              <div id="box">
+               <p align="center"><font size="3" color="black"><b>We Would like your Feedback to improve our Website<i class="fa fa-question-circle" style="font-size:18px;color:red"></i></b></font></p>
+               <p align="center"><font size="3" color="black"><b>What is your Opinion of this Website<i class="fa fa-question-circle" style="font-size:18px;color:red"></i></b></font></p>
+               <p align="center"><font size="3" color="black"><b>
+                 <button type="button" class="button button4" title="One Star" value="One Star" (click)="oneStar()"><i class="fa fa-frown-o" style="font-size:48px;color:red"></i></button>
+                 <button type="button" class="button button4" title="Two Star" value="Two Star" (click)="twoStar()"><i class="fa fa-meh-o" style="font-size:48px;color:red"></i></button>
+                 <button type="button" class="button button4" title="Three Star" value="Three Star" (click)="threeStar()"><i class="fa fa-smile-o" style="font-size:48px;color:red"></i></button>
+                 <button type="button" class="button button4" title="Four Star" value="Four Star" (click)="fourStar()"><i class="fa fa-grin-wink" style="font-size:48px;color:red"></i></button>
+                 <button type="button" class="button button4" title="Five Star" value="Five Star" (click)="fiveStar()"><i class='fa fa-grin-stars' style='font-size:48px;color:red'></i></button></b></font></p>
+               <!-- <p align="center"><font size="3" color="black"><b><i class='far fa-sad-cry' style='font-size:48px;color:red'></i><i class='far fa-sad-cry' style='font-size:48px;color:red'></i> <i class="fa fa-frown-o" style="font-size:48px;color:red"></i><i class="fa fa-smile-o" style="font-size:48px;color:red"></i></b></font></p> -->
+              </div>
+            </div>
+
+    <br>
+    <br>
+    <label>Q.1  What do you like best about application?</label>
+    <input type="text" id="question1" name="question1" placeholder="Answer">
+
+    <label>Q.2  What do you like least about application?</label>
+    <input type="text" id="question2" name="question2" placeholder="Answer">
+
+    <label>Q.3  How can we improve application? Send us your ideas and suggestions?</label>
+    <input type="text" id="question3" name="question3" placeholder="Answer">
+
+    <label for="recommend">Would you recommend this application to a friend?</label>
+    <select id="recommend" name="recommend">
+      <option value="Select--an--option" disabled>Select</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+
+    <label for="other">Other</label>
+    <textarea id="other" name="other" placeholder="I cannot find application.." style="height:200px"></textarea>
+
+    <input type="submit" value="Submit">
+  </form>
+</div>

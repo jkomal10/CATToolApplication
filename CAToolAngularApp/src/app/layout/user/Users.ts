@@ -14,4 +14,5 @@ export class Users{
     modifiedDateTime : Date;
     modifiedBy : string;
     isAdmin : number;
+    clientName : string;
 }
