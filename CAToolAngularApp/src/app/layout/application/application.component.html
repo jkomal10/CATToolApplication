@@ -1,12 +1,24 @@
 <div>
   <div>
-    <h2 class="text-muted">Application <small>List of applications</small></h2>
+    <h2 class="text-muted">Application <small>List of applications</small>&nbsp;
+      <button (click)="toggle()" id="bt" class="btn btn-info" title="Help ">
+          {{buttonName}}
+          </button> 
+    </h2>
+    <ng-container *ngIf="show">
+        <div style="margin: 0 auto;text-align: left; width:100%; border:thin">
+        <div style="border:thin solid;padding: 5px;box-shadow:5px 5px grey ">
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;This page shows all applications.On the top of table there are four buttons.<b> Add Application</b> button is to add new application. <b>Import Application</b> button is to import one or more applications for specified user. To import application you have to choose CSV file with required data. If you don't have csv file format you can download it by clicking on <b>Export Dummy Template</b>. Third button is <b>Export Application</b>. It will download a CSV file of all application. In <b>Action</b> column of table there are six buttons. First button is to deactivate application. Second button shows detail information of application. Third button is to assest application.Forth button is to edit application. Fifth button is to delete application and sixth button is to reset application.</p>
+        </div>
+        </div>
+    </ng-container> 
   </div>
   <br>
       <div>
           <nav>
             <input type="button" class="btn  btn-info" title="Add new application " value="Add Application" (click)="form()">&nbsp;
             <input type="button" class="btn btn-info" title="Import one or more applications" value="Import Application"  (click)="myFunction()">&nbsp;
+            <input type="button" class="btn btn-info" title="Download applicaion template" value="Export Dummy Template" (click)="exportTemplate()"> &nbsp;
             <input type="button" class="btn btn-info" title="Export all applications" value="Export Application" (click)="exportCsv()">
           </nav>
       

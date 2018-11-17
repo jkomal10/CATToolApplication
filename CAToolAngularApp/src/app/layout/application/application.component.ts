@@ -26,8 +26,10 @@ export class ApplicationComponent implements OnInit {
   clientNameValue : string;
   //applictaions: Observable<Application[]>;
   application:Array<Application>=[];
-  // application:Application [];
+  applicationTemplate:Array<Application>=[];
   AllData : any = [];
+  public show:boolean = false;
+  public buttonName:any = 'Help';
   constructor(public router:Router, private applicationService:ApplicationService,private http:HttpClient) { }
   
   ngOnInit() {
@@ -62,6 +64,35 @@ export class ApplicationComponent implements OnInit {
 
 
   }
+
+ toggle() {
+ this.show = !this.show;
+
+// CHANGE THE NAME OF THE BUTTON.
+ if(this.show) 
+    this.buttonName = "Hide";
+ else
+    this.buttonName = "Help";
+  }
+
+exportTemplate(){
+const csvRows = [];
+console.log(this.AllData)
+var filename = "Application";
+let dateNow:Date=new Date();
+
+var options = {
+
+// filename:"Application.csv",
+headers:["ApplicationId","Application Name","Application Description","IsCloudable","MigrationPattern",
+"CloudProvider","IsAssessment","IsFinalized","IsDeleted","IsDeactivated","DeleteDateAndTime",
+"Isverified","CreatedDate","ModifiedDateTime","CreatedBy","ModifiedBy","UserId","IsSaved"]
+}; 
+new Angular5Csv( this.applicationTemplate,filename, options);
+}
+ 
+
+
   form(){
     this.router.navigate(['/application/add-application']);
   }
