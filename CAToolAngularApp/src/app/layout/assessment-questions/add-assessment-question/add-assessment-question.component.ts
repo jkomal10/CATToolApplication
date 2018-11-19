@@ -55,7 +55,6 @@ export class AddAssessmentQuestionComponent implements OnInit {
        this.Options[index] = index;
        console.log(this.Options);
        console.log(this.Options.length);
-
     }
   }
 

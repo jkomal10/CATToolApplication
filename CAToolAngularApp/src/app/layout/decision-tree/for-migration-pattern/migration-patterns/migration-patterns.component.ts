@@ -14,6 +14,7 @@ import { Subject } from 'rxjs';
 export class MigrationPatternsComponent implements OnInit {
   migrationRuleObject: Array<MigrationRule> = [];
   dtOptions: DataTables.Settings = {};
+  countOption : number=0;
   dtTrigger: Subject<any> = new Subject();
   migrationAllData : any = [];
   migrationOption : any =[];

@@ -87,18 +87,18 @@ public class AssessmentQuestionsController {
 		return assessmentQuestionsService.getCloudableQuestions();
 	}
 	
-	@GetMapping("/getAllMigrationPattern/{migrationId}")
-	public List<AssessmentQuestions> getAllMigrationPattern(@PathVariable("migrationId") int migrationId)
+	@GetMapping("/getAllMigrationPattern/{migrationId}/{clientName}")
+	public List<AssessmentQuestions> getAllMigrationPattern(@PathVariable("migrationId") int migrationId,@PathVariable String clientName)
 	{
 		System.out.println("****************get all question******************");
-		return assessmentQuestionsService.getAllMigrationPattern(migrationId);
+		return assessmentQuestionsService.getAllMigrationPattern(migrationId,clientName);
 	}
 	
-	@GetMapping("/getAllCloudProviderRule/{cloudProviderId}")
-	public List<AssessmentQuestions> getAllcloudProviderRule(@PathVariable("cloudProviderId") int cloudProviderId)
+	@GetMapping("/getAllCloudProviderRule/{cloudProviderId}/{clientName}")
+	public List<AssessmentQuestions> getAllcloudProviderRule(@PathVariable("cloudProviderId") int cloudProviderId,@PathVariable String clientName)
 	{
 		System.out.println("****************get all question******************");
-		return assessmentQuestionsService.getAllcloudProviderRule(cloudProviderId);
+		return assessmentQuestionsService.getAllcloudProviderRule(cloudProviderId,clientName);
 	}
 	
 	

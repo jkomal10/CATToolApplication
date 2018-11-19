@@ -16,6 +16,8 @@ public class CloudProviderRule {
 	private String cloudProviderRule;
 	private int executionOrder;
 	private String questionText;
+	private String clientName;
+	
 	public int getCloudProviderRuleId() {
 		return cloudProviderRuleId;
 	}
@@ -52,6 +54,13 @@ public class CloudProviderRule {
 	public void setQuestionText(String questionText) {
 		this.questionText = questionText;
 	}
+	
+	public String getClientName() {
+		return clientName;
+	}
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
 	public CloudProviderRule() {
 		super();
 	}
@@ -59,7 +68,10 @@ public class CloudProviderRule {
 	public String toString() {
 		return "CloudProviderRule [cloudProviderRuleId=" + cloudProviderRuleId + ", questionId=" + questionId
 				+ ", cloudProviderId=" + cloudProviderId + ", cloudProviderRule=" + cloudProviderRule
-				+ ", executionOrder=" + executionOrder + ", questionText=" + questionText + "]";
+				+ ", executionOrder=" + executionOrder + ", questionText=" + questionText + ", clientName=" + clientName
+				+ "]";
 	}
+	
+	
 	
 }

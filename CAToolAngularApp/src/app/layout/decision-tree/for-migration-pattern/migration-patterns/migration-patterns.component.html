@@ -1,71 +1,75 @@
 <form #productForm="ngForm" (ngSubmit)="migrationProviderMethod()">
-    <div class="form-group">
-          <table width="100%" datatable="bootstrap" width="100%"  [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped ">
-             <thead bgcolor="#E0E0E0">
-              <tr>
-                <th>Question</th>
-                <th>Question Description</th>
-              </tr>
-            </thead> 
-            <tbody>
-                <tr *ngFor="let size of migrationAllData;let i = index">
-                    <td>Question
-                        <br>Excution Order
-                        <br>Question type
-                        <br>Options
-                        <br>Migration Rule
-                     </td>  
-                    <td> 
-                        <span name="questionText" > {{migrationAllData[i].questionText}}</span> 
-                        <span *ngFor="let s of migrationAllData[i].migrationRule">
-                        <br><input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrderValue[i]" placeholder="{{s.executionOrder}}"/>
-                        <br><span name="questionType">{{migrationAllData[i].questionType}}</span>
-                        <br><span *ngFor="let option of migrationAllData[i]['questionOption'] ; let op = index" name="optionText">{{migrationAllData[i].questionOption[op]['optionText']+" , "}}</span>
-                        <br><input type="text" #cloudableRule name="migrationRule{{i}}" [(ngModel)]="migrationRule[i]" placeholder="{{s.migrationRule}}"/>
-                    </span>
-                    </td>
-                </tr>
-          </tbody>
-          </table> 
-            <button type="submit" class="btn btn-sm btn-info div-button">Submit</button>
-            <button type="cancel" class="btn btn-sm btn-info" value="Cancel"  (click)="Cancel()">Cancel</button>
-          </div>
-         </form>
-         <div *ngIf="migrationQuestionLength==0">
-            <button type="submit" class="btn btn-sm btn-info" (click)="addQuestions()">Add Questions</button>
-         </div>
-<!-- 
-         <form #productForm="ngForm" (ngSubmit)="migrationProviderMethod()">
-                <div class="form-group">
-                      <table width="100%" datatable="bootstrap"   class="table table-striped table-hover table-sm ">
-                         <thead bgcolor="#E0E0E0">
-                          <tr>
-                            <th>Question</th>
-                            <th>Question Description</th>
-                          </tr>
-                        </thead> 
-                        <tbody>
-                            <tr *ngFor="let size of migrationAllData;let i = index">
-                                <td>Question
-                                    <br>Excution Order
-                                    <br>Question type
-                                    <br>Options
-                                    <br>Migration Rule
-                                 </td>  
-                                <td> 
-                                    <span name="questionText" > {{migrationAllData[i].questionText}}</span> 
-                                    <span *ngFor="let s of migrationAllData[i].migrationRule">
-                                    <br><input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrderValue[i]" placeholder="{{s.executionOrder}}"/>
-                                    <br><span name="questionType">{{migrationAllData[i].questionType}}</span>
-                                    <br><span *ngFor="let option of migrationAllData[i]['questionOption'] ; let op = index" name="optionText">{{migrationAllData[i].questionOption[op]['optionText']+" , "}}</span>
-                                    <br><input type="text" #cloudableRule name="migrationRule{{i}}" [(ngModel)]="migrationRule[i]" placeholder="{{s.migrationRule}}"/>
-                                </span>
-                                </td>
-                            </tr>
-                      </tbody>
-                      </table> 
-                      <button type="submit" class="btn btn-info div-button">Submit</button>
-                        <button type="cancel" class="btn btn-info" value="Cancel"  (click)="Cancel()">Cancle</button>
-                      </div>
-                     </form> -->
-        
+        <div class="form-group">
+              <table width="100%" datatable="bootstrap" width="100%"  [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped ">
+                 <thead bgcolor="#E0E0E0">
+                  <tr>
+                    <th>Question</th>
+                    <th>Question Description</th>
+                  </tr>
+                </thead> 
+                <tbody>
+                    <tr *ngFor="let size of migrationAllData;let i = index">
+                        <td>Question
+                            <br>Excution Order
+                            <br>Question type
+                            <br>Options
+                            <br>Migration Rule
+                         </td>  
+                        <td> 
+                            <span name="questionText" > {{migrationAllData[i].questionText}}</span> <br>
+                            <span name="executionOrder" > {{migrationAllData[i].migrationRule[i].executionOrder}}</span><br>
+                            <span name="questionType" > {{migrationAllData[i].questionType}}</span>
+                            <br><span *ngFor="let option of migrationAllData[i]['questionOption'] ; let op = index" name="optionText">{{migrationAllData[i].questionOption[op]['optionText']+" , "}}</span>
+                            <span *ngFor="let s of migrationAllData[i].migrationRule">
+                            <!-- <br><input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrderValue[i]" placeholder="{{s.executionOrder}}"/> -->
+                            <!-- <br><span name="questionType">{{migrationAllData[i].questionType}}</span> -->
+                            
+                            <br><input type="text" #cloudableRule name="migrationRule{{i}}" [(ngModel)]="migrationRule[i]" placeholder="{{s.migrationRule}}"/>
+                        </span>
+                        </td>
+                    </tr>
+              </tbody>
+              </table> 
+                <button type="submit" class="btn btn-sm btn-info div-button">Submit</button>
+                <button type="cancel" class="btn btn-sm btn-info" value="Cancel"  (click)="Cancel()">Cancel</button>
+              </div>
+             </form>
+             <div *ngIf="migrationQuestionLength==0">
+                <button type="submit" class="btn btn-sm btn-info" (click)="addQuestions()">Add Questions</button>
+             </div>
+    <!-- 
+             <form #productForm="ngForm" (ngSubmit)="migrationProviderMethod()">
+                    <div class="form-group">
+                          <table width="100%" datatable="bootstrap"   class="table table-striped table-hover table-sm ">
+                             <thead bgcolor="#E0E0E0">
+                              <tr>
+                                <th>Question</th>
+                                <th>Question Description</th>
+                              </tr>
+                            </thead> 
+                            <tbody>
+                                <tr *ngFor="let size of migrationAllData;let i = index">
+                                    <td>Question
+                                        <br>Excution Order
+                                        <br>Question type
+                                        <br>Options
+                                        <br>Migration Rule
+                                     </td>  
+                                    <td> 
+                                        <span name="questionText" > {{migrationAllData[i].questionText}}</span> 
+                                        <span *ngFor="let s of migrationAllData[i].migrationRule">
+                                        <br><input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrderValue[i]" placeholder="{{s.executionOrder}}"/>
+                                        <br><span name="questionType">{{migrationAllData[i].questionType}}</span>
+                                        <br><span *ngFor="let option of migrationAllData[i]['questionOption'] ; let op = index" name="optionText">{{migrationAllData[i].questionOption[op]['optionText']+" , "}}</span>
+                                        <br><input type="text" #cloudableRule name="migrationRule{{i}}" [(ngModel)]="migrationRule[i]" placeholder="{{s.migrationRule}}"/>
+                                    </span>
+                                    </td>
+                                </tr>
+                          </tbody>
+                          </table> 
+                          <button type="submit" class="btn btn-info div-button">Submit</button>
+                            <button type="cancel" class="btn btn-info" value="Cancel"  (click)="Cancel()">Cancle</button>
+                          </div>
+                         </form> -->
+            
+    

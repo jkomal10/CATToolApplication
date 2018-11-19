@@ -25,10 +25,10 @@ public class CloudProviderController {
 	@Autowired
 	CloudProviderService cloudProviderService;
 	
-	@GetMapping("/getAll")
-	public List<CloudProvider> getCloudProvider()
+	@GetMapping("/getAll/{clientName}")
+	public List<CloudProvider> getCloudProvider(@PathVariable String clientName)
 	{
-		return cloudProviderService.getAllcloudProvider();
+		return cloudProviderService.getAllcloudProvider(clientName);
 	}
 	
 //	@GetMapping("/getAllCloudProviderQuestion/{cloudProviderId}")
@@ -47,12 +47,12 @@ public class CloudProviderController {
 		cloudProviderService.setEvaluationOrder(cloudProvider);
 		 
 	}
-	@PutMapping("/updateCloudProviderRule")
-	public void updateCloudProviderRule(@RequestBody List<CloudProviderRule> cloudProviderRule)
+	@PutMapping("/updateCloudProviderRule/{clientName}")
+	public void updateCloudProviderRule(@RequestBody List<CloudProviderRule> cloudProviderRule,@PathVariable String clientName)
 	{
 		System.out.println("***************************************");
 		System.out.println(cloudProviderRule);
-		cloudProviderService.updateCloudProviderRule(cloudProviderRule);
+		cloudProviderService.updateCloudProviderRule(cloudProviderRule,clientName);
 	}
 
 }

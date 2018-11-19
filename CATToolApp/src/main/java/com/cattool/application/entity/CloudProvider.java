@@ -13,16 +13,11 @@ public class CloudProvider {
 	private int cloudProviderId;
 	private String cloudProviders;
 	private int evaluationOrder;
+	private String clientName;
 	
 	public CloudProvider() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-	public CloudProvider(int cloudProviderId, String cloudProviders, int evaluationOrder) {
-		super();
-		this.cloudProviderId = cloudProviderId;
-		this.cloudProviders = cloudProviders;
-		this.evaluationOrder = evaluationOrder;
 	}
 	public int getCloudProviderId() {
 		return cloudProviderId;
@@ -43,12 +38,17 @@ public class CloudProvider {
 		this.evaluationOrder = evaluationOrder;
 	}
 	
-	
+	public String getClientName() {
+		return clientName;
+	}
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
 	@Override
 	public String toString() {
 		return "CloudProvider [cloudProviderId=" + cloudProviderId + ", cloudProviders=" + cloudProviders
-				+ ", evaluationOrder=" + evaluationOrder + "]";
+				+ ", evaluationOrder=" + evaluationOrder + ", clientName=" + clientName + "]";
 	}
-
+	
 	
 }

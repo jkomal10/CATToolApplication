@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ForCloudableService {
-
   constructor(private http:HttpClient) { }
    baseUrl = 'http://localhost:8090/cloudableRule/save';
    CollectData(){

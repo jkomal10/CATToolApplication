@@ -15,6 +15,8 @@ public class CloudableRule {
 	private String cloudableRule;
 	private int executionOrder;
 	private String questionText;
+	private String clientName;
+	
 	public int getCloudableRuleId() {
 		return cloudableRuleId;
 	}
@@ -46,27 +48,20 @@ public class CloudableRule {
 		this.questionText = questionText;
 	}
 	
+	public String getClientName() {
+		return clientName;
+	}
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
 	public CloudableRule() {
 		super();
-	}
-	
-	public CloudableRule(int cloudableRuleId, int questionId, String cloudableRule, int executionOrder,
-			String questionText) {
-		super();
-		this.cloudableRuleId = cloudableRuleId;
-		this.questionId = questionId;
-		this.cloudableRule = cloudableRule;
-		this.executionOrder = executionOrder;
-		this.questionText = questionText;
 	}
 	@Override
 	public String toString() {
 		return "CloudableRule [cloudableRuleId=" + cloudableRuleId + ", questionId=" + questionId + ", cloudableRule="
-				+ cloudableRule + ", executionOrder=" + executionOrder + ", questionText=" + questionText + "]";
+				+ cloudableRule + ", executionOrder=" + executionOrder + ", questionText=" + questionText
+				+ ", clientName=" + clientName + "]";
 	}
 	
-	
-	
-	
-
 }

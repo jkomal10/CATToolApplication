@@ -7,6 +7,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class ForCloudProviderService {
 
+  clientNameValue : String;
+  
   private evaluationOrder = 'http://localhost:8090/cloudProvider';
   // private cloudProviderRuleUrl = 'http://localhost:8090/cloudProvider/getAllCloudProviderQuestion';
 
@@ -18,8 +20,9 @@ export class ForCloudProviderService {
   
     
 CollectData(){
+  this.clientNameValue=localStorage.getItem('clientName');
   const url = 'http://localhost:8090/cloudProvider/getAll';
-  return this.http.get(url);
+  return this.http.get(url+`/`+this.clientNameValue);
   }
 
 
@@ -38,11 +41,12 @@ CollectData(){
   }
 
   CollectCloudableRuleQuestions(cloudproviderId : number){
-   
-    return this.http.get(`http://localhost:8090/assessmentQuestions/getAllCloudProviderRule/${cloudproviderId}`);
+    this.clientNameValue=localStorage.getItem('clientName');
+    return this.http.get(`http://localhost:8090/assessmentQuestions/getAllCloudProviderRule/${cloudproviderId}/${this.clientNameValue}`);
   }
   updateCloudProviderRule(cloudableRule:any):Observable<Object>
   {
-    return this.http.put(`${this.updateCloudProviderRuleUrl}`, cloudableRule);
+    this.clientNameValue=localStorage.getItem('clientName');
+    return this.http.put(`${this.updateCloudProviderRuleUrl}`+`/`+this.clientNameValue, cloudableRule);
   }
 }
