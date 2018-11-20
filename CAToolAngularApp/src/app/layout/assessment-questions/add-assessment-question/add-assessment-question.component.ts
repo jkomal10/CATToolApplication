@@ -78,6 +78,7 @@ export class AddAssessmentQuestionComponent implements OnInit {
         if(this.MigrationData[index].migrationPattern!=false){
           var migration : MigrationRule = new MigrationRule();
           migration.migrationId=this.MigrationData[index].migrationId;
+          migration.clientName=localStorage.getItem('clientName');
           migration.questionText=this.question.questionText;
           this.question.migrationRule[index]=migration;
         }
@@ -87,11 +88,13 @@ export class AddAssessmentQuestionComponent implements OnInit {
           var cloudProvider : CloudProviderRule = new CloudProviderRule();
           cloudProvider.cloudProviderId=this.CloudProviderData[index].cloudProviderId;
           cloudProvider.questionText=this.question.questionText;
+          cloudProvider.clientName=localStorage.getItem('clientName');
           this.question.cloudProviderRules[index]=cloudProvider;
         }
       }
       console.log(JSON.stringify(this.question));
       this.question.clientName=this.clientNameValue;
+      this.question.createdBy=localStorage.getItem('userName');
       this.questionService.createQuestionn(this.question).subscribe(
       );
       this.router.navigate(['/assessment-questions']);

@@ -11,6 +11,7 @@ import { AssessmentQuestionsService } from '../assessment-questions.service';
 export class UpdateQuestionComponent implements OnInit {
 
   question = new AssessmentQuestions();
+  questionObject = new AssessmentQuestions();
   que : any;
   submitted = false;
   numberOfOptions : number;
@@ -64,6 +65,8 @@ export class UpdateQuestionComponent implements OnInit {
 
   updateQue(question) {
     console.log('*******onsubmit application**********'+question.questionId);
+    this.questionObject=question;
+    this.questionObject.modifiedBy=localStorage.getItem('userName');
     this.assessmentQuestionsService.updateAssessmentQuestions(question)
       .subscribe(
       );

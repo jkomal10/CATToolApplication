@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 public class CatToolApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CatToolApp.class, args);//l
+		SpringApplication.run(CatToolApp.class, args);
 		
 	}
 }

@@ -14,7 +14,7 @@ import com.cattool.application.repository.AssessmentQuestionsRepository;
 import com.cattool.application.repository.CloudableRuleRepository;
 @Transactional
 @Service
-public class AssessmentQuestionsService {
+public class AssessmentQuestionsService{
 	
 	@Autowired
 	AssessmentQuestionsRepository assessmentQuestionsRepository;
@@ -58,16 +58,16 @@ public class AssessmentQuestionsService {
 	public AssessmentQuestions saveQuestions(AssessmentQuestions assessmentQuestions)
 	{
 		System.out.println(assessmentQuestions);
-
+		
 		assessmentQuestionsRepository.save(assessmentQuestions);
 		CloudableRule cloudableRule = new CloudableRule();
 		System.out.println("((((((((   "+assessmentQuestions.getAssessmentTypeForCloudable());
 		if(assessmentQuestions.getAssessmentTypeForCloudable() != null)
 		{
 			System.out.println("*********** "+assessmentQuestions.getAssessmentTypeForCloudable());
-			
 			cloudableRule.setQuestionId(assessmentQuestions.getQuestionId());
 			cloudableRule.setQuestionText(assessmentQuestions.getQuestionText());
+			//cloudableRule.setClientName(assessmentQuestions.getClientName());
 			cloudableRuleRepository .save(cloudableRule);
 		}
 //		cloudableRuleRepository .save(cloudableRule);

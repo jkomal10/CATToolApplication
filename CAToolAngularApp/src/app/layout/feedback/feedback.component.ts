@@ -60,7 +60,7 @@ export class FeedbackComponent implements OnInit {
     console.log("&&&&&&&&&&&&&&&&&&"+this.recommend);
     this.feedbackObject.rating=this.rating;
     this.feedbackService.addFeedback(this.feedbackObject).subscribe();
-    this.router.navigate(['/feedback']);
+    this.router.navigate(['/dashboard']);
   }
 
 }
