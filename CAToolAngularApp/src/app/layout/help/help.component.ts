@@ -7,34 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HelpComponent implements OnInit {
 
-  video:string;
-  player:YT.Player;
-  id:string;
-  components:string;
+  textfield:string;
   constructor() { }
 
   ngOnInit() {
-    this.video=localStorage.getItem('component');
-    console.log(this.video);
-    this.call();
+   
 
   }
 
-  call()
-  {
-    // this.player: YT.Player;
-    if(this.video=='user'){
-      this.components = 'Video for all services of users';
-      this.id= '0eWrpsCLMJQ';
-    }
-    
+  submit(formvalue:string){
+    // this.textfield=formvalue;
+    console.log(this.textfield);
 
-  //  savePlayer(player) {
-  //   this.player = player;
-  //   console.log('Video Url', player.getVideoUrl());
-  // }
-  // onStateChange(event) {
-  //   console.log('player state', event.data);
-  // }
   }
+  
 }

@@ -1042,3 +1042,11 @@ Caused by: java.sql.SQLException: Cannot add foreign key constraint
 2018-11-20 11:31:08 ERROR [http-nio-8090-exec-9] c.c.a.controller.UserController -- Get all user
 2018-11-20 11:32:36 ERROR [http-nio-8090-exec-3] c.c.a.controller.UserController -- Get all user
 2018-11-20 11:33:37 ERROR [http-nio-8090-exec-2] c.c.a.controller.UserController -- Get all user
+2018-11-20 11:40:20 ERROR [http-nio-8090-exec-5] c.c.a.controller.UserController -- Get all user
+2018-11-20 12:03:11 ERROR [http-nio-8090-exec-7] c.c.a.controller.UserController -- Get all user
+2018-11-20 12:03:15 ERROR [http-nio-8090-exec-3] c.c.a.controller.UserController -- Get all user
+2018-11-20 12:06:18 ERROR [http-nio-8090-exec-10] c.c.a.controller.UserController -- Get all user
+2018-11-20 12:11:28 ERROR [http-nio-8090-exec-2] c.c.a.controller.UserController -- Get all user
+2018-11-20 12:11:32 ERROR [http-nio-8090-exec-9] c.c.a.controller.UserController -- Get all user
+2018-11-20 12:12:32 ERROR [http-nio-8090-exec-3] c.c.a.controller.UserController -- Get all user
+2018-11-20 12:13:30 ERROR [http-nio-8090-exec-8] c.c.a.controller.UserController -- Get all user
