@@ -12,6 +12,7 @@ import { ApplicationService } from '../application.service';
 })
 export class UpdateApplicationComponent implements OnInit {
 application= new Application();
+applicationObject= new Application();
   app : any;
   
   constructor(private router: Router, private applicationService: ApplicationService) { }
@@ -24,15 +25,12 @@ application= new Application();
   }
   updateActive(application) {
     console.log('*******onsubmit application**********'+application.applicationId);
-    this.applicationService.updateApplication(application)
+    this.applicationObject=application;
+    this.applicationObject.modifiedBy=localStorage.getItem('userName');
+    this.applicationService.updateApplication(this.applicationObject)
       .subscribe(
-        // data => {
-        //   console.log(data);
-        //   this.application = data as Application;
-        //   console.log('*********************'+this.app);
-        // },
-        // error => console.log(error)
       );
+    this.router.navigate(['/application']);
   }
   onSubmit(formvalues){
     this.application=formvalues;

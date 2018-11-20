@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.cattool.application.entity.Application;
 
 @Repository
-public interface ApplicationRepository extends JpaRepository<Application, Long> {
+public interface ApplicationRepository extends JpaRepository<Application, Long>{
 
 	
 

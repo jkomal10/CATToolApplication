@@ -29,6 +29,7 @@ export class AddApplicationComponent implements OnInit {
    
     save() {
       this.application.clientName=this.clientNameValue;
+      this.application.createdBy=localStorage.getItem('userName');
       this.addapplicationService.createApplication(this.application)
         .subscribe(data => console.log(data), error => console.log(error));
       this.application = new Application();
