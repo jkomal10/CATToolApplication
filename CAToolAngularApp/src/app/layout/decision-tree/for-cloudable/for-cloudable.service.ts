@@ -7,12 +7,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ForCloudableService {
+
+  clientNameValue : String;
   constructor(private http:HttpClient) { }
    baseUrl = 'http://localhost:8090/cloudableRule/save';
    CollectData(){
    //const url = 'http://localhost:8090/option/getAll';
+   this.clientNameValue=localStorage.getItem('clientName');
    const url= 'http://localhost:8090/assessmentQuestions/getAllCloudableQuestions';
-   return this.http.get(url);
+   return this.http.get(url+`/`+this.clientNameValue);
     }
 
     addClodableRule(cloudablerule: Object): Observable<Object> {

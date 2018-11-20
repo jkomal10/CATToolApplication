@@ -36,7 +36,7 @@
         </thead>
         <tbody>
             <tr *ngFor = "let size of AllData"> 
-                <td><input #value type="checkbox" id="applicationId" (change)="applicationNameChange($event,row.applicationId)"></td>
+                <td><input #value type="checkbox" id="applicationId" (change)="applicationNameChange($event,size.applicationId)"></td>
                 <td>{{size.applicationName}}</td>
             </tr> 
         </tbody>

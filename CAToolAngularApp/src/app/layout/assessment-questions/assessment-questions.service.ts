@@ -7,6 +7,7 @@ import { IUser } from './user';
 
 @Injectable()
 export class AssessmentQuestionsService {
+  clienNameValue: String;
   constructor(private http: HttpClient) {
 
   }
@@ -37,13 +38,15 @@ export class AssessmentQuestionsService {
   }
 
   getMigrationData(){
+    this.clienNameValue=localStorage.getItem('clientName');
     const  url  =  'http://localhost:8090/migrationRule/getAll';
-    return  this.http.get(url);
+    return  this.http.get(url+`/`+this.clienNameValue);
   }
 
   getCloudProviderData(){
+    this.clienNameValue=localStorage.getItem('clientName');
     const url = 'http://localhost:8090/cloudProvider/getAll';
-    return this.http.get(url);
+    return this.http.get(url+`/`+this.clienNameValue);
   }
 
   createQuestionn(question: Object): Observable<Object> {

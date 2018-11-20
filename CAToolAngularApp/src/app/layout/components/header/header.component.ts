@@ -10,10 +10,13 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HeaderComponent {
     userName : string;
+    clientNameValue : String;
 
     constructor(public router: Router) {}
 
     ngOnInit() {
+        this.clientNameValue=localStorage.getItem('clientName');
+        console.log(this.clientNameValue);
        this.userName=localStorage.getItem('userName');
         console.log(this.userName);
         

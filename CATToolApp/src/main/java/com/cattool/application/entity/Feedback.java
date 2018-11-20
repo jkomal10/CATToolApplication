@@ -11,24 +11,26 @@ public class Feedback {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int feedbackId;
-	private int userId;
+	private String userName;
 	private String question1;
 	private String question2;
 	private String question3;
 	private String recommend;
 	private String other;
 	private int rating;
+	private String clientName;
 	public int getFeedbackId() {
 		return feedbackId;
 	}
 	public void setFeedbackId(int feedbackId) {
 		this.feedbackId = feedbackId;
 	}
-	public int getUserId() {
-		return userId;
+	
+	public String getUserName() {
+		return userName;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getQuestion1() {
 		return question1;
@@ -65,6 +67,18 @@ public class Feedback {
 	}
 	public void setRating(int rating) {
 		this.rating = rating;
+	}
+	public String getClientName() {
+		return clientName;
+	}
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+	@Override
+	public String toString() {
+		return "Feedback [feedbackId=" + feedbackId + ", userName=" + userName + ", question1=" + question1
+				+ ", question2=" + question2 + ", question3=" + question3 + ", recommend=" + recommend + ", other="
+				+ other + ", rating=" + rating + ", clientName=" + clientName + "]";
 	}
 	
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { Feedback } from './Feedback';
+import { FeedbackService } from './feedback.service';
 
 @Component({
   selector: 'app-feedback',
@@ -10,9 +12,16 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class FeedbackComponent implements OnInit {
 
-  constructor(public router:Router) { }
-
+  
+  feedbackObject: Feedback = new Feedback();
+  question1 : string;
+  question2 : string;
+  question3 : string;
+  recommend : string;
+  other : string;
   rating : number=0;
+
+  constructor(public router:Router,private feedbackService: FeedbackService) { }
 
   ngOnInit() {
     this.rating=0;
@@ -41,6 +50,17 @@ export class FeedbackComponent implements OnInit {
   fiveStar(){
     this.rating=5;
     console.log("Five Star");
+  }
+
+  feedback(){
+    this.feedbackObject.question1=this.question1;
+    this.feedbackObject.question2=this.question2;
+    this.feedbackObject.question3=this.question3;
+    this.feedbackObject.recommend=this.recommend;
+    console.log("&&&&&&&&&&&&&&&&&&"+this.recommend);
+    this.feedbackObject.rating=this.rating;
+    this.feedbackService.addFeedback(this.feedbackObject).subscribe();
+    this.router.navigate(['/feedback']);
   }
 
 }

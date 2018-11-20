@@ -80,10 +80,10 @@ public class ApplicationController {
 		applicationService.deactivateApplicationById(applicationId);
 	}
 	
-	@GetMapping("/getAllReassessment")
-	public List<Application>getAllReassessment()
+	@GetMapping("/getAllReassessment/{clientName}")
+	public List<Application>getAllReassessment(@PathVariable String clientName)
 	{
-		return applicationService.getAllReassessment();
+		return applicationService.getAllReassessment(clientName);
 	}
 
 	@GetMapping("AllRuleCheck/{applicationId}")

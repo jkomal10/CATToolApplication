@@ -100,24 +100,23 @@
     <br>
     <br>
     <label>Q.1  What do you like best about application?</label>
-    <input type="text" id="question1" name="question1" placeholder="Answer">
+    <input type="text" id="question1" name="question1" value="question1" [(ngModel)]="question1" placeholder="Answer">
 
     <label>Q.2  What do you like least about application?</label>
-    <input type="text" id="question2" name="question2" placeholder="Answer">
+    <input type="text" id="question2" name="question2" value="question2" [(ngModel)]="question2" placeholder="Answer">
 
     <label>Q.3  How can we improve application? Send us your ideas and suggestions?</label>
-    <input type="text" id="question3" name="question3" placeholder="Answer">
+    <input type="text" id="question3" name="question3" value="question3" [(ngModel)]="question3" placeholder="Answer">
 
     <label for="recommend">Would you recommend this application to a friend?</label>
-    <select id="recommend" name="recommend">
+    <select id="recommend" name="recommend" [(ngModel)]="recommend">
       <option value="Select--an--option" disabled>Select</option>
       <option value="Yes">Yes</option>
       <option value="No">No</option>
     </select>
 
     <label for="other">Other</label>
-    <textarea id="other" name="other" placeholder="I cannot find application.." style="height:200px"></textarea>
-
-    <input type="submit" value="Submit">
+    <textarea id="other" name="other" placeholder="I cannot find application.." [(ngModel)]="other" style="height:200px"></textarea>
+    <input type="button" class="btn  btn-info" title="Feedback submission" value="Submit" (click)="feedback()">&nbsp;
   </form>
 </div>

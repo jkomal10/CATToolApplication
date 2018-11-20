@@ -5,12 +5,13 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ServiceService {
-
+  clientNameValue : String;
   constructor(private http:HttpClient) { }
 
   CollectData(){
+    this.clientNameValue=localStorage.getItem('clientName');
     const reassessUrl = 'http://localhost:8090/application/getAllReassessment';
-    return this.http.get(reassessUrl);
+    return this.http.get(reassessUrl+`/`+this.clientNameValue);
     }
 
   cloudProvider(applicationId : number){
