@@ -27,9 +27,9 @@ var UsersService = /** @class */ (function () {
         this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
         this.users = this.comptransfer.asObservable();
     }
-    UsersService.prototype.CollectData = function () {
+    UsersService.prototype.CollectData = function (clientName) {
         var url = 'http://localhost:8090/user/getAll';
-        return this.http.get(url);
+        return this.http.get(url + "/" + clientName);
     };
     UsersService.prototype.countNumberOfUsers = function () {
         var getCount = 'http://localhost:8090/user/getUserCount';
@@ -45,6 +45,9 @@ var UsersService = /** @class */ (function () {
     UsersService.prototype.changePassword = function (userName, password, newPassword) {
         console.log("" + this.changePasswordUrl + "/" + userName + "/" + password + "/" + newPassword);
         return this.http.get("" + this.changePasswordUrl + "/" + userName + "/" + password + "/" + newPassword);
+    };
+    UsersService.prototype.sendUsertoOtherComponent = function (messsage) {
+        this.comptransfer.next(messsage);
     };
     UsersService.prototype.sendMsgtoOtherComponent = function (messsage) {
         this.comptransfer.next(messsage);

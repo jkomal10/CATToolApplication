@@ -18,9 +18,10 @@ var AssesstApplicationService = /** @class */ (function () {
         this.AllRuleUrl = 'http://localhost:8090/application/AllRuleCheck';
         this.UpdateAnswersUrl = 'http://localhost:8090/answer/getAnswersByApplicationId/7';
     }
-    AssesstApplicationService.prototype.CollecOptiontData = function () {
+    AssesstApplicationService.prototype.CollecOptiontData = function (clientName) {
+        // const url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';getAllQuestions
         var url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';
-        return this.http.get(url);
+        return this.http.get(url + "/" + clientName);
     };
     AssesstApplicationService.prototype.saveAssessApplication = function (cloudablerule) {
         console.log(this.baseUrl + "/create");

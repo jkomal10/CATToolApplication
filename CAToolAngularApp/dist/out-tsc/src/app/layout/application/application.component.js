@@ -35,30 +35,20 @@ var ApplicationComponent = /** @class */ (function () {
     }
     ApplicationComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.clientNameValue = localStorage.getItem('clientName');
         this.dtOptions = {
             pagingType: 'full_numbers',
             pageLength: 10,
             responsive: true,
-            rowCallback: function (row, data, index) {
-                var self = _this;
-                // Unbind first in order to avoid any duplicate handler
-                // (see https://github.com/l-lin/angular-datatables/issues/87)
-                $('td', row).unbind('click');
-                $('td', row).bind('click', function () {
-                    self.someClickHandler(data);
-                });
-                return row;
-            }
         };
         // this.applicationService.CollectData().subscribe(result => 
         //   {
         //   this.AllData = result ;
         //   this.dtTrigger.next();
         //   });
-        this.applicationService.CollectData().subscribe(function (result) {
+        this.applicationService.CollectData(this.clientNameValue).subscribe(function (result) {
             _this.AllData = result;
             _this.dtTrigger.next();
-            console.log("this.AllData___" + _this.AllData);
         });
     };
     ApplicationComponent.prototype.form = function () {
@@ -129,7 +119,7 @@ var ApplicationComponent = /** @class */ (function () {
             .subscribe();
     };
     ApplicationComponent.prototype.reloadData = function () {
-        this.applicationService.CollectData();
+        this.applicationService.CollectData(this.clientNameValue);
     };
     ApplicationComponent.prototype.ViewApplication = function (formvalues) {
         this.applicationService.sendMsgtoOtherComponent(formvalues);

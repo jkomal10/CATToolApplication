@@ -1,22 +1,74 @@
 <div *ngIf="userCheck; else notShow">
   <div [@routerTransition]>
-        <h2 class="text-muted">Dashboard <small>Statistics Overview</small></h2>
+        <!-- <h2 class="text-muted">Dashboard <small>Statistics Overview</small></h2> -->
         <html lang="en">
                 <body>
                 <div class="jumbotron text-center">
 
-                    <h1  class="text-capitalize">Welcome to Cloud Assessment Tool
+                    <h2  class="text-capitalize">Welcome to Cloud Assessment Tool
                         <!-- <div *ngIf="firstName!='null'">{{firstName}}&ngsp;{{lastName}}</div> -->
-                      </h1>
+                      </h2>
                          <br>
-                      <div class="row my-3">
+                      <!-- <div class="row my-3">
                         <div class="col-xs-6 col-sm-6">
                             <p><img src="assets/images/cloud.png" width="150px" class="user-avatar" /></p> 
                         </div>
-                        <div class="col-xs-6 col-sm-6">
-                            <div ><youtube-player [videoId]="id"></youtube-player></div>
-                        </div>
-                      </div>
+                        <div class="col-xs-6 col-sm-6"> -->
+                            <!-- <div ><youtube-player [videoId]="id"></youtube-player></div> -->
+                            <!-- {}
+                                  <div><p><img src="assets/images/cloud.png" width="150px" class="user-avatar" /></p> </div>
+                                  <div>
+                                    <p>You can see the video </p>
+                                    <button class="button button-info" title="Click here to download the video" (click)="download()" >Download</button>
+                                  </div>
+                                  {} -->
+                            <vg-player>
+                                <vg-controls>
+                                    <vg-play-pause></vg-play-pause>
+                                    <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+                                    <vg-mute></vg-mute>
+                                    <vg-volume></vg-volume>
+                                    
+                                    <vg-scrub-bar>
+                                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                                        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                                     </vg-scrub-bar>
+                                     <vg-fullscreen></vg-fullscreen>
+                                    </vg-controls>
+                                <!-- <vg-overlay-play></vg-overlay-play>
+                                <vg-buffering></vg-buffering>
+                              
+                                <vg-controls>
+                                    <vg-play-pause></vg-play-pause>
+                                    <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+                              
+                                    <vg-scrub-bar>
+                                       <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                                       <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                                    </vg-scrub-bar>
+                              
+                                    <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+                              
+                                    <vg-track-selector></vg-track-selector>
+                                    <vg-mute></vg-mute>
+                                    <vg-volume></vg-volume>
+                              
+                                    <vg-fullscreen></vg-fullscreen>
+                                </vg-controls> -->
+                                
+                                <!-- <video #media [vgMedia]="media" id="singleVideo" src="../assets/video/videoplayback.3gp">
+                                    
+                                </video> -->
+
+
+                                <video #media [vgMedia]="media" id="singleVideo" preload="auto" crossorigin style="height:300px">
+                                    <source src="../assets/video/videoplayback.mp4" type="video/mp4">
+                                </video>
+
+                            </vg-player>
+
+                        <!-- </div>
+                      </div> -->
 
                     <!-- <div ><youtube-player [videoId]="id"></youtube-player></div> -->
                   

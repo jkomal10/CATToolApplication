@@ -15,6 +15,7 @@ var http_1 = require("@angular/common/http");
 var assessment_questions_service_1 = require("./assessment-questions.service");
 var rxjs_1 = require("rxjs");
 var Question_1 = require("./Question");
+var Angular5_csv_1 = require("angular5-csv/Angular5-csv");
 var DataTablesResponse = /** @class */ (function () {
     function DataTablesResponse() {
     }
@@ -29,16 +30,30 @@ var AssessmentQuestionsComponent = /** @class */ (function () {
         this.submitted = false;
         this.dtOptions = {};
         this.dtTrigger = new rxjs_1.Subject();
+        this.assessmentQuestions = [];
         this.AllData = [];
     }
+    AssessmentQuestionsComponent.prototype.exportCsv = function () {
+        var filename = "Assessment Question";
+        for (var index = 0; index < this.AllData.length; index++) {
+            this.assessmentQuestions[index] = this.AllData[index];
+        }
+        var options = {
+            headers: ["questionId", "questionText", "questionDescription", "questionType", "questionDisplayOrder",
+                "numberOfOption", "isActive", "isDelete", "assessmentTypeForMigration", "assessmentTypeForCloudProvider",
+                "assessmentTypeForCloudable", "createdBy", "cteatedTime"]
+        };
+        new Angular5_csv_1.Angular5Csv(this.assessmentQuestions, filename, options);
+    };
     AssessmentQuestionsComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.clientNameValue = localStorage.getItem('clientName');
         this.dtOptions = {
             pagingType: 'full_numbers',
             pageLength: 10,
             responsive: true
         };
-        this.assessmentQuestionsService.CollectData().subscribe(function (result) {
+        this.assessmentQuestionsService.CollectData(this.clientNameValue).subscribe(function (result) {
             _this.AllData = result;
             _this.dtTrigger.next();
             console.log(_this.AllData);

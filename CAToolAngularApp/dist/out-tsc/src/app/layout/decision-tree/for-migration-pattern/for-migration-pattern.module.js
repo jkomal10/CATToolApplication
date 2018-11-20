@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
 var forms_1 = require("@angular/forms");
+var angular_datatables_1 = require("angular-datatables");
 var for_migration_pattern_routing_module_1 = require("./for-migration-pattern-routing.module");
 var for_migration_pattern_component_1 = require("./for-migration-pattern.component");
 var evaluation_order_component_1 = require("./evaluation-order/evaluation-order.component");
@@ -18,7 +19,7 @@ var ForMigrationPatternModule = /** @class */ (function () {
     }
     ForMigrationPatternModule = __decorate([
         core_1.NgModule({
-            imports: [common_1.CommonModule, for_migration_pattern_routing_module_1.ForMigrationPatternRoutingModule, forms_1.FormsModule, forms_1.ReactiveFormsModule],
+            imports: [common_1.CommonModule, for_migration_pattern_routing_module_1.ForMigrationPatternRoutingModule, forms_1.FormsModule, forms_1.ReactiveFormsModule, angular_datatables_1.DataTablesModule],
             declarations: [for_migration_pattern_component_1.ForMigrationPatternComponent, evaluation_order_component_1.EvaluationOrderComponent, migration_patterns_component_1.MigrationPatternsComponent]
         })
     ], ForMigrationPatternModule);

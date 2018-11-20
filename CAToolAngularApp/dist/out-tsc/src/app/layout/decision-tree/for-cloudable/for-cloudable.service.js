@@ -25,6 +25,18 @@ var ForCloudableService = /** @class */ (function () {
         console.log(this.baseUrl + "/create");
         return this.http.post("" + this.baseUrl + "/create", cloudablerule);
     };
+    ForCloudableService.prototype.collectRule = function () {
+        var collectRulesUrl = "http://localhost:8090/cloudableRule/getAll";
+        return this.http.get(collectRulesUrl);
+    };
+    ForCloudableService.prototype.collectOptions = function () {
+        var collectOptionsUrl = "http://localhost:8090/option/getAll";
+        return this.http.get(collectOptionsUrl);
+    };
+    ForCloudableService.prototype.collectQuestion = function () {
+        var CollectQuestionUrl = "http://localhost:8090/assessmentQuestions/getAllQuestions";
+        return this.http.get(CollectQuestionUrl);
+    };
     ForCloudableService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

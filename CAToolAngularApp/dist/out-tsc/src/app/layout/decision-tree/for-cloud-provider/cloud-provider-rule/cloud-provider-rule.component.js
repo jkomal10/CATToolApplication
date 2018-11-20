@@ -13,16 +13,24 @@ var core_1 = require("@angular/core");
 var for_cloud_provider_service_1 = require("../for-cloud-provider.service");
 var CloudProviderRule_1 = require("../CloudProviderRule");
 var router_1 = require("../../../../../../node_modules/@angular/router");
+var rxjs_1 = require("rxjs");
 var CloudProviderRuleComponent = /** @class */ (function () {
     function CloudProviderRuleComponent(forCloudProviderService, router) {
         this.forCloudProviderService = forCloudProviderService;
         this.router = router;
+        this.dtOptions = {};
+        this.dtTrigger = new rxjs_1.Subject();
         this.executionOrders = [];
         this.cloudProviderRulesText = [];
         this.cloudProviderRule = [];
     }
     CloudProviderRuleComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.dtOptions = {
+            pagingType: 'full_numbers',
+            pageLength: 10,
+            responsive: true
+        };
         this.forCloudProviderService.cloudProviderId.subscribe(function (data) { _this.cloudproviderId = data; });
         console.log(this.cloudproviderId + "Cloud Provider rule component");
         // this.forCloudProviderService.CollectCloudableRuleQuestions(this.cloudproviderId).subscribe( result=>{
@@ -35,6 +43,7 @@ var CloudProviderRuleComponent = /** @class */ (function () {
             //      console.log("**this.executionOrdersCp"+this.executionOrdersCp[index1]);
             //   }
             // }
+            _this.dtTrigger.next();
             console.log("*****CloudProviderAllData");
             console.log("&&&&&&" + _this.executionOrders);
         });
@@ -65,6 +74,9 @@ var CloudProviderRuleComponent = /** @class */ (function () {
     };
     CloudProviderRuleComponent.prototype.Cancel = function () {
         this.router.navigate(['/for-cloud-provider']);
+    };
+    CloudProviderRuleComponent.prototype.addQuestion = function () {
+        this.router.navigate(['/assessment-questions/add-assessment-question']);
     };
     CloudProviderRuleComponent = __decorate([
         core_1.Component({

@@ -11,6 +11,9 @@ var common_1 = require("@angular/common");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var dashboard_routing_module_1 = require("./dashboard-routing.module");
 var dashboard_component_1 = require("./dashboard.component");
+var ngx_youtube_player_1 = require("ngx-youtube-player");
+var core_2 = require("videogular2/core");
+var controls_1 = require("videogular2/controls");
 var shared_1 = require("../../shared");
 var DashboardModule = /** @class */ (function () {
     function DashboardModule() {
@@ -22,7 +25,10 @@ var DashboardModule = /** @class */ (function () {
                 ng_bootstrap_1.NgbCarouselModule.forRoot(),
                 ng_bootstrap_1.NgbAlertModule.forRoot(),
                 dashboard_routing_module_1.DashboardRoutingModule,
-                shared_1.StatModule
+                shared_1.StatModule,
+                ngx_youtube_player_1.YoutubePlayerModule,
+                core_2.VgCoreModule,
+                controls_1.VgControlsModule
             ],
             declarations: [
                 dashboard_component_1.DashboardComponent

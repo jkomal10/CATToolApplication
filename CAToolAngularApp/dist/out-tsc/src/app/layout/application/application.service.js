@@ -24,9 +24,9 @@ var ApplicationService = /** @class */ (function () {
         this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
         this.question = this.comptransfer.asObservable();
     }
-    ApplicationService.prototype.CollectData = function () {
+    ApplicationService.prototype.CollectData = function (clientName) {
         var url = 'http://localhost:8090/application/getAll';
-        return this.http.get(url);
+        return this.http.get(url + "/" + clientName);
     };
     ApplicationService.prototype.createApplication = function (application) {
         return this.http.post("" + this.baseUrl + "/create", application);

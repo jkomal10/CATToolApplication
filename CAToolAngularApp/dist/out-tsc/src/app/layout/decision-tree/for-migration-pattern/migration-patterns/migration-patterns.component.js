@@ -14,12 +14,15 @@ var for_migration_pattern_service_1 = require("../for-migration-pattern.service"
 var router_1 = require("../../../../../../node_modules/@angular/router");
 var http_1 = require("@angular/common/http");
 var MigrationRule_1 = require("../../../assessment-questions/MigrationRule");
+var rxjs_1 = require("rxjs");
 var MigrationPatternsComponent = /** @class */ (function () {
     function MigrationPatternsComponent(forMigrationPatternService, router, http) {
         this.forMigrationPatternService = forMigrationPatternService;
         this.router = router;
         this.http = http;
         this.migrationRuleObject = [];
+        this.dtOptions = {};
+        this.dtTrigger = new rxjs_1.Subject();
         this.migrationAllData = [];
         this.migrationOption = [];
         this.migrationRule = [];
@@ -27,9 +30,18 @@ var MigrationPatternsComponent = /** @class */ (function () {
     }
     MigrationPatternsComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.dtOptions = {
+            pagingType: 'full_numbers',
+            pageLength: 10,
+            responsive: true
+        };
         this.forMigrationPatternService.question.subscribe(function (data) { _this.migrationIdValue = data; });
         this.forMigrationPatternService.getMigrationQuestions(this.migrationIdValue).subscribe(function (result) {
+            _this.dtTrigger.next();
             _this.migrationAllData = result;
+            console.log(_this.migrationAllData);
+            _this.migrationQuestionLength = _this.migrationAllData.length;
+            console.log(_this.migrationAllData.length);
         });
     };
     MigrationPatternsComponent.prototype.migrationProviderMethod = function () {
@@ -54,6 +66,9 @@ var MigrationPatternsComponent = /** @class */ (function () {
     };
     MigrationPatternsComponent.prototype.Cancel = function () {
         this.router.navigate(['/for-migration-pattern']);
+    };
+    MigrationPatternsComponent.prototype.addQuestions = function () {
+        this.router.navigate(['/assessment-questions/add-assessment-question']);
     };
     MigrationPatternsComponent = __decorate([
         core_1.Component({

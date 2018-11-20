@@ -14,20 +14,26 @@ var router_1 = require("@angular/router");
 var http_1 = require("@angular/common/http");
 var Angular5_csv_1 = require("angular5-csv/Angular5-csv");
 var application_service_1 = require("../application/application.service");
+var report_service_1 = require("./report.service");
 var ReportComponent = /** @class */ (function () {
-    function ReportComponent(router, applicationService, http) {
+    function ReportComponent(router, applicationService, http, reportService) {
         this.router = router;
         this.applicationService = applicationService;
         this.http = http;
+        this.reportService = reportService;
         this.application = [];
         this.AllData = [];
     }
     ReportComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.applicationService.CollectData().subscribe(function (result) {
+        this.clientNameValue = localStorage.getItem('clientName');
+        this.applicationService.CollectData(this.clientNameValue).subscribe(function (result) {
             _this.AllData = result;
             console.log(JSON.stringify(_this.AllData));
         });
+    };
+    ReportComponent.prototype.summaryReport = function () {
+        this.reportService.summaryReport().subscribe();
     };
     ReportComponent.prototype.exportCsv = function () {
         var csvRows = [];
@@ -56,7 +62,7 @@ var ReportComponent = /** @class */ (function () {
             templateUrl: './report.component.html',
             styleUrls: ['./report.component.scss']
         }),
-        __metadata("design:paramtypes", [router_1.Router, application_service_1.ApplicationService, http_1.HttpClient])
+        __metadata("design:paramtypes", [router_1.Router, application_service_1.ApplicationService, http_1.HttpClient, report_service_1.ReportService])
     ], ReportComponent);
     return ReportComponent;
 }());

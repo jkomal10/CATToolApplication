@@ -27,6 +27,10 @@ var ForCloudableComponent = /** @class */ (function () {
         this.router = router;
         this.dtOptions = {};
         this.dtTrigger = new rxjs_1.Subject();
+        this.rules = [];
+        this.options = [];
+        this.optionValues = [];
+        this.questions = [];
         //option: QuestionOption=new QuestionOption();
         //op :object [];
         //assessmentQuestions : object [];
@@ -35,6 +39,7 @@ var ForCloudableComponent = /** @class */ (function () {
         this.executionOrders = [];
         this.cloudableRulesText = [];
         this.cloudableRules = [];
+        this.exeorder = [];
         this.cloudableRules = [];
     }
     ForCloudableComponent.prototype.ngOnInit = function () {
@@ -62,25 +67,57 @@ var ForCloudableComponent = /** @class */ (function () {
             //this.op = abc['questionOption'];
             //console.log(this.op[0]['optionText']+"komalll");
         });
+        this.forCloudableService.collectRule().subscribe(function (result) {
+            _this.rules = result;
+        });
+        // for (let index = 0; index < this.rules.length; index++) {
+        //   this.exeorder[index]=this.rules[index].executionOrder;
+        // }
+        // console.log("exeorder***********"+this.exeorder);
+        this.forCloudableService.collectQuestion().subscribe(function (result) {
+            _this.questions = result;
+            console.log(_this.questions);
+        });
+        this.forCloudableService.collectOptions().subscribe(function (result) {
+            _this.options = result;
+            console.log(_this.options);
+            //  for (let index = 0; index < this.rules.length; index++) {
+            //    var qid=this.rules[index].questionId;
+            //    for (let index = 0; index < this.options.length; index++) {
+            //      if(qid==this.options[index].questionId)
+            //      {
+            //       var ops= ops+""+this.options[index].optionText;
+            //       console.log("&&&&&& **"+ops);
+            //      }
+            //      this.optionValues[index]=this.ops;
+            //     //  console.log("************   "+this.optionValues);
+            //    }
+            //  }
+        });
     };
     ForCloudableComponent.prototype.someClickHandler = function (info) {
         this.message = info.id + ' - ' + info.firstName;
     };
     ForCloudableComponent.prototype.addCloudableRule = function () {
-        for (var index = 0; index < this.AllData.length; index++) {
-            console.log(this.AllData[index].questionId + "Alldata");
+        for (var index = 0; index < this.rules.length; index++) {
+            console.log(this.rules[index].questionId + "*********  qid");
             var cRule = new CloudableRule_1.CloudableRule();
-            cRule.questionId = this.AllData[index].questionId;
-            console.log(cRule.questionId + "rule");
+            cRule.questionId = this.rules[index].questionId;
+            console.log(cRule.questionId + "ruleqid");
             cRule.cloudableRule = this.cloudableRulesText[index];
+            console.log("rules***" + cRule.cloudableRule);
             cRule.executionOrder = this.executionOrders[index];
-            cRule.questionText = this.AllData[index].questionText;
+            console.log("exeorder****" + cRule.executionOrder);
+            cRule.questionText = this.rules[index].questionText;
+            console.log("qtext****" + cRule.questionText);
+            cRule.cloudableRuleId = this.rules[index].cloudableRuleId;
+            console.log("ruleId***" + cRule.cloudableRuleId);
             this.cloudableRules[index] = cRule;
             this.router.navigate(['/for-cloudable']);
         }
         //console.log(cloudableRules+"llllllllllllllllllllllllllllllllll");
         console.log("jjjjjjjjjjjjjjjjjjjj");
-        console.log(JSON.stringify(this.cloudableRules[0]) + "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+        console.log(JSON.stringify(this.cloudableRules) + "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
         this.forCloudableService.addClodableRule(this.cloudableRules).subscribe();
     };
     ForCloudableComponent.prototype.onSubmit = function () {
@@ -93,7 +130,7 @@ var ForCloudableComponent = /** @class */ (function () {
         this.addCloudableRule();
     };
     ForCloudableComponent.prototype.Cancle = function () {
-        this.router.navigate(['/for-cloudable']);
+        this.router.navigate(['/decision-tree']);
     };
     ForCloudableComponent = __decorate([
         core_1.Component({

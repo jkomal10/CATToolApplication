@@ -14,6 +14,7 @@ var router_1 = require("@angular/router");
 var http_1 = require("@angular/common/http");
 var user_service_1 = require("./user.service");
 var rxjs_1 = require("rxjs");
+var Angular5_csv_1 = require("angular5-csv/Angular5-csv");
 var DataTablesResponse = /** @class */ (function () {
     function DataTablesResponse() {
     }
@@ -24,11 +25,20 @@ var UserComponent = /** @class */ (function () {
         this.userService = userService;
         this.router = router;
         this.http = http;
+        this.id = '0eWrpsCLMJQ';
         this.dtOptions = {};
         this.dtTrigger = new rxjs_1.Subject();
         // persons: Person[];
+        this.users = [];
         this.AllData = [];
     }
+    UserComponent.prototype.savePlayer = function (player) {
+        this.player = player;
+        console.log('Video Url', player.getVideoUrl());
+    };
+    UserComponent.prototype.onStateChange = function (event) {
+        console.log('player state', event.data);
+    };
     UserComponent.prototype.addUser = function () {
         console.log("This is user component");
         console.log(this.IpAddress);
@@ -55,8 +65,25 @@ var UserComponent = /** @class */ (function () {
         this.userService.sendIpAddresstoOtherComponent(this.IpAddress);
         this.router.navigate(['/user/upload-user']);
     };
+    UserComponent.prototype.exportCsv = function () {
+        var filename = "UserDetails";
+        for (var index = 0; index < this.AllData.length; index++) {
+            this.users[index] = this.AllData[index];
+        }
+        var options = {
+            headers: ["userId", "userName", "firstName", "lastName", "password", "ipAddress", "lastLogin", "company", "isDeleted",
+                "isDeactivate", "createdDateTime", "createdBy", "modifiedDateTime", "modifiedBy", "isAdmin"]
+        };
+        new Angular5_csv_1.Angular5Csv(this.users, filename, options);
+    };
+    UserComponent.prototype.help = function () {
+        // this.userService.sendUsertoOtherComponent("user");
+        localStorage.setItem('component', 'user');
+        this.router.navigate(['/help']);
+    };
     UserComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.clientValue = localStorage.getItem("clientName");
         this.dtOptions = {
             pagingType: 'full_numbers',
             pageLength: 10,
@@ -64,7 +91,7 @@ var UserComponent = /** @class */ (function () {
         };
         this.userService.getIpAddress().subscribe(function (data) {
             _this.IpAddress = data['ip'];
-            _this.userService.CollectData().subscribe(function (result) {
+            _this.userService.CollectData(_this.clientValue).subscribe(function (result) {
                 _this.AllData = result;
                 _this.dtTrigger.next();
             });

@@ -43,6 +43,7 @@ var UserRoleComponent = /** @class */ (function () {
         });
     };
     UserRoleComponent.prototype.assessApplication = function (formvalues) {
+        console.log("Assessssssssssssss");
         console.log(JSON.stringify(formvalues));
         console.log(formvalues.applicationId);
         this.userRoleService.sendMsgtoOtherComponent(formvalues);

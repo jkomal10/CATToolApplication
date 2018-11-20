@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,13 +27,18 @@ import com.cattool.application.service.UserService;
 @RequestMapping("/user")
 public class UserController {
 
+	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	UserService	userService; 
 	
 	@GetMapping("/getAll/{clientName}")
 	public List<Users> findAllUsers(@PathVariable String clientName)
 	{
+//		LOGGER.info("Get user Name");
+		LOGGER.error("Get all user");
 		return userService.findAllUsers(clientName);
+
+		
 	}
 	
 	@GetMapping("/getUserCount")

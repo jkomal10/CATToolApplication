@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var rxjs_1 = require("rxjs");
 var router_1 = require("@angular/router");
 var http_1 = require("@angular/common/http");
 var for_migration_pattern_service_1 = require("./for-migration-pattern.service");
@@ -21,17 +22,19 @@ var ForMigrationPatternComponent = /** @class */ (function () {
         this.http = http;
         this.assessmentQuestions = new Question_1.AssessmentQuestions();
         this.dtOptions = {};
+        this.dtTrigger = new rxjs_1.Subject();
         this.AllData = [];
     }
     ForMigrationPatternComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.dtOptions = {
             pagingType: 'full_numbers',
-            pageLength: 5,
+            pageLength: 10,
             responsive: true
         };
         this.forMigrationPatternService.CollectData().subscribe(function (result) {
             _this.AllData = result;
+            _this.dtTrigger.next();
             console.log(_this.AllData);
         });
     };

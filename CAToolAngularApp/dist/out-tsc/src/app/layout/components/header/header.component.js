@@ -21,6 +21,7 @@ var HeaderComponent = /** @class */ (function () {
     };
     HeaderComponent.prototype.onLoggedout = function () {
         localStorage.removeItem('userName');
+        localStorage.removeItem('isLoggedin');
     };
     HeaderComponent = __decorate([
         core_1.Component({

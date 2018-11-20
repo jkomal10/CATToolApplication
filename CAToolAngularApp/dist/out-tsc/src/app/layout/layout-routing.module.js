@@ -26,6 +26,9 @@ var routes = [
             { path: 'for-cloudable', loadChildren: './decision-tree/for-cloudable/for-cloudable.module#ForCloudableModule' },
             { path: 'for-migration-pattern', loadChildren: './decision-tree/for-migration-pattern/for-migration-pattern.module#ForMigrationPatternModule' },
             { path: 'reassessment', loadChildren: './decision-tree/reassessment/reassessment.module#ReassessmentModule' },
+            { path: 'feedback', loadChildren: './feedback/feedback.module#FeedbackModule' },
+            { path: 'help', loadChildren: './help/help.module#HelpModule' },
+            { path: 'faq', loadChildren: './faq/faq.module#FaqModule' }
         ]
     }
 ];

@@ -21,16 +21,33 @@ var UpdateQuestionComponent = /** @class */ (function () {
         this.submitted = false;
         this.optionsValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         this.Options = [10];
+        this.OptionsArray = [];
     }
     UpdateQuestionComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.assessmentQuestionsService.question.subscribe(function (data) { _this.que = data; });
         this.question = this.que;
+        this.numberOfOptions = 0;
+        var option = this.optionsValues;
         this.numberOfOptions = this.question.questionOption.length;
-        console.log(JSON.stringify(this.question.questionOption.length));
+        console.log(this.question.questionOption.length + "*************");
+        this.selectChangeHandlerDefault(this.numberOfOptions);
+        console.log(JSON.stringify(this.question.questionOption));
+    };
+    UpdateQuestionComponent.prototype.selectChangeHandlerDefault = function (value) {
+        console.log("option value " + value);
+        this.numberOfOptions = value;
+        console.log(this.numberOfOptions);
+        console.log();
+        for (var index = 1; index <= this.numberOfOptions; index++) {
+            console.log(index);
+            this.Options[index] = index;
+            console.log(this.Options);
+            console.log(this.Options.length);
+        }
     };
     UpdateQuestionComponent.prototype.selectChangeHandler = function (event) {
-        console.log(event);
+        console.log(event.target.value + "********");
         this.numberOfOptions = parseInt(event.target.value, 10);
         console.log(this.numberOfOptions);
         console.log(event.target.value);

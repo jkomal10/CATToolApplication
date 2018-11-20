@@ -29,6 +29,9 @@ var UpdateUserComponent = /** @class */ (function () {
         this.userService.updateUser(userdata).subscribe();
         this.router.navigate(['/user']);
     };
+    UpdateUserComponent.prototype.Cancel = function () {
+        this.router.navigate(['/user']);
+    };
     UpdateUserComponent = __decorate([
         core_1.Component({
             selector: 'app-update-user',

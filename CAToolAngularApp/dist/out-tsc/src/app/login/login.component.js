@@ -26,14 +26,17 @@ var LoginComponent = /** @class */ (function () {
     };
     LoginComponent.prototype.onLoggedin = function (formValues) {
         var _this = this;
-        localStorage.setItem('isLoggedin', 'true');
+        //  localStorage.setItem('isLoggedin', 'true');   
         this.loginservice.getUserByUserNamePassword(formValues.userName, formValues.password).subscribe(function (data) {
             _this.users = data;
             //  console.log('****************************************'+this.users.password);
             console.log(_this.users + "asdasdasd");
             if (_this.users != null) {
+                localStorage.setItem('isLoggedin', 'true');
                 if (_this.users.isAdmin === 0) {
                     localStorage.setItem('isUserActive', 'true');
+                    localStorage.setItem('clientName', _this.users.clientName);
+                    console.log("client name==" + _this.users.clientName);
                     console.log("is adminnnnnnnnnnn" + _this.users.isAdmin);
                     localStorage.setItem('firstName', _this.users.firstName);
                     localStorage.setItem('lastName', _this.users.lastName);
@@ -44,6 +47,8 @@ var LoginComponent = /** @class */ (function () {
                 }
                 else if (_this.users.isAdmin == 1) {
                     localStorage.setItem('isUserActive', 'false');
+                    localStorage.setItem('clientName', _this.users.clientName);
+                    console.log("client name==" + _this.users.clientName);
                     console.log(JSON.stringify(_this.users));
                     _this.loginService.sendMsgtoOtherComponent(_this.users.userId);
                     localStorage.setItem('firstName', _this.users.firstName);

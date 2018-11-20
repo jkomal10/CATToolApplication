@@ -111,7 +111,8 @@ var UploadUserComponent = /** @class */ (function () {
         console.log("this.userDetail" + this.userDetail);
         console.log("ipAddress ------" + this.ipAddress);
     };
-    UploadUserComponent.prototype.cancle = function () {
+    UploadUserComponent.prototype.cancel = function () {
+        this.router.navigate(['/user']);
     };
     UploadUserComponent.prototype.ngOnInit = function () {
         var _this = this;

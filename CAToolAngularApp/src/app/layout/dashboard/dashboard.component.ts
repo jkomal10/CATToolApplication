@@ -78,6 +78,10 @@ export class DashboardComponent implements OnInit {
         );
     }
 
+    download(){
+        
+    }
+
     ngOnInit() {
         this.clientNameValue=localStorage.getItem('clientName');
           this.status=localStorage.getItem('isLoggedin');

@@ -20,12 +20,15 @@ var AddApplicationComponent = /** @class */ (function () {
         this.application = new Application_1.Application();
         this.submitted = false;
     }
-    AddApplicationComponent.prototype.ngOnInit = function () { };
+    AddApplicationComponent.prototype.ngOnInit = function () {
+        this.clientNameValue = localStorage.getItem('clientName');
+    };
     AddApplicationComponent.prototype.createApplication = function () {
         this.submitted = false;
         this.application = new Application_1.Application();
     };
     AddApplicationComponent.prototype.save = function () {
+        this.application.clientName = this.clientNameValue;
         this.addapplicationService.createApplication(this.application)
             .subscribe(function (data) { return console.log(data); }, function (error) { return console.log(error); });
         this.application = new Application_1.Application();

@@ -40,28 +40,27 @@ var AssesstApplicationComponent = /** @class */ (function () {
             pagingType: 'full_numbers',
             pageLength: 2,
             responsive: true
-        };
+        }; //67 51 changes
+        this.clientNameValue = localStorage.getItem('clientName');
         this.applicationService.question.subscribe(function (data) {
+            console.log("Assesssssssssssssssssssssssssss");
             _this.application = data;
             console.log(JSON.stringify(_this.application) + "aaaaaaaaaaaaaaaaaaaaaaaa");
         });
         console.log(this.application.isSaved);
         if (this.application.isSaved == 0) {
-            this.assessmentService.CollecOptiontData().subscribe(function (result) {
+            this.assessmentService.CollecOptiontData(this.clientNameValue).subscribe(function (result) {
+                console.log("First questionnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
                 _this.AllData = result;
                 _this.dtTrigger.next();
-                console.log(_this.AllData);
             });
-            console.log(this.numberOfOption);
-            console.log(this.theCheckboxOptions);
         }
         else {
+            console.log("Secound questionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
             this.assessmentService.UpdateAnswers(this.application.applicationId).subscribe(function (result) {
                 _this.UpdateAnswersData = result;
             });
-            console.log("*********************ccccccccccccccc***********" + this.UpdateAnswersData);
-            this.assessmentService.CollecOptiontData().subscribe(function (result) { _this.AllData = result; });
-            console.log('**************' + this.AllData);
+            this.assessmentService.CollecOptiontData(this.clientNameValue).subscribe(function (result) { _this.AllData = result; });
         }
     };
     AssesstApplicationComponent.prototype.AssessApplicationRule = function () {

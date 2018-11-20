@@ -34,6 +34,7 @@ var AddAssessmentQuestionComponent = /** @class */ (function () {
         this.CloudProviderDataArray = [];
     }
     AddAssessmentQuestionComponent.prototype.ngOnInit = function () {
+        this.clientNameValue = localStorage.getItem('clientName');
     };
     AddAssessmentQuestionComponent.prototype.selectChangeHandler = function (event) {
         //console.log('rrrrrrrrrrrrrrrrr'+this.optionText[0]);
@@ -81,7 +82,9 @@ var AddAssessmentQuestionComponent = /** @class */ (function () {
             }
         }
         console.log(JSON.stringify(this.question));
+        this.question.clientName = this.clientNameValue;
         this.questionService.createQuestionn(this.question).subscribe();
+        this.router.navigate(['/assessment-questions']);
     };
     AddAssessmentQuestionComponent.prototype.onSubmit = function () {
         this.submitted = true;
