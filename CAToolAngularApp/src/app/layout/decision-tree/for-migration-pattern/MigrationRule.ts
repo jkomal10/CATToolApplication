@@ -5,4 +5,5 @@ export class MigrationRule{
 	migrationRule : String;
 	executionOrder : number;
 	questionText : String;
+	clientName : String;
 }

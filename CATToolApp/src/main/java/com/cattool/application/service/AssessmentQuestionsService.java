@@ -131,7 +131,7 @@ public class AssessmentQuestionsService {
 		return list;
 	}
 
-	public List<AssessmentQuestions> getAllMigrationPattern(int migrationId) {
+	/*public List<AssessmentQuestions> getAllMigrationPattern(int migrationId) {
 		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<>();
 		for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
 			List<MigrationRule> migrationRuleList;
@@ -145,14 +145,31 @@ public class AssessmentQuestionsService {
 		}
 		return assessmentQuestionsList;
 		
+	}*/
+	
+	public List<AssessmentQuestions> getAllMigrationPattern(int migrationId, String clientName) {
+		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<>();
+		for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
+			List<MigrationRule> migrationRuleList;
+			for(MigrationRule migrationRule:assessmentQuestions.getMigrationRule()) {
+				if(migrationId==migrationRule.getMigrationId()&&clientName.equals(migrationRule.getClientName())) {
+				assessmentQuestionsList.add(assessmentQuestions);
+				break;
+				}
+			}
+			
+		}
+		System.out.println(assessmentQuestionsList);
+		return assessmentQuestionsList;
+		
 	}
 
-	public List<AssessmentQuestions> getAllcloudProviderRule(int cloudProviderId) {
+	public List<AssessmentQuestions> getAllcloudProviderRule(int cloudProviderId, String clientName) {
 		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<>();
 		for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
 			List<CloudProviderRule> cloudProviderRuleList;
 			for(CloudProviderRule cloudProviderRules : assessmentQuestions.getCloudProviderRules()) {
-				if(cloudProviderId == cloudProviderRules.getCloudProviderId())
+				if(cloudProviderId == cloudProviderRules.getCloudProviderId() && clientName.equals(cloudProviderRules.getClientName()))
 				{
 					System.out.println(cloudProviderRules);
 					assessmentQuestionsList.add(assessmentQuestions);

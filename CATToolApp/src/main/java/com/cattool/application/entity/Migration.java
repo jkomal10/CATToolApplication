@@ -13,6 +13,8 @@ public class Migration {
 	private int migrationId;
 	private String migrationPattern;
 	private int evaluationOrder;
+	private String clientName;
+	
 	public int getMigrationId() {
 		return migrationId;
 	}
@@ -32,6 +34,12 @@ public class Migration {
 		this.evaluationOrder = evaluationOrder;
 	}
 	
+	public String getClientName() {
+		return clientName;
+	}
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
 	public Migration() {
 		super();
 	}
@@ -44,7 +52,7 @@ public class Migration {
 	@Override
 	public String toString() {
 		return "Migration [migrationId=" + migrationId + ", migrationPattern=" + migrationPattern + ", evaluationOrder="
-				+ evaluationOrder + "]";
+				+ evaluationOrder + ", clientName=" + clientName + "]";
 	}
 	
 	

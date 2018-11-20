@@ -15,6 +15,8 @@ public class MigrationRule {
 	private String migrationRule;
 	private int executionOrder;
 	private String questionText;
+	private String clientName;
+	
 	public int getMigrationRuleId() {
 		return migrationRuleId;
 	}
@@ -52,26 +54,20 @@ public class MigrationRule {
 		this.questionText = questionText;
 	}
 	
+	public String getClientName() {
+		return clientName;
+	}
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
 	public MigrationRule() {
 		super();
-	}
-	public MigrationRule(int migrationRuleId, String questionId, int migrationId, String migrationRule, int executionOrder,
-			String questionText) {
-		super();
-		this.migrationRuleId = migrationRuleId;
-		this.questionId = questionId;
-		this.migrationId = migrationId;
-		this.migrationRule = migrationRule;
-		this.executionOrder = executionOrder;
-		this.questionText = questionText;
 	}
 	@Override
 	public String toString() {
 		return "MigrationRule [migrationRuleId=" + migrationRuleId + ", questionId=" + questionId + ", migrationId="
 				+ migrationId + ", migrationRule=" + migrationRule + ", executionOrder=" + executionOrder
-				+ ", questionText=" + questionText + "]";
+				+ ", questionText=" + questionText + ", clientName=" + clientName + "]";
 	}
 	
-	
-
 }

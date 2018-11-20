@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.CloudProvider;
 import com.cattool.application.entity.CloudProviderRule;
+import com.cattool.application.entity.Migration;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
 import com.cattool.application.repository.CloudProviderRepository;
 import com.cattool.application.repository.CloudProviderRuleRepository;
@@ -27,9 +28,16 @@ public class CloudProviderService {
 	@Autowired
 	AssessmentQuestionsRepository assessmentQuestionsRepository;
 	
-	public List<CloudProvider> getAllcloudProvider(){
-		return cloudProviderRepository.findAll();
-		
+	public List<CloudProvider> getAllcloudProvider(String clientName){
+		List<CloudProvider> migrationList=new ArrayList<CloudProvider>();
+		for(CloudProvider migration:cloudProviderRepository.findAll()) {
+			System.out.println(clientName+"=="+migration.getClientName());
+			if(clientName.equals(migration.getClientName())) {
+				migrationList.add(migration);
+			}
+		}
+		System.out.println(migrationList);
+		return migrationList;
 	}
 
 	public void setEvaluationOrder(List<CloudProvider> cloudProvider) {
@@ -37,12 +45,13 @@ public class CloudProviderService {
 		cloudProviderRepository.saveAll(cloudProvider);
 	}
 
-	public void updateCloudProviderRule(List<CloudProviderRule> cloudProviderRulelist) {
+	public void updateCloudProviderRule(List<CloudProviderRule> cloudProviderRulelist,String clientName) {
 		
 		CloudProviderRule cloudProviderRules = new CloudProviderRule();
 		for (CloudProviderRule cloudProviderRule : cloudProviderRulelist) {
 			cloudProviderRules = cloudProviderRule;
 			cloudProviderRules.setCloudProviderRuleId(cloudProviderRule.getCloudProviderRuleId());
+			cloudProviderRules.setClientName(clientName);
 			cloudProviderRuleRepository.save(cloudProviderRules);
 		}
 		

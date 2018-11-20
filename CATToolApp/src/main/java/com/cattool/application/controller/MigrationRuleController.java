@@ -3,6 +3,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,17 +31,17 @@ public class MigrationRuleController {
 		return migrationRuleService.getAllmigrationRule();
 	}
 	
-	@GetMapping("/getAll")
-	public List<Migration> getAllMigrationPattern()
+	@GetMapping("/getAll/{clientName}")
+	public List<Migration> getAllMigrationPattern(@PathVariable String clientName)
 	{
-		return migrationRuleService.getAllMigrationPatterns();
+		return migrationRuleService.getAllMigrationPatterns(clientName);
 	}
 	
-	@PutMapping("/updateMigrationRule")
-	public void updateMigrationRule(@RequestBody List<MigrationRule> migrationRule )
+	@PutMapping("/updateMigrationRule/{clientName}")
+	public void updateMigrationRule(@RequestBody List<MigrationRule> migrationRule,@PathVariable String clientName)
 	{
-		
-		migrationRuleService.updateMigrationRule(migrationRule);
+		System.out.println("Update migration rule");
+		migrationRuleService.updateMigrationRule(migrationRule,clientName);
 	}
 	
 }

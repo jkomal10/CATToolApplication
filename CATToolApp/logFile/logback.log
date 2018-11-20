@@ -1,1 +1,517 @@
 2018-11-20 10:24:31 WARN  [HikariPool-6 housekeeper] com.zaxxer.hikari.pool.HikariPool -- HikariPool-6 - Thread starvation or clock leap detected (housekeeper delta=9h42m4s462ms658µs847ns).
+2018-11-20 10:43:51 INFO  [Thread-34] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext -- Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3cb59294: startup date [Mon Nov 19 19:46:21 IST 2018]; root of context hierarchy
+2018-11-20 10:43:51 INFO  [Thread-34] com.zaxxer.hikari.HikariDataSource -- HikariPool-6 - Shutdown initiated...
+2018-11-20 10:43:51 INFO  [Thread-34] com.zaxxer.hikari.HikariDataSource -- HikariPool-6 - Shutdown completed.
+2018-11-20 10:43:57 INFO  [restartedMain] com.cattool.application.CatToolApp -- Starting CatToolApp on LIN17000309 with PID 16748 (C:\Users\suvsahoo\Cattool\CATToolApplication\CATToolApp\target\classes started by suvsahoo in C:\Users\suvsahoo\Cattool\CATToolApplication\CATToolApp)
+2018-11-20 10:43:57 INFO  [restartedMain] com.cattool.application.CatToolApp -- No active profile set, falling back to default profiles: default
+2018-11-20 10:43:57 INFO  [restartedMain] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext -- Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@48e3a0bf: startup date [Tue Nov 20 10:43:57 IST 2018]; root of context hierarchy
+2018-11-20 10:44:04 INFO  [restartedMain] o.s.b.f.a.AutowiredAnnotationBeanPostProcessor -- JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-11-20 10:44:04 INFO  [restartedMain] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -- Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b6c9de83] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-20 10:44:08 INFO  [restartedMain] o.s.b.w.e.tomcat.TomcatWebServer -- Tomcat initialized with port(s): 8090 (http)
+2018-11-20 10:44:08 INFO  [restartedMain] o.a.catalina.core.StandardService -- Starting service [Tomcat]
+2018-11-20 10:44:08 INFO  [restartedMain] o.a.catalina.core.StandardEngine -- Starting Servlet Engine: Apache Tomcat/8.5.31
+2018-11-20 10:44:10 INFO  [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/] -- Initializing Spring embedded WebApplicationContext
+2018-11-20 10:44:10 INFO  [localhost-startStop-1] o.s.web.context.ContextLoader -- Root WebApplicationContext: initialization completed in 13427 ms
+2018-11-20 10:44:10 INFO  [localhost-startStop-1] o.s.b.w.s.ServletRegistrationBean -- Servlet dispatcherServlet mapped to [/]
+2018-11-20 10:44:10 INFO  [localhost-startStop-1] o.s.b.w.s.FilterRegistrationBean -- Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-11-20 10:44:10 INFO  [localhost-startStop-1] o.s.b.w.s.FilterRegistrationBean -- Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-11-20 10:44:10 INFO  [localhost-startStop-1] o.s.b.w.s.FilterRegistrationBean -- Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-11-20 10:44:10 INFO  [localhost-startStop-1] o.s.b.w.s.FilterRegistrationBean -- Mapping filter: 'requestContextFilter' to: [/*]
+2018-11-20 10:44:11 INFO  [restartedMain] com.zaxxer.hikari.HikariDataSource -- HikariPool-7 - Starting...
+2018-11-20 10:44:11 INFO  [restartedMain] com.zaxxer.hikari.HikariDataSource -- HikariPool-7 - Start completed.
+2018-11-20 10:44:11 INFO  [restartedMain] o.s.o.j.LocalContainerEntityManagerFactoryBean -- Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-11-20 10:44:11 INFO  [restartedMain] o.h.jpa.internal.util.LogHelper -- HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-11-20 10:44:11 INFO  [restartedMain] org.hibernate.dialect.Dialect -- HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-11-20 10:44:15 WARN  [restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl -- GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:559) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:504) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applyForeignKeys(AbstractSchemaMigrator.java:433) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:249) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:114) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:183) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:72) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:312) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:462) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:892) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) [spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) [spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) [spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) [spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) [spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1255) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1243) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at com.cattool.application.CatToolApp.main(CatToolApp.java:12) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_171]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_171]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_171]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_171]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+Caused by: java.sql.SQLException: Cannot add foreign key constraint
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:965) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3976) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3912) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2530) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2683) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2482) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2440) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.StatementImpl.executeInternal(StatementImpl.java:845) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.StatementImpl.execute(StatementImpl.java:745) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-2.7.9.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	... 38 common frames omitted
+2018-11-20 10:44:15 WARN  [restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl -- GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:559) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:504) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applyForeignKeys(AbstractSchemaMigrator.java:433) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:249) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:114) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:183) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:72) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:312) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:462) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:892) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) [spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) [spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) [spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) [spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) [spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1255) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1243) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at com.cattool.application.CatToolApp.main(CatToolApp.java:12) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_171]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_171]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_171]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_171]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+Caused by: java.sql.SQLException: Cannot add foreign key constraint
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:965) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3976) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3912) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2530) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2683) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2482) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2440) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.StatementImpl.executeInternal(StatementImpl.java:845) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.StatementImpl.execute(StatementImpl.java:745) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-2.7.9.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	... 38 common frames omitted
+2018-11-20 10:44:15 WARN  [restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl -- GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:559) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:504) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applyForeignKeys(AbstractSchemaMigrator.java:433) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:249) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:114) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:183) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:72) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:312) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:462) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:892) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) [spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) [spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) [spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) [spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) [spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) [spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1255) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1243) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at com.cattool.application.CatToolApp.main(CatToolApp.java:12) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_171]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_171]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.8.0_171]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.8.0_171]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+Caused by: java.sql.SQLException: Cannot add foreign key constraint
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:965) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3976) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3912) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2530) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2683) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2482) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2440) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.StatementImpl.executeInternal(StatementImpl.java:845) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.mysql.jdbc.StatementImpl.execute(StatementImpl.java:745) ~[mysql-connector-java-5.1.46.jar:5.1.46]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-2.7.9.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-2.7.9.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	... 38 common frames omitted
+2018-11-20 10:44:15 INFO  [restartedMain] o.s.o.j.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/answer/save/create],methods=[POST]}" onto public void com.cattool.application.controller.AnswersController.saveAnswers(java.util.List<com.cattool.application.entity.Answers>)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/answer/getAll],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.Answers> com.cattool.application.controller.AnswersController.getAllAnswers()
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/answer/getAnswersByApplicationId/{applicationId}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.Answers> com.cattool.application.controller.AnswersController.getAnswersByApplicationId(int)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/saveApplication/create],methods=[POST]}" onto public com.cattool.application.entity.Application com.cattool.application.controller.ApplicationController.saveApplication(com.cattool.application.entity.Application)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/resetApplicationById/{applicationId}],methods=[PUT]}" onto public void com.cattool.application.controller.ApplicationController.resetApplication(int)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/AllRuleCheck/{applicationId}],methods=[GET]}" onto public void com.cattool.application.controller.ApplicationController.allRuleCheck(int)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/migrationCheck/{applicationId}],methods=[GET]}" onto public void com.cattool.application.controller.ApplicationController.migrationCheck(int)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/getApplicationByUserName/{userName}],methods=[GET]}" onto public com.cattool.application.entity.Application com.cattool.application.controller.ApplicationController.getAppByUser(java.lang.String)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/summaryReport],methods=[GET]}" onto public void com.cattool.application.controller.ApplicationController.summaryRepory() throws java.io.FileNotFoundException
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/getAll/{clientName}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.Application> com.cattool.application.controller.ApplicationController.getAllApplication(java.lang.String)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/getApplicationById/{applicationId}],methods=[GET]}" onto public com.cattool.application.entity.Application com.cattool.application.controller.ApplicationController.getApplicationById(int)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/getApplicationByName{applicationName}],methods=[GET]}" onto public com.cattool.application.entity.Application com.cattool.application.controller.ApplicationController.getApplicationByName(java.lang.String)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/updateApplictaion],methods=[PUT]}" onto public void com.cattool.application.controller.ApplicationController.updateApplication(com.cattool.application.entity.Application)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/deleteApplicationById/{applicationId}],methods=[DELETE]}" onto public void com.cattool.application.controller.ApplicationController.deleteApplication(int)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/deactivateApplicationById/{applicationId}],methods=[PUT]}" onto public void com.cattool.application.controller.ApplicationController.deactivateApplication(int)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/getAllReassessment],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.Application> com.cattool.application.controller.ApplicationController.getAllReassessment()
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/cloudProviderCheck/{applicationId}],methods=[GET]}" onto public void com.cattool.application.controller.ApplicationController.cloudProviderCheck(int)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/getAllQuestions],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.AssessmentQuestions> com.cattool.application.controller.AssessmentQuestionsController.getAllquestions()
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/deleteQuestions/{questionId}],methods=[DELETE]}" onto public void com.cattool.application.controller.AssessmentQuestionsController.deleteQuestions(int)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/getAllQuestions/{clientName}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.AssessmentQuestions> com.cattool.application.controller.AssessmentQuestionsController.getAllquestionsByClientName(java.lang.String)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/saveAssessmentQuestions/create],methods=[POST]}" onto public void com.cattool.application.controller.AssessmentQuestionsController.saveAssessmentQuestions(com.cattool.application.entity.AssessmentQuestions)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/updateQuestions/update],methods=[PUT]}" onto public void com.cattool.application.controller.AssessmentQuestionsController.updateQuestionById(com.cattool.application.entity.AssessmentQuestions)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/getAllCloudableQuestions],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.AssessmentQuestions> com.cattool.application.controller.AssessmentQuestionsController.getCloudableQuestions()
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/getAllMigrationPattern/{migrationId}/{clientName}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.AssessmentQuestions> com.cattool.application.controller.AssessmentQuestionsController.getAllMigrationPattern(int,java.lang.String)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/getAllCloudProviderRule/{cloudProviderId}/{clientName}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.AssessmentQuestions> com.cattool.application.controller.AssessmentQuestionsController.getAllcloudProviderRule(int,java.lang.String)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/cloudableRule/save/create],methods=[POST]}" onto public void com.cattool.application.controller.CloudableRuleController.saveAll(java.util.List<com.cattool.application.entity.CloudableRule>)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/cloudableRule/getAll],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.CloudableRule> com.cattool.application.controller.CloudableRuleController.getAllCloudableRules()
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/cloudProvider/getAll/{clientName}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.CloudProvider> com.cattool.application.controller.CloudProviderController.getCloudProvider(java.lang.String)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/cloudProvider/setEvaluationOrder],methods=[PUT]}" onto public void com.cattool.application.controller.CloudProviderController.setEvaluationOrder(java.util.List<com.cattool.application.entity.CloudProvider>)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/cloudProvider/updateCloudProviderRule/{clientName}],methods=[PUT]}" onto public void com.cattool.application.controller.CloudProviderController.updateCloudProviderRule(java.util.List<com.cattool.application.entity.CloudProviderRule>,java.lang.String)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/migrationRule/getAllMigrationRule],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.MigrationRule> com.cattool.application.controller.MigrationRuleController.getAllApplication()
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/migrationRule/getAll/{clientName}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.Migration> com.cattool.application.controller.MigrationRuleController.getAllMigrationPattern(java.lang.String)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/migrationRule/updateMigrationRule/{clientName}],methods=[PUT]}" onto public void com.cattool.application.controller.MigrationRuleController.updateMigrationRule(java.util.List<com.cattool.application.entity.MigrationRule>,java.lang.String)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/option/getAll],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.QuestionOption> com.cattool.application.controller.OptionController.getAll()
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/option/save/create],methods=[POST]}" onto public void com.cattool.application.controller.OptionController.saveQuestionOption(com.cattool.application.entity.QuestionOption)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/getById/{userName}/{password}],methods=[GET]}" onto public com.cattool.application.entity.Users com.cattool.application.controller.UserController.findById(java.lang.String,org.apache.catalina.servlet4preview.http.HttpServletRequest,javax.servlet.http.HttpServletResponse,java.lang.String)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/deleteUserById/{userId}],methods=[DELETE]}" onto public void com.cattool.application.controller.UserController.deleteById(int)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/getAll/{clientName}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.Users> com.cattool.application.controller.UserController.findAllUsers(java.lang.String)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/getUserCount],methods=[GET]}" onto public int com.cattool.application.controller.UserController.getUserCount()
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/addUser/create/{createdBy}],methods=[POST]}" onto public com.cattool.application.entity.Users com.cattool.application.controller.UserController.saveUser(com.cattool.application.entity.Users,java.lang.String)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/updateUser/update/{modifiedBy}],methods=[PUT]}" onto public void com.cattool.application.controller.UserController.updateUserId(com.cattool.application.entity.Users,java.lang.String)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/changePassword/{userName}/{password}/{company}],methods=[GET]}" onto public com.cattool.application.entity.Users com.cattool.application.controller.UserController.setPassword(java.lang.String,java.lang.String,java.lang.String)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/deactivateUser/{userId}],methods=[PUT]}" onto public void com.cattool.application.controller.UserController.deactivateUser(int)
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/swagger-resources/configuration/security]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2018-11-20 10:44:21 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/swagger-resources/configuration/ui]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2018-11-20 10:44:22 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/swagger-resources]}" onto public org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2018-11-20 10:44:22 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-11-20 10:44:22 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-11-20 10:44:22 INFO  [restartedMain] s.d.s.w.PropertySourcedRequestMappingHandlerMapping -- Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2018-11-20 10:44:22 INFO  [restartedMain] o.s.w.s.h.SimpleUrlHandlerMapping -- Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-20 10:44:22 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerAdapter -- Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@48e3a0bf: startup date [Tue Nov 20 10:43:57 IST 2018]; root of context hierarchy
+2018-11-20 10:44:22 INFO  [restartedMain] o.s.w.s.h.SimpleUrlHandlerMapping -- Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-20 10:44:22 INFO  [restartedMain] o.s.w.s.h.SimpleUrlHandlerMapping -- Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-20 10:44:23 WARN  [restartedMain] o.s.b.a.g.t.GroovyTemplateAutoConfiguration -- Cannot find template location: classpath:/templates/ (please add some templates, check your Groovy configuration, or set spring.groovy.template.check-template-location=false)
+2018-11-20 10:44:25 INFO  [restartedMain] o.s.b.d.a.OptionalLiveReloadServer -- LiveReload server is running on port 35729
+2018-11-20 10:44:25 INFO  [restartedMain] o.s.j.e.a.AnnotationMBeanExporter -- Registering beans for JMX exposure on startup
+2018-11-20 10:44:25 INFO  [restartedMain] o.s.j.e.a.AnnotationMBeanExporter -- Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-11-20 10:44:25 INFO  [restartedMain] o.s.j.e.a.AnnotationMBeanExporter -- Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2018-11-20 10:44:25 INFO  [restartedMain] o.s.c.s.DefaultLifecycleProcessor -- Starting beans in phase 2147483647
+2018-11-20 10:44:25 INFO  [restartedMain] s.d.s.w.p.DocumentationPluginsBootstrapper -- Context refreshed
+2018-11-20 10:44:25 INFO  [restartedMain] s.d.s.w.p.DocumentationPluginsBootstrapper -- Found 1 custom documentation plugin(s)
+2018-11-20 10:44:26 INFO  [restartedMain] s.d.s.w.s.ApiListingReferenceScanner -- Scanning for api listing references
+2018-11-20 10:44:27 INFO  [restartedMain] s.d.s.w.r.o.CachingOperationNameGenerator -- Generating unique operation named: getAllApplicationUsingGET_1
+2018-11-20 10:44:27 INFO  [restartedMain] s.d.s.w.r.o.CachingOperationNameGenerator -- Generating unique operation named: getAllMigrationPatternUsingGET_1
+2018-11-20 10:44:27 INFO  [restartedMain] o.s.b.w.e.tomcat.TomcatWebServer -- Tomcat started on port(s): 8090 (http) with context path ''
+2018-11-20 10:44:27 INFO  [restartedMain] com.cattool.application.CatToolApp -- Started CatToolApp in 31.192 seconds (JVM running for 57262.434)
+2018-11-20 10:44:27 INFO  [restartedMain] o.s.b.d.a.ConditionEvaluationDeltaLoggingListener -- Condition evaluation unchanged
+2018-11-20 10:45:45 INFO  [restartedMain] com.cattool.application.CatToolApp -- Starting CatToolApp on LIN17000309 with PID 23744 (C:\Users\suvsahoo\Cattool\CATToolApplication\CATToolApp\target\classes started by suvsahoo in C:\Users\suvsahoo\Cattool\CATToolApplication\CATToolApp)
+2018-11-20 10:45:45 INFO  [restartedMain] com.cattool.application.CatToolApp -- No active profile set, falling back to default profiles: default
+2018-11-20 10:45:48 INFO  [restartedMain] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext -- Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@53f4f994: startup date [Tue Nov 20 10:45:48 IST 2018]; root of context hierarchy
+2018-11-20 10:46:02 INFO  [restartedMain] o.s.b.f.a.AutowiredAnnotationBeanPostProcessor -- JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-11-20 10:46:03 INFO  [restartedMain] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker -- Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$d590456f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-11-20 10:46:11 INFO  [restartedMain] o.s.b.w.e.tomcat.TomcatWebServer -- Tomcat initialized with port(s): 8090 (http)
+2018-11-20 10:46:11 INFO  [restartedMain] o.a.catalina.core.StandardService -- Starting service [Tomcat]
+2018-11-20 10:46:11 INFO  [restartedMain] o.a.catalina.core.StandardEngine -- Starting Servlet Engine: Apache Tomcat/8.5.31
+2018-11-20 10:46:11 INFO  [localhost-startStop-1] o.a.c.core.AprLifecycleListener -- The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jre1.8.0_171\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jre1.8.0_171/bin/server;C:/Program Files/Java/jre1.8.0_171/bin;C:/Program Files/Java/jre1.8.0_171/lib/amd64;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\CapgeminiScripts\Support Tools\;C:\Program Files (x86)\Common Files\Lenovo;C:\ProgramData\chocolatey\bin;C:\Program Files\Java\jdk1.8.0_172\bin;C:\Program Files\nodejs\;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Amazon\AWSCLI\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Program Files\Java\jre1.8.0_171\bin;C:\Users\suvsahoo\AppData\Roaming\npm;C:\Program Files\Microsoft VS Code\bin;C:\tools\mysql\current\bin;D:\Users\suvsahoo\Documents\apache-maven-3.5.4-bin\apache-maven-3.5.4\bin;;D:\back up\New folder (4)\eclipse-jee-oxygen-3a-win32-x86_64\eclipse;;.]
+2018-11-20 10:46:15 INFO  [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/] -- Initializing Spring embedded WebApplicationContext
+2018-11-20 10:46:15 INFO  [localhost-startStop-1] o.s.web.context.ContextLoader -- Root WebApplicationContext: initialization completed in 26703 ms
+2018-11-20 10:46:16 INFO  [localhost-startStop-1] o.s.b.w.s.ServletRegistrationBean -- Servlet dispatcherServlet mapped to [/]
+2018-11-20 10:46:16 INFO  [localhost-startStop-1] o.s.b.w.s.FilterRegistrationBean -- Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-11-20 10:46:16 INFO  [localhost-startStop-1] o.s.b.w.s.FilterRegistrationBean -- Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-11-20 10:46:16 INFO  [localhost-startStop-1] o.s.b.w.s.FilterRegistrationBean -- Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-11-20 10:46:16 INFO  [localhost-startStop-1] o.s.b.w.s.FilterRegistrationBean -- Mapping filter: 'requestContextFilter' to: [/*]
+2018-11-20 10:46:17 INFO  [restartedMain] com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Starting...
+2018-11-20 10:46:20 INFO  [restartedMain] com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Start completed.
+2018-11-20 10:46:21 INFO  [restartedMain] o.s.o.j.LocalContainerEntityManagerFactoryBean -- Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-11-20 10:46:21 INFO  [restartedMain] o.h.jpa.internal.util.LogHelper -- HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-11-20 10:46:22 INFO  [restartedMain] org.hibernate.Version -- HHH000412: Hibernate Core {5.2.17.Final}
+2018-11-20 10:46:22 INFO  [restartedMain] org.hibernate.cfg.Environment -- HHH000206: hibernate.properties not found
+2018-11-20 10:46:22 INFO  [restartedMain] o.h.annotations.common.Version -- HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-11-20 10:46:24 INFO  [restartedMain] org.hibernate.dialect.Dialect -- HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-11-20 10:46:30 WARN  [restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl -- GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:559)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:504)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applyForeignKeys(AbstractSchemaMigrator.java:433)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:249)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:114)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:183)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:72)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:312)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:462)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:892)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1255)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1243)
+	at com.cattool.application.CatToolApp.main(CatToolApp.java:12)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.sql.SQLException: Cannot add foreign key constraint
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:965)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3976)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3912)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2530)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2683)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2482)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2440)
+	at com.mysql.jdbc.StatementImpl.executeInternal(StatementImpl.java:845)
+	at com.mysql.jdbc.StatementImpl.execute(StatementImpl.java:745)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	... 38 common frames omitted
+2018-11-20 10:46:31 WARN  [restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl -- GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:559)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:504)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applyForeignKeys(AbstractSchemaMigrator.java:433)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:249)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:114)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:183)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:72)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:312)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:462)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:892)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1255)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1243)
+	at com.cattool.application.CatToolApp.main(CatToolApp.java:12)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.sql.SQLException: Cannot add foreign key constraint
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:965)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3976)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3912)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2530)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2683)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2482)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2440)
+	at com.mysql.jdbc.StatementImpl.executeInternal(StatementImpl.java:845)
+	at com.mysql.jdbc.StatementImpl.execute(StatementImpl.java:745)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	... 38 common frames omitted
+2018-11-20 10:46:31 WARN  [restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl -- GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:559)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:504)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applyForeignKeys(AbstractSchemaMigrator.java:433)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:249)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:114)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:183)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:72)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:312)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:462)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:892)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1255)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1243)
+	at com.cattool.application.CatToolApp.main(CatToolApp.java:12)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.sql.SQLException: Cannot add foreign key constraint
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:965)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3976)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3912)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2530)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2683)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2482)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2440)
+	at com.mysql.jdbc.StatementImpl.executeInternal(StatementImpl.java:845)
+	at com.mysql.jdbc.StatementImpl.execute(StatementImpl.java:745)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	... 38 common frames omitted
+2018-11-20 10:46:31 INFO  [restartedMain] o.s.o.j.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-11-20 10:46:41 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/answer/save/create],methods=[POST]}" onto public void com.cattool.application.controller.AnswersController.saveAnswers(java.util.List<com.cattool.application.entity.Answers>)
+2018-11-20 10:46:41 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/answer/getAll],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.Answers> com.cattool.application.controller.AnswersController.getAllAnswers()
+2018-11-20 10:46:41 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/answer/getAnswersByApplicationId/{applicationId}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.Answers> com.cattool.application.controller.AnswersController.getAnswersByApplicationId(int)
+2018-11-20 10:46:41 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/saveApplication/create],methods=[POST]}" onto public com.cattool.application.entity.Application com.cattool.application.controller.ApplicationController.saveApplication(com.cattool.application.entity.Application)
+2018-11-20 10:46:41 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/resetApplicationById/{applicationId}],methods=[PUT]}" onto public void com.cattool.application.controller.ApplicationController.resetApplication(int)
+2018-11-20 10:46:41 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/AllRuleCheck/{applicationId}],methods=[GET]}" onto public void com.cattool.application.controller.ApplicationController.allRuleCheck(int)
+2018-11-20 10:46:41 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/migrationCheck/{applicationId}],methods=[GET]}" onto public void com.cattool.application.controller.ApplicationController.migrationCheck(int)
+2018-11-20 10:46:41 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/getApplicationByUserName/{userName}],methods=[GET]}" onto public com.cattool.application.entity.Application com.cattool.application.controller.ApplicationController.getAppByUser(java.lang.String)
+2018-11-20 10:46:41 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/summaryReport],methods=[GET]}" onto public void com.cattool.application.controller.ApplicationController.summaryRepory() throws java.io.FileNotFoundException
+2018-11-20 10:46:41 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/getAll/{clientName}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.Application> com.cattool.application.controller.ApplicationController.getAllApplication(java.lang.String)
+2018-11-20 10:46:41 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/getApplicationById/{applicationId}],methods=[GET]}" onto public com.cattool.application.entity.Application com.cattool.application.controller.ApplicationController.getApplicationById(int)
+2018-11-20 10:46:41 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/getApplicationByName{applicationName}],methods=[GET]}" onto public com.cattool.application.entity.Application com.cattool.application.controller.ApplicationController.getApplicationByName(java.lang.String)
+2018-11-20 10:46:41 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/updateApplictaion],methods=[PUT]}" onto public void com.cattool.application.controller.ApplicationController.updateApplication(com.cattool.application.entity.Application)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/deleteApplicationById/{applicationId}],methods=[DELETE]}" onto public void com.cattool.application.controller.ApplicationController.deleteApplication(int)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/deactivateApplicationById/{applicationId}],methods=[PUT]}" onto public void com.cattool.application.controller.ApplicationController.deactivateApplication(int)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/getAllReassessment],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.Application> com.cattool.application.controller.ApplicationController.getAllReassessment()
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/application/cloudProviderCheck/{applicationId}],methods=[GET]}" onto public void com.cattool.application.controller.ApplicationController.cloudProviderCheck(int)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/getAllQuestions],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.AssessmentQuestions> com.cattool.application.controller.AssessmentQuestionsController.getAllquestions()
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/deleteQuestions/{questionId}],methods=[DELETE]}" onto public void com.cattool.application.controller.AssessmentQuestionsController.deleteQuestions(int)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/getAllQuestions/{clientName}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.AssessmentQuestions> com.cattool.application.controller.AssessmentQuestionsController.getAllquestionsByClientName(java.lang.String)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/saveAssessmentQuestions/create],methods=[POST]}" onto public void com.cattool.application.controller.AssessmentQuestionsController.saveAssessmentQuestions(com.cattool.application.entity.AssessmentQuestions)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/updateQuestions/update],methods=[PUT]}" onto public void com.cattool.application.controller.AssessmentQuestionsController.updateQuestionById(com.cattool.application.entity.AssessmentQuestions)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/getAllCloudableQuestions],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.AssessmentQuestions> com.cattool.application.controller.AssessmentQuestionsController.getCloudableQuestions()
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/getAllMigrationPattern/{migrationId}/{clientName}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.AssessmentQuestions> com.cattool.application.controller.AssessmentQuestionsController.getAllMigrationPattern(int,java.lang.String)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/assessmentQuestions/getAllCloudProviderRule/{cloudProviderId}/{clientName}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.AssessmentQuestions> com.cattool.application.controller.AssessmentQuestionsController.getAllcloudProviderRule(int,java.lang.String)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/cloudableRule/save/create],methods=[POST]}" onto public void com.cattool.application.controller.CloudableRuleController.saveAll(java.util.List<com.cattool.application.entity.CloudableRule>)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/cloudableRule/getAll],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.CloudableRule> com.cattool.application.controller.CloudableRuleController.getAllCloudableRules()
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/cloudProvider/getAll/{clientName}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.CloudProvider> com.cattool.application.controller.CloudProviderController.getCloudProvider(java.lang.String)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/cloudProvider/setEvaluationOrder],methods=[PUT]}" onto public void com.cattool.application.controller.CloudProviderController.setEvaluationOrder(java.util.List<com.cattool.application.entity.CloudProvider>)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/cloudProvider/updateCloudProviderRule/{clientName}],methods=[PUT]}" onto public void com.cattool.application.controller.CloudProviderController.updateCloudProviderRule(java.util.List<com.cattool.application.entity.CloudProviderRule>,java.lang.String)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/migrationRule/getAllMigrationRule],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.MigrationRule> com.cattool.application.controller.MigrationRuleController.getAllApplication()
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/migrationRule/getAll/{clientName}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.Migration> com.cattool.application.controller.MigrationRuleController.getAllMigrationPattern(java.lang.String)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/migrationRule/updateMigrationRule/{clientName}],methods=[PUT]}" onto public void com.cattool.application.controller.MigrationRuleController.updateMigrationRule(java.util.List<com.cattool.application.entity.MigrationRule>,java.lang.String)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/option/getAll],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.QuestionOption> com.cattool.application.controller.OptionController.getAll()
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/option/save/create],methods=[POST]}" onto public void com.cattool.application.controller.OptionController.saveQuestionOption(com.cattool.application.entity.QuestionOption)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/getAll/{clientName}],methods=[GET]}" onto public java.util.List<com.cattool.application.entity.Users> com.cattool.application.controller.UserController.findAllUsers(java.lang.String)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/getUserCount],methods=[GET]}" onto public int com.cattool.application.controller.UserController.getUserCount()
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/addUser/create/{createdBy}],methods=[POST]}" onto public com.cattool.application.entity.Users com.cattool.application.controller.UserController.saveUser(com.cattool.application.entity.Users,java.lang.String)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/updateUser/update/{modifiedBy}],methods=[PUT]}" onto public void com.cattool.application.controller.UserController.updateUserId(com.cattool.application.entity.Users,java.lang.String)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/changePassword/{userName}/{password}/{company}],methods=[GET]}" onto public com.cattool.application.entity.Users com.cattool.application.controller.UserController.setPassword(java.lang.String,java.lang.String,java.lang.String)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/deactivateUser/{userId}],methods=[PUT]}" onto public void com.cattool.application.controller.UserController.deactivateUser(int)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/getById/{userName}/{password}],methods=[GET]}" onto public com.cattool.application.entity.Users com.cattool.application.controller.UserController.findById(java.lang.String,org.apache.catalina.servlet4preview.http.HttpServletRequest,javax.servlet.http.HttpServletResponse,java.lang.String)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/user/deleteUserById/{userId}],methods=[DELETE]}" onto public void com.cattool.application.controller.UserController.deleteById(int)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/swagger-resources/configuration/security]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/swagger-resources/configuration/ui]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/swagger-resources]}" onto public org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-11-20 10:46:42 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-11-20 10:46:43 INFO  [restartedMain] s.d.s.w.PropertySourcedRequestMappingHandlerMapping -- Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2018-11-20 10:46:43 INFO  [restartedMain] o.s.w.s.h.SimpleUrlHandlerMapping -- Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-20 10:46:44 INFO  [restartedMain] o.s.w.s.m.m.a.RequestMappingHandlerAdapter -- Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@53f4f994: startup date [Tue Nov 20 10:45:48 IST 2018]; root of context hierarchy
+2018-11-20 10:46:45 INFO  [restartedMain] o.s.w.s.h.SimpleUrlHandlerMapping -- Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-20 10:46:45 INFO  [restartedMain] o.s.w.s.h.SimpleUrlHandlerMapping -- Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-11-20 10:46:46 WARN  [restartedMain] o.s.b.a.g.t.GroovyTemplateAutoConfiguration -- Cannot find template location: classpath:/templates/ (please add some templates, check your Groovy configuration, or set spring.groovy.template.check-template-location=false)
+2018-11-20 10:46:49 INFO  [restartedMain] o.s.b.d.a.OptionalLiveReloadServer -- LiveReload server is running on port 35729
+2018-11-20 10:46:49 INFO  [restartedMain] o.s.j.e.a.AnnotationMBeanExporter -- Registering beans for JMX exposure on startup
+2018-11-20 10:46:49 INFO  [restartedMain] o.s.j.e.a.AnnotationMBeanExporter -- Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-11-20 10:46:49 INFO  [restartedMain] o.s.j.e.a.AnnotationMBeanExporter -- Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2018-11-20 10:46:49 INFO  [restartedMain] o.s.c.s.DefaultLifecycleProcessor -- Starting beans in phase 2147483647
+2018-11-20 10:46:49 INFO  [restartedMain] s.d.s.w.p.DocumentationPluginsBootstrapper -- Context refreshed
+2018-11-20 10:46:49 INFO  [restartedMain] s.d.s.w.p.DocumentationPluginsBootstrapper -- Found 1 custom documentation plugin(s)
+2018-11-20 10:46:50 INFO  [restartedMain] s.d.s.w.s.ApiListingReferenceScanner -- Scanning for api listing references
+2018-11-20 10:46:51 INFO  [restartedMain] s.d.s.w.r.o.CachingOperationNameGenerator -- Generating unique operation named: getAllApplicationUsingGET_1
+2018-11-20 10:46:51 INFO  [restartedMain] s.d.s.w.r.o.CachingOperationNameGenerator -- Generating unique operation named: getAllMigrationPatternUsingGET_1
+2018-11-20 10:46:52 INFO  [restartedMain] o.s.b.w.e.tomcat.TomcatWebServer -- Tomcat started on port(s): 8090 (http) with context path ''
+2018-11-20 10:46:52 INFO  [restartedMain] com.cattool.application.CatToolApp -- Started CatToolApp in 72.973 seconds (JVM running for 84.788)

@@ -1,5 +1,6 @@
 package com.cattool.application.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,15 +27,24 @@ public class MigrationRuleService {
 		return migrationRuleRepository.findAll();
 	}
 	
-	public List<Migration> getAllMigrationPatterns(){
-		return migrationRepository.findAll();
+	public List<Migration> getAllMigrationPatterns(String clientName){
+		List<Migration> migrationList=new ArrayList<Migration>();
+		for(Migration migration:migrationRepository.findAll()) {
+			System.out.println(clientName+"=="+migration.getClientName());
+			if(clientName.equals(migration.getClientName())) {
+				migrationList.add(migration);
+			}
+		}
+		System.out.println(migrationList);
+		return migrationList;
 	}
 	
-	public void updateMigrationRule(List<MigrationRule> migrationRulelist)
+	public void updateMigrationRule(List<MigrationRule> migrationRulelist, String clientName)
 	{
 		MigrationRule migrationRuleObject=new MigrationRule();
 		for(MigrationRule migrationRule:migrationRulelist) {
 			migrationRuleObject=migrationRule;
+			migrationRuleObject.setClientName(clientName);
 			migrationRuleObject.setMigrationId(migrationRule.getMigrationId());
 			migrationRuleRepository.save(migrationRuleObject);
 		}
