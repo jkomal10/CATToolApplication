@@ -80,11 +80,11 @@ public class AssessmentQuestionsController {
 		assessmentQuestionsService.updateQuestions(assessmentQuestions);
 	}
 	
-	@GetMapping("/getAllCloudableQuestions")
-	public List<AssessmentQuestions> getCloudableQuestions()
+	@GetMapping("/getAllCloudableQuestions/{clientName}")
+	public List<AssessmentQuestions> getCloudableQuestions(@PathVariable String clientName)
 	{
 		System.out.println("****************get all question******************");
-		return assessmentQuestionsService.getCloudableQuestions();
+		return assessmentQuestionsService.getCloudableQuestions(clientName);
 	}
 	
 	@GetMapping("/getAllMigrationPattern/{migrationId}/{clientName}")

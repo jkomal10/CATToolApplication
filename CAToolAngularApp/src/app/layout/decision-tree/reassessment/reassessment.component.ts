@@ -15,6 +15,7 @@ export class ReassessmentComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   value1: string;
   AllData : any = [];
+  applicationId : number;
   applicationIdArray : any = [];
   migrationCheckbox : boolean;
   cloudProviderCheckbox : boolean;
@@ -69,6 +70,7 @@ export class ReassessmentComponent implements OnInit {
   }
 
   applicationNameChange(e,applicationId){
+    console.log("application checked");
     if(e.currentTarget.checked)
     {
 

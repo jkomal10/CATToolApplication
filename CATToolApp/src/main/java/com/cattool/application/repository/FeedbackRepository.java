@@ -8,4 +8,5 @@ import com.cattool.application.entity.Feedback;
 @Repository
 public interface FeedbackRepository extends JpaRepository<Feedback, Long>{
 
+	public Feedback findByUserName(String userName);
 }

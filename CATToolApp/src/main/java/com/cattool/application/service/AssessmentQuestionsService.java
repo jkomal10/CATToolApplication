@@ -120,12 +120,14 @@ public class AssessmentQuestionsService {
 		assessmentQuestionsRepository.save(assessmentQuestion);
 	}
 	
-	public List<AssessmentQuestions> getCloudableQuestions(){
+	public List<AssessmentQuestions> getCloudableQuestions(String clientName){
 		List<AssessmentQuestions> list=new ArrayList<AssessmentQuestions>();
 		for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
 			if(assessmentQuestions.getAssessmentTypeForCloudable().equals("true"))
 			{
+				if(clientName.equals(assessmentQuestions.getClientName())) {
 				list.add(assessmentQuestions);
+				}
 			}
 		}
 		return list;
@@ -163,20 +165,37 @@ public class AssessmentQuestionsService {
 		return assessmentQuestionsList;
 		
 	}
-
+	
 	public List<AssessmentQuestions> getAllcloudProviderRule(int cloudProviderId, String clientName) {
 		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<>();
 		for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
 			List<CloudProviderRule> cloudProviderRuleList;
-			for(CloudProviderRule cloudProviderRules : assessmentQuestions.getCloudProviderRules()) {
-				if(cloudProviderId == cloudProviderRules.getCloudProviderId() && clientName.equals(cloudProviderRules.getClientName()))
-				{
-					System.out.println(cloudProviderRules);
-					assessmentQuestionsList.add(assessmentQuestions);
-					break;
+			for(CloudProviderRule cloudProviderRule:assessmentQuestions.getCloudProviderRules()) {
+				if(cloudProviderId==cloudProviderRule.getCloudProviderId() &&clientName.equals(cloudProviderRule.getClientName())) {
+				assessmentQuestionsList.add(assessmentQuestions);
+				break;
 				}
 			}
+			
 		}
+		System.out.println(assessmentQuestionsList);
 		return assessmentQuestionsList;
+		
 	}
+
+//	public List<AssessmentQuestions> getAllcloudProviderRule(int cloudProviderId, String clientName) {
+//		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<>();
+//		for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
+//			List<CloudProviderRule> cloudProviderRuleList;
+//			for(CloudProviderRule cloudProviderRules : assessmentQuestions.getCloudProviderRules()) {
+//				if(cloudProviderId == cloudProviderRules.getCloudProviderId() && clientName.equals(cloudProviderRules.getClientName()))
+//				{
+//					System.out.println(cloudProviderRules);
+//					assessmentQuestionsList.add(assessmentQuestions);
+//					break;
+//				}
+//			}
+//		}
+//		return assessmentQuestionsList;
+//	}
 }

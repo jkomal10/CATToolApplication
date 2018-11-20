@@ -140,12 +140,12 @@ public class ApplicationService {
 		applicationRepository.save(application);
 	}
 
-	public List<Application> getAllReassessment() {
+	public List<Application> getAllReassessment(String clientName) {
 		// TODO Auto-generated method stub
 		 List<Application> appList=new ArrayList<Application>();
 		 
          for(Application application: applicationRepository.findAll()){
-       	 if(application.isFinalize()==1)
+       	 if(application.isFinalize()==1 && clientName.equals(application.getClientName()))
         	 {
         		 appList.add(application);
         		 System.out.println(appList);
