@@ -16,16 +16,25 @@
                             <br>Migration Rule
                          </td>  
                         <td> 
-                            <span name="questionText" > {{migrationAllData[i].questionText}}</span> <br>
+                                <span name="questionText" > {{migrationAllData[i].questionText}}</span> 
+                               <br><input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrderValue[i]"/>
+                               <br> <span name="questionType" > {{migrationAllData[i].questionType}}</span>
+                               <br> <span *ngFor="let option of migrationAllData[i]['questionOption'] ; let op = index" name="optionText">{{migrationAllData[i].questionOption[op]['optionText']+" , "}}</span>
+                               <br> <input type="text" #cloudableRule name="migrationRule{{i}}" [(ngModel)]="migrationRule[i]"/>
+
+                               
+
+                            <!-- <span name="questionText" > {{migrationAllData[i].questionText}}</span> <br>
                             <span name="executionOrder" > {{migrationAllData[i].migrationRule[i].executionOrder}}</span><br>
                             <span name="questionType" > {{migrationAllData[i].questionType}}</span>
                             <br><span *ngFor="let option of migrationAllData[i]['questionOption'] ; let op = index" name="optionText">{{migrationAllData[i].questionOption[op]['optionText']+" , "}}</span>
-                            <span *ngFor="let s of migrationAllData[i].migrationRule">
+                            
+                            <span *ngFor="let s of migrationAllData[i].migrationRule"> -->
                             <!-- <br><input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrderValue[i]" placeholder="{{s.executionOrder}}"/> -->
                             <!-- <br><span name="questionType">{{migrationAllData[i].questionType}}</span> -->
                             
-                            <br><input type="text" #cloudableRule name="migrationRule{{i}}" [(ngModel)]="migrationRule[i]" placeholder="{{s.migrationRule}}"/>
-                        </span>
+                            <!-- <br><input type="text" #cloudableRule name="migrationRule{{i}}" [(ngModel)]="migrationRule[i]" placeholder="{{s.migrationRule}}"/>
+                        </span> -->
                         </td>
                     </tr>
               </tbody>

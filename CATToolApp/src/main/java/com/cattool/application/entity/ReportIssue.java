@@ -12,6 +12,8 @@ public class ReportIssue {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int issueId;
 	private String issue;
+	private String userName;
+	private String clientName;
 	public int getIssueId() {
 		return issueId;
 	}
@@ -25,10 +27,26 @@ public class ReportIssue {
 		this.issue = issue;
 	}
 	
+	
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getClientName() {
+		return clientName;
+	}
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
 	@Override
 	public String toString() {
-		return "ReportIssue [issueId=" + issueId + ", issue=" + issue + "]";
+		return "ReportIssue [issueId=" + issueId + ", issue=" + issue + ", userName=" + userName + ", clientName="
+				+ clientName + "]";
 	}
+	
 	
 	
 	
