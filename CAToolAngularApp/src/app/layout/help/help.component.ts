@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { HelpService } from './help.service';
+import { HttpClient, HttpResponse,HttpHeaders } from '@angular/common/http';
+import {ActivatedRoute, Router } from '@angular/router';
+import { issue } from './issue';
 
 @Component({
   selector: 'app-help',
@@ -7,34 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HelpComponent implements OnInit {
 
-  video:string;
-  player:YT.Player;
-  id:string;
-  components:string;
-  constructor() { }
+  textfield:string;
+  issues:issue=new issue();
+  constructor(public helpService:HelpService, public router: Router,
+    private http: HttpClient) { }
 
   ngOnInit() {
-    this.video=localStorage.getItem('component');
-    console.log(this.video);
-    this.call();
+   
 
   }
 
-  call()
-  {
-    // this.player: YT.Player;
-    if(this.video=='user'){
-      this.components = 'Video for all services of users';
-      this.id= '0eWrpsCLMJQ';
-    }
-    
+  submit(){
+    // this.textfield=formvalue;
+    console.log(this.textfield);
+    this.issues.issue=this.textfield;
+    this.helpService.saveIssue(this.issues).subscribe();
+    this.router.navigate(['/dashboard']);
 
-  //  savePlayer(player) {
-  //   this.player = player;
-  //   console.log('Video Url', player.getVideoUrl());
-  // }
-  // onStateChange(event) {
-  //   console.log('player state', event.data);
-  // }
   }
+  
 }
