@@ -160,8 +160,6 @@ public class ApplicationService {
 
 	public void allRuleCheck(int applicationId) {
 		boolean cloudabilityCheck= cloudableCheck(applicationId);
-		System.out.println(cloudabilityCheck);
-		cloudabilityCheck=true;
 		if (cloudabilityCheck) {
 			boolean cloudProviderCheckTest= cloudProviderCheck(applicationId);
 			
@@ -290,6 +288,7 @@ public boolean cloudProviderCheck(int applicationId){
 	
 	public void migrationCheck(int applicationId){
 		System.out.println("Migration works");
+		gitcCheck=0;
 		int migrationQuestionIdValue=0;
 		int answerTextCount=0;
 		int answerIdCount=0;
@@ -313,16 +312,20 @@ public boolean cloudProviderCheck(int applicationId){
 				answerlist.add(answers);
 			}
 		}
-		if(answerTextCount==answerIdCount)
-		{
+		System.out.println(answerlist);
+//		if(answerTextCount==answerIdCount)
+//		{
 		for(MigrationRule migrationRule:migrationRulelist)
 		{
 			System.out.println("gitc check "+gitcCheck);
+			System.out.println("migration rule "+migrationRule.getMigrationRule());
+			System.out.println("id "+migrationRule.getMigrationId());
 			if(gitcCheck!=0)
 			{
 				publicFalseCheck=false;
+				System.out.println("publicFalseCheck=false;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
 			}
-			if(gitcCheck==0 &&publicFalseCheck==true && migrationRule.getMigrationId()==1001)//public-pass
+			if(gitcCheck==0 && publicFalseCheck==true && migrationRule.getMigrationId()==11)//public-pass
 			{
 				System.out.println(migrationRule.getMigrationRule()+"^^^^^^^^^^^^^^public pass");
 				for(Answers answers:answerlist) {
@@ -330,6 +333,7 @@ public boolean cloudProviderCheck(int applicationId){
 					System.out.println(migrationQuestionIdValue+"===="+answers.getQuestionId());
 					if(migrationQuestionIdValue==answers.getQuestionId())
 					{
+						System.out.println(migrationRule.getMigrationRule()+"-----------------"+answers.getAnswerText());
 						publicFalseCheck=migrationRule.getMigrationRule().contains(answers.getAnswerText());
 						System.out.println(publicFalseCheck);
 							if(publicFalseCheck)
@@ -346,6 +350,7 @@ public boolean cloudProviderCheck(int applicationId){
 											application.setIsFinalize(1);
 											application.setAssessment(true);
 											application.setIsSaved(1);
+											System.out.println(application.getMigrationPattern()+"::::::::::::::::::::::::::::::::::::::::::::::");
 											applicationRepository.save(application);
 										}
 								}
@@ -414,14 +419,14 @@ public boolean cloudProviderCheck(int applicationId){
 					applicationRepository.save(application);
 				}
 			}
-	}else {
-		
-				System.out.println("No answers present for given application!!!!!");
-				application.setApplicationId(applicationId);
-				application.setMigrationPattern("Re-Plateform");;
-				application.setIsSaved(0);
-				applicationRepository.save(application);
-		  }
+//	}else {
+//		
+//				System.out.println("No answers present for given application!!!!!");
+//				application.setApplicationId(applicationId);
+//				application.setMigrationPattern("Re-Plateform");;
+//				application.setIsSaved(0);
+//				applicationRepository.save(application);
+//		  }
 		}
 	
 	public void summaryReport() throws FileNotFoundException{

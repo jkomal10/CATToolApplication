@@ -49,6 +49,7 @@ public class AnswersService {
 			System.out.println("new answers"+answers.getAnswerId());
 			answersObject.setApplicationId(answers.getApplicationId());
 			answersObject.setAnswerId(answers.getAnswerId());
+			System.out.println(answersObject);
 			 answersRepository.saveAndFlush(answersObject);	
 			 if(count==0)
 			 {
