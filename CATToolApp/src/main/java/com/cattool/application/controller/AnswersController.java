@@ -39,6 +39,7 @@ public class AnswersController {
 	@PostMapping("/save/create")
 	public void saveAnswers(@RequestBody  List<Answers> answers)
 	{
+		System.out.println("***********************************************************************************%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+answers);
 		for( Answers list : answers)
 		System.out.println("new answ"+list);
 		answersService.saveAnswers(answers);

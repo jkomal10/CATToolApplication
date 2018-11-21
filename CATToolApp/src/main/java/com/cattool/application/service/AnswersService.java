@@ -21,6 +21,7 @@ public class AnswersService {
 	ApplicationRepository applicationRepository;
 	
 	int applicationIdFromUI=0;
+	int count=0;
 	
 	public List<Answers> getAllAnswers()
 	{
@@ -49,7 +50,12 @@ public class AnswersService {
 			answersObject.setApplicationId(answers.getApplicationId());
 			answersObject.setAnswerId(answers.getAnswerId());
 			 answersRepository.saveAndFlush(answersObject);	
-			 applicationIdFromUI=answers.getApplicationId();
+			 if(count==0)
+			 {
+				 applicationIdFromUI=answers.getApplicationId();
+				 System.out.println(applicationIdFromUI);
+				 count++;
+			 }
 		}
 		System.out.println("applicationIdFromUI"+applicationIdFromUI);
 		Application application=new Application();

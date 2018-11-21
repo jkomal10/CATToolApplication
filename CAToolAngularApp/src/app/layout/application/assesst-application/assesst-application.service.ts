@@ -20,6 +20,7 @@ export class AssesstApplicationService {
 
      saveAssessApplication(cloudablerule: Object): Observable<Object> {
       console.log(`${this.baseUrl }/create`);
+      console.log(JSON.stringify(cloudablerule));
       return this.http.post(`${this.baseUrl }` + `/create`, cloudablerule);
     }
 

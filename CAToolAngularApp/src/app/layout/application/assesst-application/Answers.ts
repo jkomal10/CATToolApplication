@@ -3,7 +3,7 @@ export class Answers{
     applicationId : number;
     questionId : number;
     answerText : String;
-    cloudAbility : Boolean;
+    cloudAbility : number;
     createdBy : String;
     cteatedTime : Date;
     modifiedBy : String;

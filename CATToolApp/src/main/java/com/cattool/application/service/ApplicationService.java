@@ -160,6 +160,8 @@ public class ApplicationService {
 
 	public void allRuleCheck(int applicationId) {
 		boolean cloudabilityCheck= cloudableCheck(applicationId);
+		System.out.println(cloudabilityCheck);
+		cloudabilityCheck=true;
 		if (cloudabilityCheck) {
 			boolean cloudProviderCheckTest= cloudProviderCheck(applicationId);
 			

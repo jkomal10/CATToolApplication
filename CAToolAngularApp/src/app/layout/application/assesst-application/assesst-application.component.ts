@@ -156,7 +156,7 @@ i=-1;
            this.singlee++ ;
                
        }
-       answer.cloudAbility = false;
+       answer.cloudAbility = 0;
         this.answers[index]=answer;
         console.log(JSON.stringify(answer));
     }
@@ -190,7 +190,7 @@ i=-1;
            this.singlee++ ;
                
        }
-       answer.cloudAbility = false;
+       answer.cloudAbility = 0;
         this.answers[index]=answer;
         console.log(JSON.stringify(answer));
     }

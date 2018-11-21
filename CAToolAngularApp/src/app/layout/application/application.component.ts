@@ -59,6 +59,7 @@ export class ApplicationComponent implements OnInit {
     this.applicationService.CollectData(this.clientNameValue).subscribe(result => 
       {
       this.AllData = result ;
+      console.log(JSON.stringify(this.AllData));
       this.dtTrigger.next();
       });
 
@@ -192,11 +193,15 @@ new Angular5Csv( this.applicationTemplate,filename, options);
      console.log(formvalues.applicationId)
     this.applicationService.sendMsgtoOtherComponent(formvalues);
      this.router.navigate(['/application/assesst-application']);
+
    }
 
    deactivate(formvalues){
      this.applicationService.deactivate(formvalues).subscribe();
    }
    
-
+   somefunction()
+   {
+     console.log("sommmmmmmmmmmmmmmmmmmmmmm");
+   }
 }
