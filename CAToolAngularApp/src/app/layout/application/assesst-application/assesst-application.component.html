@@ -26,13 +26,10 @@
                 <!-- <select style="padding-top: 10px ; width: 100%" (change)="selectChange($event)" [(ngModel)]="tempp[k-1]" name="tempp[k-1]" required> "tempp[k-1]"
                   <option class='option' *ngFor="let optionn of AllData[i]['questionOption'] ; let k = index" [ngValue]="optionn">{{AllData[i].questionOption[k]['optionText']}}</option>
                 </select> -->
-                <select style="padding-top: 10px ; width: 100%" (change)="selectChange($event)" required [(ngModel)]="userType1[k]" #UserType="ngModel" name="userType1{{k}}"> 
+                <select style="padding-top: 10px ; width: 100%" (change)="selectChange($event)" required> 
                     <option disabled> </option>
                     <option class='option' *ngFor="let optionn of AllData[i]['questionOption'] ; let k = index" [ngValue]="optionn">{{AllData[i].questionOption[k]['optionText']}}</option>
                 </select>
-                <div *ngIf="UserType?.touched" >
-                    <div *ngIf="UserType.errors?.required" class="color"><i>Company can't be empty</i></div>
-            </div>
               </ng-template>
             </tr>
           </tbody>
