@@ -20,8 +20,8 @@ public class AnswersService {
 	@Autowired
 	ApplicationRepository applicationRepository;
 	
-	int applicationIdFromUI=0;
-	int count=0;
+	
+	
 	
 	public List<Answers> getAllAnswers()
 	{
@@ -40,24 +40,34 @@ public class AnswersService {
 	}
 	
 	public void saveAnswers(List<Answers> AnswersList ) {
-		
+		int count=0;
+		int applicationIdFromUI=0;
 		List<Answers> ansList=new ArrayList<Answers>();
 		for(Answers answers : AnswersList )
 		{ 
 			Answers answersObject=new Answers();
 			answersObject=answers;
-			System.out.println("new answers"+answers.getAnswerId());
+//			System.out.println("new answers"+answers.getAnswerId());
 			answersObject.setApplicationId(answers.getApplicationId());
 			answersObject.setAnswerId(answers.getAnswerId());
-			System.out.println(answersObject);
+//			System.out.println(answersObject);
 			 answersRepository.saveAndFlush(answersObject);	
 			 if(count==0)
 			 {
+				 Application application=new Application();
 				 applicationIdFromUI=answers.getApplicationId();
+				 application=applicationRepository.findByApplicationId(applicationIdFromUI);
+				 application.setApplicationId(applicationIdFromUI);
+				 application.setIsSaved(1);
+				 System.out.println(application);
+				 applicationRepository.save(application);
 				 System.out.println(applicationIdFromUI);
 				 count++;
 			 }
 		}
+		
+		
+		
 		System.out.println("applicationIdFromUI"+applicationIdFromUI);
 		Application application=new Application();
 		application=applicationRepository.findByApplicationId(applicationIdFromUI);

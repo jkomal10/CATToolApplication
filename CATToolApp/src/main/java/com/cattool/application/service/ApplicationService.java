@@ -46,7 +46,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 @Transactional
 public class ApplicationService {
 	
-	private int gitcCheck=0;
+	//private int gitcCheck=0;
 
 	@Autowired
 	ApplicationRepository applicationRepository;
@@ -159,20 +159,24 @@ public class ApplicationService {
 
 
 	public void allRuleCheck(int applicationId) {
+		int gitcCheck=0;
+		Application application=applicationRepository.findByApplicationId(applicationId);
+		application.setIsFinalize(1);
+		applicationRepository.save(application);
 		boolean cloudabilityCheck= cloudableCheck(applicationId);
-		if (cloudabilityCheck) {
-			boolean cloudProviderCheckTest= cloudProviderCheck(applicationId);
-			
-			if(cloudProviderCheckTest) {
-				migrationCheck(applicationId);
+		if(cloudabilityCheck) {
+			boolean cloudproviderCheck=cloudProviderCheck(applicationId);
+			if(cloudproviderCheck==false)
+			{
+				gitcCheck=1;
+				migrationCheck(applicationId,gitcCheck);
 			}
 			else
 			{
-				gitcCheck++;
-				migrationCheck(applicationId);
+				gitcCheck=0;
+				migrationCheck(applicationId,gitcCheck);
 			}
 		}
-		
 	}
 	public boolean cloudableCheck(int applicationId){
 		int cloudableRuleFlag=0;
@@ -227,6 +231,7 @@ public boolean cloudProviderCheck(int applicationId){
 		Application application=new Application();
 		System.out.println("allAnswers** " + allAnswers);
 		application = applicationRepository.findByApplicationId(applicationId);
+		String clientName = application.getClientName();
 		allAnswers = answerRepository.findAll();
 		for (Answers getAnswers : allAnswers) {
 			System.out.println("getAnswers.getQuestionId()*** "+getAnswers.getQuestionId());
@@ -243,13 +248,23 @@ public boolean cloudProviderCheck(int applicationId){
 		List<CloudProviderRule> cloudProviderRule = new ArrayList<>();
 		cloudProviderRule = cloudProviderRuleRepository.findAll();
 		System.out.println("cloudProviderRule"+cloudProviderRule);
-		numberOfRules = cloudProviderRule.size();
+//		numberOfRules = cloudProviderRule.size();
 		System.out.println("numberOfRules"+numberOfRules);
 		
-		
+		List<CloudProviderRule> cloudProviderRuleList=new ArrayList<CloudProviderRule>();
+//		cloudProviderRuleList=cloudProviderRuleRepository.findAll();
+		for(CloudProviderRule cloudProviderRuleClientName:cloudProviderRuleRepository.findAll()) {
+			if(cloudProviderRuleClientName.getClientName().equals(clientName))
+			{
+				cloudProviderRuleList.add(cloudProviderRuleClientName);
+				
+			}
+		}
+		numberOfRules = cloudProviderRuleList.size();
+		System.out.println("%%%%%%%%%%%" + cloudProviderRuleList);
 		for (Answers userAnswers : answers) {
-			
-			for(CloudProviderRule cloudProviderRules : cloudProviderRule)
+//			if(application.getClientName().equals(c))
+			for(CloudProviderRule cloudProviderRules : cloudProviderRuleList)
 			{
 				
 				if(userAnswers.getQuestionId() == Integer.parseInt(cloudProviderRules.getQuestionId()))
@@ -275,7 +290,7 @@ public boolean cloudProviderCheck(int applicationId){
 			return false;
 		}
 		
-		else
+		else 
 		{
 			application.setCloudProvider("AWS");
 			application.setIsSaved(1);
@@ -286,7 +301,7 @@ public boolean cloudProviderCheck(int applicationId){
 	}
 
 	
-	public void migrationCheck(int applicationId){
+	public void migrationCheck(int applicationId,int gitcCheck){
 		System.out.println("Migration works");
 		Application app=new Application();
 		app=applicationRepository.findByApplicationId(applicationId);
@@ -302,9 +317,20 @@ public boolean cloudProviderCheck(int applicationId){
 		List<Answers> answerlist=new ArrayList<Answers>();
 		List<MigrationRule> migrationRulelist=new ArrayList<MigrationRule>();
 		Application application=applicationRepository.findByApplicationId(applicationId);
+		String clientName = application.getClientName();
 		Application application2=applicationRepository.findByApplicationId(applicationId);
 		System.out.println(application);
 		migrationRulelist=migrationRuleRepository.findAll();
+		List<MigrationRule> migrationRuleByClientName = new ArrayList<MigrationRule>();
+		for(MigrationRule migrationRuleAllRule:migrationRuleRepository.findAll())
+		{
+			if(migrationRuleAllRule.getClientName().equals(clientName))
+			{
+				migrationRuleByClientName.add(migrationRuleAllRule);
+			}
+		}
+		
+		
 		for(Answers answers:answerRepository.findAll())
 		{
 			if(answers.getApplicationId()==applicationId)
@@ -319,7 +345,7 @@ public boolean cloudProviderCheck(int applicationId){
 		}
 		if(answerTextCount==answerIdCount)
 		{
-		for(MigrationRule migrationRule:migrationRulelist)
+		for(MigrationRule migrationRule:migrationRuleByClientName)
 		{
 			System.out.println("gitc check "+gitcCheck);
 			if(gitcCheck!=0)
