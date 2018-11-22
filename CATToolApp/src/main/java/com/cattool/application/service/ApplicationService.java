@@ -288,7 +288,12 @@ public boolean cloudProviderCheck(int applicationId){
 	
 	public void migrationCheck(int applicationId){
 		System.out.println("Migration works");
-		gitcCheck=0;
+		Application app=new Application();
+		app=applicationRepository.findByApplicationId(applicationId);
+		app.setIsCloudable("true");
+		applicationRepository.save(app);
+		System.out.println(app.getIsCloudable());
+		
 		int migrationQuestionIdValue=0;
 		int answerTextCount=0;
 		int answerIdCount=0;
@@ -312,20 +317,16 @@ public boolean cloudProviderCheck(int applicationId){
 				answerlist.add(answers);
 			}
 		}
-		System.out.println(answerlist);
-//		if(answerTextCount==answerIdCount)
-//		{
+		if(answerTextCount==answerIdCount)
+		{
 		for(MigrationRule migrationRule:migrationRulelist)
 		{
 			System.out.println("gitc check "+gitcCheck);
-			System.out.println("migration rule "+migrationRule.getMigrationRule());
-			System.out.println("id "+migrationRule.getMigrationId());
 			if(gitcCheck!=0)
 			{
 				publicFalseCheck=false;
-				System.out.println("publicFalseCheck=false;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
 			}
-			if(gitcCheck==0 && publicFalseCheck==true && migrationRule.getMigrationId()==11)//public-pass
+			if(gitcCheck==0 &&publicFalseCheck==true && migrationRule.getMigrationId()==1001)//public-pass
 			{
 				System.out.println(migrationRule.getMigrationRule()+"^^^^^^^^^^^^^^public pass");
 				for(Answers answers:answerlist) {
@@ -333,7 +334,7 @@ public boolean cloudProviderCheck(int applicationId){
 					System.out.println(migrationQuestionIdValue+"===="+answers.getQuestionId());
 					if(migrationQuestionIdValue==answers.getQuestionId())
 					{
-						System.out.println(migrationRule.getMigrationRule()+"-----------------"+answers.getAnswerText());
+						System.out.println(migrationRule.getMigrationRule()+"==="+answers.getAnswerText());
 						publicFalseCheck=migrationRule.getMigrationRule().contains(answers.getAnswerText());
 						System.out.println(publicFalseCheck);
 							if(publicFalseCheck)
@@ -350,7 +351,6 @@ public boolean cloudProviderCheck(int applicationId){
 											application.setIsFinalize(1);
 											application.setAssessment(true);
 											application.setIsSaved(1);
-											System.out.println(application.getMigrationPattern()+"::::::::::::::::::::::::::::::::::::::::::::::");
 											applicationRepository.save(application);
 										}
 								}
@@ -366,7 +366,7 @@ public boolean cloudProviderCheck(int applicationId){
 					System.out.println("break works in public paas");
 				}
 			}
-			else if(publicFalseCheck==false && rehostFalseCheck==true && migrationRule.getMigrationId()==1002)//Rehost
+			if(publicFalseCheck==false && rehostFalseCheck==true && migrationRule.getMigrationId()==1002)//Rehost
 			{
 				System.out.println(migrationRule.getMigrationRule()+"^^^^^^^^^^^^^^Rehost");
 				System.out.println("answerssssssssss"+answerlist);
@@ -376,11 +376,12 @@ public boolean cloudProviderCheck(int applicationId){
 					if(migrationQuestionIdValue==answers.getQuestionId())
 					{
 						System.out.println(migrationRule.getMigrationRule()+"==="+answers.getAnswerText());
+						System.out.println(answers.getAnswerText()+"===="+migrationRule.getMigrationRule());
 						rehostFalseCheck=answers.getAnswerText().contains(migrationRule.getMigrationRule());
 						System.out.println(rehostFalseCheck);
 							if(rehostFalseCheck)
 								{
-										System.out.println("Rehost pass");
+										System.out.println("Rehost");
 										application2.setApplicationId(applicationId);
 										application2.setMigrationPattern("Rehost");
 										application.setIsSaved(1);
@@ -419,14 +420,14 @@ public boolean cloudProviderCheck(int applicationId){
 					applicationRepository.save(application);
 				}
 			}
-//	}else {
-//		
-//				System.out.println("No answers present for given application!!!!!");
-//				application.setApplicationId(applicationId);
-//				application.setMigrationPattern("Re-Plateform");;
-//				application.setIsSaved(0);
-//				applicationRepository.save(application);
-//		  }
+	}else {
+		
+				System.out.println("No answers present for given application!!!!!");
+				application.setApplicationId(applicationId);
+				application.setMigrationPattern("Re-Plateform");;
+				application.setIsSaved(0);
+				applicationRepository.save(application);
+		  }
 		}
 	
 	public void summaryReport() throws FileNotFoundException{
