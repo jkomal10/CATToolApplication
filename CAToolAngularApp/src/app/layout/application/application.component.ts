@@ -35,7 +35,7 @@ export class ApplicationComponent implements OnInit {
   ngOnInit() {
     this.clientNameValue=localStorage.getItem('clientName');
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'first_last_numbers',
       pageLength: 10,
       responsive: true,
     //   rowCallback: (row: Node, data: any[] | Object, index: number) => {

@@ -89,7 +89,7 @@ public class AssessmentQuestionsService{
 				System.out.println("*********** "+assessmentQuestions.getAssessmentTypeForCloudable());
 				cloudableRule.setQuestionId(assessmentQuestions.getQuestionId());
 				cloudableRule.setQuestionText(assessmentQuestions.getQuestionText());
-				//cloudableRule.setClientName(assessmentQuestions.getClientName());
+				cloudableRule.setClientName(assessmentQuestions.getClientName());
 				cloudableRuleRepository .save(cloudableRule);	
 			}
 			LOGGER.info("Successfully saved the Questions");

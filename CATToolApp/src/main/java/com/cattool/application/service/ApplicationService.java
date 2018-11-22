@@ -180,10 +180,24 @@ public class ApplicationService {
 	}
 	public boolean cloudableCheck(int applicationId){
 		int cloudableRuleFlag=0;
+		
 		Application application=new Application();
 		application=applicationRepository.findByApplicationId(applicationId);
-		List<CloudableRule> cloudableRuleList=new ArrayList<CloudableRule>();
-		cloudableRuleList = cloudableRuleRepository.findAll();
+		
+//		List<CloudableRule> cloudableRuleList=new ArrayList<CloudableRule>();
+//		cloudableRuleList = cloudableRuleRepository.findAll();
+		
+		List<CloudableRule> cloudableListByClientId = new ArrayList<CloudableRule>();
+		for(CloudableRule cloudableRule : cloudableRuleRepository.findAll())
+		{
+			System.out.println(cloudableRule);
+			System.out.println(cloudableRule.getClientName()+"==****=="+application.getClientName());
+			if(cloudableRule.getClientName().equals(application.getClientName()))
+			{
+				cloudableListByClientId.add(cloudableRule);
+			}
+		}
+		System.out.println("++++++" +cloudableListByClientId);
 		
 		List<Answers> answersList=new ArrayList<>();
 		
@@ -193,25 +207,25 @@ public class ApplicationService {
 				answersList.add(answers);
 			}
 		}
-		for(CloudableRule cloudableRule:cloudableRuleList) {
+		for(CloudableRule cloudableRule:cloudableListByClientId) {
 			System.out.println("line 1");
 			for(Answers answers:answersList) {
 				System.out.println("line 2");
 				if(cloudableRule.getQuestionId()==(answers.getQuestionId())) {
 					System.out.println("cloudableRule.getQuestionId()"+cloudableRule.getQuestionId());
-					System.out.println("answers.getQuestionId()"+answers.getQuestionId());
+//					System.out.println("answers.getQuestionId()"+answers.getQuestionId());
 					if(cloudableRule.getCloudableRule().contains(answers.getAnswerText())){
 						answers.setCloudAbility(1);
 						cloudableRuleFlag++;
 						System.out.println(cloudableRule.getCloudableRule()+"cloudableRule.getCloudableRule()");
-					    System.out.println(answers.getAnswerText()+"answers.getAnswerText()");
+//					    System.out.println(answers.getAnswerText()+"answers.getAnswerText()");
         				}//else {
 //						cloudableRuleFlag=0;break;}
 					//cloudableQuestionFlag=1;
 				}//else {cloudableQuestionFlag=0;}
 			}
 		}
-		if(cloudableRuleFlag==cloudableRuleList.size()){
+		if(cloudableRuleFlag==cloudableListByClientId.size()){
 			application.setCloudable("Yes");
 			
 			
@@ -245,9 +259,9 @@ public boolean cloudProviderCheck(int applicationId){
 		System.out.println("Specific answers"+answers);
 		
 	
-		List<CloudProviderRule> cloudProviderRule = new ArrayList<>();
-		cloudProviderRule = cloudProviderRuleRepository.findAll();
-		System.out.println("cloudProviderRule"+cloudProviderRule);
+//		List<CloudProviderRule> cloudProviderRule = new ArrayList<>();
+//		cloudProviderRule = cloudProviderRuleRepository.findAll();
+//		System.out.println("cloudProviderRule"+cloudProviderRule);
 //		numberOfRules = cloudProviderRule.size();
 		System.out.println("numberOfRules"+numberOfRules);
 		
