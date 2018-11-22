@@ -34,9 +34,11 @@ i=-1;
   application:any;
   UpdateAnswersData:any;
   clientNameValue:string;
+  userType1 :Array<number>=[1,2,3,4,5,6,7,8,9];
   constructor(private router:Router,private assessmentService:AssesstApplicationService,private applicationService:ApplicationService) { }
 
   ngOnInit() {
+   
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 2,
@@ -76,6 +78,7 @@ i=-1;
     this.single++;
     console.log(this.tempp[0]+"ooooooooooooo");
     console.log(this.tempp[1]+"ooooooooooooo");
+    console.log(this.tempp[2]+"ooooooooooooo");
       }
 
    selectChangeHandler(optionnnnnn,event,id){

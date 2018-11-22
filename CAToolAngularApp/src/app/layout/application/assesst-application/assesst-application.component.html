@@ -16,22 +16,30 @@
 
               <td width="50%" *ngIf="AllData[i].questionType==='Multiple Choice Multiple Answer'; else dropdownbox">
                 <div *ngFor="let option of AllData[i]['questionOption'] ;let j = index" >
-                  <input type="checkbox" (change)="selectChangeHandler(option,$event,AllData[i].questionId)"required>{{AllData[i].questionOption[j]['optionText']}}
+                  <input type="checkbox" (change)="selectChangeHandler(option,$event,AllData[i].questionId)"required >
+                  {{AllData[i].questionOption[j]['optionText']}}
                  
                 </div>
+                
               </td>
               <ng-template #dropdownbox>
-                <select style="padding-top: 10px ; width: 100%" (change)="selectChange($event)" [(ngModel)]="tempp[k-1]" name="tempp[k-1]" required>
+                <!-- <select style="padding-top: 10px ; width: 100%" (change)="selectChange($event)" [(ngModel)]="tempp[k-1]" name="tempp[k-1]" required> "tempp[k-1]"
                   <option class='option' *ngFor="let optionn of AllData[i]['questionOption'] ; let k = index" [ngValue]="optionn">{{AllData[i].questionOption[k]['optionText']}}</option>
+                </select> -->
+                <select style="padding-top: 10px ; width: 100%" (change)="selectChange($event)" required [(ngModel)]="userType1[k]" #UserType="ngModel" name="userType1{{k}}"> 
+                    <option disabled> </option>
+                    <option class='option' *ngFor="let optionn of AllData[i]['questionOption'] ; let k = index" [ngValue]="optionn">{{AllData[i].questionOption[k]['optionText']}}</option>
                 </select>
-
+                <div *ngIf="UserType?.touched" >
+                    <div *ngIf="UserType.errors?.required" class="color"><i>Company can't be empty</i></div>
+            </div>
               </ng-template>
             </tr>
           </tbody>
         </table>
       </div>
       <div>
-        <button type="submit" class="btn btn-info" title="saving application">Save</button>&nbsp;
+        <button type="submit" class="btn btn-info" [disabled]="add.invalid" title="saving application">Save</button>&nbsp;
     
       </div>
     </form>
