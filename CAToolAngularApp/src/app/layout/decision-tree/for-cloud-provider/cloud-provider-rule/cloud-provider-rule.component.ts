@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ForCloudProviderService } from '../for-cloud-provider.service';
 import { CloudProviderRule } from '../CloudProviderRule';
-import { Router } from '../../../../../../node_modules/@angular/router';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 @Component({
   selector: 'app-cloud-provider-rule',
