@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject, Observable } from '../../../../node_modules/rxjs';
+import { Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 import { Application } from '../application/Application';
