@@ -21,10 +21,13 @@ export class SidebarComponent {
         if(this.userActive=='false')
         {
             this.userCheck=false;
+            console.log(this.userCheck+"*****this.userCheck*******false***********************");
         }
         else{
             this.userCheck=true;
+            console.log(this.userCheck+"*****this.userCheck*******true***********************");
         }
+        console.log(this.userActive+"****this.userActive*******************************");
     }
 
     @Output() collapsedEvent = new EventEmitter<boolean>();

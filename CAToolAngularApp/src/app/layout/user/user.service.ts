@@ -32,9 +32,9 @@ countNumberOfUsers()
 
 newAddURL: string = 'http://localhost:8090/user/addUser';
   
-addUser(user: Object): Observable<Object> {
+addUser(application: Object): Observable<Object> {
   
-  return this.http.post(`${this.newAddURL}` + `/create/`+localStorage.getItem('userName'), user);
+  return this.http.post(`${this.newAddURL}` + `/create/`+localStorage.getItem('userName'), application);
 }
 
 deactivate(userId: number)
