@@ -11,39 +11,48 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
+var currentUser_model_1 = require("./currentUser.model");
 var LocalStorageService = /** @class */ (function () {
     function LocalStorageService(http) {
         this.http = http;
+        this.user = new currentUser_model_1.currentUser();
     }
-    LocalStorageService.prototype.setCurrentUser = function (currentUser) {
-        localStorage.setItem('userName', currentUser);
+    LocalStorageService.prototype.setCurrentUserObject = function (user) {
+        localStorage.setItem('user', JSON.stringify(user));
+        this.user = JSON.parse(localStorage.getItem('user'));
     };
-    LocalStorageService.prototype.setIsAdmin = function (trueFalseValue) {
-        localStorage.setItem('isUserActive', trueFalseValue);
+    LocalStorageService.prototype.setLoggedInTrue = function (isLoggedin) {
+        localStorage.setItem('isLoggedin', isLoggedin);
     };
-    LocalStorageService.prototype.setClient = function (clientName) {
-        localStorage.setItem('clientName', clientName);
+    LocalStorageService.prototype.setIsUserActive = function (isUserActive) {
+        localStorage.setItem('isUserActive', isUserActive);
     };
-    LocalStorageService.prototype.setFirstNameOfCurrentUser = function (currentUserfirstName) {
-        localStorage.setItem('firstName', currentUserfirstName);
-    };
-    LocalStorageService.prototype.setLastNameOfCurrentUser = function (currentUserlastName) {
-        localStorage.setItem('lastName', currentUserlastName);
-    };
-    LocalStorageService.prototype.getCurrentUser = function () {
-        return localStorage.getItem('userName');
-    };
-    LocalStorageService.prototype.getIsAdmin = function () {
+    LocalStorageService.prototype.getIsUserActive = function () {
         return localStorage.getItem('isUserActive');
     };
+    LocalStorageService.prototype.getLoggedInTrue = function () {
+        return localStorage.getItem('isLoggedin');
+    };
+    LocalStorageService.prototype.getCurrentUser = function () {
+        return this.user.userName;
+    };
+    LocalStorageService.prototype.getIsAdmin = function () {
+        return this.user.isAdmin;
+    };
     LocalStorageService.prototype.getClient = function () {
-        return localStorage.getItem('clientName');
+        return this.user.clientName;
     };
     LocalStorageService.prototype.getFirstNameOfCurrentUser = function () {
-        return localStorage.getItem('firstName');
+        return this.user.firstName;
     };
     LocalStorageService.prototype.getLastNameOfCurrentUser = function () {
-        return localStorage.getItem('lastName');
+        return this.user.lastName;
+    };
+    LocalStorageService.prototype.clearLoggedIn = function () {
+        return localStorage.removeItem('isLoggedin');
+    };
+    LocalStorageService.prototype.clearCurrentUser = function () {
+        return localStorage.removeItem('user');
     };
     LocalStorageService = __decorate([
         core_1.Injectable({

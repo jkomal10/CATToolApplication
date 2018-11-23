@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var layout_component_1 = require("./layout.component");
+//import { LoginComponent } from '../login/login.component';
 // import { AuthGuard } from './shared';
 var routes = [
     {

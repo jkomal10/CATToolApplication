@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -9,30 +10,16 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class SidebarComponent {
     col:boolean=true;
-    userActive : string;
-    userCheck : boolean;
+    isUser : string;
+    adminActive : boolean;
     isActive: boolean = false;
     collapsed: boolean = false;
     showMenu: string = '';
     pushRightClass: string = 'push-right';
 
-    ngOnInit() {
-        this.userActive=localStorage.getItem('isUserActive');
-        if(this.userActive=='false')
-        {
-            this.userCheck=false;
-            console.log(this.userCheck+"*****this.userCheck*******false***********************");
-        }
-        else{
-            this.userCheck=true;
-            console.log(this.userCheck+"*****this.userCheck*******true***********************");
-        }
-        console.log(this.userActive+"****this.userActive*******************************");
-    }
-
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
-    constructor(private translate: TranslateService, public router: Router) {
+    constructor(private translate: TranslateService, public router: Router, private myStorage:LocalStorageService) {
 
         const browserLang = this.translate.getBrowserLang();
 
@@ -46,6 +33,20 @@ export class SidebarComponent {
             }
         });
     }
+
+    ngOnInit() {
+        this.isUser=this.myStorage.getIsUserActive();
+        if(this.isUser=='false')
+        {
+            this.adminActive=false;
+        }
+        else{
+            this.adminActive=true;
+        }
+
+    }
+
+    
 
  addExpandClass(element: any) {
         if (element === this.showMenu) {

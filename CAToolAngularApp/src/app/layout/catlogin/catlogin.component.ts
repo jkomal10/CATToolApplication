@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { routerTransition } from '../../router.animations';
 import { CatloginService } from './catlogin.service';
 import { Users } from './Users';
+import { LocalStorageService } from '../utility/service/localStorage.service';
 
 @Component({
   selector: 'app-catlogin',
@@ -12,47 +13,32 @@ import { Users } from './Users';
 })
 export class CATloginComponent implements OnInit {
 
-  message:String;
-  users: Users = new Users();
-  userId:string;
-  
-   constructor(private loginService :CatloginService,public router: Router) {}
+    message:String;
+    users: Users = new Users();
+    userId:string;
+    
+    constructor(private loginService :CatloginService,public router: Router,private myStorage : LocalStorageService) {}
 
-   ngOnInit() {localStorage.setItem('userName',null);
-}
+    ngOnInit() {}
 
-onLoggedin(formValues) {
-    //  localStorage.setItem('isLoggedin', 'true');   
-     this.loginService.getUserByUserNamePassword(formValues.userName,formValues.password).subscribe((data)=>{
-     this.users=data;
-    //  console.log('****************************************'+this.users.password);
-
-     console.log(this.users + "asdasdasd");
+    onLoggedin(formValues) { 
+        this.loginService.getUserByUserNamePassword(formValues.userName,formValues.password).subscribe((data)=>{
+        this.users=data; 
         if( this.users!=null)
         {
-            localStorage.setItem('isLoggedin', 'true');   
+            this.myStorage.setLoggedInTrue('true'); //set is logged in true in session
+            this.myStorage.setCurrentUserObject(this.users); //set current user object in session
+
             if(this.users.isAdmin===0)
             {
-                localStorage.setItem('isUserActive','true');
-                localStorage.setItem('clientName',this.users.clientName);
-                console.log("client name=="+this.users.clientName);
-                console.log("is adminnnnnnnnnnn"+this.users.isAdmin)
-                localStorage.setItem('firstName',this.users.firstName);
-                localStorage.setItem('lastName',this.users.lastName);
-                this.message="uuuu";
-                localStorage.setItem('userName',formValues.userName);
+                this.myStorage.setIsUserActive('true');
+                this.message="admin";
                 this.loginService.sendMsgtoOtherComponent(this.users);
                 this.router.navigate(['/dashboard']);
             }
             else if(this.users.isAdmin==1){
-                localStorage.setItem('isUserActive','false');
-                localStorage.setItem('clientName',this.users.clientName);
-                console.log("client name=="+this.users.clientName);
-                console.log(JSON.stringify(this.users));
+                this.myStorage.setIsUserActive('false');
                 this.loginService.sendMsgtoOtherComponent(this.users.userId);
-                localStorage.setItem('firstName',this.users.firstName);
-                localStorage.setItem('lastName',this.users.lastName);
-                localStorage.setItem('userName',formValues.userName);
                 this.loginService.sendMsgtoOtherComponent(this.users);
                 this.router.navigate(['/dashboard']);
             }

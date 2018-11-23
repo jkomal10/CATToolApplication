@@ -27,29 +27,10 @@ export class CloudProviderRuleComponent implements OnInit {
       pageLength: 10,
       responsive: true};
     this.forCloudProviderService.cloudProviderId.subscribe(data=>{this.cloudproviderId=data;});
-    console.log(this.cloudproviderId+"Cloud Provider rule component");
-
-    // this.forCloudProviderService.CollectCloudableRuleQuestions(this.cloudproviderId).subscribe( result=>{
       this.forCloudProviderService.CollectCloudableRuleQuestions(this.cloudproviderId).subscribe( result=>{
       this.CloudProviderAllData = result;
-      console.log(this.CloudProviderAllData);
-      // for (let index = 0; index < this.CloudProviderAllData.length; index++) {
-      //   for (let index1 = 0; index1 < this.CloudProviderAllData[index].cloudProviderRules.length; index1++) {
-      //     this.executionOrdersCp[index1] = this.CloudProviderAllData[index].cloudProviderRules[index1].executionOrder;
-      //      console.log("**this.executionOrdersCp"+this.executionOrdersCp[index1]);
-
-      //   }
-      // }
       this.dtTrigger.next();
-      
-      console.log("*****CloudProviderAllData");
-      console.log("&&&&&&"+this.executionOrders);
     });
-
-    
-
-     console.log("the cloudproviderid is "+this.cloudproviderId);
-    // console.log("the providerid we get "+ this.CloudProviderAllData.cloudProviderRules[0].cloudProviderRuleId);
   }
 
   onSubmit(){

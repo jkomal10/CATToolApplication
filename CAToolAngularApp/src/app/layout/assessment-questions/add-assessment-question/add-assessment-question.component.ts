@@ -10,6 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { MigrationRule } from '../MigrationRule';
 import { CloudProviderRule } from '../CloudProviderRule';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 @Component({
   selector: 'app-add-assessment-question',
@@ -35,26 +36,17 @@ export class AddAssessmentQuestionComponent implements OnInit {
   CloudProviderDataArray : any=[];
   clientNameValue : string;
   
-  constructor(private questionService: AssessmentQuestionsService,public router: Router,private http: HttpClient) { }
+  constructor(private questionService: AssessmentQuestionsService,public router: Router,private http: HttpClient,private myStorage:LocalStorageService) { }
 
   ngOnInit() {
-      this.clientNameValue=localStorage.getItem('clientName');
+      this.clientNameValue=this.myStorage.getClient();
   }
 
   selectChangeHandler(event:any){
-    //console.log('rrrrrrrrrrrrrrrrr'+this.optionText[0]);
-    console.log(event);
     this.numberOfOptions=parseInt(event.target.value,10);
-   // this.numberOfOption=event;
-   
-    console.log(this.numberOfOptions);
-    console.log(event.target.value);
- 
+
     for (let index = 1; index <= this.numberOfOptions ; index++) {
-      console.log(index);
        this.Options[index] = index;
-       console.log(this.Options);
-       console.log(this.Options.length);
     }
   }
 
@@ -92,7 +84,6 @@ export class AddAssessmentQuestionComponent implements OnInit {
           this.question.cloudProviderRules[index]=cloudProvider;
         }
       }
-      console.log(JSON.stringify(this.question));
       this.question.clientName=this.clientNameValue;
       this.question.createdBy=localStorage.getItem('userName');
       this.questionService.createQuestionn(this.question).subscribe(

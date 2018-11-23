@@ -5,6 +5,7 @@ import { AssessmentQuestionsService } from './assessment-questions.service';
 import { Subject } from 'rxjs';
 import { AssessmentQuestions } from './Question';
 import { Angular5Csv } from 'angular5-csv/Angular5-csv';
+import { LocalStorageService } from '../utility/service/localStorage.service';
 class DataTablesResponse {
   data: any[];
   draw: number;
@@ -29,7 +30,7 @@ export class AssessmentQuestionsComponent implements OnInit {
   assessmentQuestions:Array<AssessmentQuestions>=[]
  
   AllData : any = [];
-  constructor(private assessmentQuestionsService :AssessmentQuestionsService,public router: Router,private http: HttpClient) { 
+  constructor(private assessmentQuestionsService :AssessmentQuestionsService,public router: Router,private http: HttpClient, private myStorage:LocalStorageService) { 
 
   }
 
@@ -48,14 +49,14 @@ export class AssessmentQuestionsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.clientNameValue=localStorage.getItem('clientName');
+    this.clientNameValue=this.myStorage.getClient();
 
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
       responsive: true};
 
-    this.assessmentQuestionsService.CollectData(this.clientNameValue).subscribe(result => 
+    this.assessmentQuestionsService.getAllQuestions(this.clientNameValue).subscribe(result => 
       {
       this.AllData = result ;
       this.dtTrigger.next();

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../user.service';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 @Component({
   selector: 'app-change-password',
@@ -8,17 +9,14 @@ import { UsersService } from '../user.service';
 })
 export class ChangePasswordComponent implements OnInit {
   previousPassword: String;
-  userName: String;
 
-  constructor(private userService:UsersService) { }
+  constructor(private userService:UsersService, private myStorage:LocalStorageService) { }
 
   ngOnInit() {
-    this.userName=localStorage.getItem('userName');
   }
 
   onLoggedin(formvalues){
-    console.log("Change password works!!!!"+formvalues.previousPassword+formvalues.password);
-    this.userService.changePassword(this.userName,formvalues.previousPassword,formvalues.password).subscribe();
+    this.userService.changePassword(this.myStorage.getCurrentUser(),formvalues.previousPassword,formvalues.password).subscribe();
   }
 
 }

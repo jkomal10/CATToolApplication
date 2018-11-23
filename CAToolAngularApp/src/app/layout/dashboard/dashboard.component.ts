@@ -3,6 +3,7 @@ import { routerTransition } from '../../router.animations';
 import { UsersService } from '../user/user.service';
 import { Router } from '@angular/router';
 import { ApplicationService } from '../application/application.service';
+import { LocalStorageService } from '../utility/service/localStorage.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -11,104 +12,45 @@ import { ApplicationService } from '../application/application.service';
     animations: [routerTransition()]
 })
 export class DashboardComponent implements OnInit {
-    userActive : string;
-    userId : number;
-    userCheck : boolean;
+    isUser: string;
+    userId: number;
+    isAdmin: boolean;
     isActive: boolean = false;
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
     firstName: String;
-    lastName : String;
-    status:string;
-    users : any;
-    application : any = [];
-    clientNameValue : string;
-    //applicationCount: number;
-    
-    player: YT.Player;
-    private id: string = '0eWrpsCLMJQ';
-  
-    savePlayer(player) {
-      this.player = player;
-      console.log('Video Url', player.getVideoUrl());
-    }
-    onStateChange(event) {
-      console.log('player state', event.data);
+    lastName: String;
+    redirectToDashboard: string;
+    users: any;
+    application: any = [];
+    clientNameValue: string;
+
+    constructor(private userService: UsersService, private applicationService: ApplicationService, public router: Router, private myStorage: LocalStorageService) {
     }
 
+    download() {
 
-    constructor(private userService:UsersService,private applicationService:ApplicationService,public router: Router) {
-        this.sliders.push(
-            {
-                imagePath: 'assets/images/slider1.jpg',
-                label: 'First slide label',
-                text:
-                    'Nulla vitae elit libero, a pharetra augue mollis interdum.'
-            },
-            {
-                imagePath: 'assets/images/slider2.jpg',
-                label: 'Second slide label',
-                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            },
-            {
-                imagePath: 'assets/images/slider3.jpg',
-                label: 'Third slide label',
-                text:
-                    'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
-            }
-        );
-
-        this.alerts.push(
-            {
-                id: 1,
-                type: 'success',
-                message: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptates est animi quibusdam praesentium quam, et perspiciatis,
-                consectetur velit culpa molestias dignissimos
-                voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`
-            },
-            {
-                id: 2,
-                type: 'warning',
-                message: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptates est animi quibusdam praesentium quam, et perspiciatis,
-                consectetur velit culpa molestias dignissimos
-                voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`
-            }
-        );
-    }
-
-    download(){
-        
     }
 
     ngOnInit() {
-        this.clientNameValue=localStorage.getItem('clientName');
-          this.status=localStorage.getItem('isLoggedin');
-          console.log(this.status);
+        this.clientNameValue = this.myStorage.getClient();
+        this.redirectToDashboard = this.myStorage.getLoggedInTrue();//this.status=localStorage.getItem('isLoggedin');
 
-        if(this.status=='true')
-        {
-        this.firstName=localStorage.getItem('firstName');
-        this.lastName=localStorage.getItem('lastName');
-        this.userService.CollectData(this.clientNameValue).subscribe(data=>{this.users=data});
-        this.applicationService.CollectData(this.clientNameValue).subscribe(data=>{this.application=data})
-        // this.users=10;
-        // this.applicationCount=this.application.length();
-         //console.log(this.applicationCount+"kkkkkkkkkkkkkk");
-            this.userActive=localStorage.getItem('isUserActive');
-            if(this.userActive=='false')
-            {
-                this.userCheck=false;
-                console.log(this.userCheck+"*****this.userCheck*******false***********************");
+        if (this.redirectToDashboard == 'true') {
+
+            this.firstName = this.myStorage.getFirstNameOfCurrentUser();
+            this.lastName = this.myStorage.getLastNameOfCurrentUser();
+            this.userService.CollectData(this.clientNameValue).subscribe(data => { this.users = data });
+            this.applicationService.CollectData(this.clientNameValue).subscribe(data => { this.application = data })
+            this.isUser = this.myStorage.getIsUserActive();
+            if (this.isUser == 'false') {
+                this.isAdmin = false;
             }
-            else{
-                this.userCheck=true;
-                console.log(this.userCheck+"*****this.userCheck*******true***********************");
+            else {
+                this.isAdmin = true;
             }
-            console.log(this.userActive+"****this.userActive*******************************");
         }
-        else{
+        else {
             this.router.navigate(['/login']);
         }
     }
