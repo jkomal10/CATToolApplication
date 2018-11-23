@@ -10,14 +10,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var http_1 = require("../../../../node_modules/@angular/common/http");
 var FeedbackService = /** @class */ (function () {
-    function FeedbackService() {
+    function FeedbackService(http) {
+        this.http = http;
+        this.url = "http://localhost:8090/feedback/save";
     }
+    FeedbackService.prototype.addFeedback = function (feedback) {
+        console.log("feedback for user");
+        this.userName = localStorage.getItem('userName');
+        this.clientNameValue = localStorage.getItem('clientName');
+        return this.http.post("" + this.url + "/" + this.userName + "/" + this.clientNameValue, feedback);
+    };
     FeedbackService = __decorate([
         core_1.Injectable({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [http_1.HttpClient])
     ], FeedbackService);
     return FeedbackService;
 }());

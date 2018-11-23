@@ -22,8 +22,9 @@ var ForCloudProviderService = /** @class */ (function () {
         this.cloudProviderId = this.comptransfer.asObservable();
     }
     ForCloudProviderService.prototype.CollectData = function () {
+        this.clientNameValue = localStorage.getItem('clientName');
         var url = 'http://localhost:8090/cloudProvider/getAll';
-        return this.http.get(url);
+        return this.http.get(url + "/" + this.clientNameValue);
     };
     ForCloudProviderService.prototype.saveEvaluationOrder = function (evaluationOrder) {
         console.log(this.evaluationOrder);
@@ -33,10 +34,12 @@ var ForCloudProviderService = /** @class */ (function () {
         this.comptransfer.next(messsage);
     };
     ForCloudProviderService.prototype.CollectCloudableRuleQuestions = function (cloudproviderId) {
-        return this.http.get("http://localhost:8090/assessmentQuestions/getAllCloudProviderRule/" + cloudproviderId);
+        this.clientNameValue = localStorage.getItem('clientName');
+        return this.http.get("http://localhost:8090/assessmentQuestions/getAllCloudProviderRule/" + cloudproviderId + "/" + this.clientNameValue);
     };
     ForCloudProviderService.prototype.updateCloudProviderRule = function (cloudableRule) {
-        return this.http.put("" + this.updateCloudProviderRuleUrl, cloudableRule);
+        this.clientNameValue = localStorage.getItem('clientName');
+        return this.http.put("" + this.updateCloudProviderRuleUrl + "/" + this.clientNameValue, cloudableRule);
     };
     ForCloudProviderService = __decorate([
         core_1.Injectable({

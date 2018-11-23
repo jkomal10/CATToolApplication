@@ -30,14 +30,16 @@ var ApplicationComponent = /** @class */ (function () {
         this.message = '';
         //applictaions: Observable<Application[]>;
         this.application = [];
-        // application:Application [];
+        this.applicationTemplate = [];
         this.AllData = [];
+        this.show = false;
+        this.buttonName = 'Help';
     }
     ApplicationComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.clientNameValue = localStorage.getItem('clientName');
         this.dtOptions = {
-            pagingType: 'full_numbers',
+            pagingType: 'first_last_numbers',
             pageLength: 10,
             responsive: true,
         };
@@ -48,8 +50,30 @@ var ApplicationComponent = /** @class */ (function () {
         //   });
         this.applicationService.CollectData(this.clientNameValue).subscribe(function (result) {
             _this.AllData = result;
+            console.log(JSON.stringify(_this.AllData));
             _this.dtTrigger.next();
         });
+    };
+    ApplicationComponent.prototype.toggle = function () {
+        this.show = !this.show;
+        // CHANGE THE NAME OF THE BUTTON.
+        if (this.show)
+            this.buttonName = "Hide";
+        else
+            this.buttonName = "Help";
+    };
+    ApplicationComponent.prototype.exportTemplate = function () {
+        var csvRows = [];
+        console.log(this.AllData);
+        var filename = "Application";
+        var dateNow = new Date();
+        var options = {
+            // filename:"Application.csv",
+            headers: ["ApplicationId", "Application Name", "Application Description", "IsCloudable", "MigrationPattern",
+                "CloudProvider", "IsAssessment", "IsFinalized", "IsDeleted", "IsDeactivated", "DeleteDateAndTime",
+                "Isverified", "CreatedDate", "ModifiedDateTime", "CreatedBy", "ModifiedBy", "UserId", "IsSaved"]
+        };
+        new Angular5_csv_1.Angular5Csv(this.applicationTemplate, filename, options);
     };
     ApplicationComponent.prototype.form = function () {
         this.router.navigate(['/application/add-application']);
@@ -134,6 +158,9 @@ var ApplicationComponent = /** @class */ (function () {
     };
     ApplicationComponent.prototype.deactivate = function (formvalues) {
         this.applicationService.deactivate(formvalues).subscribe();
+    };
+    ApplicationComponent.prototype.somefunction = function () {
+        console.log("sommmmmmmmmmmmmmmmmmmmmmm");
     };
     ApplicationComponent = __decorate([
         core_1.Component({

@@ -21,18 +21,21 @@ var ForMigrationPatternService = /** @class */ (function () {
         this.question = this.comptransfer.asObservable();
     }
     ForMigrationPatternService.prototype.CollectData = function () {
+        this.clientNameValue = localStorage.getItem('clientName');
         var url = 'http://localhost:8090/migrationRule/getAll';
-        return this.http.get(url);
+        return this.http.get(url + "/" + this.clientNameValue);
     };
     ForMigrationPatternService.prototype.getAssessmentQuestions = function () {
         var url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';
         return this.http.get(url);
     };
     ForMigrationPatternService.prototype.getMigrationQuestions = function (migrationId) {
-        return this.http.get("http://localhost:8090/assessmentQuestions/getAllMigrationPattern/" + migrationId);
+        this.clientNameValue = localStorage.getItem('clientName');
+        return this.http.get("http://localhost:8090/assessmentQuestions/getAllMigrationPattern/" + migrationId + "/" + this.clientNameValue);
     };
     ForMigrationPatternService.prototype.updateMigrationRule = function (value) {
-        return this.http.put("" + this.updateMigrationRuleUrl, value);
+        this.clientNameValue = localStorage.getItem('clientName');
+        return this.http.put("" + this.updateMigrationRuleUrl + "/" + this.clientNameValue, value);
     };
     ForMigrationPatternService.prototype.saveEvaluationOrder = function (migration) {
         return this.http.post("" + this.migrationUrl + "/create", migration);

@@ -11,9 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var Feedback_1 = require("./Feedback");
+var feedback_service_1 = require("./feedback.service");
 var FeedbackComponent = /** @class */ (function () {
-    function FeedbackComponent(router) {
+    function FeedbackComponent(router, feedbackService) {
         this.router = router;
+        this.feedbackService = feedbackService;
+        this.feedbackObject = new Feedback_1.Feedback();
         this.rating = 0;
     }
     FeedbackComponent.prototype.ngOnInit = function () {
@@ -39,13 +43,23 @@ var FeedbackComponent = /** @class */ (function () {
         this.rating = 5;
         console.log("Five Star");
     };
+    FeedbackComponent.prototype.feedback = function () {
+        this.feedbackObject.question1 = this.question1;
+        this.feedbackObject.question2 = this.question2;
+        this.feedbackObject.question3 = this.question3;
+        this.feedbackObject.recommend = this.recommend;
+        console.log("&&&&&&&&&&&&&&&&&&" + this.recommend);
+        this.feedbackObject.rating = this.rating;
+        this.feedbackService.addFeedback(this.feedbackObject).subscribe();
+        this.router.navigate(['/dashboard']);
+    };
     FeedbackComponent = __decorate([
         core_1.Component({
             selector: 'app-feedback',
             templateUrl: './feedback.component.html',
             styleUrls: ['./feedback.component.scss']
         }),
-        __metadata("design:paramtypes", [router_1.Router])
+        __metadata("design:paramtypes", [router_1.Router, feedback_service_1.FeedbackService])
     ], FeedbackComponent);
     return FeedbackComponent;
 }());

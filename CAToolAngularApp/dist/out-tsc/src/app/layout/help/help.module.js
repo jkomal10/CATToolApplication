@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
+var forms_1 = require("@angular/forms");
 var help_routing_module_1 = require("./help-routing.module");
 var help_component_1 = require("./help.component");
 var ngx_youtube_player_1 = require("ngx-youtube-player");
@@ -19,7 +20,9 @@ var HelpModule = /** @class */ (function () {
             imports: [
                 common_1.CommonModule,
                 help_routing_module_1.HelpRoutingModule,
-                ngx_youtube_player_1.YoutubePlayerModule
+                ngx_youtube_player_1.YoutubePlayerModule,
+                forms_1.FormsModule,
+                forms_1.ReactiveFormsModule
             ],
             declarations: [help_component_1.HelpComponent]
         })

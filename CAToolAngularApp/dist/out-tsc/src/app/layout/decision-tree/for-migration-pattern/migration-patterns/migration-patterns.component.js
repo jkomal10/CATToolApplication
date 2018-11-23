@@ -22,6 +22,7 @@ var MigrationPatternsComponent = /** @class */ (function () {
         this.http = http;
         this.migrationRuleObject = [];
         this.dtOptions = {};
+        this.countOption = 0;
         this.dtTrigger = new rxjs_1.Subject();
         this.migrationAllData = [];
         this.migrationOption = [];

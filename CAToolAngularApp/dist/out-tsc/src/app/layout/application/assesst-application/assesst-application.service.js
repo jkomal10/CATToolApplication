@@ -25,6 +25,7 @@ var AssesstApplicationService = /** @class */ (function () {
     };
     AssesstApplicationService.prototype.saveAssessApplication = function (cloudablerule) {
         console.log(this.baseUrl + "/create");
+        console.log(JSON.stringify(cloudablerule));
         return this.http.post("" + this.baseUrl + "/create", cloudablerule);
     };
     AssesstApplicationService.prototype.UpdateAnswers = function (applicationId) {

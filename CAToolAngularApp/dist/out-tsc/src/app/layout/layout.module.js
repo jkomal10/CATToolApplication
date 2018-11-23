@@ -15,8 +15,6 @@ var layout_component_1 = require("./layout.component");
 var sidebar_component_1 = require("./components/sidebar/sidebar.component");
 var header_component_1 = require("./components/header/header.component");
 var footer_component_1 = require("./components/footer/footer.component");
-// import { FaqComponent } from './faq/faq.component';
-// import { FeedbackComponent } from './feedback/feedback.component';
 var LayoutModule = /** @class */ (function () {
     function LayoutModule() {
     }

@@ -29,6 +29,7 @@ var AddApplicationComponent = /** @class */ (function () {
     };
     AddApplicationComponent.prototype.save = function () {
         this.application.clientName = this.clientNameValue;
+        this.application.createdBy = localStorage.getItem('userName');
         this.addapplicationService.createApplication(this.application)
             .subscribe(function (data) { return console.log(data); }, function (error) { return console.log(error); });
         this.application = new Application_1.Application();

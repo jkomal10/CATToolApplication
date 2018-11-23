@@ -54,6 +54,8 @@ var DashboardComponent = /** @class */ (function () {
     DashboardComponent.prototype.onStateChange = function (event) {
         console.log('player state', event.data);
     };
+    DashboardComponent.prototype.download = function () {
+    };
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.clientNameValue = localStorage.getItem('clientName');
