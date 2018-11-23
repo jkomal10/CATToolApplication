@@ -92,7 +92,7 @@ public class ApplicationController {
 		applicationService.allRuleCheck(applicationId);
 	}
 	
-//	@GetMapping("migrationCheck/{applicationId}")
+//	@GetMapping("migrationCheck/{applicationId}/")
 //	public void migrationCheck(@PathVariable("applicationId") int applicationId) {
 //		System.out.println("All rule check!!!!");
 //		applicationService.migrationCheck(applicationId);

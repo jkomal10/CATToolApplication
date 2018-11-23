@@ -26,6 +26,7 @@ export class HeaderComponent {
     {
         localStorage.removeItem('userName');
         localStorage.removeItem('isLoggedin');
+        localStorage.clear();
     }
     
 }

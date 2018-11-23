@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
-import { LoginComponent } from '../login/login.component';
+// import { LoginComponent } from '../login/login.component';
 // import { AuthGuard } from './shared';
 
 const routes: Routes = [
@@ -10,6 +10,7 @@ const routes: Routes = [
         component: LayoutComponent,
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' },
+            { path: 'login', loadChildren: './login/login.module#LoginModule' },
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
             { path: 'user', loadChildren: './user/user.module#UserModule' },
             { path: 'application', loadChildren: './application/application.module#ApplicationModule' },
