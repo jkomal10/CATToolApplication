@@ -1,52 +1,62 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { currentUser } from './currentUser.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
-
+  user: currentUser = new currentUser();
   constructor(private http:HttpClient) { }
 
-  setCurrentUser(currentUser : string){
-    localStorage.setItem('userName' , currentUser);
+  setCurrentUserObject(user : Object){
+    localStorage.setItem('user',JSON.stringify(user));
+    this.user=JSON.parse(localStorage.getItem('user'));
   }
 
-  setIsAdmin(trueFalseValue : string){
-    localStorage.setItem('isUserActive',trueFalseValue);        
+  setLoggedInTrue(isLoggedin : string){
+    localStorage.setItem('isLoggedin',isLoggedin);
   }
 
-  setClient(clientName : string){
-    localStorage.setItem('clientName',clientName);
+  setIsUserActive(isUserActive : string){
+    localStorage.setItem('isUserActive',isUserActive);
   }
 
-  setFirstNameOfCurrentUser(currentUserfirstName : string){
-    localStorage.setItem('firstName',currentUserfirstName);
+  getIsUserActive(){
+    return localStorage.getItem('isUserActive');
   }
 
-  setLastNameOfCurrentUser(currentUserlastName : string){
-    localStorage.setItem('lastName',currentUserlastName);
+  getLoggedInTrue(){
+    return localStorage.getItem('isLoggedin');
   }
 
   getCurrentUser(){
-    return localStorage.getItem('userName');
+    return this.user.userName;
   }
 
   getIsAdmin(){
-    return localStorage.getItem('isUserActive');        
+    return this.user.isAdmin;       
   }
 
   getClient(){
-    return localStorage.getItem('clientName');
+    return this.user.clientName;
   }
 
   getFirstNameOfCurrentUser(){
-    return localStorage.getItem('firstName');
+    return this.user.firstName;
   }
 
   getLastNameOfCurrentUser(){
-    return localStorage.getItem('lastName');
+    return this.user.lastName;
+  }
+
+  clearLoggedIn(){
+    return localStorage.removeItem('isLoggedin');
+  }
+
+  clearCurrentUser(){
+    return localStorage.removeItem('user');
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 
 @Component({
@@ -12,20 +13,17 @@ export class HeaderComponent {
     userName : string;
     clientNameValue : String;
 
-    constructor(public router: Router) {}
+    constructor(public router: Router, private myStorage:LocalStorageService) {}
 
     ngOnInit() {
-        this.clientNameValue=localStorage.getItem('clientName');
-        console.log(this.clientNameValue);
-       this.userName=localStorage.getItem('userName');
-        console.log(this.userName);
-        
+        this.clientNameValue=this.myStorage.getClient();
+        this.userName=this.myStorage.getCurrentUser();      
     }
 
     onLoggedout()
     {
-        localStorage.removeItem('userName');
-        localStorage.removeItem('isLoggedin');
+        this.myStorage.clearCurrentUser();
+        this.myStorage.clearLoggedIn();
     }
     
 }

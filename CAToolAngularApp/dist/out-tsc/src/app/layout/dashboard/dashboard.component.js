@@ -14,38 +14,18 @@ var router_animations_1 = require("../../router.animations");
 var user_service_1 = require("../user/user.service");
 var router_1 = require("@angular/router");
 var application_service_1 = require("../application/application.service");
+var localStorage_service_1 = require("../utility/service/localStorage.service");
 var DashboardComponent = /** @class */ (function () {
-    function DashboardComponent(userService, applicationService, router) {
+    function DashboardComponent(userService, applicationService, router, myStorage) {
         this.userService = userService;
         this.applicationService = applicationService;
         this.router = router;
+        this.myStorage = myStorage;
         this.isActive = false;
         this.alerts = [];
         this.sliders = [];
         this.application = [];
         this.id = '0eWrpsCLMJQ';
-        this.sliders.push({
-            imagePath: 'assets/images/slider1.jpg',
-            label: 'First slide label',
-            text: 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
-        }, {
-            imagePath: 'assets/images/slider2.jpg',
-            label: 'Second slide label',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-        }, {
-            imagePath: 'assets/images/slider3.jpg',
-            label: 'Third slide label',
-            text: 'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
-        });
-        this.alerts.push({
-            id: 1,
-            type: 'success',
-            message: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.\n                Voluptates est animi quibusdam praesentium quam, et perspiciatis,\n                consectetur velit culpa molestias dignissimos\n                voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum"
-        }, {
-            id: 2,
-            type: 'warning',
-            message: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.\n                Voluptates est animi quibusdam praesentium quam, et perspiciatis,\n                consectetur velit culpa molestias dignissimos\n                voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum"
-        });
     }
     DashboardComponent.prototype.savePlayer = function (player) {
         this.player = player;
@@ -58,27 +38,20 @@ var DashboardComponent = /** @class */ (function () {
     };
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.clientNameValue = localStorage.getItem('clientName');
-        this.status = localStorage.getItem('isLoggedin');
-        console.log(this.status);
-        if (this.status == 'true') {
-            this.firstName = localStorage.getItem('firstName');
-            this.lastName = localStorage.getItem('lastName');
+        this.clientNameValue = this.myStorage.getClient();
+        this.redirectToDashboard = this.myStorage.getLoggedInTrue(); //this.status=localStorage.getItem('isLoggedin');
+        if (this.redirectToDashboard == 'true') {
+            this.firstName = this.myStorage.getFirstNameOfCurrentUser();
+            this.lastName = this.myStorage.getLastNameOfCurrentUser();
             this.userService.CollectData(this.clientNameValue).subscribe(function (data) { _this.users = data; });
             this.applicationService.CollectData(this.clientNameValue).subscribe(function (data) { _this.application = data; });
-            // this.users=10;
-            // this.applicationCount=this.application.length();
-            //console.log(this.applicationCount+"kkkkkkkkkkkkkk");
-            this.userActive = localStorage.getItem('isUserActive');
+            this.userActive = this.myStorage.getIsUserActive();
             if (this.userActive == 'false') {
                 this.userCheck = false;
-                console.log(this.userCheck + "*****this.userCheck*******false***********************");
             }
             else {
                 this.userCheck = true;
-                console.log(this.userCheck + "*****this.userCheck*******true***********************");
             }
-            console.log(this.userActive + "****this.userActive*******************************");
         }
         else {
             this.router.navigate(['/login']);
@@ -95,7 +68,7 @@ var DashboardComponent = /** @class */ (function () {
             styleUrls: ['./dashboard.component.scss'],
             animations: [router_animations_1.routerTransition()]
         }),
-        __metadata("design:paramtypes", [user_service_1.UsersService, application_service_1.ApplicationService, router_1.Router])
+        __metadata("design:paramtypes", [user_service_1.UsersService, application_service_1.ApplicationService, router_1.Router, localStorage_service_1.LocalStorageService])
     ], DashboardComponent);
     return DashboardComponent;
 }());

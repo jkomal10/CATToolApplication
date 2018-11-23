@@ -11,19 +11,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var localStorage_service_1 = require("../../utility/service/localStorage.service");
 var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent(router) {
+    function HeaderComponent(router, myStorage) {
         this.router = router;
+        this.myStorage = myStorage;
     }
     HeaderComponent.prototype.ngOnInit = function () {
-        this.clientNameValue = localStorage.getItem('clientName');
-        console.log(this.clientNameValue);
-        this.userName = localStorage.getItem('userName');
-        console.log(this.userName);
+        this.clientNameValue = this.myStorage.getClient();
+        this.userName = this.myStorage.getCurrentUser();
     };
     HeaderComponent.prototype.onLoggedout = function () {
-        localStorage.removeItem('userName');
-        localStorage.removeItem('isLoggedin');
+        this.myStorage.clearCurrentUser();
+        this.myStorage.clearLoggedIn();
     };
     HeaderComponent = __decorate([
         core_1.Component({
@@ -31,7 +31,7 @@ var HeaderComponent = /** @class */ (function () {
             templateUrl: './header.component.html',
             styleUrls: ['./header.component.scss']
         }),
-        __metadata("design:paramtypes", [router_1.Router])
+        __metadata("design:paramtypes", [router_1.Router, localStorage_service_1.LocalStorageService])
     ], HeaderComponent);
     return HeaderComponent;
 }());

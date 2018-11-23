@@ -11,7 +11,8 @@ var router_1 = require("@angular/router");
 var shared_1 = require("./shared");
 var routes = [
     { path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [shared_1.AuthGuard] },
-    { path: 'login', loadChildren: './login/login.module#LoginModule' },
+    //{ path: 'login', loadChildren: './login/login.module#LoginModule' },
+    { path: 'login', loadChildren: './layout/catlogin/catlogin.module#CatloginModule' },
     { path: 'signup', loadChildren: './signup/signup.module#SignupModule' },
     { path: 'error', loadChildren: './server-error/server-error.module#ServerErrorModule' },
     { path: 'access-denied', loadChildren: './access-denied/access-denied.module#AccessDeniedModule' },

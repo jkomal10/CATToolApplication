@@ -44,17 +44,13 @@ export class UserRoleComponent implements OnInit {
   }
 
   assessApplication(formvalues){
-    console.log("Assessssssssssssss");
-    console.log(JSON.stringify(formvalues));
-    console.log(formvalues.applicationId)
-   this.userRoleService.sendMsgtoOtherComponent(formvalues);
-    this.router.navigate(['/application/assesst-application']);
+      this.userRoleService.sendMsgtoOtherComponent(formvalues);
+      this.router.navigate(['/application/assesst-application']);
   }
 
   ViewApplication(formvalues){
-    this.userRoleService.sendMsgtoOtherComponent(formvalues);
-    console.log(formvalues);
-   this.router.navigate(['/application/view-application']);
+      this.userRoleService.sendMsgtoOtherComponent(formvalues);
+      this.router.navigate(['/application/view-application']);
   }  
 
 }

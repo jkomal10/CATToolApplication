@@ -12,11 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var core_2 = require("@ngx-translate/core");
+var localStorage_service_1 = require("../../utility/service/localStorage.service");
 var SidebarComponent = /** @class */ (function () {
-    function SidebarComponent(translate, router) {
+    function SidebarComponent(translate, router, myStorage) {
         var _this = this;
         this.translate = translate;
         this.router = router;
+        this.myStorage = myStorage;
         this.col = true;
         this.isActive = false;
         this.collapsed = false;
@@ -33,7 +35,7 @@ var SidebarComponent = /** @class */ (function () {
         });
     }
     SidebarComponent.prototype.ngOnInit = function () {
-        this.userActive = localStorage.getItem('isUserActive');
+        this.userActive = this.myStorage.getIsUserActive();
         if (this.userActive == 'false') {
             this.userCheck = false;
             console.log(this.userCheck + "*****this.userCheck*******false***********************");
@@ -76,7 +78,7 @@ var SidebarComponent = /** @class */ (function () {
             templateUrl: './sidebar.component.html',
             styleUrls: ['./sidebar.component.scss']
         }),
-        __metadata("design:paramtypes", [core_2.TranslateService, router_1.Router])
+        __metadata("design:paramtypes", [core_2.TranslateService, router_1.Router, localStorage_service_1.LocalStorageService])
     ], SidebarComponent);
     return SidebarComponent;
 }());

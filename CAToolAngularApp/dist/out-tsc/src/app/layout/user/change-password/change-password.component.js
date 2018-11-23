@@ -11,16 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var user_service_1 = require("../user.service");
+var localStorage_service_1 = require("../../utility/service/localStorage.service");
 var ChangePasswordComponent = /** @class */ (function () {
-    function ChangePasswordComponent(userService) {
+    function ChangePasswordComponent(userService, myStorage) {
         this.userService = userService;
+        this.myStorage = myStorage;
     }
     ChangePasswordComponent.prototype.ngOnInit = function () {
-        this.userName = localStorage.getItem('userName');
     };
     ChangePasswordComponent.prototype.onLoggedin = function (formvalues) {
-        console.log("Change password works!!!!" + formvalues.previousPassword + formvalues.password);
-        this.userService.changePassword(this.userName, formvalues.previousPassword, formvalues.password).subscribe();
+        this.userService.changePassword(this.myStorage.getCurrentUser(), formvalues.previousPassword, formvalues.password).subscribe();
     };
     ChangePasswordComponent = __decorate([
         core_1.Component({
@@ -28,7 +28,7 @@ var ChangePasswordComponent = /** @class */ (function () {
             templateUrl: './change-password.component.html',
             styleUrls: ['./change-password.component.scss']
         }),
-        __metadata("design:paramtypes", [user_service_1.UsersService])
+        __metadata("design:paramtypes", [user_service_1.UsersService, localStorage_service_1.LocalStorageService])
     ], ChangePasswordComponent);
     return ChangePasswordComponent;
 }());
