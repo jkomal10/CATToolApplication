@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
+var forms_1 = require("@angular/forms");
 var feedback_routing_module_1 = require("./feedback-routing.module");
 var feedback_component_1 = require("./feedback.component");
 var FeedbackModule = /** @class */ (function () {
@@ -17,7 +18,7 @@ var FeedbackModule = /** @class */ (function () {
         core_1.NgModule({
             imports: [
                 common_1.CommonModule,
-                feedback_routing_module_1.FeedbackRoutingModule
+                feedback_routing_module_1.FeedbackRoutingModule, forms_1.FormsModule, forms_1.ReactiveFormsModule
             ],
             declarations: [feedback_component_1.FeedbackComponent]
         })

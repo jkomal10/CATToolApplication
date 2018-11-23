@@ -62,6 +62,7 @@ var ReassessmentComponent = /** @class */ (function () {
         this.cloudProviderCheckbox = values.currentTarget.checked;
     };
     ReassessmentComponent.prototype.applicationNameChange = function (e, applicationId) {
+        console.log("application checked");
         if (e.currentTarget.checked) {
             this.applicationIdArray[this.i] = applicationId;
             console.log(this.applicationIdArray[this.i]);

@@ -18,6 +18,7 @@ var UpdateApplicationComponent = /** @class */ (function () {
         this.router = router;
         this.applicationService = applicationService;
         this.application = new Application_1.Application();
+        this.applicationObject = new Application_1.Application();
     }
     UpdateApplicationComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -26,8 +27,11 @@ var UpdateApplicationComponent = /** @class */ (function () {
     };
     UpdateApplicationComponent.prototype.updateActive = function (application) {
         console.log('*******onsubmit application**********' + application.applicationId);
-        this.applicationService.updateApplication(application)
+        this.applicationObject = application;
+        this.applicationObject.modifiedBy = localStorage.getItem('userName');
+        this.applicationService.updateApplication(this.applicationObject)
             .subscribe();
+        this.router.navigate(['/application']);
     };
     UpdateApplicationComponent.prototype.onSubmit = function (formvalues) {
         this.application = formvalues;

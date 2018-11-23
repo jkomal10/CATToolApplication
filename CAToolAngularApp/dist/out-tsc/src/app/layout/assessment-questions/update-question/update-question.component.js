@@ -18,6 +18,7 @@ var UpdateQuestionComponent = /** @class */ (function () {
         this.assessmentQuestionsService = assessmentQuestionsService;
         this.router = router;
         this.question = new Question_1.AssessmentQuestions();
+        this.questionObject = new Question_1.AssessmentQuestions();
         this.submitted = false;
         this.optionsValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         this.Options = [10];
@@ -60,6 +61,8 @@ var UpdateQuestionComponent = /** @class */ (function () {
     };
     UpdateQuestionComponent.prototype.updateQue = function (question) {
         console.log('*******onsubmit application**********' + question.questionId);
+        this.questionObject = question;
+        this.questionObject.modifiedBy = localStorage.getItem('userName');
         this.assessmentQuestionsService.updateAssessmentQuestions(question)
             .subscribe();
         this.router.navigate(['/assessment-questions']);

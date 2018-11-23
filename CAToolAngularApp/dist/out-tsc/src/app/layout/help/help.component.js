@@ -10,27 +10,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var help_service_1 = require("./help.service");
+var http_1 = require("@angular/common/http");
+var router_1 = require("@angular/router");
+var issue_1 = require("./issue");
 var HelpComponent = /** @class */ (function () {
-    function HelpComponent() {
+    function HelpComponent(helpService, router, http) {
+        this.helpService = helpService;
+        this.router = router;
+        this.http = http;
+        this.issues = new issue_1.issue();
     }
     HelpComponent.prototype.ngOnInit = function () {
-        this.video = localStorage.getItem('component');
-        console.log(this.video);
-        this.call();
     };
-    HelpComponent.prototype.call = function () {
-        // this.player: YT.Player;
-        if (this.video == 'user') {
-            this.components = 'Video for all services of users';
-            this.id = '0eWrpsCLMJQ';
-        }
-        //  savePlayer(player) {
-        //   this.player = player;
-        //   console.log('Video Url', player.getVideoUrl());
-        // }
-        // onStateChange(event) {
-        //   console.log('player state', event.data);
-        // }
+    HelpComponent.prototype.submit = function () {
+        // this.textfield=formvalue;
+        console.log(this.textfield);
+        this.issues.issue = this.textfield;
+        this.issues.userName = localStorage.getItem("userName");
+        console.log(this.issues.userName);
+        this.issues.clientName = localStorage.getItem("clientName");
+        console.log(this.issues.clientName);
+        this.helpService.saveIssue(this.issues).subscribe();
+        this.router.navigate(['/dashboard']);
     };
     HelpComponent = __decorate([
         core_1.Component({
@@ -38,7 +40,8 @@ var HelpComponent = /** @class */ (function () {
             templateUrl: './help.component.html',
             styleUrls: ['./help.component.scss']
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [help_service_1.HelpService, router_1.Router,
+            http_1.HttpClient])
     ], HelpComponent);
     return HelpComponent;
 }());

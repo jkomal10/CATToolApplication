@@ -16,8 +16,9 @@ var ServiceService = /** @class */ (function () {
         this.http = http;
     }
     ServiceService.prototype.CollectData = function () {
+        this.clientNameValue = localStorage.getItem('clientName');
         var reassessUrl = 'http://localhost:8090/application/getAllReassessment';
-        return this.http.get(reassessUrl);
+        return this.http.get(reassessUrl + "/" + this.clientNameValue);
     };
     ServiceService.prototype.cloudProvider = function (applicationId) {
         var cloudProviderUrl = 'http://localhost:8090/application/cloudProviderCheck';

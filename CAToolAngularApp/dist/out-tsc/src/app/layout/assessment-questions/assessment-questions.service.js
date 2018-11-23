@@ -37,12 +37,14 @@ var AssessmentQuestionsService = /** @class */ (function () {
         this.comptransfer.next(messsage);
     };
     AssessmentQuestionsService.prototype.getMigrationData = function () {
+        this.clienNameValue = localStorage.getItem('clientName');
         var url = 'http://localhost:8090/migrationRule/getAll';
-        return this.http.get(url);
+        return this.http.get(url + "/" + this.clienNameValue);
     };
     AssessmentQuestionsService.prototype.getCloudProviderData = function () {
+        this.clienNameValue = localStorage.getItem('clientName');
         var url = 'http://localhost:8090/cloudProvider/getAll';
-        return this.http.get(url);
+        return this.http.get(url + "/" + this.clienNameValue);
     };
     AssessmentQuestionsService.prototype.createQuestionn = function (question) {
         // return this.http.post(`${this.addUrl}` + `/create`, question);

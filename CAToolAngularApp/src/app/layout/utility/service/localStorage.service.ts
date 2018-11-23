@@ -9,19 +9,44 @@ export class LocalStorageService {
 
   constructor(private http:HttpClient) { }
 
-//   getApplicationByUserName(userName:string){
-//       console.log(`http://localhost:8090/application/getApplicationByUserName`+`/`+userName);
-//       const url = 'http://localhost:8090/application/getApplicationByUserName';
-//       return this.http.get(`http://localhost:8090/application/getApplicationByUserName`+`/`+userName);
-//   }
+  setCurrentUser(currentUser : string){
+    localStorage.setItem('userName' , currentUser);
+  }
 
-//   private comptransfer = new BehaviorSubject("Hello");
-//     question = this.comptransfer.asObservable();
-  
-//     sendMsgtoOtherComponent(messsage){
-//         this.comptransfer.next(messsage);
-//     }
+  setIsAdmin(trueFalseValue : string){
+    localStorage.setItem('isUserActive',trueFalseValue);        
+  }
 
+  setClient(clientName : string){
+    localStorage.setItem('clientName',clientName);
+  }
 
+  setFirstNameOfCurrentUser(currentUserfirstName : string){
+    localStorage.setItem('firstName',currentUserfirstName);
+  }
+
+  setLastNameOfCurrentUser(currentUserlastName : string){
+    localStorage.setItem('lastName',currentUserlastName);
+  }
+
+  getCurrentUser(){
+    return localStorage.getItem('userName');
+  }
+
+  getIsAdmin(){
+    return localStorage.getItem('isUserActive');        
+  }
+
+  getClient(){
+    return localStorage.getItem('clientName');
+  }
+
+  getFirstNameOfCurrentUser(){
+    return localStorage.getItem('firstName');
+  }
+
+  getLastNameOfCurrentUser(){
+    return localStorage.getItem('lastName');
+  }
 
 }

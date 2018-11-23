@@ -16,6 +16,8 @@ var HeaderComponent = /** @class */ (function () {
         this.router = router;
     }
     HeaderComponent.prototype.ngOnInit = function () {
+        this.clientNameValue = localStorage.getItem('clientName');
+        console.log(this.clientNameValue);
         this.userName = localStorage.getItem('userName');
         console.log(this.userName);
     };

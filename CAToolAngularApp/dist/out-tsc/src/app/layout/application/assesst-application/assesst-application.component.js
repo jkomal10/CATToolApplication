@@ -33,6 +33,7 @@ var AssesstApplicationComponent = /** @class */ (function () {
         this.result = "";
         this.queId1 = 0;
         this.i = -1;
+        this.userType1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     }
     AssesstApplicationComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -72,6 +73,7 @@ var AssesstApplicationComponent = /** @class */ (function () {
         this.single++;
         console.log(this.tempp[0] + "ooooooooooooo");
         console.log(this.tempp[1] + "ooooooooooooo");
+        console.log(this.tempp[2] + "ooooooooooooo");
     };
     AssesstApplicationComponent.prototype.selectChangeHandler = function (optionnnnnn, event, id) {
         // var queId1=0,i=-1; 
@@ -141,7 +143,7 @@ var AssesstApplicationComponent = /** @class */ (function () {
                 console.log(answer.answerText + "lllllllllllll");
                 this.singlee++;
             }
-            answer.cloudAbility = false;
+            answer.cloudAbility = 0;
             this.answers[index] = answer;
             console.log(JSON.stringify(answer));
         }
@@ -173,7 +175,7 @@ var AssesstApplicationComponent = /** @class */ (function () {
                 console.log(answer.answerText + "lllllllllllll");
                 this.singlee++;
             }
-            answer.cloudAbility = false;
+            answer.cloudAbility = 0;
             this.answers[index] = answer;
             console.log(JSON.stringify(answer));
         }
