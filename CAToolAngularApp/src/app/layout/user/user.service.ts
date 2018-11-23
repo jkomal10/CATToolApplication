@@ -24,6 +24,12 @@ const url = 'http://localhost:8090/user/getAll';
 return this.http.get(url+`/`+clientName);
 }
 
+getUserByUserName(clientName:string,userName:string)
+{
+  const getuserByName = "http://localhost:8090/user/getUserId";
+  return this.http.get(getuserByName+'/'+clientName+'/'+userName);
+}
+
 countNumberOfUsers()
 {
   const getCount='http://localhost:8090/user/getUserCount';

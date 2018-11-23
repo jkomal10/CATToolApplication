@@ -21,17 +21,6 @@ class DataTablesResponse {
 export class UserComponent implements OnInit {
 
   clientValue : string;
-  player: YT.Player;
-  private id: string = '0eWrpsCLMJQ';
-
-  savePlayer(player) {
-    this.player = player;
-    console.log('Video Url', player.getVideoUrl());
-  }
-  onStateChange(event) {
-    console.log('player state', event.data);
-  }
-
   user: Users;
   IpAddress : string;
  
@@ -81,6 +70,16 @@ export class UserComponent implements OnInit {
     this.userService.sendIpAddresstoOtherComponent(this.IpAddress);
     this.router.navigate(['/user/upload-user']);
   }
+
+  exportCsvTemplate()
+  {
+    var filename = "Users";
+    var options={
+      headers:[ "userName","firstName","lastName","company","isAdmin"]
+    };
+    new Angular5Csv(this.users, filename, options);
+  }
+
 
   exportCsv(){
     var filename = "UserDetails";

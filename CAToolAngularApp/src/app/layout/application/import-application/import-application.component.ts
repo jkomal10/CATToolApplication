@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Application } from '../../decision-tree/reassessment/Application';
+// import { Application } from '../../decision-tree/reassessment/Application';
 import { ApplicationService } from '../application.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Application } from '../Application';
+import { UsersService } from '../../user/user.service';
 
 @Component({
   selector: 'app-import-application',
@@ -18,10 +20,15 @@ export class ImportApplicationComponent implements OnInit {
    applications : Application = new Application();
   application : Application = new Application();
   lines = [];
+  value : any;
+  userData: any = [];
   ipAddress : any;
-  constructor(public router: Router,private applicationService : ApplicationService) { }
+  existingUser : number;
+  clientName : string = localStorage.getItem('clientName');
+  constructor(public router: Router,private applicationService : ApplicationService,private userService : UsersService) { }
 
   ngOnInit() {
+    // this.userService.CollectData(this.clientName).subscribe(data=>{this.userData=data});
   }
   fileChangeListener(event:any){
     this.filename = event.target.files[0].name;
@@ -43,8 +50,8 @@ export class ImportApplicationComponent implements OnInit {
     else{
       alert("please enter a csv file");
     }
-        console.log(this.filename[0]+"___________");
-        console.log(this.link+"**************");
+        // console.log(this.filename[0]+"___________");
+        // console.log(this.link+"**************");
   }
 
   getDataRecordsArrayFromCSVFile(csvRecordsArray : any,headerLength : any){
@@ -60,7 +67,7 @@ export class ImportApplicationComponent implements OnInit {
          this.lines.push(dataArr);
       }
     }
-    console.log(this.lines.length);
+    // console.log(this.lines.length);
     for (var i = 0; i < this.lines.length; i++)
       {
         
@@ -89,22 +96,61 @@ export class ImportApplicationComponent implements OnInit {
     for (var i = 0; i < this.lines.length; i++)
     {
    
-      this.application.applicationId = this.lines[i][0];
-      this.application.applicationName =this.lines[i][1];
-      this.application.applicationDescription =this.lines[i][2];
-      this.application.applicationType = this.lines[i][3];
+      
+      this.application.applicationName =this.lines[i][0];
+      this.application.applicationDescription =this.lines[i][1];
+      this.application.clientName = localStorage.getItem('clientName');
+      this.application.cloudProvider = "";
+      this.application.createdBy = localStorage.getItem('clientName');
+      this.application.createdDate  = new Date();
+      this.application.isAssessment = false;
+      // this.application.isCloudable = false;
+      this.application.isDeactivate = false;
+      this.application.isDeleted = false;
+      this.application.isFinalize = 0;
+      this.application.isSaved = 0;
+      this.application.isVerified = false;
+      this.application.MigrationPattern = "";
+      this.application.modifiedBy = localStorage.getItem('clientName');
+      this.application.modifiedDateTime = new Date();
+      var userName = this.lines[i][2];
+      this.getuserIdByName(userName);
+      this.existingUser = this.value;
+      console.log("++++++++++"+this.value);
+      console.log("************"+this.existingUser);
+      
+      // console.log("************"+this.application.userId);
+        
+      // for (let index = 0; index < this.userData.length; index++) {
+      //   console.log("((((((((("+this.userData.userId+"dxfcg");
+        
+      // }
+    
 
-      console.log("this.lines[i][0]"+this.lines[i][0]);
-      console.log("this.lines[i][1]"+this.lines[i][1]);
-      console.log("this.lines[i][2]"+this.lines[i][2]);
-      console.log("this.lines[i][3]"+this.lines[i][3]);
+      this.application.clientName = localStorage.getItem('clientName');
+      
+      // console.log("this.lines[i][0]"+this.lines[i][0]);
+      // console.log("this.lines[i][1]"+this.lines[i][1]);
+      // console.log("this.lines[i][2]"+this.lines[i][2]);
+      // console.log("this.lines[i][3]"+this.lines[i][3]);
       this.applicationService.createApplication(this.application)
     .subscribe();
-    console.log("success");
-    this.router.navigate(['/user']);
-    console.log("----------this.userDetail"+this.application);
+    // console.log("success");
+    this.router.navigate(['/application']);
+    // console.log("----------this.userDetail"+this.application);
     }
-    console.log("this.userDetail"+this.application);
+
+    
+
+    // console.log("this.userDetail"+this.application);
    }
+
+    getuserIdByName(userName)
+   {
+    this.userService.getUserByUserName(localStorage.getItem('clientName'),userName).subscribe(data=>{this.value=data,console.log(this.value)});
+    // console.log("ssssssssssssssssss"+this.value);
+    // return this.userService.getUserByUserName(localStorage.getItem('clientName'),userName).subscribe(data=>{this.value=data});
+     return 0;
+  }
 
 }

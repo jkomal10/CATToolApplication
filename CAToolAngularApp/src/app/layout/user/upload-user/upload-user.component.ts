@@ -115,11 +115,22 @@ export class UploadUserComponent implements OnInit {
       this.userDetail.firstName =this.lines[i][1];
       this.userDetail.lastName =this.lines[i][2];
       this.userDetail.company = this.lines[i][3];
+      this.userDetail.password = 'Cg@123';
       this.userDetail.ipAddress = this.ipAddress;
+      this.userDetail.clientName = localStorage.getItem('clientName');
+      this.userDetail.createdBy = localStorage.getItem('clientName');
+      this.userDetail.createdDateTime = new Date();
+      this.userDetail.isAdmin = this.lines[i][4];
+      this.userDetail.isDeactivate = false;
+      this.userDetail.isDeleted = 0;
+      this.userDetail.lastLogin = 0;
+      this.userDetail.modifiedBy = localStorage.getItem('clientName');
+      this.userDetail.modifiedDateTime = new Date();
       console.log("this.lines[i][0]"+this.lines[i][0]);
       console.log("this.lines[i][1]"+this.lines[i][1]);
       console.log("this.lines[i][2]"+this.lines[i][2]);
       console.log("this.lines[i][3]"+this.lines[i][3]);
+      console.log("this.lines[i][4]"+this.lines[i][4]);
       console.log("this.userDetail.ipAddress"+this.ipAddress)
       this.userservice.addUser(this.userDetail)
     .subscribe();

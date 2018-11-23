@@ -85,9 +85,7 @@ let dateNow:Date=new Date();
 var options = {
 
 // filename:"Application.csv",
-headers:["ApplicationId","Application Name","Application Description","IsCloudable","MigrationPattern",
-"CloudProvider","IsAssessment","IsFinalized","IsDeleted","IsDeactivated","DeleteDateAndTime",
-"Isverified","CreatedDate","ModifiedDateTime","CreatedBy","ModifiedBy","UserId","IsSaved"]
+headers:["Application Name","Application Description","UserId"]
 }; 
 new Angular5Csv( this.applicationTemplate,filename, options);
 }
