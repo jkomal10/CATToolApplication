@@ -20,7 +20,7 @@ export class ImportApplicationComponent implements OnInit {
    applications : Application = new Application();
   application : Application = new Application();
   lines = [];
-  value : any;
+  value : any = [];
   userData: any = [];
   ipAddress : any;
   existingUser : number;
@@ -97,6 +97,61 @@ export class ImportApplicationComponent implements OnInit {
     {
    
       
+  //     this.application.applicationName =this.lines[i][0];
+  //     this.application.applicationDescription =this.lines[i][1];
+  //     this.application.clientName = localStorage.getItem('clientName');
+  //     this.application.cloudProvider = "";
+  //     this.application.createdBy = localStorage.getItem('clientName');
+  //     this.application.createdDate  = new Date();
+  //     this.application.isAssessment = false;
+  //     // this.application.isCloudable = false;
+  //     this.application.isDeactivate = false;
+  //     this.application.isDeleted = false;
+  //     this.application.isFinalize = 0;
+  //     this.application.isSaved = 0;
+  //     this.application.isVerified = false;
+  //     this.application.MigrationPattern = "";
+  //     this.application.modifiedBy = localStorage.getItem('clientName');
+  //     this.application.modifiedDateTime = new Date();
+      var userName = this.lines[i][2];
+      this.getuserIdByName(userName);
+     
+     
+     
+      // this.existingUser = this.value;
+      //  console.log("{{{{{{{"+this.value);
+      
+      // console.log("************"+this.existingUser);
+      
+      
+
+      // this.application.clientName = localStorage.getItem('clientName');
+      
+      
+    //   this.applicationService.createApplication(this.application)
+    // .subscribe();
+    
+    this.router.navigate(['/application']);
+    
+    
+    console.log(this.value);
+
+    }
+
+    
+
+    // console.log("this.userDetail"+this.application);
+   }
+
+    getuserIdByName(userName)
+   {
+    this.userService.getUserByUserName(localStorage.getItem('clientName'),userName).subscribe(data=>{this.value=data,console.log(this.value)
+    
+     
+      for (var i = 0; i < 1; i++)
+    {
+   
+      
       this.application.applicationName =this.lines[i][0];
       this.application.applicationDescription =this.lines[i][1];
       this.application.clientName = localStorage.getItem('clientName');
@@ -113,44 +168,26 @@ export class ImportApplicationComponent implements OnInit {
       this.application.MigrationPattern = "";
       this.application.modifiedBy = localStorage.getItem('clientName');
       this.application.modifiedDateTime = new Date();
-      var userName = this.lines[i][2];
-      this.getuserIdByName(userName);
-      this.existingUser = this.value;
-      console.log("++++++++++"+this.value);
+      // var userName = this.lines[i][2];
+      this.existingUser = this.value.id;
+       console.log("{{{{{{{"+this.value.id);
+      // console.log("++++++++++"+JSON.stringify(this.value[0]));
       console.log("************"+this.existingUser);
-      
-      // console.log("************"+this.application.userId);
-        
-      // for (let index = 0; index < this.userData.length; index++) {
-      //   console.log("((((((((("+this.userData.userId+"dxfcg");
-        
-      // }
-    
-
+      this.application.userId=this.existingUser;
+      console.log(this.application.userId);
+ 
       this.application.clientName = localStorage.getItem('clientName');
-      
-      // console.log("this.lines[i][0]"+this.lines[i][0]);
-      // console.log("this.lines[i][1]"+this.lines[i][1]);
-      // console.log("this.lines[i][2]"+this.lines[i][2]);
-      // console.log("this.lines[i][3]"+this.lines[i][3]);
       this.applicationService.createApplication(this.application)
-    .subscribe();
-    // console.log("success");
-    this.router.navigate(['/application']);
-    // console.log("----------this.userDetail"+this.application);
+      .subscribe();
     }
 
-    
 
-    // console.log("this.userDetail"+this.application);
-   }
-
-    getuserIdByName(userName)
-   {
-    this.userService.getUserByUserName(localStorage.getItem('clientName'),userName).subscribe(data=>{this.value=data,console.log(this.value)});
+    });
     // console.log("ssssssssssssssssss"+this.value);
     // return this.userService.getUserByUserName(localStorage.getItem('clientName'),userName).subscribe(data=>{this.value=data});
      return 0;
   }
+
+  
 
 }
