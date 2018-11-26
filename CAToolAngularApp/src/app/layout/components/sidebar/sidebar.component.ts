@@ -48,7 +48,7 @@ export class SidebarComponent {
 
     
 
- addExpandClass(element: any) {
+    addExpandClass(element: any) {
         if (element === this.showMenu) {
             this.col=true;
             this.showMenu = '0';

@@ -8,11 +8,14 @@ import { currentUser } from './currentUser.model';
 })
 export class LocalStorageService {
   user: currentUser = new currentUser();
+  private localurl ='http://localhost:8090/user/getAll';
   constructor(private http:HttpClient) { }
 
   setCurrentUserObject(user : Object){
     localStorage.setItem('user',JSON.stringify(user));
     this.user=JSON.parse(localStorage.getItem('user'));
+    console.log(JSON.stringify(this.user));
+    console.log(this.user.userName);
   }
 
   setLoggedInTrue(isLoggedin : string){
@@ -21,6 +24,23 @@ export class LocalStorageService {
 
   setIsUserActive(isUserActive : string){
     localStorage.setItem('isUserActive',isUserActive);
+  }
+
+  setClient(client:string){
+    localStorage.setItem('clientName',client);
+  }
+
+  setIpAddress(ip : string){
+    localStorage.setItem('ip',ip);
+  }
+
+  getIpAddress(){
+    return localStorage.getItem('ip');
+  }
+
+  getLocalhostURL(){
+    localStorage.setItem('local','http://localhost:8090');
+    return localStorage.getItem('local');
   }
 
   getIsUserActive(){
@@ -40,7 +60,7 @@ export class LocalStorageService {
   }
 
   getClient(){
-    return this.user.clientName;
+    return localStorage.getItem('clientName');
   }
 
   getFirstNameOfCurrentUser(){

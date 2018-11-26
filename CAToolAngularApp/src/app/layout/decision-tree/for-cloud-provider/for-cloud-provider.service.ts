@@ -1,26 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ForCloudProviderService {
 
-  clientNameValue : String;
-  
+ 
   private evaluationOrder = 'http://localhost:8090/cloudProvider';
-  // private cloudProviderRuleUrl = 'http://localhost:8090/cloudProvider/getAllCloudProviderQuestion';
-
-
   private updateCloudProviderRuleUrl="http://localhost:8090/cloudProvider/updateCloudProviderRule";
-
-  constructor(private http:HttpClient) { }
-
+  constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
+  clientNameValue : String;
   
     
 CollectData(){
-  this.clientNameValue=localStorage.getItem('clientName');
+  this.clientNameValue=this.myStorage.getClient();
   const url = 'http://localhost:8090/cloudProvider/getAll';
   return this.http.get(url+`/`+this.clientNameValue);
   }
@@ -41,12 +37,12 @@ CollectData(){
   }
 
   CollectCloudableRuleQuestions(cloudproviderId : number){
-    this.clientNameValue=localStorage.getItem('clientName');
+    this.clientNameValue=this.myStorage.getClient();
     return this.http.get(`http://localhost:8090/assessmentQuestions/getAllCloudProviderRule/${cloudproviderId}/${this.clientNameValue}`);
   }
   updateCloudProviderRule(cloudableRule:any):Observable<Object>
   {
-    this.clientNameValue=localStorage.getItem('clientName');
+    this.clientNameValue=this.myStorage.getClient();
     return this.http.put(`${this.updateCloudProviderRuleUrl}`+`/`+this.clientNameValue, cloudableRule);
   }
 }

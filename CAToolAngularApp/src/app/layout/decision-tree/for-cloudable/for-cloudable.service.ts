@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 
 @Injectable({
@@ -9,11 +10,11 @@ import { Observable } from 'rxjs';
 export class ForCloudableService {
 
   clientNameValue : String;
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
    baseUrl = 'http://localhost:8090/cloudableRule/save';
    CollectData(){
    //const url = 'http://localhost:8090/option/getAll';
-   this.clientNameValue=localStorage.getItem('clientName');
+   this.clientNameValue=this.myStorage.getClient();
    const url= 'http://localhost:8090/assessmentQuestions/getAllCloudableQuestions';
    return this.http.get(url+`/`+this.clientNameValue);
     }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { LocalStorageService } from '../utility/service/localStorage.service';
 // import 'rxjs/add/observable/merge';
 // import 'rxjs/add/operator/map';
 
@@ -16,13 +17,15 @@ export class UsersService {
    private deleteUrl = 'http://localhost:8090/user/deleteUserById';
    private changePasswordUrl = 'http://localhost:8090/user/changePassword';
    private deactivateUrl = 'http://localhost:8090/user/deactivateUser';
-constructor(private http:HttpClient) { }
+constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
 
 CollectData(clientName : string): Observable<Object>{
-const url = 'http://localhost:8090/user/getAll';
-
-return this.http.get(url+`/`+clientName);
+return this.http.get(this.myStorage.getLocalhostURL()+`/user/getAll/`+clientName);
 }
+getAllUsers(clientName : string): Observable<Object>{
+  console.log(this.myStorage.getLocalhostURL()+`/user/getAll/`+this.myStorage.getClient());
+  return this.http.get(this.myStorage.getLocalhostURL()+`/user/getAll/`+clientName);
+  }
 
 getUserByUserName(clientName:string,userName:string)
 {
@@ -38,9 +41,9 @@ countNumberOfUsers()
 
 newAddURL: string = 'http://localhost:8090/user/addUser';
   
-addUser(application: Object): Observable<Object> {
-  
-  return this.http.post(`${this.newAddURL}` + `/create/`+localStorage.getItem('userName'), application);
+addUser(user: Object): Observable<Object> {
+  console.log(this.myStorage.getCurrentUser());
+  return this.http.post(`${this.newAddURL}` + `/create/`+this.myStorage.getCurrentUser(), user);
 }
 
 deactivate(userId: number)
@@ -71,7 +74,7 @@ private comptransfer = new BehaviorSubject("Hello");
         }
 
       updateUser(user: Object): Observable<Object> {
-        return this.http.put(`${this.updateUrl}`+ `/update/`+localStorage.getItem('userName'), user);
+        return this.http.put(`${this.updateUrl}`+ `/update/`+this.myStorage.getCurrentUser(), user);
       }
 
       deleteUser(userId: number): Observable<any> {

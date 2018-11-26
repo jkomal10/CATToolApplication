@@ -46,7 +46,7 @@
                 <td width="13%">{{size.ipAddress}}</td>
                 <td width="13%">{{size.company}}</td>
                 <td width="13%">{{size.createdBy}}</td>
-                <td width="13%" *ngIf="size.isAdmin==1;else user">Admin</td>
+                <td width="13%" *ngIf="size.isAdmin==0;else user">Admin</td>
                 <ng-template #user><td>User</td></ng-template>
                 <td width="13%">{{size.modifiedBy}}</td>
                 <td width="10%">{{size.lastLogin}}</td>

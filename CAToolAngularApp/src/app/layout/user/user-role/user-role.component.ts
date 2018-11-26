@@ -4,6 +4,7 @@ import {ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpResponse,HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { UserRoleService } from './user-role.service';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 class DataTablesResponse {
   data: any[];
@@ -25,11 +26,11 @@ export class UserRoleComponent implements OnInit {
 
   constructor(private userRoleService :UserRoleService,
     public router: Router,
-  private http: HttpClient) { 
+  private http: HttpClient,private myStorage:LocalStorageService) { 
 }
 
   ngOnInit() {
-    this.userName=localStorage.getItem('userName');
+    this.userName=this.myStorage.getCurrentUser();
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
