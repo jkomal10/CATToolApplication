@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { AssessmentQuestions } from '../Question';
 import { AssessmentQuestionsService } from '../assessment-questions.service';
 import { QuestionOption } from '../Option';
-import { JsonpModule } from '@angular/http';
-import { stringify } from '@angular/compiler/src/util';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { MigrationRule } from '../MigrationRule';
