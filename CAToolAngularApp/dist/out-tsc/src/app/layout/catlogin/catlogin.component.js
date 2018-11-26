@@ -10,10 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var router_1 = require("@angular/router");
 var router_animations_1 = require("../../router.animations");
-var catlogin_service_1 = require("./catlogin.service");
+var router_1 = require("@angular/router");
 var Users_1 = require("./Users");
+var catlogin_service_1 = require("./catlogin.service");
 var localStorage_service_1 = require("../utility/service/localStorage.service");
 var CATloginComponent = /** @class */ (function () {
     function CATloginComponent(loginService, router, myStorage) {
@@ -22,18 +22,21 @@ var CATloginComponent = /** @class */ (function () {
         this.myStorage = myStorage;
         this.users = new Users_1.Users();
     }
-    CATloginComponent.prototype.ngOnInit = function () { };
+    CATloginComponent.prototype.ngOnInit = function () {
+        localStorage.setItem('userName', null);
+    };
     CATloginComponent.prototype.onLoggedin = function (formValues) {
         var _this = this;
         this.loginService.getUserByUserNamePassword(formValues.userName, formValues.password).subscribe(function (data) {
             _this.users = data;
+            console.log(_this.users + "asdasdasd");
             if (_this.users != null) {
-                _this.myStorage.setLoggedInTrue('true'); //set is logged in true in session
-                _this.myStorage.setCurrentUserObject(_this.users); //set current user object in session
+                _this.myStorage.setCurrentUserObject(_this.users);
+                _this.myStorage.setLoggedInTrue('true');
+                //  this.myStorage.setUsername(this.users.userName);
                 if (_this.users.isAdmin === 0) {
-                    localStorage.setItem('userName', formValues.userName);
                     _this.myStorage.setIsUserActive('true');
-                    _this.message = "admin";
+                    _this.message = "logged in successfully";
                     _this.loginService.sendMsgtoOtherComponent(_this.users);
                     _this.router.navigate(['/dashboard']);
                 }

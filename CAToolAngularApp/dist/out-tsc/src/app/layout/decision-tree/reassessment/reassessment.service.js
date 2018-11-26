@@ -11,12 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
+var localStorage_service_1 = require("../../utility/service/localStorage.service");
 var ServiceService = /** @class */ (function () {
-    function ServiceService(http) {
+    function ServiceService(http, myStorage) {
         this.http = http;
+        this.myStorage = myStorage;
     }
     ServiceService.prototype.CollectData = function () {
-        this.clientNameValue = localStorage.getItem('clientName');
+        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
         var reassessUrl = 'http://localhost:8090/application/getAllReassessment';
         return this.http.get(reassessUrl + "/" + this.clientNameValue);
     };
@@ -34,7 +36,7 @@ var ServiceService = /** @class */ (function () {
         core_1.Injectable({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [http_1.HttpClient, localStorage_service_1.LocalStorageService])
     ], ServiceService);
     return ServiceService;
 }());

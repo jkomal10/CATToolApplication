@@ -15,6 +15,7 @@ var core_2 = require("@ngx-translate/core");
 var http_loader_1 = require("@ngx-translate/http-loader");
 var core_3 = require("videogular2/core");
 var controls_1 = require("videogular2/controls");
+var ngx_logger_1 = require("ngx-logger");
 var app_routing_module_1 = require("./app-routing.module");
 var app_component_1 = require("./app.component");
 var shared_1 = require("./shared");
@@ -48,7 +49,8 @@ var AppModule = /** @class */ (function () {
                 }),
                 app_routing_module_1.AppRoutingModule,
                 core_3.VgCoreModule,
-                controls_1.VgControlsModule
+                controls_1.VgControlsModule,
+                ngx_logger_1.LoggerModule.forRoot({ level: ngx_logger_1.NgxLoggerLevel.DEBUG, serverLogLevel: ngx_logger_1.NgxLoggerLevel.OFF })
             ],
             declarations: [app_component_1.AppComponent],
             providers: [shared_1.AuthGuard, assessment_questions_service_1.AssessmentQuestionsService],

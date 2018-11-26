@@ -11,15 +11,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var core_2 = require("@ngx-translate/core");
 var localStorage_service_1 = require("../../utility/service/localStorage.service");
+var Users_1 = require("../../catlogin/Users");
 var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent(router, myStorage) {
+    function HeaderComponent(router, myStorage, translate) {
         this.router = router;
         this.myStorage = myStorage;
+        this.translate = translate;
+        this.user = new Users_1.Users();
     }
     HeaderComponent.prototype.ngOnInit = function () {
-        this.clientNameValue = this.myStorage.getClient();
-        this.userName = this.myStorage.getCurrentUser();
+        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
+        this.user = JSON.parse(localStorage.getItem('user'));
+        this.userName = this.user.userName;
+    };
+    HeaderComponent.prototype.changeLang = function (language) {
+        this.translate.use(language);
+        localStorage.setItem('language', language);
     };
     HeaderComponent.prototype.onLoggedout = function () {
         this.myStorage.clearCurrentUser();
@@ -31,7 +40,7 @@ var HeaderComponent = /** @class */ (function () {
             templateUrl: './header.component.html',
             styleUrls: ['./header.component.scss']
         }),
-        __metadata("design:paramtypes", [router_1.Router, localStorage_service_1.LocalStorageService])
+        __metadata("design:paramtypes", [router_1.Router, localStorage_service_1.LocalStorageService, core_2.TranslateService])
     ], HeaderComponent);
     return HeaderComponent;
 }());

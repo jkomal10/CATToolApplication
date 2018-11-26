@@ -15,55 +15,48 @@ var http_1 = require("@angular/common/http");
 var user_service_1 = require("./user.service");
 var rxjs_1 = require("rxjs");
 var Angular5_csv_1 = require("angular5-csv/Angular5-csv");
+var localStorage_service_1 = require("../utility/service/localStorage.service");
 var DataTablesResponse = /** @class */ (function () {
     function DataTablesResponse() {
     }
     return DataTablesResponse;
 }());
 var UserComponent = /** @class */ (function () {
-    function UserComponent(userService, router, http) {
+    function UserComponent(userService, router, http, myStorage) {
         this.userService = userService;
         this.router = router;
         this.http = http;
-        this.id = '0eWrpsCLMJQ';
+        this.myStorage = myStorage;
         this.dtOptions = {};
         this.dtTrigger = new rxjs_1.Subject();
-        // persons: Person[];
         this.users = [];
         this.AllData = [];
     }
-    UserComponent.prototype.savePlayer = function (player) {
-        this.player = player;
-        console.log('Video Url', player.getVideoUrl());
-    };
-    UserComponent.prototype.onStateChange = function (event) {
-        console.log('player state', event.data);
-    };
     UserComponent.prototype.addUser = function () {
-        console.log("This is user component");
-        console.log(this.IpAddress);
         this.userService.sendIpAddresstoOtherComponent(this.IpAddress);
         this.router.navigate(['/user/add-user']);
     };
     UserComponent.prototype.updateUser = function (user) {
-        console.log(user);
         this.userService.sendMsgtoOtherComponent(user);
         this.router.navigate(['/user/update-user']);
     };
     UserComponent.prototype.deleteUser = function (formvalues) {
-        console.log(formvalues);
-        this.userService.deleteUser(formvalues).subscribe(function (data) {
-            console.log(data);
-        }, function (error) { return console.log('ERROR: ' + error); });
+        this.userService.deleteUser(formvalues).subscribe(function (data) { }, function (error) { return console.log('ERROR: ' + error); });
         this.router.navigate(['/user']);
     };
     UserComponent.prototype.deactivate = function (formvalues) {
         this.userService.deactivate(formvalues).subscribe();
     };
     UserComponent.prototype.uploadUserInfo = function () {
-        console.log(this.IpAddress);
         this.userService.sendIpAddresstoOtherComponent(this.IpAddress);
         this.router.navigate(['/user/upload-user']);
+    };
+    UserComponent.prototype.exportCsvTemplate = function () {
+        var filename = "Users";
+        var options = {
+            headers: ["userName", "firstName", "lastName", "company", "isAdmin"]
+        };
+        new Angular5_csv_1.Angular5Csv(this.users, filename, options);
     };
     UserComponent.prototype.exportCsv = function () {
         var filename = "UserDetails";
@@ -77,13 +70,12 @@ var UserComponent = /** @class */ (function () {
         new Angular5_csv_1.Angular5Csv(this.users, filename, options);
     };
     UserComponent.prototype.help = function () {
-        // this.userService.sendUsertoOtherComponent("user");
-        localStorage.setItem('component', 'user');
+        this.myStorage.setComponent('user');
         this.router.navigate(['/help']);
     };
     UserComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.clientValue = localStorage.getItem("clientName");
+        this.clientValue = this.myStorage.getCurrentUserObject().clientName;
         this.dtOptions = {
             pagingType: 'full_numbers',
             pageLength: 10,
@@ -91,7 +83,7 @@ var UserComponent = /** @class */ (function () {
         };
         this.userService.getIpAddress().subscribe(function (data) {
             _this.IpAddress = data['ip'];
-            _this.userService.CollectData(_this.clientValue).subscribe(function (result) {
+            _this.userService.getAllUsers(_this.clientValue).subscribe(function (result) {
                 _this.AllData = result;
                 _this.dtTrigger.next();
             });
@@ -103,9 +95,7 @@ var UserComponent = /** @class */ (function () {
             templateUrl: './user.component.html',
             styleUrls: ['./user.component.scss']
         }),
-        __metadata("design:paramtypes", [user_service_1.UsersService,
-            router_1.Router,
-            http_1.HttpClient])
+        __metadata("design:paramtypes", [user_service_1.UsersService, router_1.Router, http_1.HttpClient, localStorage_service_1.LocalStorageService])
     ], UserComponent);
     return UserComponent;
 }());

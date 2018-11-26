@@ -16,16 +16,18 @@ var assessment_questions_service_1 = require("./assessment-questions.service");
 var rxjs_1 = require("rxjs");
 var Question_1 = require("./Question");
 var Angular5_csv_1 = require("angular5-csv/Angular5-csv");
+var localStorage_service_1 = require("../utility/service/localStorage.service");
 var DataTablesResponse = /** @class */ (function () {
     function DataTablesResponse() {
     }
     return DataTablesResponse;
 }());
 var AssessmentQuestionsComponent = /** @class */ (function () {
-    function AssessmentQuestionsComponent(assessmentQuestionsService, router, http) {
+    function AssessmentQuestionsComponent(assessmentQuestionsService, router, http, myStorage) {
         this.assessmentQuestionsService = assessmentQuestionsService;
         this.router = router;
         this.http = http;
+        this.myStorage = myStorage;
         this.question = new Question_1.AssessmentQuestions();
         this.submitted = false;
         this.dtOptions = {};
@@ -47,13 +49,13 @@ var AssessmentQuestionsComponent = /** @class */ (function () {
     };
     AssessmentQuestionsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.clientNameValue = localStorage.getItem('clientName');
+        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
         this.dtOptions = {
             pagingType: 'full_numbers',
             pageLength: 10,
             responsive: true
         };
-        this.assessmentQuestionsService.CollectData(this.clientNameValue).subscribe(function (result) {
+        this.assessmentQuestionsService.getAllQuestions(this.clientNameValue).subscribe(function (result) {
             _this.AllData = result;
             _this.dtTrigger.next();
             console.log(_this.AllData);
@@ -85,7 +87,7 @@ var AssessmentQuestionsComponent = /** @class */ (function () {
             templateUrl: './assessment-questions.component.html',
             styleUrls: ['./assessment-questions.component.scss']
         }),
-        __metadata("design:paramtypes", [assessment_questions_service_1.AssessmentQuestionsService, router_1.Router, http_1.HttpClient])
+        __metadata("design:paramtypes", [assessment_questions_service_1.AssessmentQuestionsService, router_1.Router, http_1.HttpClient, localStorage_service_1.LocalStorageService])
     ], AssessmentQuestionsComponent);
     return AssessmentQuestionsComponent;
 }());

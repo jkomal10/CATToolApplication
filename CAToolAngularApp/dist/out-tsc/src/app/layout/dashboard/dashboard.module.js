@@ -15,6 +15,7 @@ var ngx_youtube_player_1 = require("ngx-youtube-player");
 var core_2 = require("videogular2/core");
 var controls_1 = require("videogular2/controls");
 var shared_1 = require("../../shared");
+var core_3 = require("@ngx-translate/core");
 var DashboardModule = /** @class */ (function () {
     function DashboardModule() {
     }
@@ -24,6 +25,7 @@ var DashboardModule = /** @class */ (function () {
                 common_1.CommonModule,
                 ng_bootstrap_1.NgbCarouselModule.forRoot(),
                 ng_bootstrap_1.NgbAlertModule.forRoot(),
+                core_3.TranslateModule.forChild(),
                 dashboard_routing_module_1.DashboardRoutingModule,
                 shared_1.StatModule,
                 ngx_youtube_player_1.YoutubePlayerModule,

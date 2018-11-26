@@ -17,12 +17,14 @@ var import_application_component_1 = require("./import-application/import-applic
 var view_application_component_1 = require("./view-application/view-application.component");
 var assesst_application_component_1 = require("./assesst-application/assesst-application.component");
 var update_application_component_1 = require("./update-application/update-application.component");
+var ngx_logger_1 = require("ngx-logger");
 var ApplicationModule = /** @class */ (function () {
     function ApplicationModule() {
     }
     ApplicationModule = __decorate([
         core_1.NgModule({
-            imports: [common_1.CommonModule, application_routing_module_1.ApplicationRoutingModule, angular_datatables_1.DataTablesModule, forms_1.FormsModule],
+            imports: [common_1.CommonModule, application_routing_module_1.ApplicationRoutingModule, angular_datatables_1.DataTablesModule, forms_1.FormsModule,
+                ngx_logger_1.LoggerModule.forRoot({ level: ngx_logger_1.NgxLoggerLevel.LOG, disableConsoleLogging: true })],
             declarations: [
                 application_component_1.ApplicationComponent,
                 add_application_component_1.AddApplicationComponent,

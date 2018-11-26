@@ -13,18 +13,18 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var rxjs_1 = require("../../../../node_modules/rxjs");
 var application_service_1 = require("./application.service");
-var http_1 = require("@angular/common/http");
 var Angular5_csv_1 = require("angular5-csv/Angular5-csv");
+var ngx_logger_1 = require("ngx-logger");
 var DataTablesResponse = /** @class */ (function () {
     function DataTablesResponse() {
     }
     return DataTablesResponse;
 }());
 var ApplicationComponent = /** @class */ (function () {
-    function ApplicationComponent(router, applicationService, http) {
+    function ApplicationComponent(router, applicationService, logger) {
         this.router = router;
         this.applicationService = applicationService;
-        this.http = http;
+        this.logger = logger;
         this.dtOptions = {};
         this.dtTrigger = new rxjs_1.Subject();
         this.message = '';
@@ -38,6 +38,8 @@ var ApplicationComponent = /** @class */ (function () {
     ApplicationComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.clientNameValue = localStorage.getItem('clientName');
+        this.logger.debug('Your log message goes here');
+        this.logger.log('Your log message goes here');
         this.dtOptions = {
             pagingType: 'first_last_numbers',
             pageLength: 10,
@@ -50,7 +52,7 @@ var ApplicationComponent = /** @class */ (function () {
         //   });
         this.applicationService.CollectData(this.clientNameValue).subscribe(function (result) {
             _this.AllData = result;
-            console.log(JSON.stringify(_this.AllData));
+            _this.logger.log(JSON.stringify(_this.AllData));
             _this.dtTrigger.next();
         });
     };
@@ -64,14 +66,12 @@ var ApplicationComponent = /** @class */ (function () {
     };
     ApplicationComponent.prototype.exportTemplate = function () {
         var csvRows = [];
-        console.log(this.AllData);
+        this.logger.log(this.AllData);
         var filename = "Application";
         var dateNow = new Date();
         var options = {
             // filename:"Application.csv",
-            headers: ["ApplicationId", "Application Name", "Application Description", "IsCloudable", "MigrationPattern",
-                "CloudProvider", "IsAssessment", "IsFinalized", "IsDeleted", "IsDeactivated", "DeleteDateAndTime",
-                "Isverified", "CreatedDate", "ModifiedDateTime", "CreatedBy", "ModifiedBy", "UserId", "IsSaved"]
+            headers: ["Application Name", "Application Description", "UserId"]
         };
         new Angular5_csv_1.Angular5Csv(this.applicationTemplate, filename, options);
     };
@@ -85,24 +85,24 @@ var ApplicationComponent = /** @class */ (function () {
         this.router.navigate(['/application/import-application']);
     };
     ApplicationComponent.prototype.editApplication = function (application) {
-        console.log(JSON.stringify(application));
+        this.logger.log(JSON.stringify(application));
         this.applicationService.sendMsgtoOtherComponent(application);
         this.router.navigate(['/application/update-application']);
     };
     ApplicationComponent.prototype.exportCsv = function () {
         var csvRows = [];
-        console.log(this.AllData);
+        this.logger.log(this.AllData);
         var filename = "Application";
         // const headers = this.AllData[0];
         // console.log("headers****"+headers);
         // var  DEFAULTFILENAME = 'mycsv.csv';
         var dateNow = new Date();
-        console.log(dateNow.getDate().toString + " Date");
-        console.log(dateNow.getDay().toString + " day");
-        console.log(dateNow.getMonth().toString + " month");
-        console.log(dateNow.getFullYear().toString + " year");
+        this.logger.log(dateNow.getDate().toString + " Date");
+        this.logger.log(dateNow.getDay().toString + " day");
+        this.logger.log(dateNow.getMonth().toString + " month");
+        this.logger.log(dateNow.getFullYear().toString + " year");
         for (var index = 0; index < this.AllData.length; index++) {
-            console.log(this.AllData[index].applicationId + "id");
+            this.logger.log(this.AllData[index].applicationId + "id");
             this.application[index] = this.AllData[index];
             //  this.application[index].applicationName=this.AllData[index].applicationName;
             //  this.application[index].applicationDescription=this.AllData[index].applicationDescription;
@@ -114,7 +114,7 @@ var ApplicationComponent = /** @class */ (function () {
             //  this.application[index].isDeleted=this.AllData[index].isDeleted;
             //  this.application[index].isDeactivate=this.AllData[index].isDeactivate;
         }
-        console.log(this.application);
+        this.logger.log(this.application);
         // for (let index = 0; index < this.application.length; index++) {
         //   console.log(this.application[index]);
         // }
@@ -130,7 +130,7 @@ var ApplicationComponent = /** @class */ (function () {
         var _this = this;
         this.applicationService.deleteApplications(formvalues)
             .subscribe(function (data) {
-            console.log(data);
+            _this.logger.log(data);
             //this.reloadData();
             //this.router.navigate(['/applictaion']);
             _this.reloadData();
@@ -147,12 +147,12 @@ var ApplicationComponent = /** @class */ (function () {
     };
     ApplicationComponent.prototype.ViewApplication = function (formvalues) {
         this.applicationService.sendMsgtoOtherComponent(formvalues);
-        console.log(formvalues);
+        this.logger.log(formvalues);
         this.router.navigate(['/application/view-application']);
     };
     ApplicationComponent.prototype.assessApplication = function (formvalues) {
-        console.log(JSON.stringify(formvalues));
-        console.log(formvalues.applicationId);
+        this.logger.log(JSON.stringify(formvalues));
+        this.logger.log(formvalues.applicationId);
         this.applicationService.sendMsgtoOtherComponent(formvalues);
         this.router.navigate(['/application/assesst-application']);
     };
@@ -166,9 +166,10 @@ var ApplicationComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-application',
             templateUrl: './application.component.html',
-            styleUrls: ['./application.component.scss']
+            styleUrls: ['./application.component.scss'],
+            providers: [ngx_logger_1.NGXLogger]
         }),
-        __metadata("design:paramtypes", [router_1.Router, application_service_1.ApplicationService, http_1.HttpClient])
+        __metadata("design:paramtypes", [router_1.Router, application_service_1.ApplicationService, ngx_logger_1.NGXLogger])
     ], ApplicationComponent);
     return ApplicationComponent;
 }());

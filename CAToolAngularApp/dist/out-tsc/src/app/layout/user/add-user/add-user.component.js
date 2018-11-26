@@ -12,25 +12,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var user_service_1 = require("../user.service");
 var router_1 = require("@angular/router");
+var localStorage_service_1 = require("../../utility/service/localStorage.service");
 var AddUserComponent = /** @class */ (function () {
-    function AddUserComponent(userService, router) {
+    function AddUserComponent(userService, router, myStorage) {
         this.userService = userService;
         this.router = router;
+        this.myStorage = myStorage;
         this.AllData = [];
         this.status = true;
         this.userTypeValue = 1;
         this.userType = "User";
         this.count = 0;
+        console.log(this.myStorage.getCurrentUserObject().userName);
     }
     AddUserComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.clientNameValue = localStorage.getItem('clientName');
+        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
         this.userService.getIpAddress().subscribe(function (data) {
-            localStorage.setItem('ip', data['ip']);
+            _this.myStorage.setIpAddress(data['ip']);
         });
-        this.userService.CollectData(this.clientNameValue).subscribe(function (result) {
+        this.userService.getAllUsers(this.clientNameValue).subscribe(function (result) {
             _this.AllData = result;
-            console.log(_this.AllData);
         });
     };
     AddUserComponent.prototype.addUserComponent = function (formvalues) {
@@ -40,13 +42,13 @@ var AddUserComponent = /** @class */ (function () {
         for (var index = 0; index < this.AllData.length; index++) {
             if (this.userName === this.AllData[index].userName) {
                 this.status = false;
-                console.log(this.status);
                 alert("User already exits, please enter a new name");
                 this.router.navigate(['/user']);
             }
         }
         if (this.status) {
-            this.user.ipAddress = localStorage.getItem('ip');
+            this.user.ipAddress = this.myStorage.getIpAddress();
+            this.user.createdBy = this.myStorage.getCurrentUserObject().userName;
             this.user.clientName = this.clientNameValue;
             this.userService.addUser(this.user).subscribe();
             this.router.navigate(['/user']);
@@ -54,13 +56,11 @@ var AddUserComponent = /** @class */ (function () {
     };
     AddUserComponent.prototype.selectChangeHandler = function (event) {
         if (event.target.value == "User") {
-            console.log("User is Admin=1");
             this.userTypeValue = 1;
             this.user.isAdmin = 1;
             this.userType = "User";
         }
         else {
-            console.log("Admin is Admin=0");
             this.userTypeValue = 0;
             this.user.isAdmin = 0;
             this.userType = "Admin";
@@ -72,7 +72,7 @@ var AddUserComponent = /** @class */ (function () {
             templateUrl: './add-user.component.html',
             styleUrls: ['./add-user.component.scss']
         }),
-        __metadata("design:paramtypes", [user_service_1.UsersService, router_1.Router])
+        __metadata("design:paramtypes", [user_service_1.UsersService, router_1.Router, localStorage_service_1.LocalStorageService])
     ], AddUserComponent);
     return AddUserComponent;
 }());

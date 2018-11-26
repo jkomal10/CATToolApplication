@@ -12,39 +12,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
 var rxjs_1 = require("rxjs");
-// import 'rxjs/add/observable/merge';
-// import 'rxjs/add/operator/map';
+var localStorage_service_1 = require("../utility/service/localStorage.service");
 var UsersService = /** @class */ (function () {
-    function UsersService(http) {
+    function UsersService(http, myStorage) {
         this.http = http;
-        this.addUserURL = 'http://localhost:8090/user/addUser';
-        this.addUrl = 'http://localhost:8090/user/addUser';
-        this.updateUrl = 'http://localhost:8090/user/updateUser';
-        this.deleteUrl = 'http://localhost:8090/user/deleteUserById';
-        this.changePasswordUrl = 'http://localhost:8090/user/changePassword';
-        this.deactivateUrl = 'http://localhost:8090/user/deactivateUser';
-        this.newAddURL = 'http://localhost:8090/user/addUser';
+        this.myStorage = myStorage;
         this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
         this.users = this.comptransfer.asObservable();
     }
-    UsersService.prototype.CollectData = function (clientName) {
-        var url = 'http://localhost:8090/user/getAll';
-        return this.http.get(url + "/" + clientName);
+    UsersService.prototype.getAllUsers = function (clientName) {
+        return this.http.get(this.myStorage.getdomainURL() + "/user/getAll/" + clientName);
+    };
+    UsersService.prototype.getUserByUserName = function (clientName, userName) {
+        return this.http.get(this.myStorage.getdomainURL() + '/user/getUserId/' + clientName + '/' + userName);
     };
     UsersService.prototype.countNumberOfUsers = function () {
-        var getCount = 'http://localhost:8090/user/getUserCount';
-        return this.http.get(getCount);
+        return this.http.get(this.myStorage.getdomainURL() + "/user/getUserCount");
     };
-    UsersService.prototype.addUser = function (application) {
-        return this.http.post("" + this.newAddURL + "/create/" + localStorage.getItem('userName'), application);
+    UsersService.prototype.addUser = function (user) {
+        return this.http.post(this.myStorage.getdomainURL() + "/user/addUser/create/" + this.myStorage.getCurrentUserObject().userName, user);
     };
     UsersService.prototype.deactivate = function (userId) {
-        console.log('************deactivate ********');
-        return this.http.put(this.deactivateUrl + "/" + userId, { responseType: 'text' });
+        return this.http.put(this.myStorage.getdomainURL() + "/user/deactivateUser/" + userId, { responseType: 'text' });
     };
     UsersService.prototype.changePassword = function (userName, password, newPassword) {
-        console.log("" + this.changePasswordUrl + "/" + userName + "/" + password + "/" + newPassword);
-        return this.http.get("" + this.changePasswordUrl + "/" + userName + "/" + password + "/" + newPassword);
+        console.log(this.myStorage.getdomainURL() + "/user/changePassword/" + userName + "/" + password + "/" + newPassword);
+        return this.http.get(this.myStorage.getdomainURL() + "/user/changePassword/" + userName + "/" + password + "/" + newPassword);
     };
     UsersService.prototype.sendUsertoOtherComponent = function (messsage) {
         this.comptransfer.next(messsage);
@@ -56,18 +49,16 @@ var UsersService = /** @class */ (function () {
         this.comptransfer.next(messsage);
     };
     UsersService.prototype.updateUser = function (user) {
-        return this.http.put("" + this.updateUrl + "/update/" + localStorage.getItem('userName'), user);
+        return this.http.put(this.myStorage.getdomainURL() + "/user/updateUser/update/" + this.myStorage.getCurrentUserObject().userName, user);
     };
     UsersService.prototype.deleteUser = function (userId) {
-        return this.http.delete(this.deleteUrl + "/" + userId, { responseType: 'text' });
+        return this.http.delete(this.myStorage.getdomainURL() + "/user/deleteUserById/" + userId, { responseType: 'text' });
     };
     UsersService.prototype.getIpAddress = function () {
-        // const headers = new HttpHeaders({ 'Content-Type': 'application/json' ,'Origin' : 'http://localhost:3000', "Access-Control-Allow-Origin" : "*" });
         var headers = new http_1.HttpHeaders({ "Access-Control-Allow-Origin": "*" });
         return this.http.get('http://ipinfo.io');
     };
     UsersService.prototype.handleError = function (error) {
-        //Log error in the browser console
         console.error('observable error: ', error);
         return rxjs_1.Observable.throw(error);
     };
@@ -75,7 +66,7 @@ var UsersService = /** @class */ (function () {
         core_1.Injectable({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [http_1.HttpClient, localStorage_service_1.LocalStorageService])
     ], UsersService);
     return UsersService;
 }());

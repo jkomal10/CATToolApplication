@@ -24,20 +24,18 @@ export class AssessmentQuestionsComponent implements OnInit {
   question: AssessmentQuestions = new AssessmentQuestions();
   questionId : number;
   submitted = false;
-
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   assessmentQuestions:Array<AssessmentQuestions>=[]
- 
-  AllData : any = [];
+  assessmentQuestionData: any = [];
   constructor(private assessmentQuestionsService :AssessmentQuestionsService,public router: Router,private http: HttpClient, private myStorage:LocalStorageService) { 
 
   }
 
   exportCsv(){
    var filename = "Assessment Question";
-   for (let index = 0; index < this.AllData.length; index++) {
-    this.assessmentQuestions[index]=this.AllData[index];
+   for (let index = 0; index < this.assessmentQuestionData.length; index++) {
+    this.assessmentQuestions[index]=this.assessmentQuestionData[index];
    }
    var options={
      headers:["questionId","questionText","questionDescription","questionType","questionDisplayOrder",
@@ -58,9 +56,8 @@ export class AssessmentQuestionsComponent implements OnInit {
 
     this.assessmentQuestionsService.getAllQuestions(this.clientNameValue).subscribe(result => 
       {
-      this.AllData = result ;
-      this.dtTrigger.next();
-      console.log(this.AllData);
+        this.assessmentQuestionData= result ;
+        this.dtTrigger.next();
       }); 
 
   }

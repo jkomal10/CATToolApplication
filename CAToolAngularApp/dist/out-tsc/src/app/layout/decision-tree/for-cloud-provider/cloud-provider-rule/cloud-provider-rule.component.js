@@ -32,23 +32,10 @@ var CloudProviderRuleComponent = /** @class */ (function () {
             responsive: true
         };
         this.forCloudProviderService.cloudProviderId.subscribe(function (data) { _this.cloudproviderId = data; });
-        console.log(this.cloudproviderId + "Cloud Provider rule component");
-        // this.forCloudProviderService.CollectCloudableRuleQuestions(this.cloudproviderId).subscribe( result=>{
         this.forCloudProviderService.CollectCloudableRuleQuestions(this.cloudproviderId).subscribe(function (result) {
             _this.CloudProviderAllData = result;
-            console.log(_this.CloudProviderAllData);
-            // for (let index = 0; index < this.CloudProviderAllData.length; index++) {
-            //   for (let index1 = 0; index1 < this.CloudProviderAllData[index].cloudProviderRules.length; index1++) {
-            //     this.executionOrdersCp[index1] = this.CloudProviderAllData[index].cloudProviderRules[index1].executionOrder;
-            //      console.log("**this.executionOrdersCp"+this.executionOrdersCp[index1]);
-            //   }
-            // }
             _this.dtTrigger.next();
-            console.log("*****CloudProviderAllData");
-            console.log("&&&&&&" + _this.executionOrders);
         });
-        console.log("the cloudproviderid is " + this.cloudproviderId);
-        // console.log("the providerid we get "+ this.CloudProviderAllData.cloudProviderRules[0].cloudProviderRuleId);
     };
     CloudProviderRuleComponent.prototype.onSubmit = function () {
         this.addCloudeProviderRule();

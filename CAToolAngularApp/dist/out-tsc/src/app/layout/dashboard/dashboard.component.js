@@ -15,8 +15,10 @@ var user_service_1 = require("../user/user.service");
 var router_1 = require("@angular/router");
 var application_service_1 = require("../application/application.service");
 var localStorage_service_1 = require("../utility/service/localStorage.service");
+var core_2 = require("@ngx-translate/core");
 var DashboardComponent = /** @class */ (function () {
-    function DashboardComponent(userService, applicationService, router, myStorage) {
+    function DashboardComponent(translate, userService, applicationService, router, myStorage) {
+        this.translate = translate;
         this.userService = userService;
         this.applicationService = applicationService;
         this.router = router;
@@ -25,32 +27,26 @@ var DashboardComponent = /** @class */ (function () {
         this.alerts = [];
         this.sliders = [];
         this.application = [];
-        this.id = '0eWrpsCLMJQ';
+        this.appCount = [];
     }
-    DashboardComponent.prototype.savePlayer = function (player) {
-        this.player = player;
-        console.log('Video Url', player.getVideoUrl());
-    };
-    DashboardComponent.prototype.onStateChange = function (event) {
-        console.log('player state', event.data);
-    };
     DashboardComponent.prototype.download = function () {
     };
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.clientNameValue = this.myStorage.getClient();
+        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
         this.redirectToDashboard = this.myStorage.getLoggedInTrue(); //this.status=localStorage.getItem('isLoggedin');
         if (this.redirectToDashboard == 'true') {
-            this.firstName = this.myStorage.getFirstNameOfCurrentUser();
-            this.lastName = this.myStorage.getLastNameOfCurrentUser();
-            this.userService.CollectData(this.clientNameValue).subscribe(function (data) { _this.users = data; });
+            this.firstName = this.myStorage.getCurrentUserObject().firstName;
+            this.lastName = this.myStorage.getCurrentUserObject().lastName;
+            this.userService.getAllUsers(this.clientNameValue).subscribe(function (data) { _this.users = data; });
             this.applicationService.CollectData(this.clientNameValue).subscribe(function (data) { _this.application = data; });
-            this.userActive = this.myStorage.getIsUserActive();
-            if (this.userActive == 'false') {
-                this.userCheck = false;
+            this.applicationService.getApplicationCount(this.clientNameValue).subscribe(function (data) { _this.appCount = data, console.log(_this.appCount); });
+            this.isUser = this.myStorage.getIsUserActive();
+            if (this.isUser == 'false') {
+                this.isAdmin = false;
             }
             else {
-                this.userCheck = true;
+                this.isAdmin = true;
             }
         }
         else {
@@ -68,7 +64,7 @@ var DashboardComponent = /** @class */ (function () {
             styleUrls: ['./dashboard.component.scss'],
             animations: [router_animations_1.routerTransition()]
         }),
-        __metadata("design:paramtypes", [user_service_1.UsersService, application_service_1.ApplicationService, router_1.Router, localStorage_service_1.LocalStorageService])
+        __metadata("design:paramtypes", [core_2.TranslateService, user_service_1.UsersService, application_service_1.ApplicationService, router_1.Router, localStorage_service_1.LocalStorageService])
     ], DashboardComponent);
     return DashboardComponent;
 }());

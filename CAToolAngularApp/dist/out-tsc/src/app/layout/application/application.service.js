@@ -20,6 +20,7 @@ var ApplicationService = /** @class */ (function () {
         this.deleteUrl = 'http://localhost:8090/application/resetApplicationById';
         //url:String= 'http://localhost:8090/application/getApplicationById';
         this.url1 = 'http://localhost:8090/application/updateApplictaion';
+        this.appCountUrl = "http://localhost:8090/application/getTotalApplicationsCount";
         this.baseUrl = 'http://localhost:8090/application/saveApplication';
         this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
         this.question = this.comptransfer.asObservable();
@@ -49,6 +50,9 @@ var ApplicationService = /** @class */ (function () {
     };
     ApplicationService.prototype.sendMsgtoOtherComponent = function (messsage) {
         this.comptransfer.next(messsage);
+    };
+    ApplicationService.prototype.getApplicationCount = function (clientName) {
+        return this.http.get(this.appCountUrl + "/" + clientName);
     };
     ApplicationService = __decorate([
         core_1.Injectable({

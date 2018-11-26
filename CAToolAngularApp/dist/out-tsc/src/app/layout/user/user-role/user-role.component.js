@@ -14,23 +14,25 @@ var router_1 = require("@angular/router");
 var http_1 = require("@angular/common/http");
 var rxjs_1 = require("rxjs");
 var user_role_service_1 = require("./user-role.service");
+var localStorage_service_1 = require("../../utility/service/localStorage.service");
 var DataTablesResponse = /** @class */ (function () {
     function DataTablesResponse() {
     }
     return DataTablesResponse;
 }());
 var UserRoleComponent = /** @class */ (function () {
-    function UserRoleComponent(userRoleService, router, http) {
+    function UserRoleComponent(userRoleService, router, http, myStorage) {
         this.userRoleService = userRoleService;
         this.router = router;
         this.http = http;
+        this.myStorage = myStorage;
         this.AllData = [];
         this.dtOptions = {};
         this.dtTrigger = new rxjs_1.Subject();
     }
     UserRoleComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.userName = localStorage.getItem('userName');
+        this.userName = this.myStorage.getCurrentUserObject().userName;
         this.dtOptions = {
             pagingType: 'full_numbers',
             pageLength: 10,
@@ -58,7 +60,7 @@ var UserRoleComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [user_role_service_1.UserRoleService,
             router_1.Router,
-            http_1.HttpClient])
+            http_1.HttpClient, localStorage_service_1.LocalStorageService])
     ], UserRoleComponent);
     return UserRoleComponent;
 }());

@@ -20,7 +20,7 @@ var ChangePasswordComponent = /** @class */ (function () {
     ChangePasswordComponent.prototype.ngOnInit = function () {
     };
     ChangePasswordComponent.prototype.onLoggedin = function (formvalues) {
-        this.userService.changePassword(this.myStorage.getCurrentUser(), formvalues.previousPassword, formvalues.password).subscribe();
+        this.userService.changePassword(this.myStorage.getCurrentUserObject().userName, formvalues.previousPassword, formvalues.password).subscribe();
     };
     ChangePasswordComponent = __decorate([
         core_1.Component({

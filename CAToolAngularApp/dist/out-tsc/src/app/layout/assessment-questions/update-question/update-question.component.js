@@ -13,11 +13,19 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var Question_1 = require("../Question");
 var assessment_questions_service_1 = require("../assessment-questions.service");
+var localStorage_service_1 = require("../../utility/service/localStorage.service");
 var UpdateQuestionComponent = /** @class */ (function () {
-    function UpdateQuestionComponent(assessmentQuestionsService, router) {
+    function UpdateQuestionComponent(assessmentQuestionsService, router, myStorage) {
         this.assessmentQuestionsService = assessmentQuestionsService;
         this.router = router;
+        this.myStorage = myStorage;
+        this.questionList = new Question_1.AssessmentQuestions();
+        this.MigrationData = [];
+        this.CloudProviderData = [];
+        this.MigrationDataArray = [];
+        this.CloudProviderDataArray = [];
         this.question = new Question_1.AssessmentQuestions();
+        this.updatedQuestion = new Question_1.AssessmentQuestions();
         this.questionObject = new Question_1.AssessmentQuestions();
         this.submitted = false;
         this.optionsValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -28,12 +36,39 @@ var UpdateQuestionComponent = /** @class */ (function () {
         var _this = this;
         this.assessmentQuestionsService.question.subscribe(function (data) { _this.que = data; });
         this.question = this.que;
+        console.log("**********" + this.question.questionId);
         this.numberOfOptions = 0;
         var option = this.optionsValues;
         this.numberOfOptions = this.question.questionOption.length;
-        console.log(this.question.questionOption.length + "*************");
+        console.log(this.question.questionOption[0].optionText + "))))))");
+        for (var index = 0; index < this.numberOfOptions; index++) {
+            this.OptionsArray[index] = this.question.questionOption[index].optionText;
+        }
+        // this.OptionsArray[0]=this.question.questionOption[0].optionText;
         this.selectChangeHandlerDefault(this.numberOfOptions);
         console.log(JSON.stringify(this.question.questionOption));
+    };
+    UpdateQuestionComponent.prototype.assessmentTypeForMigrationClick = function (event) {
+        var _this = this;
+        console.log(event.target.checked);
+        this.assessmentTypeForMigrationValue = event.target.checked;
+        this.assessmentQuestionsService.getMigrationData().subscribe(function (result) {
+            _this.MigrationData = result;
+            console.log(_this.MigrationData);
+            for (var index = 0; index < _this.MigrationData.length; index++) {
+                _this.MigrationDataArray[index] = _this.MigrationData[index].migrationPattern;
+            }
+        });
+    };
+    UpdateQuestionComponent.prototype.assessmentTypeForCloudProviderClick = function (event) {
+        var _this = this;
+        this.assessmentTypeForCloudProvider = event.target.checked;
+        this.assessmentQuestionsService.getCloudProviderData().subscribe(function (result) {
+            _this.CloudProviderData = result;
+            for (var index = 0; index < _this.CloudProviderData.length; index++) {
+                _this.CloudProviderDataArray[index] = _this.CloudProviderData[index].cloudProviders;
+            }
+        });
     };
     UpdateQuestionComponent.prototype.selectChangeHandlerDefault = function (value) {
         console.log("option value " + value);
@@ -59,17 +94,22 @@ var UpdateQuestionComponent = /** @class */ (function () {
             console.log(this.Options.length);
         }
     };
-    UpdateQuestionComponent.prototype.updateQue = function (question) {
-        console.log('*******onsubmit application**********' + question.questionId);
-        this.questionObject = question;
-        this.questionObject.modifiedBy = localStorage.getItem('userName');
-        this.assessmentQuestionsService.updateAssessmentQuestions(question)
-            .subscribe();
+    UpdateQuestionComponent.prototype.updateQue = function (updatedQuestion) {
+        // console.log('&&&&&&&&&&&'+question);
+        console.log('*******onsubmit application**********' + this.question.questionId);
+        this.questionObject = updatedQuestion;
+        // console.log("&&&&&&&&&"+this.myStorage.getCurrentUser());
+        this.questionObject.modifiedBy = "UUUUUUUUU";
+        console.log("%%%%%%%%5", updatedQuestion);
+        // this.assessmentQuestionsService.updateAssessmentQuestions(updatedQuestion)
+        //   .subscribe(
+        //   );
         this.router.navigate(['/assessment-questions']);
     };
     UpdateQuestionComponent.prototype.onSubmit = function (formvalues) {
-        this.question = formvalues;
-        this.updateQue(this.question);
+        this.updatedQuestion = formvalues;
+        console.log("%%%%%%%%5", this.updatedQuestion);
+        this.updateQue(this.updatedQuestion);
     };
     UpdateQuestionComponent = __decorate([
         core_1.Component({
@@ -77,7 +117,7 @@ var UpdateQuestionComponent = /** @class */ (function () {
             templateUrl: './update-question.component.html',
             styleUrls: ['./update-question.component.scss']
         }),
-        __metadata("design:paramtypes", [assessment_questions_service_1.AssessmentQuestionsService, router_1.Router])
+        __metadata("design:paramtypes", [assessment_questions_service_1.AssessmentQuestionsService, router_1.Router, localStorage_service_1.LocalStorageService])
     ], UpdateQuestionComponent);
     return UpdateQuestionComponent;
 }());

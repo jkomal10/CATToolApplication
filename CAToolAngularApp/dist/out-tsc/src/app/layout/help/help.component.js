@@ -14,11 +14,13 @@ var help_service_1 = require("./help.service");
 var http_1 = require("@angular/common/http");
 var router_1 = require("@angular/router");
 var issue_1 = require("./issue");
+var localStorage_service_1 = require("../utility/service/localStorage.service");
 var HelpComponent = /** @class */ (function () {
-    function HelpComponent(helpService, router, http) {
+    function HelpComponent(helpService, router, http, myStorage) {
         this.helpService = helpService;
         this.router = router;
         this.http = http;
+        this.myStorage = myStorage;
         this.issues = new issue_1.issue();
     }
     HelpComponent.prototype.ngOnInit = function () {
@@ -27,9 +29,9 @@ var HelpComponent = /** @class */ (function () {
         // this.textfield=formvalue;
         console.log(this.textfield);
         this.issues.issue = this.textfield;
-        this.issues.userName = localStorage.getItem("userName");
+        this.issues.userName = this.myStorage.getCurrentUserObject().userName;
         console.log(this.issues.userName);
-        this.issues.clientName = localStorage.getItem("clientName");
+        this.issues.clientName = this.myStorage.getCurrentUserObject().clientName;
         console.log(this.issues.clientName);
         this.helpService.saveIssue(this.issues).subscribe();
         this.router.navigate(['/dashboard']);
@@ -41,7 +43,7 @@ var HelpComponent = /** @class */ (function () {
             styleUrls: ['./help.component.scss']
         }),
         __metadata("design:paramtypes", [help_service_1.HelpService, router_1.Router,
-            http_1.HttpClient])
+            http_1.HttpClient, localStorage_service_1.LocalStorageService])
     ], HelpComponent);
     return HelpComponent;
 }());

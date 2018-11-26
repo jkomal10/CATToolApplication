@@ -17,11 +17,13 @@ var Option_1 = require("../Option");
 var http_1 = require("@angular/common/http");
 var MigrationRule_1 = require("../MigrationRule");
 var CloudProviderRule_1 = require("../CloudProviderRule");
+var localStorage_service_1 = require("../../utility/service/localStorage.service");
 var AddAssessmentQuestionComponent = /** @class */ (function () {
-    function AddAssessmentQuestionComponent(questionService, router, http) {
+    function AddAssessmentQuestionComponent(questionService, router, http, myStorage) {
         this.questionService = questionService;
         this.router = router;
         this.http = http;
+        this.myStorage = myStorage;
         this.optionText = [];
         this.Options = [10];
         this.question = new Question_1.AssessmentQuestions();
@@ -34,20 +36,12 @@ var AddAssessmentQuestionComponent = /** @class */ (function () {
         this.CloudProviderDataArray = [];
     }
     AddAssessmentQuestionComponent.prototype.ngOnInit = function () {
-        this.clientNameValue = localStorage.getItem('clientName');
+        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
     };
     AddAssessmentQuestionComponent.prototype.selectChangeHandler = function (event) {
-        //console.log('rrrrrrrrrrrrrrrrr'+this.optionText[0]);
-        console.log(event);
         this.numberOfOptions = parseInt(event.target.value, 10);
-        // this.numberOfOption=event;
-        console.log(this.numberOfOptions);
-        console.log(event.target.value);
         for (var index = 1; index <= this.numberOfOptions; index++) {
-            console.log(index);
             this.Options[index] = index;
-            console.log(this.Options);
-            console.log(this.Options.length);
         }
     };
     AddAssessmentQuestionComponent.prototype.options = function () {
@@ -83,7 +77,6 @@ var AddAssessmentQuestionComponent = /** @class */ (function () {
                 this.question.cloudProviderRules[index] = cloudProvider;
             }
         }
-        console.log(JSON.stringify(this.question));
         this.question.clientName = this.clientNameValue;
         this.question.createdBy = localStorage.getItem('userName');
         this.questionService.createQuestionn(this.question).subscribe();
@@ -121,7 +114,7 @@ var AddAssessmentQuestionComponent = /** @class */ (function () {
             templateUrl: './add-assessment-question.component.html',
             styleUrls: ['./add-assessment-question.component.scss']
         }),
-        __metadata("design:paramtypes", [assessment_questions_service_1.AssessmentQuestionsService, router_1.Router, http_1.HttpClient])
+        __metadata("design:paramtypes", [assessment_questions_service_1.AssessmentQuestionsService, router_1.Router, http_1.HttpClient, localStorage_service_1.LocalStorageService])
     ], AddAssessmentQuestionComponent);
     return AddAssessmentQuestionComponent;
 }());

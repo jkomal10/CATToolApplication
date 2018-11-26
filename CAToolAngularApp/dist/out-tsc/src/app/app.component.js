@@ -10,8 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var core_2 = require("@ngx-translate/core");
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(translate) {
+        this.translate = translate;
+        translate.setDefaultLang('en');
     }
     AppComponent.prototype.ngOnInit = function () {
     };
@@ -21,7 +24,7 @@ var AppComponent = /** @class */ (function () {
             templateUrl: './app.component.html',
             styleUrls: ['./app.component.scss']
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [core_2.TranslateService])
     ], AppComponent);
     return AppComponent;
 }());
