@@ -32,7 +32,7 @@ export class CATloginComponent implements OnInit {
                  this.myStorage.setCurrentUserObject(this.users);
                  this.myStorage.setClient(this.users.clientName);
                  this.myStorage.setLoggedInTrue('true'); 
-                 this.myStorage.setUsername(this.users.userName);
+                //  this.myStorage.setUsername(this.users.userName);
                  if(this.users.isAdmin===0)
                  {
                      this.myStorage.setIsUserActive('true');

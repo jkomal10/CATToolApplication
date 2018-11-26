@@ -22,11 +22,16 @@ constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
 CollectData(clientName : string): Observable<Object>{
 return this.http.get(this.myStorage.getLocalhostURL()+`/user/getAll/`+clientName);
 }
-
 getAllUsers(clientName : string): Observable<Object>{
   console.log(this.myStorage.getLocalhostURL()+`/user/getAll/`+this.myStorage.getClient());
   return this.http.get(this.myStorage.getLocalhostURL()+`/user/getAll/`+clientName);
   }
+
+getUserByUserName(clientName:string,userName:string)
+{
+  const getuserByName = "http://localhost:8090/user/getUserId";
+  return this.http.get(getuserByName+'/'+clientName+'/'+userName);
+}
 
 countNumberOfUsers()
 {

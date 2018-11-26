@@ -7,6 +7,7 @@
   <button type="button" class="btn btn-info" title="Add New user" style="margin-right: 5px" (click)="addUser()">Add User</button>
   <button type="button" class="btn btn-info btn-md" title="Upload Users Information" (click)="uploadUserInfo()">Import User</button>&nbsp;
   <!-- s<input type="button" class="btn btn-info" value="Export users" (click)="exportCsv()"> -->
+  <button type="button" class="btn btn-info btn-md" title="Export Sample User Template" (click)="exportCsvTemplate()">User Template</button>&nbsp;
   <button type="button" class="btn btn-info btn-md" title="Export All User Details" (click)="exportCsv()">Export Users</button>&nbsp;
   <button type="button" class="btn btn-info btn-md fa fa-hand-o-right sidenav" id="mybtn" title="You can find some videos here" (click)="help()"> Issue Report </button>
 
@@ -45,7 +46,7 @@
                 <td width="13%">{{size.ipAddress}}</td>
                 <td width="13%">{{size.company}}</td>
                 <td width="13%">{{size.createdBy}}</td>
-                <td width="13%" *ngIf="size.isAdmin==1;else user">Admin</td>
+                <td width="13%" *ngIf="size.isAdmin==0;else user">Admin</td>
                 <ng-template #user><td>User</td></ng-template>
                 <td width="13%">{{size.modifiedBy}}</td>
                 <td width="10%">{{size.lastLogin}}</td>

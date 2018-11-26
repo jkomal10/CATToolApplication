@@ -316,12 +316,10 @@ public boolean cloudProviderCheck(int applicationId){
 
 	
 	public void migrationCheck(int applicationId,int gitcCheck){
-		System.out.println("Migration works");
 		Application app=new Application();
 		app=applicationRepository.findByApplicationId(applicationId);
 		app.setIsCloudable("true");
 		applicationRepository.save(app);
-		System.out.println(app.getIsCloudable());
 		
 		int migrationQuestionIdValue=0;
 		int answerTextCount=0;
@@ -333,7 +331,6 @@ public boolean cloudProviderCheck(int applicationId){
 		Application application=applicationRepository.findByApplicationId(applicationId);
 		String clientName = application.getClientName();
 		Application application2=applicationRepository.findByApplicationId(applicationId);
-		System.out.println(application);
 		migrationRulelist=migrationRuleRepository.findAll();
 		List<MigrationRule> migrationRuleByClientName = new ArrayList<MigrationRule>();
 		for(MigrationRule migrationRuleAllRule:migrationRuleRepository.findAll())
@@ -368,15 +365,11 @@ public boolean cloudProviderCheck(int applicationId){
 			}
 			if(gitcCheck==0 &&publicFalseCheck==true && migrationRule.getMigrationId()==1001)//public-pass
 			{
-				System.out.println(migrationRule.getMigrationRule()+"^^^^^^^^^^^^^^public pass");
 				for(Answers answers:answerlist) {
 					migrationQuestionIdValue=Integer.parseInt(migrationRule.getQuestionId());
-					System.out.println(migrationQuestionIdValue+"===="+answers.getQuestionId());
 					if(migrationQuestionIdValue==answers.getQuestionId())
 					{
-						System.out.println(migrationRule.getMigrationRule()+"==="+answers.getAnswerText());
 						publicFalseCheck=migrationRule.getMigrationRule().contains(answers.getAnswerText());
-						System.out.println(publicFalseCheck);
 							if(publicFalseCheck)
 								{
 										if(gitcCheck!=0)
@@ -385,7 +378,6 @@ public boolean cloudProviderCheck(int applicationId){
 										}
 										else
 										{
-											System.out.println("**************************public pass");
 											application.setApplicationId(applicationId);
 											application.setMigrationPattern("public-pass");
 											application.setIsFinalize(1);

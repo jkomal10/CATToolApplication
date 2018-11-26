@@ -27,7 +27,7 @@ export class AddUserComponent implements OnInit {
   ngOnInit() {
     this.clientNameValue=this.myStorage.getClient();
     this.userService.getIpAddress().subscribe(data => {
-      localStorage.setItem('ip',data['ip']);
+      this.myStorage.setIpAddress(data['ip']);
   });
 
   this.userService.CollectData( this.clientNameValue).subscribe(result => 
@@ -52,7 +52,8 @@ export class AddUserComponent implements OnInit {
     }
     if(this.status)
     {
-    this.user.ipAddress=localStorage.getItem('ip');
+    this.user.ipAddress=this.myStorage.getIpAddress();
+    this.user.createdBy=this.myStorage.getCurrentUser();
     this.user.clientName=this.clientNameValue;
     this.userService.addUser(this.user).subscribe();
     this.router.navigate(['/user']);

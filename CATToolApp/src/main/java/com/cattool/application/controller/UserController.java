@@ -42,12 +42,21 @@ public class UserController {
 		
 	}
 	
-	@GetMapping("/getUserCount")
+	@GetMapping("/getUserId/{clientName}/{userName}")
+	public String getuserIdByName(@PathVariable String clientName,@PathVariable String userName)
+	{
+		System.out.print(clientName);
+		System.out.println(userName);
+		return userService.findUserId(clientName,userName);
+	}
+	
+	
+	@GetMapping("/getTotalUsersCount")
 	public int getUserCount()
 	{
 		return userService.getUserCount();
-		
 	}
+	
 	
 	@GetMapping("/getById/{userName}/{password}")
 	public Users findById(@PathVariable String userName,HttpServletRequest request,HttpServletResponse response, @PathVariable String password)

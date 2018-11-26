@@ -14,6 +14,8 @@ export class LocalStorageService {
   setCurrentUserObject(user : Object){
     localStorage.setItem('user',JSON.stringify(user));
     this.user=JSON.parse(localStorage.getItem('user'));
+    console.log(JSON.stringify(this.user));
+    console.log(this.user.userName);
   }
 
   setLoggedInTrue(isLoggedin : string){
@@ -24,12 +26,16 @@ export class LocalStorageService {
     localStorage.setItem('isUserActive',isUserActive);
   }
 
-  setUsername(userName:string){
-    localStorage.setItem('userName',userName);
-  }
-
   setClient(client:string){
     localStorage.setItem('clientName',client);
+  }
+
+  setIpAddress(ip : string){
+    localStorage.setItem('ip',ip);
+  }
+
+  getIpAddress(){
+    return localStorage.getItem('ip');
   }
 
   getLocalhostURL(){
@@ -46,7 +52,7 @@ export class LocalStorageService {
   }
 
   getCurrentUser(){
-    return localStorage.getItem('userName');
+    return this.user.userName;
   }
 
   getIsAdmin(){
