@@ -6,27 +6,14 @@
 <div>
   <button type="button" class="btn btn-info" title="Add New user" style="margin-right: 5px" (click)="addUser()">Add User</button>
   <button type="button" class="btn btn-info btn-md" title="Upload Users Information" (click)="uploadUserInfo()">Import User</button>&nbsp;
-  <!-- s<input type="button" class="btn btn-info" value="Export users" (click)="exportCsv()"> -->
   <button type="button" class="btn btn-info btn-md" title="Export Sample User Template" (click)="exportCsvTemplate()">User Template</button>&nbsp;
   <button type="button" class="btn btn-info btn-md" title="Export All User Details" (click)="exportCsv()">Export Users</button>&nbsp;
   <button type="button" class="btn btn-info btn-md fa fa-hand-o-right sidenav" id="mybtn" title="You can find some videos here" (click)="help()"> Issue Report </button>
 
-  <!-- <a routerLink="/help" [routerLinkActive]="['router-link-active']" id="mybtn" class="btn btn-info btn-md fa fa-hand-o-right sidenav" title="You can find some videos here">
-   
-    <span> Help</span>
-</a> -->
-
-  <!-- <div><youtube-player
-    [videoId]="id"
-    (ready)="savePlayer($event)"
-    (change)="onStateChange($event)"
-  ></youtube-player></div>  -->
+  
 </div>
 <br>
 
-<!-- <div> -->
-  <!-- <br> -->
-  <!-- <div class="container"> -->
     <table datatable="bootstrap" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped table-hover ">
         <thead bgcolor="#E0E0E0" >
           <tr>
@@ -41,55 +28,20 @@
           </tr>
         </thead>
         <tbody>
-            <tr *ngFor = "let size of AllData">
-                <td width="13%">{{size.userName}}</td>
-                <td width="13%">{{size.ipAddress}}</td>
-                <td width="13%">{{size.company}}</td>
-                <td width="13%">{{size.createdBy}}</td>
-                <td width="13%" *ngIf="size.isAdmin==0;else user">Admin</td>
+            <tr *ngFor = "let user of userData">
+                <td width="13%">{{user.userName}}</td>
+                <td width="13%">{{user.ipAddress}}</td>
+                <td width="13%">{{user.company}}</td>
+                <td width="13%">{{user.createdBy}}</td>
+                <td width="13%" *ngIf="user.isAdmin==0;else user">Admin</td>
                 <ng-template #user><td>User</td></ng-template>
-                <td width="13%">{{size.modifiedBy}}</td>
-                <td width="10%">{{size.lastLogin}}</td>
+                <td width="13%">{{user.modifiedBy}}</td>
+                <td width="10%">{{user.lastLogin}}</td>
                 <td width="13%">
-                <button (click)="deactivate(size.userId)" title="Deactivate" style="font-size:16px" class="button button"> <i style="color:black" class="fa fa-key"></i></button>&nbsp;
-                <button (click)="updateUser(size)" title=" Update" style="font-size:16px"  class="button button"><i style="color:black" class="fa fa-edit"></i></button>&nbsp;
-                <button (click)="deleteUser(size.userId)" title="Delete" type="button" class="button button"><i style="color:black" class="fa fa-trash"></i></button>
+                <button (click)="deactivate(user.userId)" title="Deactivate" style="font-size:16px" class="button button"> <i style="color:black" class="fa fa-key"></i></button>&nbsp;
+                <button (click)="updateUser(user)" title=" Update" style="font-size:16px"  class="button button"><i style="color:black" class="fa fa-edit"></i></button>&nbsp;
+                <button (click)="deleteUser(user.userId)" title="Delete" type="button" class="button button"><i style="color:black" class="fa fa-trash"></i></button>
                 </td>
               </tr> 
         </tbody>
       </table>
-<!-- </div> -->
-
-
-  <!-- <nav class="navbar navbar-default">
-    <ul class="nav navbar-nav">
-      <li>
-        <a routerLink="adduser">AddUser</a>
-      </li>
-      <li>
-        <a routerLink="adduser">Upload User Info</a>
-      </li>
-    </ul>
-  </nav>
-<router-outlet></router-outlet> -->
-<!-- </div> -->
-
-<!-- <table datatable [dtOptions]="dtOptions" class="row-border hover">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>First name</th>
-      <th>Last name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let person of persons">
-      <td>{{ person.id }}</td>
-      <td>{{ person.first_name }}</td>
-      <td>{{ person.last_name }}</td>
-    </tr>
-    <tr *ngIf="persons?.length == 0">
-      <td colspan="3" class="no-data-available">No data!</td>
-    </tr>
-  </tbody>
-</table> -->
