@@ -158,9 +158,11 @@ public class UserService {
 
 	public Users changePassword(String userName, String password, String newPassword) {
 		Users user = new Users();
+		System.out.println(userName+password+newPassword);
 		try {
 			user = userRepository.findByUserName(userName);
-			System.out.println(password + "==" + newPassword + "==" + user.getPassword());
+			System.out.println(password +  "==" + user.getPassword());
+			
 			if (password.equals(user.getPassword())) {
 				user.setUserId(user.getUserId());
 				user.setPassword(password);
@@ -169,7 +171,7 @@ public class UserService {
 				System.out.println("Password changed");
 				return user;
 			} else {
-
+				System.out.println("not updated");
 				LOGGER.error(ExceptionMessages.UpdateUserPassword);
 				System.out.println(ExceptionMessages.UpdateUserPassword);
 				// throw new CATException(ExceptionMessages.UpdateUserPassword);
