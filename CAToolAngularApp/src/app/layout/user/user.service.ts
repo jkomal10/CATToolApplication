@@ -2,23 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { LocalStorageService } from '../utility/service/localStorage.service';
-// import 'rxjs/add/observable/merge';
-// import 'rxjs/add/operator/map';
 
 @Injectable({
 providedIn: 'root'
 })
 export class UsersService {
 
-  ipAddress : string;
-
-  constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
+ipAddress : string;
+constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
 
 
 CollectData(clientName : string): Observable<Object>{
     return this.http.get(this.myStorage.getLocalhostURL()+`/user/getAll/`+clientName);
   }
-  
+
 getAllUsers(clientName : string): Observable<Object>{
   console.log(this.myStorage.getLocalhostURL()+`/user/getAll/`+this.myStorage.getClient());
   return this.http.get(this.myStorage.getLocalhostURL()+`/user/getAll/`+clientName);
@@ -74,14 +71,12 @@ private comptransfer = new BehaviorSubject("Hello");
       }
 
       getIpAddress() : Observable<any>{
-        // const headers = new HttpHeaders({ 'Content-Type': 'application/json' ,'Origin' : 'http://localhost:3000', "Access-Control-Allow-Origin" : "*" });
-       const headers = new HttpHeaders({ "Access-Control-Allow-Origin" : "*" });
+        const headers = new HttpHeaders({ "Access-Control-Allow-Origin" : "*" });
         return this.http.get('http://ipinfo.io');
     }
 
     private handleError(error: HttpErrorResponse):
       Observable<any> {
-        //Log error in the browser console
         console.error('observable error: ', error);
         return Observable.throw(error);
       }
