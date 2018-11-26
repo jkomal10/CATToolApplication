@@ -8,15 +8,8 @@ import { currentUser } from './currentUser.model';
 })
 export class LocalStorageService {
   user: currentUser = new currentUser();
-  private localurl ='http://localhost:8090/user/getAll';
-  constructor(private http:HttpClient) { }
 
-  setCurrentUserObject(user : Object){
-    localStorage.setItem('user',JSON.stringify(user));
-    this.user=JSON.parse(localStorage.getItem('user'));
-    console.log(JSON.stringify(this.user));
-    console.log(this.user.userName);
-  }
+  constructor(private http:HttpClient) { }
 
   setLoggedInTrue(isLoggedin : string){
     localStorage.setItem('isLoggedin',isLoggedin);
@@ -26,8 +19,21 @@ export class LocalStorageService {
     localStorage.setItem('isUserActive',isUserActive);
   }
 
-  setClient(client:string){
-    localStorage.setItem('clientName',client);
+  setLocalhostURL(){
+    localStorage.setItem('local','http://localhost:8090');
+  }
+
+  getLocalhostURL(){
+    return localStorage.getItem('local');
+  }
+
+  setCurrentUserObject(user : Object){
+    localStorage.setItem('user',JSON.stringify(user));
+    this.user=JSON.parse(localStorage.getItem('user'));
+    localStorage.setItem('userName',this.user.userName);
+    localStorage.setItem('clientName',this.user.clientName);
+    localStorage.setItem('firstName',this.user.firstName);
+    localStorage.setItem('lastName',this.user.lastName);
   }
 
   setIpAddress(ip : string){
@@ -36,12 +42,7 @@ export class LocalStorageService {
 
   getIpAddress(){
     return localStorage.getItem('ip');
-  }
-
-  getLocalhostURL(){
-    localStorage.setItem('local','http://localhost:8090');
-    return localStorage.getItem('local');
-  }
+  } 
 
   getIsUserActive(){
     return localStorage.getItem('isUserActive');
@@ -52,7 +53,7 @@ export class LocalStorageService {
   }
 
   getCurrentUser(){
-    return this.user.userName;
+    return localStorage.getItem('userName');
   }
 
   getIsAdmin(){
@@ -64,11 +65,13 @@ export class LocalStorageService {
   }
 
   getFirstNameOfCurrentUser(){
-    return this.user.firstName;
+    this.user=JSON.parse(localStorage.getItem('user'));
+    return localStorage.getItem('firstName');
   }
 
   getLastNameOfCurrentUser(){
-    return this.user.lastName;
+    this.user=JSON.parse(localStorage.getItem('user'));
+    return localStorage.getItem('lastName');
   }
 
   clearLoggedIn(){
