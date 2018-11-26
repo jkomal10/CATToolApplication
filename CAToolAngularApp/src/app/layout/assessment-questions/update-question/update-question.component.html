@@ -1,12 +1,32 @@
 <h3>Assessment Questions</h3>
 <h1><hr width="100%" size="80"></h1>
 <div [hidden]="submitted" style="width: 300px;">
-  <form (ngSubmit)="onSubmit()">
+  <form role="form" #update="ngForm" (ngSubmit)="onSubmit(update.value)">
       <div class="form-group">
           <br>
           <label for="questionType"><b>Assessment Type</b></label><br>
-          <input type="checkbox" [(ngModel)]="question.assessmentTypeForMigration" name="assessmentTypeForMigration" >&ngsp;<label>Migration</label><br/>
-          <input type="checkbox" [(ngModel)]="question.assessmentTypeForCloudProvider" name="assessmentTypeForCloudProvider">&ngsp;<label>cloud provider</label><br/>
+          <input type="checkbox" [(ngModel)]="question.assessmentTypeForMigration" name="assessmentTypeForMigration" (click)="assessmentTypeForMigrationClick($event)" >&ngsp;<label>Migration</label><br/>
+          <div *ngIf="assessmentTypeForMigrationValue">
+            <br>  
+            <div *ngFor =  "let row of MigrationData ;let i=index" >
+                <tr>
+                  &ngsp;&ngsp;<td><input type="checkbox" [(ngModel)]="row.migrationPattern" name="migrationPattern{{i}}" value="row.migrationPattern"></td><td>{{MigrationDataArray[i]}}</td>    
+                </tr>
+              </div>
+            <br>
+            </div>
+          
+          <input type="checkbox" [(ngModel)]="question.assessmentTypeForCloudProvider" name="assessmentTypeForCloudProvider" (click)="selectCloudProvider()" (click)="assessmentTypeForCloudProviderClick($event)" >&ngsp;<label>cloud provider</label><br/>
+          <div *ngIf="assessmentTypeForCloudProvider">
+            <br>  
+            <div *ngFor =  "let row of CloudProviderData;let i=index" >
+                <tr>
+                  &ngsp;&ngsp;<td><input type="checkbox" [(ngModel)]="row.cloudProviders" name="cloudProviders{{i}}" value="row.cloudProviders"></td><td>{{CloudProviderDataArray[i]}}</td>    
+                </tr>
+              </div>
+            <br>
+        </div>
+          
           <input type="checkbox" [(ngModel)]="question.assessmentTypeForCloudable" name="assessmentTypeForCloudable">&ngsp;<label>Cloudable</label><br/>
         </div>
     <div class="form-group">
@@ -67,7 +87,7 @@
             </div>
               <ng-template #notfirst>
                   <label for="answers">Answer{{size}}</label>
-                  <input type="text" class="form-control" id="answerValues'+'{{size}}" required [(ngModel)]="answerValues" name="answerValues">
+                  <input type="text" class="form-control" id="answerValues'+'{{size}}" required name="answerValues" placeholder="answerValues">
                 </ng-template>
        
       

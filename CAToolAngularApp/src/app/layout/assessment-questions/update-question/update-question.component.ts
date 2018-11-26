@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AssessmentQuestions } from '../Question';
 import { AssessmentQuestionsService } from '../assessment-questions.service';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 @Component({
   selector: 'app-update-question',
@@ -10,7 +11,16 @@ import { AssessmentQuestionsService } from '../assessment-questions.service';
 })
 export class UpdateQuestionComponent implements OnInit {
 
+
+  public questionList : AssessmentQuestions = new AssessmentQuestions(); 
+  assessmentTypeForMigrationValue : boolean;
+  assessmentTypeForCloudProvider : boolean;
+  MigrationData : any = [];
+  CloudProviderData : any = [];
+  MigrationDataArray : any=[];
+  CloudProviderDataArray : any=[];
   question = new AssessmentQuestions();
+  updatedQuestion = new AssessmentQuestions();
   questionObject = new AssessmentQuestions();
   que : any;
   submitted = false;
@@ -19,17 +29,43 @@ export class UpdateQuestionComponent implements OnInit {
   Options : Array<number>=[10];
   OptionsArray : Array<String>=[];
 
-  constructor(private assessmentQuestionsService : AssessmentQuestionsService ,public router: Router) { }
+  constructor(private assessmentQuestionsService : AssessmentQuestionsService ,public router: Router,private myStorage:LocalStorageService) { }
   assessmentQuestionData : string;
   ngOnInit() {
     this.assessmentQuestionsService.question.subscribe(data => {this.que= data;}); 
     this.question=this.que;
+    console.log("**********"+this.question.questionId);
     this.numberOfOptions=0;
     let option =this.optionsValues;
     this.numberOfOptions=this.question.questionOption.length;
     console.log(this.question.questionOption.length+"*************");
     this.selectChangeHandlerDefault(this.numberOfOptions);
     console.log(JSON.stringify(this.question.questionOption));
+    
+  }
+
+  assessmentTypeForMigrationClick(event){
+    console.log(event.target.checked);
+    this.assessmentTypeForMigrationValue=event.target.checked;
+    this.assessmentQuestionsService.getMigrationData().subscribe(result => 
+      {
+          this.MigrationData = result ;
+          console.log(this.MigrationData );
+          for (let index = 0; index < this.MigrationData.length ; index++) {
+          this.MigrationDataArray[index] = this.MigrationData[index].migrationPattern; 
+      }
+      });
+  }
+
+  assessmentTypeForCloudProviderClick(event){
+    this.assessmentTypeForCloudProvider=event.target.checked;
+    this.assessmentQuestionsService.getCloudProviderData().subscribe(result => 
+      {
+          this.CloudProviderData = result ;
+          for (let index = 0; index < this.CloudProviderData.length ; index++) {
+          this.CloudProviderDataArray[index] = this.CloudProviderData[index].cloudProviders; 
+      }
+      });
   }
 
   selectChangeHandlerDefault(value:number){
@@ -63,19 +99,23 @@ export class UpdateQuestionComponent implements OnInit {
     }
   }
 
-  updateQue(question) {
-    console.log('*******onsubmit application**********'+question.questionId);
-    this.questionObject=question;
-    this.questionObject.modifiedBy=localStorage.getItem('userName');
-    this.assessmentQuestionsService.updateAssessmentQuestions(question)
-      .subscribe(
-      );
+  updateQue(updatedQuestion) {
+    // console.log('&&&&&&&&&&&'+question);
+    console.log('*******onsubmit application**********'+this.question.questionId);
+    this.questionObject=updatedQuestion;
+    // console.log("&&&&&&&&&"+this.myStorage.getCurrentUser());
+    this.questionObject.modifiedBy="UUUUUUUUU";
+    console.log("%%%%%%%%5",updatedQuestion);
+    // this.assessmentQuestionsService.updateAssessmentQuestions(updatedQuestion)
+    //   .subscribe(
+    //   );
       this.router.navigate(['/assessment-questions']);
   }
   
   onSubmit(formvalues){
-    this.question=formvalues;
-      this.updateQue(this.question);
+    this.updatedQuestion=formvalues;
+    console.log("%%%%%%%%5",this.updatedQuestion);
+      this.updateQue(this.updatedQuestion);
   }
 
 
