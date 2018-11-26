@@ -3,7 +3,6 @@ package com.cattool.application.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
@@ -12,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.MessageDigest;
+import com.cattool.application.encryption.EncryptPassword;
 import com.cattool.application.entity.Users;
 import com.cattool.application.exception.CATException;
 import com.cattool.application.exception.ExceptionMessages;
@@ -56,7 +57,9 @@ public class UserService {
 			int lastLogInDateInInt=(int) (new Date().getTime()/1000);
 			if(userDb!=null)
 			{
-				if(password.equals(userDb.getPassword()))
+				String decryptedPassword = EncryptPassword.decrypt(userDb.getPassword());    
+                System.out.println("decrypted pass="+decryptedPassword);
+				if(password.equals(decryptedPassword))
 				{
 					userDb.setLastLogin(lastLogInDateInInt);
 					LOGGER.info("Successfully get password");
@@ -91,6 +94,8 @@ public class UserService {
 		try {
 			user.setCreatedBy(createdBy);
 			LOGGER.info("Successfully save user details");
+			String encryptedPassword = EncryptPassword.encrypt(user.getPassword());
+			user.setPassword(encryptedPassword);
 			return userRepository.save(user);
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.AddUserError);

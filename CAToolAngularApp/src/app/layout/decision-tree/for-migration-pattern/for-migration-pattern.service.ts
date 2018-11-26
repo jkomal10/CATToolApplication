@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,9 @@ export class ForMigrationPatternService {
   private migrationUrl = 'http://localhost:8090/migrationRule/setExceutionOrder';
   private updateMigrationRuleUrl = 'http://localhost:8090/migrationRule/updateMigrationRule';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private myStorage:LocalStorageService) { }
   CollectData() {
-    this.clientNameValue=localStorage.getItem('clientName');
+    this.clientNameValue=this.myStorage.getClient();
     const  url  =  'http://localhost:8090/migrationRule/getAll';
     return  this.http.get(url+`/`+this.clientNameValue);
   }
@@ -24,12 +25,12 @@ export class ForMigrationPatternService {
   }
 
   getMigrationQuestions(migrationId : number){
-    this.clientNameValue=localStorage.getItem('clientName');
+    this.clientNameValue=this.myStorage.getClient();
     return  this.http.get(`http://localhost:8090/assessmentQuestions/getAllMigrationPattern/${migrationId}/${this.clientNameValue}`);
   }
 
   updateMigrationRule(value: any):Observable<Object>{
-    this.clientNameValue=localStorage.getItem('clientName');
+    this.clientNameValue=this.myStorage.getClient();
     return this.http.put(`${this.updateMigrationRuleUrl}`+`/`+this.clientNameValue, value);
   }
 

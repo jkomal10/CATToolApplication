@@ -6,6 +6,7 @@ import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 import { Application } from '../application/Application';
 import { ApplicationService } from '../application/application.service';
 import { ReportService } from './report.service';
+import { LocalStorageService } from '../utility/service/localStorage.service';
 
 @Component({
   selector: 'app-report',
@@ -16,10 +17,10 @@ export class ReportComponent implements OnInit {
   application:Array<Application>=[];
   AllData : any = [];
   clientNameValue : string;
-  constructor(public router:Router, private applicationService:ApplicationService,private http:HttpClient, private reportService:ReportService) { }
+  constructor(public router:Router, private applicationService:ApplicationService,private http:HttpClient, private reportService:ReportService,private myStorage:LocalStorageService) { }
 
   ngOnInit() {
-    this.clientNameValue=localStorage.getItem('clientName');
+    this.clientNameValue=this.myStorage.getClient();
     this.applicationService.CollectData(this.clientNameValue).subscribe(result => 
       {
       this.AllData = result;

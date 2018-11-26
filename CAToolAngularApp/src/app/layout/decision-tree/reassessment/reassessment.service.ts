@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceService {
   clientNameValue : String;
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
 
   CollectData(){
-    this.clientNameValue=localStorage.getItem('clientName');
+    this.clientNameValue=this.myStorage.getClient();
     const reassessUrl = 'http://localhost:8090/application/getAllReassessment';
     return this.http.get(reassessUrl+`/`+this.clientNameValue);
     }

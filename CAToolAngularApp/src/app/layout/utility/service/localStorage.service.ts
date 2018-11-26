@@ -8,6 +8,7 @@ import { currentUser } from './currentUser.model';
 })
 export class LocalStorageService {
   user: currentUser = new currentUser();
+  private localurl ='http://localhost:8090/user/getAll';
   constructor(private http:HttpClient) { }
 
   setCurrentUserObject(user : Object){
@@ -23,6 +24,19 @@ export class LocalStorageService {
     localStorage.setItem('isUserActive',isUserActive);
   }
 
+  setUsername(userName:string){
+    localStorage.setItem('userName',userName);
+  }
+
+  setClient(client:string){
+    localStorage.setItem('clientName',client);
+  }
+
+  getLocalhostURL(){
+    localStorage.setItem('local','http://localhost:8090');
+    return localStorage.getItem('local');
+  }
+
   getIsUserActive(){
     return localStorage.getItem('isUserActive');
   }
@@ -32,7 +46,7 @@ export class LocalStorageService {
   }
 
   getCurrentUser(){
-    return this.user.userName;
+    return localStorage.getItem('userName');
   }
 
   getIsAdmin(){
@@ -40,7 +54,7 @@ export class LocalStorageService {
   }
 
   getClient(){
-    return this.user.clientName;
+    return localStorage.getItem('clientName');
   }
 
   getFirstNameOfCurrentUser(){

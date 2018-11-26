@@ -1,39 +1,39 @@
 <div>
-  <div class="login-page" [@routerTransition]>
-      <div class="row justify-content-md-center">
-          <div class="col-md-4">
-              <img src="assets/images/logo.png" width="150px" class="user-avatar" />
-              <h1>CAT Tool</h1>
-              <form role="form" #loginForm="ngForm" (ngSubmit)="onLoggedin(loginForm.value)">
-                  <div class="form-content">
-                      <div class="form-group">
-                          <!-- <input type="text"  [ngModel]="userName" title="enter username" class="form-control input-underline input-lg" name="userName" placeholder="UserName" required/> -->
-                          <input class="form-control input-underline input-lg" type="text" [(ngModel)]="userName" #formName="ngModel" name="userName" placeholder="Name" required autocomplete="off">
-                          <div *ngIf="formName?.touched" >
-                              <div *ngIf="formName.errors?.required">Name can't be empty</div>
-                              <!-- <div *ngIf="formName.errors?.pattern">Name should not contain digits</div> -->
-                              <!-- <div *ngIf="formName.errors?.minlength">Name should be 8 characters</div> -->
-                          </div>
-                     
-                      </div>
-                      
-                      
-                      <div class="form-group">
-                          <!-- <input type="password" [ngModel]="password" title="enter correct password" name="password" class="form-control input-underline input-lg" placeholder="Password" required/> -->
-                          <input class="form-control input-underline input-lg" type="password"  #formPassword="ngModel" [(ngModel)]="password"  name="password" placeholder="Password" required  autocomplete="off">
-                      
-                          <div *ngIf="formPassword?.touched" >
-                              <div *ngIf="formPassword.errors?.required">Password can't be empty</div>
-                              <!-- <div *ngIf="formPassword.errors?.pattern">Password should contain at least one number and one uppercase and lowercase letter</div> -->
-                              <!-- <div *ngIf=" formPassword.errors?.minlength">Password should be 8 or more characters</div> -->
-                           </div>
-                      </div>
+    <div class="login-page" [@routerTransition]>
+        <div class="row justify-content-md-center">
+            <div class="col-md-4">
+                <img src="assets/images/logo.png" width="150px" class="user-avatar" />
+                <h1>CAT Tool</h1>
+                <form role="form" #loginForm="ngForm" (ngSubmit)="onLoggedin(loginForm.value)">
+                    <div class="form-content">
+                        <div class="form-group">
+                            <!-- <input type="text"  [ngModel]="userName" title="enter username" class="form-control input-underline input-lg" name="userName" placeholder="UserName" required/> -->
+                            <input class="form-control input-underline input-lg" type="text" [(ngModel)]="userName" #formName="ngModel" name="userName" placeholder="Name" required autocomplete="off">
+                            <div *ngIf="formName?.touched" >
+                                <div *ngIf="formName.errors?.required">Name can't be empty</div>
+                                <!-- <div *ngIf="formName.errors?.pattern">Name should not contain digits</div> -->
+                                <!-- <div *ngIf="formName.errors?.minlength">Name should be 8 characters</div> -->
+                            </div>
                        
-                  </div>
-                 <!-- <input type="submit"class="btn rounded-btn" value="Login"> -->
-                 <button class="btn rounded-btn" (click)="onLoggedin(userForm.value)" [disabled]="loginForm.invalid" > Log in </button>
-              </form>
-          </div>
-      </div>
-  </div>
-  </div>
+                        </div>
+                        
+                        
+                        <div class="form-group">
+                            <!-- <input type="password" [ngModel]="password" title="enter correct password" name="password" class="form-control input-underline input-lg" placeholder="Password" required/> -->
+                            <input class="form-control input-underline input-lg" type="password"  #formPassword="ngModel" [(ngModel)]="password"  name="password" placeholder="Password" required  autocomplete="off">
+                        
+                            <div *ngIf="formPassword?.touched" >
+                                <div *ngIf="formPassword.errors?.required">Password can't be empty</div>
+                                <!-- <div *ngIf="formPassword.errors?.pattern">Password should contain at least one number and one uppercase and lowercase letter</div> -->
+                                <!-- <div *ngIf=" formPassword.errors?.minlength">Password should be 8 or more characters</div> -->
+                             </div>
+                        </div>
+                         
+                    </div>
+                   <!-- <input type="submit"class="btn rounded-btn" value="Login"> -->
+                   <button class="btn rounded-btn" (click)="onLoggedin(userForm.value)" [disabled]="loginForm.invalid" > Log in </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>

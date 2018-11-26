@@ -5,6 +5,7 @@ import { UsersService } from './user.service';
 import { Subject } from 'rxjs';
 import { Users } from './Users';
 import { Angular5Csv } from 'angular5-csv/Angular5-csv';
+import { LocalStorageService } from '../utility/service/localStorage.service';
 
 class DataTablesResponse {
   data: any[];
@@ -43,7 +44,7 @@ export class UserComponent implements OnInit {
   AllData : any = [];
   constructor(private userService : UsersService,
       public router: Router,
-    private http: HttpClient) { 
+    private http: HttpClient,private myStorage:LocalStorageService) { 
   }
   addUser()
   {
@@ -104,7 +105,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
 
-    this.clientValue=localStorage.getItem("clientName");
+    this.clientValue=this.myStorage.getClient();
 
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -113,7 +114,7 @@ export class UserComponent implements OnInit {
       this.userService.getIpAddress().subscribe(data => {
         this.IpAddress=data['ip'];
 
-    this.userService.CollectData(this.clientValue).subscribe(result => 
+    this.userService.getAllUsers(this.clientValue).subscribe(result => 
       {
       this.AllData = result ;
       this.dtTrigger.next();
