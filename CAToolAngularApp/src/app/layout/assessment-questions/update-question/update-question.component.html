@@ -16,7 +16,7 @@
             <br>
             </div>
           
-          <input type="checkbox" [(ngModel)]="question.assessmentTypeForCloudProvider" name="assessmentTypeForCloudProvider" (click)="selectCloudProvider()" (click)="assessmentTypeForCloudProviderClick($event)" >&ngsp;<label>cloud provider</label><br/>
+          <input type="checkbox" [(ngModel)]="question.assessmentTypeForCloudProvider" name="assessmentTypeForCloudProvider" (click)="assessmentTypeForCloudProviderClick($event)" >&ngsp;<label>cloud provider</label><br/>
           <div *ngIf="assessmentTypeForCloudProvider">
             <br>  
             <div *ngFor =  "let row of CloudProviderData;let i=index" >
@@ -87,7 +87,7 @@
             </div>
               <ng-template #notfirst>
                   <label for="answers">Answer{{size}}</label>
-                  <input type="text" class="form-control" id="answerValues'+'{{size}}" required name="answerValues" placeholder="answerValues">
+                  <input type="text" class="form-control" id="answerValues'+'{{size}}" required name="OptionsArray{{size}}" [(ngModel)]="OptionsArray[size-1]">
                 </ng-template>
        
       
