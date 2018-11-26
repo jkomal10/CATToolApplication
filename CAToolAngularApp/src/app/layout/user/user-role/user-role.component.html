@@ -1,4 +1,3 @@
-
 <div>
     <div>
       <h2 class="text-muted">Application <small>List of applications</small></h2>
@@ -6,8 +5,7 @@
     <br>
         <br>
       <div>
-          <!-- <table datatable id="app-list" class="row-border hover"> -->
-              <table width="100%" datatable="bootstrap" id="user-list" [dtTrigger]="dtTrigger" [dtOptions]="dtOptions"  class="table table-hover table-sm ">
+            <table width="100%" datatable="bootstrap" id="user-list" [dtTrigger]="dtTrigger" [dtOptions]="dtOptions"  class="table table-hover table-sm ">
             <thead bgcolor="#E0E0E0">
               <tr>
                 <th>Application name</th>
@@ -21,15 +19,15 @@
             </thead>
             <tbody>
               <tr>
-                  <td>{{AllData .applicationName}}</td>
-                  <td>{{AllData .applicationDescription}}</td>
-                  <td>{{AllData .applicationList}}</td>
-                  <td>{{AllData .cloudable}}</td>
-                  <td>{{AllData .migrationPattern}}</td>
-                  <td>{{AllData .cloudProvider}}</td>
+                  <td>{{userRoleData.applicationName}}</td>
+                  <td>{{userRoleData.applicationDescription}}</td>
+                  <td>{{userRoleData.applicationList}}</td>
+                  <td>{{userRoleData.cloudable}}</td>
+                  <td>{{userRoleData.migrationPattern}}</td>
+                  <td>{{userRoleData.cloudProvider}}</td>
                  <td width="24%"> 
-                    <button (click)="ViewApplication(AllData)" class="btn btn-light" ><i class="fa fa-info-circle"></i></button>&nbsp;
-                    <button (click)="assessApplication(AllData)"  class="btn btn-light" ><i class="fa fa-hourglass-start"></i></button>&nbsp;
+                    <button (click)="ViewApplication(userRoleData)" class="btn btn-light" ><i class="fa fa-info-circle"></i></button>&nbsp;
+                    <button (click)="assessApplication(userRoleData)"  class="btn btn-light" ><i class="fa fa-hourglass-start"></i></button>&nbsp;
                   </td>
                   </tr> 
           </tbody>
