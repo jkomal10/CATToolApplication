@@ -8,13 +8,12 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class ApplicationService {
   
   constructor(private http:HttpClient) { }
-  deactivateUrl:String ='http://localhost:8090/application/deactivateApplicationById';
-   Baseurl:String = 'http://localhost:8090/application/deleteApplicationById';
-   deleteUrl:String ='http://localhost:8090/application/resetApplicationById';
-  //url:String= 'http://localhost:8090/application/getApplicationById';
-  url1:String= 'http://localhost:8090/application/updateApplictaion';
-  appCountUrl:string = "http://localhost:8090/application/getTotalApplicationsCount";
-  CollectData(clientName : string){
+   deactivateUrl:String ='http://localhost:8090/application/deactivateApplicationById';
+   deleteAppUrl:String = 'http://localhost:8090/application/deleteApplicationById';
+   resetAppUrl:String ='http://localhost:8090/application/resetApplicationById';
+   updateAppUrl:String= 'http://localhost:8090/application/updateApplictaion';
+   appCountUrl:string = "http://localhost:8090/application/getTotalApplicationsCount";
+   CollectData(clientName : string){
     const url = 'http://localhost:8090/application/getAll';
     return this.http.get(url+`/`+clientName);
     }
@@ -26,17 +25,17 @@ export class ApplicationService {
     }
 
     deleteApplications(applicationId: number): Observable<any> {
-      return this.http.delete(`${this. Baseurl}/${applicationId}`, { responseType: 'text' });
+      return this.http.delete(`${this.deleteAppUrl}/${applicationId}`, { responseType: 'text' });
     }
 
     resetApplication(applicationId: number): Observable<any> {
-      return this.http.put(`${this. deleteUrl}/${applicationId}`, { responseType: 'text' });
+      return this.http.put(`${this.resetAppUrl}/${applicationId}`, { responseType: 'text' });
     }
     
     updateApplication(value: any): Observable<Object> {
       console.log('################application.service.');
-      console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~'+`${this.url1}`+'~~~~~~~~~~~~~~~~~~~~~~~');
-      return this.http.put(`${this.url1}`, value);
+      console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~'+`${this.updateAppUrl}`+'~~~~~~~~~~~~~~~~~~~~~~~');
+      return this.http.put(`${this.updateAppUrl}`, value);
     }
 
     deactivate(applicationId: number): Observable<any> {
@@ -51,8 +50,6 @@ export class ApplicationService {
     sendMsgtoOtherComponent(messsage){
         this.comptransfer.next(messsage);
     } 
-
-
     getApplicationCount(clientName:string): Observable<any>{
       return this.http.get(`${this.appCountUrl}/${clientName}`);
     }

@@ -27,7 +27,7 @@ export class UserComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   users:Array<Users>=[];
-  AllData : any = [];
+  userData: any = [];
 
   constructor(private userService : UsersService,public router: Router,private http: HttpClient,private myStorage:LocalStorageService) { 
   }
@@ -72,8 +72,8 @@ export class UserComponent implements OnInit {
 
   exportCsv(){
     var filename = "UserDetails";
-   for (let index = 0; index < this.AllData.length; index++) {
-     this.users[index]=this.AllData[index];
+   for (let index = 0; index < this.userData.length; index++) {
+     this.users[index]=this.userData[index];
      
    }
    var options={
@@ -102,7 +102,7 @@ export class UserComponent implements OnInit {
 
     this.userService.getAllUsers(this.clientValue).subscribe(result => 
       {
-      this.AllData = result ;
+      this.userData= result ;
       this.dtTrigger.next();
       });
  

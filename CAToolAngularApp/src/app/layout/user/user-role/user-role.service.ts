@@ -10,12 +10,10 @@ export class UserRoleService {
   constructor(private http:HttpClient) { }
 
   getApplicationByUserName(userName:string){
-      console.log(`http://localhost:8090/application/getApplicationByUserName`+`/`+userName);
-      const url = 'http://localhost:8090/application/getApplicationByUserName';
-      return this.http.get(`http://localhost:8090/application/getApplicationByUserName`+`/`+userName);
+    return this.http.get(`http://localhost:8090/application/getApplicationByUserName`+`/`+userName);
   }
 
-  private comptransfer = new BehaviorSubject("Hello");
+  private comptransfer = new BehaviorSubject("User Role");
     question = this.comptransfer.asObservable();
   
     sendMsgtoOtherComponent(messsage){

@@ -20,13 +20,11 @@ class DataTablesResponse {
 })
 export class UserRoleComponent implements OnInit {
   userName:string;
-  AllData : any = [];
+  userRoleData : any = [];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
-  constructor(private userRoleService :UserRoleService,
-    public router: Router,
-  private http: HttpClient,private myStorage:LocalStorageService) { 
+  constructor(private userRoleService :UserRoleService, public router: Router, private http: HttpClient,private myStorage:LocalStorageService) { 
 }
 
   ngOnInit() {
@@ -38,9 +36,8 @@ export class UserRoleComponent implements OnInit {
 
   this.userRoleService.getApplicationByUserName(this.userName).subscribe(result => 
     {
-    this.AllData = result ;
-    this.dtTrigger.next();
-    console.log(JSON.stringify(this.AllData));
+      this.userRoleData= result ;
+      this.dtTrigger.next();
     });
   }
 

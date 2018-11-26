@@ -14,7 +14,7 @@ import { UpdateApplicationComponent } from './update-application/update-applicat
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 @NgModule({
     imports: [CommonModule, ApplicationRoutingModule,DataTablesModule,FormsModule
-    ,LoggerModule.forRoot({level: NgxLoggerLevel.LOG,disableConsoleLogging:true})],
+    ,LoggerModule.forRoot({level: NgxLoggerLevel.LOG,disableConsoleLogging:false,serverLogLevel: NgxLoggerLevel.LOG})],
     declarations: [
         ApplicationComponent,
          AddApplicationComponent,

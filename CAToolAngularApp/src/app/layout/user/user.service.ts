@@ -35,11 +35,10 @@ deactivate(userId: number)
 }
 
 changePassword(userName: String,password: String,newPassword: String){
-  console.log(this.myStorage.getdomainURL()+ `/user/changePassword/`+userName+`/`+password+`/`+newPassword);
-  return this.http.get(this.myStorage.getdomainURL()+ `/user/changePassword/`+userName+`/`+password+`/`+newPassword);
+   return this.http.get(this.myStorage.getdomainURL()+ `/user/changePassword/`+userName+`/`+password+`/`+newPassword);
 }
 
-private comptransfer = new BehaviorSubject("Hello");
+private comptransfer = new BehaviorSubject("user data by default");
         users = this.comptransfer.asObservable();
 
         sendUsertoOtherComponent(messsage){
