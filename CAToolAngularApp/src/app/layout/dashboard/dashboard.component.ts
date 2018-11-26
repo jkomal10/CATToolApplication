@@ -4,6 +4,7 @@ import { UsersService } from '../user/user.service';
 import { Router } from '@angular/router';
 import { ApplicationService } from '../application/application.service';
 import { LocalStorageService } from '../utility/service/localStorage.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-dashboard',
@@ -26,7 +27,7 @@ export class DashboardComponent implements OnInit {
     appCount : any = [];
     clientNameValue: string;
 
-    constructor(private userService: UsersService, private applicationService: ApplicationService, public router: Router, private myStorage: LocalStorageService) {
+    constructor(private translate: TranslateService,private userService: UsersService, private applicationService: ApplicationService, public router: Router, private myStorage: LocalStorageService) {
     }
 
     download() {

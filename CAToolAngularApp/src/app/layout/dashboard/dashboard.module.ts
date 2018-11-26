@@ -8,12 +8,13 @@ import { YoutubePlayerModule } from 'ngx-youtube-player';
 import { VgCoreModule } from 'videogular2/core';
 import { VgControlsModule } from 'videogular2/controls';
 import { StatModule } from '../../shared';
-
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 @NgModule({
     imports: [
         CommonModule,
         NgbCarouselModule.forRoot(),
         NgbAlertModule.forRoot(),
+        TranslateModule.forChild(),
         DashboardRoutingModule,
         StatModule,
         YoutubePlayerModule,
