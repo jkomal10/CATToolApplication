@@ -38,7 +38,11 @@ export class UpdateQuestionComponent implements OnInit {
     this.numberOfOptions=0;
     let option =this.optionsValues;
     this.numberOfOptions=this.question.questionOption.length;
-    console.log(this.question.questionOption.length+"*************");
+    console.log(this.question.questionOption[0].optionText+"))))))");
+    for (let index = 0; index < this.numberOfOptions; index++) {
+      this.OptionsArray[index]=this.question.questionOption[index].optionText;
+    }
+    // this.OptionsArray[0]=this.question.questionOption[0].optionText;
     this.selectChangeHandlerDefault(this.numberOfOptions);
     console.log(JSON.stringify(this.question.questionOption));
     

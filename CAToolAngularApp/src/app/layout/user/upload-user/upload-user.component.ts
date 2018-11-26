@@ -23,36 +23,35 @@ export class UploadUserComponent implements OnInit {
   constructor(private userservice : UsersService,public router: Router) { }
 
   fileChangeListener(event:any){
-    this.filename = event.target.files[0].name;
-    this.link = event.target.files[0];
+    this.filename = event.target.files[0].name;
+    this.link = event.target.files[0];
     console.log("link"+this.link);
-    this.ext = this.filename.substring(this.filename.lastIndexOf('.')).toLowerCase();
+    this.ext = this.filename.substring(this.filename.lastIndexOf('.')).toLowerCase();
     console.log(this.ext);
-
-    if (this.isCSVFile(this.ext)){
-      console.log(this.filename);
-      console.log("csv file");
-      let reader: FileReader = new FileReader();
-        reader.readAsText(this.link);
-        reader.onload = (data) => {
-          let csvData : string = reader.result;
-          let csvRecordsArray = csvData.split(/\r|\n|\n/);
-          // console.log(csvRecordsArray);
-           let headersRow = this.getHeaderArray(csvRecordsArray);
-           console.log(headersRow);
-
-             this.userDetails =  this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
-            
-        }
+    
+    if (this.isCSVFile(this.ext)){
+    console.log(this.filename);
+    console.log("csv file");
+    let reader: FileReader = new FileReader();
+    reader.readAsText(this.link);
+    reader.onload = (data) => {
+    let csvData : string = reader.result;
+    let csvRecordsArray = csvData.split(/\r|\n|\n/);
+    // console.log(csvRecordsArray);
+    let headersRow = this.getHeaderArray(csvRecordsArray);
+    console.log(headersRow);
+    
+    this.userDetails = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
     }
-
+    }
+    
     else{
-      alert("please enter a csv file");
+    alert("please enter a csv file");
     }
-        console.log(this.filename[0]+"___________");
-        console.log(this.link+"**************");
-  }
-
+    console.log(this.filename[0]+"___________");
+    console.log(this.link+"**************");
+    } 
+    
   getDataRecordsArrayFromCSVFile(csvRecordsArray : any,headerLength : any){
 
     for (let i = 1; i < csvRecordsArray.length; i++) {
