@@ -231,7 +231,9 @@ public class UserService {
 		userbyId.setPassword("Cg@123");
 		System.out.println(userRepository.save(userbyId).getUserId());
 		//return userRepository.save(userbyId).getUserId();
-		return null;
+		int id = userRepository.save(userbyId).getUserId();
+		String json = "{\"id\" : "+id+"}";
+		return json;
 	}
 
 	

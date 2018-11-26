@@ -5,6 +5,7 @@ import { ApplicationService } from './application.service';
 import { HttpClient } from '@angular/common/http';
 import { Application } from './Application';
 import { Angular5Csv } from 'angular5-csv/Angular5-csv';
+import { NGXLogger } from 'ngx-logger';
 
 class DataTablesResponse {
   data: any[];
@@ -16,7 +17,8 @@ class DataTablesResponse {
 @Component({
   selector: 'app-application',
   templateUrl: './application.component.html',
-  styleUrls: ['./application.component.scss']
+  styleUrls: ['./application.component.scss'],
+  providers: [NGXLogger]
 })
 export class ApplicationComponent implements OnInit {
 
@@ -30,10 +32,12 @@ export class ApplicationComponent implements OnInit {
   AllData : any = [];
   public show:boolean = false;
   public buttonName:any = 'Help';
-  constructor(public router:Router, private applicationService:ApplicationService,private http:HttpClient) { }
+  constructor(public router:Router, private applicationService:ApplicationService,private logger: NGXLogger) { }
   
   ngOnInit() {
     this.clientNameValue=localStorage.getItem('clientName');
+    this.logger.debug('Your log message goes here');
+    this.logger.log('Your log message goes here');
     this.dtOptions = {
       pagingType: 'first_last_numbers',
       pageLength: 10,
@@ -59,7 +63,7 @@ export class ApplicationComponent implements OnInit {
     this.applicationService.CollectData(this.clientNameValue).subscribe(result => 
       {
       this.AllData = result ;
-      console.log(JSON.stringify(this.AllData));
+      this.logger.log(JSON.stringify(this.AllData));
       this.dtTrigger.next();
       });
 
@@ -78,7 +82,7 @@ export class ApplicationComponent implements OnInit {
 
 exportTemplate(){
 const csvRows = [];
-console.log(this.AllData)
+this.logger.log(this.AllData)
 var filename = "Application";
 let dateNow:Date=new Date();
 
@@ -105,26 +109,26 @@ new Angular5Csv( this.applicationTemplate,filename, options);
     this.router.navigate(['/application/import-application']);
   }
   editApplication(application: Application): void {
-    console.log(JSON.stringify(application));
+    this.logger.log(JSON.stringify(application));
     this.applicationService.sendMsgtoOtherComponent(application);
     this.router.navigate(['/application/update-application']);
   }
   exportCsv(){
     const csvRows = [];
-    console.log(this.AllData)
+    this.logger.log(this.AllData)
     var filename = "Application";
     // const headers = this.AllData[0];
     // console.log("headers****"+headers);
     // var  DEFAULTFILENAME = 'mycsv.csv';
     let dateNow:Date=new Date();
-    console.log(dateNow.getDate().toString+" Date");
-    console.log(dateNow.getDay().toString+" day");
-    console.log(dateNow.getMonth().toString+ " month");
-    console.log(dateNow.getFullYear().toString+" year");
+    this.logger.log(dateNow.getDate().toString+" Date");
+    this.logger.log(dateNow.getDay().toString+" day");
+    this.logger.log(dateNow.getMonth().toString+ " month");
+    this.logger.log(dateNow.getFullYear().toString+" year");
 
 
     for (let index = 0; index < this.AllData.length; index++) {
-      console.log(this.AllData[index].applicationId+"id");
+      this.logger.log(this.AllData[index].applicationId+"id");
       this.application[index]=this.AllData[index];
     //  this.application[index].applicationName=this.AllData[index].applicationName;
     //  this.application[index].applicationDescription=this.AllData[index].applicationDescription;
@@ -138,7 +142,7 @@ new Angular5Csv( this.applicationTemplate,filename, options);
       
     }
 
-    console.log(this.application);
+    this.logger.log(this.application);
     // for (let index = 0; index < this.application.length; index++) {
      
     //   console.log(this.application[index]);
@@ -162,7 +166,7 @@ new Angular5Csv( this.applicationTemplate,filename, options);
     this.applicationService.deleteApplications(formvalues)
     .subscribe(
       data => {
-        console.log(data);
+        this.logger.log(data);
         //this.reloadData();
         //this.router.navigate(['/applictaion']);
         this.reloadData();
@@ -183,12 +187,12 @@ new Angular5Csv( this.applicationTemplate,filename, options);
    
    ViewApplication(formvalues){
      this.applicationService.sendMsgtoOtherComponent(formvalues);
-     console.log(formvalues);
+     this.logger.log(formvalues);
     this.router.navigate(['/application/view-application']);
    }
    assessApplication(formvalues){
-     console.log(JSON.stringify(formvalues));
-     console.log(formvalues.applicationId)
+    this.logger.log(JSON.stringify(formvalues));
+    this.logger.log(formvalues.applicationId)
     this.applicationService.sendMsgtoOtherComponent(formvalues);
      this.router.navigate(['/application/assesst-application']);
 

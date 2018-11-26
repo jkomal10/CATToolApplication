@@ -15,14 +15,18 @@ export class HeaderComponent {
     clientNameValue : String;
     user: Users = new Users();
 
-    constructor(public router: Router, private myStorage:LocalStorageService) {}
+    constructor(public router: Router, private myStorage:LocalStorageService,private translate:TranslateService) {}
 
     ngOnInit() {
         this.clientNameValue=this.myStorage.getClient();
         this.user=JSON.parse(localStorage.getItem('user'));   
         this.userName=this.user.userName;
     }
-
+    changeLang(language:string){
+        this.translate.use(language);
+        //return language;
+        localStorage.setItem('language',language);
+    }
     onLoggedout()
     {
         this.myStorage.clearCurrentUser();

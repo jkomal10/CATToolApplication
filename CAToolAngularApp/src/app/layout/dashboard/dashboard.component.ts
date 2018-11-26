@@ -4,6 +4,7 @@ import { UsersService } from '../user/user.service';
 import { Router } from '@angular/router';
 import { ApplicationService } from '../application/application.service';
 import { LocalStorageService } from '../utility/service/localStorage.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-dashboard',
@@ -23,9 +24,10 @@ export class DashboardComponent implements OnInit {
     redirectToDashboard: string;
     users: any;
     application: any = [];
+    appCount : any = [];
     clientNameValue: string;
 
-    constructor(private userService: UsersService, private applicationService: ApplicationService, public router: Router, private myStorage: LocalStorageService) {
+    constructor(private translate: TranslateService,private userService: UsersService, private applicationService: ApplicationService, public router: Router, private myStorage: LocalStorageService) {
     }
 
     download() {
@@ -55,7 +57,9 @@ export class DashboardComponent implements OnInit {
             this.firstName = this.myStorage.getFirstNameOfCurrentUser();
             this.lastName = this.myStorage.getLastNameOfCurrentUser();
             this.userService.CollectData(this.clientNameValue).subscribe(data => { this.users = data });
-            this.applicationService.CollectData(this.clientNameValue).subscribe(data => { this.application = data })
+            this.applicationService.CollectData(this.clientNameValue).subscribe(data => { this.application = data });
+            this.applicationService.getApplicationCount(this.clientNameValue).subscribe(data=>{this.appCount=data,console.log(this.appCount)});
+
             this.isUser = this.myStorage.getIsUserActive();
             if (this.isUser == 'false') {
                 this.isAdmin = false;

@@ -13,6 +13,7 @@ export class ApplicationService {
    deleteUrl:String ='http://localhost:8090/application/resetApplicationById';
   //url:String= 'http://localhost:8090/application/getApplicationById';
   url1:String= 'http://localhost:8090/application/updateApplictaion';
+  appCountUrl:string = "http://localhost:8090/application/getTotalApplicationsCount";
   CollectData(clientName : string){
     const url = 'http://localhost:8090/application/getAll';
     return this.http.get(url+`/`+clientName);
@@ -50,6 +51,11 @@ export class ApplicationService {
     sendMsgtoOtherComponent(messsage){
         this.comptransfer.next(messsage);
     } 
+
+
+    getApplicationCount(clientName:string): Observable<any>{
+      return this.http.get(`${this.appCountUrl}/${clientName}`);
+    }
     
    
 }

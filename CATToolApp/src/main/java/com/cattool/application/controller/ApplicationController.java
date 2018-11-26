@@ -24,6 +24,13 @@ public class ApplicationController {
 	@Autowired
 	ApplicationService applicationService;
 	
+	@GetMapping("/getTotalApplicationsCount/{clientName}") 
+    public int getAllApplicationCount(@PathVariable String clientName) 
+    { 
+		    System.out.println("*******");
+            return applicationService.getAllAppsCount(clientName); 
+    }
+	
 	@GetMapping("/getAll/{clientName}")
 	public List<Application>getAllApplication(@PathVariable String clientName)
 	{

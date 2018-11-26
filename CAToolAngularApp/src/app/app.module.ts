@@ -7,7 +7,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { VgCoreModule } from 'videogular2/core';
 import { VgControlsModule } from 'videogular2/controls';
-
+import { NGXLogger } from 'ngx-logger';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
@@ -39,7 +40,8 @@ export const createTranslateLoader = (http: HttpClient) => {
         }),
         AppRoutingModule,
         VgCoreModule,
-        VgControlsModule
+        VgControlsModule,
+        LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG,serverLogLevel: NgxLoggerLevel.OFF})
     ],
     declarations: [AppComponent],
     providers: [AuthGuard,AssessmentQuestionsService],

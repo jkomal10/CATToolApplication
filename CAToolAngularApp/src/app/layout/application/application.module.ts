@@ -11,9 +11,10 @@ import { ImportApplicationComponent } from './import-application/import-applicat
 import { ViewApplicationComponent } from './view-application/view-application.component';
 import { AssesstApplicationComponent } from './assesst-application/assesst-application.component';
 import { UpdateApplicationComponent } from './update-application/update-application.component';
-
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 @NgModule({
-    imports: [CommonModule, ApplicationRoutingModule,DataTablesModule,FormsModule],
+    imports: [CommonModule, ApplicationRoutingModule,DataTablesModule,FormsModule
+    ,LoggerModule.forRoot({level: NgxLoggerLevel.LOG,disableConsoleLogging:true})],
     declarations: [
         ApplicationComponent,
          AddApplicationComponent,
