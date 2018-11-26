@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
     redirectToDashboard: string;
     users: any;
     application: any = [];
+    appCount : any = [];
     clientNameValue: string;
 
     constructor(private userService: UsersService, private applicationService: ApplicationService, public router: Router, private myStorage: LocalStorageService) {
@@ -41,7 +42,9 @@ export class DashboardComponent implements OnInit {
             this.firstName = this.myStorage.getFirstNameOfCurrentUser();
             this.lastName = this.myStorage.getLastNameOfCurrentUser();
             this.userService.CollectData(this.clientNameValue).subscribe(data => { this.users = data });
-            this.applicationService.CollectData(this.clientNameValue).subscribe(data => { this.application = data })
+            this.applicationService.CollectData(this.clientNameValue).subscribe(data => { this.application = data });
+            this.applicationService.getApplicationCount(this.clientNameValue).subscribe(data=>{this.appCount=data,console.log(this.appCount)});
+
             this.isUser = this.myStorage.getIsUserActive();
             if (this.isUser == 'false') {
                 this.isAdmin = false;

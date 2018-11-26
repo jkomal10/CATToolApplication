@@ -69,6 +69,20 @@ public class ApplicationService {
 	@Autowired
 	UserRepository userRepository;
 	
+	public int getAllAppsCount(String clientName) 
+    {   int appsCount=0; 
+    System.out.println("&&&&&&&&&&");
+        List<Application> applicationList= new ArrayList<Application>(); 
+        for(Application applications : applicationRepository.findAll())
+        {
+        	applicationList.add(applications);
+        }
+        
+        appsCount=applicationList.size(); 
+//        String countJsonformat = "{\"count\" : "+appsCount+"}";
+            return appsCount; 
+    }
+	
 	public List<Application> getAllApplication(String clientName)
 	{
 		List<Application> applicationList = new ArrayList<>();
