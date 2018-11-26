@@ -35,28 +35,14 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-        // var userLoginTime=JSON.parse(localStorage.getItem('loginTime'));
-        // var usertimeOut=(userLoginTime+1);
-        // var currentTime=(new Date().getHours());
-        // console.log( currentTime +" "+usertimeOut+" "+userLoginTime);
-        // if ( currentTime > usertimeOut)
-        //     { 
-        //         localStorage.removeItem('loginTime');
-        //         //localStorage.clear();
-        //         this.router.navigate(['/login']);
-        //     }
-        //     else
-        //     {
-        //         console.log("inside else in dahsboard")
-        //         } 
-        this.clientNameValue = this.myStorage.getClient();
+        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
         this.redirectToDashboard = this.myStorage.getLoggedInTrue();//this.status=localStorage.getItem('isLoggedin');
 
         if (this.redirectToDashboard == 'true') {
 
-            this.firstName = this.myStorage.getFirstNameOfCurrentUser();
-            this.lastName = this.myStorage.getLastNameOfCurrentUser();
-            this.userService.CollectData(this.clientNameValue).subscribe(data => { this.users = data });
+            this.firstName = this.myStorage.getCurrentUserObject().firstName;
+            this.lastName = this.myStorage.getCurrentUserObject().lastName;
+            this.userService.getAllUsers(this.clientNameValue).subscribe(data => { this.users = data });
             this.applicationService.CollectData(this.clientNameValue).subscribe(data => { this.application = data });
             this.applicationService.getApplicationCount(this.clientNameValue).subscribe(data=>{this.appCount=data,console.log(this.appCount)});
 

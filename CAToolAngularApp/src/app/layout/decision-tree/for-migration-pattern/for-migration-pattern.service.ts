@@ -14,7 +14,7 @@ export class ForMigrationPatternService {
 
   constructor(private http: HttpClient,private myStorage:LocalStorageService) { }
   CollectData() {
-    this.clientNameValue=this.myStorage.getClient();
+    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
     const  url  =  'http://localhost:8090/migrationRule/getAll';
     return  this.http.get(url+`/`+this.clientNameValue);
   }
@@ -25,12 +25,12 @@ export class ForMigrationPatternService {
   }
 
   getMigrationQuestions(migrationId : number){
-    this.clientNameValue=this.myStorage.getClient();
+    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
     return  this.http.get(`http://localhost:8090/assessmentQuestions/getAllMigrationPattern/${migrationId}/${this.clientNameValue}`);
   }
 
   updateMigrationRule(value: any):Observable<Object>{
-    this.clientNameValue=this.myStorage.getClient();
+    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
     return this.http.put(`${this.updateMigrationRuleUrl}`+`/`+this.clientNameValue, value);
   }
 

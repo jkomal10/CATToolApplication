@@ -24,40 +24,29 @@ export class UserComponent implements OnInit {
   clientValue : string;
   user: Users;
   IpAddress : string;
- 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
-
-  // persons: Person[];
   users:Array<Users>=[];
   AllData : any = [];
-  constructor(private userService : UsersService,
-      public router: Router,
-    private http: HttpClient,private myStorage:LocalStorageService) { 
+
+  constructor(private userService : UsersService,public router: Router,private http: HttpClient,private myStorage:LocalStorageService) { 
   }
+  
   addUser()
   {
-    console.log("This is user component");
-    console.log(this.IpAddress);
     this.userService.sendIpAddresstoOtherComponent(this.IpAddress);
     this.router.navigate(['/user/add-user']);
   }
 
   updateUser(user:Users){
-    console.log(user);
      this.userService.sendMsgtoOtherComponent(user);
      this.router.navigate(['/user/update-user']);
   }
 
   deleteUser(formvalues){
-    console.log(formvalues);
-    this.userService.deleteUser(formvalues).subscribe(data => {
-      console.log(data);
-    },
+    this.userService.deleteUser(formvalues).subscribe(data => {},
     error => console.log('ERROR: ' + error));
     this.router.navigate(['/user']);
-    
-
   }
 
   deactivate(formvalues)
@@ -67,7 +56,6 @@ export class UserComponent implements OnInit {
 
   uploadUserInfo()
   {
-    console.log(this.IpAddress);
     this.userService.sendIpAddresstoOtherComponent(this.IpAddress);
     this.router.navigate(['/user/upload-user']);
   }
@@ -97,14 +85,13 @@ export class UserComponent implements OnInit {
 
   help()
   {
-    // this.userService.sendUsertoOtherComponent("user");
-    localStorage.setItem('component', 'user');   
+    this.myStorage.setComponent('user');  
     this.router.navigate(['/help']);
   }
 
   ngOnInit() {
 
-    this.clientValue=this.myStorage.getClient();
+    this.clientValue=this.myStorage.getCurrentUserObject().clientName;
 
     this.dtOptions = {
       pagingType: 'full_numbers',

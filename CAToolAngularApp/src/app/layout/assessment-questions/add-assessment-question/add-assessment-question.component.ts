@@ -39,7 +39,7 @@ export class AddAssessmentQuestionComponent implements OnInit {
   constructor(private questionService: AssessmentQuestionsService,public router: Router,private http: HttpClient,private myStorage:LocalStorageService) { }
 
   ngOnInit() {
-      this.clientNameValue=this.myStorage.getClient();
+      this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
   }
 
   selectChangeHandler(event:any){

@@ -14,8 +14,8 @@ export class FeedbackService {
 
   addFeedback(feedback: Object): Observable<Object> {
     console.log("feedback for user");
-    this.userName=this.myStorage.getCurrentUser();
-    this.clientNameValue=this.myStorage.getClient();
+    this.userName=this.myStorage.getCurrentUserObject().userName;
+    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
     return this.http.post(`${this.url}`+`/`+this.userName+`/`+this.clientNameValue,feedback);
    }
 }

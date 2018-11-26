@@ -30,7 +30,7 @@ export class UserRoleComponent implements OnInit {
 }
 
   ngOnInit() {
-    this.userName=this.myStorage.getCurrentUser();
+    this.userName=this.myStorage.getCurrentUserObject().userName;
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,

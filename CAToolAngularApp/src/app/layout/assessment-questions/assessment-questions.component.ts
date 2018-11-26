@@ -49,7 +49,7 @@ export class AssessmentQuestionsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.clientNameValue=this.myStorage.getClient();
+    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
 
     this.dtOptions = {
       pagingType: 'full_numbers',

@@ -19,25 +19,27 @@ export class LocalStorageService {
     localStorage.setItem('isUserActive',isUserActive);
   }
 
-  setLocalhostURL(){
+  setdomainURL(){
     localStorage.setItem('local','http://localhost:8090');
   }
 
-  getLocalhostURL(){
+  getdomainURL(){
     return localStorage.getItem('local');
   }
 
   setCurrentUserObject(user : Object){
     localStorage.setItem('user',JSON.stringify(user));
-    this.user=JSON.parse(localStorage.getItem('user'));
-    localStorage.setItem('userName',this.user.userName);
-    localStorage.setItem('clientName',this.user.clientName);
-    localStorage.setItem('firstName',this.user.firstName);
-    localStorage.setItem('lastName',this.user.lastName);
   }
 
+  getCurrentUserObject() : currentUser{
+    return JSON.parse(localStorage.getItem('user'));
+  }
+  
   setIpAddress(ip : string){
     localStorage.setItem('ip',ip);
+  }
+  setComponent(componentName: string){
+    localStorage.setItem('component', componentName); 
   }
 
   getIpAddress(){
@@ -52,28 +54,6 @@ export class LocalStorageService {
     return localStorage.getItem('isLoggedin');
   }
 
-  getCurrentUser(){
-    return localStorage.getItem('userName');
-  }
-
-  getIsAdmin(){
-    return this.user.isAdmin;       
-  }
-
-  getClient(){
-    return localStorage.getItem('clientName');
-  }
-
-  getFirstNameOfCurrentUser(){
-    this.user=JSON.parse(localStorage.getItem('user'));
-    return localStorage.getItem('firstName');
-  }
-
-  getLastNameOfCurrentUser(){
-    this.user=JSON.parse(localStorage.getItem('user'));
-    return localStorage.getItem('lastName');
-  }
-
   clearLoggedIn(){
     return localStorage.removeItem('isLoggedin');
   }
@@ -81,5 +61,7 @@ export class LocalStorageService {
   clearCurrentUser(){
     return localStorage.removeItem('user');
   }
+
+
 
 }

@@ -11,39 +11,32 @@ export class UsersService {
 ipAddress : string;
 constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
 
-
-CollectData(clientName : string): Observable<Object>{
-    return this.http.get(this.myStorage.getLocalhostURL()+`/user/getAll/`+clientName);
-  }
-
 getAllUsers(clientName : string): Observable<Object>{
-  console.log(this.myStorage.getLocalhostURL()+`/user/getAll/`+this.myStorage.getClient());
-  return this.http.get(this.myStorage.getLocalhostURL()+`/user/getAll/`+clientName);
+  return this.http.get(this.myStorage.getdomainURL()+`/user/getAll/`+clientName);
   }
 
 getUserByUserName(clientName:string,userName:string)
 {
-  const getuserByName = "http://localhost:8090/user/getUserId";
-  return this.http.get(getuserByName+'/'+clientName+'/'+userName);
+  return this.http.get(this.myStorage.getdomainURL()+'/user/getUserId/'+clientName+'/'+userName);
 }
 
 countNumberOfUsers()
 {
-  return this.http.get(this.myStorage.getLocalhostURL()+`/user/getUserCount`);
+  return this.http.get(this.myStorage.getdomainURL()+`/user/getUserCount`);
 }
   
 addUser(user: Object): Observable<Object> {
-  return this.http.post(this.myStorage.getLocalhostURL()+`/user/addUser/create/`+this.myStorage.getCurrentUser(), user);
+  return this.http.post(this.myStorage.getdomainURL()+`/user/addUser/create/`+this.myStorage.getCurrentUserObject().userName, user);
 }
 
 deactivate(userId: number)
 {
-  return this.http.put(this.myStorage.getLocalhostURL()+`/user/deactivateUser/`+userId,  { responseType: 'text' });
+  return this.http.put(this.myStorage.getdomainURL()+`/user/deactivateUser/`+userId,  { responseType: 'text' });
 }
 
 changePassword(userName: String,password: String,newPassword: String){
-  console.log(this.myStorage.getLocalhostURL()+ `/user/changePassword/`+userName+`/`+password+`/`+newPassword);
-  return this.http.get(this.myStorage.getLocalhostURL()+ `/user/changePassword/`+userName+`/`+password+`/`+newPassword);
+  console.log(this.myStorage.getdomainURL()+ `/user/changePassword/`+userName+`/`+password+`/`+newPassword);
+  return this.http.get(this.myStorage.getdomainURL()+ `/user/changePassword/`+userName+`/`+password+`/`+newPassword);
 }
 
 private comptransfer = new BehaviorSubject("Hello");
@@ -63,11 +56,11 @@ private comptransfer = new BehaviorSubject("Hello");
         }
 
       updateUser(user: Object): Observable<Object> {
-        return this.http.put(this.myStorage.getLocalhostURL()+ `/user/updateUser/update/`+this.myStorage.getCurrentUser(), user);
+        return this.http.put(this.myStorage.getdomainURL()+ `/user/updateUser/update/`+this.myStorage.getCurrentUserObject().userName, user);
       }
 
       deleteUser(userId: number): Observable<any> {
-        return this.http.delete(this.myStorage.getLocalhostURL()+`/user/deleteUserById/`+userId, { responseType: 'text' });
+        return this.http.delete(this.myStorage.getdomainURL()+`/user/deleteUserById/`+userId, { responseType: 'text' });
       }
 
       getIpAddress() : Observable<any>{

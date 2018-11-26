@@ -14,7 +14,7 @@ export class ForCloudableService {
    baseUrl = 'http://localhost:8090/cloudableRule/save';
    CollectData(){
    //const url = 'http://localhost:8090/option/getAll';
-   this.clientNameValue=this.myStorage.getClient();
+   this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
    const url= 'http://localhost:8090/assessmentQuestions/getAllCloudableQuestions';
    return this.http.get(url+`/`+this.clientNameValue);
     }

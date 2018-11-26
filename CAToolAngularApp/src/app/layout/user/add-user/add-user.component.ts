@@ -11,8 +11,8 @@ import { LocalStorageService } from '../../utility/service/localStorage.service'
   styleUrls: ['./add-user.component.scss']
 })
 export class AddUserComponent implements OnInit {
-  user: Users;
-  AllData : any = [];
+ user: Users;
+ AllData : any = [];
  IpAddress : string;
  userName : string;
  status : boolean = true; 
@@ -22,18 +22,20 @@ export class AddUserComponent implements OnInit {
 
  count:number=0;
  
-  constructor(private userService:UsersService,public router: Router,private myStorage:LocalStorageService) { }
+  constructor(private userService:UsersService,public router: Router,private myStorage:LocalStorageService) {
+
+    console.log(this.myStorage.getCurrentUserObject().userName);
+   }
 
   ngOnInit() {
-    this.clientNameValue=this.myStorage.getClient();
+    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
     this.userService.getIpAddress().subscribe(data => {
       this.myStorage.setIpAddress(data['ip']);
   });
 
-  this.userService.CollectData( this.clientNameValue).subscribe(result => 
+  this.userService.getAllUsers( this.clientNameValue).subscribe(result => 
     {
-    this.AllData = result ;
-    console.log(this.AllData);
+      this.AllData = result ;
     });
   }
 
@@ -45,7 +47,6 @@ export class AddUserComponent implements OnInit {
     for (let index = 0; index < this.AllData.length; index++) {
       if(this.userName === this.AllData[index].userName){
         this.status=false;
-        console.log(this.status);
         alert("User already exits, please enter a new name");
         this.router.navigate(['/user']);
       }
@@ -53,7 +54,7 @@ export class AddUserComponent implements OnInit {
     if(this.status)
     {
     this.user.ipAddress=this.myStorage.getIpAddress();
-    this.user.createdBy=this.myStorage.getCurrentUser();
+    this.user.createdBy=this.myStorage.getCurrentUserObject().userName;
     this.user.clientName=this.clientNameValue;
     this.userService.addUser(this.user).subscribe();
     this.router.navigate(['/user']);
@@ -64,14 +65,12 @@ export class AddUserComponent implements OnInit {
   selectChangeHandler (event: any) {
     if(event.target.value=="User")
     {
-      console.log("User is Admin=1");
       this.userTypeValue=1;
       this.user.isAdmin=1;
       this.userType="User";
     }
     else
     {
-      console.log("Admin is Admin=0");
       this.userTypeValue=0;
       this.user.isAdmin=0;
       this.userType="Admin";

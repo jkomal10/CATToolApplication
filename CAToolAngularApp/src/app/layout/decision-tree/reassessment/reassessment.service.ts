@@ -10,7 +10,7 @@ export class ServiceService {
   constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
 
   CollectData(){
-    this.clientNameValue=this.myStorage.getClient();
+    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
     const reassessUrl = 'http://localhost:8090/application/getAllReassessment';
     return this.http.get(reassessUrl+`/`+this.clientNameValue);
     }

@@ -16,7 +16,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   onLoggedin(formvalues){
-    this.userService.changePassword(this.myStorage.getCurrentUser(),formvalues.previousPassword,formvalues.password).subscribe();
+    this.userService.changePassword(this.myStorage.getCurrentUserObject().userName,formvalues.previousPassword,formvalues.password).subscribe();
   }
 
 }

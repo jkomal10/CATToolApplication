@@ -40,13 +40,14 @@ export class AssessmentQuestionsService {
   }
 
   getMigrationData(){
-    this.clienNameValue=this.myStorage.getClient();
+    this.clienNameValue=this.myStorage.getCurrentUserObject().clientName;
     const  url  =  'http://localhost:8090/migrationRule/getAll';
     return  this.http.get(url+`/`+this.clienNameValue);
   }
 
   getCloudProviderData(){
-    this.clienNameValue=this.myStorage.getClient();
+    this.clienNameValue=this.myStorage.getCurrentUserObject().clientName;
+
     const url = 'http://localhost:8090/cloudProvider/getAll';
     return this.http.get(url+`/`+this.clienNameValue);
   }

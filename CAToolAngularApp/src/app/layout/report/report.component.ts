@@ -20,7 +20,7 @@ export class ReportComponent implements OnInit {
   constructor(public router:Router, private applicationService:ApplicationService,private http:HttpClient, private reportService:ReportService,private myStorage:LocalStorageService) { }
 
   ngOnInit() {
-    this.clientNameValue=this.myStorage.getClient();
+    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
     this.applicationService.CollectData(this.clientNameValue).subscribe(result => 
       {
       this.AllData = result;

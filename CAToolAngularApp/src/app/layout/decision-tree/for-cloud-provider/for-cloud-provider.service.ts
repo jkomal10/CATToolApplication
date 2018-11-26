@@ -16,7 +16,7 @@ export class ForCloudProviderService {
   
     
 CollectData(){
-  this.clientNameValue=this.myStorage.getClient();
+  this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
   const url = 'http://localhost:8090/cloudProvider/getAll';
   return this.http.get(url+`/`+this.clientNameValue);
   }
@@ -37,12 +37,12 @@ CollectData(){
   }
 
   CollectCloudableRuleQuestions(cloudproviderId : number){
-    this.clientNameValue=this.myStorage.getClient();
+    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
     return this.http.get(`http://localhost:8090/assessmentQuestions/getAllCloudProviderRule/${cloudproviderId}/${this.clientNameValue}`);
   }
   updateCloudProviderRule(cloudableRule:any):Observable<Object>
   {
-    this.clientNameValue=this.myStorage.getClient();
+    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
     return this.http.put(`${this.updateCloudProviderRuleUrl}`+`/`+this.clientNameValue, cloudableRule);
   }
 }
