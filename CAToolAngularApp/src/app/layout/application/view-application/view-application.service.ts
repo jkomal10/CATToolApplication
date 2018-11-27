@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Application } from '../Application';
 import { Observable } from 'rxjs';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ViewApplicationService {
-  url:String ='http://localhost:8090/application/getApplicationById';
-  constructor(private http:HttpClient) { }
+
+  constructor(private http:HttpClient, private myStorage:LocalStorageService) { }
   CollectSingleApplicationData(applicationId: number): Observable<any>{
-    
-    return this.http.get(`${this.url}/${applicationId}`, { responseType: 'text' });
+    return this.http.get(this.myStorage.getdomainURL()+`/application/getApplicationById`+applicationId, { responseType: 'text' });
     
   }
 }

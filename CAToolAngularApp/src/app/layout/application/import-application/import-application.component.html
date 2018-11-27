@@ -1,19 +1,25 @@
 <div>
     <div>
-            <h2 class="text-muted">Application <small>Import Application</small></h2>
-    </div><br><br>
-<form accept-charset="UTF-8" role="form">
-          <div class="form-group">
-              <label class="btn btn-default" for="my-file-selector">
-                    <button style="background-color: white; border: aliceblue" title="Select CSV file to import one or more Applications" class="btn btn-light" ><i class="fa fa-question-circle" style="font-size:18px;color:red"></i></button> 
-                  <input id="my-file-selector" (change)="fileChangeListener($event)"  accept=".csv" type="file" onchange="$('#upload-file-info').html(this.files[0].name)"/>
-                  
-                   <br><br>
-              </label>
-          </div>
-          <div class="form-group">
-              <button type="submit" class="btn btn-info" (click)="importData()">Submit</button>&nbsp;
-              <button type="button" class="btn btn-info" (click)="cancle()">Cancel</button>
-          </div>
-</form>
+        <h2 class="text-muted">Application
+            <small>Import Application</small>
+        </h2>
+    </div>
+    <br>
+    <br>
+    <form accept-charset="UTF-8" role="form">
+        <div class="form-group">
+            <label class="btn btn-default" for="my-file-selector">
+                <button style="background-color: white; border: aliceblue"  title="Select CSV file to import one or more Applications"  class="btn btn-light">
+                    <i class="fa fa-question-circle"  style="font-size:18px;color:red"></i>
+                </button>
+                <input id="my-file-selector" (change)="fileChangeListener($event)" accept=".csv" type="file" onchange="$('#upload-file-info').html(this.files[0].name)"/>
+                <br>
+                <br>
+            </label>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-info" (click)="importData()">Submit</button>&nbsp;
+            <button type="button" class="btn btn-info" (click)="cancle()">Cancel</button>
+        </div>
+    </form>
 </div>

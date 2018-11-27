@@ -20,7 +20,6 @@ export class UpdateUserComponent implements OnInit {
   }
 
   updateUserComponent(userdata){
-    console.log("update user component "+userdata.firstName);
     this.user=userdata;
     this.userService.updateUser(userdata).subscribe();
     this.router.navigate(['/user']);

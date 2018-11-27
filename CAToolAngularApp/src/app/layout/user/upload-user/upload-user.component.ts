@@ -21,30 +21,23 @@ export class UploadUserComponent implements OnInit {
   userDetail: Users = new Users();
   lines = [];
 
-  ipAddress : any;
-  constructor(private userservice : UsersService,public router: Router, private myStorage:LocalStorageService) { }
+  ipAddress: any;
+  constructor(private userservice: UsersService, public router: Router, private myStorage: LocalStorageService) { }
 
-  fileChangeListener(event:any){
-    this.filename = event.target.files[0].name;
-    this.link = event.target.files[0];
-    console.log("link"+this.link);
-    this.ext = this.filename.substring(this.filename.lastIndexOf('.')).toLowerCase();
-    console.log(this.ext);
-    
-    if (this.isCSVFile(this.ext)){
-    console.log(this.filename);
-    console.log("csv file");
-    let reader: FileReader = new FileReader();
-    reader.readAsText(this.link);
-    reader.onload = (data) => {
-    let csvData : string = reader.result;
-    let csvRecordsArray = csvData.split(/\r|\n|\n/);
-    // console.log(csvRecordsArray);
-    let headersRow = this.getHeaderArray(csvRecordsArray);
-    console.log(headersRow);
-    
-    this.userDetails = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
-    }
+  fileChangeListener(event: any) {
+    this.filename  =  event.target.files[0].name;
+    this.link  =  event.target.files[0];
+    this.ext  =  this.filename.substring(this.filename.lastIndexOf('.')).toLowerCase();
+
+    if  (this.isCSVFile(this.ext)) {
+      let  reader:  FileReader  =  new  FileReader();
+      reader.readAsText(this.link);
+      reader.onload  =  (data)  =>  {
+        let  csvData :  string  =  reader.result;
+        let  csvRecordsArray  =  csvData.split(/\r|\n|\n/);
+        let  headersRow  =  this.getHeaderArray(csvRecordsArray);
+        this.userDetails  =  this.getDataRecordsArrayFromCSVFile(csvRecordsArray,  headersRow.length);
+      }
     }
 
     else {
@@ -104,8 +97,7 @@ export class UploadUserComponent implements OnInit {
       this.userDetail.lastLogin = 0;
       this.userDetail.modifiedBy = this.myStorage.getCurrentUserObject().modifiedBy;
       this.userDetail.modifiedDateTime = new Date();
-      this.userservice.addUser(this.userDetail)
-        .subscribe();
+      this.userservice.addUser(this.userDetail).subscribe();
       this.router.navigate(['/user']);
     }
 
@@ -116,7 +108,7 @@ export class UploadUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userservice.users.subscribe(data  =>  { this.ipAddress =  data; });
+    this.userservice.users.subscribe(data => { this.ipAddress = data; });
   }
 
 }

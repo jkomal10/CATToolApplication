@@ -10,12 +10,10 @@ export class FeedbackService {
   userName : String;
   clientIdValue : number;
   constructor(private http: HttpClient,private myStorage:LocalStorageService) { }
-  private url="http://localhost:8090/feedback/save";
 
   addFeedback(feedback: Object): Observable<Object> {
-    console.log("feedback for user");
     this.userName=this.myStorage.getCurrentUserObject().userName;
     this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
-    return this.http.post(`${this.url}`+`/`+this.userName+`/`+this.clientIdValue,feedback);
+    return this.http.post(this.myStorage.getdomainURL()+`/feedback/save/`+this.userName+`/`+this.clientIdValue,feedback);
    }
 }

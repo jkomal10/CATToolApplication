@@ -27,7 +27,6 @@ export class ApplicationComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
   message = '';
   clientIdValue : number;
-  //applictaions: Observable<Application[]>;
   application:Array<Application>=[];
   applicationTemplate:Array<Application>=[];
   applicationList: any = [];
@@ -45,7 +44,7 @@ export class ApplicationComponent implements OnInit {
       responsive: true,
     
   };
-    this.applicationService.CollectData(this.clientIdValue).subscribe(result => 
+    this.applicationService.getAllAplication(this.clientIdValue).subscribe(result => 
       {
       this.applicationList= result ;
       this.logger.log(JSON.stringify(this.applicationList));
@@ -136,7 +135,7 @@ new Angular5Csv( this.applicationTemplate,filename, options);
   }
 
    reloadData() {
-     this.applicationService.CollectData(this.clientIdValue);
+     this.applicationService.getAllAplication(this.clientIdValue);
    }
    
    ViewApplication(formvalues){
@@ -154,10 +153,5 @@ new Angular5Csv( this.applicationTemplate,filename, options);
 
    deactivate(formvalues){
      this.applicationService.deactivate(formvalues).subscribe();
-   }
-   
-   somefunction()
-   {
-     console.log("sommmmmmmmmmmmmmmmmmmmmmm");
    }
 }

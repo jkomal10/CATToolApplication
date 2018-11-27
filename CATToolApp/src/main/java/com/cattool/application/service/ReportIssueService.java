@@ -14,12 +14,8 @@ public class ReportIssueService {
 
 	@Autowired
 	ReportIssueRepository reportIssueRepository;
-//	public ReportIssue saveIssue(String issue) {
-//		
-//		return reportIssueRepository.save(issue);
-//	}
+	
 	public ReportIssue saveIssue(ReportIssue reportIssue) {
-		// TODO Auto-generated method stub
 		return reportIssueRepository.save(reportIssue);
 	}
 	

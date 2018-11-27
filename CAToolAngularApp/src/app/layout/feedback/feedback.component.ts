@@ -57,7 +57,6 @@ export class FeedbackComponent implements OnInit {
     this.feedbackObject.question2=this.question2;
     this.feedbackObject.question3=this.question3;
     this.feedbackObject.recommend=this.recommend;
-    console.log("&&&&&&&&&&&&&&&&&&"+this.recommend);
     this.feedbackObject.rating=this.rating;
     this.feedbackService.addFeedback(this.feedbackObject).subscribe();
     this.router.navigate(['/dashboard']);

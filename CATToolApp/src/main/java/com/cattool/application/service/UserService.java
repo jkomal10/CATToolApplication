@@ -43,7 +43,6 @@ public class UserService {
 			}
 		}
 		count = usersList.size();
-		System.out.println(count);
 		return count;
 	}
 
@@ -54,15 +53,11 @@ public class UserService {
 		System.out.println(userRepository.findAll());
 		try {
 			for (Users users : userRepository.findAll()) {
-				System.out.println(users.isDeactivate());
-				System.out.println(clientId+"=="+users.getClientId());
 				if (!users.isDeactivate() && (clientId==users.getClientId())) {
 					userList.add(users);
 				}
-
 			}
 			LOGGER.info("Successfully get all users");
-			System.out.println(userList);
 			return userList;
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.GetUserDetails + e);
@@ -77,11 +72,9 @@ public class UserService {
 		try {
 			userDb = userRepository.findByUserName(userName);
 			System.out.println(userDb.getUserName());
-//			int lastLogInDateInInt=(int) (new Date().getTime()/1000);
 			if(userDb!=null)
 			{
 				String decryptedPassword = EncryptPassword.decrypt(userDb.getPassword());    
-                System.out.println("decrypted pass="+decryptedPassword);
 				if(password.equals(decryptedPassword))
 				{
 			int lastLogInDateInInt = (int) (new Date().getTime() / 1000);
@@ -89,11 +82,8 @@ public class UserService {
 				if (password.equals(userDb.getPassword())) {
 					userDb.setLastLogin(lastLogInDateInInt);
 					LOGGER.info("Successfully get password");
-					System.out.println("Successfully logged in");
 					return userDb;
 				} else {
-					// System.out.println("password does not exist!!!!!!!");
-					// return null;
 					LOGGER.error(ExceptionMessages.WrongPassword);
 					throw new CATException(ExceptionMessages.WrongPassword);
 				}
@@ -105,7 +95,6 @@ public class UserService {
 		} }}catch (Exception e) {
 			LOGGER.error(ExceptionMessages.InvalidName);
 			System.out.println(ExceptionMessages.InvalidName + e);
-			// return null;
 		}
 
 		return userDb;
@@ -113,7 +102,6 @@ public class UserService {
 	}
 
 	public Users saveUser(Users user, String createdBy) {
-		System.out.println(user + createdBy);
 		try {
 			user.setCreatedBy(createdBy);
 			LOGGER.info("Successfully save user details");
@@ -122,10 +110,8 @@ public class UserService {
 			return userRepository.save(user);
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.AddUserError);
-			// throw new CATException(ExceptionMessages.AddUserError);
-			System.out.println(ExceptionMessages.AddUserError + e);
 		}
-		return null;
+		return user;
 
 	}
 
@@ -135,7 +121,6 @@ public class UserService {
 			LOGGER.info("Succfully deleted the user");
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.DeletsUser);
-			// throw new CATException(ExceptionMessages.DeletsUser);
 			System.out.println(ExceptionMessages.DeletsUser + e);
 		}
 
@@ -143,9 +128,7 @@ public class UserService {
 
 	public void updateUsers(Users user, String modifiedBy) {
 		try {
-			System.out.println("service");
 			Users users = new Users();
-			System.out.println(user.getUserId() + " it is user id *********");
 			users = userRepository.findByUserId(user.getUserId());
 			System.out.println(users.getUserId());
 			users.setUserId(user.getUserId());
@@ -167,7 +150,6 @@ public class UserService {
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.UpdateUser + e);
 			System.out.println(ExceptionMessages.UpdateUser + e);
-			// throw new CATException(ExceptionMessages.UpdateUser);
 		}
 
 	}
@@ -177,8 +159,6 @@ public class UserService {
 		System.out.println(userName+password+newPassword);
 		try {
 			user = userRepository.findByUserName(userName);
-			System.out.println(password +  "==" + user.getPassword());
-			
 			if (password.equals(user.getPassword())) {
 				user.setUserId(user.getUserId());
 				user.setPassword(password);
@@ -190,10 +170,8 @@ public class UserService {
 				System.out.println("not updated");
 				LOGGER.error(ExceptionMessages.UpdateUserPassword);
 				System.out.println(ExceptionMessages.UpdateUserPassword);
-				// throw new CATException(ExceptionMessages.UpdateUserPassword);
 			}
 		} catch (Exception e) {
-			// throw new CATException(ExceptionMessages.UpdatePassword);
 			LOGGER.error(ExceptionMessages.UpdatePassword + e);
 			System.out.println(ExceptionMessages.UpdatePassword + e);
 		}
@@ -205,15 +183,12 @@ public class UserService {
 		Users users = new Users();
 		try {
 			users = userRepository.findByUserId(userId);
-			System.out.println("**** " + users);
-			System.out.println(users.getUserId());
 			users.setDeactivate(true);
 			users.setUserId(users.getUserId());
 			LOGGER.info("User is deactivated succfully");
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.DeactivateUser + e);
 			System.out.println(ExceptionMessages.DeactivateUser + e);
-			// throw new CATException(ExceptionMessages.DeactivateUser);
 		}
 
 	}
@@ -228,14 +203,11 @@ public class UserService {
 				userList.add(user);
 			}
 		}
-//		System.out.println(userList.size());
-//		System.out.println(userList);
 		
 		for(Users alluser : userList)
 		{
 			if(alluser.getUserName().equals(userName))
 			{
-				System.out.println(alluser.getUserId());
 				int id = alluser.getUserId();
 				String json = "{\"id\" : "+id+"}";
 				return json;
@@ -246,7 +218,6 @@ public class UserService {
 		userbyId.setClientId(clientId);
 		userbyId.setPassword("Cg@123");
 		System.out.println(userRepository.save(userbyId).getUserId());
-		//return userRepository.save(userbyId).getUserId();
 		int id = userRepository.save(userbyId).getUserId();
 		String json = "{\"id\" : "+id+"}";
 		return json;

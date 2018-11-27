@@ -27,72 +27,83 @@ public class ApplicationController {
 	@GetMapping("/getTotalApplicationsCount/{clientId}") 
     public int getAllApplicationCount(@PathVariable int clientId) 
     { 
-            return applicationService.getAllAppsCount(clientId); 
+		 System.out.println("Get application count!!");
+         return applicationService.getAllAppsCount(clientId); 
     }
 	
 	@GetMapping("/getAll/{clientId}")
 	public List<Application>getAllApplication(@PathVariable int clientId)
 	{
-	return applicationService.getAllApplication(clientId);
+		System.out.println("Get all application!!");
+		return applicationService.getAllApplication(clientId);
 	}
 	
 	@GetMapping("/getApplicationById/{applicationId}")
 	public Application getApplicationById(@PathVariable("applicationId") int id) {
-	 return applicationService.GetSingleApplication(id);	
+		System.out.println("Get application by id!!");
+		return applicationService.GetSingleApplication(id);	
 	}
 
 	@PostMapping("/saveApplication/create")
 	public Application saveApplication(@RequestBody Application application)
 	{
+		System.out.println("Save application!!");
 		return applicationService.saveApplication(application);
 	}
 	
 	@GetMapping("/getApplicationByName{applicationName}")
 	public Application getApplicationByName(@PathVariable String applicationName)
 	{
+		System.out.println("Get application by name!!");
 		Application application=applicationService.findbyApplicationName(applicationName);
 		if(application!=null) {
-		return applicationService.findbyApplicationName(applicationName);
+			return applicationService.findbyApplicationName(applicationName);
 	    }
 		else {
-		return null;
+			return null;
 		}
 	}
 	
 	@GetMapping("/getApplicationByUserName/{userName}")
 	public Application getAppByUser(@PathVariable("userName") String userName) {
+		System.out.println("Get application by username!!");
 		return applicationService.getApplicationByUserName(userName);
 	}
 	
 	@PutMapping("/updateApplictaion")
 	public void updateApplication (@RequestBody Application application) {
+		System.out.println("Update application!!");
 		applicationService.updateApplication(application.getApplicationId(),application);
 	}
 		
 	@DeleteMapping("/deleteApplicationById/{applicationId}")
 	public void  deleteApplication(@PathVariable("applicationId") int id) {
+		System.out.println("Delete application!!");
 		applicationService.deleteApplicationById(id);
 	}
 	
 	@PutMapping("/resetApplicationById/{applicationId}")
 	public void resetApplication (@PathVariable("applicationId") int applicationId) {
+		System.out.println("Reset application!!");
 		applicationService.resetApplicationById(applicationId);
 	}
 	
 	@PutMapping("/deactivateApplicationById/{applicationId}")
 	public void deactivateApplication(@PathVariable("applicationId") int applicationId) {
+		System.out.println("Deactivate questions!!");
 		applicationService.deactivateApplicationById(applicationId);
 	}
 	
 	@GetMapping("/getAllReassessment/{clientId}")
 	public List<Application>getAllReassessment(@PathVariable int clientId)
 	{
+		System.out.println("Get all reassessment!!");
 		return applicationService.getAllReassessment(clientId);
 	}
 
 	@GetMapping("AllRuleCheck/{applicationId}")
 	public void allRuleCheck(@PathVariable("applicationId") int applicationId) {
-		
+		System.out.println("Rule check!!");
 		applicationService.allRuleCheck(applicationId);
 	}
 	
@@ -104,7 +115,7 @@ public class ApplicationController {
 	
 	@GetMapping("cloudProviderCheck/{applicationId}")
 	public void cloudProviderCheck(@PathVariable("applicationId") int applicationId) {
-		
+		System.out.println("Cloud provider rule check!!");
 		applicationService.cloudProviderCheck(applicationId);
 	}
 	
@@ -112,6 +123,7 @@ public class ApplicationController {
 	@GetMapping("/summaryReport")
 	public void summaryRepory() throws FileNotFoundException
 	{
+		System.out.println("Summary Report works!!");
 		applicationService.summaryReport();
 	}
 

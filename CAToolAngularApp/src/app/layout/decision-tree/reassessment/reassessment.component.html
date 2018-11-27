@@ -1,45 +1,32 @@
-<!-- <h4>Reassessment</h4>
-<form>
-  Run Rules for:<br><br>
-  <input type="button" class="btn  btn-info" value="Run Rules" (click)="runRule()">&nbsp;
-  <br><br>
-  Migration Pattern: <input type="checkbox" id="migrationPattern" (change)="migrationPatternMethod($event)"><br>
-  Cloud.. Provider..   : <input type="checkbox" id="cloudProvider" (change)="cloudProviderMethod($event)">
-  <br>
-  <br>
-  <table  width="100%" class="table table-hover table-sm ">
-    <tr bgcolor="#E0E0E0"><td>App</td><td>Application</td></tr>
-    <tr *ngFor = "let row of AllData">
-      <td width="20%" widh ><input #value type="checkbox" id="applicationId" (change)="applicationNameChange($event,row.applicationId)"></td>
-     <td  width="80%">{{row.applicationName}}</td>
-    </tr> 
-    <tr><td><td></td></tr>
-  </table>
-</form> -->
-<h2 class="text-muted"><strong>Reassessment</strong></h2>
-<!-- Run Rules for:<br> -->
+<h2 class="text-muted">
+  <strong>Reassessment</strong>
+</h2>
 <br>
-  <input type="button" class="btn  btn-info" value="Run Rules" (click)="runRule()">&nbsp;
-  <br><br>
-  <input type="checkbox" id="migrationPattern" (change)="migrationPatternMethod($event)">&nbsp;Migration Pattern <br>
-  <input type="checkbox" id="cloudProvider" (change)="cloudProviderMethod($event)">&nbsp;Cloud Provider   
-  <br>
+<input type="button" class="btn  btn-info" value="Run Rules" (click)="runRule()">&nbsp;
+<br>
+<br>
+<input type="checkbox" id="migrationPattern" (change)="migrationPatternMethod($event)">&nbsp;Migration Pattern
+<br>
+<input type="checkbox" id="cloudProvider" (change)="cloudProviderMethod($event)">&nbsp;Cloud Provider
+<br>
 <div>
-    <br>
-    <div class="container">
-      <table datatable="bootstrap" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped ">
-          <thead>
-            <tr>
-              <th>App</th>
-              <th>Application</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor = "let size of AllData"> 
-                <td><input #value type="checkbox" id="applicationId" (change)="applicationNameChange($event,size.applicationId)"></td>
-                <td>{{size.applicationName}}</td>
-            </tr> 
-        </tbody>
-      </table>
-</div>
+  <br>
+  <div class="container">
+    <table datatable="bootstrap" [dtOptions]="dtOptions"  [dtTrigger]="dtTrigger" class="table table-bordered table-striped ">
+      <thead>
+        <tr>
+          <th>App</th>
+          <th>Application</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor =  "let size of reassessmentDataValue">
+          <td>
+            <input #value type="checkbox" id="applicationId" (change)="applicationNameChange($event,size.applicationId)">
+          </td>
+          <td>{{size.applicationName}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

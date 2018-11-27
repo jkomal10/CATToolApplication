@@ -2,46 +2,36 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Application } from './Application';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { LocalStorageService } from '../utility/service/localStorage.service';
 @Injectable({
   providedIn: 'root'
 })
 export class ApplicationService {
   
-  constructor(private http:HttpClient) { }
-   deactivateUrl:String ='http://localhost:8090/application/deactivateApplicationById';
-   deleteAppUrl:String = 'http://localhost:8090/application/deleteApplicationById';
-   resetAppUrl:String ='http://localhost:8090/application/resetApplicationById';
-   updateAppUrl:String= 'http://localhost:8090/application/updateApplictaion';
-   appCountUrl:string = "http://localhost:8090/application/getTotalApplicationsCount";
-   CollectData(clientId : number): Observable<Object>{
-    const url = 'http://localhost:8090/application/getAll';
-    return this.http.get(url+`/`+clientId);
-    }
+  constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
 
-    baseUrl: string = 'http://localhost:8090/application/saveApplication';
+   getAllAplication(clientId : number): Observable<Object>{
+      return this.http.get(this.myStorage.getdomainURL()+`/application/getAll/`+clientId);
+    }
   
     createApplication(application: Object): Observable<Object> {
-      return this.http.post(`${this.baseUrl}` + `/create`, application);
+      return this.http.post(this.myStorage.getdomainURL() + `/application/saveApplication/create`, application);
     }
 
     deleteApplications(applicationId: number): Observable<any> {
-      return this.http.delete(`${this.deleteAppUrl}/${applicationId}`, { responseType: 'text' });
+      return this.http.delete(this.myStorage.getdomainURL()+`/application/deleteApplicationById/`+applicationId, { responseType: 'text' });
     }
 
     resetApplication(applicationId: number): Observable<any> {
-      return this.http.put(`${this.resetAppUrl}/${applicationId}`, { responseType: 'text' });
+      return this.http.put(this.myStorage.getdomainURL()+`/application/resetApplicationById/`+applicationId, { responseType: 'text' });
     }
     
     updateApplication(value: any): Observable<Object> {
-      console.log('################application.service.');
-      console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~'+`${this.updateAppUrl}`+'~~~~~~~~~~~~~~~~~~~~~~~');
-      return this.http.put(`${this.updateAppUrl}`, value);
+      return this.http.put(this.myStorage.getdomainURL()+`/application/updateApplictaion`, value);
     }
 
     deactivate(applicationId: number): Observable<any> {
-      console.log('################application.service.');
-      console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~'+`${this.deactivateUrl}`+'~~~~~~~~~~~~~~~~~~~~~~~');
-      return this.http.put(`${this.deactivateUrl}/${applicationId}`,  { responseType: 'text' });
+      return this.http.put(this.myStorage.getdomainURL()+`/application/deactivateApplicationById/`+applicationId,  { responseType: 'text' });
     }
 
     private comptransfer = new BehaviorSubject("Hello");
@@ -51,7 +41,7 @@ export class ApplicationService {
         this.comptransfer.next(messsage);
     } 
     getApplicationCount(clientId:number): Observable<any>{
-      return this.http.get(`${this.appCountUrl}/${clientId}`);
+      return this.http.get(this.myStorage.getdomainURL()+`/application/getTotalApplicationsCount/`+clientId);
     }
     
    

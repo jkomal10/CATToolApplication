@@ -20,14 +20,7 @@ public class OptionService {
 		return optionRepository.findAll();
 	}
 
-//	public QuestionOption saveQuestionOption(QuestionOption questionOption) {
-//		this.optionRepository.saveAndFlush(questionOption);
-//		return optionRepository.save(questionOption);
-//		
-//	}
 	public QuestionOption saveQuestionOption(QuestionOption questionOption) {
-		System.out.println();
-		//questionOption.setAssessmentQuestions(questionOption.getAssessmentQuestions());
 		return optionRepository.save(questionOption);
 		
 	}

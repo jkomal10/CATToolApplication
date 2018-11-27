@@ -40,7 +40,6 @@ public class MigrationRuleController {
 	@PutMapping("/updateMigrationRule/{clientId}")
 	public void updateMigrationRule(@RequestBody List<MigrationRule> migrationRule,@PathVariable int clientId)
 	{
-		System.out.println("Update migration rule");
 		migrationRuleService.updateMigrationRule(migrationRule,clientId);
 	}
 	
