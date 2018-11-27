@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormsModule }    from '@angular/forms';
 import { CloudableRule } from './CloudableRule';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 class DataTablesResponse {
   data: any[];
@@ -38,8 +39,9 @@ export class ForCloudableComponent implements OnInit {
   cloudableRulesText : Array<String> = [];
   cloudableRules : Array<CloudableRule> = [];
   orderByQuestionDisplayOrder : any = [];
+  cloudableQuestions : any = [];
   exeorder:any=[];
-  constructor(private http:HttpClient,private forCloudableService:ForCloudableService,private router:Router) {
+  constructor(private http:HttpClient,private forCloudableService:ForCloudableService,private router:Router,private myStorage:LocalStorageService) {
   this.cloudableRules = [];
    }
 
@@ -87,9 +89,17 @@ export class ForCloudableComponent implements OnInit {
           // }
           // console.log("exeorder***********"+this.exeorder);
 
-       this.forCloudableService.collectQuestion().subscribe(result=>{
+       this.forCloudableService.collectQuestion(this.myStorage.getCurrentUserObject().clientId).subscribe(result=>{
          this.questions=result;
+        //  for (let index = 0; index < this.questions.length; index++) {
+        //   if(this.questions[index].assessmentTypeForCloudable)
+        //  {
+        //   this.cloudableQuestions[index] = this.questions[index];
+        //  } 
+        //  }
+         
          console.log(this.questions);
+  
        });
 
        this.forCloudableService.collectOptions().subscribe(result =>{
@@ -162,32 +172,35 @@ export class ForCloudableComponent implements OnInit {
     if(event.target.value=="QuestionDisplayOrder")
     {
       let small : number = 0;
+
       // this.orderByQuestionDisplayOrder = this.questions.sort((n1,n2)=>{
       //    return this.compare(n1.questionDisplayOrder,n2.questionDisplayOrder);
       // });
 
-      for (let index = 0; index < this.questions.length; index++) {
-        for (let index1 = index+1; index1 < this.questions.length; index1++) {
-          if(this.questions[index].questionDisplayOrder>this.questions[index1].questionDisplayOrder)
-          {
-            this.orderByQuestionDisplayOrder[index]=this.questions[index1];
-            this.questions[index1]=this.questions[index];
-            this.questions[index]=this.orderByQuestionDisplayOrder[index];
-          }
-          // else{
-          //   this.orderByQuestionDisplayOrder[index]=this.questions[index1];
-          // }
-          
-        } 
+      // for (let index = 0; index < this.questions.length; index++) {
+      //   for (let index1 = index+1; index1 < this.questions.length; index1++) {
+      //     if(this.questions[index].questionDisplayOrder>this.questions[index1].questionDisplayOrder)
+      //     {
+      //       this.orderByQuestionDisplayOrder[index]=this.questions[index1];
+      //       this.questions[index1]=this.questions[index];
+      //       this.questions[index]=this.orderByQuestionDisplayOrder[index];
+      //     }
+      //   } 
+        
+      this.cloudableQuestions.sort(function(question1,question2){
+        if(question1.questionDisplayOrder>question2.questionDisplayOrder) return -1;
+        if(question1.questionDisplayOrder<question2.questionDisplayOrder) return 1;
+      })
 
-        for (let index = 0; index < this.questions.length; index++) {
-          console.log(this.questions[index].questionDisplayOrder);
-          
+        for (let index = 0; index < this.rules.length; index++) {
+          // console.log(this.questions.length);
+          console.log("*********"+this.rules[index].questionDisplayOrder);
+  
         }
      
 
         // console.log("SORT*********"+ this.orderByQuestionDisplayOrder[index].questionDisplayOrder);
-      }
+      
 
          
       
