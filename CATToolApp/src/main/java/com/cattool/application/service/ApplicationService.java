@@ -86,9 +86,12 @@ public class ApplicationService {
 		return applicationList;
 	}
 	
+	public Application GetSingleApplication(int applicationId) {
+		return applicationRepository.findByApplicationId(applicationId);
+	}
+	
 	public Application saveApplication(Application application)
 	{
-		System.out.println("**********************************************"+application);
 		return applicationRepository.save(application);
 	}
 	
@@ -96,21 +99,9 @@ public class ApplicationService {
 	{
 		return applicationRepository.findByApplicationName(applicationName);
 	}
-
-	public void deleteApplicationById(int id) {
-		
-		applicationRepository.deleteByApplicationId(id);
-	}
-
-	public Application GetSingleApplication(int applicationId) {
-		return applicationRepository.findByApplicationId(applicationId);
-	}
-	
 	public Application getApplicationByUserName(String userName) {
 		Users user=new Users();
 		user=userRepository.findByUserName(userName);
-		System.out.println(applicationRepository.findByUserId(user.getUserId()));
-		//System.out.println(applicationRepository.findByUserId(user.getUserId()));
 		return applicationRepository.findByUserId(user.getUserId());
 	}
 	
@@ -124,15 +115,18 @@ public class ApplicationService {
 		app.setUserId(application.getUserId());
 		return applicationRepository.save(application);
 	}
-	
+	public void deleteApplicationById(int id) {
+		
+		applicationRepository.deleteByApplicationId(id);
+	}
 	public void resetApplicationById(int applicationId)
 	{
 		Application application=new Application();
+		System.out.println("Komal");
 		application.setApplicationId(applicationId);
 		application.setUserId(applicationRepository.findByApplicationId(applicationId).getUserId());
 		applicationRepository.save(application);
 	}
-	
 	public void deactivateApplicationById(int applicationId) {
 		Application application=new Application();
 		application = applicationRepository.findByApplicationId(applicationId);
@@ -140,24 +134,12 @@ public class ApplicationService {
 		application.setUserId(applicationRepository.findByApplicationId(applicationId).getUserId());
 		applicationRepository.save(application);
 	}
-
-	public List<Application> getAllReassessment(String clientName) {
-		// TODO Auto-generated method stub
-		 List<Application> appList=new ArrayList<Application>();
+	public List<Application> getAllReassessment(int clientId) {
+		 List<Application> applicationList=new ArrayList<Application>();
 		 
-         for(Application application: applicationRepository.findAll()){
-       	 //if(application.isFinalize()==1 && clientName.equals(application.getClientName()))
-        	 {
-        		 appList.add(application);
-        		 System.out.println(appList);
-        	 }
-        	 System.out.println(application.getApplicationName());
-         }
-       
-         System.out.println("**************************"+appList+"v  *****************");
-		return appList;
+		 applicationList=applicationRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
+   		return applicationList;
 	}
-
 
 	public void allRuleCheck(int applicationId) {
 		int gitcCheck=0;
@@ -181,54 +163,25 @@ public class ApplicationService {
 	}
 	public boolean cloudableCheck(int applicationId){
 		int cloudableRuleFlag=0;
-		
 		Application application=new Application();
 		application=applicationRepository.findByApplicationId(applicationId);
-		
-//		List<CloudableRule> cloudableRuleList=new ArrayList<CloudableRule>();
-//		cloudableRuleList = cloudableRuleRepository.findAll();
-		
-		List<CloudableRule> cloudableListByClientId = new ArrayList<CloudableRule>();
-		for(CloudableRule cloudableRule : cloudableRuleRepository.findAll())
-		{
-			System.out.println(cloudableRule);
-			//System.out.println(cloudableRule.getClientName()+"==****=="+application.getClientName());
-		//	if(cloudableRule.getClientName().equals(application.getClientName()))
-			{
-				cloudableListByClientId.add(cloudableRule);
-			}
-		}
-		System.out.println("++++++" +cloudableListByClientId);
-		
+		int clientId=application.getClientId();
+		List<CloudableRule> cloudableRuleListByClientId = new ArrayList<CloudableRule>();
+		cloudableRuleListByClientId=cloudableRuleRepository.findByClientId(clientId);
 		List<Answers> answersList=new ArrayList<>();
-		
-		for(Answers  answers : answerRepository.findAll()) {
-			if(answers.getApplicationId()==applicationId)
-			{
-				answersList.add(answers);
-			}
-		}
-		for(CloudableRule cloudableRule:cloudableListByClientId) {
-			System.out.println("line 1");
+		answersList=answerRepository.findByApplicationId(applicationId);
+		for(CloudableRule cloudableRule:cloudableRuleListByClientId) {
 			for(Answers answers:answersList) {
-				System.out.println("line 2");
 				if(cloudableRule.getQuestionId()==(answers.getQuestionId())) {
-					System.out.println("cloudableRule.getQuestionId()"+cloudableRule.getQuestionId());
-//					System.out.println("answers.getQuestionId()"+answers.getQuestionId());
 					if(cloudableRule.getCloudableRule().contains(answers.getAnswerText())){
 						answers.setCloudAbility(1);
 						cloudableRuleFlag++;
-						System.out.println(cloudableRule.getCloudableRule()+"cloudableRule.getCloudableRule()");
-//					    System.out.println(answers.getAnswerText()+"answers.getAnswerText()");
-        				}//else {
-//						cloudableRuleFlag=0;break;}
-					//cloudableQuestionFlag=1;
-				}//else {cloudableQuestionFlag=0;}
+					}
+				}
 			}
 		}
-		if(cloudableRuleFlag==cloudableListByClientId.size()){
+		if(cloudableRuleFlag==cloudableRuleListByClientId.size()){
 			application.setCloudable("Yes");
-			
 			
 		return true;}
 		else {

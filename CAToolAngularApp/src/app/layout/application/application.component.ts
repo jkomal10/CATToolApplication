@@ -30,7 +30,7 @@ export class ApplicationComponent implements OnInit {
   //applictaions: Observable<Application[]>;
   application:Array<Application>=[];
   applicationTemplate:Array<Application>=[];
-  applications: any = [];
+  applicationList: any = [];
   public show:boolean = false;
   public buttonName:any = 'Help';
   constructor(public router:Router, private applicationService:ApplicationService,private logger: NGXLogger,private myStorage:LocalStorageService) { }
@@ -47,8 +47,8 @@ export class ApplicationComponent implements OnInit {
   };
     this.applicationService.CollectData(this.clientIdValue).subscribe(result => 
       {
-      this.applications= result ;
-      this.logger.log(JSON.stringify(this.applications));
+      this.applicationList= result ;
+      this.logger.log(JSON.stringify(this.applicationList));
       this.dtTrigger.next();
       });
   }
@@ -64,7 +64,7 @@ export class ApplicationComponent implements OnInit {
 
 exportTemplate(){
 const csvRows = [];
-this.logger.log(this.applications)
+this.logger.log(this.applicationList)
 var filename = "Application";
 let dateNow:Date=new Date();
 
@@ -93,7 +93,7 @@ new Angular5Csv( this.applicationTemplate,filename, options);
   }
   exportCsv(){
     const csvRows = [];
-    this.logger.log(this.applications)
+    this.logger.log(this.applicationList)
     var filename = "Application";
    
     let dateNow:Date=new Date();
@@ -103,9 +103,9 @@ new Angular5Csv( this.applicationTemplate,filename, options);
     this.logger.log(dateNow.getFullYear().toString+" year");
 
 
-    for (let index = 0; index < this.applications.length; index++) {
-      this.logger.log(this.applications[index].applicationId+"id");
-      this.application[index]=this.applications[index];
+    for (let index = 0; index < this.applicationList.length; index++) {
+      this.logger.log(this.applicationList[index].applicationId+"id");
+      this.application[index]=this.applicationList[index];
     }
 
     this.logger.log(this.application);
