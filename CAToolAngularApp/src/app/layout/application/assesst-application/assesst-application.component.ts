@@ -81,9 +81,19 @@ i=-1;
     console.log(this.tempp[1]+"ooooooooooooo");
     console.log(this.tempp[2]+"ooooooooooooo");
       }
-
+    isSelected(value: string): boolean {
+     this.result=value;
+     console.log(this.result.indexOf(value)>0);
+     console.log(this.result+"kooooooooooooooooooooooook^^^^^^^666");
+      return false;
+        // if (this.user)
+        //   return this.user.roles.indexOf(value) >= 0;
+        // else
+        //   return false;
+      }
    selectChangeHandler(optionnnnnn,event,id){
-    // var queId1=0,i=-1; 
+    // var queId1=0,i=-1;
+    var text1; 
     if(event.target.checked)
     {
     console.log(id+"idddddddd"+this.queId1);  
@@ -92,9 +102,9 @@ i=-1;
        {
          
         console.log(id);
-        var text1=optionnnnnn.optionText;
+        text1=optionnnnnn.optionText;
         var text2="";
-        this.result=this.result+text1;
+        this.result=this.result+','+text1;
         console.log(text1+"iiiiiiiiii");
         //console.log(text1+"iiiiiiiiii");
          this.theCheckbox[this.i]=this.result;
@@ -133,7 +143,7 @@ i=-1;
     //console.log(JSON.stringify(event)+"***************");
    // return event;
       }else{
-
+      this.result=this.result.slice(1);
       }
    }
 
