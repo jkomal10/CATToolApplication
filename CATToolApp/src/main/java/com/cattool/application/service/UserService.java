@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
 import com.cattool.application.encryption.EncryptPassword;
+import com.cattool.application.entity.ClientMaster;
 import com.cattool.application.entity.Users;
 import com.cattool.application.exception.CATException;
 import com.cattool.application.exception.ExceptionMessages;
+import com.cattool.application.repository.ClientMasterRepository;
 import com.cattool.application.repository.UserRepository;
 
 @Transactional
@@ -24,6 +26,9 @@ public class UserService {
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	ClientMasterRepository clientMasterRepository;
 
 	public int getUserCount(int clientId) {
 
@@ -45,6 +50,7 @@ public class UserService {
 	public List<Users> findAllUsers(int clientId) {
 
 		List<Users> userList = new ArrayList<>();
+		
 		System.out.println(userRepository.findAll());
 		try {
 			for (Users users : userRepository.findAll()) {
@@ -244,6 +250,12 @@ public class UserService {
 		int id = userRepository.save(userbyId).getUserId();
 		String json = "{\"id\" : "+id+"}";
 		return json;
+	}
+	
+	public String getClientNameByClientId(int clientId) {
+		ClientMaster client=new ClientMaster();
+		client=clientMasterRepository.findByClientId(clientId);
+		return client.getClientName();
 	}
 
 	

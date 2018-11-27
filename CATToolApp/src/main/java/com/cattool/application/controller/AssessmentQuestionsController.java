@@ -35,7 +35,7 @@ public class AssessmentQuestionsController {
 		return assessmentQuestionsService.getAllquestions();
 	}
 	
-	@GetMapping("/getAllQuestions/{clientName}")
+	@GetMapping("/getAllQuestions/{clientId}")
 	public List<AssessmentQuestions> getAllquestionsByClientName(@PathVariable int clientId)
 	{
 		System.out.println("****************get all question by client name******************");
