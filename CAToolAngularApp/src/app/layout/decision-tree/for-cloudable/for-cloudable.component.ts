@@ -37,6 +37,7 @@ export class ForCloudableComponent implements OnInit {
   executionOrders : Array<number> = [];
   cloudableRulesText : Array<String> = [];
   cloudableRules : Array<CloudableRule> = [];
+  orderByQuestionDisplayOrder : any = [];
   exeorder:any=[];
   constructor(private http:HttpClient,private forCloudableService:ForCloudableService,private router:Router) {
   this.cloudableRules = [];
@@ -45,7 +46,7 @@ export class ForCloudableComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2,
+      pageLength: 10,
       responsive: true,
       rowCallback: (row: Node, data: any[] | Object, index: number) => {
         const self = this;
@@ -58,14 +59,17 @@ export class ForCloudableComponent implements OnInit {
         return row;
     }
   };
+
+
+  
   
 
     this.forCloudableService.CollectData().subscribe(result => {
 
        this.AllData = result;
        this.dtTrigger.next();
-       console.log(this.AllData);
-       let abc=result[0];
+      //  console.log(this.AllData);
+      //  let abc=result[0];
         //this.op = abc['questionOption'];
        //console.log(this.op[0]['optionText']+"komalll");
       });
@@ -90,8 +94,9 @@ export class ForCloudableComponent implements OnInit {
 
        this.forCloudableService.collectOptions().subscribe(result =>{
          this.options=result;
-         console.log(this.options);
-        //  for (let index = 0; index < this.rules.length; index++) {
+        //  console.log(this.options);
+        
+         //  for (let index = 0; index < this.rules.length; index++) {
         //    var qid=this.rules[index].questionId;
         //    for (let index = 0; index < this.options.length; index++) {
         //      if(qid==this.options[index].questionId)
@@ -117,23 +122,23 @@ export class ForCloudableComponent implements OnInit {
       console.log(this.rules[index].questionId+"*********  qid");
       var cRule : CloudableRule = new CloudableRule();
       cRule.questionId= this.rules[index].questionId;
-      console.log(cRule.questionId+"ruleqid");
+      // console.log(cRule.questionId+"ruleqid");
       cRule.cloudableRule=this.cloudableRulesText[index];
-      console.log("rules***"+cRule.cloudableRule);
+      // console.log("rules***"+cRule.cloudableRule);
       cRule.executionOrder=this.executionOrders[index];
-      console.log("exeorder****"+ cRule.executionOrder);
+      // console.log("exeorder****"+ cRule.executionOrder);
       cRule.questionText=this.rules[index].questionText;
-      console.log("qtext****"+cRule.questionText);
+      // console.log("qtext****"+cRule.questionText);
       cRule.cloudableRuleId=this.rules[index].cloudableRuleId;
-      console.log("ruleId***"+cRule.cloudableRuleId);
+      // console.log("ruleId***"+cRule.cloudableRuleId);
       this.cloudableRules[index]=cRule;
        this.router.navigate(['/for-cloudable']);
     }
     
     //console.log(cloudableRules+"llllllllllllllllllllllllllllllllll");
-    console.log("jjjjjjjjjjjjjjjjjjjj");
+    // console.log("jjjjjjjjjjjjjjjjjjjj");
     
-    console.log(JSON.stringify(this.cloudableRules)+"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+    // console.log(JSON.stringify(this.cloudableRules)+"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
     this.forCloudableService.addClodableRule(this.cloudableRules).subscribe();
   
   }
@@ -150,5 +155,37 @@ export class ForCloudableComponent implements OnInit {
   }
   Cancle(){
     this.router.navigate(['/decision-tree']);
+  }
+
+  selectChangeHandler(event:any)
+  {
+    if(event.target.value=="QuestionDisplayOrder")
+    {
+      let small : number = 0;
+      this.orderByQuestionDisplayOrder = this.questions.sort();
+      for (let index = 0; index < this.orderByQuestionDisplayOrder.length; index++) {
+        // const element = array[index];
+        console.log("SORT*********"+ this.orderByQuestionDisplayOrder[index].questionDisplayOrder);
+      }
+      
+      //  for (let index = 0; index < this.questions.length-1; index++) {
+      //    console.log(this.questions[index].questionDisplayOrder);
+      //   //  if(this.questions.)
+      //    for (let index1 = 0; index1 < this.questions.length; index1++) {
+      //     //  const element = array[index];
+      //     if(this.questions[index].questionId>this.questions[index1].questionId)
+      //     {
+      //       this.orderByQuestionDisplayOrder[index]=this.questions[index1];
+            
+      //     }
+           
+      //    }
+
+      //  }
+    }
+    else
+    {
+
+    }
   }
 }
