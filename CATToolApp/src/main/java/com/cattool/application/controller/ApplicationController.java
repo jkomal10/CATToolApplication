@@ -34,8 +34,8 @@ public class ApplicationController {
 	public List<Application>getAllApplication(@PathVariable int clientId)
 	{
 	return applicationService.getAllApplication(clientId);
-		
 	}
+	
 	@GetMapping("/getApplicationById/{applicationId}")
 	public Application getApplicationById(@PathVariable("applicationId") int id) {
 	 return applicationService.GetSingleApplication(id);	
@@ -44,8 +44,6 @@ public class ApplicationController {
 	@PostMapping("/saveApplication/create")
 	public Application saveApplication(@RequestBody Application application)
 	{
-		System.out.println("******************************************add application*************************");
-		System.out.println(application);
 		return applicationService.saveApplication(application);
 	}
 	
@@ -57,44 +55,44 @@ public class ApplicationController {
 		return applicationService.findbyApplicationName(applicationName);
 	    }
 		else {
-			return null;
+		return null;
 		}
+	}
+	
+	@GetMapping("/getApplicationByUserName/{userName}")
+	public Application getAppByUser(@PathVariable("userName") String userName) {
+		return applicationService.getApplicationByUserName(userName);
 	}
 	
 	@PutMapping("/updateApplictaion")
 	public void updateApplication (@RequestBody Application application) {
-		System.out.println("*******update*******");
 		applicationService.updateApplication(application.getApplicationId(),application);
 	}
-	
-	
+		
 	@DeleteMapping("/deleteApplicationById/{applicationId}")
 	public void  deleteApplication(@PathVariable("applicationId") int id) {
-		System.out.println("*******delete*******");
 		applicationService.deleteApplicationById(id);
 	}
 	
 	@PutMapping("/resetApplicationById/{applicationId}")
 	public void resetApplication (@PathVariable("applicationId") int applicationId) {
-		System.out.println("*******Reset*******");
 		applicationService.resetApplicationById(applicationId);
 	}
 	
 	@PutMapping("/deactivateApplicationById/{applicationId}")
 	public void deactivateApplication(@PathVariable("applicationId") int applicationId) {
-		System.out.println("*******deactivate*******"+applicationId);
 		applicationService.deactivateApplicationById(applicationId);
 	}
 	
-	@GetMapping("/getAllReassessment/{clientName}")
-	public List<Application>getAllReassessment(@PathVariable String clientName)
+	@GetMapping("/getAllReassessment/{clientId}")
+	public List<Application>getAllReassessment(@PathVariable int clientId)
 	{
-		return applicationService.getAllReassessment(clientName);
+		return applicationService.getAllReassessment(clientId);
 	}
 
 	@GetMapping("AllRuleCheck/{applicationId}")
 	public void allRuleCheck(@PathVariable("applicationId") int applicationId) {
-		System.out.println("All rule check!!!!");
+		
 		applicationService.allRuleCheck(applicationId);
 	}
 	
@@ -106,20 +104,14 @@ public class ApplicationController {
 	
 	@GetMapping("cloudProviderCheck/{applicationId}")
 	public void cloudProviderCheck(@PathVariable("applicationId") int applicationId) {
-		System.out.println("cloud provider rule check!!!!");
+		
 		applicationService.cloudProviderCheck(applicationId);
 	}
 	
-	@GetMapping("/getApplicationByUserName/{userName}")
-	public Application getAppByUser(@PathVariable("userName") String userName) {
-		System.out.println("application get by user name!!!!"+userName);
-		return applicationService.getApplicationByUserName(userName);
-	}
 	
 	@GetMapping("/summaryReport")
 	public void summaryRepory() throws FileNotFoundException
 	{
-		System.out.println("Summary report works!!!");
 		applicationService.summaryReport();
 	}
 
