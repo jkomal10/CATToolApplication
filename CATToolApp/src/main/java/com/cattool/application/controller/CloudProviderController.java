@@ -30,28 +30,16 @@ public class CloudProviderController {
 	{
 		return cloudProviderService.getAllcloudProvider(clientId);
 	}
-	
-//	@GetMapping("/getAllCloudProviderQuestion/{cloudProviderId}")
-//	public List<AssessmentQuestions> getCloudProviderQuestion(@PathVariable int cloudProviderId)
-//	{
-//		System.out.println("**********getAllCloudProviderQuestion*********");
-//		return cloudProviderService.getCloudProviderQuestion(cloudProviderId);
-//	}
-//	
+
 	@PutMapping("/setEvaluationOrder")
 	public void setEvaluationOrder(@RequestBody List<CloudProvider> cloudProvider)
 	{
-		
-		System.out.println("*************SetEvaluationOrder**********"+cloudProvider);
-		
 		cloudProviderService.setEvaluationOrder(cloudProvider);
-		 
 	}
+	
 	@PutMapping("/updateCloudProviderRule/{clientId}")
 	public void updateCloudProviderRule(@RequestBody List<CloudProviderRule> cloudProviderRule,@PathVariable int clientId)
 	{
-		System.out.println("***************************************");
-		System.out.println(cloudProviderRule);
 		cloudProviderService.updateCloudProviderRule(cloudProviderRule,clientId);
 	}
 

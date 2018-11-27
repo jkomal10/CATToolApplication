@@ -3,29 +3,37 @@
 <div>
   <form>
     <table width="100%" class="table table-hover table-sm ">
-        <thead bgcolor="#E0E0E0">
-          <tr >
-            <th>
-              <font color="black">Migration Pattern id</font>
-            </th>
-            <th>
-              <font color="black">Evaluation Order</font>
-            </th>
-            <th>
-              <font color="black">Migration Pattern</font>
-            </th>
-          </tr>
-        </thead>
-        <tbody >
-          <tr *ngFor =  "let row of AllData;let i = index" >
-              <td  width="20%">{{row.migrationId}}</td>
-              <td width="20%"><input type="text" [(ngModel)]="row.evaluationOrder" name="evaluationOrder{{i}}" value="row.evaluationOrder"></td>
-              <td width="20%">{{row.migrationPattern}}</td>
-          </tr>
-          <tr><td></td><td></td><td></td></tr>
-        </tbody>
-        <button type="submit" (click)="saveEvaluationOrder()"><i class="fa fa-save" style="font-size:24px"></i></button>
-      </table>
+      <thead bgcolor="#E0E0E0">
+        <tr>
+          <th>
+            <font color="black">Migration Pattern id</font>
+          </th>
+          <th>
+            <font color="black">Evaluation Order</font>
+          </th>
+          <th>
+            <font color="black">Migration Pattern</font>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor =  "let row of migrationData ;let i = index">
+          <td width="20%">{{row.migrationId}}</td>
+          <td width="20%">
+            <input type="text" [(ngModel)]="row.evaluationOrder" name="evaluationOrder{{i}}" value="row.evaluationOrder">
+          </td>
+          <td width="20%">{{row.migrationPattern}}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+      <button type="submit" (click)="saveEvaluationOrder()">
+        <i class="fa fa-save" style="font-size:24px"></i>
+      </button>
+    </table>
   </form>
 
 </div>

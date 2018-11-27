@@ -11,11 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.CloudProviderRule;
 import com.cattool.application.entity.CloudableRule;
-import com.cattool.application.entity.Migration;
 import com.cattool.application.entity.MigrationRule;
 import com.cattool.application.exception.ExceptionMessages;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
 import com.cattool.application.repository.CloudableRuleRepository;
+import com.cattool.application.repository.MigrationRepository;
+
 @Transactional
 @Service
 public class AssessmentQuestionsService{
@@ -44,11 +45,9 @@ public class AssessmentQuestionsService{
 				
 			}
 			LOGGER.info("Successfully get all the questions");
-			System.out.println(assessmentQuestionsList);
 			return assessmentQuestionsList;
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.GetQuestion +e);
-			System.out.println(ExceptionMessages.GetQuestion +e);
 		}
 		return null;
 	}
@@ -65,11 +64,9 @@ public class AssessmentQuestionsService{
 				
 			}
 			LOGGER.error("Succfully get all users by client name");
-			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"+assessmentQuestionsList);
 			return assessmentQuestionsList;
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.GetQuestionByClientName +e);
-			System.out.println(ExceptionMessages.GetQuestionByClientName +e);
 		}
 		return null;
 		
@@ -77,15 +74,11 @@ public class AssessmentQuestionsService{
 	
 	public AssessmentQuestions saveQuestions(AssessmentQuestions assessmentQuestions)
 	{
-		System.out.println(assessmentQuestions);
-		
 		try {
 			assessmentQuestionsRepository.save(assessmentQuestions);
 			CloudableRule cloudableRule = new CloudableRule();
-			System.out.println("((((((((   "+assessmentQuestions.getAssessmentTypeForCloudable());
 			if(assessmentQuestions.getAssessmentTypeForCloudable() != null)
 			{
-				System.out.println("*********** "+assessmentQuestions.getAssessmentTypeForCloudable());
 				cloudableRule.setQuestionId(assessmentQuestions.getQuestionId());
 				cloudableRule.setQuestionText(assessmentQuestions.getQuestionText());
 				cloudableRule.setClientId(assessmentQuestions.getClientId());
@@ -94,22 +87,8 @@ public class AssessmentQuestionsService{
 			LOGGER.info("Successfully saved the Questions");
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.SaveQuestion +e);
-			System.out.println(ExceptionMessages.SaveQuestion +e);
 		}
-//		cloudableRuleRepository .save(cloudableRule);
 		return null;
-
-//		AssessmentQuestions a1=new AssessmentQuestions();
-//		a1=assessmentQuestionsRepository.save(assessmentQuestions);
-//		if(assessmentQuestions.getAssessmentTypeForCloudable()!=null || assessmentQuestions.getAssessmentTypeForCloudable()!="false")
-//		{
-//			CloudableRule cloudableRule=new CloudableRule();
-//			cloudableRule.setQuestionId(a1.getQuestionId());
-//			cloudableRule.setQuestionText(a1.getQuestionText());
-//			cloudableRuleRepository.save(cloudableRule);
-//		}
-//		return a1;
-
 	}
 	
 	public void deleteQuestions(int questionId)
@@ -129,9 +108,7 @@ public class AssessmentQuestionsService{
 			LOGGER.info("Succfully delete the question");
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.DeleteQuestion +e);
-			System.out.println(ExceptionMessages.DeleteQuestion +e);
 		}
-		
 	}
 	
 	public void updateQuestions(AssessmentQuestions assessmentQuestions)
@@ -154,15 +131,11 @@ public class AssessmentQuestionsService{
 			LOGGER.info("Succfully updated the questions");
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.UpdateQuestion +e);
-			System.out.println(ExceptionMessages.UpdateQuestion +e);
 		}
 	}
 	
 	public List<AssessmentQuestions> getCloudableQuestions(int clientId){
 		List<AssessmentQuestions> list=new ArrayList<AssessmentQuestions>();
-		
-//		list = assessmentQuestionsRepository.findByClientIdAndAssessmentTypeForCloudable(clientId,"true");
-		
 		try {
 			for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
 				if(assessmentQuestions.getAssessmentTypeForCloudable().equals("true"))
@@ -181,43 +154,22 @@ public class AssessmentQuestionsService{
 		return null;
 	}
 
-	/*public List<AssessmentQuestions> getAllMigrationPattern(int migrationId) {
-		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<>();
-		for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
-			List<MigrationRule> migrationRuleList;
-			for(MigrationRule migrationRule:assessmentQuestions.getMigrationRule()) {
-				if(migrationId==migrationRule.getMigrationId()) {
-				System.out.println(migrationRule);
-				
-				assessmentQuestionsList.add(assessmentQuestions);
-				break;}
-			}
-		}
-		return assessmentQuestionsList;
-		
-	}*/
-	
 	public List<AssessmentQuestions> getAllMigrationPattern(int migrationId, int clientId) {
 		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<>();
 		try {
 			for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
-				List<MigrationRule> migrationRuleList;
 				for(MigrationRule migrationRule:assessmentQuestions.getMigrationRule()) {
 					if(migrationId==migrationRule.getMigrationId ()&& (clientId==(migrationRule.getClientId()))) {
-					assessmentQuestionsList.add(assessmentQuestions);
-					break;
+						assessmentQuestionsList.add(assessmentQuestions);
+						break;
 					}
 				}
 				
 			}
-			System.out.println(assessmentQuestionsList);
 			LOGGER.info("Succfully get all the migration pattern list for dicision tree");
 			return assessmentQuestionsList;
-			
-			
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.MigrationPattern +e);
-			System.out.println(ExceptionMessages.MigrationPattern +e);
 		}
 		return null;
 	}
@@ -226,16 +178,14 @@ public class AssessmentQuestionsService{
 		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<>();
 		try {
 			for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
-				List<CloudProviderRule> cloudProviderRuleList;
 				for(CloudProviderRule cloudProviderRule:assessmentQuestions.getCloudProviderRules()) {
 					if(cloudProviderId==cloudProviderRule.getCloudProviderId() &&clientId==cloudProviderRule.getClientId()) {
-					assessmentQuestionsList.add(assessmentQuestions);
+						assessmentQuestionsList.add(assessmentQuestions);
 					break;
 					}
 				}
 				
 			}
-			System.out.println(assessmentQuestionsList);
 			LOGGER.info("Succfully get all the cloud provider pattern list for dicision tree");
 			return assessmentQuestionsList;
 		} catch (Exception e) {
@@ -247,26 +197,9 @@ public class AssessmentQuestionsService{
 
 	public List<AssessmentQuestions> getQuestionsforCloudable(int clientId) {
       List<AssessmentQuestions> list=new ArrayList<AssessmentQuestions>();
-		
 		list = assessmentQuestionsRepository.findByClientIdAndAssessmentTypeForCloudable(clientId,"true");
 		System.out.println(list);
 		return list;
 	}
-	
-	
-//	public List<AssessmentQuestions> getAllcloudProviderRule(int cloudProviderId, String clientName) {
-//		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<>();
-//		for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
-//			List<CloudProviderRule> cloudProviderRuleList;
-//			for(CloudProviderRule cloudProviderRules : assessmentQuestions.getCloudProviderRules()) {
-//				if(cloudProviderId == cloudProviderRules.getCloudProviderId() && clientName.equals(cloudProviderRules.getClientName()))
-//				{
-//					System.out.println(cloudProviderRules);
-//					assessmentQuestionsList.add(assessmentQuestions);
-//					break;
-//				}
-//			}
-//		}
-//		return assessmentQuestionsList;
-//	}
+
 }

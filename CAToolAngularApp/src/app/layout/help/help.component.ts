@@ -14,8 +14,7 @@ export class HelpComponent implements OnInit {
 
   textfield:string;
   issues:issue=new issue();
-  constructor(public helpService:HelpService, public router: Router,
-    private http: HttpClient, private myStorage:LocalStorageService) { }
+  constructor(public helpService:HelpService, public router: Router,private http: HttpClient, private myStorage:LocalStorageService) { }
 
   ngOnInit() {
    
@@ -23,13 +22,9 @@ export class HelpComponent implements OnInit {
   }
 
   submit(){
-    // this.textfield=formvalue;
-    console.log(this.textfield);
     this.issues.issue=this.textfield;
     this.issues.userName=this.myStorage.getCurrentUserObject().userName;
-    console.log(this.issues.userName);
     this.issues.clientId=this.myStorage.getCurrentUserObject().clientId;
-    console.log(this.issues.clientId);
     this.helpService.saveIssue(this.issues).subscribe();
     this.router.navigate(['/dashboard']);
 

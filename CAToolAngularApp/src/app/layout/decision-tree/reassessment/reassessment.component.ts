@@ -12,78 +12,64 @@ import { ServiceService } from './reassessment.service';
 export class ReassessmentComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();
+  dtTrigger: Subject<any> = new Subject();
   value1: string;
-  AllData : any = [];
-  applicationId : number;
-  applicationIdArray : any = [];
-  migrationCheckbox : boolean;
-  cloudProviderCheckbox : boolean;
-  i : number=0;
-  j : number=0;
+  reassessmentDataValue: any = [];
+  applicationId: number;
+  applicationIdArray: any = [];
+  migrationCheckbox: boolean;
+  cloudProviderCheckbox: boolean;
+  i: number = 0;
+  j: number = 0;
 
-  constructor(public router:Router,private reassessmentService:ServiceService,private http:HttpClient) { }
+  constructor(public router: Router, private reassessmentService: ServiceService, private http: HttpClient) { }
 
   ngOnInit() {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      responsive: true};
-    this.reassessmentService.CollectData().subscribe(result => 
-      {
-      this.AllData = result ;
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      responsive: true
+    };
+    this.reassessmentService.reassessmentData().subscribe(result => {
+      this.reassessmentDataValue = result ;
       this.dtTrigger.next();
-      });
+    });
 
-    
+
   }
 
-  runRule(){
-    console.log("run rules++++++++++++++++");
-    for (let index = 0; index < this.applicationIdArray.length ; index++) {
-      console.log(this.applicationIdArray[index]);
-      console.log("^^^"+this.migrationCheckbox+"^^^^");
+  runRule() {
+    for (let index = 0; index < this.applicationIdArray.length; index++) {
 
-      if(this.cloudProviderCheckbox)
-      {
-          console.log("cloud provider clicked");
-          this.reassessmentService.cloudProvider(this.applicationIdArray[index]).subscribe();
+      if (this.cloudProviderCheckbox) {
+        this.reassessmentService.cloudProvider(this.applicationIdArray[index]).subscribe();
       }
 
-      if(this.migrationCheckbox)
-      {
-          console.log("migration clicked");
-          this.reassessmentService.migrationPattern(this.applicationIdArray[index]).subscribe();
+      if (this.migrationCheckbox) {
+        this.reassessmentService.migrationPattern(this.applicationIdArray[index]).subscribe();
       }
 
-    } 
-  }
-
-  migrationPatternMethod(values:any){
-    console.log("migration "+values.currentTarget.checked)
-    this.migrationCheckbox=values.currentTarget.checked;
-  }
-
-  cloudProviderMethod(values:any){
-    console.log("cloud provider "+values.currentTarget.checked);
-    this.cloudProviderCheckbox=values.currentTarget.checked;
-  }
-
-  applicationNameChange(e,applicationId){
-    console.log("application checked");
-    if(e.currentTarget.checked)
-    {
-
-      this.applicationIdArray[this.i]=applicationId;
-      console.log(this.applicationIdArray[this.i]);
-      this.i++;
-      console.log(this.i);
     }
-    else{
-      for (let index = 0; index < this.applicationIdArray.length ; index++) {
+  }
 
-        if(this.applicationIdArray[index]==applicationId)
-        {
+  migrationPatternMethod(values: any) {
+    this.migrationCheckbox = values.currentTarget.checked;
+  }
+
+  cloudProviderMethod(values: any) {
+    this.cloudProviderCheckbox = values.currentTarget.checked;
+  }
+
+  applicationNameChange(e, applicationId) {
+    if (e.currentTarget.checked) {
+
+      this.applicationIdArray[this.i] = applicationId;
+      this.i++;
+    }
+    else {
+      for (let index = 0; index < this.applicationIdArray.length; index++) {
+
+        if (this.applicationIdArray[index] == applicationId) {
           this.applicationIdArray.splice(index, 1);
         }
       }

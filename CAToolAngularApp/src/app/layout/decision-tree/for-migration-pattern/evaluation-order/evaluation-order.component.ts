@@ -12,16 +12,13 @@ import { Migration } from '../Migration';
 })
 export class EvaluationOrderComponent implements OnInit {
   constructor(private forMigrationPatternService : ForMigrationPatternService,public router: Router,private http: HttpClient) { }
-  AllData : any = [];
+  migrationData : any = [];
 
   ngOnInit() {
-    this.forMigrationPatternService.CollectData().subscribe(result => 
+    this.forMigrationPatternService.getAllMigrationData().subscribe(result => 
       {
-      this.AllData = result;
-      console.log(this.AllData);
+        this.migrationData = result;
       });
-
-
   }
 
   questions(){
@@ -29,8 +26,7 @@ export class EvaluationOrderComponent implements OnInit {
   }
 
   saveEvaluationOrder(){
-    console.log('*************************'+JSON.stringify(this.AllData));
-    this.forMigrationPatternService.saveEvaluationOrder(this.AllData).subscribe();
+    this.forMigrationPatternService.saveEvaluationOrder(this.migrationData).subscribe();
   }
 
 }

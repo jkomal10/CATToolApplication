@@ -61,6 +61,7 @@ export class ForCloudableComponent implements OnInit {
     });
 
 
+
     this.forCloudableService.collectRule(this.myStorage.getCurrentUserObject().clientId).subscribe(result => {
       this.rules = result;
       // this.cloudableQuestionsRules= result;
@@ -76,6 +77,29 @@ export class ForCloudableComponent implements OnInit {
       this.options = result;
     })
 
+  
+  
+
+    // this.forCloudableService.getCloudableQuestions().subscribe(result => {
+    //     this.AllData = result;
+    //     this.dtTrigger.next();
+    //   });
+
+   
+    //    this.forCloudableService.collectRule().subscribe(result => {
+    //     this.rules=result;
+        
+    //    });
+
+       this.forCloudableService.collectQuestion(this.myStorage.getCurrentUserObject().clientId).subscribe(result=>{
+         this.questions=result;
+       });
+
+       this.forCloudableService.collectOptions().subscribe(result =>{
+         this.options=result;
+       })
+
+
 
   }
   someClickHandler(info: any): void {
@@ -84,6 +108,7 @@ export class ForCloudableComponent implements OnInit {
 
   addCloudableRule() {
     for (let index = 0; index < this.rules.length; index++) {
+
       console.log(this.rules[index].questionId + "*********  qid");
       var cRule: CloudableRule = new CloudableRule();
       cRule.questionId = this.rules[index].questionId;
@@ -99,37 +124,70 @@ export class ForCloudableComponent implements OnInit {
   }
 
   onSubmit() {
-    let cRule = new CloudableRule();
+      let cRule = new CloudableRule();
+
+    //   var cRule : CloudableRule = new CloudableRule();
+    //   cRule.questionId= this.rules[index].questionId;
+    //   cRule.cloudableRule=this.cloudableRulesText[index];
+    //   cRule.executionOrder=this.executionOrders[index];
+    //   cRule.questionText=this.rules[index].questionText;
+    //   cRule.cloudableRuleId=this.rules[index].cloudableRuleId;
+    //   this.cloudableRules[index]=cRule;
+    //   this.router.navigate(['/for-cloudable']);
+    // }
+    // this.forCloudableService.addClodableRule(this.cloudableRules).subscribe();
     this.addCloudableRule();
   }
-  Cancle() {
-    this.router.navigate(['/decision-tree']);
-  }
 
-  selectChangeHandler(event: any) {
-    if (event.target.value == "QuestionDisplayOrder") {
-      this.questions.sort(function (question1, question2) {
-        if (question1.questionDisplayOrder > question2.questionDisplayOrder) {
-          // console.log("true****");
-          return 1;
-        }
-        if (question1.questionDisplayOrder < question2.questionDisplayOrder) {
-          // console.log("qqqqqqq****");
-          return -1;
-        }
-      });
+  // onSubmit(){
+  //   let cRule=new CloudableRule();
 
-      for (let index = 0; index < this.questions.length; index++) {
-          console.log("*********" + this.questions[index].questionDisplayOrder);
-          for (let index1 = 0; index1 < this.questions.length; index1++) {
-              if(this.questions[index].questionText===this.rules[index1].questionText)
-              {
-                this.cloudableQuestionsRules[index].executionOrder=this.rules[index].executionOrder;
-              }
-          }
-          console.log("*********" + this.cloudableQuestionsRules[index].executionOrder);
-          console.log("*********" + this.rules[index].executionOrder);
-      }
+  //   this.addCloudableRule();
+  // }
+  // Cancle() {
+  //   this.router.navigate(['/decision-tree']);
+  // }
+
+
+  // selectChangeHandler(event: any) {
+  //   if (event.target.value == "QuestionDisplayOrder") {
+  //     this.questions.sort(function (question1, question2) {
+  //       if (question1.questionDisplayOrder > question2.questionDisplayOrder) {
+  //         // console.log("true****");
+  //         return 1;
+  //       }
+  //       if (question1.questionDisplayOrder < question2.questionDisplayOrder) {
+  //         // console.log("qqqqqqq****");
+  //         return -1;
+  //       }
+  //     });
+
+  //     for (let index = 0; index < this.questions.length; index++) {
+  //         console.log("*********" + this.questions[index].questionDisplayOrder);
+  //         for (let index1 = 0; index1 < this.questions.length; index1++) {
+  //             if(this.questions[index].questionText===this.rules[index1].questionText)
+  //             {
+  //               this.cloudableQuestionsRules[index].executionOrder=this.rules[index].executionOrder;
+  //             }
+  //         }
+  //         console.log("*********" + this.cloudableQuestionsRules[index].executionOrder);
+  //         console.log("*********" + this.rules[index].executionOrder);
+  //     }
+
+  selectChangeHandler(event:any)
+  {
+    if(event.target.value=="QuestionDisplayOrder")
+    {
+      let small : number = 0;
+      this.questions.sort(function(question1,question2){
+        if(question1.questionDisplayOrder>question2.questionDisplayOrder) return -1;
+        if(question1.questionDisplayOrder<question2.questionDisplayOrder) return 1;
+      })
+
+        for (let index = 0; index < this.rules.length; index++) {
+          console.log("*********"+this.rules[index].questionDisplayOrder);
+        }
+
     }
     else if (event.target.value == "ExecutionOrder") {
       this.rules.sort(function (executionOrder1, executionOrder2) {
@@ -148,3 +206,4 @@ export class ForCloudableComponent implements OnInit {
     }
   }
 }
+

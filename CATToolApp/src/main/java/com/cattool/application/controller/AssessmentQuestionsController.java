@@ -30,14 +30,14 @@ public class AssessmentQuestionsController {
 	@GetMapping("/getAllQuestions")
 	public List<AssessmentQuestions> getAllquestions()
 	{
-		System.out.println("****************get all question******************");
-		System.out.println(assessmentQuestionsService.getAllquestions());
+		System.out.println("Get all question!!");
 		return assessmentQuestionsService.getAllquestions();
 	}
 	
 	@GetMapping("/getCloudableQuestion/{clientId}")
 	public List<AssessmentQuestions> getQuestionsforCloudable(@PathVariable int clientId)
 	{
+		System.out.println("Get cloudable question!!");
 		return assessmentQuestionsService.getQuestionsforCloudable(clientId);
 	}
 	
@@ -45,66 +45,49 @@ public class AssessmentQuestionsController {
 	@GetMapping("/getAllQuestions/{clientId}")
 	public List<AssessmentQuestions> getAllquestionsByClientName(@PathVariable int clientId)
 	{
-		System.out.println("****************get all question by client name******************");
+		System.out.println("Get all question by client name!!");
 		return assessmentQuestionsService.getAllquestionsByClientId(clientId);
 	}
 	
 	@PostMapping("/saveAssessmentQuestions/create")
 	public void saveAssessmentQuestions(@RequestBody AssessmentQuestions assessmentQuestions)
 	{
-		System.out.println("****************save all question******************"+assessmentQuestions);
-		System.out.println("migration rule +++++++++++++++++"+assessmentQuestions.getMigrationRule());
-//		List<MigrationRule> migrationRuleList =new ArrayList<>();
-//		migrationRuleList=assessmentQuestions.getMigrationRule();
-//		assessmentQuestions.setMigrationRule(migrationRuleList);
-		//assessmentQuestions.setMigrationRule(assessmentQuestions.getMigrationRule());
-
-	//List<QuestionOption> questionOptionList =new ArrayList<>();
-	//questionOptionList=assessmentQuestions.getQuestionOption();
-  // assessmentQuestions.setQuestionOption(assessmentQuestions.getQuestionOption());
-//		
-	//assessmentQuestions.setQuestionOption(questionOptionList);
-//		
-//		System.out.println("secoooooooooooooooooooooooooooooo");
-		
+		System.out.println("Save all question!!");
 		assessmentQuestionsService.saveQuestions(assessmentQuestions);
-		
-		
 	}
 	
 	@DeleteMapping("/deleteQuestions/{questionId}")
 	public void deleteQuestions(@PathVariable int questionId)
 	{
-		System.out.println("****************delete question******************");
+		System.out.println("Delete question!!");
 		assessmentQuestionsService.deleteQuestions(questionId);
 		
 	}
 	
 	@PutMapping("/updateQuestions/update")
 	public void updateQuestionById(@RequestBody AssessmentQuestions assessmentQuestions) {
-		System.out.println("***************Update question******************");
-		System.out.println("########"+assessmentQuestions.getQuestionId());
+		System.out.println("Update question!!");
 		assessmentQuestionsService.updateQuestions(assessmentQuestions);
 	}
 	
 	@GetMapping("/getAllCloudableQuestions/{clientId}")
 	public List<AssessmentQuestions> getCloudableQuestions(@PathVariable int clientId)
 	{
-		System.out.println("****************get all question******************");
+		System.out.println("Get all question!!");
 		return assessmentQuestionsService.getCloudableQuestions(clientId);
 	}
 	
 	@GetMapping("/getAllMigrationPattern/{migrationId}/{clientId}")
 	public List<AssessmentQuestions> getAllMigrationPattern(@PathVariable("migrationId") int migrationId,@PathVariable int clientId)
 	{
-		System.out.println("****************get all question******************");
+		System.out.println("Get all question!!");
 		return assessmentQuestionsService.getAllMigrationPattern(migrationId,clientId);
 	}
 	
 	@GetMapping("/getAllCloudProviderRule/{cloudProviderId}/{clientId}")
 	public List<AssessmentQuestions> getAllcloudProviderRule(@PathVariable("cloudProviderId") int cloudProviderId,@PathVariable int clientId)
 	{
-		System.out.println("****************get all question******************");
+		System.out.println("Get all cloud provider question!!");
 		return assessmentQuestionsService.getAllcloudProviderRule(cloudProviderId,clientId);
 	}
 	

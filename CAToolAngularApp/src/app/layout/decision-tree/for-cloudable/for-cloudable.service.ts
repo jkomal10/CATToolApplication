@@ -15,31 +15,45 @@ export class ForCloudableService {
   private url= 'http://localhost:8090/assessmentQuestions/getAllCloudableQuestions';
   clientIdValue : number;
   constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
+
    
    CollectData(){
    this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
    return this.http.get(`${this.url}`+`/`+this.clientIdValue);
     }
 
-     addClodableRule(cloudablerule: Object): Observable<Object> {
-      console.log(`${this.baseUrl }/create`);
-      return this.http.post(`${this.baseUrl }` + `/create`, cloudablerule);
+    //  addClodableRule(cloudablerule: Object): Observable<Object> {
+    //   console.log(`${this.baseUrl }/create`);
+    //   return this.http.post(`${this.baseUrl }` + `/create`, cloudablerule);
+    //  }
+
+
+   getCloudableQuestions(){
+      this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
+      return this.http.get(this.myStorage.getdomainURL()+`/assessmentQuestions/getAllCloudableQuestions/`+this.clientIdValue);
+    }
+
+    addClodableRule(cloudablerule: Object): Observable<Object> {
+      return this.http.post(this.myStorage.getdomainURL() + `/cloudableRule/save/create`, cloudablerule);
+
     }
 
     collectRule(clientId:number)
     {
-     
-      return this.http.get(`${this.collectRulesUrl}`+`/`+clientId);
+      // return this.http.get(`${this.collectRulesUrl}`+`/`+clientId);
+      return this.http.get(this.myStorage.getdomainURL()+`/cloudableRule/getAll`);
     }
 
     collectOptions()
     {
-      const collectOptionsUrl = "http://localhost:8090/option/getAll";
-      return this.http.get(collectOptionsUrl);
+      return this.http.get(this.myStorage.getdomainURL()+`/option/getAll`);
     }
 
     collectQuestion(clientId:number){
-     
-      return this.http.get(`${this.CollectCloudableQuestionUrl}`+`/`+clientId);
+
+      // return this.http.get(`${this.CollectCloudableQuestionUrl}`+`/`+clientId);
+
+      return this.http.get(this.myStorage.getdomainURL()+`/assessmentQuestions/getCloudableQuestion/`+clientId);
+
     }
 }

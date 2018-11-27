@@ -41,20 +41,14 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
-        this.redirectToDashboard = this.myStorage.getLoggedInTrue();//this.status=localStorage.getItem('isLoggedin');
-
+        this.redirectToDashboard = this.myStorage.getLoggedInTrue();
         if (this.redirectToDashboard == 'true') {
-
             this.firstName = this.myStorage.getCurrentUserObject().firstName;
             this.lastName = this.myStorage.getCurrentUserObject().lastName;
-
-           
             this.userService.getUsersCount(this.clientIdValue).subscribe(data=>{this.userCount=data,console.log(this.userCount)});
-
             this.userService.getAllUsers(this.clientIdValue).subscribe(data => { this.users = data });
-            this.applicationService.CollectData(this.clientIdValue).subscribe(data => { this.application = data });
+            this.applicationService.getAllAplication(this.clientIdValue).subscribe(data => { this.application = data });
             this.applicationService.getApplicationCount(this.clientIdValue).subscribe(data=>{this.appCount=data,console.log(this.appCount)});
-
             this.isUser = this.myStorage.getIsUserActive();
             if (this.isUser == 'false') {
                 this.isAdmin = false;

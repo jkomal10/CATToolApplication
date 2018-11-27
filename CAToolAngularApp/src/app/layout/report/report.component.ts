@@ -21,10 +21,9 @@ export class ReportComponent implements OnInit {
 
   ngOnInit() {
     this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
-    this.applicationService.CollectData(this.clientIdValue).subscribe(result => 
+    this.applicationService.getAllAplication(this.clientIdValue).subscribe(result => 
       {
-      this.AllData = result;
-      console.log(JSON.stringify(this.AllData));
+        this.AllData = result;
       });
   }
 
@@ -34,15 +33,8 @@ export class ReportComponent implements OnInit {
 
   exportCsv(){
     const csvRows = [];
-    console.log(this.AllData)
     var filename = "Application";
     let dateNow:Date=new Date();
-    console.log(dateNow.getDate().toString+" Date");
-    console.log(dateNow.getDay().toString+" day");
-    console.log(dateNow.getMonth().toString+ " month");
-    console.log(dateNow.getFullYear().toString+" year");
-
-
     for (let index = 0; index < this.AllData.length; index++) {
       console.log(this.AllData[index].applicationId+"id");
       this.application[index]=this.AllData[index];  

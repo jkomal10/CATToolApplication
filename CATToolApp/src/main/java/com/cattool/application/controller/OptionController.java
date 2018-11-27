@@ -31,9 +31,6 @@ public class OptionController {
 	@PostMapping("/save/create")
 	public void saveQuestionOption(@RequestBody QuestionOption questionOption)
 	{
-		System.out.println("************8create ");
-		//questionOption.setAssessmentQuestions(questionOption.getAssessmentQuestions());
-		//questionOption.setQuestionText(questionOption.getAssessmentQuestions().getQuestionText());
 		optionService.saveQuestionOption(questionOption);
 	}
 }

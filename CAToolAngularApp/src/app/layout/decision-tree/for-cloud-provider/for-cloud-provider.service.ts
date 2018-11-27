@@ -7,28 +7,22 @@ import { LocalStorageService } from '../../utility/service/localStorage.service'
   providedIn: 'root'
 })
 export class ForCloudProviderService {
-
- 
-  private evaluationOrder = 'http://localhost:8090/cloudProvider';
-  private updateCloudProviderRuleUrl="http://localhost:8090/cloudProvider/updateCloudProviderRule";
   constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
   clientIdValue : number;
   
     
 CollectData(){
-  this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
-  const url = 'http://localhost:8090/cloudProvider/getAll';
-  return this.http.get(url+`/`+this.clientIdValue);
+    this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
+    return this.http.get(this.myStorage.getdomainURL()+`/cloudProvider/getAll/`+this.clientIdValue);
   }
 
 
   saveEvaluationOrder(evaluationOrder: Object): Observable<Object> 
   {
-    console.log(this.evaluationOrder);
-    return this.http.put(`${this.evaluationOrder}`+`/setEvaluationOrder`,evaluationOrder);
+    return this.http.put(this.myStorage.getdomainURL()+`/cloudProvider/setEvaluationOrder`,evaluationOrder);
   }
 
-  private  comptransfer  =  new  BehaviorSubject("Hello");
+  private  comptransfer  =  new  BehaviorSubject("cloud provider");
   cloudProviderId  =  this.comptransfer.asObservable();
 
   sendCloudProviderIdtoOtherComponent(messsage)
@@ -38,11 +32,11 @@ CollectData(){
 
   CollectCloudableRuleQuestions(cloudproviderId : number){
     this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
-    return this.http.get(`http://localhost:8090/assessmentQuestions/getAllCloudProviderRule/${cloudproviderId}/${this.clientIdValue}`);
+    return this.http.get(this.myStorage.getdomainURL()+`/assessmentQuestions/getAllCloudProviderRule/`+cloudproviderId+`/`+this.clientIdValue);
   }
   updateCloudProviderRule(cloudableRule:any):Observable<Object>
   {
     this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
-    return this.http.put(`${this.updateCloudProviderRuleUrl}`+`/`+this.clientIdValue, cloudableRule);
+    return this.http.put(this.myStorage.getdomainURL()+`/cloudProvider/updateCloudProviderRule`+`/`+this.clientIdValue, cloudableRule);
   }
 }

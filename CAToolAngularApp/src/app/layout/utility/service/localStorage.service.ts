@@ -24,6 +24,14 @@ export class LocalStorageService {
     localStorage.setItem('local','http://localhost:8090');
   }
 
+  setClientName(clientName:string){
+    localStorage.setItem('clientName',clientName);
+  }
+
+  getClientName(){
+    return localStorage.getItem('clientName');
+  }
+
   getdomainURL(){
     return localStorage.getItem('local');
   }

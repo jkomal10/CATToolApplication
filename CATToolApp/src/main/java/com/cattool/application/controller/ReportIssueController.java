@@ -16,13 +16,7 @@ import com.cattool.application.service.ReportIssueService;
 @RestController
 @RequestMapping("/reportIssue")
 public class ReportIssueController {
-	
-//	@PostMapping("/addUser/create/{createdBy}")
-//	public Users saveUser(@RequestBody Users user,@PathVariable String createdBy)
-//	{
-//		System.out.println("post method*****************");
-//		return userService.saveUser(user,createdBy);
-//	}
+
 	@Autowired
 	ReportIssueService reportIssueService;
 	
@@ -30,8 +24,6 @@ public class ReportIssueController {
 	public ReportIssue saveIssue(@RequestBody ReportIssue reportIssue)
 	{
 		System.out.print(reportIssue);
-//		ReportIssue reportIssue = new ReportIssue();
-//		reportIssue.setIssue(issue);
 		return reportIssueService.saveIssue(reportIssue);
 		
 	}
