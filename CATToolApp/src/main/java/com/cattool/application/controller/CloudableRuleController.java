@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +21,10 @@ public class CloudableRuleController {
 	
 	@Autowired
 	CloudableRuleService cloudableRuleService;
-	@GetMapping("/getAll")
-	public List<CloudableRule> getAllCloudableRules()
+	@GetMapping("/getAll/{clientId}")
+	public List<CloudableRule> getAllCloudableRules(@PathVariable int clientId)
 	{
-		return cloudableRuleService.getAll();
+		return cloudableRuleService.getAll(clientId);
 	}
 	
 	@PostMapping("/save/create")
