@@ -162,11 +162,39 @@ export class ForCloudableComponent implements OnInit {
     if(event.target.value=="QuestionDisplayOrder")
     {
       let small : number = 0;
-      this.orderByQuestionDisplayOrder = this.questions.sort();
-      for (let index = 0; index < this.orderByQuestionDisplayOrder.length; index++) {
-        // const element = array[index];
-        console.log("SORT*********"+ this.orderByQuestionDisplayOrder[index].questionDisplayOrder);
+      // this.orderByQuestionDisplayOrder = this.questions.sort((n1,n2)=>{
+      //    return this.compare(n1.questionDisplayOrder,n2.questionDisplayOrder);
+      // });
+
+      for (let index = 0; index < this.questions.length; index++) {
+        for (let index1 = index+1; index1 < this.questions.length; index1++) {
+          if(this.questions[index].questionDisplayOrder>this.questions[index1].questionDisplayOrder)
+          {
+            this.orderByQuestionDisplayOrder[index]=this.questions[index1];
+            this.questions[index1]=this.questions[index];
+            this.questions[index]=this.orderByQuestionDisplayOrder[index];
+          }
+          // else{
+          //   this.orderByQuestionDisplayOrder[index]=this.questions[index1];
+          // }
+          
+        } 
+
+        for (let index = 0; index < this.questions.length; index++) {
+          console.log(this.questions[index].questionDisplayOrder);
+          
+        }
+     
+
+        // console.log("SORT*********"+ this.orderByQuestionDisplayOrder[index].questionDisplayOrder);
       }
+
+         
+      
+
+     
+
+
       
       //  for (let index = 0; index < this.questions.length-1; index++) {
       //    console.log(this.questions[index].questionDisplayOrder);
@@ -188,4 +216,9 @@ export class ForCloudableComponent implements OnInit {
 
     }
   }
+
+  // compare(n1:number,n2:number)
+  // {
+  //   return null;
+  // }
 }
