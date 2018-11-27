@@ -12,13 +12,13 @@ import { Users } from '../../catlogin/Users';
 })
 export class HeaderComponent {
     userName : string;
-    clientIdValue : number;
+    clientName : string;
     user: Users = new Users();
 
     constructor(public router: Router, private myStorage:LocalStorageService,private translate:TranslateService) {}
 
     ngOnInit() {
-        this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
+        this.clientName=this.myStorage.getClientName();
         this.user=JSON.parse(localStorage.getItem('user'));   
         this.userName=this.user.userName;
     }
