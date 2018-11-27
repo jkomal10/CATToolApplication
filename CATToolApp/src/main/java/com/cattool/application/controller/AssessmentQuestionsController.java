@@ -80,7 +80,7 @@ public class AssessmentQuestionsController {
 	@GetMapping("/getAllMigrationPattern/{migrationId}/{clientId}")
 	public List<AssessmentQuestions> getAllMigrationPattern(@PathVariable("migrationId") int migrationId,@PathVariable int clientId)
 	{
-		System.out.println("Get all question!!");
+		System.out.println("Get all migration pattern question!!");
 		return assessmentQuestionsService.getAllMigrationPattern(migrationId,clientId);
 	}
 	
