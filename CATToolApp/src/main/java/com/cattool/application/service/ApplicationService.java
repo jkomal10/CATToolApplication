@@ -46,8 +46,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 @Transactional
 public class ApplicationService {
 	
-	//private int gitcCheck=0;
-
+	
 	@Autowired
 	ApplicationRepository applicationRepository;
 	
@@ -69,34 +68,21 @@ public class ApplicationService {
 	@Autowired
 	UserRepository userRepository;
 	
-	public int getAllAppsCount(String clientName) 
-    {   int appsCount=0; 
-    System.out.println("&&&&&&&&&&");
+	Boolean isDeactivate=false;
+	public int getAllAppsCount(int clientId) 
+    {   int appsCount=0;
+     
         List<Application> applicationList= new ArrayList<Application>(); 
-        for(Application applications : applicationRepository.findAll())
-        {
-        	applicationList.add(applications);
-        }
+        applicationList=applicationRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
         
         appsCount=applicationList.size(); 
-//        String countJsonformat = "{\"count\" : "+appsCount+"}";
             return appsCount; 
     }
 	
-	public List<Application> getAllApplication(String clientName,Boolean isDeactivate)
+	public List<Application> getAllApplication(int clientId)
 	{
 		List<Application> applicationList = new ArrayList<>();
-		applicationList=applicationRepository.findByClientNameAndIsDeactivate(clientName,isDeactivate);
-		/*for (Application application : applicationRepository.findAll()) {
-			System.out.println(clientName+"=="+application.getClientName());
-			if(!application.isDeactivate() && clientName.equals(application.getClientName()))
-			{
-				applicationList.add(application) ;
-			}
-			
-		}
-		
-		System.out.println(applicationList);*/
+		applicationList=applicationRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
 		return applicationList;
 	}
 	
@@ -160,7 +146,7 @@ public class ApplicationService {
 		 List<Application> appList=new ArrayList<Application>();
 		 
          for(Application application: applicationRepository.findAll()){
-       	 if(application.isFinalize()==1 && clientName.equals(application.getClientName()))
+       	 //if(application.isFinalize()==1 && clientName.equals(application.getClientName()))
         	 {
         		 appList.add(application);
         		 System.out.println(appList);
@@ -206,8 +192,8 @@ public class ApplicationService {
 		for(CloudableRule cloudableRule : cloudableRuleRepository.findAll())
 		{
 			System.out.println(cloudableRule);
-			System.out.println(cloudableRule.getClientName()+"==****=="+application.getClientName());
-			if(cloudableRule.getClientName().equals(application.getClientName()))
+			//System.out.println(cloudableRule.getClientName()+"==****=="+application.getClientName());
+		//	if(cloudableRule.getClientName().equals(application.getClientName()))
 			{
 				cloudableListByClientId.add(cloudableRule);
 			}
@@ -260,7 +246,7 @@ public boolean cloudProviderCheck(int applicationId){
 		Application application=new Application();
 		System.out.println("allAnswers** " + allAnswers);
 		application = applicationRepository.findByApplicationId(applicationId);
-		String clientName = application.getClientName();
+		//String clientName = application.getClientName();
 		allAnswers = answerRepository.findAll();
 		for (Answers getAnswers : allAnswers) {
 			System.out.println("getAnswers.getQuestionId()*** "+getAnswers.getQuestionId());
@@ -283,7 +269,7 @@ public boolean cloudProviderCheck(int applicationId){
 		List<CloudProviderRule> cloudProviderRuleList=new ArrayList<CloudProviderRule>();
 //		cloudProviderRuleList=cloudProviderRuleRepository.findAll();
 		for(CloudProviderRule cloudProviderRuleClientName:cloudProviderRuleRepository.findAll()) {
-			if(cloudProviderRuleClientName.getClientName().equals(clientName))
+	//		if(cloudProviderRuleClientName.getClientName().equals(clientName))
 			{
 				cloudProviderRuleList.add(cloudProviderRuleClientName);
 				
@@ -344,13 +330,13 @@ public boolean cloudProviderCheck(int applicationId){
 		List<Answers> answerlist=new ArrayList<Answers>();
 		List<MigrationRule> migrationRulelist=new ArrayList<MigrationRule>();
 		Application application=applicationRepository.findByApplicationId(applicationId);
-		String clientName = application.getClientName();
+	//	String clientName = application.getClientName();
 		Application application2=applicationRepository.findByApplicationId(applicationId);
 		migrationRulelist=migrationRuleRepository.findAll();
 		List<MigrationRule> migrationRuleByClientName = new ArrayList<MigrationRule>();
 		for(MigrationRule migrationRuleAllRule:migrationRuleRepository.findAll())
 		{
-			if(migrationRuleAllRule.getClientName().equals(clientName))
+	//		if(migrationRuleAllRule.getClientName().equals(clientName))
 			{
 				migrationRuleByClientName.add(migrationRuleAllRule);
 			}

@@ -24,18 +24,17 @@ public class ApplicationController {
 	@Autowired
 	ApplicationService applicationService;
 	
-	@GetMapping("/getTotalApplicationsCount/{clientName}") 
-    public int getAllApplicationCount(@PathVariable String clientName) 
+	@GetMapping("/getTotalApplicationsCount/{clientId}") 
+    public int getAllApplicationCount(@PathVariable int clientId) 
     { 
-		    System.out.println("*******");
-            return applicationService.getAllAppsCount(clientName); 
+            return applicationService.getAllAppsCount(clientId); 
     }
 	
-	@GetMapping("/getAll/{clientName}/{isDeactivate}")
-	public List<Application>getAllApplication(@PathVariable String clientName,@PathVariable Boolean isDeactivate)
+	@GetMapping("/getAll/{clientId}")
+	public List<Application>getAllApplication(@PathVariable int clientId)
 	{
-		System.out.println(clientName+" get all application with this client ");
-		return applicationService.getAllApplication(clientName,isDeactivate);
+	return applicationService.getAllApplication(clientId);
+		
 	}
 	@GetMapping("/getApplicationById/{applicationId}")
 	public Application getApplicationById(@PathVariable("applicationId") int id) {

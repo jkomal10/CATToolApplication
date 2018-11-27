@@ -16,6 +16,7 @@ public interface ApplicationRepository extends JpaRepository<Application, Long>{
 	void  deleteByApplicationId(int applicationId);
 	Application findByApplicationId(int applicationId);
 	Application findByUserId(int userId);
-	List<Application> findByClientNameAndIsDeactivate(String clientName,Boolean isDeactivate);
-	//List<Application> findByClientNameAndNotIsDeactivate(String clientName);
+	List<Application> findByClientIdAndIsDeactivate(int clientId,Boolean isDeactivate);
+
+
 }
