@@ -37,14 +37,22 @@ import com.cattool.application.encryption.EncryptPassword;
 public class EncryptExample {
 
     public static void main(String[] args) {
-        try {
-        String password = "priyanjali";
-            System.out.println("plain pass="+password);
-        String encryptedPassword = EncryptPassword.encrypt(password);
-            System.out.println("encrypted pass="+encryptedPassword);
-        String decryptedPassword = EncryptPassword.decrypt(encryptedPassword);    
-                System.out.println("decrypted pass="+decryptedPassword);
-        } catch(Exception e) { System.out.println("bug"+e.getMessage()); }
+    	
+String str1 = "Tomcat 7.0.0 and above";
+		
+		//System.out.println(str1.contains("\\")); //true
+		//System.out.println(str1.contains("/")); //true
+		
+		boolean flag = "above".contains("Tomcat 7.0.0 and above"); //false
+		System.out.println(flag);
+//        try {
+//        String password = "priyanjali";
+//            System.out.println("plain pass="+password);
+//        String encryptedPassword = EncryptPassword.encrypt(password);
+//            System.out.println("encrypted pass="+encryptedPassword);
+//        String decryptedPassword = EncryptPassword.decrypt(encryptedPassword);    
+//                System.out.println("decrypted pass="+decryptedPassword);
+//        } catch(Exception e) { System.out.println("bug"+e.getMessage()); }
     }
     
 }
