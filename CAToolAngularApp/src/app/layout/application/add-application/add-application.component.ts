@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { AddApplicationService } from './add-application.service';
 import { Application } from '../Application';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 @Component({
   selector: 'app-add-application',
@@ -14,13 +15,13 @@ export class AddApplicationComponent implements OnInit {
 
   application: Application = new Application();
   submitted = false;
-  clientNameValue : string;
+  clientIdValue : number;
   
-  constructor(private router:Router,private addapplicationService:AddApplicationService) { }
+  constructor(private myStorage:LocalStorageService,private router:Router,private addapplicationService:AddApplicationService) { }
 
   ngOnInit() {
-    this.clientNameValue=localStorage.getItem('clientName');
-  }
+    this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
+    }
 
   createApplication(): void {
       this.submitted = false;
@@ -28,8 +29,8 @@ export class AddApplicationComponent implements OnInit {
     }
    
     save() {
-      this.application.clientName=this.clientNameValue;
-      this.application.createdBy=localStorage.getItem('userName');
+      this.application.clientId=this.myStorage.getCurrentUserObject().clientId;
+      this.application.createdBy=this.myStorage.getCurrentUserObject().userName;
       this.addapplicationService.createApplication(this.application)
         .subscribe(data => console.log(data), error => console.log(error));
       this.application = new Application();

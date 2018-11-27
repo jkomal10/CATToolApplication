@@ -26,7 +26,7 @@ var UserRoleComponent = /** @class */ (function () {
         this.router = router;
         this.http = http;
         this.myStorage = myStorage;
-        this.AllData = [];
+        this.userRoleData = [];
         this.dtOptions = {};
         this.dtTrigger = new rxjs_1.Subject();
     }
@@ -39,9 +39,8 @@ var UserRoleComponent = /** @class */ (function () {
             responsive: true
         };
         this.userRoleService.getApplicationByUserName(this.userName).subscribe(function (result) {
-            _this.AllData = result;
+            _this.userRoleData = result;
             _this.dtTrigger.next();
-            console.log(JSON.stringify(_this.AllData));
         });
     };
     UserRoleComponent.prototype.assessApplication = function (formvalues) {
@@ -58,9 +57,7 @@ var UserRoleComponent = /** @class */ (function () {
             templateUrl: './user-role.component.html',
             styleUrls: ['./user-role.component.scss']
         }),
-        __metadata("design:paramtypes", [user_role_service_1.UserRoleService,
-            router_1.Router,
-            http_1.HttpClient, localStorage_service_1.LocalStorageService])
+        __metadata("design:paramtypes", [user_role_service_1.UserRoleService, router_1.Router, http_1.HttpClient, localStorage_service_1.LocalStorageService])
     ], UserRoleComponent);
     return UserRoleComponent;
 }());

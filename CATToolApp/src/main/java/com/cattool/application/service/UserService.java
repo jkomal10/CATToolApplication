@@ -42,13 +42,15 @@ public class UserService {
 		return count;
 	}
 
-	public List<Users> findAllUsers(String clientName) {
+	public List<Users> findAllUsers(int clientId) {
 
 		List<Users> userList = new ArrayList<>();
+		System.out.println(userRepository.findAll());
 		try {
 			for (Users users : userRepository.findAll()) {
-
-				if (!users.isDeactivate() && clientName.equals(users.getClientName())) {
+				System.out.println(users.isDeactivate());
+				System.out.println(clientId+"=="+users.getClientId());
+				if (!users.isDeactivate() && (clientId==users.getClientId())) {
 					userList.add(users);
 				}
 
@@ -210,12 +212,12 @@ public class UserService {
 
 	}
 
-	public String findUserId(String clientName, String userName) {
+	public String findUserId(int clientId, String userName) {
 		List<Users> userList = new ArrayList<Users>();
 		Users userbyId = new Users();
 		for(Users user : userRepository.findAll())
 		{
-			if(user.getClientName().equals(clientName))
+			if(user.getClientId()==clientId)
 			{
 				userList.add(user);
 			}
@@ -235,7 +237,7 @@ public class UserService {
 		}
 		
 		userbyId.setUserName(userName);
-		userbyId.setClientName(clientName);
+		userbyId.setClientId(clientId);
 		userbyId.setPassword("Cg@123");
 		System.out.println(userRepository.save(userbyId).getUserId());
 		//return userRepository.save(userbyId).getUserId();

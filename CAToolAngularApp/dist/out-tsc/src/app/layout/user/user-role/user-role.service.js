@@ -15,12 +15,10 @@ var rxjs_1 = require("rxjs");
 var UserRoleService = /** @class */ (function () {
     function UserRoleService(http) {
         this.http = http;
-        this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
+        this.comptransfer = new rxjs_1.BehaviorSubject("User Role");
         this.question = this.comptransfer.asObservable();
     }
     UserRoleService.prototype.getApplicationByUserName = function (userName) {
-        console.log("http://localhost:8090/application/getApplicationByUserName" + "/" + userName);
-        var url = 'http://localhost:8090/application/getApplicationByUserName';
         return this.http.get("http://localhost:8090/application/getApplicationByUserName" + "/" + userName);
     };
     UserRoleService.prototype.sendMsgtoOtherComponent = function (messsage) {

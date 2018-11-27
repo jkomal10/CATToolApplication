@@ -21,7 +21,7 @@ class DataTablesResponse {
 })
 export class UserComponent implements OnInit {
 
-  clientValue : string;
+  clientIdValue : number;
   user: Users;
   IpAddress : string;
   dtOptions: DataTables.Settings = {};
@@ -91,7 +91,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
 
-    this.clientValue=this.myStorage.getCurrentUserObject().clientName;
+    this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
 
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -100,7 +100,7 @@ export class UserComponent implements OnInit {
       this.userService.getIpAddress().subscribe(data => {
         this.IpAddress=data['ip'];
 
-    this.userService.getAllUsers(this.clientValue).subscribe(result => 
+    this.userService.getAllUsers(this.clientIdValue).subscribe(result => 
       {
       this.userData= result ;
       this.dtTrigger.next();

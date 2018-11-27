@@ -8,15 +8,15 @@ import { LocalStorageService } from '../../utility/service/localStorage.service'
   providedIn: 'root'
 })
 export class ForMigrationPatternService {
-  clientNameValue : String;
+  clientIdValue : number;
   private migrationUrl = 'http://localhost:8090/migrationRule/setExceutionOrder';
   private updateMigrationRuleUrl = 'http://localhost:8090/migrationRule/updateMigrationRule';
 
   constructor(private http: HttpClient,private myStorage:LocalStorageService) { }
   CollectData() {
-    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
+    this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
     const  url  =  'http://localhost:8090/migrationRule/getAll';
-    return  this.http.get(url+`/`+this.clientNameValue);
+    return  this.http.get(url+`/`+this.clientIdValue);
   }
 
   getAssessmentQuestions(){
@@ -25,13 +25,13 @@ export class ForMigrationPatternService {
   }
 
   getMigrationQuestions(migrationId : number){
-    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
-    return  this.http.get(`http://localhost:8090/assessmentQuestions/getAllMigrationPattern/${migrationId}/${this.clientNameValue}`);
+    this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
+    return  this.http.get(`http://localhost:8090/assessmentQuestions/getAllMigrationPattern/${migrationId}/${this.clientIdValue}`);
   }
 
   updateMigrationRule(value: any):Observable<Object>{
-    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
-    return this.http.put(`${this.updateMigrationRuleUrl}`+`/`+this.clientNameValue, value);
+    this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
+    return this.http.put(`${this.updateMigrationRuleUrl}`+`/`+this.clientIdValue, value);
   }
 
   saveEvaluationOrder(migration: Object): Observable<Object> {

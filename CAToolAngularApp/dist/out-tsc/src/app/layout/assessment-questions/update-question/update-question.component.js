@@ -36,17 +36,13 @@ var UpdateQuestionComponent = /** @class */ (function () {
         var _this = this;
         this.assessmentQuestionsService.question.subscribe(function (data) { _this.que = data; });
         this.question = this.que;
-        console.log("**********" + this.question.questionId);
         this.numberOfOptions = 0;
         var option = this.optionsValues;
         this.numberOfOptions = this.question.questionOption.length;
-        console.log(this.question.questionOption[0].optionText + "))))))");
         for (var index = 0; index < this.numberOfOptions; index++) {
             this.OptionsArray[index] = this.question.questionOption[index].optionText;
         }
-        // this.OptionsArray[0]=this.question.questionOption[0].optionText;
         this.selectChangeHandlerDefault(this.numberOfOptions);
-        console.log(JSON.stringify(this.question.questionOption));
     };
     UpdateQuestionComponent.prototype.assessmentTypeForMigrationClick = function (event) {
         var _this = this;
@@ -54,7 +50,6 @@ var UpdateQuestionComponent = /** @class */ (function () {
         this.assessmentTypeForMigrationValue = event.target.checked;
         this.assessmentQuestionsService.getMigrationData().subscribe(function (result) {
             _this.MigrationData = result;
-            console.log(_this.MigrationData);
             for (var index = 0; index < _this.MigrationData.length; index++) {
                 _this.MigrationDataArray[index] = _this.MigrationData[index].migrationPattern;
             }
@@ -71,44 +66,24 @@ var UpdateQuestionComponent = /** @class */ (function () {
         });
     };
     UpdateQuestionComponent.prototype.selectChangeHandlerDefault = function (value) {
-        console.log("option value " + value);
         this.numberOfOptions = value;
-        console.log(this.numberOfOptions);
-        console.log();
         for (var index = 1; index <= this.numberOfOptions; index++) {
-            console.log(index);
             this.Options[index] = index;
-            console.log(this.Options);
-            console.log(this.Options.length);
         }
     };
     UpdateQuestionComponent.prototype.selectChangeHandler = function (event) {
-        console.log(event.target.value + "********");
         this.numberOfOptions = parseInt(event.target.value, 10);
-        console.log(this.numberOfOptions);
-        console.log(event.target.value);
         for (var index = 1; index <= this.numberOfOptions; index++) {
-            console.log(index);
             this.Options[index] = index;
-            console.log(this.Options);
-            console.log(this.Options.length);
         }
     };
     UpdateQuestionComponent.prototype.updateQue = function (updatedQuestion) {
-        // console.log('&&&&&&&&&&&'+question);
-        console.log('*******onsubmit application**********' + this.question.questionId);
         this.questionObject = updatedQuestion;
-        // console.log("&&&&&&&&&"+this.myStorage.getCurrentUser());
-        this.questionObject.modifiedBy = "UUUUUUUUU";
-        console.log("%%%%%%%%5", updatedQuestion);
-        // this.assessmentQuestionsService.updateAssessmentQuestions(updatedQuestion)
-        //   .subscribe(
-        //   );
+        this.questionObject.modifiedBy = this.myStorage.getCurrentUserObject().userName;
         this.router.navigate(['/assessment-questions']);
     };
     UpdateQuestionComponent.prototype.onSubmit = function (formvalues) {
         this.updatedQuestion = formvalues;
-        console.log("%%%%%%%%5", this.updatedQuestion);
         this.updateQue(this.updatedQuestion);
     };
     UpdateQuestionComponent = __decorate([

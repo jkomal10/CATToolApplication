@@ -36,7 +36,7 @@ var AddAssessmentQuestionComponent = /** @class */ (function () {
         this.CloudProviderDataArray = [];
     }
     AddAssessmentQuestionComponent.prototype.ngOnInit = function () {
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
     };
     AddAssessmentQuestionComponent.prototype.selectChangeHandler = function (event) {
         this.numberOfOptions = parseInt(event.target.value, 10);
@@ -63,7 +63,7 @@ var AddAssessmentQuestionComponent = /** @class */ (function () {
             if (this.MigrationData[index].migrationPattern != false) {
                 var migration = new MigrationRule_1.MigrationRule();
                 migration.migrationId = this.MigrationData[index].migrationId;
-                migration.clientName = localStorage.getItem('clientName');
+                migration.clientId = this.myStorage.getCurrentUserObject().clientId;
                 migration.questionText = this.question.questionText;
                 this.question.migrationRule[index] = migration;
             }
@@ -77,8 +77,8 @@ var AddAssessmentQuestionComponent = /** @class */ (function () {
                 this.question.cloudProviderRules[index] = cloudProvider;
             }
         }
-        this.question.clientName = this.clientNameValue;
-        this.question.createdBy = localStorage.getItem('userName');
+        this.question.clientId = this.myStorage.getCurrentUserObject().clientId;
+        this.question.createdBy = this.myStorage.getCurrentUserObject().userName;
         this.questionService.createQuestionn(this.question).subscribe();
         this.router.navigate(['/assessment-questions']);
     };

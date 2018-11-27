@@ -9,14 +9,14 @@ import { LocalStorageService } from '../../utility/service/localStorage.service'
 })
 export class ForCloudableService {
 
-  clientNameValue : String;
+  clientIdValue : number;
   constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
    baseUrl = 'http://localhost:8090/cloudableRule/save';
    CollectData(){
    //const url = 'http://localhost:8090/option/getAll';
-   this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
+   this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
    const url= 'http://localhost:8090/assessmentQuestions/getAllCloudableQuestions';
-   return this.http.get(url+`/`+this.clientNameValue);
+   return this.http.get(url+`/`+this.clientIdValue);
     }
 
     addClodableRule(cloudablerule: Object): Observable<Object> {

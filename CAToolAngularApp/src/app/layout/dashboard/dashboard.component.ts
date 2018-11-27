@@ -25,8 +25,12 @@ export class DashboardComponent implements OnInit {
     users: any;
     application: any = [];
     appCount : any = [];
+
     userCount: any=[];
-    clientNameValue: string;
+ 
+
+    clientIdValue: number;
+
 
     constructor(private translate: TranslateService,private userService: UsersService, private applicationService: ApplicationService, public router: Router, private myStorage: LocalStorageService) {
     }
@@ -36,17 +40,21 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
         this.redirectToDashboard = this.myStorage.getLoggedInTrue();//this.status=localStorage.getItem('isLoggedin');
 
         if (this.redirectToDashboard == 'true') {
 
             this.firstName = this.myStorage.getCurrentUserObject().firstName;
             this.lastName = this.myStorage.getCurrentUserObject().lastName;
-            this.userService.getAllUsers(this.clientNameValue).subscribe(data => { this.users = data });
-            this.applicationService.CollectData(this.clientNameValue).subscribe(data => { this.application = data });
-            this.applicationService.getApplicationCount(this.clientNameValue).subscribe(data=>{this.appCount=data,console.log(this.appCount)});
-            this.userService.getUsersCount(this.clientNameValue).subscribe(data=>{this.userCount=data,console.log(this.userCount)});
+
+           
+            this.userService.getUsersCount(this.clientIdValue).subscribe(data=>{this.userCount=data,console.log(this.userCount)});
+
+            this.userService.getAllUsers(this.clientIdValue).subscribe(data => { this.users = data });
+            this.applicationService.CollectData(this.clientIdValue).subscribe(data => { this.application = data });
+            this.applicationService.getApplicationCount(this.clientIdValue).subscribe(data=>{this.appCount=data,console.log(this.appCount)});
+
             this.isUser = this.myStorage.getIsUserActive();
             if (this.isUser == 'false') {
                 this.isAdmin = false;

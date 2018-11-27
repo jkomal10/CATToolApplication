@@ -28,8 +28,8 @@ export class HelpComponent implements OnInit {
     this.issues.issue=this.textfield;
     this.issues.userName=this.myStorage.getCurrentUserObject().userName;
     console.log(this.issues.userName);
-    this.issues.clientName=this.myStorage.getCurrentUserObject().clientName;
-    console.log(this.issues.clientName);
+    this.issues.clientId=this.myStorage.getCurrentUserObject().clientId;
+    console.log(this.issues.clientId);
     this.helpService.saveIssue(this.issues).subscribe();
     this.router.navigate(['/dashboard']);
 

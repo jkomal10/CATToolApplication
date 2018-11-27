@@ -14,9 +14,6 @@ var rxjs_1 = require("rxjs");
 var router_1 = require("@angular/router");
 var http_1 = require("@angular/common/http");
 var application_service_1 = require("../application.service");
-//import { ApplicationComponent } from '../application.component';
-//import { ApplicationService } from '../application.service';
-//@Input() application: Application;
 var DataTablesResponse = /** @class */ (function () {
     function DataTablesResponse() {
     }
@@ -31,7 +28,6 @@ var ViewApplicationComponent = /** @class */ (function () {
         this.dtTrigger = new rxjs_1.Subject();
         this.AllData = [];
     }
-    //constructor(private getData:ApplicationService,private app:ApplicationComponent){}
     ViewApplicationComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.dtOptions = {
@@ -39,13 +35,6 @@ var ViewApplicationComponent = /** @class */ (function () {
             pageLength: 2,
             responsive: true
         };
-        //ViewApplicationById(formvalues){
-        // this.getData.CollectSingleApplicationData(this.id).subscribe(result => 
-        //   {
-        //   this.AllData = result ;
-        //   this.dtTrigger.next();
-        //   console.log(this.AllData);
-        //   });
         this.applicationService.question.subscribe(function (data) { return _this.message = data; });
     };
     ViewApplicationComponent = __decorate([

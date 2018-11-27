@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Users } from '../Users';
 import { UsersService } from '../user.service';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 
 @Component({
@@ -19,25 +20,31 @@ export class UploadUserComponent implements OnInit {
   userDetails: Users = new Users();
   userDetail: Users = new Users();
   lines = [];
-  ipAddress: any;
-  constructor(private userservice: UsersService, public router: Router) { }
 
-  fileChangeListener(event: any) {
-    this.filename  =  event.target.files[0].name;
-    this.link  =  event.target.files[0];
-    this.ext  =  this.filename.substring(this.filename.lastIndexOf('.')).toLowerCase();
+  ipAddress : any;
+  constructor(private userservice : UsersService,public router: Router, private myStorage:LocalStorageService) { }
 
-    if  (this.isCSVFile(this.ext)) {
-
-      let  reader:  FileReader  =  new  FileReader();
-      reader.readAsText(this.link);
-      reader.onload  =  (data)  =>  {
-        let  csvData :  string  =  reader.result;
-        let  csvRecordsArray  =  csvData.split(/\r|\n|\n/);
-        let  headersRow  =  this.getHeaderArray(csvRecordsArray);
-
-        this.userDetails  =  this.getDataRecordsArrayFromCSVFile(csvRecordsArray,  headersRow.length);
-      }
+  fileChangeListener(event:any){
+    this.filename = event.target.files[0].name;
+    this.link = event.target.files[0];
+    console.log("link"+this.link);
+    this.ext = this.filename.substring(this.filename.lastIndexOf('.')).toLowerCase();
+    console.log(this.ext);
+    
+    if (this.isCSVFile(this.ext)){
+    console.log(this.filename);
+    console.log("csv file");
+    let reader: FileReader = new FileReader();
+    reader.readAsText(this.link);
+    reader.onload = (data) => {
+    let csvData : string = reader.result;
+    let csvRecordsArray = csvData.split(/\r|\n|\n/);
+    // console.log(csvRecordsArray);
+    let headersRow = this.getHeaderArray(csvRecordsArray);
+    console.log(headersRow);
+    
+    this.userDetails = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+    }
     }
 
     else {
@@ -88,14 +95,14 @@ export class UploadUserComponent implements OnInit {
       this.userDetail.company = this.lines[i][3];
       this.userDetail.password = 'Cg@123';
       this.userDetail.ipAddress = this.ipAddress;
-      this.userDetail.clientName = localStorage.getItem('clientName');
-      this.userDetail.createdBy = localStorage.getItem('clientName');
+      this.userDetail.clientId = this.myStorage.getCurrentUserObject().clientId;
+      this.userDetail.createdBy = this.myStorage.getCurrentUserObject().createdBy;
       this.userDetail.createdDateTime = new Date();
       this.userDetail.isAdmin = this.lines[i][4];
       this.userDetail.isDeactivate = false;
       this.userDetail.isDeleted = 0;
       this.userDetail.lastLogin = 0;
-      this.userDetail.modifiedBy = localStorage.getItem('clientName');
+      this.userDetail.modifiedBy = this.myStorage.getCurrentUserObject().modifiedBy;
       this.userDetail.modifiedDateTime = new Date();
       this.userservice.addUser(this.userDetail)
         .subscribe();

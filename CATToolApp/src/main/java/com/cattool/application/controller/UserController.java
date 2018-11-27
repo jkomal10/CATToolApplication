@@ -32,22 +32,22 @@ public class UserController {
 	@Autowired
 	UserService	userService; 
 	
-	@GetMapping("/getAll/{clientName}")
-	public List<Users> findAllUsers(@PathVariable String clientName)
+	@GetMapping("/getAll/{clientId}")
+	public List<Users> findAllUsers(@PathVariable int clientId)
 	{
 //		LOGGER.info("Get user Name");
 		LOGGER.error("Get all user");
-		return userService.findAllUsers(clientName);
+		return userService.findAllUsers(clientId);
 
 		
 	}
 	
-	@GetMapping("/getUserId/{clientName}/{userName}")
-	public String getuserIdByName(@PathVariable String clientName,@PathVariable String userName)
+	@GetMapping("/getUserId/{clientId}/{userName}")
+	public String getuserIdByName(@PathVariable int clientId,@PathVariable String userName)
 	{
-		System.out.print(clientName);
+		System.out.print(clientId);
 		System.out.println(userName);
-		return userService.findUserId(clientName,userName);
+		return userService.findUserId(clientId,userName);
 	}
 	
 	
