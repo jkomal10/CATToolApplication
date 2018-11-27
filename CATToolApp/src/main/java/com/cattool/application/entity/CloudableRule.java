@@ -18,7 +18,16 @@ public class CloudableRule {
 	private int executionOrder;
 	private String questionText;
 	private int clientId;
+	private int questionDisplayOrder;
 	
+	
+	
+	public int getQuestionDisplayOrder() {
+		return questionDisplayOrder;
+	}
+	public void setQuestionDisplayOrder(int questionDisplayOrder) {
+		this.questionDisplayOrder = questionDisplayOrder;
+	}
 	public int getCloudableRuleId() {
 		return cloudableRuleId;
 	}
@@ -59,7 +68,8 @@ public class CloudableRule {
 	public String toString() {
 		return "CloudableRule [cloudableRuleId=" + cloudableRuleId + ", questionId=" + questionId + ", cloudableRule="
 				+ cloudableRule + ", executionOrder=" + executionOrder + ", questionText=" + questionText
-				+ ", clientId=" + clientId + "]";
+				+ ", clientId=" + clientId + ", questionDisplayOrder=" + questionDisplayOrder + "]";
 	}
+	
 	
 }

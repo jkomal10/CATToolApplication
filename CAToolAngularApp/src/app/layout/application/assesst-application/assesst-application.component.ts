@@ -29,7 +29,7 @@ export class AssesstApplicationComponent implements OnInit {
   multi = 0;
   single = 0;
   singlee = 0;
-  result = "";
+  result =[];
   queId1 = 0;
   i = -1;
   application: any;
@@ -84,7 +84,7 @@ export class AssesstApplicationComponent implements OnInit {
     console.log(this.tempp[2]+"ooooooooooooo");
       }
     isSelected(value: string): boolean {
-     this.result=value;
+     //this.resultvalue;
      console.log(this.result.indexOf(value)>0);
      console.log(this.result+"kooooooooooooooooooooooook^^^^^^^666");
       return false;
@@ -93,48 +93,63 @@ export class AssesstApplicationComponent implements OnInit {
         // else
         //   return false;
       }
-   selectChangeHandler(optionnnnnn,event,id){
-    // var queId1=0,i=-1;
-    var text1; 
-    if(event.target.checked)
-    {
-    console.log(id+"idddddddd"+this.queId1);  
-   
-       if(this.queId1 === id )
-       {
-         
-        console.log(id);
-        text1=optionnnnnn.optionText;
-        var text2="";
-        this.result=this.result+','+text1;
-        console.log(text1+"iiiiiiiiii");
-        //console.log(text1+"iiiiiiiiii");
-         this.theCheckbox[this.i]=this.result;
-         console.log(this.i+"if");
-         console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrr'+this.result);
+      selectChangeHandler(optionnnnnn,event,id){
+        console.log(event.target.checked);
+       if(event.target.checked){
+         console.log("inside if");
+         this.result.push(optionnnnnn.optionText);
        }else{
-         if(queId!=id)
-         {
-           this.result="";
-         }
-       this.i++;
-       this.result=this.result+","+optionnnnnn.optionText;
-        this.theCheckbox[this.i]=optionnnnnn.optionText;
-        console.log("else"+this.i);
+         console.log("inside else");
+        this.result.reduceRight(optionnnnnn.optionText);
        }
-       var queId=id;
-       this.queId1=queId;
+        console.log(this.result);
+      }
+
+  //  selectChangeHandler(optionnnnnn,event,id){
+  //   // var queId1=0,i=-1;
+  //   var text1; 
+  //   if(event.target.checked)
+  //   {
+  //   console.log(id+"idddddddd"+this.queId1);  
+   
+  //      if(this.queId1 === id )
+  //      {
+         
+  //       console.log(id);
+        
+  //       text1=optionnnnnn.optionText;
+  //       var text2="";
+  //     //  this.result=this.result+','+text1;
+  //     this.result.push(text1);
+  //       console.log(text1+"iiiiiiiiii");
+  //       //console.log(text1+"iiiiiiiiii");
+  //      //  this.theCheckbox[this.i]=this.result;
+  //        console.log(this.i+"if");
+  //        console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrr'+this.result);
+  //      }else{
+  //        if(queId!=id)
+  //        {
+  //          this.result=null;
+  //        }
+  //      this.i++;
+  //      this.result.push(optionnnnnn.optionText);
+  //      //this.result=this.result+","+optionnnnnn.optionText;
+  //       this.theCheckbox[this.i]=optionnnnnn.optionText;
+  //       console.log("else"+this.i);
+  //      }
+  //      var queId=id;
+  //      this.queId1=queId;
      
       
-     } else{
-      this.result=this.result.slice(1);
+  //    } else{
+  //     this.result.slice(1);
 
-      }
-      var queId = id;
-      this.queId1 = queId;
+  //     }
+  //     var queId = id;
+  //     this.queId1 = queId;
 
      
-  }
+  // }
 
   onSubmit() {
     alert("Do you want to save");

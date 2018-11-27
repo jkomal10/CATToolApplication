@@ -13,9 +13,9 @@ public class CloudableRuleService {
 
 	@Autowired
 	CloudableRuleRepository cloudableRuleRepository;
-	public List<CloudableRule> getAll() {
+	public List<CloudableRule> getAll(int clientId) {
 		
-		return cloudableRuleRepository.findAll();
+		return cloudableRuleRepository.findByClientId(clientId);
 	}
 	public void createClodableRule(List<CloudableRule> cloudableRule) {
 		
