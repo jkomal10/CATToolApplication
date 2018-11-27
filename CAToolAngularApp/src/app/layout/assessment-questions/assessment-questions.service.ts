@@ -8,7 +8,7 @@ import { LocalStorageService } from '../utility/service/localStorage.service';
 
 @Injectable()
 export class AssessmentQuestionsService {
-  clienNameValue: String;
+  clienIdValue: number;
   constructor(private http: HttpClient, private myStorage: LocalStorageService) {
 
   }
@@ -18,8 +18,8 @@ export class AssessmentQuestionsService {
   private addUrl = 'http://localhost:8090/assessmentQuestions/saveAssessmentQuestions';
   private addUrl1= 'http://localhost:8090/assessmentQuestions/saveAssessmentQuestions';
 
-  getAllQuestions(clientName : string) {
-    return  this.http.get(this.getAllQuestionsURL+`/`+clientName);
+  getAllQuestions(clientId : number) {
+    return  this.http.get(this.getAllQuestionsURL+`/`+clientId);
   }
 
   deleteQuestion(questionId: number): Observable<any> {
@@ -40,16 +40,16 @@ export class AssessmentQuestionsService {
   }
 
   getMigrationData(){
-    this.clienNameValue=this.myStorage.getCurrentUserObject().clientName;
+    this.clienIdValue=this.myStorage.getCurrentUserObject().clientId;
     const  url  =  'http://localhost:8090/migrationRule/getAll';
-    return  this.http.get(url+`/`+this.clienNameValue);
+    return  this.http.get(url+`/`+this.clienIdValue);
   }
 
   getCloudProviderData(){
-    this.clienNameValue=this.myStorage.getCurrentUserObject().clientName;
+    this.clienIdValue=this.myStorage.getCurrentUserObject().clientId;
 
     const url = 'http://localhost:8090/cloudProvider/getAll';
-    return this.http.get(url+`/`+this.clienNameValue);
+    return this.http.get(url+`/`+this.clienIdValue);
   }
 
   createQuestionn(question: Object): Observable<Object> {

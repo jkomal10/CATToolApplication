@@ -33,12 +33,12 @@ var AssessmentQuestionsComponent = /** @class */ (function () {
         this.dtOptions = {};
         this.dtTrigger = new rxjs_1.Subject();
         this.assessmentQuestions = [];
-        this.AllData = [];
+        this.assessmentQuestionData = [];
     }
     AssessmentQuestionsComponent.prototype.exportCsv = function () {
         var filename = "Assessment Question";
-        for (var index = 0; index < this.AllData.length; index++) {
-            this.assessmentQuestions[index] = this.AllData[index];
+        for (var index = 0; index < this.assessmentQuestionData.length; index++) {
+            this.assessmentQuestions[index] = this.assessmentQuestionData[index];
         }
         var options = {
             headers: ["questionId", "questionText", "questionDescription", "questionType", "questionDisplayOrder",
@@ -56,9 +56,8 @@ var AssessmentQuestionsComponent = /** @class */ (function () {
             responsive: true
         };
         this.assessmentQuestionsService.getAllQuestions(this.clientNameValue).subscribe(function (result) {
-            _this.AllData = result;
+            _this.assessmentQuestionData = result;
             _this.dtTrigger.next();
-            console.log(_this.AllData);
         });
     };
     AssessmentQuestionsComponent.prototype.importQuestions = function () {

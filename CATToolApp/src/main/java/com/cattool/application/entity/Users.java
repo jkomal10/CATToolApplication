@@ -35,14 +35,7 @@ public class Users {
 	private String company;
 	private int isDeleted;
 	private boolean isDeactivate;
-	private String clientName;
-	
-	public String getClientName() {
-		return clientName;
-	}
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
-	}
+	private int clientId;
 	@CreatedDate
 	private Date createdDateTime;
 	@CreatedBy
@@ -146,6 +139,13 @@ public class Users {
 		this.isAdmin = isAdmin;
 	}
 	
+	public int getClientId() {
+		return clientId;
+	}
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
+	}
+	
 	public Users() {
 		super();
 	}
@@ -153,11 +153,9 @@ public class Users {
 	public String toString() {
 		return "Users [userId=" + userId + ", userName=" + userName + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", password=" + password + ", ipAddress=" + ipAddress + ", lastLogin=" + lastLogin
-				+ ", company=" + company + ", isDeleted=" + isDeleted + ", isDeactivate=" + isDeactivate
-				+ ", clientName=" + clientName + ", createdDateTime=" + createdDateTime + ", createdBy=" + createdBy
-				+ ", modifiedDateTime=" + modifiedDateTime + ", modifiedBy=" + modifiedBy + ", isAdmin=" + isAdmin
-				+ "]";
+				+ ", company=" + company + ", isDeleted=" + isDeleted + ", isDeactivate=" + isDeactivate + ", clientId="
+				+ clientId + ", createdDateTime=" + createdDateTime + ", createdBy=" + createdBy + ", modifiedDateTime="
+				+ modifiedDateTime + ", modifiedBy=" + modifiedBy + ", isAdmin=" + isAdmin + "]";
 	}
 
-	
 }

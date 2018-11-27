@@ -24,7 +24,7 @@ var ApplicationModule = /** @class */ (function () {
     ApplicationModule = __decorate([
         core_1.NgModule({
             imports: [common_1.CommonModule, application_routing_module_1.ApplicationRoutingModule, angular_datatables_1.DataTablesModule, forms_1.FormsModule,
-                ngx_logger_1.LoggerModule.forRoot({ level: ngx_logger_1.NgxLoggerLevel.LOG, disableConsoleLogging: true })],
+                ngx_logger_1.LoggerModule.forRoot({ level: ngx_logger_1.NgxLoggerLevel.LOG, disableConsoleLogging: false, serverLogLevel: ngx_logger_1.NgxLoggerLevel.LOG })],
             declarations: [
                 application_component_1.ApplicationComponent,
                 add_application_component_1.AddApplicationComponent,

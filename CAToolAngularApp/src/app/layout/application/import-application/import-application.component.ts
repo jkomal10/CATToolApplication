@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Application } from '../Application';
 import { UsersService } from '../../user/user.service';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 @Component({
   selector: 'app-import-application',
@@ -25,7 +26,7 @@ export class ImportApplicationComponent implements OnInit {
   ipAddress : any;
   existingUser : number;
   clientName : string = localStorage.getItem('clientName');
-  constructor(public router: Router,private applicationService : ApplicationService,private userService : UsersService) { }
+  constructor(private myStorage:LocalStorageService,public router: Router,private applicationService : ApplicationService,private userService : UsersService) { }
 
   ngOnInit() {
     // this.userService.CollectData(this.clientName).subscribe(data=>{this.userData=data});
@@ -145,7 +146,7 @@ export class ImportApplicationComponent implements OnInit {
 
     getuserIdByName(userName)
    {
-    this.userService.getUserByUserName(localStorage.getItem('clientName'),userName).subscribe(data=>{this.value=data,console.log(this.value)
+    this.userService.getUserByUserName(this.myStorage.getCurrentUserObject().clientId,userName).subscribe(data=>{this.value=data,console.log(this.value)
     
      
       for (var i = 0; i < 1; i++)
@@ -154,9 +155,9 @@ export class ImportApplicationComponent implements OnInit {
       
       this.application.applicationName =this.lines[i][0];
       this.application.applicationDescription =this.lines[i][1];
-      this.application.clientName = localStorage.getItem('clientName');
+      this.application.clientId = this.myStorage.getCurrentUserObject().clientId;
       this.application.cloudProvider = "";
-      this.application.createdBy = localStorage.getItem('clientName');
+      this.application.createdBy = this.myStorage.getCurrentUserObject().userName;
       this.application.createdDate  = new Date();
       this.application.isAssessment = false;
       // this.application.isCloudable = false;
@@ -176,7 +177,7 @@ export class ImportApplicationComponent implements OnInit {
       this.application.userId=this.existingUser;
       console.log(this.application.userId);
  
-      this.application.clientName = localStorage.getItem('clientName');
+      this.application.clientId = this.myStorage.getCurrentUserObject().clientId;
       this.applicationService.createApplication(this.application)
       .subscribe();
     }

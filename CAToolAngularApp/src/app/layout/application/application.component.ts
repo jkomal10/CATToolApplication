@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Application } from './Application';
 import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 import { NGXLogger } from 'ngx-logger';
+import { LocalStorageService } from '../utility/service/localStorage.service';
 
 class DataTablesResponse {
   data: any[];
@@ -25,17 +26,17 @@ export class ApplicationComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   message = '';
-  clientNameValue : string;
+  clientIdValue : number;
   //applictaions: Observable<Application[]>;
   application:Array<Application>=[];
   applicationTemplate:Array<Application>=[];
   applications: any = [];
   public show:boolean = false;
   public buttonName:any = 'Help';
-  constructor(public router:Router, private applicationService:ApplicationService,private logger: NGXLogger) { }
+  constructor(public router:Router, private applicationService:ApplicationService,private logger: NGXLogger,private myStorage:LocalStorageService) { }
   
   ngOnInit() {
-    this.clientNameValue=localStorage.getItem('clientName');
+    this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
     this.logger.debug('************8Your log message goes here');
     this.logger.log('Your log message goes here');
     this.dtOptions = {
@@ -44,7 +45,7 @@ export class ApplicationComponent implements OnInit {
       responsive: true,
     
   };
-    this.applicationService.CollectData(this.clientNameValue).subscribe(result => 
+    this.applicationService.CollectData(this.clientIdValue).subscribe(result => 
       {
       this.applications= result ;
       this.logger.log(JSON.stringify(this.applications));
@@ -135,7 +136,7 @@ new Angular5Csv( this.applicationTemplate,filename, options);
   }
 
    reloadData() {
-     this.applicationService.CollectData(this.clientNameValue);
+     this.applicationService.CollectData(this.clientIdValue);
    }
    
    ViewApplication(formvalues){

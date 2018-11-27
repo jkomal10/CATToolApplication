@@ -16,10 +16,9 @@ var ApplicationService = /** @class */ (function () {
     function ApplicationService(http) {
         this.http = http;
         this.deactivateUrl = 'http://localhost:8090/application/deactivateApplicationById';
-        this.Baseurl = 'http://localhost:8090/application/deleteApplicationById';
-        this.deleteUrl = 'http://localhost:8090/application/resetApplicationById';
-        //url:String= 'http://localhost:8090/application/getApplicationById';
-        this.url1 = 'http://localhost:8090/application/updateApplictaion';
+        this.deleteAppUrl = 'http://localhost:8090/application/deleteApplicationById';
+        this.resetAppUrl = 'http://localhost:8090/application/resetApplicationById';
+        this.updateAppUrl = 'http://localhost:8090/application/updateApplictaion';
         this.appCountUrl = "http://localhost:8090/application/getTotalApplicationsCount";
         this.baseUrl = 'http://localhost:8090/application/saveApplication';
         this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
@@ -33,15 +32,15 @@ var ApplicationService = /** @class */ (function () {
         return this.http.post("" + this.baseUrl + "/create", application);
     };
     ApplicationService.prototype.deleteApplications = function (applicationId) {
-        return this.http.delete(this.Baseurl + "/" + applicationId, { responseType: 'text' });
+        return this.http.delete(this.deleteAppUrl + "/" + applicationId, { responseType: 'text' });
     };
     ApplicationService.prototype.resetApplication = function (applicationId) {
-        return this.http.put(this.deleteUrl + "/" + applicationId, { responseType: 'text' });
+        return this.http.put(this.resetAppUrl + "/" + applicationId, { responseType: 'text' });
     };
     ApplicationService.prototype.updateApplication = function (value) {
         console.log('################application.service.');
-        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~' + ("" + this.url1) + '~~~~~~~~~~~~~~~~~~~~~~~');
-        return this.http.put("" + this.url1, value);
+        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~' + ("" + this.updateAppUrl) + '~~~~~~~~~~~~~~~~~~~~~~~');
+        return this.http.put("" + this.updateAppUrl, value);
     };
     ApplicationService.prototype.deactivate = function (applicationId) {
         console.log('################application.service.');

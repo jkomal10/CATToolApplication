@@ -30,7 +30,7 @@ var UserComponent = /** @class */ (function () {
         this.dtOptions = {};
         this.dtTrigger = new rxjs_1.Subject();
         this.users = [];
-        this.AllData = [];
+        this.userData = [];
     }
     UserComponent.prototype.addUser = function () {
         this.userService.sendIpAddresstoOtherComponent(this.IpAddress);
@@ -60,8 +60,8 @@ var UserComponent = /** @class */ (function () {
     };
     UserComponent.prototype.exportCsv = function () {
         var filename = "UserDetails";
-        for (var index = 0; index < this.AllData.length; index++) {
-            this.users[index] = this.AllData[index];
+        for (var index = 0; index < this.userData.length; index++) {
+            this.users[index] = this.userData[index];
         }
         var options = {
             headers: ["userId", "userName", "firstName", "lastName", "password", "ipAddress", "lastLogin", "company", "isDeleted",
@@ -84,7 +84,7 @@ var UserComponent = /** @class */ (function () {
         this.userService.getIpAddress().subscribe(function (data) {
             _this.IpAddress = data['ip'];
             _this.userService.getAllUsers(_this.clientValue).subscribe(function (result) {
-                _this.AllData = result;
+                _this.userData = result;
                 _this.dtTrigger.next();
             });
         });

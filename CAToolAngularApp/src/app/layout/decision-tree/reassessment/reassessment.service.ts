@@ -6,13 +6,13 @@ import { LocalStorageService } from '../../utility/service/localStorage.service'
   providedIn: 'root'
 })
 export class ServiceService {
-  clientNameValue : String;
+  clientIdValue : number;
   constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
 
   CollectData(){
-    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
+    this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
     const reassessUrl = 'http://localhost:8090/application/getAllReassessment';
-    return this.http.get(reassessUrl+`/`+this.clientNameValue);
+    return this.http.get(reassessUrl+`/`+this.clientIdValue);
     }
 
   cloudProvider(applicationId : number){

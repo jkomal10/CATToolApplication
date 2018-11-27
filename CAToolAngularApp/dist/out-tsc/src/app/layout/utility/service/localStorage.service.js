@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
-var currentUser_model_1 = require("./currentUser.model");
+var currentUser_model_1 = require("../model/currentUser.model");
 var LocalStorageService = /** @class */ (function () {
     function LocalStorageService(http) {
         this.http = http;

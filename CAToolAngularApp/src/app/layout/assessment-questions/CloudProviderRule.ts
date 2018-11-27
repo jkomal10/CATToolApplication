@@ -6,5 +6,5 @@ export class CloudProviderRule{
     cloudProviderRule : String;
     executionOrder : number;
     questionText : String;
-    clientName : String;
+    clientId : number;
 }

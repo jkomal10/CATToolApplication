@@ -20,7 +20,7 @@ export class AssessmentQuestions{
     modifiedTime : Date;
     answerValues : string;
     executionOrder:number;
-    clientName : string;
+    clientId : number;
     public questionOption : Array<QuestionOption> = [];
     public migrationRule : Array<MigrationRule> = [];
     public cloudProviderRules : Array<CloudProviderRule> = [];

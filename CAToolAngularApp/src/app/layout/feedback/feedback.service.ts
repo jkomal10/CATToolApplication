@@ -8,14 +8,14 @@ import { LocalStorageService } from '../utility/service/localStorage.service';
 })
 export class FeedbackService {
   userName : String;
-  clientNameValue : String;
+  clientIdValue : number;
   constructor(private http: HttpClient,private myStorage:LocalStorageService) { }
   private url="http://localhost:8090/feedback/save";
 
   addFeedback(feedback: Object): Observable<Object> {
     console.log("feedback for user");
     this.userName=this.myStorage.getCurrentUserObject().userName;
-    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
-    return this.http.post(`${this.url}`+`/`+this.userName+`/`+this.clientNameValue,feedback);
+    this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
+    return this.http.post(`${this.url}`+`/`+this.userName+`/`+this.clientIdValue,feedback);
    }
 }

@@ -16,12 +16,12 @@ import { LocalStorageService } from '../utility/service/localStorage.service';
 export class ReportComponent implements OnInit {
   application:Array<Application>=[];
   AllData : any = [];
-  clientNameValue : string;
+  clientIdValue : number;
   constructor(public router:Router, private applicationService:ApplicationService,private http:HttpClient, private reportService:ReportService,private myStorage:LocalStorageService) { }
 
   ngOnInit() {
-    this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
-    this.applicationService.CollectData(this.clientNameValue).subscribe(result => 
+    this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
+    this.applicationService.CollectData(this.clientIdValue).subscribe(result => 
       {
       this.AllData = result;
       console.log(JSON.stringify(this.AllData));

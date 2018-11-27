@@ -32,12 +32,12 @@ export class AddAssessmentQuestionComponent implements OnInit {
   CloudProviderData : any = [];
   MigrationDataArray : any=[];
   CloudProviderDataArray : any=[];
-  clientNameValue : string;
+  clientIdValue : number;
   
   constructor(private questionService: AssessmentQuestionsService,public router: Router,private http: HttpClient,private myStorage:LocalStorageService) { }
 
   ngOnInit() {
-      this.clientNameValue=this.myStorage.getCurrentUserObject().clientName;
+      this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
   }
 
   selectChangeHandler(event:any){
@@ -68,7 +68,7 @@ export class AddAssessmentQuestionComponent implements OnInit {
         if(this.MigrationData[index].migrationPattern!=false){
           var migration : MigrationRule = new MigrationRule();
           migration.migrationId=this.MigrationData[index].migrationId;
-          migration.clientName=localStorage.getItem('clientName');
+          migration.clientId=this.myStorage.getCurrentUserObject().clientId;
           migration.questionText=this.question.questionText;
           this.question.migrationRule[index]=migration;
         }
@@ -78,12 +78,12 @@ export class AddAssessmentQuestionComponent implements OnInit {
           var cloudProvider : CloudProviderRule = new CloudProviderRule();
           cloudProvider.cloudProviderId=this.CloudProviderData[index].cloudProviderId;
           cloudProvider.questionText=this.question.questionText;
-          cloudProvider.clientName=localStorage.getItem('clientName');
+          cloudProvider.clientId=this.myStorage.getCurrentUserObject().clientId;
           this.question.cloudProviderRules[index]=cloudProvider;
         }
       }
-      this.question.clientName=this.clientNameValue;
-      this.question.createdBy=localStorage.getItem('userName');
+      this.question.clientId=this.myStorage.getCurrentUserObject().clientId;
+      this.question.createdBy=this.myStorage.getCurrentUserObject().userName;
       this.questionService.createQuestionn(this.question).subscribe(
       );
       this.router.navigate(['/assessment-questions']);

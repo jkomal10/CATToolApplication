@@ -79,7 +79,7 @@ public class Application {
 	private int isSaved;
 	
 	
-	private String clientName;
+	private int clientId;
 	
 	
 	public int getApplicationId() {
@@ -246,12 +246,12 @@ public class Application {
 		this.isCloudable = isCloudable;
 	}
 
-	public String getClientName() {
-		return clientName;
+	public int getClientId() {
+		return clientId;
 	}
 
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 
 	@Override
@@ -262,8 +262,8 @@ public class Application {
 				+ isAssessment + ", isFinalize=" + isFinalize + ", isDeleted=" + isDeleted + ", isDeactivate="
 				+ isDeactivate + ", deletedDateTime=" + deletedDateTime + ", isVerified=" + isVerified
 				+ ", createdDate=" + createdDate + ", modifiedDateTime=" + modifiedDateTime + ", createdBy=" + createdBy
-				+ ", modifiedBy=" + modifiedBy + ", userId=" + userId + ", isSaved=" + isSaved + ", clientName="
-				+ clientName + "]";
+				+ ", modifiedBy=" + modifiedBy + ", userId=" + userId + ", isSaved=" + isSaved + ", clientId="
+				+ clientId + "]";
 	}
 
 	

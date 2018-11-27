@@ -27,11 +27,11 @@ var AddUserComponent = /** @class */ (function () {
     }
     AddUserComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
         this.userService.getIpAddress().subscribe(function (data) {
             _this.myStorage.setIpAddress(data['ip']);
         });
-        this.userService.getAllUsers(this.clientNameValue).subscribe(function (result) {
+        this.userService.getAllUsers(this.clientIdValue).subscribe(function (result) {
             _this.AllData = result;
         });
     };
@@ -49,7 +49,7 @@ var AddUserComponent = /** @class */ (function () {
         if (this.status) {
             this.user.ipAddress = this.myStorage.getIpAddress();
             this.user.createdBy = this.myStorage.getCurrentUserObject().userName;
-            this.user.clientName = this.clientNameValue;
+            this.user.clientId = this.clientIdValue;
             this.userService.addUser(this.user).subscribe();
             this.router.navigate(['/user']);
         }

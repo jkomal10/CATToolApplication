@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { currentUser } from './currentUser.model';
+import { currentUser } from '../model/currentUser.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
+  
   user: currentUser = new currentUser();
 
   constructor(private http:HttpClient) { }

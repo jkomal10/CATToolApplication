@@ -18,6 +18,6 @@ export class Application{
     // applicationType:String;
     isSaved:number;
     userId:number;
-    clientName:string;
+    clientId:number;
 
 }

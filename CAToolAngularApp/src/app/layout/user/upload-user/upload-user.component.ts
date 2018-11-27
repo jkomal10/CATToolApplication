@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Users } from '../Users';
 import { UsersService } from '../user.service';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class UploadUserComponent implements OnInit {
   userDetail : Users = new Users();
   lines = [];
   ipAddress : any;
-  constructor(private userservice : UsersService,public router: Router) { }
+  constructor(private userservice : UsersService,public router: Router, private myStorage:LocalStorageService) { }
 
   fileChangeListener(event:any){
     this.filename = event.target.files[0].name;
@@ -116,14 +117,14 @@ export class UploadUserComponent implements OnInit {
       this.userDetail.company = this.lines[i][3];
       this.userDetail.password = 'Cg@123';
       this.userDetail.ipAddress = this.ipAddress;
-      this.userDetail.clientName = localStorage.getItem('clientName');
-      this.userDetail.createdBy = localStorage.getItem('clientName');
+      this.userDetail.clientId = this.myStorage.getCurrentUserObject().clientId;
+      this.userDetail.createdBy = this.myStorage.getCurrentUserObject().createdBy;
       this.userDetail.createdDateTime = new Date();
       this.userDetail.isAdmin = this.lines[i][4];
       this.userDetail.isDeactivate = false;
       this.userDetail.isDeleted = 0;
       this.userDetail.lastLogin = 0;
-      this.userDetail.modifiedBy = localStorage.getItem('clientName');
+      this.userDetail.modifiedBy = this.myStorage.getCurrentUserObject().modifiedBy;
       this.userDetail.modifiedDateTime = new Date();
       console.log("this.lines[i][0]"+this.lines[i][0]);
       console.log("this.lines[i][1]"+this.lines[i][1]);

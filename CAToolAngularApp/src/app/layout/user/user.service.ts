@@ -11,13 +11,13 @@ export class UsersService {
 ipAddress : string;
 constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
 
-getAllUsers(clientName : string): Observable<Object>{
-  return this.http.get(this.myStorage.getdomainURL()+`/user/getAll/`+clientName);
+getAllUsers(clientId : number): Observable<Object>{
+  return this.http.get(this.myStorage.getdomainURL()+`/user/getAll/`+clientId);
   }
 
-getUserByUserName(clientName:string,userName:string)
+getUserByUserName(clientId:number,userName:string)
 {
-  return this.http.get(this.myStorage.getdomainURL()+'/user/getUserId/'+clientName+'/'+userName);
+  return this.http.get(this.myStorage.getdomainURL()+'/user/getUserId/'+clientId+'/'+userName);
 }
 
 countNumberOfUsers()

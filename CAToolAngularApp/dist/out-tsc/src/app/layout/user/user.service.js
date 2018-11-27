@@ -17,7 +17,7 @@ var UsersService = /** @class */ (function () {
     function UsersService(http, myStorage) {
         this.http = http;
         this.myStorage = myStorage;
-        this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
+        this.comptransfer = new rxjs_1.BehaviorSubject("user data by default");
         this.users = this.comptransfer.asObservable();
     }
     UsersService.prototype.getAllUsers = function (clientName) {
@@ -36,7 +36,6 @@ var UsersService = /** @class */ (function () {
         return this.http.put(this.myStorage.getdomainURL() + "/user/deactivateUser/" + userId, { responseType: 'text' });
     };
     UsersService.prototype.changePassword = function (userName, password, newPassword) {
-        console.log(this.myStorage.getdomainURL() + "/user/changePassword/" + userName + "/" + password + "/" + newPassword);
         return this.http.get(this.myStorage.getdomainURL() + "/user/changePassword/" + userName + "/" + password + "/" + newPassword);
     };
     UsersService.prototype.sendUsertoOtherComponent = function (messsage) {
