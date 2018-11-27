@@ -13,7 +13,7 @@ public class CloudProvider {
 	private int cloudProviderId;
 	private String cloudProviders;
 	private int evaluationOrder;
-	private String clientName;
+	private int clientId;
 	
 	public CloudProvider() {
 		super();
@@ -37,18 +37,17 @@ public class CloudProvider {
 	public void setEvaluationOrder(int evaluationOrder) {
 		this.evaluationOrder = evaluationOrder;
 	}
-	
-	public String getClientName() {
-		return clientName;
+	public int getClientId() {
+		return clientId;
 	}
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 	@Override
 	public String toString() {
 		return "CloudProvider [cloudProviderId=" + cloudProviderId + ", cloudProviders=" + cloudProviders
-				+ ", evaluationOrder=" + evaluationOrder + ", clientName=" + clientName + "]";
+				+ ", evaluationOrder=" + evaluationOrder + ", clientId=" + clientId + "]";
 	}
-	
+
 	
 }

@@ -53,13 +53,12 @@ public class AssessmentQuestionsService{
 		return null;
 	}
 	
-	public List<AssessmentQuestions> getAllquestionsByClientName(String clientName)
+	public List<AssessmentQuestions> getAllquestionsByClientId(int clientId)
 	{
 		List<AssessmentQuestions> assessmentQuestionsList = new ArrayList<>();
 		try {
 			for (AssessmentQuestions assessmentQuestions : assessmentQuestionsRepository.findAll()) {
-				System.out.println(assessmentQuestions.getClientName()+"=="+clientName);
-				if(assessmentQuestions.isActive()==0 && clientName.equals(assessmentQuestions.getClientName()))
+				if(assessmentQuestions.isActive()==0 && (clientId==assessmentQuestions.getClientId()))
 				{
 					assessmentQuestionsList.add(assessmentQuestions);
 				}
@@ -89,7 +88,7 @@ public class AssessmentQuestionsService{
 				System.out.println("*********** "+assessmentQuestions.getAssessmentTypeForCloudable());
 				cloudableRule.setQuestionId(assessmentQuestions.getQuestionId());
 				cloudableRule.setQuestionText(assessmentQuestions.getQuestionText());
-				cloudableRule.setClientName(assessmentQuestions.getClientName());
+				cloudableRule.setClientId(assessmentQuestions.getClientId());
 				cloudableRuleRepository .save(cloudableRule);	
 			}
 			LOGGER.info("Successfully saved the Questions");
@@ -159,13 +158,13 @@ public class AssessmentQuestionsService{
 		}
 	}
 	
-	public List<AssessmentQuestions> getCloudableQuestions(String clientName){
+	public List<AssessmentQuestions> getCloudableQuestions(int clientId){
 		List<AssessmentQuestions> list=new ArrayList<AssessmentQuestions>();
 		try {
 			for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
 				if(assessmentQuestions.getAssessmentTypeForCloudable().equals("true"))
 				{
-					if(clientName.equals(assessmentQuestions.getClientName())) {
+					if((clientId==assessmentQuestions.getClientId())) {
 					list.add(assessmentQuestions);
 					}
 				}
@@ -195,13 +194,13 @@ public class AssessmentQuestionsService{
 		
 	}*/
 	
-	public List<AssessmentQuestions> getAllMigrationPattern(int migrationId, String clientName) {
+	public List<AssessmentQuestions> getAllMigrationPattern(int migrationId, int clientId) {
 		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<>();
 		try {
 			for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
 				List<MigrationRule> migrationRuleList;
 				for(MigrationRule migrationRule:assessmentQuestions.getMigrationRule()) {
-					if(migrationId==migrationRule.getMigrationId()&&clientName.equals(migrationRule.getClientName())) {
+					if(migrationId==migrationRule.getMigrationId ()&& (clientId==(migrationRule.getClientId()))) {
 					assessmentQuestionsList.add(assessmentQuestions);
 					break;
 					}
@@ -220,13 +219,13 @@ public class AssessmentQuestionsService{
 		return null;
 	}
 	
-	public List<AssessmentQuestions> getAllcloudProviderRule(int cloudProviderId, String clientName) {
+	public List<AssessmentQuestions> getAllcloudProviderRule(int cloudProviderId, int clientId) {
 		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<>();
 		try {
 			for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
 				List<CloudProviderRule> cloudProviderRuleList;
 				for(CloudProviderRule cloudProviderRule:assessmentQuestions.getCloudProviderRules()) {
-					if(cloudProviderId==cloudProviderRule.getCloudProviderId() &&clientName.equals(cloudProviderRule.getClientName())) {
+					if(cloudProviderId==cloudProviderRule.getCloudProviderId() &&clientId==cloudProviderRule.getClientId()) {
 					assessmentQuestionsList.add(assessmentQuestions);
 					break;
 					}

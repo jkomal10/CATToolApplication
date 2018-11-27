@@ -13,7 +13,7 @@ public class ReportIssue {
 	private int issueId;
 	private String issue;
 	private String userName;
-	private String clientName;
+	private int clientId;
 	public int getIssueId() {
 		return issueId;
 	}
@@ -26,28 +26,23 @@ public class ReportIssue {
 	public void setIssue(String issue) {
 		this.issue = issue;
 	}
-	
-	
-	
 	public String getUserName() {
 		return userName;
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getClientName() {
-		return clientName;
+	public int getClientId() {
+		return clientId;
 	}
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 	@Override
 	public String toString() {
-		return "ReportIssue [issueId=" + issueId + ", issue=" + issue + ", userName=" + userName + ", clientName="
-				+ clientName + "]";
+		return "ReportIssue [issueId=" + issueId + ", issue=" + issue + ", userName=" + userName + ", clientId="
+				+ clientId + "]";
 	}
-	
-	
 	
 	
 }

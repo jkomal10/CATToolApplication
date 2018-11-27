@@ -44,7 +44,7 @@ public class AssessmentQuestions {
 	private String modifiedBy;
 	@LastModifiedDate
 	private Date modifiedTime;
-	private String clientName;
+	private int clientId;
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="questionId", referencedColumnName="questionId")
@@ -222,12 +222,12 @@ public class AssessmentQuestions {
 		this.isDelete = isDelete;
 	}
 
-	public String getClientName() {
-		return clientName;
+	public int getClientId() {
+		return clientId;
 	}
 
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 
 	@Override
@@ -239,8 +239,10 @@ public class AssessmentQuestions {
 				+ assessmentTypeForMigration + ", assessmentTypeForCloudProvider=" + assessmentTypeForCloudProvider
 				+ ", assessmentTypeForCloudable=" + assessmentTypeForCloudable + ", createdBy=" + createdBy
 				+ ", cteatedTime=" + cteatedTime + ", modifiedBy=" + modifiedBy + ", modifiedTime=" + modifiedTime
-				+ ", clientName=" + clientName + ", migrationRule=" + migrationRule + ", questionOption="
-				+ questionOption + ", cloudProviderRules=" + cloudProviderRules + "]";
+				+ ", clientId=" + clientId + ", migrationRule=" + migrationRule + ", questionOption=" + questionOption
+				+ ", cloudProviderRules=" + cloudProviderRules + "]";
 	}
+
+	
 	
 }

@@ -15,7 +15,7 @@ public class FeedbackService {
 	@Autowired
 	FeedbackRepository feedbackRepository;
 
-	public void saveFeedback(Feedback feedback,String userName,String clientName) {
+	public void saveFeedback(Feedback feedback,String userName,int clientId) {
 		Feedback feedbackObj=new Feedback();
 		feedbackObj=feedbackRepository.findByUserName(userName);
 		if(feedbackObj!=null)
@@ -25,7 +25,7 @@ public class FeedbackService {
 		else
 		{
 			System.out.println(userName);
-			feedback.setClientName(clientName);
+			feedback.setClientId(clientId);
 			feedback.setUserName(userName);
 			feedbackRepository.save(feedback);
 		}

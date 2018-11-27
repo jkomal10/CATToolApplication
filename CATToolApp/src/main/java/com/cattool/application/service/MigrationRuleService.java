@@ -27,11 +27,10 @@ public class MigrationRuleService {
 		return migrationRuleRepository.findAll();
 	}
 	
-	public List<Migration> getAllMigrationPatterns(String clientName){
+	public List<Migration> getAllMigrationPatterns(int clientId){
 		List<Migration> migrationList=new ArrayList<Migration>();
 		for(Migration migration:migrationRepository.findAll()) {
-			System.out.println(clientName+"=="+migration.getClientName());
-			if(clientName.equals(migration.getClientName())) {
+			if(clientId==migration.getClientId()) {
 				migrationList.add(migration);
 			}
 		}
@@ -39,12 +38,12 @@ public class MigrationRuleService {
 		return migrationList;
 	}
 	
-	public void updateMigrationRule(List<MigrationRule> migrationRulelist, String clientName)
+	public void updateMigrationRule(List<MigrationRule> migrationRulelist, int clientId)
 	{
 		MigrationRule migrationRuleObject=new MigrationRule();
 		for(MigrationRule migrationRule:migrationRulelist) {
 			migrationRuleObject=migrationRule;
-			migrationRuleObject.setClientName(clientName);
+			migrationRuleObject.setClientId(clientId);
 			migrationRuleObject.setMigrationId(migrationRule.getMigrationId());
 			migrationRuleRepository.save(migrationRuleObject);
 		}

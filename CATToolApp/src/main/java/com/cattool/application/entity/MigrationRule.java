@@ -15,7 +15,7 @@ public class MigrationRule {
 	private String migrationRule;
 	private int executionOrder;
 	private String questionText;
-	private String clientName;
+	private int clientId;
 	
 	public int getMigrationRuleId() {
 		return migrationRuleId;
@@ -53,12 +53,11 @@ public class MigrationRule {
 	public void setQuestionText(String questionText) {
 		this.questionText = questionText;
 	}
-	
-	public String getClientName() {
-		return clientName;
+	public int getClientId() {
+		return clientId;
 	}
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 	public MigrationRule() {
 		super();
@@ -67,7 +66,7 @@ public class MigrationRule {
 	public String toString() {
 		return "MigrationRule [migrationRuleId=" + migrationRuleId + ", questionId=" + questionId + ", migrationId="
 				+ migrationId + ", migrationRule=" + migrationRule + ", executionOrder=" + executionOrder
-				+ ", questionText=" + questionText + ", clientName=" + clientName + "]";
+				+ ", questionText=" + questionText + ", clientId=" + clientId + "]";
 	}
 	
 }
