@@ -100,4 +100,9 @@ public class UserController {
 		System.out.println("*****deactivateUser "+ userId);
 		userService.deactivateUser(userId);
 	}
+	
+	@GetMapping("/get/client/{clientId}")
+	public String getClient(@PathVariable int clientId) {
+		return userService.getClientNameByClientId(clientId);
+	}
 }

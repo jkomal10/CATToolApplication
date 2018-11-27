@@ -16,6 +16,7 @@ export class CATloginComponent implements OnInit {
     message:String;
     users: Users = new Users();
     userId:string;
+    clientName:string;
     
      constructor(private loginService :CatloginService,public router: Router,private myStorage:LocalStorageService) {}
  
@@ -30,7 +31,13 @@ export class CATloginComponent implements OnInit {
              if( this.users!=null)
              {
                  this.myStorage.setCurrentUserObject(this.users);
-                 this.myStorage.setLoggedInTrue('true'); 
+                 this.myStorage.setLoggedInTrue('true');
+                 this.loginService.getClientByClientId(this.myStorage.getCurrentUserObject().clientId).subscribe(
+                     (data)=>{
+                        this.clientName=data;
+                        this.myStorage.setClientName(this.clientName);
+                     }
+                 );
                 //  this.myStorage.setUsername(this.users.userName);
                  if(this.users.isAdmin===0)
                  {

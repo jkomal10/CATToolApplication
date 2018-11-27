@@ -96,11 +96,11 @@ public class ApplicationController {
 		applicationService.allRuleCheck(applicationId);
 	}
 	
-//	@GetMapping("migrationCheck/{applicationId}/")
-//	public void migrationCheck(@PathVariable("applicationId") int applicationId) {
-//		System.out.println("All rule check!!!!");
-//		applicationService.migrationCheck(applicationId);
-//	}
+	@GetMapping("migrationCheck/{applicationId}/{isFinalize}")
+	public void migrationCheck(@PathVariable("applicationId") int applicationId,@PathVariable int isFinalize) {
+		System.out.println("All rule check!!!!");
+		applicationService.migrationCheck(applicationId,isFinalize);
+	}
 	
 	@GetMapping("cloudProviderCheck/{applicationId}")
 	public void cloudProviderCheck(@PathVariable("applicationId") int applicationId) {

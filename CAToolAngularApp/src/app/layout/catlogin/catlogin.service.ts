@@ -25,6 +25,11 @@ export class CatloginService {
       return this.http.get(`${this.getUserByID_url}/${username}/${password}`);  
   }
 
+
+  getClientByClientId(clientId:number):Observable<any>{
+    return this.http.get(`http://localhost:8090/user/get/client/`+clientId);
+  }
+
   private  comptransfer  =  new  BehaviorSubject("Hello");
   question  =  this.comptransfer.asObservable();
 

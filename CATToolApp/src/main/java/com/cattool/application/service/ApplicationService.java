@@ -270,11 +270,6 @@ public boolean cloudProviderCheck(int applicationId){
 
 	
 	public void migrationCheck(int applicationId,int gitcCheck){
-		Application app=new Application();
-		app=applicationRepository.findByApplicationId(applicationId);
-		app.setIsCloudable("true");
-		applicationRepository.save(app);
-		
 		int migrationQuestionIdValue=0;
 		int answerTextCount=0;
 		int answerIdCount=0;
@@ -283,13 +278,11 @@ public boolean cloudProviderCheck(int applicationId){
 		List<Answers> answerlist=new ArrayList<Answers>();
 		List<MigrationRule> migrationRulelist=new ArrayList<MigrationRule>();
 		Application application=applicationRepository.findByApplicationId(applicationId);
-	//	String clientName = application.getClientName();
 		Application application2=applicationRepository.findByApplicationId(applicationId);
 		migrationRulelist=migrationRuleRepository.findAll();
 		List<MigrationRule> migrationRuleByClientName = new ArrayList<MigrationRule>();
 		for(MigrationRule migrationRuleAllRule:migrationRuleRepository.findAll())
 		{
-	//		if(migrationRuleAllRule.getClientName().equals(clientName))
 			{
 				migrationRuleByClientName.add(migrationRuleAllRule);
 			}
@@ -312,7 +305,6 @@ public boolean cloudProviderCheck(int applicationId){
 		{
 		for(MigrationRule migrationRule:migrationRuleByClientName)
 		{
-			System.out.println("gitc check "+gitcCheck);
 			if(gitcCheck!=0)
 			{
 				publicFalseCheck=false;
@@ -321,9 +313,16 @@ public boolean cloudProviderCheck(int applicationId){
 			{
 				for(Answers answers:answerlist) {
 					migrationQuestionIdValue=Integer.parseInt(migrationRule.getQuestionId());
+					System.out.println(migrationQuestionIdValue+"=="+answers.getQuestionId());
 					if(migrationQuestionIdValue==answers.getQuestionId())
 					{
+						System.out.println(migrationRule.getMigrationRule()+"=="+answers.getAnswerText() );
 						publicFalseCheck=migrationRule.getMigrationRule().contains(answers.getAnswerText());
+						if(publicFalseCheck==false)
+						{
+							publicFalseCheck=(answers.getAnswerText()).contains(migrationRule.getMigrationRule());
+						}
+						System.out.println(publicFalseCheck);
 							if(publicFalseCheck)
 								{
 										if(gitcCheck!=0)
@@ -354,38 +353,28 @@ public boolean cloudProviderCheck(int applicationId){
 			}
 			if(publicFalseCheck==false && rehostFalseCheck==true && migrationRule.getMigrationId()==1002)//Rehost
 			{
-				System.out.println(migrationRule.getMigrationRule()+"^^^^^^^^^^^^^^Rehost");
-				System.out.println("answerssssssssss"+answerlist);
 				for(Answers answers:answerlist) {
 					migrationQuestionIdValue=Integer.parseInt(migrationRule.getQuestionId());
-					System.out.println(answers.getAnswerText());
 					if(migrationQuestionIdValue==answers.getQuestionId())
 					{
-						System.out.println(migrationRule.getMigrationRule()+"==="+answers.getAnswerText());
-						System.out.println(answers.getAnswerText()+"===="+migrationRule.getMigrationRule());
 						rehostFalseCheck=answers.getAnswerText().contains(migrationRule.getMigrationRule());
-						System.out.println(rehostFalseCheck);
 							if(rehostFalseCheck)
 								{
-										System.out.println("Rehost");
 										application2.setApplicationId(applicationId);
 										application2.setMigrationPattern("Rehost");
 										application.setIsSaved(1);
 										application.setAssessment(true);
 										application.setIsFinalize(1);
 										applicationRepository.save(application);
-										System.out.println(application);
 								}
 							else {
 								rehostFalseCheck=false;
-								System.out.println(rehostFalseCheck+" is rehostFalseCheck");
 								break;
 							}
 					}
 				}
 				if(rehostFalseCheck==false)
 				{
-					System.out.println("break works in rehost");
 					application.setApplicationId(applicationId);
 					application.setIsSaved(1);
 					application.setAssessment(true);
@@ -396,7 +385,6 @@ public boolean cloudProviderCheck(int applicationId){
 			}
 			else if(rehostFalseCheck==false)
 				{
-				System.out.println(migrationRule.getMigrationRule()+"^^^^^^^^^^^^^^Replateform");
 					System.out.println("replateform");
 					application.setApplicationId(applicationId);
 					application.setIsSaved(1);
