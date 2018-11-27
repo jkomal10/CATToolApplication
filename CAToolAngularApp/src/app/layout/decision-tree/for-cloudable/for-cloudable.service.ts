@@ -22,15 +22,9 @@ export class ForCloudableService {
    return this.http.get(`${this.url}`+`/`+this.clientIdValue);
     }
 
-    //  addClodableRule(cloudablerule: Object): Observable<Object> {
-    //   console.log(`${this.baseUrl }/create`);
-    //   return this.http.post(`${this.baseUrl }` + `/create`, cloudablerule);
-    //  }
-
-
    getCloudableQuestions(){
       this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
-      return this.http.get(this.myStorage.getdomainURL()+`/assessmentQuestions/getAllCloudableQuestions/`+this.clientIdValue);
+      return this.http.get(this.myStorage.getdomainURL()+`/assessmentQuestions/getCloudableQuestion/`+this.clientIdValue);
     }
 
     addClodableRule(cloudablerule: Object): Observable<Object> {
@@ -41,7 +35,7 @@ export class ForCloudableService {
     collectRule(clientId:number)
     {
       // return this.http.get(`${this.collectRulesUrl}`+`/`+clientId);
-      return this.http.get(this.myStorage.getdomainURL()+`/cloudableRule/getAll`);
+      return this.http.get(this.myStorage.getdomainURL()+`/cloudableRule/getAll/`+clientId);
     }
 
     collectOptions()
