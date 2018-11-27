@@ -9,36 +9,33 @@ import { LocalStorageService } from '../../utility/service/localStorage.service'
 })
 export class ForMigrationPatternService {
   clientIdValue : number;
-  private migrationUrl = 'http://localhost:8090/migrationRule/setExceutionOrder';
-  private updateMigrationRuleUrl = 'http://localhost:8090/migrationRule/updateMigrationRule';
 
   constructor(private http: HttpClient,private myStorage:LocalStorageService) { }
-  CollectData() {
+
+  getAllMigrationData() {
     this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
-    const  url  =  'http://localhost:8090/migrationRule/getAll';
-    return  this.http.get(url+`/`+this.clientIdValue);
+    return  this.http.get(this.myStorage.getdomainURL()+`/migrationRule/getAll/`+this.clientIdValue);
   }
 
   getAssessmentQuestions(){
-    const  url  =  'http://localhost:8090/assessmentQuestions/getAllQuestions';
-    return  this.http.get(url);
+    return  this.http.get(this.myStorage.getdomainURL()+`/assessmentQuestions/getAllQuestions`);
   }
 
   getMigrationQuestions(migrationId : number){
     this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
-    return  this.http.get(`http://localhost:8090/assessmentQuestions/getAllMigrationPattern/${migrationId}/${this.clientIdValue}`);
+    return  this.http.get(this.myStorage.getdomainURL()+`/assessmentQuestions/getAllMigrationPattern/${migrationId}/${this.clientIdValue}`);
   }
 
   updateMigrationRule(value: any):Observable<Object>{
     this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
-    return this.http.put(`${this.updateMigrationRuleUrl}`+`/`+this.clientIdValue, value);
+    return this.http.put(this.myStorage.getdomainURL()+`/migrationRule/updateMigrationRule/`+this.clientIdValue, value);
   }
 
   saveEvaluationOrder(migration: Object): Observable<Object> {
-    return this.http.post(`${this.migrationUrl}` + `/create`, migration);
+    return this.http.post(this.myStorage.getdomainURL() + `/migrationRule/setExceutionOrder/create`, migration);
   }
 
-  private comptransfer = new BehaviorSubject("Hello");
+  private comptransfer = new BehaviorSubject("migration pattern");
   question = this.comptransfer.asObservable();
 
   sendMsgtoOtherComponent(messsage){

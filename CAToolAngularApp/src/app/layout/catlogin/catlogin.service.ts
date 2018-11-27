@@ -1,28 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { Users } from './Users';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, BehaviorSubject} from 'rxjs';
+import { LocalStorageService } from '../utility/service/localStorage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CatloginService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private myStorage:LocalStorageService) {
      
   }
 
   ngOnInit() {
   }
 
-  users: Users = new Users();
-  private getUserByID_url: string = "http://localhost:8090/user/getById";
-
-
   getUserByUserNamePassword(username : string,password : string):Observable<any>{
-      console.log(`${this.getUserByID_url}/${username}/${password}`)
-      return this.http.get(`${this.getUserByID_url}/${username}/${password}`);  
+      return this.http.get(this.myStorage.getdomainURL()+`/user/getById/`+username+`/`+password);  
   }
 
 
@@ -30,7 +25,7 @@ export class CatloginService {
     return this.http.get(`http://localhost:8090/user/get/client/`+clientId);
   }
 
-  private  comptransfer  =  new  BehaviorSubject("Hello");
+  private  comptransfer  =  new  BehaviorSubject("login");
   question  =  this.comptransfer.asObservable();
 
   sendMsgtoOtherComponent(messsage) {

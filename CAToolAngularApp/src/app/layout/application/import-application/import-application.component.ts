@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { Application } from '../../decision-tree/reassessment/Application';
 import { ApplicationService } from '../application.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -13,49 +12,47 @@ import { LocalStorageService } from '../../utility/service/localStorage.service'
   styleUrls: ['./import-application.component.scss']
 })
 export class ImportApplicationComponent implements OnInit {
-  filename : any;
-  link : any;
-  ext : string ;
-  extCheck : boolean =  false;
-  extation : string = ".csv";
-   applications : Application = new Application();
-  application : Application = new Application();
+  filename: any;
+  link: any;
+  ext: string;
+  extCheck: boolean = false;
+  extation: string = ".csv";
+  applications: Application = new Application();
+  application: Application = new Application();
   lines = [];
-  value : any = [];
+  value: any = [];
   userData: any = [];
-  ipAddress : any;
-  existingUser : number;
-  clientName : string = localStorage.getItem('clientName');
-  constructor(private myStorage:LocalStorageService,public router: Router,private applicationService : ApplicationService,private userService : UsersService) { }
+  ipAddress: any;
+  existingUser: number;
+  clientName: string = localStorage.getItem('clientName');
+  constructor(private myStorage: LocalStorageService, public router: Router, private applicationService: ApplicationService, private userService: UsersService) { }
 
   ngOnInit() {
-    // this.userService.CollectData(this.clientName).subscribe(data=>{this.userData=data});
   }
-  fileChangeListener(event:any){
+  fileChangeListener(event: any) {
     this.filename = event.target.files[0].name;
     this.link = event.target.files[0];
     this.ext = this.filename.substring(this.filename.lastIndexOf('.')).toLowerCase();
 
-    if (this.isCSVFile(this.ext)){
+    if (this.isCSVFile(this.ext)) {
       let reader: FileReader = new FileReader();
-        reader.readAsText(this.link);
-        reader.onload = (data) => {
-          let csvData : string = reader.result;
-          let csvRecordsArray = csvData.split(/\r|\n|\n/);
-          let headersRow = this.getHeaderArray(csvRecordsArray);
-          this.applications =  this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
-            
-        }
+      reader.readAsText(this.link);
+      reader.onload = (data) => {
+        let csvData: string = reader.result;
+        let csvRecordsArray = csvData.split(/\r|\n|\n/);
+        let headersRow = this.getHeaderArray(csvRecordsArray);
+        this.applications = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+
+      }
     }
 
-    else{
+    else {
       alert("please enter a csv file");
     }
-        // console.log(this.filename[0]+"___________");
-        // console.log(this.link+"**************");
+
   }
 
-  getDataRecordsArrayFromCSVFile(csvRecordsArray : any,headerLength : any){
+  getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {
 
     for (let i = 1; i < csvRecordsArray.length; i++) {
       let data = csvRecordsArray[i].split(',');
@@ -63,132 +60,75 @@ export class ImportApplicationComponent implements OnInit {
         var dataArr = [];
         for (let j = 0; j < headerLength; j++) {
           dataArr.push(data[j]);
-      }
-        
-         this.lines.push(dataArr);
+        }
+
+        this.lines.push(dataArr);
       }
     }
-    // console.log(this.lines.length);
-    for (var i = 0; i < this.lines.length; i++)
-      {
-        
-      console.log("adduser of row"+this.lines[i][0]);
-      }
     return null;
   }
 
-  getHeaderArray(csvRecordsArr : any){
+  getHeaderArray(csvRecordsArr: any) {
     let headers = csvRecordsArr[0].split(',');
     let headerArray = [];
     for (let j = 0; j < headers.length; j++) {
-    headerArray.push(headers[j]);
+      headerArray.push(headers[j]);
     }
-   return headerArray;
+    return headerArray;
   }
 
   isCSVFile(extn: string) {
     this.extCheck = (extn === this.extation);
     return this.extCheck;
-    }
+  }
 
-  importData(){
+  importData() {
 
 
-    for (var i = 0; i < this.lines.length; i++)
-    {
-   
-      
-  //     this.application.applicationName =this.lines[i][0];
-  //     this.application.applicationDescription =this.lines[i][1];
-  //     this.application.clientName = localStorage.getItem('clientName');
-  //     this.application.cloudProvider = "";
-  //     this.application.createdBy = localStorage.getItem('clientName');
-  //     this.application.createdDate  = new Date();
-  //     this.application.isAssessment = false;
-  //     // this.application.isCloudable = false;
-  //     this.application.isDeactivate = false;
-  //     this.application.isDeleted = false;
-  //     this.application.isFinalize = 0;
-  //     this.application.isSaved = 0;
-  //     this.application.isVerified = false;
-  //     this.application.MigrationPattern = "";
-  //     this.application.modifiedBy = localStorage.getItem('clientName');
-  //     this.application.modifiedDateTime = new Date();
+    for (var i = 0; i < this.lines.length; i++) {
       var userName = this.lines[i][2];
       this.getuserIdByName(userName);
-     
-     
-     
-      // this.existingUser = this.value;
-      //  console.log("{{{{{{{"+this.value);
-      
-      // console.log("************"+this.existingUser);
-      
-      
-
-      // this.application.clientName = localStorage.getItem('clientName');
-      
-      
-    //   this.applicationService.createApplication(this.application)
-    // .subscribe();
-    
-    this.router.navigate(['/application']);
-    
-    
-    console.log(this.value);
+      this.router.navigate(['/application']);
+      console.log(this.value);
 
     }
+  }
 
-    
+  getuserIdByName(userName) {
+    this.userService.getUserByUserName(this.myStorage.getCurrentUserObject().clientId, userName).subscribe(data => {
+      this.value = data, console.log(this.value)
 
-    // console.log("this.userDetail"+this.application);
-   }
 
-    getuserIdByName(userName)
-   {
-    this.userService.getUserByUserName(this.myStorage.getCurrentUserObject().clientId,userName).subscribe(data=>{this.value=data,console.log(this.value)
-    
-     
-      for (var i = 0; i < 1; i++)
-    {
-   
-      
-      this.application.applicationName =this.lines[i][0];
-      this.application.applicationDescription =this.lines[i][1];
-      this.application.clientId = this.myStorage.getCurrentUserObject().clientId;
-      this.application.cloudProvider = "";
-      this.application.createdBy = this.myStorage.getCurrentUserObject().userName;
-      this.application.createdDate  = new Date();
-      this.application.isAssessment = false;
-      // this.application.isCloudable = false;
-      this.application.isDeactivate = false;
-      this.application.isDeleted = false;
-      this.application.isFinalize = 0;
-      this.application.isSaved = 0;
-      this.application.isVerified = false;
-      this.application.MigrationPattern = "";
-      this.application.modifiedBy = localStorage.getItem('clientName');
-      this.application.modifiedDateTime = new Date();
-      // var userName = this.lines[i][2];
-      this.existingUser = this.value.id;
-       console.log("{{{{{{{"+this.value.id);
-      // console.log("++++++++++"+JSON.stringify(this.value[0]));
-      console.log("************"+this.existingUser);
-      this.application.userId=this.existingUser;
-      console.log(this.application.userId);
- 
-      this.application.clientId = this.myStorage.getCurrentUserObject().clientId;
-      this.applicationService.createApplication(this.application)
-      .subscribe();
-    }
+      for (var i = 0; i < 1; i++) {
+
+
+        this.application.applicationName = this.lines[i][0];
+        this.application.applicationDescription = this.lines[i][1];
+        this.application.clientId = this.myStorage.getCurrentUserObject().clientId;
+        this.application.cloudProvider = "";
+        this.application.createdBy = this.myStorage.getCurrentUserObject().userName;
+        this.application.createdDate = new Date();
+        this.application.isAssessment = false;
+        this.application.isDeactivate = false;
+        this.application.isDeleted = false;
+        this.application.isFinalize = 0;
+        this.application.isSaved = 0;
+        this.application.isVerified = false;
+        this.application.MigrationPattern = "";
+        this.application.modifiedBy = localStorage.getItem('clientName');
+        this.application.modifiedDateTime = new Date();
+        this.existingUser = this.value.id;
+        this.application.userId = this.existingUser;
+        this.application.clientId = this.myStorage.getCurrentUserObject().clientId;
+        this.applicationService.createApplication(this.application)
+          .subscribe();
+      }
 
 
     });
-    // console.log("ssssssssssssssssss"+this.value);
-    // return this.userService.getUserByUserName(localStorage.getItem('clientName'),userName).subscribe(data=>{this.value=data});
-     return 0;
+    return 0;
   }
 
-  
+
 
 }

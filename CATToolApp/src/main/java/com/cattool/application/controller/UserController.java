@@ -35,7 +35,6 @@ public class UserController {
 	@GetMapping("/getAll/{clientId}")
 	public List<Users> findAllUsers(@PathVariable int clientId)
 	{
-//		LOGGER.info("Get user Name");
 		LOGGER.error("Get all user");
 		return userService.findAllUsers(clientId);
 
@@ -45,8 +44,6 @@ public class UserController {
 	@GetMapping("/getUserId/{clientId}/{userName}")
 	public String getuserIdByName(@PathVariable int clientId,@PathVariable String userName)
 	{
-		System.out.print(clientId);
-		System.out.println(userName);
 		return userService.findUserId(clientId,userName);
 	}
 	
@@ -61,43 +58,34 @@ public class UserController {
 	@GetMapping("/getById/{userName}/{password}")
 	public Users findById(@PathVariable String userName,HttpServletRequest request,HttpServletResponse response, @PathVariable String password)
 	{
-		HttpSession session=request.getSession();
-		session.setAttribute("userName", userName);
-		session.getAttribute("userName");
-		System.out.println(session.getAttribute("userName"));
 		return userService.findById(userName,password);
 	}
 	
 	@PostMapping("/addUser/create/{createdBy}")
 	public Users saveUser(@RequestBody Users user,@PathVariable String createdBy)
 	{
-		System.out.println("post method*****************");
 		return userService.saveUser(user,createdBy);
 	}
 	 
 	@DeleteMapping("/deleteUserById/{userId}")
 	public void deleteById(@PathVariable int userId)
 	{
-		System.out.println("delete method*****************");
 		userService.deleteById(userId);
 	}
 	
 	@PutMapping("/updateUser/update/{modifiedBy}")
 	public void updateUserId(@RequestBody Users user,@PathVariable String modifiedBy) {
-		System.out.println("***************Update question******************"+modifiedBy);
 		userService.updateUsers(user,modifiedBy);
 	}
 	
 	@GetMapping("changePassword/{userName}/{password}/{company}")
 	public Users setPassword(@PathVariable String userName,@PathVariable String password,@PathVariable String company) {
-		System.out.println("Change password");
 		return userService.changePassword(userName, password,company);
 	}
 	
 	@PutMapping("/deactivateUser/{userId}")
 	public void deactivateUser(@PathVariable("userId") int userId)
 	{
-		System.out.println("*****deactivateUser "+ userId);
 		userService.deactivateUser(userId);
 	}
 	

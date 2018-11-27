@@ -12,27 +12,22 @@ export class AssessmentQuestionsService {
   constructor(private http: HttpClient, private myStorage: LocalStorageService) {
 
   }
-  private getAllQuestionsURL='http://localhost:8090/assessmentQuestions/getAllQuestions';
-  private baseUrl = 'http://localhost:8090/assessmentQuestions/deleteQuestions';
-  private updateUrl = 'http://localhost:8090/assessmentQuestions/updateQuestions/update';
-  private addUrl = 'http://localhost:8090/assessmentQuestions/saveAssessmentQuestions';
-  private addUrl1= 'http://localhost:8090/assessmentQuestions/saveAssessmentQuestions';
 
   getAllQuestions(clientId : number) {
-    return  this.http.get(this.getAllQuestionsURL+`/`+clientId);
+    return  this.http.get(this.myStorage.getdomainURL()+`/assessmentQuestions/getAllQuestions/`+clientId);
   }
 
   deleteQuestion(questionId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${questionId}`, {
+    return this.http.delete(this.myStorage.getdomainURL()+`/assessmentQuestions/deleteQuestions/`+questionId, {
       responseType: 'text' 
     });
   }
 
   updateQuestions(question: Object): Observable<Object> {
-    return this.http.put(`${this.updateUrl}`, + `/update`, question);
+    return this.http.put(this.myStorage.getdomainURL() + `/assessmentQuestions/updateQuestions/update`, question);
   }
 
-  private  comptransfer  =  new  BehaviorSubject("Hello");
+  private  comptransfer  =  new  BehaviorSubject("Assessment Questions");
   question  =  this.comptransfer.asObservable();
 
   sendMsgtoOtherComponent(messsage) {
@@ -41,25 +36,22 @@ export class AssessmentQuestionsService {
 
   getMigrationData(){
     this.clienIdValue=this.myStorage.getCurrentUserObject().clientId;
-    const  url  =  'http://localhost:8090/migrationRule/getAll';
-    return  this.http.get(url+`/`+this.clienIdValue);
+    return  this.http.get(this.myStorage.getdomainURL()+`/migrationRule/getAll/`+this.clienIdValue);
   }
 
   getCloudProviderData(){
     this.clienIdValue=this.myStorage.getCurrentUserObject().clientId;
-
-    const url = 'http://localhost:8090/cloudProvider/getAll';
-    return this.http.get(url+`/`+this.clienIdValue);
+    return this.http.get(this.myStorage.getdomainURL()+`/cloudProvider/getAll/`+this.clienIdValue);
   }
 
   createQuestionn(question: Object): Observable<Object> {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8'); 
-    return this.http.post(`${this.addUrl1}` + `/create`,question);
+    return this.http.post(this.myStorage.getdomainURL() + `/assessmentQuestions/saveAssessmentQuestions/create`,question);
   }
   
   updateAssessmentQuestions(value: any): Observable<Object> {
-    return this.http.put(`${this.updateUrl}`, value);
+    return this.http.put(this.myStorage.getdomainURL+`/assessmentQuestions/updateQuestions/update`, value);
   }
 
 

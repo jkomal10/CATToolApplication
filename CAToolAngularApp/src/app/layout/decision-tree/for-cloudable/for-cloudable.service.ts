@@ -11,33 +11,27 @@ export class ForCloudableService {
 
   clientIdValue : number;
   constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
-   baseUrl = 'http://localhost:8090/cloudableRule/save';
-   CollectData(){
-   //const url = 'http://localhost:8090/option/getAll';
-   this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
-   const url= 'http://localhost:8090/assessmentQuestions/getAllCloudableQuestions';
-   return this.http.get(url+`/`+this.clientIdValue);
+
+   getCloudableQuestions(){
+      this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
+      return this.http.get(this.myStorage.getdomainURL()+`/assessmentQuestions/getAllCloudableQuestions/`+this.clientIdValue);
     }
 
     addClodableRule(cloudablerule: Object): Observable<Object> {
-      console.log(`${this.baseUrl }/create`);
-      return this.http.post(`${this.baseUrl }` + `/create`, cloudablerule);
+      return this.http.post(this.myStorage.getdomainURL() + `/cloudableRule/save/create`, cloudablerule);
     }
 
     collectRule()
     {
-      const collectRulesUrl="http://localhost:8090/cloudableRule/getAll";
-      return this.http.get(collectRulesUrl);
+      return this.http.get(this.myStorage.getdomainURL()+`/cloudableRule/getAll`);
     }
 
     collectOptions()
     {
-      const collectOptionsUrl = "http://localhost:8090/option/getAll";
-      return this.http.get(collectOptionsUrl);
+      return this.http.get(this.myStorage.getdomainURL()+`/option/getAll`);
     }
 
     collectQuestion(clientId:number){
-      const CollectQuestionUrl="http://localhost:8090/assessmentQuestions/getCloudableQuestion";
-      return this.http.get(CollectQuestionUrl+`/`+clientId);
+      return this.http.get(this.myStorage.getdomainURL()+`/assessmentQuestions/getCloudableQuestion/`+clientId);
     }
 }

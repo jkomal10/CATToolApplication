@@ -5,10 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.cattool.application.entity.Migration;
 import com.cattool.application.entity.MigrationRule;
+import com.cattool.application.repository.MigrationRepository;
 import com.cattool.application.repository.MigrationRuleRepository;
 
 @Service
@@ -34,7 +33,6 @@ public class MigrationRuleService {
 				migrationList.add(migration);
 			}
 		}
-		System.out.println(migrationList);
 		return migrationList;
 	}
 	

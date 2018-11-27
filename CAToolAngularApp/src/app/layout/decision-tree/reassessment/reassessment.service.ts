@@ -9,21 +9,16 @@ export class ServiceService {
   clientIdValue : number;
   constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
 
-  CollectData(){
+  reassessmentData(){
     this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
-    const reassessUrl = 'http://localhost:8090/application/getAllReassessment';
-    return this.http.get(reassessUrl+`/`+this.clientIdValue);
+    return this.http.get(this.myStorage.getdomainURL()+`/application/getAllReassessment/`+this.clientIdValue);
     }
 
   cloudProvider(applicationId : number){
-    const cloudProviderUrl = 'http://localhost:8090/application/cloudProviderCheck';
-    console.log(cloudProviderUrl+`/`+applicationId);
-    return this.http.get(cloudProviderUrl+`/`+applicationId);
+    return this.http.get(this.myStorage.getdomainURL()+`/application/cloudProviderCheck/`+applicationId);
   }
 
   migrationPattern(applicationId : number){
-    const migrationPatternUrl = 'http://localhost:8090/application/migrationCheck';
-    console.log(migrationPatternUrl+`/`+applicationId);
-    return this.http.get(migrationPatternUrl+`/`+applicationId);
+    return this.http.get(this.myStorage.getdomainURL()+`/application/migrationCheck/`+applicationId);
   }
 }
