@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.cattool.application.entity.ClientMaster;
 
-public interface ClientUserRepository extends JpaRepository<ClientMaster, Long>{
+public interface ClientMasterRepository extends JpaRepository<ClientMaster, Long>{
+	
+	ClientMaster findByClientId(int clientId);
 
 }
