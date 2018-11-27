@@ -160,6 +160,9 @@ public class AssessmentQuestionsService{
 	
 	public List<AssessmentQuestions> getCloudableQuestions(int clientId){
 		List<AssessmentQuestions> list=new ArrayList<AssessmentQuestions>();
+		
+//		list = assessmentQuestionsRepository.findByClientIdAndAssessmentTypeForCloudable(clientId,"true");
+		
 		try {
 			for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
 				if(assessmentQuestions.getAssessmentTypeForCloudable().equals("true"))
@@ -242,6 +245,15 @@ public class AssessmentQuestionsService{
 		return null;
 	}
 
+	public List<AssessmentQuestions> getQuestionsforCloudable(int clientId) {
+      List<AssessmentQuestions> list=new ArrayList<AssessmentQuestions>();
+		
+		list = assessmentQuestionsRepository.findByClientIdAndAssessmentTypeForCloudable(clientId,"true");
+		System.out.println(list);
+		return list;
+	}
+	
+	
 //	public List<AssessmentQuestions> getAllcloudProviderRule(int cloudProviderId, String clientName) {
 //		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<>();
 //		for(AssessmentQuestions assessmentQuestions:assessmentQuestionsRepository.findAll()) {
