@@ -64,7 +64,7 @@ export class UserComponent implements OnInit {
   {
     var filename = "Users";
     var options={
-      headers:[ "userName","firstName","lastName","company","isAdmin"]
+      headers:[ "User Name","First Name","Last Name","Company","UserType"]
     };
     new Angular5Csv(this.users, filename, options);
   }

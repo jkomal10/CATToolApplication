@@ -25,7 +25,12 @@ export class DashboardComponent implements OnInit {
     users: any;
     application: any = [];
     appCount : any = [];
+
+    userCount: any=[];
+ 
+
     clientIdValue: number;
+
 
     constructor(private translate: TranslateService,private userService: UsersService, private applicationService: ApplicationService, public router: Router, private myStorage: LocalStorageService) {
     }
@@ -42,6 +47,10 @@ export class DashboardComponent implements OnInit {
 
             this.firstName = this.myStorage.getCurrentUserObject().firstName;
             this.lastName = this.myStorage.getCurrentUserObject().lastName;
+
+           
+            this.userService.getUsersCount(this.clientIdValue).subscribe(data=>{this.userCount=data,console.log(this.userCount)});
+
             this.userService.getAllUsers(this.clientIdValue).subscribe(data => { this.users = data });
             this.applicationService.CollectData(this.clientIdValue).subscribe(data => { this.application = data });
             this.applicationService.getApplicationCount(this.clientIdValue).subscribe(data=>{this.appCount=data,console.log(this.appCount)});

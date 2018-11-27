@@ -83,10 +83,11 @@ public class ApplicationService {
             return appsCount; 
     }
 	
-	public List<Application> getAllApplication(String clientName)
+	public List<Application> getAllApplication(String clientName,Boolean isDeactivate)
 	{
 		List<Application> applicationList = new ArrayList<>();
-		for (Application application : applicationRepository.findAll()) {
+		applicationList=applicationRepository.findByClientNameAndIsDeactivate(clientName,isDeactivate);
+		/*for (Application application : applicationRepository.findAll()) {
 			System.out.println(clientName+"=="+application.getClientName());
 			if(!application.isDeactivate() && clientName.equals(application.getClientName()))
 			{
@@ -95,7 +96,7 @@ public class ApplicationService {
 			
 		}
 		
-		System.out.println(applicationList);
+		System.out.println(applicationList);*/
 		return applicationList;
 	}
 	

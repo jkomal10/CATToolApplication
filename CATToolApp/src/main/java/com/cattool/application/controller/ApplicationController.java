@@ -31,11 +31,11 @@ public class ApplicationController {
             return applicationService.getAllAppsCount(clientName); 
     }
 	
-	@GetMapping("/getAll/{clientName}")
-	public List<Application>getAllApplication(@PathVariable String clientName)
+	@GetMapping("/getAll/{clientName}/{isDeactivate}")
+	public List<Application>getAllApplication(@PathVariable String clientName,@PathVariable Boolean isDeactivate)
 	{
 		System.out.println(clientName+" get all application with this client ");
-		return applicationService.getAllApplication(clientName);
+		return applicationService.getAllApplication(clientName,isDeactivate);
 	}
 	@GetMapping("/getApplicationById/{applicationId}")
 	public Application getApplicationById(@PathVariable("applicationId") int id) {
