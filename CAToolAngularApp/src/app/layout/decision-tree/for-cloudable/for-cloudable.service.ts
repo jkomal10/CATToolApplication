@@ -36,8 +36,8 @@ export class ForCloudableService {
       return this.http.get(collectOptionsUrl);
     }
 
-    collectQuestion(){
-      const CollectQuestionUrl="http://localhost:8090/assessmentQuestions/getAllQuestions";
-      return this.http.get(CollectQuestionUrl);
+    collectQuestion(clientId:number){
+      const CollectQuestionUrl="http://localhost:8090/assessmentQuestions/getCloudableQuestion";
+      return this.http.get(CollectQuestionUrl+`/`+clientId);
     }
 }

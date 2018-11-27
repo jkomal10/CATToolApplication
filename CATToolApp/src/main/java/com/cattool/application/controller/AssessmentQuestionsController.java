@@ -35,6 +35,13 @@ public class AssessmentQuestionsController {
 		return assessmentQuestionsService.getAllquestions();
 	}
 	
+	@GetMapping("/getCloudableQuestion/{clientId}")
+	public List<AssessmentQuestions> getQuestionsforCloudable(@PathVariable int clientId)
+	{
+		return assessmentQuestionsService.getQuestionsforCloudable(clientId);
+	}
+	
+	
 	@GetMapping("/getAllQuestions/{clientId}")
 	public List<AssessmentQuestions> getAllquestionsByClientName(@PathVariable int clientId)
 	{
