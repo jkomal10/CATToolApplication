@@ -31,17 +31,17 @@ public class MigrationRuleController {
 		return migrationRuleService.getAllmigrationRule();
 	}
 	
-	@GetMapping("/getAll/{clientName}")
-	public List<Migration> getAllMigrationPattern(@PathVariable String clientName)
+	@GetMapping("/getAll/{clientId}")
+	public List<Migration> getAllMigrationPattern(@PathVariable int clientId)
 	{
-		return migrationRuleService.getAllMigrationPatterns(clientName);
+		return migrationRuleService.getAllMigrationPatterns(clientId);
 	}
 	
-	@PutMapping("/updateMigrationRule/{clientName}")
-	public void updateMigrationRule(@RequestBody List<MigrationRule> migrationRule,@PathVariable String clientName)
+	@PutMapping("/updateMigrationRule/{clientId}")
+	public void updateMigrationRule(@RequestBody List<MigrationRule> migrationRule,@PathVariable int clientId)
 	{
 		System.out.println("Update migration rule");
-		migrationRuleService.updateMigrationRule(migrationRule,clientName);
+		migrationRuleService.updateMigrationRule(migrationRule,clientId);
 	}
 	
 }

@@ -28,11 +28,11 @@ public class CloudProviderService {
 	@Autowired
 	AssessmentQuestionsRepository assessmentQuestionsRepository;
 	
-	public List<CloudProvider> getAllcloudProvider(String clientName){
+	public List<CloudProvider> getAllcloudProvider(int clientId){
 		List<CloudProvider> migrationList=new ArrayList<CloudProvider>();
 		for(CloudProvider migration:cloudProviderRepository.findAll()) {
-			System.out.println(clientName+"=="+migration.getClientName());
-			if(clientName.equals(migration.getClientName())) {
+			System.out.println(clientId+"=="+migration.getClientId());
+			if(clientId==migration.getClientId()) {
 				migrationList.add(migration);
 			}
 		}
@@ -45,13 +45,13 @@ public class CloudProviderService {
 		cloudProviderRepository.saveAll(cloudProvider);
 	}
 
-	public void updateCloudProviderRule(List<CloudProviderRule> cloudProviderRulelist,String clientName) {
+	public void updateCloudProviderRule(List<CloudProviderRule> cloudProviderRulelist,int clientId) {
 		
 		CloudProviderRule cloudProviderRules = new CloudProviderRule();
 		for (CloudProviderRule cloudProviderRule : cloudProviderRulelist) {
 			cloudProviderRules = cloudProviderRule;
 			cloudProviderRules.setCloudProviderRuleId(cloudProviderRule.getCloudProviderRuleId());
-			cloudProviderRules.setClientName(clientName);
+			cloudProviderRules.setClientId(clientId);
 			cloudProviderRuleRepository.save(cloudProviderRules);
 		}
 		

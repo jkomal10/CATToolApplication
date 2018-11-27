@@ -18,7 +18,7 @@ public class Feedback {
 	private String recommend;
 	private String other;
 	private int rating;
-	private String clientName;
+	private int clientId;
 	public int getFeedbackId() {
 		return feedbackId;
 	}
@@ -68,17 +68,17 @@ public class Feedback {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	public String getClientName() {
-		return clientName;
+	public int getClientId() {
+		return clientId;
 	}
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 	@Override
 	public String toString() {
 		return "Feedback [feedbackId=" + feedbackId + ", userName=" + userName + ", question1=" + question1
 				+ ", question2=" + question2 + ", question3=" + question3 + ", recommend=" + recommend + ", other="
-				+ other + ", rating=" + rating + ", clientName=" + clientName + "]";
+				+ other + ", rating=" + rating + ", clientId=" + clientId + "]";
 	}
 	
 }

@@ -19,11 +19,11 @@ public class FeedbackController {
 	@Autowired
 	FeedbackService feedbackService;
 	
-	@PostMapping("/save/{userName}/{clientName}")
-	public void saveAll(@RequestBody Feedback feedback,@PathVariable String userName,@PathVariable String clientName)
+	@PostMapping("/save/{userName}/{clientId}")
+	public void saveAll(@RequestBody Feedback feedback,@PathVariable String userName,@PathVariable int clientId)
 	{
 		System.out.println("Feedback form saved");
-		feedbackService.saveFeedback(feedback,userName,clientName);
+		feedbackService.saveFeedback(feedback,userName,clientId);
 	}
 
 }

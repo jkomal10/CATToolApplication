@@ -36,10 +36,10 @@ public class AssessmentQuestionsController {
 	}
 	
 	@GetMapping("/getAllQuestions/{clientName}")
-	public List<AssessmentQuestions> getAllquestionsByClientName(@PathVariable String clientName)
+	public List<AssessmentQuestions> getAllquestionsByClientName(@PathVariable int clientId)
 	{
 		System.out.println("****************get all question by client name******************");
-		return assessmentQuestionsService.getAllquestionsByClientName(clientName);
+		return assessmentQuestionsService.getAllquestionsByClientId(clientId);
 	}
 	
 	@PostMapping("/saveAssessmentQuestions/create")
@@ -80,25 +80,25 @@ public class AssessmentQuestionsController {
 		assessmentQuestionsService.updateQuestions(assessmentQuestions);
 	}
 	
-	@GetMapping("/getAllCloudableQuestions/{clientName}")
-	public List<AssessmentQuestions> getCloudableQuestions(@PathVariable String clientName)
+	@GetMapping("/getAllCloudableQuestions/{clientId}")
+	public List<AssessmentQuestions> getCloudableQuestions(@PathVariable int clientId)
 	{
 		System.out.println("****************get all question******************");
-		return assessmentQuestionsService.getCloudableQuestions(clientName);
+		return assessmentQuestionsService.getCloudableQuestions(clientId);
 	}
 	
-	@GetMapping("/getAllMigrationPattern/{migrationId}/{clientName}")
-	public List<AssessmentQuestions> getAllMigrationPattern(@PathVariable("migrationId") int migrationId,@PathVariable String clientName)
+	@GetMapping("/getAllMigrationPattern/{migrationId}/{clientId}")
+	public List<AssessmentQuestions> getAllMigrationPattern(@PathVariable("migrationId") int migrationId,@PathVariable int clientId)
 	{
 		System.out.println("****************get all question******************");
-		return assessmentQuestionsService.getAllMigrationPattern(migrationId,clientName);
+		return assessmentQuestionsService.getAllMigrationPattern(migrationId,clientId);
 	}
 	
-	@GetMapping("/getAllCloudProviderRule/{cloudProviderId}/{clientName}")
-	public List<AssessmentQuestions> getAllcloudProviderRule(@PathVariable("cloudProviderId") int cloudProviderId,@PathVariable String clientName)
+	@GetMapping("/getAllCloudProviderRule/{cloudProviderId}/{clientId}")
+	public List<AssessmentQuestions> getAllcloudProviderRule(@PathVariable("cloudProviderId") int cloudProviderId,@PathVariable int clientId)
 	{
 		System.out.println("****************get all question******************");
-		return assessmentQuestionsService.getAllcloudProviderRule(cloudProviderId,clientName);
+		return assessmentQuestionsService.getAllcloudProviderRule(cloudProviderId,clientId);
 	}
 	
 	

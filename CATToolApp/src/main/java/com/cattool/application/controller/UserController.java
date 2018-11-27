@@ -51,10 +51,10 @@ public class UserController {
 	}
 	
 	
-	@GetMapping("/getTotalUsersCount/{clientName}")
-	public int getUserCount(@PathVariable String clientName)
+	@GetMapping("/getTotalUsersCount/{clientId}")
+	public int getUserCount(@PathVariable int clientId)
 	{
-		return userService.getUserCount(clientName);
+		return userService.getUserCount(clientId);
 	}
 	
 	

@@ -18,7 +18,7 @@ public class CloudProviderRule {
 	private String cloudProviderRule;
 	private int executionOrder;
 	private String questionText;
-	private String clientName;
+	private int clientId;
 	
 	public int getCloudProviderRuleId() {
 		return cloudProviderRuleId;
@@ -56,24 +56,18 @@ public class CloudProviderRule {
 	public void setQuestionText(String questionText) {
 		this.questionText = questionText;
 	}
-	
-	public String getClientName() {
-		return clientName;
+	public int getClientId() {
+		return clientId;
 	}
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
-	}
-	public CloudProviderRule() {
-		super();
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 	@Override
 	public String toString() {
 		return "CloudProviderRule [cloudProviderRuleId=" + cloudProviderRuleId + ", questionId=" + questionId
 				+ ", cloudProviderId=" + cloudProviderId + ", cloudProviderRule=" + cloudProviderRule
-				+ ", executionOrder=" + executionOrder + ", questionText=" + questionText + ", clientName=" + clientName
+				+ ", executionOrder=" + executionOrder + ", questionText=" + questionText + ", clientId=" + clientId
 				+ "]";
 	}
-	
-	
 	
 }

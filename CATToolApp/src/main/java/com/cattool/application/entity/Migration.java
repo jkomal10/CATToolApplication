@@ -13,7 +13,7 @@ public class Migration {
 	private int migrationId;
 	private String migrationPattern;
 	private int evaluationOrder;
-	private String clientName;
+	private int clientId;
 	
 	public int getMigrationId() {
 		return migrationId;
@@ -33,27 +33,20 @@ public class Migration {
 	public void setEvaluationOrder(int evaluationOrder) {
 		this.evaluationOrder = evaluationOrder;
 	}
-	
-	public String getClientName() {
-		return clientName;
+	public int getClientId() {
+		return clientId;
 	}
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 	public Migration() {
 		super();
 	}
-	public Migration(int migrationId, String migrationPattern, int evaluationOrder) {
-		super();
-		this.migrationId = migrationId;
-		this.migrationPattern = migrationPattern;
-		this.evaluationOrder = evaluationOrder;
-	}
 	@Override
 	public String toString() {
 		return "Migration [migrationId=" + migrationId + ", migrationPattern=" + migrationPattern + ", evaluationOrder="
-				+ evaluationOrder + ", clientName=" + clientName + "]";
+				+ evaluationOrder + ", clientId=" + clientId + "]";
 	}
-	
+
 	
 }
