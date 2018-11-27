@@ -29,7 +29,7 @@ export class AssesstApplicationComponent implements OnInit {
   multi = 0;
   single = 0;
   singlee = 0;
-  result =[];
+  result :any=[];
   queId1 = 0;
   i = -1;
   application: any;
