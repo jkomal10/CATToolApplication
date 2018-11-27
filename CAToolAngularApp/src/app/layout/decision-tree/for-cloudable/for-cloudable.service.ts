@@ -34,7 +34,6 @@ export class ForCloudableService {
 
     collectRule(clientId:number)
     {
-      // return this.http.get(`${this.collectRulesUrl}`+`/`+clientId);
       return this.http.get(this.myStorage.getdomainURL()+`/cloudableRule/getAll/`+clientId);
     }
 
@@ -44,10 +43,6 @@ export class ForCloudableService {
     }
 
     collectQuestion(clientId:number){
-
-      // return this.http.get(`${this.CollectCloudableQuestionUrl}`+`/`+clientId);
-
       return this.http.get(this.myStorage.getdomainURL()+`/assessmentQuestions/getCloudableQuestion/`+clientId);
-
     }
 }
