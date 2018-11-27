@@ -28,19 +28,19 @@
           </tr>
         </thead>
         <tbody>
-            <tr *ngFor = "let user of userData">
-                <td width="13%">{{user.userName}}</td>
-                <td width="13%">{{user.ipAddress}}</td>
-                <td width="13%">{{user.company}}</td>
-                <td width="13%">{{user.createdBy}}</td>
-                <td width="13%" *ngIf="user.isAdmin==0;else user">Admin</td>
+            <tr *ngFor = "let users of userData"> 
+                <td width="13%">{{users.userName}}</td>
+                <td width="13%">{{users.ipAddress}}</td>
+                <td width="13%">{{users.company}}</td>
+                <td width="13%">{{users.createdBy}}</td>
+                <td width="13%" *ngIf="users.isAdmin==0;else user">Admin</td>
                 <ng-template #user><td>User</td></ng-template>
-                <td width="13%">{{user.modifiedBy}}</td>
-                <td width="10%">{{user.lastLogin}}</td>
+                <td width="13%">{{users.modifiedBy}}</td>
+                <td width="10%">{{users.lastLogin}}</td>
                 <td width="13%">
-                <button (click)="deactivate(user.userId)" title="Deactivate" style="font-size:16px" class="button button"> <i style="color:black" class="fa fa-key"></i></button>&nbsp;
-                <button (click)="updateUser(user)" title=" Update" style="font-size:16px"  class="button button"><i style="color:black" class="fa fa-edit"></i></button>&nbsp;
-                <button (click)="deleteUser(user.userId)" title="Delete" type="button" class="button button"><i style="color:black" class="fa fa-trash"></i></button>
+                <button (click)="deactivate(users.userId)" title="Deactivate" style="font-size:16px" class="button button"> <i style="color:black" class="fa fa-key"></i></button>&nbsp;
+                <button (click)="updateUser(users)" title=" Update" style="font-size:16px"  class="button button"><i style="color:black" class="fa fa-edit"></i></button>&nbsp;
+                <button (click)="deleteUser(users.userId)" title="Delete" type="button" class="button button"><i style="color:black" class="fa fa-trash"></i></button>
                 </td>
               </tr> 
         </tbody>

@@ -15,6 +15,10 @@ getAllUsers(clientName : string): Observable<Object>{
   return this.http.get(this.myStorage.getdomainURL()+`/user/getAll/`+clientName);
   }
 
+ getUsersCount(clientName : string): Observable<any>{
+   return this.http.get(this.myStorage.getdomainURL()+`/user/getTotalUsersCount/`+clientName);
+ }
+
 getUserByUserName(clientName:string,userName:string)
 {
   return this.http.get(this.myStorage.getdomainURL()+'/user/getUserId/'+clientName+'/'+userName);

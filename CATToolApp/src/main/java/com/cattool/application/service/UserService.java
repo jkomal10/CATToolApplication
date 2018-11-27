@@ -25,10 +25,18 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 
-	public int getUserCount() {
+	public int getUserCount(String clientName) {
 
 		List<Users> usersList = userRepository.findAll();
 		int count = 0;
+		
+		for(Users user:userRepository.findAll())
+		{
+			if(user.getClientName().equals(clientName))
+			{
+				usersList.add(user);
+			}
+		}
 		count = usersList.size();
 		System.out.println(count);
 		return count;
