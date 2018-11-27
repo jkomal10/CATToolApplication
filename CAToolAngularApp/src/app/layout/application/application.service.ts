@@ -13,7 +13,7 @@ export class ApplicationService {
    resetAppUrl:String ='http://localhost:8090/application/resetApplicationById';
    updateAppUrl:String= 'http://localhost:8090/application/updateApplictaion';
    appCountUrl:string = "http://localhost:8090/application/getTotalApplicationsCount";
-   CollectData(clientId : number){
+   CollectData(clientId : number): Observable<Object>{
     const url = 'http://localhost:8090/application/getAll';
     return this.http.get(url+`/`+clientId);
     }

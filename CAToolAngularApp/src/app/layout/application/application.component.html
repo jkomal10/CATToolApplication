@@ -32,29 +32,29 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor =  "let row of applications">
-          <td>{{row.applicationName }}{{row.isDeactivate}}</td>
-          <td>{{row.applicationDescription}}</td>
-          <td>{{row.isCloudable}}</td>
-          <td>{{row.migrationPattern}}</td>
-          <td>{{row.cloudProvider}}</td>
+        <tr *ngFor =  "let app of applicationList">
+          <td>{{app.applicationName }}{{app.isDeactivate}}</td>
+          <td>{{app.applicationDescription}}</td>
+          <td>{{app.isCloudable}}</td>
+          <td>{{app.migrationPattern}}</td>
+          <td>{{app.cloudProvider}}</td>
           <td width="24%">
-            <button (click)="deactivate(row.applicationId)" title="Deactivate" style="size:16px" class="button button">
+            <button (click)="deactivate(app.applicationId)" title="Deactivate" style="size:16px" class="button button">
               <i style="color:black;size:16px " class="fa fa-lock" aria-hidden="true"></i>
             </button>&nbsp;
-            <button (click)="ViewApplication(row)" title="Details" style="size:16px" class="button button">
+            <button (click)="ViewApplication(app)" title="Details" style="size:16px" class="button button">
               <i style="color:black;size:16px " class="fa fa-info-circle"></i>
             </button>&nbsp;
-            <button (click)="assessApplication(row)" title="Assest" style="size:16px" class="button button">
+            <button (click)="assessApplication(app)" title="Assest" style="size:16px" class="button button">
               <i style="color:black" class="fa fa-hourglass-start"></i>
             </button>&nbsp;
-            <button (click)="editApplication(row)" title="Edit" style="size:16px" class="button button">
+            <button (click)="editApplication(app)" title="Edit" style="size:16px" class="button button">
               <i style="color:black" class="fa fa-edit"></i>
             </button>&nbsp;
-            <button (click)="deleteApplication(row.applicationId)" title="Delete" style="size:16px" class="button button">
+            <button (click)="deleteApplication(app.applicationId)" title="Delete" style="size:16px" class="button button">
               <i style="color:black" class="fa fa-trash"></i>
             </button>&nbsp;
-            <button (click)="resetApplication(row.applicationId)" title="Reset" style="size:16px" class="button button">
+            <button (click)="resetApplication(app.applicationId)" title="Reset" style="size:16px" class="button button">
               <i style="color:black" class="fa fa-refresh" aria-hidden="true"></i>
             </button>
           </td>
