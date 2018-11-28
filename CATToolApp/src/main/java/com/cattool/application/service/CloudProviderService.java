@@ -27,14 +27,9 @@ public class CloudProviderService {
 	AssessmentQuestionsRepository assessmentQuestionsRepository;
 	
 	public List<CloudProvider> getAllcloudProvider(int clientId){
-		List<CloudProvider> migrationList=new ArrayList<CloudProvider>();
-		for(CloudProvider migration:cloudProviderRepository.findAll()) {
-			if(clientId==migration.getClientId()) {
-				migrationList.add(migration);
-			}
-		}
-		System.out.println(migrationList);
-		return migrationList;
+		List<CloudProvider> providerList=new ArrayList<CloudProvider>();
+		providerList=cloudProviderRepository.findByClientId(clientId);
+		return providerList;
 	}
 
 	public void setEvaluationOrder(List<CloudProvider> cloudProvider) {

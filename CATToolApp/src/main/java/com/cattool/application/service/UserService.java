@@ -29,19 +29,14 @@ public class UserService {
 	
 	@Autowired
 	ClientMasterRepository clientMasterRepository;
-
+    
+	int isDeactivate=0;
 	public int getUserCount(int clientId) {
 
 		List<Users> usersList = userRepository.findAll();
 		int count = 0;
 		
-		for(Users user:userRepository.findAll())
-		{
-			if(user.getClientId()==clientId)
-			{
-				usersList.add(user);
-			}
-		}
+		usersList=userRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
 		count = usersList.size();
 		return count;
 	}
@@ -50,13 +45,9 @@ public class UserService {
 
 		List<Users> userList = new ArrayList<>();
 		
-		System.out.println(userRepository.findAll());
 		try {
-			for (Users users : userRepository.findAll()) {
-				if (!users.isDeactivate() && (clientId==users.getClientId())) {
-					userList.add(users);
-				}
-			}
+			userList=userRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
+			
 			LOGGER.info("Successfully get all users");
 			return userList;
 		} catch (Exception e) {
@@ -196,13 +187,7 @@ public class UserService {
 	public String findUserId(int clientId, String userName) {
 		List<Users> userList = new ArrayList<Users>();
 		Users userbyId = new Users();
-		for(Users user : userRepository.findAll())
-		{
-			if(user.getClientId()==clientId)
-			{
-				userList.add(user);
-			}
-		}
+		userList=userRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
 		
 		for(Users alluser : userList)
 		{
