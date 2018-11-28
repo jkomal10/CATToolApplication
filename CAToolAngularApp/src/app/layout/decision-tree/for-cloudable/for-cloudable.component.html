@@ -44,12 +44,14 @@
             <span *ngIf="rules[i].questionId==questions[k].questionId && rules[i].questionId!=0">{{question.questionType}}</span>
           </span>
           <br>
-          <span *ngFor="let option of options; let j = index;let last  = last">
-            <!-- <span *ngFor="let option1 of options.optionText; let k = index;let last1  = last"></span> -->
-            <span *ngIf="rules[i].questionId==options[j].questionId">{{option.optionText}}
-              <!-- {{option.optionText.length}} -->
-            <span *ngIf="last; else notlast"></span>
-            <ng-template #notlast>,</ng-template>
+          <span *ngFor="let option of options; let j = index;let last  = last " >
+           
+              <!-- <span *ngIf="check(rules[i].questionId)"> -->
+
+
+            <span *ngIf="rules[i].questionId==options[j].questionId">{{option.optionText}},
+               <!-- {{option.optionText.replace(' ', ',')}} -->
+              <!-- <span  *ngIf="rules[i].questionId==options[j+1].questionId">,</span> -->
           </span>
           </span>
           <br>

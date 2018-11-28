@@ -35,6 +35,8 @@ export class ForCloudableComponent implements OnInit {
   cloudableRules: Array<CloudableRule> = [];
   orderByQuestionDisplayOrder: any = [];
   count : number ;
+  opns : string;
+  optionComma:boolean=false;
   cloudableQuestionsRules: Array<CloudableRule> = [];
   exeorder: any = [];
   constructor(private http: HttpClient, private forCloudableService: ForCloudableService, private router: Router, private myStorage: LocalStorageService) {
@@ -61,7 +63,7 @@ export class ForCloudableComponent implements OnInit {
 
     this.forCloudableService.collectQuestion(this.myStorage.getCurrentUserObject().clientId).subscribe(result => {
       this.questions = result;
-      console.log(this.questions);
+      // console.log(this.questions);
     });
 
     this.forCloudableService.collectOptions().subscribe(result => {
@@ -74,11 +76,25 @@ export class ForCloudableComponent implements OnInit {
 
        this.forCloudableService.collectOptions().subscribe(result =>{
          this.options=result;
-        //  console.log(this.options);
+         console.log(this.options);
        })
   }
   someClickHandler(info: any): void {
     this.message = info.id + ' - ' + info.firstName;
+  }
+
+  check(id:number)
+  {
+    console.log(id);
+  //  for (let index = 0; index < this.options.length; index++) {
+    
+  //   if(id==this.options[index].questionId)
+  //   {
+  //     this.opns = this.opns+this.options[index]+',';
+  //   }
+  //  }
+  //  console.log(this.opns);
+   
   }
 
   addCloudableRule() {
