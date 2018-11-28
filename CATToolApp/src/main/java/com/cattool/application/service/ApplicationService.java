@@ -11,6 +11,7 @@ import com.cattool.application.entity.Application;
 import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.CloudProviderRule;
 import com.cattool.application.entity.CloudableRule;
+import com.cattool.application.entity.Migration;
 import com.cattool.application.entity.MigrationRule;
 import com.cattool.application.entity.SummaryReport;
 import com.cattool.application.entity.Users;
@@ -19,6 +20,7 @@ import com.cattool.application.repository.ApplicationRepository;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
 import com.cattool.application.repository.CloudProviderRuleRepository;
 import com.cattool.application.repository.CloudableRuleRepository;
+import com.cattool.application.repository.MigrationRepository;
 import com.cattool.application.repository.MigrationRuleRepository;
 import com.cattool.application.repository.UserRepository;
 
@@ -62,6 +64,9 @@ public class ApplicationService {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	MigrationRepository migrationRepository;
 	
 	Boolean isDeactivate=false;
 	public int getAllAppsCount(int clientId) 
@@ -241,150 +246,8 @@ public boolean cloudProviderCheck(int applicationId){
 		}		
 	}
 
-	
-//	public void migrationCheck(int applicationId,int gitcCheck){
-//		int migrationQuestionIdValue=0;
-//		int answerTextCount=0;
-//		int answerIdCount=0;
-//		boolean publicFalseCheck=true;
-//		boolean rehostFalseCheck=true;
-//		List<Answers> answerlist=new ArrayList<Answers>();
-//		List<MigrationRule> migrationRulelist=new ArrayList<MigrationRule>();
-//		Application application=applicationRepository.findByApplicationId(applicationId);
-//		Application application2=applicationRepository.findByApplicationId(applicationId);
-//		migrationRulelist=migrationRuleRepository.findAll();
-//		List<MigrationRule> migrationRuleByClientName = new ArrayList<MigrationRule>();
-//		for(MigrationRule migrationRuleAllRule:migrationRuleRepository.findAll())
-//		{
-//			{
-//				migrationRuleByClientName.add(migrationRuleAllRule);
-//			}
-//		}
-//		
-//		
-//		for(Answers answers:answerRepository.findAll())
-//		{
-//			if(answers.getApplicationId()==applicationId)
-//			{
-//				if(answers.getAnswerText()!=null)
-//				{
-//					answerTextCount++;
-//				}
-//				answerIdCount++;
-//				answerlist.add(answers);
-//			}
-//		}
-//		if(answerTextCount==answerIdCount)
-//		{
-//		for(MigrationRule migrationRule:migrationRuleByClientName)
-//		{
-//			if(gitcCheck!=0)
-//			{
-//				publicFalseCheck=false;
-//			}
-//			if(gitcCheck==0 &&publicFalseCheck==true && migrationRule.getMigrationId()==1001)//public-pass
-//			{
-//				for(Answers answers:answerlist) {
-//					migrationQuestionIdValue=Integer.parseInt(migrationRule.getQuestionId());
-//					if(migrationQuestionIdValue==answers.getQuestionId())
-//					{
-//						publicFalseCheck=migrationRule.getMigrationRule().contains(answers.getAnswerText());
-//						if(publicFalseCheck==false)
-//						{
-//							publicFalseCheck=(answers.getAnswerText()).contains(migrationRule.getMigrationRule());
-//						}
-//							if(publicFalseCheck)
-//								{
-//										if(gitcCheck!=0)
-//										{
-//											publicFalseCheck=false;
-//										}
-//										else
-//										{
-//											application.setApplicationId(applicationId);
-//											application.setMigrationPattern("public-pass");
-//											application.setIsFinalize(1);
-//											application.setAssessment(true);
-//											application.setIsSaved(1);
-//											applicationRepository.save(application);
-//										}
-//								}
-//							else {
-//								publicFalseCheck=false;
-//								break;
-//							}
-//							
-//					}
-//				}	
-//				if(publicFalseCheck==false)
-//				{
-//					System.out.println("break works in public paas");
-//				}
-//			}
-//			if(publicFalseCheck==false && rehostFalseCheck==true && migrationRule.getMigrationId()==1002)//Rehost
-//			{
-//				for(Answers answers:answerlist) {
-//					migrationQuestionIdValue=Integer.parseInt(migrationRule.getQuestionId());
-//					if(migrationQuestionIdValue==answers.getQuestionId())
-//					{
-//						rehostFalseCheck=answers.getAnswerText().contains(migrationRule.getMigrationRule());
-//							if(rehostFalseCheck)
-//								{
-//										application2.setApplicationId(applicationId);
-//										application2.setMigrationPattern("Rehost");
-//										application.setIsSaved(1);
-//										application.setAssessment(true);
-//										application.setIsFinalize(1);
-//										applicationRepository.save(application);
-//								}
-//							else {
-//								rehostFalseCheck=false;
-//								break;
-//							}
-//					}
-//				}
-//				if(rehostFalseCheck==false)
-//				{
-//					application.setApplicationId(applicationId);
-//					application.setIsSaved(1);
-//					application.setAssessment(true);
-//					application.setIsFinalize(1);
-//					application.setMigrationPattern("Re-Plateform");
-//					applicationRepository.save(application);
-//				}
-//			}
-//			else if(rehostFalseCheck==false)
-//				{
-//					System.out.println("replateform");
-//					application.setApplicationId(applicationId);
-//					application.setIsSaved(1);
-//					application.setIsFinalize(1);
-//					application.setAssessment(true);
-//					application.setMigrationPattern("Re-Plateform");
-//					applicationRepository.save(application);
-//				}
-//			}
-//	}else {
-//		
-//				System.out.println("No answers present for given application!!!!!");
-//				application.setApplicationId(applicationId);
-//				application.setMigrationPattern("Re-Plateform");;
-//				application.setIsSaved(0);
-//				applicationRepository.save(application);
-//		  }
-//		}
-
 public void migrationCheck(int applicationId,int gitcCheck){
-	int migrationQuestionIdValue=0;
-	int answerTextCount=0;
-	int answerIdCount=0;
-	boolean publicFalseCheck=true;
-	boolean rehostFalseCheck=true;
-	List<Answers> answerlist=new ArrayList<Answers>();
-	List<MigrationRule> migrationRulelist=new ArrayList<MigrationRule>();
-	Application application=applicationRepository.findByApplicationId(applicationId);
-	Application application2=applicationRepository.findByApplicationId(applicationId);
-	migrationRulelist=migrationRuleRepository.findAll();
+	int migrationFinal=0;
 	List<MigrationRule> migrationRuleByClientName = new ArrayList<MigrationRule>();
 	for(MigrationRule migrationRuleAllRule:migrationRuleRepository.findAll())
 	{
@@ -393,121 +256,71 @@ public void migrationCheck(int applicationId,int gitcCheck){
 		}
 	}
 	
-	
+	List<Answers> answerlist = new ArrayList<Answers>();
 	for(Answers answers:answerRepository.findAll())
 	{
 		if(answers.getApplicationId()==applicationId)
 		{
-			if(answers.getAnswerText()!=null)
-			{
-				answerTextCount++;
-			}
-			answerIdCount++;
 			answerlist.add(answers);
 		}
 	}
-	if(answerTextCount==answerIdCount)
+
+	for(Migration migration:migrationRepository.findAll())
 	{
-	for(MigrationRule migrationRule:migrationRuleByClientName)
-	{
-		if(gitcCheck!=0)
+		System.out.println("Migration pattern======"+migration.getMigrationPattern()+"=====================>");
+		int count=0;
+		for(MigrationRule migrationRuleCount:migrationRuleRepository.findAll())
 		{
-			publicFalseCheck=false;
+			if(migration.getMigrationId()==migrationRuleCount.getMigrationId())
+			{
+				count++;
+			}
 		}
 		
-		if(gitcCheck==0 && publicFalseCheck==true && migrationRule.getMigrationId()==1001)//public-pass
-		{
-			for(Answers answers:answerlist) {
-				migrationQuestionIdValue=Integer.parseInt(migrationRule.getQuestionId());
-				if(migrationQuestionIdValue==answers.getQuestionId())
+		int countAfter=0;
+		for(MigrationRule migrationRule:migrationRuleRepository.findAll()){
+			for(Answers answer:answerlist) 
+			{
+				if(migration.getMigrationId()==migrationRule.getMigrationId())
 				{
-					publicFalseCheck=migrationRule.getMigrationRule().contains(answers.getAnswerText());
-					if(publicFalseCheck==false)
+					if(migrationRule.getMigrationRule().contains(answer.getAnswerText()) || answer.getAnswerText().contains(migrationRule.getMigrationRule()))
 					{
-						publicFalseCheck=(answers.getAnswerText()).contains(migrationRule.getMigrationRule());
+						System.out.println(migrationRule.getMigrationRule()+"=="+answer.getAnswerText()+"//"+migrationRule.getQuestionId()+"=="+answer.getQuestionId());
+						if(Integer.parseInt(migrationRule.getQuestionId())==answer.getQuestionId()) {
+							
+							countAfter++;
+						}
 					}
-						if(publicFalseCheck)
-							{
-									if(gitcCheck!=0)
-									{
-										publicFalseCheck=false;
-									}
-									else
-									{
-										application.setApplicationId(applicationId);
-										application.setMigrationPattern("public-pass");
-										application.setIsFinalize(1);
-										application.setAssessment(true);
-										application.setIsSaved(1);
-										applicationRepository.save(application);
-									}
-							}
-						else {
-							publicFalseCheck=false;
-							break;
-						}
-						
 				}
-			}	
-			if(publicFalseCheck==false)
-			{
-				System.out.println("break works in public paas");
 			}
 		}
-		if(publicFalseCheck==false && rehostFalseCheck==true && migrationRule.getMigrationId()==1002)//Rehost
-		{
-			for(Answers answers:answerlist) {
-				migrationQuestionIdValue=Integer.parseInt(migrationRule.getQuestionId());
-				if(migrationQuestionIdValue==answers.getQuestionId())
+
+		if(count==countAfter) {
+			if(count>0)
+			{
+				if(gitcCheck==0)
 				{
-					rehostFalseCheck=answers.getAnswerText().contains(migrationRule.getMigrationRule());
-						if(rehostFalseCheck)
-							{
-									application2.setApplicationId(applicationId);
-									application2.setMigrationPattern("Rehost");
-									application.setIsSaved(1);
-									application.setAssessment(true);
-									application.setIsFinalize(1);
-									applicationRepository.save(application);
-							}
-						else {
-							rehostFalseCheck=false;
-							break;
-						}
+					Application application=new Application();
+					application=applicationRepository.findByApplicationId(applicationId);
+					application.setMigrationPattern(migration.getMigrationPattern());
 				}
-			}
-			if(rehostFalseCheck==false)
-			{
-				application.setApplicationId(applicationId);
-				application.setIsSaved(1);
-				application.setAssessment(true);
-				application.setIsFinalize(1);
-				application.setMigrationPattern("Re-Plateform");
-				applicationRepository.save(application);
+				System.out.println(migration.getMigrationPattern());
+				migrationFinal++;
 			}
 		}
-		else if(rehostFalseCheck==false)
-			{
-				System.out.println("replateform");
-				application.setApplicationId(applicationId);
-				application.setIsSaved(1);
-				application.setIsFinalize(1);
-				application.setAssessment(true);
-				application.setMigrationPattern("Re-Plateform");
-				applicationRepository.save(application);
-			}
-		}
-}else {
-	
-			System.out.println("No answers present for given application!!!!!");
-			application.setApplicationId(applicationId);
-			application.setMigrationPattern("Re-Plateform");;
-			application.setIsSaved(0);
-			applicationRepository.save(application);
-	  }
+		
 	}
 
+	if(migrationFinal==0)
+	{
+		Application application=new Application();
+		application=applicationRepository.findByApplicationId(applicationId);
+		application.setMigrationPattern("Replateform");
+	}
+}
+
 	
+
 	public void summaryReport() throws FileNotFoundException{
 		
 		int summaryReportCount=1;

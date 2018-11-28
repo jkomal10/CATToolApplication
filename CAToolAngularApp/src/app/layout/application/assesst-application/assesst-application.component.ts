@@ -18,8 +18,8 @@ import { LocalStorageService } from '../../utility/service/localStorage.service'
 export class AssesstApplicationComponent implements OnInit {
   userActive: string;
   dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();
-  AllData : any;
+  dtTrigger:  Subject<any>  =  new  Subject();
+  AllData :  any;
   assessmentQuestions: object[];
   numberOfOption: Array<string> = [];
   theCheckboxOptions: Array<string> = [];
@@ -29,41 +29,38 @@ export class AssesstApplicationComponent implements OnInit {
   multi = 0;
   single = 0;
   singlee = 0;
-  result: any = [];
+  result = "";
   queId1 = 0;
   i = -1;
   application: any;
   UpdateAnswersData: any;
   clientIdValue: number;
   userType1: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  constructor(private router: Router, private assessmentService: AssesstApplicationService, private applicationService: ApplicationService, private myStorage: LocalStorageService) { }
+  constructor(private myStorage: LocalStorageService, private router: Router, private assessmentService: AssesstApplicationService, private applicationService: ApplicationService) { }
 
   ngOnInit() {
 
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 2,
-      responsive: true
+    this.dtOptions  =  {
+      pagingType:  'full_numbers',
+      pageLength:  10,
+      responsive:  true
     };
-
     this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
-    this.applicationService.question.subscribe(data => {
-      this.application = data;
+    this.applicationService.question.subscribe(data  => {
+      this.application =  data;
     });
-    console.log(this.application.isSaved);
     if (this.application.isSaved == 0) {
-      this.assessmentService.CollecOptiontData(this.clientIdValue).subscribe(result => {
-        this.AllData = result ;
+      this.assessmentService.CollecOptiontData(this.clientIdValue).subscribe(result  => {
+        this.AllData  =  result ;
         this.dtTrigger.next();
-
       });
     }
     else {
       this.assessmentService.UpdateAnswers(this.application.applicationId).subscribe(result => {
-        this.UpdateAnswersData = result;
+      this.UpdateAnswersData = result;
       });
 
-      this.assessmentService.CollecOptiontData(this.clientIdValue).subscribe(result => { this.AllData = result ; });
+      this.assessmentService.CollecOptiontData(this.clientIdValue).subscribe(result => { this.AllData  =  result ; });
     }
   }
   AssessApplicationRule() {
@@ -71,27 +68,40 @@ export class AssesstApplicationComponent implements OnInit {
     this.assessmentService.AllRuleCheck(this.application.applicationId).subscribe();
   }
   selectChange(args) {
-
     this.tempp[this.single] = args.target.options[args.target.selectedIndex].text;
     this.single++;
   }
-  isSelected(value: string): boolean {
-    return false;
-  }
+
   selectChangeHandler(optionnnnnn, event, id) {
     if (event.target.checked) {
-      this.result.push(optionnnnnn.optionText);
+      if (this.queId1 === id) {
+        var text1 = optionnnnnn.optionText;
+        var text2 = "";
+        this.result = this.result + text1;
+        this.theCheckbox[this.i] = this.result;
+      } else {
+        if (queId != id) {
+          this.result = "";
+        }
+        this.i++;
+        this.result = this.result + "," + optionnnnnn.optionText;
+        this.theCheckbox[this.i] = optionnnnnn.optionText;
+      }
+      var queId = id;
+      this.queId1 = queId;
     } else {
-      this.result.reduceRight(optionnnnnn.optionText);
+
     }
   }
 
   onSubmit() {
     alert("Do you want to save");
+    this.application.isSaved = 1;
     this.submit();
   }
 
   submit() {
+    this.application.isSaved = 1;
     for (let index = 0; index < this.AllData.length; index++) {
       let answer: Answers = new Answers();
       answer.applicationId = this.application.applicationId;
@@ -104,15 +114,17 @@ export class AssesstApplicationComponent implements OnInit {
         this.singlee++;
 
       }
-     // answer.cloudAbility = 0;
+      answer.cloudAbility = 0;
       this.answers[index] = answer;
+      console.log(JSON.stringify(answer));
     }
     this.assessmentService.saveAssessApplication(this.answers).subscribe();
-    if (this.myStorage.getCurrentUserObject().isAdmin == 1) {//isAdmin==1 means user
+    this.userActive = localStorage.getItem('isUserActive');
+    if (this.userActive == 'false') {
       this.router.navigate(['/user/user-role']);
     }
     else {
-      this.router.navigate(['/application']); //admin
+      this.router.navigate(['/application']);
     }
   };
 
@@ -129,7 +141,7 @@ export class AssesstApplicationComponent implements OnInit {
         this.singlee++;
 
       }
-     // answer.cloudAbility = 0;
+      answer.cloudAbility = 0;
       this.answers[index] = answer;
     }
     this.assessmentService.saveAssessApplicationUpdate(this.answers).subscribe();

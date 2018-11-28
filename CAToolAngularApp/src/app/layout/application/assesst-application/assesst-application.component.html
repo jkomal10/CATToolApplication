@@ -1,8 +1,7 @@
-<!-- <div *ngIf="application.isSaved===1; else isNotSaved">
+<div *ngIf="application.isSaved===1; else isNotSaved">
   <button type="button" (click)="AssessApplicationRule()">Finalize</button>
-  
 </div>
-<ng-template #isNotSaved> -->
+<ng-template #isNotSaved>
   <div>
     <form #add="ngForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
@@ -13,28 +12,15 @@
           <tbody>
             <tr width="100%" *ngFor =  "let row of AllData;let i = index">
               <td width="50%">Question{{i+1}}. {{row.questionText}}</td>
-
               <td width="50%" *ngIf="AllData[i].questionType==='Multiple Choice Multiple Answer'; else dropdownbox">
-                <!-- <div class='checkbox' *ngFor="let option of AllData[i]['questionOption'];let j = index">
-                  <label>
-                    <input type='checkbox'  [checked]='isSelected(option.optionText)' [value]='option.optioId'>{{option.optionText}}
-                  </label>
-                </div> -->
-                
-                <div *ngFor="let option of AllData[i]['questionOption'] ;let j = index" >
-                  <input type="checkbox" (change)="selectChangeHandler(option,$event,AllData[i].questionId)"required >   {{AllData[i].questionOption[j]['optionText']}}
-                  {{AllData[i].questionOption[j]['optionText']}}
-                 
+                <div *ngFor="let option of AllData[i]['questionOption'] ;let j = index">
+                  <input type="checkbox" (change)="selectChangeHandler(option,$event,AllData[i].questionId)" required> {{AllData[i].questionOption[j]['optionText']}}
                 </div>
-                
               </td>
               <ng-template #dropdownbox>
-                <!-- <select style="padding-top: 10px ; width: 100%" (change)="selectChange($event)" [(ngModel)]="tempp[k-1]" name="tempp[k-1]" required> "tempp[k-1]"
+                <select style="padding-top: 10px ; width: 100%" (change)="selectChange($event)" required>
+                  <option disabled> </option>
                   <option class='option' *ngFor="let optionn of AllData[i]['questionOption'] ; let k = index" [ngValue]="optionn">{{AllData[i].questionOption[k]['optionText']}}</option>
-                </select> -->
-                <select style="padding-top: 10px ; width: 100%" (change)="selectChange($event)" required> 
-                    <option disabled> </option>
-                    <option class='option' *ngFor="let optionn of AllData[i]['questionOption'] ; let k = index" [ngValue]="optionn">{{AllData[i].questionOption[k]['optionText']}}</option>
                 </select>
               </ng-template>
             </tr>
@@ -43,8 +29,7 @@
       </div>
       <div>
         <button type="submit" class="btn btn-info" [disabled]="add.invalid" title="saving application">Save</button>&nbsp;
-    
       </div>
     </form>
   </div>
-<!-- </ng-template> -->
+</ng-template>

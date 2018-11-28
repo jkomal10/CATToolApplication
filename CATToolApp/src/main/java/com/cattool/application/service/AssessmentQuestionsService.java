@@ -60,6 +60,7 @@ public class AssessmentQuestionsService{
 				cloudableRule.setQuestionId(assessmentQuestions.getQuestionId());
 				cloudableRule.setQuestionText(assessmentQuestions.getQuestionText());
 				cloudableRule.setClientId(assessmentQuestions.getClientId());
+				cloudableRule.setQuestionDisplayOrder(assessmentQuestions.getQuestionDisplayOrder());
 				cloudableRuleRepository .save(cloudableRule);	
 			}
 			LOGGER.info("Successfully saved the Questions");
