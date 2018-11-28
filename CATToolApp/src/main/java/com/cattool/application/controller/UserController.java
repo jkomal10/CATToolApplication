@@ -37,8 +37,6 @@ public class UserController {
 	{
 		LOGGER.error("Get all user");
 		return userService.findAllUsers(clientId);
-
-		
 	}
 	
 	@GetMapping("/getUserId/{clientId}/{userName}")

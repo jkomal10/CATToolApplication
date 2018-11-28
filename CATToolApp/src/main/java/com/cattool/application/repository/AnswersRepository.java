@@ -12,5 +12,6 @@ public interface AnswersRepository extends JpaRepository<Answers, Long> {
 
 	List<Answers> findByApplicationId(int applicationId);
 	Answers deleteByApplicationId(int applicationId);
+	
 }
 

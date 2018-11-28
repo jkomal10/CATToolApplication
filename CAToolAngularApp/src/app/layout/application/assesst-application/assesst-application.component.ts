@@ -104,7 +104,7 @@ export class AssesstApplicationComponent implements OnInit {
         this.singlee++;
 
       }
-      answer.cloudAbility = 0;
+     // answer.cloudAbility = 0;
       this.answers[index] = answer;
     }
     this.assessmentService.saveAssessApplication(this.answers).subscribe();
@@ -129,7 +129,7 @@ export class AssesstApplicationComponent implements OnInit {
         this.singlee++;
 
       }
-      answer.cloudAbility = 0;
+     // answer.cloudAbility = 0;
       this.answers[index] = answer;
     }
     this.assessmentService.saveAssessApplicationUpdate(this.answers).subscribe();

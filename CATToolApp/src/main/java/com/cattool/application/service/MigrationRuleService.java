@@ -28,11 +28,7 @@ public class MigrationRuleService {
 	
 	public List<Migration> getAllMigrationPatterns(int clientId){
 		List<Migration> migrationList=new ArrayList<Migration>();
-		for(Migration migration:migrationRepository.findAll()) {
-			if(clientId==migration.getClientId()) {
-				migrationList.add(migration);
-			}
-		}
+		migrationList=migrationRepository.findByClientId(clientId);
 		return migrationList;
 	}
 	

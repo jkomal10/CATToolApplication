@@ -27,67 +27,57 @@ public class AssessmentQuestionsController {
 	@Autowired
 	AssessmentQuestionsService  assessmentQuestionsService;
 	
-	@GetMapping("/getAllQuestions")
-	public List<AssessmentQuestions> getAllquestions()
-	{
-		System.out.println("Get all question!!");
-		return assessmentQuestionsService.getAllquestions();
-	}
+//	@GetMapping("/getAllQuestions")
+//	public List<AssessmentQuestions> getAllquestions()
+//	{
+//		System.out.println("Get all question!!");
+//		return assessmentQuestionsService.getAllquestions();
+//	}
 	
 	@GetMapping("/getCloudableQuestion/{clientId}")
 	public List<AssessmentQuestions> getQuestionsforCloudable(@PathVariable int clientId)
 	{
-		System.out.println("Get cloudable question!!");
 		return assessmentQuestionsService.getQuestionsforCloudable(clientId);
 	}
-	
-	
+		
 	@GetMapping("/getAllQuestions/{clientId}")
-	public List<AssessmentQuestions> getAllquestionsByClientName(@PathVariable int clientId)
+	public List<AssessmentQuestions> getAllquestionsByClientId(@PathVariable int clientId)
 	{
-		System.out.println("Get all question by client name!!");
 		return assessmentQuestionsService.getAllquestionsByClientId(clientId);
 	}
 	
 	@PostMapping("/saveAssessmentQuestions/create")
 	public void saveAssessmentQuestions(@RequestBody AssessmentQuestions assessmentQuestions)
 	{
-		System.out.println("Save all question!!");
 		assessmentQuestionsService.saveQuestions(assessmentQuestions);
 	}
 	
 	@DeleteMapping("/deleteQuestions/{questionId}")
 	public void deleteQuestions(@PathVariable int questionId)
 	{
-		System.out.println("Delete question!!");
 		assessmentQuestionsService.deleteQuestions(questionId);
-		
 	}
 	
 	@PutMapping("/updateQuestions/update")
 	public void updateQuestionById(@RequestBody AssessmentQuestions assessmentQuestions) {
-		System.out.println("Update question!!");
 		assessmentQuestionsService.updateQuestions(assessmentQuestions);
 	}
 	
 	@GetMapping("/getAllCloudableQuestions/{clientId}")
 	public List<AssessmentQuestions> getCloudableQuestions(@PathVariable int clientId)
 	{
-		System.out.println("Get all question!!");
 		return assessmentQuestionsService.getCloudableQuestions(clientId);
 	}
 	
 	@GetMapping("/getAllMigrationPattern/{migrationId}/{clientId}")
 	public List<AssessmentQuestions> getAllMigrationPattern(@PathVariable("migrationId") int migrationId,@PathVariable int clientId)
 	{
-		System.out.println("Get all migration pattern question!!");
 		return assessmentQuestionsService.getAllMigrationPattern(migrationId,clientId);
 	}
 	
 	@GetMapping("/getAllCloudProviderRule/{cloudProviderId}/{clientId}")
 	public List<AssessmentQuestions> getAllcloudProviderRule(@PathVariable("cloudProviderId") int cloudProviderId,@PathVariable int clientId)
 	{
-		System.out.println("Get all cloud provider question!!");
 		return assessmentQuestionsService.getAllcloudProviderRule(cloudProviderId,clientId);
 	}
 	
