@@ -173,7 +173,7 @@ export class AssesstApplicationComponent implements OnInit {
         this.singlee++;
 
       }
-      answer.cloudAbility = 0;
+     // answer.cloudAbility = 0;
       this.answers[index] = answer;
       console.log(JSON.stringify(answer));
     }
@@ -205,7 +205,7 @@ export class AssesstApplicationComponent implements OnInit {
         this.singlee++;
 
       }
-      answer.cloudAbility = 0;
+     // answer.cloudAbility = 0;
       this.answers[index] = answer;
       console.log(JSON.stringify(answer));
     }
