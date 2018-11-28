@@ -16,10 +16,6 @@ export class LocalStorageService {
     localStorage.setItem('isLoggedin',isLoggedin);
   }
 
-  setIsUserActive(isUserActive : string){
-    localStorage.setItem('isUserActive',isUserActive);
-  }
-
   setdomainURL(){
     localStorage.setItem('local','http://localhost:8090');
   }
@@ -54,10 +50,6 @@ export class LocalStorageService {
   getIpAddress(){
     return localStorage.getItem('ip');
   } 
-
-  getIsUserActive(){
-    return localStorage.getItem('isUserActive');
-  }
 
   getLoggedInTrue(){
     return localStorage.getItem('isLoggedin');

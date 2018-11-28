@@ -52,26 +52,7 @@ public class AssessmentQuestionsService{
 		}
 		return null;
 	}
-	
-//	public List<AssessmentQuestions> getAllquestionsByClientId(int clientId)
-//	{
-//		List<AssessmentQuestions> assessmentQuestionsList = new ArrayList<>();
-//		try {
-//			for (AssessmentQuestions assessmentQuestions : assessmentQuestionsRepository.findAll()) {
-//				if(assessmentQuestions.isActive()==0 && (clientId==assessmentQuestions.getClientId()))
-//				{
-//					assessmentQuestionsList.add(assessmentQuestions);
-//				}
-//				
-//			}
-//			LOGGER.error("Succfully get all users by client name");
-//			return assessmentQuestionsList;
-//		} catch (Exception e) {
-//			LOGGER.error(ExceptionMessages.GetQuestionByClientName +e);
-//		}
-//		return null;
-//		
-//	}
+
 	
 	public List<AssessmentQuestions> getAllquestionsByClientId(int clientId) {
 		List<AssessmentQuestions> assessmentQuestionList = new ArrayList<>();

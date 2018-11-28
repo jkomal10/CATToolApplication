@@ -20,14 +20,12 @@ export class CATloginComponent implements OnInit {
     
      constructor(private loginService :CatloginService,public router: Router,private myStorage:LocalStorageService) {}
  
-     ngOnInit() {localStorage.setItem('userName',null);
+     ngOnInit() {
  }
  
      onLoggedin(formValues) { 
           this.loginService.getUserByUserNamePassword(formValues.userName,formValues.password).subscribe((data)=>{
           this.users=data;
- 
-          console.log(this.users + "asdasdasd");
              if( this.users!=null)
              {
                  this.myStorage.setCurrentUserObject(this.users);
@@ -38,16 +36,13 @@ export class CATloginComponent implements OnInit {
                         this.myStorage.setClientName(this.clientName);
                      }
                  );
-                //  this.myStorage.setUsername(this.users.userName);
                  if(this.users.isAdmin===0)
                  {
-                     this.myStorage.setIsUserActive('true');
                      this.message="logged in successfully";
                      this.loginService.sendMsgtoOtherComponent(this.users);
                      this.router.navigate(['/dashboard']);
                  }
                  else if(this.users.isAdmin==1){
-                     this.myStorage.setIsUserActive('false');
                      this.loginService.sendMsgtoOtherComponent(this.users.userId);
                      this.loginService.sendMsgtoOtherComponent(this.users);
                      this.router.navigate(['/dashboard']);

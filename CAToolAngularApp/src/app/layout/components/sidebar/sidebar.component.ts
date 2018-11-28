@@ -35,8 +35,7 @@ export class SidebarComponent {
     }
 
     ngOnInit() {
-        this.isUser=this.myStorage.getIsUserActive();
-        if(this.isUser=='false')
+        if(this.myStorage.getCurrentUserObject().isAdmin==1)
         {
             this.adminActive=false;
         }
