@@ -49,8 +49,7 @@ export class DashboardComponent implements OnInit {
             this.userService.getAllUsers(this.clientIdValue).subscribe(data => { this.users = data });
             this.applicationService.getAllAplication(this.clientIdValue).subscribe(data => { this.application = data });
             this.applicationService.getApplicationCount(this.clientIdValue).subscribe(data=>{this.appCount=data,console.log(this.appCount)});
-            this.isUser = this.myStorage.getIsUserActive();
-            if (this.isUser == 'false') {
+            if (this.myStorage.getCurrentUserObject().isAdmin==1) {
                 this.isAdmin = false;
             }
             else {

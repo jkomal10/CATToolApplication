@@ -34,25 +34,6 @@ public class AssessmentQuestionsService{
 	CloudableRuleRepository cloudableRuleRepository;
 	
 	int isActive=0;
-	public List<AssessmentQuestions> getAllquestions()
-	{
-		List<AssessmentQuestions> assessmentQuestionsList = new ArrayList<>();
-		try {
-			for (AssessmentQuestions assessmentQuestions : assessmentQuestionsRepository.findAll()) {
-				
-				if(assessmentQuestions.isActive()==0)
-				{
-					assessmentQuestionsList.add(assessmentQuestions);
-				}
-				
-			}
-			LOGGER.info("Successfully get all the questions");
-			return assessmentQuestionsList;
-		} catch (Exception e) {
-			LOGGER.error(ExceptionMessages.GetQuestion +e);
-		}
-		return null;
-	}
 
 	public List<AssessmentQuestions> getAllquestionsByClientId(int clientId) {
 		List<AssessmentQuestions> assessmentQuestionList = new ArrayList<AssessmentQuestions>();
@@ -142,7 +123,7 @@ public class AssessmentQuestionsService{
 		}
 		return null;
 	}
-
+	
 	public List<AssessmentQuestions> getAllMigrationPattern(int migrationId, int clientId) {
 		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<AssessmentQuestions>();
 		try {
@@ -153,14 +134,14 @@ public class AssessmentQuestionsService{
 						break;
 					}
 				}
-				
 			}
 			LOGGER.info("Succfully get all the migration pattern list for dicision tree");
+			System.out.println(assessmentQuestionsList);
 			return assessmentQuestionsList;
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.MigrationPattern +e);
 		}
-		return null;
+		return assessmentQuestionsList;
 	}
 	
 	public List<AssessmentQuestions> getAllcloudProviderRule(int cloudProviderId, int clientId) {
@@ -175,6 +156,7 @@ public class AssessmentQuestionsService{
 				}
 				
 			}
+			System.out.println(assessmentQuestionsList);
 			LOGGER.info("Succfully get all the migration pattern list for dicision tree");
 			return assessmentQuestionsList;
 		} catch (Exception e) {
