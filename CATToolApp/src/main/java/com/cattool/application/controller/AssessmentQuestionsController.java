@@ -63,11 +63,11 @@ public class AssessmentQuestionsController {
 		assessmentQuestionsService.updateQuestions(assessmentQuestions);
 	}
 	
-	@GetMapping("/getAllCloudableQuestions/{clientId}")
-	public List<AssessmentQuestions> getCloudableQuestions(@PathVariable int clientId)
-	{
-		return assessmentQuestionsService.getCloudableQuestions(clientId);
-	}
+//	@GetMapping("/getAllCloudableQuestions/{clientId}")
+//	public List<AssessmentQuestions> getCloudableQuestions(@PathVariable int clientId)
+//	{
+//		return assessmentQuestionsService.getCloudableQuestions(clientId);
+//	}
 	
 	@GetMapping("/getAllMigrationPattern/{migrationId}/{clientId}")
 	public List<AssessmentQuestions> getAllMigrationPattern(@PathVariable("migrationId") int migrationId,@PathVariable int clientId)

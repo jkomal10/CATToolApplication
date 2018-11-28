@@ -37,18 +37,23 @@
         <td>
           <span name="questionText"> {{rules[i].questionText}}</span>
           <br>
-          <input type="number" #executionOrder name="executionOrder{{i}}" [(ngModel)]="executionOrders[i]" placeholder="{{rules[i].executionOrder}}"
+          <input style="width: 8%" type="number" #executionOrder name="executionOrder{{i}}" [(ngModel)]="executionOrders[i]" placeholder="{{rules[i].executionOrder}}"
           />
           <br>
           <span *ngFor="let question of questions;let k = index">
             <span *ngIf="rules[i].questionId==questions[k].questionId && rules[i].questionId!=0">{{question.questionType}}</span>
           </span>
           <br>
-          <span *ngFor="let option of options; let j = index">
-            <span *ngIf="rules[i].questionId==options[j].questionId">{{option.optionText}},</span>
+          <span *ngFor="let option of options; let j = index;let last  = last">
+            <!-- <span *ngFor="let option1 of options.optionText; let k = index;let last1  = last"></span> -->
+            <span *ngIf="rules[i].questionId==options[j].questionId">{{option.optionText}}
+              <!-- {{option.optionText.length}} -->
+            <span *ngIf="last; else notlast"></span>
+            <ng-template #notlast>,</ng-template>
+          </span>
           </span>
           <br>
-          <input style="width:50%" type="text" #cloudableRule name="cloudableRulesText{{i}}" [(ngModel)]="cloudableRulesText[i]"
+          <input style="width:100%" type="text" #cloudableRule name="cloudableRulesText{{i}}" [(ngModel)]="cloudableRulesText[i]"
             placeholder="{{rules[i].cloudableRule}}" />
         </td>
       </tr>

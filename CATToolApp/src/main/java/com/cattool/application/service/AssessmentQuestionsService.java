@@ -186,6 +186,7 @@ public class AssessmentQuestionsService{
 	public List<AssessmentQuestions> getQuestionsforCloudable(int clientId) {
       List<AssessmentQuestions> list=new ArrayList<AssessmentQuestions>();
 		list = assessmentQuestionsRepository.findByClientIdAndAssessmentTypeForCloudable(clientId,"true");
+		System.out.println(list);
 		return list;
 	}
 
