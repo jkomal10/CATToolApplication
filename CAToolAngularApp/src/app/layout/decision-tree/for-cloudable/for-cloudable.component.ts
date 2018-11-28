@@ -35,7 +35,8 @@ export class ForCloudableComponent implements OnInit {
   cloudableRules: Array<CloudableRule> = [];
   orderByQuestionDisplayOrder: any = [];
   count : number ;
-  opns : string;
+  opns : string ;
+  optionsList : string;
   optionComma:boolean=false;
   cloudableQuestionsRules: Array<CloudableRule> = [];
   exeorder: any = [];
@@ -86,14 +87,16 @@ export class ForCloudableComponent implements OnInit {
   check(id:number)
   {
     console.log(id);
-  //  for (let index = 0; index < this.options.length; index++) {
+    this.opns='';
+   for (let index = 0; index < this.options.length; index++) {
     
-  //   if(id==this.options[index].questionId)
-  //   {
-  //     this.opns = this.opns+this.options[index]+',';
-  //   }
-  //  }
-  //  console.log(this.opns);
+    if(id==this.options[index].questionId)
+    {
+      this.opns = this.opns+this.options[index].optionText+',';
+    }
+   }
+   this.optionsList = this.opns.slice(0, -1);
+   console.log(this.optionsList);
    
   }
 
