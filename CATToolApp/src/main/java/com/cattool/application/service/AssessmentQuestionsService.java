@@ -37,8 +37,6 @@ public class AssessmentQuestionsService{
 
 	public List<AssessmentQuestions> getAllquestionsByClientId(int clientId) {
 		List<AssessmentQuestions> assessmentQuestionList = new ArrayList<AssessmentQuestions>();
-		
-		System.out.println(assessmentQuestionsRepository.findAll());
 		try {
 			assessmentQuestionList=assessmentQuestionsRepository.findByClientIdAndIsActive(clientId, isActive);
 			LOGGER.info("Succfully get all users by client name");
@@ -137,7 +135,6 @@ public class AssessmentQuestionsService{
 				}
 			}
 			LOGGER.info("Succfully get all the migration pattern list for dicision tree");
-			System.out.println(assessmentQuestionsList);
 			return assessmentQuestionsList;
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.MigrationPattern +e);
@@ -157,7 +154,6 @@ public class AssessmentQuestionsService{
 				}
 				
 			}
-			System.out.println(assessmentQuestionsList);
 			LOGGER.info("Succfully get all the migration pattern list for dicision tree");
 			return assessmentQuestionsList;
 		} catch (Exception e) {
@@ -169,7 +165,6 @@ public class AssessmentQuestionsService{
 	public List<AssessmentQuestions> getQuestionsforCloudable(int clientId) {
       List<AssessmentQuestions> list=new ArrayList<AssessmentQuestions>();
 		list = assessmentQuestionsRepository.findByClientIdAndAssessmentTypeForCloudable(clientId,"true");
-		System.out.println(list);
 		return list;
 	}
 

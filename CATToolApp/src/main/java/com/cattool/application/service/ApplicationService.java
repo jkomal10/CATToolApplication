@@ -122,7 +122,6 @@ public class ApplicationService {
 	public void resetApplicationById(int applicationId)
 	{
 		Application application=new Application();
-		System.out.println("Komal");
 		application.setApplicationId(applicationId);
 		application.setUserId(applicationRepository.findByApplicationId(applicationId).getUserId());
 		applicationRepository.save(application);
@@ -191,8 +190,6 @@ public class ApplicationService {
 	
 public boolean cloudProviderCheck(int applicationId){
 		
-		System.out.println("applicationId " + applicationId);
-		
 		int count = 0,numberOfRules = 0;
 		List<Answers> allAnswers = new ArrayList<>();
 		List<Answers> answers = new ArrayList<>();
@@ -206,7 +203,6 @@ public boolean cloudProviderCheck(int applicationId){
 			}
 			
 		}
-		System.out.println("numberOfRules"+numberOfRules);
 		List<CloudProviderRule> cloudProviderRuleList=new ArrayList<CloudProviderRule>();
 		for(CloudProviderRule cloudProviderRuleClientName:cloudProviderRuleRepository.findAll()) {
 			{
@@ -267,7 +263,6 @@ public void migrationCheck(int applicationId,int gitcCheck){
 
 	for(Migration migration:migrationRepository.findAll())
 	{
-		System.out.println("Migration pattern======"+migration.getMigrationPattern()+"=====================>");
 		int count=0;
 		for(MigrationRule migrationRuleCount:migrationRuleRepository.findAll())
 		{
@@ -285,9 +280,7 @@ public void migrationCheck(int applicationId,int gitcCheck){
 				{
 					if(migrationRule.getMigrationRule().contains(answer.getAnswerText()) || answer.getAnswerText().contains(migrationRule.getMigrationRule()))
 					{
-						System.out.println(migrationRule.getMigrationRule()+"=="+answer.getAnswerText()+"//"+migrationRule.getQuestionId()+"=="+answer.getQuestionId());
 						if(Integer.parseInt(migrationRule.getQuestionId())==answer.getQuestionId()) {
-							
 							countAfter++;
 						}
 					}
@@ -304,7 +297,6 @@ public void migrationCheck(int applicationId,int gitcCheck){
 					application=applicationRepository.findByApplicationId(applicationId);
 					application.setMigrationPattern(migration.getMigrationPattern());
 				}
-				System.out.println(migration.getMigrationPattern());
 				migrationFinal++;
 			}
 		}
@@ -396,15 +388,11 @@ public void migrationCheck(int applicationId,int gitcCheck){
 				try {
 					report = JasperCompileManager.compileReport(reportStream);
 					     JasperPrint jasperPrint = JasperFillManager.fillReport(report,parametres, jds);
-					     System.out.println("filled");
 					 JasperExportManager.exportReportToPdfFile(jasperPrint, "/hsjd/CloudRreport"+summaryReportCount+".pdf");
 					 summaryReportCount++;
-					 System.out.println("pdf done");
 				} catch (JRException e) {
 					e.printStackTrace();
 				}
-				System.out.println("After Removing "+summaryReportList);
-				
 		}
 			summaryReportList.clear();
 		}	
