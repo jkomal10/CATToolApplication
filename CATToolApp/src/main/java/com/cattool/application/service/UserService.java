@@ -30,7 +30,7 @@ public class UserService {
 	@Autowired
 	ClientMasterRepository clientMasterRepository;
     
-	int isDeactivate=0;
+	boolean isDeactivate=false;
 	public int getUserCount(int clientId) {
 
 		List<Users> usersList = userRepository.findAll();
@@ -43,11 +43,11 @@ public class UserService {
 
 	public List<Users> findAllUsers(int clientId) {
 
-		List<Users> userList = new ArrayList<>();
+		List<Users> userList = new ArrayList<Users>();
 		
 		try {
 			userList=userRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
-			
+			System.out.println(userList);
 			LOGGER.info("Successfully get all users");
 			return userList;
 		} catch (Exception e) {
