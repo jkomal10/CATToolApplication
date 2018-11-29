@@ -31,12 +31,13 @@ public class UserService {
 	ClientMasterRepository clientMasterRepository;
     
 	boolean isDeactivate=false;
+	int isDeleted = 0;
 	public int getUserCount(int clientId) {
 
 		List<Users> usersList = userRepository.findAll();
 		int count = 0;
 		
-		usersList=userRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
+		usersList=userRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate, isDeleted);
 		count = usersList.size();
 		return count;
 	}
@@ -46,7 +47,7 @@ public class UserService {
 		List<Users> userList = new ArrayList<Users>();
 		
 		try {
-			userList=userRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
+			userList=userRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate, isDeleted);
 			System.out.println(userList);
 			LOGGER.info("Successfully get all users");
 			return userList;
@@ -106,9 +107,13 @@ public class UserService {
 
 	}
 
-	public void deleteById(int userId) {
+	public void deleteById(int clientId,int userId) {
 		try {
-			userRepository.deleteByUserId(userId);
+			Users user = new Users();
+			user = userRepository.findByClientIdAndUserId(clientId, userId);
+			user.setIsDeleted(1);
+			userRepository.save(user);
+			System.out.println(user);
 			LOGGER.info("Succfully deleted the user");
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.DeletsUser);
@@ -187,7 +192,7 @@ public class UserService {
 	public String findUserId(int clientId, String userName) {
 		List<Users> userList = new ArrayList<Users>();
 		Users userbyId = new Users();
-		userList=userRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
+		userList=userRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate, isDeleted);
 		
 		for(Users alluser : userList)
 		{

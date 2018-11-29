@@ -64,11 +64,17 @@ public class UserController {
 	{
 		return userService.saveUser(user,createdBy);
 	}
+	
+//	@DeleteMapping("/deleteUserById/{userId}")
+//	public void deleteById(@PathVariable int userId)
+//	{
+//		userService.deleteById(userId);
+//	}
 	 
-	@DeleteMapping("/deleteUserById/{userId}")
-	public void deleteById(@PathVariable int userId)
+	@DeleteMapping("/deleteUserById/{clientId}/{userId}")
+	public void deleteById(@PathVariable int clientId,@PathVariable int userId)
 	{
-		userService.deleteById(userId);
+		userService.deleteById(clientId,userId);
 	}
 	
 	@PutMapping("/updateUser/update/{modifiedBy}")

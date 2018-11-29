@@ -63,7 +63,7 @@ private comptransfer = new BehaviorSubject("user data by default");
       }
 
       deleteUser(userId: number): Observable<any> {
-        return this.http.delete(this.myStorage.getdomainURL()+`/user/deleteUserById/`+userId, { responseType: 'text' });
+        return this.http.delete(this.myStorage.getdomainURL()+`/user/deleteUserById/`+this.myStorage.getCurrentUserObject().clientId+`/`+userId, { responseType: 'text' });
       }
 
       getIpAddress() : Observable<any>{
