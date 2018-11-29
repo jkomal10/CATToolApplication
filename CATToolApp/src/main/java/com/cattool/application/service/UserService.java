@@ -47,8 +47,12 @@ public class UserService {
 		List<Users> userList = new ArrayList<Users>();
 		
 		try {
+
 			userList=userRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate, isDeleted);
 			System.out.println(userList);
+
+//			userList=userRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
+
 			LOGGER.info("Successfully get all users");
 			return userList;
 		} catch (Exception e) {
@@ -63,7 +67,6 @@ public class UserService {
 		Users userDb = new Users();
 		try {
 			userDb = userRepository.findByUserName(userName);
-			System.out.println(userDb.getUserName());
 			if(userDb!=null)
 			{
 				String decryptedPassword = EncryptPassword.decrypt(userDb.getPassword());    
@@ -126,7 +129,6 @@ public class UserService {
 		try {
 			Users users = new Users();
 			users = userRepository.findByUserId(user.getUserId());
-			System.out.println(users.getUserId());
 			users.setUserId(user.getUserId());
 			users.setUserName(user.getUserName());
 			users.setFirstName(user.getFirstName());
@@ -152,7 +154,6 @@ public class UserService {
 
 	public Users changePassword(String userName, String password, String newPassword) {
 		Users user = new Users();
-		System.out.println(userName+password+newPassword);
 		try {
 			user = userRepository.findByUserName(userName);
 			if (password.equals(user.getPassword())) {
@@ -207,7 +208,6 @@ public class UserService {
 		userbyId.setUserName(userName);
 		userbyId.setClientId(clientId);
 		userbyId.setPassword("Cg@123");
-		System.out.println(userRepository.save(userbyId).getUserId());
 		int id = userRepository.save(userbyId).getUserId();
 		String json = "{\"id\" : "+id+"}";
 		return json;
