@@ -86,6 +86,7 @@ export class AddAssessmentQuestionComponent implements OnInit {
       this.question.createdBy=this.myStorage.getCurrentUserObject().userName;
       this.questionService.createQuestionn(this.question).subscribe(
       );
+      location.reload();
       this.router.navigate(['/assessment-questions']);
    }
 

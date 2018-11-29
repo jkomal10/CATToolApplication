@@ -46,6 +46,7 @@ export class UserComponent implements OnInit {
   deleteUser(formvalues){
     this.userService.deleteUser(formvalues).subscribe(data => {},
     error => console.log('ERROR: ' + error));
+    location.reload();
     this.router.navigate(['/user']);
   }
 

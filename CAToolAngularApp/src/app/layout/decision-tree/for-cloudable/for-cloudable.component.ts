@@ -64,7 +64,6 @@ export class ForCloudableComponent implements OnInit {
 
     this.forCloudableService.collectQuestion(this.myStorage.getCurrentUserObject().clientId).subscribe(result => {
       this.questions = result;
-      // console.log(this.questions);
     });
 
     this.forCloudableService.collectOptions().subscribe(result => {
@@ -77,7 +76,6 @@ export class ForCloudableComponent implements OnInit {
 
        this.forCloudableService.collectOptions().subscribe(result =>{
          this.options=result;
-         console.log(this.options);
        })
   }
   someClickHandler(info: any): void {
@@ -86,7 +84,6 @@ export class ForCloudableComponent implements OnInit {
 
   check(id:number)
   {
-    console.log(id);
     this.opns='';
    for (let index = 0; index < this.options.length; index++) {
     
@@ -96,14 +93,11 @@ export class ForCloudableComponent implements OnInit {
     }
    }
    this.optionsList = this.opns.slice(0, -1);
-   console.log(this.optionsList);
    
   }
 
   addCloudableRule() {
     for (let index = 0; index < this.rules.length; index++) {
-
-      console.log(this.rules[index].questionId + "*********  qid");
       var cRule: CloudableRule = new CloudableRule();
       cRule.questionId = this.rules[index].questionId;
       cRule.cloudableRule = this.cloudableRulesText[index];
@@ -138,10 +132,6 @@ export class ForCloudableComponent implements OnInit {
         if(displayOrder1.questionDisplayOrder<displayOrder2.questionDisplayOrder) return -1;
       })
 
-        for (let index = 0; index < this.rules.length; index++) {
-          console.log("*********"+this.rules[index].questionDisplayOrder);
-        }
-
     }
     else if (event.target.value == "ExecutionOrder") {
       this.rules.sort(function (executionOrder1, executionOrder2) {
@@ -152,11 +142,6 @@ export class ForCloudableComponent implements OnInit {
           return -1;
         }
       });
-      for (let index = 0; index < this.rules.length; index++) {
-        console.log("*********" + this.rules[index].executionOrder);
-        console.log("*********" + this.rules[index].cloudableRuleId);
-        console.log("*********" + this.rules[index].questionText);
-      }
     }
   }
 }

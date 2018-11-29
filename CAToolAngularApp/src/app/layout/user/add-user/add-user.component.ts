@@ -44,6 +44,7 @@ export class AddUserComponent implements OnInit {
       if (this.userName === this.AllData[index].userName) {
         this.status = false;
         alert("User already exits, please enter a new name");
+        location.reload();
         this.router.navigate(['/user']);
       }
     }
@@ -52,6 +53,7 @@ export class AddUserComponent implements OnInit {
       this.user.createdBy = this.myStorage.getCurrentUserObject().userName;
       this.user.clientId = this.clientIdValue;
       this.userService.addUser(this.user).subscribe();
+      location.reload();
       this.router.navigate(['/user']);
     }
   }

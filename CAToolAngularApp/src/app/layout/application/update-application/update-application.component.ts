@@ -24,6 +24,7 @@ export class UpdateApplicationComponent implements OnInit {
     this.applicationObject=application;
     this.applicationObject.modifiedBy=localStorage.getItem('userName');
     this.applicationService.updateApplication(this.applicationObject).subscribe();
+    location.reload();
     this.router.navigate(['/application']);
   }
   onSubmit(formvalues){

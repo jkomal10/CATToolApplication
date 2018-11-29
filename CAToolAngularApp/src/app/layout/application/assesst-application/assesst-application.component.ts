@@ -121,9 +121,11 @@ export class AssesstApplicationComponent implements OnInit {
     this.assessmentService.saveAssessApplication(this.answers).subscribe();
     this.userActive = localStorage.getItem('isUserActive');
     if (this.userActive == 'false') {
+      location.reload();
       this.router.navigate(['/user/user-role']);
     }
     else {
+      location.reload();
       this.router.navigate(['/application']);
     }
   };
