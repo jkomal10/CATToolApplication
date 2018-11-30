@@ -16,6 +16,10 @@ public interface UserRepository extends JpaRepository<Users, Long>{
 	 
 	List<Users> findByClientIdAndIsDeactivate(int clientId,boolean isDeactivate);
 
+	Users findByClientIdAndUserId(int clientId, int userId);
+
+	List<Users> findByClientIdAndIsDeactivateAndIsDeleted(int clientId, boolean isDeactivate, int isDeleted);
+
 
 
 }
