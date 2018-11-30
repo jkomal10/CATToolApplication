@@ -69,11 +69,12 @@ public class ApplicationService {
 	MigrationRepository migrationRepository;
 	
 	Boolean isDeactivate=false;
+	Boolean isDeleted = false;
 	public int getAllAppsCount(int clientId) 
     {   int appsCount=0;
      
         List<Application> applicationList= new ArrayList<Application>(); 
-        applicationList=applicationRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
+        applicationList=applicationRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate, isDeleted);
         
         appsCount=applicationList.size(); 
             return appsCount; 
@@ -82,7 +83,7 @@ public class ApplicationService {
 	public List<Application> getAllApplication(int clientId)
 	{
 		List<Application> applicationList = new ArrayList<>();
-		applicationList=applicationRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
+		applicationList=applicationRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate, isDeleted);
 		return applicationList;
 	}
 	
@@ -117,7 +118,11 @@ public class ApplicationService {
 	}
 	public void deleteApplicationById(int id) {
 		
-		applicationRepository.deleteByApplicationId(id);
+		Application app=new Application();
+		app = applicationRepository.findByApplicationId(id);
+		app.setDeleted(true);
+		applicationRepository.save(app);
+//		applicationRepository.deleteByApplicationId(id);
 	}
 	public void resetApplicationById(int applicationId)
 	{
