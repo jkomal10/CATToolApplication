@@ -29,7 +29,6 @@ import com.cattool.application.repository.UserRepository;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,11 +72,13 @@ public class ApplicationService {
 	Boolean isDeactivate=false;
 	Boolean isDelete=false;
 	int isFinalizeValue=1;
+	Boolean isDeleted = false;
 	public int getAllAppsCount(int clientId) 
     {   int appsCount=0;
      
         List<Application> applicationList= new ArrayList<Application>(); 
-        applicationList=applicationRepository.findByClientIdAndIsDeleted(clientId,isDelete);
+        //applicationList=applicationRepository.findByClientIdAndIsDeleted(clientId,isDelete);
+        applicationList=applicationRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate, isDeleted);
         
         appsCount=applicationList.size(); 
             return appsCount; 
@@ -86,7 +87,8 @@ public class ApplicationService {
 	public List<Application> getAllApplication(int clientId)
 	{
 		List<Application> applicationList = new ArrayList<>();
-		applicationList=applicationRepository.findByClientIdAndIsDeleted(clientId,isDelete);
+		//applicationList=applicationRepository.findByClientIdAndIsDeleted(clientId,isDelete);
+		applicationList=applicationRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate, isDeleted);
 		return applicationList;
 	}
 	
@@ -121,7 +123,11 @@ public class ApplicationService {
 	}
 	public void deleteApplicationById(int id) {
 		
-		applicationRepository.deleteByApplicationId(id);
+		Application app=new Application();
+		app = applicationRepository.findByApplicationId(id);
+		app.setDeleted(true);
+		applicationRepository.save(app);
+//		applicationRepository.deleteByApplicationId(id);
 	}
 	public void resetApplicationById(int applicationId)
 	{

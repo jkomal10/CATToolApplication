@@ -20,4 +20,7 @@ public interface ApplicationRepository extends JpaRepository<Application, Long>{
 	List<Application> findByClientIdAndIsDeleted(int clientId,Boolean isDeleted);
 	List<Application> findByClientId(int clientId);
 	List<Application> findByClientIdAndIsDeletedAndIsFinalize(int clientId, Boolean isDelete, int isFinalizeValue);
+
+	List<Application> findByClientIdAndIsDeactivateAndIsDeleted(int clientId, Boolean isDeactivate, Boolean isDeleted);
+
 }

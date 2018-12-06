@@ -51,6 +51,7 @@ public class AssessmentQuestionsService{
 	
 	public AssessmentQuestions saveQuestions(AssessmentQuestions assessmentQuestions)
 	{
+		System.out.println("**********");
 		try {
 			assessmentQuestionsRepository.save(assessmentQuestions);
 			CloudableRule cloudableRule = new CloudableRule();
@@ -91,20 +92,40 @@ public class AssessmentQuestionsService{
 	
 	public void updateQuestions(AssessmentQuestions assessmentQuestions)
 	{
+		System.out.println("%%%%%%%%%%"+assessmentQuestions.getQuestionId());
 		try {
 			AssessmentQuestions assessmentQuestion=new AssessmentQuestions();
 			assessmentQuestion=assessmentQuestionsRepository.getByQuestionId(assessmentQuestions.getQuestionId());
 			assessmentQuestion.setQuestionId(assessmentQuestions.getQuestionId());
-			assessmentQuestion.setQuestionText(assessmentQuestions.getQuestionText());
-			assessmentQuestion.setQuestionDescription(assessmentQuestions.getQuestionDescription());
-			assessmentQuestion.setQuestionType(assessmentQuestions.getQuestionType());
-			assessmentQuestion.setQuestionDisplayOrder(assessmentQuestions.getQuestionDisplayOrder());
-			assessmentQuestion.setNumberOfOption(assessmentQuestions.getNumberOfOption());
-			assessmentQuestion.setActive(assessmentQuestions.isActive());
-			assessmentQuestion.setDelete(assessmentQuestions.isDelete());
-			assessmentQuestion.setAssessmentTypeForMigration(assessmentQuestions.getAssessmentTypeForMigration());
-			assessmentQuestion.setAssessmentTypeForCloudProvider(assessmentQuestions.getAssessmentTypeForCloudProvider());
-			assessmentQuestion.setAssessmentTypeForCloudable(assessmentQuestions.getAssessmentTypeForCloudProvider());
+			assessmentQuestion=assessmentQuestions;
+			System.out.println("*****************************************");
+			
+//			assessmentQuestion.setQuestionText(assessmentQuestions.getQuestionText());
+//			assessmentQuestion.setQuestionDescription(assessmentQuestions.getQuestionDescription());
+//			assessmentQuestion.setQuestionType(assessmentQuestions.getQuestionType());
+//			assessmentQuestion.setQuestionDisplayOrder(assessmentQuestions.getQuestionDisplayOrder());
+//			assessmentQuestion.setNumberOfOption(assessmentQuestions.getNumberOfOption());
+//			assessmentQuestion.setActive(assessmentQuestions.isActive());
+//			assessmentQuestion.setDelete(assessmentQuestions.isDelete());
+//			assessmentQuestion.setAssessmentTypeForMigration(assessmentQuestions.getAssessmentTypeForMigration());
+//			assessmentQuestion.setAssessmentTypeForCloudProvider(assessmentQuestions.getAssessmentTypeForCloudProvider());
+//			assessmentQuestion.setAssessmentTypeForCloudable(assessmentQuestions.getAssessmentTypeForCloudProvider());
+			//System.out.println("******************************"+assessmentQuestion);
+			CloudableRule cloudableRule = cloudableRuleRepository.findByQuestionId(assessmentQuestions.getQuestionId());
+			if(assessmentQuestions.getAssessmentTypeForCloudable() != "false")
+			{
+				cloudableRule.setCloudableRuleId(cloudableRule.getCloudableRuleId());
+				cloudableRule.setQuestionId(assessmentQuestion.getQuestionId());
+				cloudableRule.setQuestionText(assessmentQuestion.getQuestionText());
+				cloudableRule.setClientId(assessmentQuestion.getClientId());
+				cloudableRule.setQuestionDisplayOrder(assessmentQuestion.getQuestionDisplayOrder());
+				cloudableRuleRepository.save(cloudableRule);	
+				
+			}
+			else
+			{
+				cloudableRuleRepository.deleteByQuestionId(assessmentQuestion.getQuestionId());
+			}
 			assessmentQuestionsRepository.save(assessmentQuestion);
 			LOGGER.info("Succfully updated the questions");
 		} catch (Exception e) {
