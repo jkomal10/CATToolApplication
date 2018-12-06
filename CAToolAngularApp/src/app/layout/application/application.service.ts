@@ -11,8 +11,14 @@ export class ApplicationService {
   constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
 
    getAllAplication(clientId : number): Observable<Object>{
+     console.log("**********************************"+this.myStorage.getdomainURL() );
       return this.http.get(this.myStorage.getdomainURL()+`/application/getAll/`+clientId);
     }
+
+    getAllFinalizeAplication(clientId : number): Observable<Object>{
+      console.log("**********************************"+this.myStorage.getdomainURL() );
+       return this.http.get(this.myStorage.getdomainURL()+`/application/getAllFinalizeAplication/`+clientId);
+     }
   
     createApplication(application: Object): Observable<Object> {
       return this.http.post(this.myStorage.getdomainURL() + `/application/saveApplication/create`, application);

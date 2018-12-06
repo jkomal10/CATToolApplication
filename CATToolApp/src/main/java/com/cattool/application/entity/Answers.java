@@ -23,14 +23,6 @@ public class Answers {
 	private String answerText;
 	@Column
 	private int cloudAbility;
-	@Column
-	private String createdBy;
-	@Column
-	private Date cteatedTime;
-	@Column
-	private String modifiedBy;
-	@Column
-	private Date modifiedTime;
 	public int getAnswerId() {
 		return answerId;
 	}
@@ -61,36 +53,10 @@ public class Answers {
 	public void setCloudAbility(int cloudAbility) {
 		this.cloudAbility = cloudAbility;
 	}
-	public String getCreatedBy() {
-		return createdBy;
-	}
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-	public Date getCteatedTime() {
-		return cteatedTime;
-	}
-	public void setCteatedTime(Date cteatedTime) {
-		this.cteatedTime = cteatedTime;
-	}
-	public String getModifiedBy() {
-		return modifiedBy;
-	}
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
-	}
-	public Date getModifiedTime() {
-		return modifiedTime;
-	}
-	public void setModifiedTime(Date modifiedTime) {
-		this.modifiedTime = modifiedTime;
-	}
 	@Override
 	public String toString() {
 		return "Answers [answerId=" + answerId + ", applicationId=" + applicationId + ", questionId=" + questionId
-				+ ", answerText=" + answerText + ", cloudAbility=" + cloudAbility + ", createdBy=" + createdBy
-				+ ", cteatedTime=" + cteatedTime + ", modifiedBy=" + modifiedBy + ", modifiedTime=" + modifiedTime
-				+ "]";
-	}	
-
+				+ ", answerText=" + answerText + ", cloudAbility=" + cloudAbility + "]";
+	}
+	
 }

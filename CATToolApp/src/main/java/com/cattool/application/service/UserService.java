@@ -37,7 +37,7 @@ public class UserService {
 		List<Users> usersList = userRepository.findAll();
 		int count = 0;
 		
-		usersList=userRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate, isDeleted);
+		usersList=userRepository.findByClientIdAndIsDeleted(clientId, isDeleted);
 		count = usersList.size();
 		return count;
 	}
@@ -48,7 +48,7 @@ public class UserService {
 		
 		try {
 
-			userList=userRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate, isDeleted);
+			userList=userRepository.findByClientIdAndIsDeleted(clientId, isDeleted);
 			System.out.println(userList);
 
 //			userList=userRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);

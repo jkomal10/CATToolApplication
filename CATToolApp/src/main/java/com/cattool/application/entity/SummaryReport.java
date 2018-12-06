@@ -1,10 +1,8 @@
 package com.cattool.application.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,6 +31,9 @@ public class SummaryReport {
 	
 	@Column
 	private String answerText;
+	
+	@Column
+	private Date assesstTime;
 
 	public int getSummaryReportId() {
 		return summaryReportId;
@@ -90,12 +91,21 @@ public class SummaryReport {
 		this.answerText = answerText;
 	}
 
+	public Date getAssesstTime() {
+		return assesstTime;
+	}
+
+	public void setAssesstTime(Date assesstTime) {
+		this.assesstTime = assesstTime;
+	}
+
 	@Override
 	public String toString() {
 		return "SummaryReport [summaryReportId=" + summaryReportId + ", applicationName=" + applicationName
 				+ ", applicationDescription=" + applicationDescription + ", cloudability=" + cloudability
 				+ ", assessment_type=" + assessment_type + ", questionText=" + questionText + ", answerText="
-				+ answerText + "]";
+				+ answerText + ", assesstTime=" + assesstTime + "]";
 	}
+
 	
 }

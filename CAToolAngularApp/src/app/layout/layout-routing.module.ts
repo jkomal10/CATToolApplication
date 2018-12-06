@@ -10,7 +10,7 @@ const routes: Routes = [
         component: LayoutComponent,
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' },
-            { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
+            { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },    
             { path: 'user', loadChildren: './user/user.module#UserModule' },
             { path: 'application', loadChildren: './application/application.module#ApplicationModule' },
             { path: 'assessment-questions', loadChildren: './assessment-questions/assessment-questions.module#AssessmentQuestionsModule' },

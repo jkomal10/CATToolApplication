@@ -19,7 +19,7 @@ public interface UserRepository extends JpaRepository<Users, Long>{
 	Users findByClientIdAndUserId(int clientId, int userId);
 
 	List<Users> findByClientIdAndIsDeactivateAndIsDeleted(int clientId, boolean isDeactivate, int isDeleted);
-
+	List<Users> findByClientIdAndIsDeleted(int clientId,int isDeleted);
 
 
 }

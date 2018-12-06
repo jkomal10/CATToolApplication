@@ -17,7 +17,7 @@ export class LocalStorageService {
   }
 
   setdomainURL(){
-    localStorage.setItem('local','http://localhost:8090');
+    localStorage.setItem('domainURL','http://localhost:8090');
   }
 
   setClientName(clientName:string){
@@ -29,7 +29,8 @@ export class LocalStorageService {
   }
 
   getdomainURL(){
-    return localStorage.getItem('local');
+    localStorage.setItem('domainURL','http://localhost:8090');
+    return localStorage.getItem('domainURL');
   }
 
   setCurrentUserObject(user : Object){

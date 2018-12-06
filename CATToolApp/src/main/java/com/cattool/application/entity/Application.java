@@ -78,8 +78,11 @@ public class Application {
 	@Column
 	private int isSaved;
 	
-	
+	@Column
 	private int clientId;
+	
+	@Column
+	private Date assessApplicationTime;
 	
 	
 	public int getApplicationId() {
@@ -254,6 +257,14 @@ public class Application {
 		this.clientId = clientId;
 	}
 
+	public Date getAssessApplicationTime() {
+		return assessApplicationTime;
+	}
+
+	public void setAssessApplicationTime(Date assessApplicationTime) {
+		this.assessApplicationTime = assessApplicationTime;
+	}
+
 	@Override
 	public String toString() {
 		return "Application [applicationId=" + applicationId + ", applicationName=" + applicationName
@@ -263,9 +274,7 @@ public class Application {
 				+ isDeactivate + ", deletedDateTime=" + deletedDateTime + ", isVerified=" + isVerified
 				+ ", createdDate=" + createdDate + ", modifiedDateTime=" + modifiedDateTime + ", createdBy=" + createdBy
 				+ ", modifiedBy=" + modifiedBy + ", userId=" + userId + ", isSaved=" + isSaved + ", clientId="
-				+ clientId + "]";
+				+ clientId + ", assessApplicationTime=" + assessApplicationTime + "]";
 	}
 
-	
-	
 }

@@ -46,6 +46,7 @@ public class AssessmentQuestionsService{
 	OptionRepository optionRepository;
 	
 	int isActive=0;
+	Boolean isDelete=false;
 
 	public List<AssessmentQuestions> getAllquestionsByClientId(int clientId) {
 		List<AssessmentQuestions> assessmentQuestionList = new ArrayList<AssessmentQuestions>();
@@ -217,7 +218,7 @@ public class AssessmentQuestionsService{
 
 	public List<AssessmentQuestions> getQuestionsforCloudable(int clientId) {
       List<AssessmentQuestions> list=new ArrayList<AssessmentQuestions>();
-		list = assessmentQuestionsRepository.findByClientIdAndAssessmentTypeForCloudable(clientId,"true");
+		list = assessmentQuestionsRepository.findByClientIdAndAssessmentTypeForCloudableAndIsDelete(clientId,"true",isDelete);
 		System.out.println(list);
 		return list;
 	}

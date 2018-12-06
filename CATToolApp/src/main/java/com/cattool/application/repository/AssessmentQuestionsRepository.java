@@ -10,6 +10,7 @@ public interface AssessmentQuestionsRepository extends JpaRepository<AssessmentQ
 	
 	public void deleteByQuestionId(int questionId);
 	public AssessmentQuestions getByQuestionId(int questionId);
+	public List<AssessmentQuestions> findByClientIdAndAssessmentTypeForCloudableAndIsDelete(int clientId, String assessmentTypeForCloudable,Boolean isDelete);
 	
 	public List<AssessmentQuestions> findByClientIdAndAssessmentTypeForCloudable(int clientId, String assessmentTypeForCloudable);
 	public List<AssessmentQuestions> findByClientIdAndIsActive(int clientId,int isActive);
