@@ -21,7 +21,6 @@ public class CloudableRule {
 	private int questionDisplayOrder;
 	
 	
-	
 	public int getQuestionDisplayOrder() {
 		return questionDisplayOrder;
 	}

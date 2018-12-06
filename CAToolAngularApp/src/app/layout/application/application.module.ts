@@ -12,7 +12,6 @@ import { ViewApplicationComponent } from './view-application/view-application.co
 import { AssesstApplicationComponent } from './assesst-application/assesst-application.component';
 import { UpdateApplicationComponent } from './update-application/update-application.component';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
-import { ApplicationAssessmentComponent } from './application-assessment/application-assessment.component';
 @NgModule({
     imports: [CommonModule, ApplicationRoutingModule,DataTablesModule,FormsModule
     ,LoggerModule.forRoot({level: NgxLoggerLevel.LOG,disableConsoleLogging:false,serverLogLevel: NgxLoggerLevel.LOG})],
@@ -22,8 +21,7 @@ import { ApplicationAssessmentComponent } from './application-assessment/applica
           ImportApplicationComponent,
           ViewApplicationComponent,
           AssesstApplicationComponent,
-          UpdateApplicationComponent,
-          ApplicationAssessmentComponent
+          UpdateApplicationComponent
         ]
 })
 

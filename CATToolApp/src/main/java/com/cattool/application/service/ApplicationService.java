@@ -1,6 +1,7 @@
 package com.cattool.application.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ import com.cattool.application.repository.UserRepository;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,11 +71,13 @@ public class ApplicationService {
 	MigrationRepository migrationRepository;
 	
 	Boolean isDeactivate=false;
+	Boolean isDelete=false;
+	int isFinalizeValue=1;
 	public int getAllAppsCount(int clientId) 
     {   int appsCount=0;
      
         List<Application> applicationList= new ArrayList<Application>(); 
-        applicationList=applicationRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
+        applicationList=applicationRepository.findByClientIdAndIsDeleted(clientId,isDelete);
         
         appsCount=applicationList.size(); 
             return appsCount; 
@@ -82,7 +86,7 @@ public class ApplicationService {
 	public List<Application> getAllApplication(int clientId)
 	{
 		List<Application> applicationList = new ArrayList<>();
-		applicationList=applicationRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
+		applicationList=applicationRepository.findByClientIdAndIsDeleted(clientId,isDelete);
 		return applicationList;
 	}
 	
@@ -124,6 +128,7 @@ public class ApplicationService {
 		Application application=new Application();
 		application.setApplicationId(applicationId);
 		application.setUserId(applicationRepository.findByApplicationId(applicationId).getUserId());
+		application.setClientId(application.getClientId());
 		applicationRepository.save(application);
 	}
 	public void deactivateApplicationById(int applicationId) {
@@ -136,7 +141,7 @@ public class ApplicationService {
 	public List<Application> getAllReassessment(int clientId) {
 		 List<Application> applicationList=new ArrayList<Application>();
 		 
-		 applicationList=applicationRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
+		 applicationList=applicationRepository.findByClientIdAndIsDeleted(clientId,isDelete);
    		return applicationList;
 	}
 
@@ -144,6 +149,11 @@ public class ApplicationService {
 		int gitcCheck=0;
 		Application application=applicationRepository.findByApplicationId(applicationId);
 		application.setIsFinalize(1);
+		Date dNow = new Date( );
+//		SimpleDateFormat ft = new SimpleDateFormat ("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
+//	    System.out.println("Current Date: " + ft.format(dNow));
+	    application.setAssessApplicationTime(dNow);
+	    System.out.println(dNow);
 		applicationRepository.save(application);
 		boolean cloudabilityCheck= cloudableCheck(applicationId);
 		if(cloudabilityCheck) {
@@ -396,6 +406,12 @@ public void migrationCheck(int applicationId,int gitcCheck){
 		}
 			summaryReportList.clear();
 		}	
+	}
+
+	public List<Application> getAllFinalizeAplication(int clientId) {
+		List<Application> applicationList = new ArrayList<>();
+		applicationList=applicationRepository.findByClientIdAndIsDeletedAndIsFinalize(clientId,isDelete,isFinalizeValue);
+		return applicationList;
 	}
 
 }

@@ -38,6 +38,13 @@ public class ApplicationController {
 		return applicationService.getAllApplication(clientId);
 	}
 	
+	@GetMapping("/getAllFinalizeAplication/{clientId}")
+	public List<Application>getAllFinalizeAplication(@PathVariable int clientId)
+	{
+		System.out.println("Get all application!!");
+		return applicationService.getAllFinalizeAplication(clientId);
+	}
+	
 	@GetMapping("/getApplicationById/{applicationId}")
 	public Application getApplicationById(@PathVariable("applicationId") int id) {
 		System.out.println("Get application by id!!");
