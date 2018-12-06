@@ -18,21 +18,19 @@ var EvaluationOrderComponent = /** @class */ (function () {
         this.forMigrationPatternService = forMigrationPatternService;
         this.router = router;
         this.http = http;
-        this.AllData = [];
+        this.migrationData = [];
     }
     EvaluationOrderComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.forMigrationPatternService.CollectData().subscribe(function (result) {
-            _this.AllData = result;
-            console.log(_this.AllData);
+        this.forMigrationPatternService.getAllMigrationData().subscribe(function (result) {
+            _this.migrationData = result;
         });
     };
     EvaluationOrderComponent.prototype.questions = function () {
         this.router.navigate(['/for-migration-pattern/public-pass']);
     };
     EvaluationOrderComponent.prototype.saveEvaluationOrder = function () {
-        console.log('*************************' + JSON.stringify(this.AllData));
-        this.forMigrationPatternService.saveEvaluationOrder(this.AllData).subscribe();
+        this.forMigrationPatternService.saveEvaluationOrder(this.migrationData).subscribe();
     };
     EvaluationOrderComponent = __decorate([
         core_1.Component({

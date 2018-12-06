@@ -11,19 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
+var localStorage_service_1 = require("../../utility/service/localStorage.service");
 var ViewApplicationService = /** @class */ (function () {
-    function ViewApplicationService(http) {
+    function ViewApplicationService(http, myStorage) {
         this.http = http;
-        this.url = 'http://localhost:8090/application/getApplicationById';
+        this.myStorage = myStorage;
     }
     ViewApplicationService.prototype.CollectSingleApplicationData = function (applicationId) {
-        return this.http.get(this.url + "/" + applicationId, { responseType: 'text' });
+        return this.http.get(this.myStorage.getdomainURL() + "/application/getApplicationById" + applicationId, { responseType: 'text' });
     };
     ViewApplicationService = __decorate([
         core_1.Injectable({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [http_1.HttpClient, localStorage_service_1.LocalStorageService])
     ], ViewApplicationService);
     return ViewApplicationService;
 }());

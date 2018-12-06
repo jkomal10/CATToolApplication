@@ -6,4 +6,6 @@ import com.cattool.application.entity.QuestionOption;
 
 public interface OptionRepository extends JpaRepository<QuestionOption, Long> {
 
+	void deleteByQuestionId(String questionId);
+
 }

@@ -17,30 +17,26 @@ var ForCloudProviderService = /** @class */ (function () {
     function ForCloudProviderService(http, myStorage) {
         this.http = http;
         this.myStorage = myStorage;
-        this.evaluationOrder = 'http://localhost:8090/cloudProvider';
-        this.updateCloudProviderRuleUrl = "http://localhost:8090/cloudProvider/updateCloudProviderRule";
-        this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
+        this.comptransfer = new rxjs_1.BehaviorSubject("cloud provider");
         this.cloudProviderId = this.comptransfer.asObservable();
     }
     ForCloudProviderService.prototype.CollectData = function () {
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
-        var url = 'http://localhost:8090/cloudProvider/getAll';
-        return this.http.get(url + "/" + this.clientNameValue);
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
+        return this.http.get(this.myStorage.getdomainURL() + "/cloudProvider/getAll/" + this.clientIdValue);
     };
     ForCloudProviderService.prototype.saveEvaluationOrder = function (evaluationOrder) {
-        console.log(this.evaluationOrder);
-        return this.http.put("" + this.evaluationOrder + "/setEvaluationOrder", evaluationOrder);
+        return this.http.put(this.myStorage.getdomainURL() + "/cloudProvider/setEvaluationOrder", evaluationOrder);
     };
     ForCloudProviderService.prototype.sendCloudProviderIdtoOtherComponent = function (messsage) {
         this.comptransfer.next(messsage);
     };
     ForCloudProviderService.prototype.CollectCloudableRuleQuestions = function (cloudproviderId) {
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
-        return this.http.get("http://localhost:8090/assessmentQuestions/getAllCloudProviderRule/" + cloudproviderId + "/" + this.clientNameValue);
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
+        return this.http.get(this.myStorage.getdomainURL() + "/assessmentQuestions/getAllCloudProviderRule/" + cloudproviderId + "/" + this.clientIdValue);
     };
     ForCloudProviderService.prototype.updateCloudProviderRule = function (cloudableRule) {
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
-        return this.http.put("" + this.updateCloudProviderRuleUrl + "/" + this.clientNameValue, cloudableRule);
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
+        return this.http.put(this.myStorage.getdomainURL() + "/cloudProvider/updateCloudProviderRule" + "/" + this.clientIdValue, cloudableRule);
     };
     ForCloudProviderService = __decorate([
         core_1.Injectable({

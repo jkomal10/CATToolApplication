@@ -14,6 +14,9 @@ var router_1 = require("@angular/router");
 var Question_1 = require("../Question");
 var assessment_questions_service_1 = require("../assessment-questions.service");
 var localStorage_service_1 = require("../../utility/service/localStorage.service");
+var MigrationRule_1 = require("../MigrationRule");
+var CloudProviderRule_1 = require("../CloudProviderRule");
+var Option_1 = require("../Option");
 var UpdateQuestionComponent = /** @class */ (function () {
     function UpdateQuestionComponent(assessmentQuestionsService, router, myStorage) {
         this.assessmentQuestionsService = assessmentQuestionsService;
@@ -27,6 +30,7 @@ var UpdateQuestionComponent = /** @class */ (function () {
         this.question = new Question_1.AssessmentQuestions();
         this.updatedQuestion = new Question_1.AssessmentQuestions();
         this.questionObject = new Question_1.AssessmentQuestions();
+        this.questionUpdate = new Question_1.AssessmentQuestions();
         this.submitted = false;
         this.optionsValues = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         this.Options = [10];
@@ -36,8 +40,12 @@ var UpdateQuestionComponent = /** @class */ (function () {
         var _this = this;
         this.assessmentQuestionsService.question.subscribe(function (data) { _this.que = data; });
         this.question = this.que;
+        console.log("~~~~~~~~~~~~~~~~~~~~~`````````````````~~~~~~~~~~~" + this.question.questionId);
         this.numberOfOptions = 0;
         var option = this.optionsValues;
+        // console.log(this.que.questionOption.length);
+        // console.log(this.question.questionOption.length);
+        // console.log(this.numberOfOptions);
         this.numberOfOptions = this.question.questionOption.length;
         for (var index = 0; index < this.numberOfOptions; index++) {
             this.OptionsArray[index] = this.question.questionOption[index].optionText;
@@ -50,6 +58,8 @@ var UpdateQuestionComponent = /** @class */ (function () {
         this.assessmentTypeForMigrationValue = event.target.checked;
         this.assessmentQuestionsService.getMigrationData().subscribe(function (result) {
             _this.MigrationData = result;
+            console.log(JSON.stringify(_this.MigrationData));
+            console.log("********************************************************");
             for (var index = 0; index < _this.MigrationData.length; index++) {
                 _this.MigrationDataArray[index] = _this.MigrationData[index].migrationPattern;
             }
@@ -79,11 +89,73 @@ var UpdateQuestionComponent = /** @class */ (function () {
     };
     UpdateQuestionComponent.prototype.updateQue = function (updatedQuestion) {
         this.questionObject = updatedQuestion;
-        this.questionObject.modifiedBy = this.myStorage.getCurrentUserObject().userName;
+        for (var index = 0; index < this.OptionsArray.length; index++) {
+            var option = new Option_1.QuestionOption();
+            option.optionText = this.OptionsArray[index];
+            // this.questionUpdate
+            this.questionUpdate.questionOption[index] = option;
+            // console.log(this.questionUpdate.questionOption[index]);
+        }
+        for (var index = 0; index < this.MigrationData.length; index++) {
+            if (this.MigrationData[index].migrationPattern != false) {
+                var migration = new MigrationRule_1.MigrationRule();
+                migration.migrationId = this.MigrationData[index].migrationId;
+                migration.clientId = this.myStorage.getCurrentUserObject().clientId;
+                migration.questionText = this.updatedQuestion.questionText;
+                this.questionUpdate.migrationRule[index] = migration;
+                console.log(this.questionUpdate.migrationRule[index]);
+            }
+        }
+        for (var index = 0; index < this.CloudProviderData.length; index++) {
+            if (this.CloudProviderData[index].cloudProviders) {
+                var cloudProvider = new CloudProviderRule_1.CloudProviderRule();
+                cloudProvider.cloudProviderId = this.CloudProviderData[index].cloudProviderId;
+                cloudProvider.questionText = this.updatedQuestion.questionText;
+                cloudProvider.clientId = this.myStorage.getCurrentUserObject().clientId;
+                this.questionUpdate.cloudProviderRules[index] = cloudProvider;
+            }
+        }
+        //  this.questionUpdate.assessmentTypeForCloudable=this.updatedQuestion.assessmentTypeForCloudable;
+        console.log(this.updatedQuestion.assessmentTypeForCloudable);
+        if (this.updatedQuestion.assessmentTypeForCloudable) {
+            this.questionUpdate.assessmentTypeForCloudable = "true";
+        }
+        else {
+            this.questionUpdate.assessmentTypeForCloudable = null;
+        }
+        console.log(this.questionUpdate.assessmentTypeForCloudable);
+        this.questionUpdate.clientId = this.myStorage.getCurrentUserObject().clientId;
+        if (this.updatedQuestion.assessmentTypeForCloudProvider) {
+            this.questionUpdate.assessmentTypeForCloudProvider = "true";
+        }
+        else {
+            this.questionUpdate.assessmentTypeForCloudProvider = null;
+            this.questionUpdate.cloudProviderRules = null;
+        }
+        console.log(this.questionUpdate.assessmentTypeForCloudProvider);
+        if (this.updatedQuestion.assessmentTypeForMigration) {
+            this.questionUpdate.assessmentTypeForMigration = "true";
+        }
+        else {
+            this.questionUpdate.assessmentTypeForMigration = null;
+            this.questionUpdate.migrationRule = null;
+        }
+        //  this.questionUpdate.assessmentTypeForMigration=this.updatedQuestion.assessmentTypeForMigration;
+        this.questionUpdate.modifiedBy = this.myStorage.getCurrentUserObject().userName;
+        this.questionUpdate.questionDescription = this.updatedQuestion.questionDescription;
+        this.questionUpdate.questionText = this.updatedQuestion.questionText;
+        this.questionUpdate.questionDisplayOrder = this.updatedQuestion.questionDisplayOrder;
+        this.questionUpdate.numberOfOption = this.updatedQuestion.numberOfOption;
+        this.questionUpdate.questionType = this.updatedQuestion.questionType;
+        this.questionUpdate.questionId = this.question.questionId;
+        console.log(this.questionUpdate);
+        this.assessmentQuestionsService.updateQuestions(this.questionUpdate).subscribe();
+        // this.questionObject.modifiedBy=this.myStorage.getCurrentUserObject().userName;
         this.router.navigate(['/assessment-questions']);
     };
     UpdateQuestionComponent.prototype.onSubmit = function (formvalues) {
         this.updatedQuestion = formvalues;
+        // console.log(this.updatedQuestion);
         this.updateQue(this.updatedQuestion);
     };
     UpdateQuestionComponent = __decorate([

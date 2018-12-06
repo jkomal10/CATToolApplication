@@ -49,13 +49,13 @@ var AssessmentQuestionsComponent = /** @class */ (function () {
     };
     AssessmentQuestionsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
         this.dtOptions = {
             pagingType: 'full_numbers',
             pageLength: 10,
             responsive: true
         };
-        this.assessmentQuestionsService.getAllQuestions(this.clientNameValue).subscribe(function (result) {
+        this.assessmentQuestionsService.getAllQuestions(this.clientIdValue).subscribe(function (result) {
             _this.assessmentQuestionData = result;
             _this.dtTrigger.next();
         });

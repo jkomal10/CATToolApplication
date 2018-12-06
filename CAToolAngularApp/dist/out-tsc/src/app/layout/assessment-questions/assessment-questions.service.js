@@ -17,45 +17,38 @@ var AssessmentQuestionsService = /** @class */ (function () {
     function AssessmentQuestionsService(http, myStorage) {
         this.http = http;
         this.myStorage = myStorage;
-        this.getAllQuestionsURL = 'http://localhost:8090/assessmentQuestions/getAllQuestions';
-        this.baseUrl = 'http://localhost:8090/assessmentQuestions/deleteQuestions';
-        this.updateUrl = 'http://localhost:8090/assessmentQuestions/updateQuestions/update';
-        this.addUrl = 'http://localhost:8090/assessmentQuestions/saveAssessmentQuestions';
-        this.addUrl1 = 'http://localhost:8090/assessmentQuestions/saveAssessmentQuestions';
-        this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
+        this.comptransfer = new rxjs_1.BehaviorSubject("Assessment Questions");
         this.question = this.comptransfer.asObservable();
     }
-    AssessmentQuestionsService.prototype.getAllQuestions = function (clientName) {
-        return this.http.get(this.getAllQuestionsURL + "/" + clientName);
+    AssessmentQuestionsService.prototype.getAllQuestions = function (clientId) {
+        return this.http.get(this.myStorage.getdomainURL() + "/assessmentQuestions/getAllQuestions/" + clientId);
     };
     AssessmentQuestionsService.prototype.deleteQuestion = function (questionId) {
-        return this.http.delete(this.baseUrl + "/" + questionId, {
+        return this.http.delete(this.myStorage.getdomainURL() + "/assessmentQuestions/deleteQuestions/" + questionId, {
             responseType: 'text'
         });
     };
     AssessmentQuestionsService.prototype.updateQuestions = function (question) {
-        return this.http.put("" + this.updateUrl, +"/update", question);
+        return this.http.put(this.myStorage.getdomainURL() + "/assessmentQuestions/updateQuestions/update", question);
     };
     AssessmentQuestionsService.prototype.sendMsgtoOtherComponent = function (messsage) {
         this.comptransfer.next(messsage);
     };
     AssessmentQuestionsService.prototype.getMigrationData = function () {
-        this.clienNameValue = this.myStorage.getCurrentUserObject().clientName;
-        var url = 'http://localhost:8090/migrationRule/getAll';
-        return this.http.get(url + "/" + this.clienNameValue);
+        this.clienIdValue = this.myStorage.getCurrentUserObject().clientId;
+        return this.http.get(this.myStorage.getdomainURL() + "/migrationRule/getAll/" + this.clienIdValue);
     };
     AssessmentQuestionsService.prototype.getCloudProviderData = function () {
-        this.clienNameValue = this.myStorage.getCurrentUserObject().clientName;
-        var url = 'http://localhost:8090/cloudProvider/getAll';
-        return this.http.get(url + "/" + this.clienNameValue);
+        this.clienIdValue = this.myStorage.getCurrentUserObject().clientId;
+        return this.http.get(this.myStorage.getdomainURL() + "/cloudProvider/getAll/" + this.clienIdValue);
     };
     AssessmentQuestionsService.prototype.createQuestionn = function (question) {
         var headers = new http_1.HttpHeaders();
         headers = headers.set('Content-Type', 'application/json; charset=utf-8');
-        return this.http.post("" + this.addUrl1 + "/create", question);
+        return this.http.post(this.myStorage.getdomainURL() + "/assessmentQuestions/saveAssessmentQuestions/create", question);
     };
     AssessmentQuestionsService.prototype.updateAssessmentQuestions = function (value) {
-        return this.http.put("" + this.updateUrl, value);
+        return this.http.put(this.myStorage.getdomainURL + "/assessmentQuestions/updateQuestions/update", value);
     };
     AssessmentQuestionsService = __decorate([
         core_1.Injectable(),

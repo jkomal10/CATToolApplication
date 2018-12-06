@@ -10,23 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var http_1 = require("@angular/common/http");
-var localStorage_service_1 = require("../utility/service/localStorage.service");
-var HelpService = /** @class */ (function () {
-    function HelpService(http, myStorage) {
-        this.http = http;
-        this.myStorage = myStorage;
+var ApplicationAssessmentComponent = /** @class */ (function () {
+    function ApplicationAssessmentComponent() {
     }
-    HelpService.prototype.saveIssue = function (text) {
-        return this.http.post(this.myStorage.getdomainURL() + "/reportIssue/issue", text);
+    ApplicationAssessmentComponent.prototype.ngOnInit = function () {
     };
-    HelpService = __decorate([
-        core_1.Injectable({
-            providedIn: 'root'
+    ApplicationAssessmentComponent = __decorate([
+        core_1.Component({
+            selector: 'app-application-assessment',
+            templateUrl: './application-assessment.component.html',
+            styleUrls: ['./application-assessment.component.scss']
         }),
-        __metadata("design:paramtypes", [http_1.HttpClient, localStorage_service_1.LocalStorageService])
-    ], HelpService);
-    return HelpService;
+        __metadata("design:paramtypes", [])
+    ], ApplicationAssessmentComponent);
+    return ApplicationAssessmentComponent;
 }());
-exports.HelpService = HelpService;
-//# sourceMappingURL=help.service.js.map
+exports.ApplicationAssessmentComponent = ApplicationAssessmentComponent;
+//# sourceMappingURL=application-assessment.component.js.map

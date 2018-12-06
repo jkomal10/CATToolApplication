@@ -40,9 +40,7 @@ var MigrationPatternsComponent = /** @class */ (function () {
         this.forMigrationPatternService.getMigrationQuestions(this.migrationIdValue).subscribe(function (result) {
             _this.dtTrigger.next();
             _this.migrationAllData = result;
-            console.log(_this.migrationAllData);
             _this.migrationQuestionLength = _this.migrationAllData.length;
-            console.log(_this.migrationAllData.length);
         });
     };
     MigrationPatternsComponent.prototype.migrationProviderMethod = function () {
@@ -52,7 +50,6 @@ var MigrationPatternsComponent = /** @class */ (function () {
             migrationRuleNewObject.questionId = this.migrationAllData[index].questionId;
             migrationRuleNewObject.migrationId = this.migrationIdValue;
             migrationRuleNewObject.migrationRule = this.migrationRule[index];
-            console.log(this.executionOrderValue[index] + "***********%%%%%%%%%%%%%******************");
             migrationRuleNewObject.executionOrder = this.executionOrderValue[index];
             migrationRuleNewObject.questionText = this.migrationAllData[index].questionText;
             for (var i = 0; i < this.migrationAllData[index].migrationRule.length; i++) {

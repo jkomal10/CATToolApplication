@@ -15,29 +15,30 @@ var rxjs_1 = require("../../../../node_modules/rxjs");
 var application_service_1 = require("./application.service");
 var Angular5_csv_1 = require("angular5-csv/Angular5-csv");
 var ngx_logger_1 = require("ngx-logger");
+var localStorage_service_1 = require("../utility/service/localStorage.service");
 var DataTablesResponse = /** @class */ (function () {
     function DataTablesResponse() {
     }
     return DataTablesResponse;
 }());
 var ApplicationComponent = /** @class */ (function () {
-    function ApplicationComponent(router, applicationService, logger) {
+    function ApplicationComponent(router, applicationService, logger, myStorage) {
         this.router = router;
         this.applicationService = applicationService;
         this.logger = logger;
+        this.myStorage = myStorage;
         this.dtOptions = {};
         this.dtTrigger = new rxjs_1.Subject();
         this.message = '';
-        //applictaions: Observable<Application[]>;
         this.application = [];
         this.applicationTemplate = [];
-        this.applications = [];
+        this.applicationList = [];
         this.show = false;
         this.buttonName = 'Help';
     }
     ApplicationComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.clientNameValue = localStorage.getItem('clientName');
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
         this.logger.debug('************8Your log message goes here');
         this.logger.log('Your log message goes here');
         this.dtOptions = {
@@ -45,9 +46,9 @@ var ApplicationComponent = /** @class */ (function () {
             pageLength: 10,
             responsive: true,
         };
-        this.applicationService.CollectData(this.clientNameValue).subscribe(function (result) {
-            _this.applications = result;
-            _this.logger.log(JSON.stringify(_this.applications));
+        this.applicationService.getAllAplication(this.clientIdValue).subscribe(function (result) {
+            _this.applicationList = result;
+            _this.logger.log(JSON.stringify(_this.applicationList));
             _this.dtTrigger.next();
         });
     };
@@ -60,7 +61,7 @@ var ApplicationComponent = /** @class */ (function () {
     };
     ApplicationComponent.prototype.exportTemplate = function () {
         var csvRows = [];
-        this.logger.log(this.applications);
+        this.logger.log(this.applicationList);
         var filename = "Application";
         var dateNow = new Date();
         var options = {
@@ -84,16 +85,16 @@ var ApplicationComponent = /** @class */ (function () {
     };
     ApplicationComponent.prototype.exportCsv = function () {
         var csvRows = [];
-        this.logger.log(this.applications);
+        this.logger.log(this.applicationList);
         var filename = "Application";
         var dateNow = new Date();
         this.logger.log(dateNow.getDate().toString + " Date");
         this.logger.log(dateNow.getDay().toString + " day");
         this.logger.log(dateNow.getMonth().toString + " month");
         this.logger.log(dateNow.getFullYear().toString + " year");
-        for (var index = 0; index < this.applications.length; index++) {
-            this.logger.log(this.applications[index].applicationId + "id");
-            this.application[index] = this.applications[index];
+        for (var index = 0; index < this.applicationList.length; index++) {
+            this.logger.log(this.applicationList[index].applicationId + "id");
+            this.application[index] = this.applicationList[index];
         }
         this.logger.log(this.application);
         var options = {
@@ -116,7 +117,7 @@ var ApplicationComponent = /** @class */ (function () {
             .subscribe();
     };
     ApplicationComponent.prototype.reloadData = function () {
-        this.applicationService.CollectData(this.clientNameValue);
+        this.applicationService.getAllAplication(this.clientIdValue);
     };
     ApplicationComponent.prototype.ViewApplication = function (formvalues) {
         this.applicationService.sendMsgtoOtherComponent(formvalues);
@@ -132,9 +133,6 @@ var ApplicationComponent = /** @class */ (function () {
     ApplicationComponent.prototype.deactivate = function (formvalues) {
         this.applicationService.deactivate(formvalues).subscribe();
     };
-    ApplicationComponent.prototype.somefunction = function () {
-        console.log("sommmmmmmmmmmmmmmmmmmmmmm");
-    };
     ApplicationComponent = __decorate([
         core_1.Component({
             selector: 'app-application',
@@ -142,7 +140,7 @@ var ApplicationComponent = /** @class */ (function () {
             styleUrls: ['./application.component.scss'],
             providers: [ngx_logger_1.NGXLogger]
         }),
-        __metadata("design:paramtypes", [router_1.Router, application_service_1.ApplicationService, ngx_logger_1.NGXLogger])
+        __metadata("design:paramtypes", [router_1.Router, application_service_1.ApplicationService, ngx_logger_1.NGXLogger, localStorage_service_1.LocalStorageService])
     ], ApplicationComponent);
     return ApplicationComponent;
 }());

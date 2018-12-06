@@ -10,4 +10,6 @@ public interface MigrationRuleRepository extends JpaRepository<MigrationRule, Lo
 
 	
 	List<MigrationRule> findByClientId(int clientId);
+
+	void deleteByQuestionId(String string);
 }

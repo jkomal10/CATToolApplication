@@ -18,6 +18,7 @@ var view_application_component_1 = require("./view-application/view-application.
 var assesst_application_component_1 = require("./assesst-application/assesst-application.component");
 var update_application_component_1 = require("./update-application/update-application.component");
 var ngx_logger_1 = require("ngx-logger");
+var application_assessment_component_1 = require("./application-assessment/application-assessment.component");
 var ApplicationModule = /** @class */ (function () {
     function ApplicationModule() {
     }
@@ -31,7 +32,8 @@ var ApplicationModule = /** @class */ (function () {
                 import_application_component_1.ImportApplicationComponent,
                 view_application_component_1.ViewApplicationComponent,
                 assesst_application_component_1.AssesstApplicationComponent,
-                update_application_component_1.UpdateApplicationComponent
+                update_application_component_1.UpdateApplicationComponent,
+                application_assessment_component_1.ApplicationAssessmentComponent
             ]
         })
     ], ApplicationModule);

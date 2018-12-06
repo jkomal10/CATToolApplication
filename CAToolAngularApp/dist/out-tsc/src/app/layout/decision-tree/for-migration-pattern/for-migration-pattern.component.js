@@ -23,7 +23,7 @@ var ForMigrationPatternComponent = /** @class */ (function () {
         this.assessmentQuestions = new Question_1.AssessmentQuestions();
         this.dtOptions = {};
         this.dtTrigger = new rxjs_1.Subject();
-        this.AllData = [];
+        this.migrationPatternData = [];
     }
     ForMigrationPatternComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -32,14 +32,13 @@ var ForMigrationPatternComponent = /** @class */ (function () {
             pageLength: 10,
             responsive: true
         };
-        this.forMigrationPatternService.CollectData().subscribe(function (result) {
-            _this.AllData = result;
+        this.forMigrationPatternService.getAllMigrationData().subscribe(function (result) {
+            _this.migrationPatternData = result;
             _this.dtTrigger.next();
-            console.log(_this.AllData);
+            console.log(_this.migrationPatternData);
         });
     };
     ForMigrationPatternComponent.prototype.questions = function (index) {
-        console.log('**************' + index); //rehost
         this.forMigrationPatternService.sendMsgtoOtherComponent(index);
         this.router.navigate(['/for-migration-pattern/migration-patterns']);
     };

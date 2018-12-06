@@ -22,7 +22,7 @@ var HeaderComponent = /** @class */ (function () {
         this.user = new Users_1.Users();
     }
     HeaderComponent.prototype.ngOnInit = function () {
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
+        this.clientName = this.myStorage.getClientName();
         this.user = JSON.parse(localStorage.getItem('user'));
         this.userName = this.user.userName;
     };

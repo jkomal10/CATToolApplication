@@ -57,7 +57,9 @@ var AddAssessmentQuestionComponent = /** @class */ (function () {
         for (var index = 0; index < this.optionText.length; index++) {
             var option = new Option_1.QuestionOption();
             option.optionText = this.optionText[index];
+            //  console.log(option);
             this.question.questionOption[index] = option;
+            //  console.log(this.question.questionOption[index]);
         }
         for (var index = 0; index < this.MigrationData.length; index++) {
             if (this.MigrationData[index].migrationPattern != false) {
@@ -73,13 +75,15 @@ var AddAssessmentQuestionComponent = /** @class */ (function () {
                 var cloudProvider = new CloudProviderRule_1.CloudProviderRule();
                 cloudProvider.cloudProviderId = this.CloudProviderData[index].cloudProviderId;
                 cloudProvider.questionText = this.question.questionText;
-                cloudProvider.clientName = localStorage.getItem('clientName');
+                cloudProvider.clientId = this.myStorage.getCurrentUserObject().clientId;
                 this.question.cloudProviderRules[index] = cloudProvider;
             }
         }
         this.question.clientId = this.myStorage.getCurrentUserObject().clientId;
         this.question.createdBy = this.myStorage.getCurrentUserObject().userName;
+        console.log(this.question);
         this.questionService.createQuestionn(this.question).subscribe();
+        location.reload();
         this.router.navigate(['/assessment-questions']);
     };
     AddAssessmentQuestionComponent.prototype.onSubmit = function () {
@@ -92,7 +96,6 @@ var AddAssessmentQuestionComponent = /** @class */ (function () {
         this.assessmentTypeForMigrationValue = event.target.checked;
         this.questionService.getMigrationData().subscribe(function (result) {
             _this.MigrationData = result;
-            console.log(_this.MigrationData);
             for (var index = 0; index < _this.MigrationData.length; index++) {
                 _this.MigrationDataArray[index] = _this.MigrationData[index].migrationPattern;
             }

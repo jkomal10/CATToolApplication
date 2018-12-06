@@ -10,22 +10,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var Users_1 = require("./Users");
 var http_1 = require("@angular/common/http");
 var rxjs_1 = require("rxjs");
+var localStorage_service_1 = require("../utility/service/localStorage.service");
 var CatloginService = /** @class */ (function () {
-    function CatloginService(http) {
+    function CatloginService(http, myStorage) {
         this.http = http;
-        this.users = new Users_1.Users();
-        this.getUserByID_url = "http://localhost:8090/user/getById";
-        this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
+        this.myStorage = myStorage;
+        this.comptransfer = new rxjs_1.BehaviorSubject("login");
         this.question = this.comptransfer.asObservable();
     }
     CatloginService.prototype.ngOnInit = function () {
     };
     CatloginService.prototype.getUserByUserNamePassword = function (username, password) {
-        console.log(this.getUserByID_url + "/" + username + "/" + password);
-        return this.http.get(this.getUserByID_url + "/" + username + "/" + password);
+        return this.http.get(this.myStorage.getdomainURL() + "/user/getById/" + username + "/" + password);
+    };
+    CatloginService.prototype.getClientByClientId = function (clientId) {
+        return this.http.get("http://localhost:8090/user/get/client/" + clientId);
     };
     CatloginService.prototype.sendMsgtoOtherComponent = function (messsage) {
         this.comptransfer.next(messsage);
@@ -34,7 +35,7 @@ var CatloginService = /** @class */ (function () {
         core_1.Injectable({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [http_1.HttpClient, localStorage_service_1.LocalStorageService])
     ], CatloginService);
     return CatloginService;
 }());

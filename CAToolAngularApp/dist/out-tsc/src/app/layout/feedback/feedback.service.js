@@ -16,13 +16,11 @@ var FeedbackService = /** @class */ (function () {
     function FeedbackService(http, myStorage) {
         this.http = http;
         this.myStorage = myStorage;
-        this.url = "http://localhost:8090/feedback/save";
     }
     FeedbackService.prototype.addFeedback = function (feedback) {
-        console.log("feedback for user");
         this.userName = this.myStorage.getCurrentUserObject().userName;
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
-        return this.http.post("" + this.url + "/" + this.userName + "/" + this.clientNameValue, feedback);
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
+        return this.http.post(this.myStorage.getdomainURL() + "/feedback/save/" + this.userName + "/" + this.clientIdValue, feedback);
     };
     FeedbackService = __decorate([
         core_1.Injectable({

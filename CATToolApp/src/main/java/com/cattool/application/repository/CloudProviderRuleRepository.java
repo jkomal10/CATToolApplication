@@ -5,4 +5,6 @@ import com.cattool.application.entity.CloudProviderRule;
 
 public interface CloudProviderRuleRepository extends JpaRepository<CloudProviderRule, Long>{
 
+	void deleteByQuestionId(String string);
+
 }

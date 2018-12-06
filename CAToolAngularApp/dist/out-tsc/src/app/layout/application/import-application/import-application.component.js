@@ -10,13 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-// import { Application } from '../../decision-tree/reassessment/Application';
 var application_service_1 = require("../application.service");
 var router_1 = require("@angular/router");
 var Application_1 = require("../Application");
 var user_service_1 = require("../../user/user.service");
+var localStorage_service_1 = require("../../utility/service/localStorage.service");
 var ImportApplicationComponent = /** @class */ (function () {
-    function ImportApplicationComponent(router, applicationService, userService) {
+    function ImportApplicationComponent(myStorage, router, applicationService, userService) {
+        this.myStorage = myStorage;
         this.router = router;
         this.applicationService = applicationService;
         this.userService = userService;
@@ -30,7 +31,6 @@ var ImportApplicationComponent = /** @class */ (function () {
         this.clientName = localStorage.getItem('clientName');
     }
     ImportApplicationComponent.prototype.ngOnInit = function () {
-        // this.userService.CollectData(this.clientName).subscribe(data=>{this.userData=data});
     };
     ImportApplicationComponent.prototype.fileChangeListener = function (event) {
         var _this = this;
@@ -50,12 +50,10 @@ var ImportApplicationComponent = /** @class */ (function () {
         else {
             alert("please enter a csv file");
         }
-        // console.log(this.filename[0]+"___________");
-        // console.log(this.link+"**************");
     };
     ImportApplicationComponent.prototype.getDataRecordsArrayFromCSVFile = function (csvRecordsArray, headerLength) {
-        for (var i_1 = 1; i_1 < csvRecordsArray.length; i_1++) {
-            var data = csvRecordsArray[i_1].split(',');
+        for (var i = 1; i < csvRecordsArray.length; i++) {
+            var data = csvRecordsArray[i].split(',');
             if (data.length == headerLength) {
                 var dataArr = [];
                 for (var j = 0; j < headerLength; j++) {
@@ -63,10 +61,6 @@ var ImportApplicationComponent = /** @class */ (function () {
                 }
                 this.lines.push(dataArr);
             }
-        }
-        // console.log(this.lines.length);
-        for (var i = 0; i < this.lines.length; i++) {
-            console.log("adduser of row" + this.lines[i][0]);
         }
         return null;
     };
@@ -84,48 +78,24 @@ var ImportApplicationComponent = /** @class */ (function () {
     };
     ImportApplicationComponent.prototype.importData = function () {
         for (var i = 0; i < this.lines.length; i++) {
-            //     this.application.applicationName =this.lines[i][0];
-            //     this.application.applicationDescription =this.lines[i][1];
-            //     this.application.clientName = localStorage.getItem('clientName');
-            //     this.application.cloudProvider = "";
-            //     this.application.createdBy = localStorage.getItem('clientName');
-            //     this.application.createdDate  = new Date();
-            //     this.application.isAssessment = false;
-            //     // this.application.isCloudable = false;
-            //     this.application.isDeactivate = false;
-            //     this.application.isDeleted = false;
-            //     this.application.isFinalize = 0;
-            //     this.application.isSaved = 0;
-            //     this.application.isVerified = false;
-            //     this.application.MigrationPattern = "";
-            //     this.application.modifiedBy = localStorage.getItem('clientName');
-            //     this.application.modifiedDateTime = new Date();
             var userName = this.lines[i][2];
             this.getuserIdByName(userName);
-            // this.existingUser = this.value;
-            //  console.log("{{{{{{{"+this.value);
-            // console.log("************"+this.existingUser);
-            // this.application.clientName = localStorage.getItem('clientName');
-            //   this.applicationService.createApplication(this.application)
-            // .subscribe();
             this.router.navigate(['/application']);
             console.log(this.value);
         }
-        // console.log("this.userDetail"+this.application);
     };
     ImportApplicationComponent.prototype.getuserIdByName = function (userName) {
         var _this = this;
-        this.userService.getUserByUserName(localStorage.getItem('clientName'), userName).subscribe(function (data) {
+        this.userService.getUserByUserName(this.myStorage.getCurrentUserObject().clientId, userName).subscribe(function (data) {
             _this.value = data, console.log(_this.value);
             for (var i = 0; i < 1; i++) {
                 _this.application.applicationName = _this.lines[i][0];
                 _this.application.applicationDescription = _this.lines[i][1];
-                _this.application.clientName = localStorage.getItem('clientName');
+                _this.application.clientId = _this.myStorage.getCurrentUserObject().clientId;
                 _this.application.cloudProvider = "";
-                _this.application.createdBy = localStorage.getItem('clientName');
+                _this.application.createdBy = _this.myStorage.getCurrentUserObject().userName;
                 _this.application.createdDate = new Date();
                 _this.application.isAssessment = false;
-                // this.application.isCloudable = false;
                 _this.application.isDeactivate = false;
                 _this.application.isDeleted = false;
                 _this.application.isFinalize = 0;
@@ -134,20 +104,13 @@ var ImportApplicationComponent = /** @class */ (function () {
                 _this.application.MigrationPattern = "";
                 _this.application.modifiedBy = localStorage.getItem('clientName');
                 _this.application.modifiedDateTime = new Date();
-                // var userName = this.lines[i][2];
                 _this.existingUser = _this.value.id;
-                console.log("{{{{{{{" + _this.value.id);
-                // console.log("++++++++++"+JSON.stringify(this.value[0]));
-                console.log("************" + _this.existingUser);
                 _this.application.userId = _this.existingUser;
-                console.log(_this.application.userId);
-                _this.application.clientName = localStorage.getItem('clientName');
+                _this.application.clientId = _this.myStorage.getCurrentUserObject().clientId;
                 _this.applicationService.createApplication(_this.application)
                     .subscribe();
             }
         });
-        // console.log("ssssssssssssssssss"+this.value);
-        // return this.userService.getUserByUserName(localStorage.getItem('clientName'),userName).subscribe(data=>{this.value=data});
         return 0;
     };
     ImportApplicationComponent = __decorate([
@@ -156,7 +119,7 @@ var ImportApplicationComponent = /** @class */ (function () {
             templateUrl: './import-application.component.html',
             styleUrls: ['./import-application.component.scss']
         }),
-        __metadata("design:paramtypes", [router_1.Router, application_service_1.ApplicationService, user_service_1.UsersService])
+        __metadata("design:paramtypes", [localStorage_service_1.LocalStorageService, router_1.Router, application_service_1.ApplicationService, user_service_1.UsersService])
     ], ImportApplicationComponent);
     return ImportApplicationComponent;
 }());

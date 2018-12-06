@@ -26,13 +26,9 @@ var HelpComponent = /** @class */ (function () {
     HelpComponent.prototype.ngOnInit = function () {
     };
     HelpComponent.prototype.submit = function () {
-        // this.textfield=formvalue;
-        console.log(this.textfield);
         this.issues.issue = this.textfield;
         this.issues.userName = this.myStorage.getCurrentUserObject().userName;
-        console.log(this.issues.userName);
-        this.issues.clientName = this.myStorage.getCurrentUserObject().clientName;
-        console.log(this.issues.clientName);
+        this.issues.clientId = this.myStorage.getCurrentUserObject().clientId;
         this.helpService.saveIssue(this.issues).subscribe();
         this.router.navigate(['/dashboard']);
     };
@@ -42,8 +38,7 @@ var HelpComponent = /** @class */ (function () {
             templateUrl: './help.component.html',
             styleUrls: ['./help.component.scss']
         }),
-        __metadata("design:paramtypes", [help_service_1.HelpService, router_1.Router,
-            http_1.HttpClient, localStorage_service_1.LocalStorageService])
+        __metadata("design:paramtypes", [help_service_1.HelpService, router_1.Router, http_1.HttpClient, localStorage_service_1.LocalStorageService])
     ], HelpComponent);
     return HelpComponent;
 }());

@@ -12,10 +12,14 @@ import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.CloudProviderRule;
 import com.cattool.application.entity.CloudableRule;
 import com.cattool.application.entity.MigrationRule;
+import com.cattool.application.entity.QuestionOption;
 import com.cattool.application.exception.ExceptionMessages;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
+import com.cattool.application.repository.CloudProviderRuleRepository;
 import com.cattool.application.repository.CloudableRuleRepository;
 import com.cattool.application.repository.MigrationRepository;
+import com.cattool.application.repository.MigrationRuleRepository;
+import com.cattool.application.repository.OptionRepository;
 
 @Transactional
 @Service
@@ -31,6 +35,15 @@ public class AssessmentQuestionsService{
 	
 	@Autowired
 	CloudableRuleRepository cloudableRuleRepository;
+	
+	@Autowired
+	CloudProviderRuleRepository cloudProviderRuleRepository;
+	
+	@Autowired
+	MigrationRuleRepository migrationRuleRepository;
+	
+	@Autowired
+	OptionRepository optionRepository;
 	
 	int isActive=0;
 
@@ -94,8 +107,19 @@ public class AssessmentQuestionsService{
 		System.out.println("%%%%%%%%%%"+assessmentQuestions.getQuestionId());
 		try {
 			AssessmentQuestions assessmentQuestion=new AssessmentQuestions();
+			optionRepository.deleteByQuestionId(Integer.toString(assessmentQuestions.getQuestionId()));
+			if(assessmentQuestions.getAssessmentTypeForCloudProvider()!="true")
+			{
+				cloudProviderRuleRepository.deleteByQuestionId(Integer.toString(assessmentQuestions.getQuestionId()));
+			}
+			if(assessmentQuestions.getAssessmentTypeForMigration()!="true")
+			{
+				migrationRuleRepository.deleteByQuestionId(Integer.toString(assessmentQuestions.getQuestionId()));
+			}
 			assessmentQuestion=assessmentQuestionsRepository.getByQuestionId(assessmentQuestions.getQuestionId());
 			assessmentQuestion.setQuestionId(assessmentQuestions.getQuestionId());
+//			assessmentQuestion.setCreatedBy(assessmentQuestion.getCreatedBy());
+//			assessmentQuestion.setCteatedTime(assessmentQuestion.getCteatedTime());
 			assessmentQuestion=assessmentQuestions;
 			System.out.println("*****************************************");
 			
@@ -111,7 +135,8 @@ public class AssessmentQuestionsService{
 //			assessmentQuestion.setAssessmentTypeForCloudable(assessmentQuestions.getAssessmentTypeForCloudProvider());
 			//System.out.println("******************************"+assessmentQuestion);
 			CloudableRule cloudableRule = cloudableRuleRepository.findByQuestionId(assessmentQuestions.getQuestionId());
-			if(assessmentQuestions.getAssessmentTypeForCloudable() != "false")
+			System.out.println(assessmentQuestions.getAssessmentTypeForCloudable()+"********");
+			if(assessmentQuestions.getAssessmentTypeForCloudable() == "true")
 			{
 				cloudableRule.setCloudableRuleId(cloudableRule.getCloudableRuleId());
 				cloudableRule.setQuestionId(assessmentQuestion.getQuestionId());
@@ -125,6 +150,11 @@ public class AssessmentQuestionsService{
 			{
 				cloudableRuleRepository.deleteByQuestionId(assessmentQuestion.getQuestionId());
 			}
+			
+//			else
+//			{
+//				
+//			}
 			assessmentQuestionsRepository.save(assessmentQuestion);
 			LOGGER.info("Succfully updated the questions");
 		} catch (Exception e) {

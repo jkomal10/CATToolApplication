@@ -21,7 +21,7 @@ var ReassessmentComponent = /** @class */ (function () {
         this.http = http;
         this.dtOptions = {};
         this.dtTrigger = new rxjs_1.Subject();
-        this.AllData = [];
+        this.reassessmentDataValue = [];
         this.applicationIdArray = [];
         this.i = 0;
         this.j = 0;
@@ -33,41 +33,31 @@ var ReassessmentComponent = /** @class */ (function () {
             pageLength: 10,
             responsive: true
         };
-        this.reassessmentService.CollectData().subscribe(function (result) {
-            _this.AllData = result;
+        this.reassessmentService.reassessmentData().subscribe(function (result) {
+            _this.reassessmentDataValue = result;
             _this.dtTrigger.next();
         });
     };
     ReassessmentComponent.prototype.runRule = function () {
-        console.log("run rules++++++++++++++++");
         for (var index = 0; index < this.applicationIdArray.length; index++) {
-            console.log(this.applicationIdArray[index]);
-            console.log("^^^" + this.migrationCheckbox + "^^^^");
             if (this.cloudProviderCheckbox) {
-                console.log("cloud provider clicked");
                 this.reassessmentService.cloudProvider(this.applicationIdArray[index]).subscribe();
             }
             if (this.migrationCheckbox) {
-                console.log("migration clicked");
                 this.reassessmentService.migrationPattern(this.applicationIdArray[index]).subscribe();
             }
         }
     };
     ReassessmentComponent.prototype.migrationPatternMethod = function (values) {
-        console.log("migration " + values.currentTarget.checked);
         this.migrationCheckbox = values.currentTarget.checked;
     };
     ReassessmentComponent.prototype.cloudProviderMethod = function (values) {
-        console.log("cloud provider " + values.currentTarget.checked);
         this.cloudProviderCheckbox = values.currentTarget.checked;
     };
     ReassessmentComponent.prototype.applicationNameChange = function (e, applicationId) {
-        console.log("application checked");
         if (e.currentTarget.checked) {
             this.applicationIdArray[this.i] = applicationId;
-            console.log(this.applicationIdArray[this.i]);
             this.i++;
-            console.log(this.i);
         }
         else {
             for (var index = 0; index < this.applicationIdArray.length; index++) {

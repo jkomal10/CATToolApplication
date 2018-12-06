@@ -24,7 +24,6 @@ var UpdateUserComponent = /** @class */ (function () {
         this.userService.users.subscribe(function (data) { _this.userdata = data; });
     };
     UpdateUserComponent.prototype.updateUserComponent = function (userdata) {
-        console.log("update user component " + userdata.firstName);
         this.user = userdata;
         this.userService.updateUser(userdata).subscribe();
         this.router.navigate(['/user']);

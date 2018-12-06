@@ -23,25 +23,24 @@ var CATloginComponent = /** @class */ (function () {
         this.users = new Users_1.Users();
     }
     CATloginComponent.prototype.ngOnInit = function () {
-        localStorage.setItem('userName', null);
     };
     CATloginComponent.prototype.onLoggedin = function (formValues) {
         var _this = this;
         this.loginService.getUserByUserNamePassword(formValues.userName, formValues.password).subscribe(function (data) {
             _this.users = data;
-            console.log(_this.users + "asdasdasd");
             if (_this.users != null) {
                 _this.myStorage.setCurrentUserObject(_this.users);
                 _this.myStorage.setLoggedInTrue('true');
-                //  this.myStorage.setUsername(this.users.userName);
+                _this.loginService.getClientByClientId(_this.myStorage.getCurrentUserObject().clientId).subscribe(function (data) {
+                    _this.clientName = data;
+                    _this.myStorage.setClientName(_this.clientName);
+                });
                 if (_this.users.isAdmin === 0) {
-                    _this.myStorage.setIsUserActive('true');
                     _this.message = "logged in successfully";
                     _this.loginService.sendMsgtoOtherComponent(_this.users);
                     _this.router.navigate(['/dashboard']);
                 }
                 else if (_this.users.isAdmin == 1) {
-                    _this.myStorage.setIsUserActive('false');
                     _this.loginService.sendMsgtoOtherComponent(_this.users.userId);
                     _this.loginService.sendMsgtoOtherComponent(_this.users);
                     _this.router.navigate(['/dashboard']);

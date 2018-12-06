@@ -17,30 +17,26 @@ var ForMigrationPatternService = /** @class */ (function () {
     function ForMigrationPatternService(http, myStorage) {
         this.http = http;
         this.myStorage = myStorage;
-        this.migrationUrl = 'http://localhost:8090/migrationRule/setExceutionOrder';
-        this.updateMigrationRuleUrl = 'http://localhost:8090/migrationRule/updateMigrationRule';
-        this.comptransfer = new rxjs_1.BehaviorSubject("Hello");
+        this.comptransfer = new rxjs_1.BehaviorSubject("migration pattern");
         this.question = this.comptransfer.asObservable();
     }
-    ForMigrationPatternService.prototype.CollectData = function () {
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
-        var url = 'http://localhost:8090/migrationRule/getAll';
-        return this.http.get(url + "/" + this.clientNameValue);
+    ForMigrationPatternService.prototype.getAllMigrationData = function () {
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
+        return this.http.get(this.myStorage.getdomainURL() + "/migrationRule/getAll/" + this.clientIdValue);
     };
     ForMigrationPatternService.prototype.getAssessmentQuestions = function () {
-        var url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';
-        return this.http.get(url);
+        return this.http.get(this.myStorage.getdomainURL() + "/assessmentQuestions/getAllQuestions");
     };
     ForMigrationPatternService.prototype.getMigrationQuestions = function (migrationId) {
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
-        return this.http.get("http://localhost:8090/assessmentQuestions/getAllMigrationPattern/" + migrationId + "/" + this.clientNameValue);
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
+        return this.http.get(this.myStorage.getdomainURL() + ("/assessmentQuestions/getAllMigrationPattern/" + migrationId + "/" + this.clientIdValue));
     };
     ForMigrationPatternService.prototype.updateMigrationRule = function (value) {
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
-        return this.http.put("" + this.updateMigrationRuleUrl + "/" + this.clientNameValue, value);
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
+        return this.http.put(this.myStorage.getdomainURL() + "/migrationRule/updateMigrationRule/" + this.clientIdValue, value);
     };
     ForMigrationPatternService.prototype.saveEvaluationOrder = function (migration) {
-        return this.http.post("" + this.migrationUrl + "/create", migration);
+        return this.http.post(this.myStorage.getdomainURL() + "/migrationRule/setExceutionOrder/create", migration);
     };
     ForMigrationPatternService.prototype.sendMsgtoOtherComponent = function (messsage) {
         this.comptransfer.next(messsage);

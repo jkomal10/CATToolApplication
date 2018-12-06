@@ -11,19 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
+var localStorage_service_1 = require("../utility/service/localStorage.service");
 var ReportService = /** @class */ (function () {
-    function ReportService(http) {
+    function ReportService(http, myStorage) {
         this.http = http;
+        this.myStorage = myStorage;
     }
     ReportService.prototype.summaryReport = function () {
-        var url = 'http://localhost:8090/application/summaryReport';
-        return this.http.get(url);
+        return this.http.get(this.myStorage.getdomainURL() + "/application/summaryReport");
     };
     ReportService = __decorate([
         core_1.Injectable({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [http_1.HttpClient, localStorage_service_1.LocalStorageService])
     ], ReportService);
     return ReportService;
 }());

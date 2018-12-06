@@ -42,6 +42,7 @@ var UserComponent = /** @class */ (function () {
     };
     UserComponent.prototype.deleteUser = function (formvalues) {
         this.userService.deleteUser(formvalues).subscribe(function (data) { }, function (error) { return console.log('ERROR: ' + error); });
+        location.reload();
         this.router.navigate(['/user']);
     };
     UserComponent.prototype.deactivate = function (formvalues) {
@@ -54,7 +55,7 @@ var UserComponent = /** @class */ (function () {
     UserComponent.prototype.exportCsvTemplate = function () {
         var filename = "Users";
         var options = {
-            headers: ["userName", "firstName", "lastName", "company", "isAdmin"]
+            headers: ["User Name", "First Name", "Last Name", "Company", "UserType"]
         };
         new Angular5_csv_1.Angular5Csv(this.users, filename, options);
     };
@@ -75,7 +76,7 @@ var UserComponent = /** @class */ (function () {
     };
     UserComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.clientValue = this.myStorage.getCurrentUserObject().clientName;
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
         this.dtOptions = {
             pagingType: 'full_numbers',
             pageLength: 10,
@@ -83,7 +84,7 @@ var UserComponent = /** @class */ (function () {
         };
         this.userService.getIpAddress().subscribe(function (data) {
             _this.IpAddress = data['ip'];
-            _this.userService.getAllUsers(_this.clientValue).subscribe(function (result) {
+            _this.userService.getAllUsers(_this.clientIdValue).subscribe(function (result) {
                 _this.userData = result;
                 _this.dtTrigger.next();
             });

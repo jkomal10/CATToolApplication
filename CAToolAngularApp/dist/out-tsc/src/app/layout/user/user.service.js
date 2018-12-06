@@ -20,11 +20,14 @@ var UsersService = /** @class */ (function () {
         this.comptransfer = new rxjs_1.BehaviorSubject("user data by default");
         this.users = this.comptransfer.asObservable();
     }
-    UsersService.prototype.getAllUsers = function (clientName) {
-        return this.http.get(this.myStorage.getdomainURL() + "/user/getAll/" + clientName);
+    UsersService.prototype.getAllUsers = function (clientId) {
+        return this.http.get(this.myStorage.getdomainURL() + "/user/getAll/" + clientId);
     };
-    UsersService.prototype.getUserByUserName = function (clientName, userName) {
-        return this.http.get(this.myStorage.getdomainURL() + '/user/getUserId/' + clientName + '/' + userName);
+    UsersService.prototype.getUsersCount = function (clientId) {
+        return this.http.get(this.myStorage.getdomainURL() + "/user/getTotalUsersCount/" + clientId);
+    };
+    UsersService.prototype.getUserByUserName = function (clientId, userName) {
+        return this.http.get(this.myStorage.getdomainURL() + '/user/getUserId/' + clientId + '/' + userName);
     };
     UsersService.prototype.countNumberOfUsers = function () {
         return this.http.get(this.myStorage.getdomainURL() + "/user/getUserCount");
@@ -51,7 +54,7 @@ var UsersService = /** @class */ (function () {
         return this.http.put(this.myStorage.getdomainURL() + "/user/updateUser/update/" + this.myStorage.getCurrentUserObject().userName, user);
     };
     UsersService.prototype.deleteUser = function (userId) {
-        return this.http.delete(this.myStorage.getdomainURL() + "/user/deleteUserById/" + userId, { responseType: 'text' });
+        return this.http.delete(this.myStorage.getdomainURL() + "/user/deleteUserById/" + this.myStorage.getCurrentUserObject().clientId + "/" + userId, { responseType: 'text' });
     };
     UsersService.prototype.getIpAddress = function () {
         var headers = new http_1.HttpHeaders({ "Access-Control-Allow-Origin": "*" });

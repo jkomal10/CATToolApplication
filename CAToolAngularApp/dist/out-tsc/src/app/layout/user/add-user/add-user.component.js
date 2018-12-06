@@ -23,7 +23,6 @@ var AddUserComponent = /** @class */ (function () {
         this.userTypeValue = 1;
         this.userType = "User";
         this.count = 0;
-        console.log(this.myStorage.getCurrentUserObject().userName);
     }
     AddUserComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -43,6 +42,7 @@ var AddUserComponent = /** @class */ (function () {
             if (this.userName === this.AllData[index].userName) {
                 this.status = false;
                 alert("User already exits, please enter a new name");
+                location.reload();
                 this.router.navigate(['/user']);
             }
         }
@@ -51,6 +51,7 @@ var AddUserComponent = /** @class */ (function () {
             this.user.createdBy = this.myStorage.getCurrentUserObject().userName;
             this.user.clientId = this.clientIdValue;
             this.userService.addUser(this.user).subscribe();
+            location.reload();
             this.router.navigate(['/user']);
         }
     };

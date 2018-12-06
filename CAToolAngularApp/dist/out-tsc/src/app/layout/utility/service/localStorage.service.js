@@ -20,11 +20,14 @@ var LocalStorageService = /** @class */ (function () {
     LocalStorageService.prototype.setLoggedInTrue = function (isLoggedin) {
         localStorage.setItem('isLoggedin', isLoggedin);
     };
-    LocalStorageService.prototype.setIsUserActive = function (isUserActive) {
-        localStorage.setItem('isUserActive', isUserActive);
-    };
     LocalStorageService.prototype.setdomainURL = function () {
         localStorage.setItem('local', 'http://localhost:8090');
+    };
+    LocalStorageService.prototype.setClientName = function (clientName) {
+        localStorage.setItem('clientName', clientName);
+    };
+    LocalStorageService.prototype.getClientName = function () {
+        return localStorage.getItem('clientName');
     };
     LocalStorageService.prototype.getdomainURL = function () {
         return localStorage.getItem('local');
@@ -43,9 +46,6 @@ var LocalStorageService = /** @class */ (function () {
     };
     LocalStorageService.prototype.getIpAddress = function () {
         return localStorage.getItem('ip');
-    };
-    LocalStorageService.prototype.getIsUserActive = function () {
-        return localStorage.getItem('isUserActive');
     };
     LocalStorageService.prototype.getLoggedInTrue = function () {
         return localStorage.getItem('isLoggedin');

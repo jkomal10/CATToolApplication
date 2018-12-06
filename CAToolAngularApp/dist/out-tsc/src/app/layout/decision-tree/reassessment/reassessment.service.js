@@ -17,20 +17,15 @@ var ServiceService = /** @class */ (function () {
         this.http = http;
         this.myStorage = myStorage;
     }
-    ServiceService.prototype.CollectData = function () {
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
-        var reassessUrl = 'http://localhost:8090/application/getAllReassessment';
-        return this.http.get(reassessUrl + "/" + this.clientNameValue);
+    ServiceService.prototype.reassessmentData = function () {
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
+        return this.http.get(this.myStorage.getdomainURL() + "/application/getAllReassessment/" + this.clientIdValue);
     };
     ServiceService.prototype.cloudProvider = function (applicationId) {
-        var cloudProviderUrl = 'http://localhost:8090/application/cloudProviderCheck';
-        console.log(cloudProviderUrl + "/" + applicationId);
-        return this.http.get(cloudProviderUrl + "/" + applicationId);
+        return this.http.get(this.myStorage.getdomainURL() + "/application/cloudProviderCheck/" + applicationId);
     };
     ServiceService.prototype.migrationPattern = function (applicationId) {
-        var migrationPatternUrl = 'http://localhost:8090/application/migrationCheck';
-        console.log(migrationPatternUrl + "/" + applicationId);
-        return this.http.get(migrationPatternUrl + "/" + applicationId);
+        return this.http.get(this.myStorage.getdomainURL() + "/application/migrationCheck/" + applicationId);
     };
     ServiceService = __decorate([
         core_1.Injectable({

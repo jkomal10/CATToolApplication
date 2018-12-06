@@ -18,25 +18,20 @@ var AssesstApplicationService = /** @class */ (function () {
         this.AllRuleUrl = 'http://localhost:8090/application/AllRuleCheck';
         this.UpdateAnswersUrl = 'http://localhost:8090/answer/getAnswersByApplicationId/7';
     }
-    AssesstApplicationService.prototype.CollecOptiontData = function (clientName) {
-        // const url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';getAllQuestions
+    AssesstApplicationService.prototype.CollecOptiontData = function (clientId) {
         var url = 'http://localhost:8090/assessmentQuestions/getAllQuestions';
-        return this.http.get(url + "/" + clientName);
+        return this.http.get(url + "/" + clientId);
     };
     AssesstApplicationService.prototype.saveAssessApplication = function (cloudablerule) {
-        console.log(this.baseUrl + "/create");
-        console.log(JSON.stringify(cloudablerule));
         return this.http.post("" + this.baseUrl + "/create", cloudablerule);
     };
     AssesstApplicationService.prototype.UpdateAnswers = function (applicationId) {
         return this.http.get("" + this.UpdateAnswersUrl);
     };
     AssesstApplicationService.prototype.saveAssessApplicationUpdate = function (cloudablerule) {
-        console.log(this.baseUrl + "/create");
         return this.http.put("" + this.baseUrl + "/create", cloudablerule);
     };
     AssesstApplicationService.prototype.AllRuleCheck = function (applicationId) {
-        console.log("" + this.AllRuleUrl + "/" + applicationId);
         return this.http.get("" + this.AllRuleUrl + "/" + applicationId);
     };
     AssesstApplicationService = __decorate([

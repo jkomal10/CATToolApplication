@@ -28,21 +28,22 @@ var DashboardComponent = /** @class */ (function () {
         this.sliders = [];
         this.application = [];
         this.appCount = [];
+        this.userCount = [];
     }
     DashboardComponent.prototype.download = function () {
     };
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
-        this.redirectToDashboard = this.myStorage.getLoggedInTrue(); //this.status=localStorage.getItem('isLoggedin');
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
+        this.redirectToDashboard = this.myStorage.getLoggedInTrue();
         if (this.redirectToDashboard == 'true') {
             this.firstName = this.myStorage.getCurrentUserObject().firstName;
             this.lastName = this.myStorage.getCurrentUserObject().lastName;
-            this.userService.getAllUsers(this.clientNameValue).subscribe(function (data) { _this.users = data; });
-            this.applicationService.CollectData(this.clientNameValue).subscribe(function (data) { _this.application = data; });
-            this.applicationService.getApplicationCount(this.clientNameValue).subscribe(function (data) { _this.appCount = data, console.log(_this.appCount); });
-            this.isUser = this.myStorage.getIsUserActive();
-            if (this.isUser == 'false') {
+            this.userService.getUsersCount(this.clientIdValue).subscribe(function (data) { _this.userCount = data, console.log(_this.userCount); });
+            this.userService.getAllUsers(this.clientIdValue).subscribe(function (data) { _this.users = data; });
+            this.applicationService.getAllAplication(this.clientIdValue).subscribe(function (data) { _this.application = data; });
+            this.applicationService.getApplicationCount(this.clientIdValue).subscribe(function (data) { _this.appCount = data, console.log(_this.appCount); });
+            if (this.myStorage.getCurrentUserObject().isAdmin == 1) {
                 this.isAdmin = false;
             }
             else {

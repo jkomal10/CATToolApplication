@@ -28,10 +28,9 @@ var ReportComponent = /** @class */ (function () {
     }
     ReportComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
-        this.applicationService.CollectData(this.clientNameValue).subscribe(function (result) {
+        this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
+        this.applicationService.getAllAplication(this.clientIdValue).subscribe(function (result) {
             _this.AllData = result;
-            console.log(JSON.stringify(_this.AllData));
         });
     };
     ReportComponent.prototype.summaryReport = function () {
@@ -39,13 +38,8 @@ var ReportComponent = /** @class */ (function () {
     };
     ReportComponent.prototype.exportCsv = function () {
         var csvRows = [];
-        console.log(this.AllData);
         var filename = "Application";
         var dateNow = new Date();
-        console.log(dateNow.getDate().toString + " Date");
-        console.log(dateNow.getDay().toString + " day");
-        console.log(dateNow.getMonth().toString + " month");
-        console.log(dateNow.getFullYear().toString + " year");
         for (var index = 0; index < this.AllData.length; index++) {
             console.log(this.AllData[index].applicationId + "id");
             this.application[index] = this.AllData[index];

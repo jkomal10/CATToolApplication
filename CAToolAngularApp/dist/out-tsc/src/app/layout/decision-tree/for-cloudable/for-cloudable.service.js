@@ -16,29 +16,21 @@ var ForCloudableService = /** @class */ (function () {
     function ForCloudableService(http, myStorage) {
         this.http = http;
         this.myStorage = myStorage;
+        this.collectRulesUrl = "http://localhost:8090/cloudableRule/getAll";
+        this.CollectCloudableQuestionUrl = "http://localhost:8090/assessmentQuestions/getCloudableQuestion";
         this.baseUrl = 'http://localhost:8090/cloudableRule/save';
     }
-    ForCloudableService.prototype.CollectData = function () {
-        //const url = 'http://localhost:8090/option/getAll';
-        this.clientNameValue = this.myStorage.getCurrentUserObject().clientName;
-        var url = 'http://localhost:8090/assessmentQuestions/getAllCloudableQuestions';
-        return this.http.get(url + "/" + this.clientNameValue);
-    };
     ForCloudableService.prototype.addClodableRule = function (cloudablerule) {
-        console.log(this.baseUrl + "/create");
-        return this.http.post("" + this.baseUrl + "/create", cloudablerule);
+        return this.http.post(this.myStorage.getdomainURL() + "/cloudableRule/save/create", cloudablerule);
     };
-    ForCloudableService.prototype.collectRule = function () {
-        var collectRulesUrl = "http://localhost:8090/cloudableRule/getAll";
-        return this.http.get(collectRulesUrl);
+    ForCloudableService.prototype.collectRule = function (clientId) {
+        return this.http.get(this.myStorage.getdomainURL() + "/cloudableRule/getAll/" + clientId);
     };
     ForCloudableService.prototype.collectOptions = function () {
-        var collectOptionsUrl = "http://localhost:8090/option/getAll";
-        return this.http.get(collectOptionsUrl);
+        return this.http.get(this.myStorage.getdomainURL() + "/option/getAll");
     };
-    ForCloudableService.prototype.collectQuestion = function () {
-        var CollectQuestionUrl = "http://localhost:8090/assessmentQuestions/getAllQuestions";
-        return this.http.get(CollectQuestionUrl);
+    ForCloudableService.prototype.collectQuestion = function (clientId) {
+        return this.http.get(this.myStorage.getdomainURL() + "/assessmentQuestions/getCloudableQuestion/" + clientId);
     };
     ForCloudableService = __decorate([
         core_1.Injectable({

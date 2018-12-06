@@ -35,8 +35,7 @@ var SidebarComponent = /** @class */ (function () {
         });
     }
     SidebarComponent.prototype.ngOnInit = function () {
-        this.isUser = this.myStorage.getIsUserActive();
-        if (this.isUser == 'false') {
+        if (this.myStorage.getCurrentUserObject().isAdmin == 1) {
             this.adminActive = false;
         }
         else {

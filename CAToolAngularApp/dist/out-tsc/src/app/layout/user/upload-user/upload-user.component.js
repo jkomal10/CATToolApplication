@@ -13,10 +13,12 @@ var core_1 = require("@angular/core");
 var Users_1 = require("../Users");
 var user_service_1 = require("../user.service");
 var router_1 = require("@angular/router");
+var localStorage_service_1 = require("../../utility/service/localStorage.service");
 var UploadUserComponent = /** @class */ (function () {
-    function UploadUserComponent(userservice, router) {
+    function UploadUserComponent(userservice, router, myStorage) {
         this.userservice = userservice;
         this.router = router;
+        this.myStorage = myStorage;
         this.extCheck = false;
         this.extation = ".csv";
         this.userDetails = new Users_1.Users();
@@ -27,54 +29,31 @@ var UploadUserComponent = /** @class */ (function () {
         var _this = this;
         this.filename = event.target.files[0].name;
         this.link = event.target.files[0];
-        console.log("link" + this.link);
         this.ext = this.filename.substring(this.filename.lastIndexOf('.')).toLowerCase();
-        console.log(this.ext);
         if (this.isCSVFile(this.ext)) {
-            console.log(this.filename);
-            console.log("csv file");
             var reader_1 = new FileReader();
             reader_1.readAsText(this.link);
             reader_1.onload = function (data) {
                 var csvData = reader_1.result;
                 var csvRecordsArray = csvData.split(/\r|\n|\n/);
-                // console.log(csvRecordsArray);
                 var headersRow = _this.getHeaderArray(csvRecordsArray);
-                console.log(headersRow);
                 _this.userDetails = _this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
             };
         }
         else {
             alert("please enter a csv file");
         }
-        console.log(this.filename[0] + "___________");
-        console.log(this.link + "**************");
     };
     UploadUserComponent.prototype.getDataRecordsArrayFromCSVFile = function (csvRecordsArray, headerLength) {
-        for (var i_1 = 1; i_1 < csvRecordsArray.length; i_1++) {
-            var data = csvRecordsArray[i_1].split(',');
+        for (var i = 1; i < csvRecordsArray.length; i++) {
+            var data = csvRecordsArray[i].split(',');
             if (data.length == headerLength) {
-                console.log("headerLength" + headerLength);
-                console.log("data.length" + data.length);
-                // var userDetail : Users = new Users();
                 var dataArr = [];
                 for (var j = 0; j < headerLength; j++) {
                     dataArr.push(data[j]);
                 }
-                // this.userDetail.userName = data[0].trim();
-                // this.userDetail.firstName = data[1].trim();
-                // this.userDetail.lastName = data[1].trim();
-                // this.userDetail.company = data[1].trim();
-                // dataArr.push(this.userDetail);
                 this.lines.push(dataArr);
             }
-            console.log("dataArr------------" + dataArr);
-            // console.log(this.userDetail);
-            console.log(">>>>>>>>>>>>>>>>>this.lines", this.lines);
-        }
-        console.log(this.lines.length);
-        for (var i = 0; i < this.lines.length; i++) {
-            console.log("adduser of row" + this.lines[i][0]);
         }
         return null;
     };
@@ -98,29 +77,18 @@ var UploadUserComponent = /** @class */ (function () {
             this.userDetail.company = this.lines[i][3];
             this.userDetail.password = 'Cg@123';
             this.userDetail.ipAddress = this.ipAddress;
-            this.userDetail.clientName = localStorage.getItem('clientName');
-            this.userDetail.createdBy = localStorage.getItem('clientName');
+            this.userDetail.clientId = this.myStorage.getCurrentUserObject().clientId;
+            this.userDetail.createdBy = this.myStorage.getCurrentUserObject().createdBy;
             this.userDetail.createdDateTime = new Date();
             this.userDetail.isAdmin = this.lines[i][4];
             this.userDetail.isDeactivate = false;
             this.userDetail.isDeleted = 0;
             this.userDetail.lastLogin = 0;
-            this.userDetail.modifiedBy = localStorage.getItem('clientName');
+            this.userDetail.modifiedBy = this.myStorage.getCurrentUserObject().modifiedBy;
             this.userDetail.modifiedDateTime = new Date();
-            console.log("this.lines[i][0]" + this.lines[i][0]);
-            console.log("this.lines[i][1]" + this.lines[i][1]);
-            console.log("this.lines[i][2]" + this.lines[i][2]);
-            console.log("this.lines[i][3]" + this.lines[i][3]);
-            console.log("this.lines[i][4]" + this.lines[i][4]);
-            console.log("this.userDetail.ipAddress" + this.ipAddress);
-            this.userservice.addUser(this.userDetail)
-                .subscribe();
-            console.log("success");
+            this.userservice.addUser(this.userDetail).subscribe();
             this.router.navigate(['/user']);
-            console.log("----------this.userDetail" + this.userDetail);
         }
-        console.log("this.userDetail" + this.userDetail);
-        console.log("ipAddress ------" + this.ipAddress);
     };
     UploadUserComponent.prototype.cancel = function () {
         this.router.navigate(['/user']);
@@ -135,7 +103,7 @@ var UploadUserComponent = /** @class */ (function () {
             templateUrl: './upload-user.component.html',
             styleUrls: ['./upload-user.component.scss']
         }),
-        __metadata("design:paramtypes", [user_service_1.UsersService, router_1.Router])
+        __metadata("design:paramtypes", [user_service_1.UsersService, router_1.Router, localStorage_service_1.LocalStorageService])
     ], UploadUserComponent);
     return UploadUserComponent;
 }());
