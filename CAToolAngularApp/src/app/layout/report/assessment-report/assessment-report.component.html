@@ -5,13 +5,14 @@
      From Date: <input type="text" class="form-control"[minDate]="minDate" [maxDate]="maxDate" name="fromDate" bsDatepicker style="width: 70%" [(ngModel)]="fromDate">&nbsp;
      To Date: <input type="text" class="form-control" [minDate]="minDate" [maxDate]="maxDate" name="toDate" bsDatepicker style="width: 70%" [(ngModel)]="toDate"><br>
 </div>
-<div class="col" >
-    Application Id 
-    <input type="button" value="click" (click)="getApplication()">
-    <select id="dates-field2" class="multiselect-ui form-control" multiple="multiple" >
-            <option value="app.applicationName" *ngFor =  "let app of applicationList">{{app.applicationName}}</option>
+<div class="col" > 
+    <input type="button" value="Application Id" (click)="getApplication()">
+    <br>
+    <div *ngIf="dropdownSelect==1; else notShow">
+        <select id="dates-field2" class="multiselect-ui form-control" multiple="multiple" >
+            <option value="app.applicationName" *ngFor =  "let app of applicationList; let k = index">{{app.applicationName}}</option>
         </select>
-
+    </div>
 </div>
 <div class="col">
     From Date: <input type="text" class="form-control"[minDate]="minDate" [maxDate]="maxDate" name="fromDate" bsDatepicker style="width: 70%" [(ngModel)]="fromDate">&nbsp;
