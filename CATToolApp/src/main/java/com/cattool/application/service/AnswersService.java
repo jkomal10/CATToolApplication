@@ -27,11 +27,13 @@ public class AnswersService {
 	
 	public List<Answers> GetSingleApplication(int applicationId) {
 		List<Answers> ansList=new ArrayList<>();
-		for(Answers answers: answersRepository.findAll()) {
-			if(answers.getApplicationId()==applicationId)
-		ansList.add(answers);
-		System.out.println(ansList);
-		}
+		ansList=answersRepository.findByApplicationId(applicationId);
+//		for(Answers answers: answersRepository.findAll()) {
+//			if(answers.getApplicationId()==applicationId)
+//		ansList.add(answers);
+//		System.out.println(ansList);
+//		}
+		System.out.println(ansList+"^^^^^^^^^66");
 		return ansList;
 	}
 	
@@ -67,4 +69,21 @@ public class AnswersService {
 		application.setIsSaved(1);
 		applicationRepository.save(application);
 	}
+public void updateAns(List<Answers> answerList) {
+		
+		
+		for(Answers answer: answerList )
+		{ System.out.println(answer+"@@@@@@@@@@@");
+		Answers answerObj=new Answers();
+			answerObj.setAnswerId(answer.getAnswerId());
+			answerObj.setOptionId(answer.getOptionId());
+			answerObj.setApplicationId(answer.getApplicationId());
+			answerObj.setQuestionId(answer.getQuestionId());
+			answerObj.setAnswerText(answer.getAnswerText());
+			
+			//answerObj=answer;
+			answersRepository.save(answerObj);
+		}
+	}
+
 }
