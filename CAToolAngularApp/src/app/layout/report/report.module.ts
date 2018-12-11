@@ -5,9 +5,10 @@ import { ReportRoutingModule } from './report-routing.module';
 import { ReportComponent } from './report.component';
 import { AssessmentReportComponent } from './assessment-report/assessment-report.component';
 import { BsDatepickerModule } from 'ngx-bootstrap';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
-    imports: [CommonModule, ReportRoutingModule,FormsModule,BsDatepickerModule.forRoot()],
+    imports: [CommonModule, ReportRoutingModule,FormsModule,BsDatepickerModule.forRoot(),NgMultiSelectDropDownModule.forRoot()],
     declarations: [ReportComponent,AssessmentReportComponent
     ]
 })

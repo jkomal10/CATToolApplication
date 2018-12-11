@@ -1,19 +1,19 @@
 package com.cattool.assessment.Report.entity;
-
-import java.io.FileOutputStream;
-import java.sql.Blob;
 import java.util.Arrays;
-
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import net.sf.jasperreports.engine.JasperPrint;
 
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class ReportPDF {
 	
 
@@ -21,8 +21,35 @@ public class ReportPDF {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int reportPDFId;
 	@Column
-	private Blob pdfFiles;
+	private byte[] pdfFiles;
 	
+	@CreatedDate
+	private Date generatedDateTime;
+	@Column
+	private String applicationName;
+	
+	
+	
+	public Date getGeneratedDateTime() {
+		return generatedDateTime;
+	}
+
+
+	public void setGeneratedDateTime(Date generatedDateTime) {
+		this.generatedDateTime = generatedDateTime;
+	}
+
+
+	public String getApplicationName() {
+		return applicationName;
+	}
+
+
+	public void setApplicationName(String applicationName) {
+		this.applicationName = applicationName;
+	}
+
+
 	public int getReportPDFId() {
 		return reportPDFId;
 	}
@@ -32,22 +59,26 @@ public class ReportPDF {
 		this.reportPDFId = reportPDFId;
 	}
 
-	public Blob getPdfFiles() {
+	public byte[] getPdfFiles() {
 		return pdfFiles;
 	}
 
 
 
-	public void setPdfFiles(Blob pdfFiles) {
-		this.pdfFiles = pdfFiles;
+	public void setPdfFiles(byte[] reportArray) {
+		this.pdfFiles = reportArray;
 	}
-
 
 
 	@Override
 	public String toString() {
-		return "ReportPDF [reportPDFId=" + reportPDFId + ", pdfFiles=" + pdfFiles + "]";
+		return "ReportPDF [reportPDFId=" + reportPDFId + ", pdfFiles=" + Arrays.toString(pdfFiles)
+				+ ", generatedDateTime=" + generatedDateTime + ", applicationName=" + applicationName + "]";
 	}
+
+
+
+	
  
 	
 	

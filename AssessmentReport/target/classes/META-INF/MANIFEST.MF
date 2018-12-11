@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: AssessmentReport
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: suvsahoo
+Implementation-Vendor-Id: com.cattool.report
+Build-Jdk: 1.8.0_171
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/AssessmentReport
+Created-By: Maven Integration for Eclipse
+

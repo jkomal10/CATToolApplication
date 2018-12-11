@@ -120,7 +120,7 @@ public class ApplicationController {
 		applicationService.migrationCheck(applicationId,isFinalize);
 	}
 	
-	@GetMapping("cloudProviderCheck/{applicationId}")
+	@GetMapping("/cloudProviderCheck/{applicationId}")
 	public void cloudProviderCheck(@PathVariable("applicationId") int applicationId) {
 		System.out.println("Cloud provider rule check!!");
 		applicationService.cloudProviderCheck(applicationId);

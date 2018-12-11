@@ -13,9 +13,9 @@
             <th>
                 <font color="black">migration Pattern</font>
             </th>
-            <th>
+            <!-- <th>
               <font color="black">Evaluation Order</font>
-            </th>
+            </th> -->
             <th>
               <font color="black">Add Rule</font>
             </th>
@@ -25,7 +25,7 @@
             <tr *ngFor =  "let row of migrationPatternData ;let i = index" >
               <td  width="20%">{{row.migrationId}}</td>
               <td width="20%">{{row.migrationPattern}}</td>
-              <td width="20%">{{row.evaluationOrder}}</td>
+              <!-- <td width="20%">{{row.evaluationOrder}}</td> -->
               <td width="15%"><button title="Add rule for {{migrationPatternData [i].migrationPattern}}" type="submit" (click)="questions(migrationPatternData [i].migrationId)"><i class="fa fa-plus" aria-hidden="true"></i></button></td>
             </tr>
         </tbody>

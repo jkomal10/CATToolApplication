@@ -33,6 +33,11 @@ export class LocalStorageService {
     return localStorage.getItem('domainURL');
   }
 
+  getreportURL(){
+    localStorage.setItem('domainURL','http://localhost:8099');
+    return localStorage.getItem('domainURL');
+  }
+
   setCurrentUserObject(user : Object){
     localStorage.setItem('user',JSON.stringify(user));
   }

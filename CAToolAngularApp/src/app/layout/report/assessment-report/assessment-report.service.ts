@@ -1,9 +1,40 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { LocalStorageService } from '../../utility/service/localStorage.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssessmentReportService {
 
-  constructor() { }
+  constructor(private http: HttpClient, private myStorage:LocalStorageService) { }
+
+  generateReport(genereteAppReport:any)
+  {
+    console.log(genereteAppReport);
+    // return null;
+    return this.http.get(this.myStorage.getreportURL()+`/assessment/report/generateReport/`+genereteAppReport);
+    // return  this.http.get(this.myStorage.getdomainURL()+`/application/summaryReport`);
+
+  }
+
+  viewReportInBrowser(appName:any)
+  {
+    const httpOptions = {
+      'responseType'  : 'arraybuffer' as 'json'
+       //'responseType'  : 'blob' as 'json'        //This also worked
+    };
+    return this.http.get(this.myStorage.getreportURL()+`/assessment/report/viewReportInBrowser/`+appName,httpOptions);
+  }
+
+  viewGeneratedReport(fromDate,toDate)
+  {
+     return this.http.get(this.myStorage.getreportURL()+`/assessment/report/viewReport/`+fromDate+`/`+toDate);
+  }
+
+  zipExport(fromDate,toDate)
+  {
+    return this.http.get(this.myStorage.getreportURL()+`/assessment/report/zipExport/`+fromDate+`/`+toDate);
+  }
 }

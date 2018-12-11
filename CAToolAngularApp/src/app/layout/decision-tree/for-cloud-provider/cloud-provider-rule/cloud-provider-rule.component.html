@@ -17,7 +17,7 @@
                 <tbody>
                     <tr *ngFor="let size of CloudProviderAllData;let i = index">
                         <td>Question
-                            <br>Excution Order
+                            <!-- <br>Excution Order -->
                             <br>Question type
                             <br>Options
                             <br>Cloudable Rule
@@ -25,8 +25,8 @@
                         <td> 
                             <!-- {{size}} {{i}} -->
                             <span name="questionText" > {{CloudProviderAllData[i].questionText}}</span>
-                            <br>
-                            <input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrders[i]" />
+                            <!-- <br>
+                            <input type="number" #executionOrder name="executionOrder" [(ngModel)]="executionOrders[i]" /> -->
                             <br><span name="questionType">{{CloudProviderAllData[i].questionType}}</span>
                             <br><span *ngFor="let option of CloudProviderAllData[i]['questionOption'] ; let op = index" name="optionText">{{CloudProviderAllData[i].questionOption[op]['optionText']+" , "}}</span>
                             <br><input type="text" #cloudableRule name="cloudProviderRulesText{{i}}" [(ngModel)]="cloudProviderRulesText[i]"/>
