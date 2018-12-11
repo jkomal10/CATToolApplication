@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Answers } from './Answers';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +13,9 @@ export class AssesstApplicationService {
   constructor(private http: HttpClient) { }
   baseUrl  = 'http://localhost:8090/answer/save';
   AllRuleUrl = 'http://localhost:8090/application/AllRuleCheck';
-  UpdateAnswersUrl = 'http://localhost:8090/answer/getAnswersByApplicationId/7';
-
+  UpdateAnswersUrl = 'http://localhost:8090/answer/getAnswersByApplicationId';
+ 
+  updateUrl='http://localhost:8090/answer/update';
   CollecOptiontData(clientId: number) {
     const  url  =  'http://localhost:8090/assessmentQuestions/getAllQuestions';
     return  this.http.get(url + `/` + clientId);
@@ -20,9 +24,12 @@ export class AssesstApplicationService {
   saveAssessApplication(cloudablerule: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl }` + `/create`, cloudablerule);
   }
-
-  UpdateAnswers(applicationId: number): Observable<any> {
-    return  this.http.get(`${this.UpdateAnswersUrl}`);
+  Update(answer:any):Observable<any>{
+    return this.http.put(`${this.updateUrl}`,answer);
+  } 
+    
+  getAnswers(applicationId: number): Observable<Object> {
+    return  this.http.get(`${this.UpdateAnswersUrl}` + `/` + applicationId);
   }
 
   saveAssessApplicationUpdate(cloudablerule: Object): Observable<Object> {

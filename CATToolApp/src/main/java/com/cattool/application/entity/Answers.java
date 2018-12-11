@@ -23,6 +23,9 @@ public class Answers {
 	private String answerText;
 	@Column
 	private int cloudAbility;
+	@Column
+	private int optionId;
+	
 	public int getAnswerId() {
 		return answerId;
 	}
@@ -53,10 +56,24 @@ public class Answers {
 	public void setCloudAbility(int cloudAbility) {
 		this.cloudAbility = cloudAbility;
 	}
+	public int getOptionId() {
+		return optionId;
+	}
+	public void setOptionId(int optionId) {
+		this.optionId = optionId;
+	}
+	public int getCloudAbility() {
+		return cloudAbility;
+	}
+	
+	public Answers() {
+		super();
+	}
 	@Override
 	public String toString() {
 		return "Answers [answerId=" + answerId + ", applicationId=" + applicationId + ", questionId=" + questionId
-				+ ", answerText=" + answerText + ", cloudAbility=" + cloudAbility + "]";
+				+ ", answerText=" + answerText + ", cloudAbility=" + cloudAbility + ", optionId=" + optionId + "]";
 	}
+	
 	
 }
