@@ -33,7 +33,6 @@ public class AnswersService {
 //		ansList.add(answers);
 //		System.out.println(ansList);
 //		}
-		System.out.println(ansList+"^^^^^^^^^66");
 		return ansList;
 	}
 	
@@ -47,6 +46,15 @@ public class AnswersService {
 			answersObject=answers;
 			answersObject.setApplicationId(answers.getApplicationId());
 			answersObject.setAnswerId(answers.getAnswerId());
+			if(answersObject.getAnswerText()!=null )
+			{
+				System.out.println("working fine!!!");
+			}
+			else
+			{
+				System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+				answersObject.setAnswerText("0");
+			}
 			 answersRepository.saveAndFlush(answersObject);	
 			 if(count==0)
 			 {
@@ -55,14 +63,11 @@ public class AnswersService {
 				 application=applicationRepository.findByApplicationId(applicationIdFromUI);
 				 application.setApplicationId(applicationIdFromUI);
 				 application.setIsSaved(1);
-				 System.out.println(application);
 				 applicationRepository.save(application);
-				 System.out.println(applicationIdFromUI);
 				 count++;
 			 }
 		}
 		
-		System.out.println("applicationIdFromUI"+applicationIdFromUI);
 		Application application=new Application();
 		application=applicationRepository.findByApplicationId(applicationIdFromUI);
 		application.setApplicationId(applicationIdFromUI);
@@ -73,7 +78,7 @@ public void updateAns(List<Answers> answerList) {
 		
 		
 		for(Answers answer: answerList )
-		{ System.out.println(answer+"@@@@@@@@@@@");
+		{ 
 		Answers answerObj=new Answers();
 			answerObj.setAnswerId(answer.getAnswerId());
 			answerObj.setOptionId(answer.getOptionId());

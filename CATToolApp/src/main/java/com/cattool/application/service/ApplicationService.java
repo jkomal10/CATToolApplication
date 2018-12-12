@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cattool.application.entity.Answers;
 import com.cattool.application.entity.Application;
 import com.cattool.application.entity.AssessmentQuestions;
-import com.cattool.application.entity.CloudProvider;
 import com.cattool.application.entity.CloudProviderRule;
 import com.cattool.application.entity.CloudableRule;
 import com.cattool.application.entity.Migration;
@@ -20,7 +19,6 @@ import com.cattool.application.entity.Users;
 import com.cattool.application.repository.AnswersRepository;
 import com.cattool.application.repository.ApplicationRepository;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
-import com.cattool.application.repository.CloudProviderRepository;
 import com.cattool.application.repository.CloudProviderRuleRepository;
 import com.cattool.application.repository.CloudableRuleRepository;
 import com.cattool.application.repository.MigrationRepository;
@@ -70,9 +68,6 @@ public class ApplicationService {
 	
 	@Autowired
 	MigrationRepository migrationRepository;
-	
-	@Autowired
-	CloudProviderRepository cloudProviderRepository;
 	
 	Boolean isDeactivate=false;
 	Boolean isDelete=false;
@@ -209,107 +204,70 @@ public class ApplicationService {
 			return false;}
 	}
 	
-	public boolean cloudProviderCheck(int applicationId){
-		
+public boolean cloudProviderCheck(int applicationId){
+		int count = 0,numberOfRules = 0;
+		List<Answers> allAnswers = new ArrayList<>();
+		List<Answers> answers = new ArrayList<>();
 		Application application=new Application();
 		application = applicationRepository.findByApplicationId(applicationId);
-		List<Answers> allanswers = answerRepository.findByApplicationId(applicationId);
-		for(CloudProvider cloudProvider:cloudProviderRepository.findByClientId(application.getClientId()))
-		{
-			int count = 0,numberOfRules = 0;
-//			System.out.println(cloudProvider.getCloudProviders());
-			for(CloudProviderRule getCloudProviderRules:cloudProviderRuleRepository.findByCloudProviderId(cloudProvider.getCloudProviderId()))
-			{   
-				numberOfRules++;
-				System.out.println(getCloudProviderRules.getCloudProviderId());
-				for(Answers answers:allanswers)
+		allAnswers = answerRepository.findAll();
+		for (Answers getAnswers : allAnswers) {
+			if(applicationId==getAnswers.getApplicationId())
+			{
+				answers.add(getAnswers);
+			}
+			
+		}
+		List<CloudProviderRule> cloudProviderRuleList=new ArrayList<CloudProviderRule>();
+		for(CloudProviderRule cloudProviderRuleClientName:cloudProviderRuleRepository.findAll()) {
+			{
+				cloudProviderRuleList.add(cloudProviderRuleClientName);
+			}
+		}
+		numberOfRules = cloudProviderRuleList.size();
+		for (Answers userAnswers : answers) {
+			for(CloudProviderRule cloudProviderRules : cloudProviderRuleList)
+			{
+				String[] cloudProviderArray = cloudProviderRules.getCloudProviderRule().split(",");
+				if(userAnswers.getQuestionId() == Integer.parseInt(cloudProviderRules.getQuestionId()))
 				{
-					if(answers.getQuestionId()==Integer.parseInt(getCloudProviderRules.getQuestionId()))
+					
+					for(String cloudProviderArrayValue:cloudProviderArray)
 					{
-						if(getCloudProviderRules.getCloudProviderRule().contains(answers.getAnswerText())) {
-							count++;
+						if(cloudProviderArrayValue==userAnswers.getAnswerText())
+						{
+							count = count+1;
 						}
 					}
-				}
-			}
-			if(numberOfRules==count)
-			{
-				application.setCloudProvider("GITC");
-				application.setIsSaved(1);
-				applicationRepository.save(application);
-				System.out.println("GITC");
-				break;
-			}
-			else 
-				{
-					application.setCloudProvider("AWS");
-					application.setIsSaved(1);
-					applicationRepository.save(application);
-					System.out.println("AWS");
-					break;
-//					return true;
-				}
-		}
-		
-		return isDeactivate;
-		
-	}
-	
-//public boolean cloudProviderCheck(int applicationId){
-//		
-//		int count = 0,numberOfRules = 0;
-//		List<Answers> allAnswers = new ArrayList<>();
-//		List<Answers> answers = new ArrayList<>();
-//		Application application=new Application();
-//		application = applicationRepository.findByApplicationId(applicationId);
-//		allAnswers = answerRepository.findAll();
-//		for (Answers getAnswers : allAnswers) {
-//			if(applicationId==getAnswers.getApplicationId())
-//			{
-//				answers.add(getAnswers);
-//			}
-//			
-//		}
-//		List<CloudProviderRule> cloudProviderRuleList=new ArrayList<CloudProviderRule>();
-//		for(CloudProviderRule cloudProviderRuleClientName:cloudProviderRuleRepository.findAll()) {
-//			{
-//				cloudProviderRuleList.add(cloudProviderRuleClientName);
-//			}
-//		}
-//		numberOfRules = cloudProviderRuleList.size();
-//		for (Answers userAnswers : answers) {
-//			for(CloudProviderRule cloudProviderRules : cloudProviderRuleList)
-//			{
-//				if(userAnswers.getQuestionId() == Integer.parseInt(cloudProviderRules.getQuestionId()))
-//				{
 //					if(cloudProviderRules.getCloudProviderRule().contains(userAnswers.getAnswerText()))
 //					{
 //						count = count+1;
 //					}
-//					
-//				}
-//			}
-//			
-//		}
-//		
-//		if(count == numberOfRules)
-//		{
-//			application.setCloudProvider("GITC");
-//			application.setIsSaved(1);
-//			applicationRepository.save(application);
-//			return false;
-//		}
-//		
-//		else 
-//		{
-//			application.setCloudProvider("AWS");
-//			application.setIsSaved(1);
-//			applicationRepository.save(application);
-//			return true;
-//		}		
-//	}
+					
+				}
+			}
+			
+		}
+		
+		if(count == numberOfRules)
+		{
+			application.setCloudProvider("GITC");
+			application.setIsSaved(1);
+			applicationRepository.save(application);
+			return false;
+		}
+		
+		else 
+		{
+			application.setCloudProvider("AWS");
+			application.setIsSaved(1);
+			applicationRepository.save(application);
+			return true;
+		}		
+	}
 
 public void migrationCheck(int applicationId,int gitcCheck){
+	
 	int migrationFinal=0;
 	List<MigrationRule> migrationRuleByClientName = new ArrayList<MigrationRule>();
 	for(MigrationRule migrationRuleAllRule:migrationRuleRepository.findAll())
@@ -318,7 +276,6 @@ public void migrationCheck(int applicationId,int gitcCheck){
 			migrationRuleByClientName.add(migrationRuleAllRule);
 		}
 	}
-	
 	List<Answers> answerlist = new ArrayList<Answers>();
 	for(Answers answers:answerRepository.findAll())
 	{
@@ -327,9 +284,12 @@ public void migrationCheck(int applicationId,int gitcCheck){
 			answerlist.add(answers);
 		}
 	}
+	
 
 	for(Migration migration:migrationRepository.findAll())
 	{
+		System.out.println("migration id"+migration.getMigrationId());
+		
 		int count=0;
 		for(MigrationRule migrationRuleCount:migrationRuleRepository.findAll())
 		{
@@ -339,22 +299,42 @@ public void migrationCheck(int applicationId,int gitcCheck){
 			}
 		}
 		
+		
 		int countAfter=0;
 		for(MigrationRule migrationRule:migrationRuleRepository.findAll()){
+			String[] migrationRuleArray = migrationRule.getMigrationRule().split(",");
+			
 			for(Answers answer:answerlist) 
 			{
 				if(migration.getMigrationId()==migrationRule.getMigrationId())
 				{
-					if(migrationRule.getMigrationRule().contains(answer.getAnswerText()) || answer.getAnswerText().contains(migrationRule.getMigrationRule()))
+					if(Integer.parseInt(migrationRule.getQuestionId())==answer.getQuestionId()) {
+					
+					for(int i=0;i<migrationRuleArray.length;i++)
 					{
-						if(Integer.parseInt(migrationRule.getQuestionId())==answer.getQuestionId()) {
-							countAfter++;
-						}
+							System.out.println(migrationRuleArray[i]);
+							System.out.println(migrationRuleArray[i]+"=="+answer.getAnswerText());
+							if(migrationRuleArray[i].equals(answer.getAnswerText()))
+							{
+								System.out.println(migrationRuleArray[i]+"=********="+answer.getAnswerText());
+								countAfter++;
+							}
+					}
+//					for(String migrationRuleArrayValue:migrationRuleArray)
+//					{
+//						
+//						if(migrationRuleArrayValue==answer.getAnswerText())
+//						{
+//							System.out.println(migrationRuleArrayValue+"=="+answer.getAnswerText());
+//							countAfter++;
+//							System.out.println(countAfter+"countAfter````````````````````````"+countAfter);
+//						}
+//					}
 					}
 				}
 			}
 		}
-
+		System.out.println("<<<<<<<<<<<<count "+count+"=="+countAfter+">>>>>>>>>>>>>>>>>>");
 		if(count==countAfter) {
 			if(count>0)
 			{
@@ -374,8 +354,9 @@ public void migrationCheck(int applicationId,int gitcCheck){
 	{
 		Application application=new Application();
 		application=applicationRepository.findByApplicationId(applicationId);
-		application.setMigrationPattern("Replateform");
+		application.setMigrationPattern("Rehost");
 	}
+	System.out.println("~~~~~~~~~~~~~~~~~~~~~~priya~");
 }
 
 	

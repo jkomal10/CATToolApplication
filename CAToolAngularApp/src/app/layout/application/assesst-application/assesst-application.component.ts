@@ -207,4 +207,8 @@ export class AssesstApplicationComponent implements OnInit {
       }
 
 
+      finalise(){
+        this.assessmentService.AllRuleCheck(this.application.applicationId).subscribe();
+      }
+
 }
