@@ -5,7 +5,7 @@
         <h2 class="text-muted">Detailed Assessment</h2>
       </div>
       <div>
-        <table datatable id="question-list" class="table table-bordered table-striped ">
+        <table  id="question-list" class="table table-bordered table-striped table-hover ">
           <tbody>
             <tr width="100%" *ngFor =  "let row of AllData;let i = index">
               <td width="70%">Question{{i+1}}. {{row.questionText}}</td>
@@ -41,7 +41,7 @@
       <h2 class="text-muted">Detailed Assessment</h2>
     </div>
     <div>
-      <table datatable class="table table-bordered ">
+      <table class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
             <th>Question</th>
