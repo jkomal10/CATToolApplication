@@ -73,6 +73,10 @@ export class AssessmentReportComponent implements OnInit {
   
   generateReport(){
     this.dropdownSelect=false;
+    if((this.fromDate==null || this.fromDate==null) || this.fromDate>this.toDate)
+    {
+      alert("Please select Valid date");
+  }
     console.log(this.appIds);
     this.applications=this.appIds.split(",");
     console.log(this.applications);

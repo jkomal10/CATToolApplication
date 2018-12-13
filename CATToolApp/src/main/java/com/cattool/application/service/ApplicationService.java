@@ -213,6 +213,9 @@ public class ApplicationService {
 		
 		Application application=new Application();
 		application = applicationRepository.findByApplicationId(applicationId);
+		System.out.println("********"+applicationId);
+//		application = commonServices.cloudProviderFindByappId(applicationId);
+		System.out.println(application);
 		List<Answers> allanswers = answerRepository.findByApplicationId(applicationId);
 		for(CloudProvider cloudProvider:cloudProviderRepository.findByClientId(application.getClientId()))
 		{
@@ -220,166 +223,90 @@ public class ApplicationService {
 //			System.out.println(cloudProvider.getCloudProviders());
 			for(CloudProviderRule getCloudProviderRules:cloudProviderRuleRepository.findByCloudProviderId(cloudProvider.getCloudProviderId()))
 			{   
+				
 				numberOfRules++;
 				System.out.println(getCloudProviderRules.getCloudProviderId());
+				
 				for(Answers answers:allanswers)
 				{
 					if(answers.getQuestionId()==Integer.parseInt(getCloudProviderRules.getQuestionId()))
 					{
 						if(getCloudProviderRules.getCloudProviderRule().contains(answers.getAnswerText())) {
-							count++;
+							count ++;
 						}
 					}
 				}
 			}
+			System.out.println(numberOfRules+" ****** "+count);
 			if(numberOfRules==count)
 			{
-				application.setCloudProvider("GITC");
-				application.setIsSaved(1);
-				applicationRepository.save(application);
-				System.out.println("GITC");
+				
+				application.setCloudProvider(cloudProvider.getCloudProviders());
+//				System.out.println(cloudProvider.getCloudProviders()+"********");
+//				application.setIsSaved(1);
+//				applicationRepository.save(application);
+//				System.out.println("GITC");
+//				return false;
 				break;
 			}
-			else 
-				{
-					application.setCloudProvider("AWS");
-					application.setIsSaved(1);
-					applicationRepository.save(application);
-					System.out.println("AWS");
-					break;
-//					return true;
-				}
-		}
-		
-		return isDeactivate;
-		
-	}
-	
-//public boolean cloudProviderCheck(int applicationId){
-//		
-//		int count = 0,numberOfRules = 0;
-//		List<Answers> allAnswers = new ArrayList<>();
-//		List<Answers> answers = new ArrayList<>();
-//		Application application=new Application();
-//		application = applicationRepository.findByApplicationId(applicationId);
-//		allAnswers = answerRepository.findAll();
-//		for (Answers getAnswers : allAnswers) {
-//			if(applicationId==getAnswers.getApplicationId())
-//			{
-//				answers.add(getAnswers);
-//			}
-//			
-//		}
-//		List<CloudProviderRule> cloudProviderRuleList=new ArrayList<CloudProviderRule>();
-//		for(CloudProviderRule cloudProviderRuleClientName:cloudProviderRuleRepository.findAll()) {
-//			{
-//				cloudProviderRuleList.add(cloudProviderRuleClientName);
-//			}
-//		}
-//		numberOfRules = cloudProviderRuleList.size();
-//		for (Answers userAnswers : answers) {
-//			for(CloudProviderRule cloudProviderRules : cloudProviderRuleList)
-//			{
-//				if(userAnswers.getQuestionId() == Integer.parseInt(cloudProviderRules.getQuestionId()))
+//			else 
 //				{
-//					if(cloudProviderRules.getCloudProviderRule().contains(userAnswers.getAnswerText()))
-//					{
-//						count = count+1;
-//					}
-//					
+//				if(count==0) {
+//					application.setCloudProvider(cloudProvider.getCloudProviders());
+//					System.out.println(cloudProvider.getCloudProviders()+"&&&&&&&&&&");
+////					application.setIsSaved(1);
+////					applicationRepository.save(application);
+//					System.out.println("AWS");
+////					return true;
+////					break;
 //				}
-//			}
-//			
-//		}
-//		
-//		if(count == numberOfRules)
-//		{
-//			application.setCloudProvider("GITC");
-//			application.setIsSaved(1);
-//			applicationRepository.save(application);
-//			return false;
-//		}
-//		
-//		else 
-//		{
-//			application.setCloudProvider("AWS");
-//			application.setIsSaved(1);
-//			applicationRepository.save(application);
-//			return true;
-//		}		
-//	}
-
-public void migrationCheck(int applicationId,int gitcCheck){
-	int migrationFinal=0;
-	List<MigrationRule> migrationRuleByClientName = new ArrayList<MigrationRule>();
-	for(MigrationRule migrationRuleAllRule:migrationRuleRepository.findAll())
-	{
-		{
-			migrationRuleByClientName.add(migrationRuleAllRule);
-		}
-	}
-	
-	List<Answers> answerlist = new ArrayList<Answers>();
-	for(Answers answers:answerRepository.findAll())
-	{
-		if(answers.getApplicationId()==applicationId)
-		{
-			answerlist.add(answers);
-		}
-	}
-
-	for(Migration migration:migrationRepository.findAll())
-	{
-		int count=0;
-		for(MigrationRule migrationRuleCount:migrationRuleRepository.findAll())
-		{
-			if(migration.getMigrationId()==migrationRuleCount.getMigrationId())
-			{
-				count++;
-			}
+//				}
 		}
 		
-		int countAfter=0;
-		for(MigrationRule migrationRule:migrationRuleRepository.findAll()){
-			for(Answers answer:answerlist) 
+		return false;
+		
+	}
+	
+public void migrationCheck(int applicationId,int gitcCheck){
+	int count = 0,numberOfRules = 0,migrationFinal=0;
+	Application application=new Application();
+	application = applicationRepository.findByApplicationId(applicationId);
+	List<Answers> allanswers = answerRepository.findByApplicationId(applicationId);
+	for(Migration migration:migrationRepository.findByClientId(application.getClientId()))
 			{
-				if(migration.getMigrationId()==migrationRule.getMigrationId())
+		for(MigrationRule migrationRule:migrationRuleRepository.findByMigrationId(migration.getMigrationId()))
+		{
+			numberOfRules++;
+			for(Answers answers:allanswers)
+			{
+				if(answers.getQuestionId()==Integer.parseInt(migrationRule.getQuestionId()))
 				{
-					if(migrationRule.getMigrationRule().contains(answer.getAnswerText()) || answer.getAnswerText().contains(migrationRule.getMigrationRule()))
-					{
-						if(Integer.parseInt(migrationRule.getQuestionId())==answer.getQuestionId()) {
-							countAfter++;
-						}
+					if(migrationRule.getMigrationRule().contains(answers.getAnswerText())) {
+						count++;
 					}
 				}
 			}
 		}
-
-		if(count==countAfter) {
+		
+		if(count==numberOfRules) {
 			if(count>0)
 			{
 				if(gitcCheck==0)
 				{
-					Application application=new Application();
-					application=applicationRepository.findByApplicationId(applicationId);
 					application.setMigrationPattern(migration.getMigrationPattern());
 				}
 				migrationFinal++;
 			}
 		}
-		
-	}
-
 	if(migrationFinal==0)
 	{
-		Application application=new Application();
-		application=applicationRepository.findByApplicationId(applicationId);
-		application.setMigrationPattern("Replateform");
+		application.setMigrationPattern(migration.getMigrationPattern());
 	}
-}
-
+		
+			}
+		
+	}
 	
-
 	public void summaryReport() throws FileNotFoundException{
 		
 		int summaryReportCount=1;

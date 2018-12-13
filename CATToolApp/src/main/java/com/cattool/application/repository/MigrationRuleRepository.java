@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.cattool.application.entity.CloudProviderRule;
 import com.cattool.application.entity.MigrationRule;
 
 public interface MigrationRuleRepository extends JpaRepository<MigrationRule, Long> {
@@ -12,4 +13,6 @@ public interface MigrationRuleRepository extends JpaRepository<MigrationRule, Lo
 	List<MigrationRule> findByClientId(int clientId);
 
 	void deleteByQuestionId(String string);
+
+	List<MigrationRule> findByMigrationId(int migrationId);
 }
