@@ -44,7 +44,7 @@ export class AssesstApplicationComponent implements OnInit {
   i = -1;
   All:any=[1,2,3,4,5,6,7];
   isChecked=false;
-
+  
   application: any;
   AnswersData : any =[];
   clientIdValue: number;
@@ -52,7 +52,7 @@ export class AssesstApplicationComponent implements OnInit {
   constructor( private router: Router, private assessmentService: AssesstApplicationService, private applicationService: ApplicationService, private myStorage: LocalStorageService, private userRoleService : UserRoleService ) { }
 
   ngOnInit() {
-     
+    
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
@@ -60,11 +60,15 @@ export class AssesstApplicationComponent implements OnInit {
       columnDefs: [{ orderable: false, targets:3 }]
     };
     this.clientIdValue = this.myStorage.getCurrentUserObject().clientId;
+    
     this.applicationService.question.subscribe(data => {
+      this.application = data;
+      });
+     this.userRoleService.question.subscribe(data => {
       this.application = data;
       
     });
-  
+
       this.assessmentService.getAnswers(this.application.applicationId).subscribe(result => {
         this.AnswersData = result;
        
@@ -135,12 +139,20 @@ export class AssesstApplicationComponent implements OnInit {
  
 
     this.assessmentService.saveAssessApplication(this.AnswersData).subscribe();
+    if(this.myStorage.getCurrentUserObject().isAdmin==0){
     this.router.navigate(['/application']);
+     }else{
+      this.router.navigate(['/user/user-role']);
      }
+    }
  
   onSubmit(formvalues){
        this.assessmentService.Update(this.AnswersData).subscribe();
-       this.router.navigate(['/application']);
+       if(this.myStorage.getCurrentUserObject().isAdmin==0){
+        this.router.navigate(['/application']);
+         }else{
+          this.router.navigate(['/user/user-role']);
+         }
      }
     
      updateSelectedTimeslots(event) {
@@ -194,5 +206,9 @@ export class AssesstApplicationComponent implements OnInit {
 
       }
 
+
+      finalise(){
+        this.assessmentService.AllRuleCheck(this.application.applicationId).subscribe();
+      }
 
 }

@@ -66,18 +66,19 @@ public class ApplicationService {
 	CloudProviderRuleRepository cloudProviderRuleRepository;
 	
 	@Autowired
+	CloudProviderRepository cloudProviderRepository;
+	
+	@Autowired
 	UserRepository userRepository;
 	
 	@Autowired
 	MigrationRepository migrationRepository;
 	
-	@Autowired
-	CloudProviderRepository cloudProviderRepository;
-	
 	Boolean isDeactivate=false;
 	Boolean isDelete=false;
 	int isFinalizeValue=1;
 	Boolean isDeleted = false;
+	String publicPass="Public Pass";
 	public int getAllAppsCount(int clientId) 
     {   int appsCount=0;
      
@@ -168,17 +169,8 @@ public class ApplicationService {
 		applicationRepository.save(application);
 		boolean cloudabilityCheck= cloudableCheck(applicationId);
 		if(cloudabilityCheck) {
-			boolean cloudproviderCheck=cloudProviderCheck(applicationId);
-			if(cloudproviderCheck==false)
-			{
-				gitcCheck=1;
-				migrationCheck(applicationId,gitcCheck);
-			}
-			else
-			{
-				gitcCheck=0;
-				migrationCheck(applicationId,gitcCheck);
-			}
+			cloudProviderCheck(applicationId);
+			migrationCheck(applicationId);
 		}
 	}
 	public boolean cloudableCheck(int applicationId){
@@ -191,12 +183,18 @@ public class ApplicationService {
 		List<Answers> answersList=new ArrayList<>();
 		answersList=answerRepository.findByApplicationId(applicationId);
 		for(CloudableRule cloudableRule:cloudableRuleListByClientId) {
+			String[] cloudableRuleArray=cloudableRule.getCloudableRule().split(",");
 			for(Answers answers:answersList) {
 				if(cloudableRule.getQuestionId()==(answers.getQuestionId())) {
-					if(cloudableRule.getCloudableRule().contains(answers.getAnswerText())){
-						answers.setCloudAbility(1);
-						cloudableRuleFlag++;
+					for(int i=0;i<cloudableRuleArray.length;i++)
+					{
+						if(cloudableRuleArray[i].equals(answers.getAnswerText()))
+						{
+							answers.setCloudAbility(1);
+							cloudableRuleFlag++;
+						}
 					}
+//					
 				}
 			}
 		}
@@ -206,107 +204,125 @@ public class ApplicationService {
 		return true;}
 		else {
 			application.setCloudable("No");
+			application.setCloudProvider("Not Applicable");
+			application.setMigrationPattern("Not Applicable");
 			return false;}
 	}
 	
-	public boolean cloudProviderCheck(int applicationId){
+public void cloudProviderCheck(int applicationId){
 		
 		Application application=new Application();
 		application = applicationRepository.findByApplicationId(applicationId);
-		System.out.println("********"+applicationId);
-//		application = commonServices.cloudProviderFindByappId(applicationId);
-		System.out.println(application);
 		List<Answers> allanswers = answerRepository.findByApplicationId(applicationId);
 		for(CloudProvider cloudProvider:cloudProviderRepository.findByClientId(application.getClientId()))
 		{
 			int count = 0,numberOfRules = 0;
-//			System.out.println(cloudProvider.getCloudProviders());
 			for(CloudProviderRule getCloudProviderRules:cloudProviderRuleRepository.findByCloudProviderId(cloudProvider.getCloudProviderId()))
 			{   
-				
+				String[] cloudProviderRuleArray=getCloudProviderRules.getCloudProviderRule().split(",");
 				numberOfRules++;
-				System.out.println(getCloudProviderRules.getCloudProviderId());
 				
 				for(Answers answers:allanswers)
 				{
 					if(answers.getQuestionId()==Integer.parseInt(getCloudProviderRules.getQuestionId()))
 					{
-						if(getCloudProviderRules.getCloudProviderRule().contains(answers.getAnswerText())) {
-							count ++;
+						
+						for(int i=0;i<cloudProviderRuleArray.length;i++)
+						{
+								if(cloudProviderRuleArray[i].equals(answers.getAnswerText()))
+								{
+									
+									count++;
+									System.out.println(answers.getAnswerText()+"=="+count);
+								}
 						}
+//						
+//						if(getCloudProviderRules.getCloudProviderRule().contains(answers.getAnswerText())) {
+//							count++;
+//						}
 					}
 				}
 			}
-			System.out.println(numberOfRules+" ****** "+count);
+			System.out.println(count);
+			if(count>0)
+			{
+				application.setCloudProvider(cloudProvider.getCloudProviders());
+				break;
+			}
 			if(numberOfRules==count)
 			{
 				
 				application.setCloudProvider(cloudProvider.getCloudProviders());
-//				System.out.println(cloudProvider.getCloudProviders()+"********");
-//				application.setIsSaved(1);
-//				applicationRepository.save(application);
-//				System.out.println("GITC");
-//				return false;
 				break;
 			}
-//			else 
-//				{
-//				if(count==0) {
-//					application.setCloudProvider(cloudProvider.getCloudProviders());
-//					System.out.println(cloudProvider.getCloudProviders()+"&&&&&&&&&&");
-////					application.setIsSaved(1);
-////					applicationRepository.save(application);
-//					System.out.println("AWS");
-////					return true;
-////					break;
-//				}
-//				}
 		}
 		
-		return false;
 		
 	}
-	
-public void migrationCheck(int applicationId,int gitcCheck){
-	int count = 0,numberOfRules = 0,migrationFinal=0;
+
+
+public void migrationCheck(int applicationId){
+	int migrationFinal=0;
 	Application application=new Application();
 	application = applicationRepository.findByApplicationId(applicationId);
 	List<Answers> allanswers = answerRepository.findByApplicationId(applicationId);
 	for(Migration migration:migrationRepository.findByClientId(application.getClientId()))
-			{
+	{
+		int count = 0,numberOfRules = 0;	
 		for(MigrationRule migrationRule:migrationRuleRepository.findByMigrationId(migration.getMigrationId()))
 		{
+			String[] migrationRuleArray = migrationRule.getMigrationRule().split(",");
 			numberOfRules++;
 			for(Answers answers:allanswers)
 			{
 				if(answers.getQuestionId()==Integer.parseInt(migrationRule.getQuestionId()))
 				{
-					if(migrationRule.getMigrationRule().contains(answers.getAnswerText())) {
-						count++;
+					for(int i=0;i<migrationRuleArray.length;i++)
+					{
+						
+							if(migrationRuleArray[i].equals(answers.getAnswerText()))
+							{
+								count++;
+							}
 					}
 				}
 			}
 		}
-		
 		if(count==numberOfRules) {
-			if(count>0)
-			{
-				if(gitcCheck==0)
-				{
-					application.setMigrationPattern(migration.getMigrationPattern());
-				}
-				migrationFinal++;
-			}
+		application.setMigrationPattern(migration.getMigrationPattern());
+		applicationRepository.save(application);
+		migrationFinal++;
+		break;
 		}
+//		if(migration.getMigrationPattern().equals(publicPass))
+//		{
+//			if(count==numberOfRules) {
+//				application.setMigrationPattern(migration.getMigrationPattern());
+//				applicationRepository.save(application);
+//				migrationFinal++;
+//				break;
+//			}
+//		}
+//		else
+//		{
+//			if(numberOfRules>0)
+//			{
+//				application.setMigrationPattern(migration.getMigrationPattern());
+//				applicationRepository.save(application);
+//				migrationFinal++;
+//				break;
+//			}
+//		}
+		
 	if(migrationFinal==0)
 	{
 		application.setMigrationPattern(migration.getMigrationPattern());
 	}
 		
 			}
+	
 		
 	}
-	
 	public void summaryReport() throws FileNotFoundException{
 		
 		int summaryReportCount=1;

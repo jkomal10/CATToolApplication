@@ -118,7 +118,7 @@ public class ApplicationController {
 	@GetMapping("migrationCheck/{applicationId}/{isFinalize}")
 	public void migrationCheck(@PathVariable("applicationId") int applicationId,@PathVariable int isFinalize) {
 		System.out.println("migration rule check!!!!");
-		applicationService.migrationCheck(applicationId,isFinalize);
+		applicationService.migrationCheck(applicationId);
 	}
 	
 	@GetMapping("/cloudProviderCheck/{applicationId}")

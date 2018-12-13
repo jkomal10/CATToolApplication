@@ -2,7 +2,7 @@ export class Application{
     applicationId:number;
     applicationName:String;
     applicationDescription:String;
-    isCloudable:boolean;
+    isCloudable:String;
     MigrationPattern:string;
     cloudProvider:string;
     isAssessment:boolean;
