@@ -139,7 +139,7 @@ public String[] summaryReport(String apps) throws FileNotFoundException{
 					JRBeanCollectionDataSource jds=new JRBeanCollectionDataSource(summaryReportList);
 					Map<String,Object> parametres=new HashMap<String,Object>();
 					parametres.put("ItemDataSource", jds);
-					InputStream reportStream = new FileInputStream("\\Users\\suvsahoo\\Volkswagen\\jasperTemplate\\template.jrxml");
+					InputStream reportStream = new FileInputStream("\\Users\\priyanj\\Volkswagen\\jasperTemplate\\template.jrxml");
 					JasperReport report;
 					try {
 						ReportPDF pdf=new ReportPDF();
@@ -147,7 +147,7 @@ public String[] summaryReport(String apps) throws FileNotFoundException{
 						report = JasperCompileManager.compileReport(reportStream);
 						ByteArrayOutputStream array=new ByteArrayOutputStream();
 						 JasperPrint jasperPrint = JasperFillManager.fillReport(report,parametres, jds);
-						 JasperExportManager.exportReportToPdfFile(jasperPrint, "/hsjd/"+arr[i]+".pdf"); 
+						 JasperExportManager.exportReportToPdfFile(jasperPrint, "/report/"+arr[i]+".pdf"); 
 						 JasperExportManager.exportReportToPdfStream(jasperPrint,bos);
 						 reportArray=bos.toByteArray();
 						 ReportPDF reportPDF = new ReportPDF();

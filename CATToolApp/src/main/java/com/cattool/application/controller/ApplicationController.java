@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cattool.application.entity.Application;
 import com.cattool.application.service.ApplicationService;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/application")
@@ -113,13 +114,6 @@ public class ApplicationController {
 		System.out.println("Rule check!!");
 		applicationService.allRuleCheck(applicationId);
 	}
-	
-	@GetMapping("/cloudProviderCheck/{applicationId}")
-	public void cloudProviderCheck(@PathVariable("applicationId") int applicationId) {
-		System.out.println("Cloud provider rule check!!");
-		applicationService.cloudProviderCheck(applicationId);
-	}
-	
 	
 	@GetMapping("/summaryReport")
 	public void summaryRepory() throws FileNotFoundException
