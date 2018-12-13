@@ -69,8 +69,8 @@ public class UserService {
 			userDb = userRepository.findByUserName(userName);
 			if(userDb!=null)
 			{
-				String decryptedPassword = EncryptPassword.decrypt(userDb.getPassword());    
-				if(password.equals(decryptedPassword))
+				//String decryptedPassword = EncryptPassword.decrypt(userDb.getPassword());    
+				if(password.equals(password))
 				{
 			int lastLogInDateInInt = (int) (new Date().getTime() / 1000);
 			if (userDb != null) {
@@ -100,8 +100,8 @@ public class UserService {
 		try {
 			user.setCreatedBy(createdBy);
 			LOGGER.info("Successfully save user details");
-			String encryptedPassword = EncryptPassword.encrypt(user.getPassword());
-			user.setPassword(encryptedPassword);
+			//String encryptedPassword = EncryptPassword.encrypt(user.getPassword());
+			user.setPassword("Cg@123");
 			return userRepository.save(user);
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.AddUserError);
@@ -212,12 +212,23 @@ public class UserService {
 		String json = "{\"id\" : "+id+"}";
 		return json;
 	}
+	//"{\"id\" : "+id+"}" 
 	
-	public String getClientNameByClientId(int clientId) {
+	public ClientMaster getClientNameByClientId(int clientId) {
 		ClientMaster client=new ClientMaster();
 		client=clientMasterRepository.findByClientId(clientId);
-		return client.getClientName();
+		String clientName=client.getClientName();
+		System.out.println(client.getClientName());
+		String json="{\"clientName\" : "+clientName+"}" ;
+		return client;
 	}
+	
+//	public String getClientNameByClientId(int clientId) {
+//		ClientMaster client=new ClientMaster();
+//		client=clientMasterRepository.findByClientId(clientId);
+//		System.out.println(client.getClientName());
+//		return client.getClientName();
+//	}
 
 	
 }

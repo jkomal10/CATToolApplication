@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cattool.application.entity.AssessmentQuestions;
+import com.cattool.application.entity.ClientMaster;
 import com.cattool.application.entity.Users;
 import com.cattool.application.exception.CATException;
 import com.cattool.application.service.UserService;
@@ -65,11 +66,6 @@ public class UserController {
 		return userService.saveUser(user,createdBy);
 	}
 	
-//	@DeleteMapping("/deleteUserById/{userId}")
-//	public void deleteById(@PathVariable int userId)
-//	{
-//		userService.deleteById(userId);
-//	}
 	 
 	@DeleteMapping("/deleteUserById/{clientId}/{userId}")
 	public void deleteById(@PathVariable int clientId,@PathVariable int userId)
@@ -94,7 +90,12 @@ public class UserController {
 	}
 	
 	@GetMapping("/get/client/{clientId}")
-	public String getClient(@PathVariable int clientId) {
+	public ClientMaster getClient(@PathVariable int clientId) {
 		return userService.getClientNameByClientId(clientId);
 	}
+	
+//	@GetMapping("/get/client/{clientId}")
+//	public String getClient(@PathVariable int clientId) {
+//		return userService.getClientNameByClientId(clientId);
+//	}
 }

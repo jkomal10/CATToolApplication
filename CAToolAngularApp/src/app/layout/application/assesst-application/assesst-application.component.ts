@@ -140,8 +140,10 @@ export class AssesstApplicationComponent implements OnInit {
 
     this.assessmentService.saveAssessApplication(this.AnswersData).subscribe();
     if(this.myStorage.getCurrentUserObject().isAdmin==0){
+      location.reload();
     this.router.navigate(['/application']);
      }else{
+      location.reload();
       this.router.navigate(['/user/user-role']);
      }
     }
@@ -149,8 +151,10 @@ export class AssesstApplicationComponent implements OnInit {
   onSubmit(formvalues){
        this.assessmentService.Update(this.AnswersData).subscribe();
        if(this.myStorage.getCurrentUserObject().isAdmin==0){
+        location.reload();
         this.router.navigate(['/application']);
          }else{
+          location.reload();
           this.router.navigate(['/user/user-role']);
          }
      }
@@ -208,7 +212,9 @@ export class AssesstApplicationComponent implements OnInit {
 
 
       finalise(){
+
         this.assessmentService.AllRuleCheck(this.application.applicationId).subscribe();
+        location.reload();
       }
 
 }

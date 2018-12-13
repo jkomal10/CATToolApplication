@@ -28,11 +28,6 @@ public class AnswersService {
 	public List<Answers> GetSingleApplication(int applicationId) {
 		List<Answers> ansList=new ArrayList<>();
 		ansList=answersRepository.findByApplicationId(applicationId);
-//		for(Answers answers: answersRepository.findAll()) {
-//			if(answers.getApplicationId()==applicationId)
-//		ansList.add(answers);
-//		System.out.println(ansList);
-//		}
 		return ansList;
 	}
 	
@@ -48,11 +43,9 @@ public class AnswersService {
 			answersObject.setAnswerId(answers.getAnswerId());
 			if(answersObject.getAnswerText()!=null )
 			{
-				System.out.println("working fine!!!");
 			}
 			else
 			{
-				System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 				answersObject.setAnswerText("0");
 			}
 			 answersRepository.saveAndFlush(answersObject);	
@@ -85,8 +78,6 @@ public void updateAns(List<Answers> answerList) {
 			answerObj.setApplicationId(answer.getApplicationId());
 			answerObj.setQuestionId(answer.getQuestionId());
 			answerObj.setAnswerText(answer.getAnswerText());
-			
-			//answerObj=answer;
 			answersRepository.save(answerObj);
 		}
 	}

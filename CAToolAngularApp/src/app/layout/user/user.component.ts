@@ -95,7 +95,7 @@ export class UserComponent implements OnInit {
     this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
 
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'first_last_numbers',
       pageLength: 10,
       responsive: true};
       this.userService.getIpAddress().subscribe(data => {

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cattool.application.entity.Answers;
 import com.cattool.application.entity.Application;
 import com.cattool.application.entity.AssessmentQuestions;
+import com.cattool.application.entity.CloudProvider;
 import com.cattool.application.entity.CloudProviderRule;
 import com.cattool.application.entity.CloudableRule;
 import com.cattool.application.entity.Migration;
@@ -19,6 +20,7 @@ import com.cattool.application.entity.Users;
 import com.cattool.application.repository.AnswersRepository;
 import com.cattool.application.repository.ApplicationRepository;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
+import com.cattool.application.repository.CloudProviderRepository;
 import com.cattool.application.repository.CloudProviderRuleRepository;
 import com.cattool.application.repository.CloudableRuleRepository;
 import com.cattool.application.repository.MigrationRepository;
@@ -64,6 +66,9 @@ public class ApplicationService {
 	CloudProviderRuleRepository cloudProviderRuleRepository;
 	
 	@Autowired
+	CloudProviderRepository cloudProviderRepository;
+	
+	@Autowired
 	UserRepository userRepository;
 	
 	@Autowired
@@ -73,11 +78,11 @@ public class ApplicationService {
 	Boolean isDelete=false;
 	int isFinalizeValue=1;
 	Boolean isDeleted = false;
+	String publicPass="Public Pass";
 	public int getAllAppsCount(int clientId) 
     {   int appsCount=0;
      
         List<Application> applicationList= new ArrayList<Application>(); 
-        //applicationList=applicationRepository.findByClientIdAndIsDeleted(clientId,isDelete);
         applicationList=applicationRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate, isDeleted);
         
         appsCount=applicationList.size(); 
@@ -87,7 +92,6 @@ public class ApplicationService {
 	public List<Application> getAllApplication(int clientId)
 	{
 		List<Application> applicationList = new ArrayList<>();
-		//applicationList=applicationRepository.findByClientIdAndIsDeleted(clientId,isDelete);
 		applicationList=applicationRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate, isDeleted);
 		return applicationList;
 	}
@@ -152,28 +156,16 @@ public class ApplicationService {
 	}
 
 	public void allRuleCheck(int applicationId) {
-		int gitcCheck=0;
 		Application application=applicationRepository.findByApplicationId(applicationId);
 		application.setIsFinalize(1);
 		Date dNow = new Date( );
-//		SimpleDateFormat ft = new SimpleDateFormat ("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
-//	    System.out.println("Current Date: " + ft.format(dNow));
 	    application.setAssessApplicationTime(dNow);
 	    System.out.println(dNow);
 		applicationRepository.save(application);
 		boolean cloudabilityCheck= cloudableCheck(applicationId);
 		if(cloudabilityCheck) {
-			boolean cloudproviderCheck=cloudProviderCheck(applicationId);
-			if(cloudproviderCheck==false)
-			{
-				gitcCheck=1;
-				migrationCheck(applicationId,gitcCheck);
-			}
-			else
-			{
-				gitcCheck=0;
-				migrationCheck(applicationId,gitcCheck);
-			}
+			cloudProviderCheck(applicationId);
+			migrationCheck(applicationId);
 		}
 	}
 	public boolean cloudableCheck(int applicationId){
@@ -186,11 +178,16 @@ public class ApplicationService {
 		List<Answers> answersList=new ArrayList<>();
 		answersList=answerRepository.findByApplicationId(applicationId);
 		for(CloudableRule cloudableRule:cloudableRuleListByClientId) {
+			String[] cloudableRuleArray=cloudableRule.getCloudableRule().split(",");
 			for(Answers answers:answersList) {
 				if(cloudableRule.getQuestionId()==(answers.getQuestionId())) {
-					if(cloudableRule.getCloudableRule().contains(answers.getAnswerText())){
-						answers.setCloudAbility(1);
-						cloudableRuleFlag++;
+					for(int i=0;i<cloudableRuleArray.length;i++)
+					{
+						if(cloudableRuleArray[i].equals(answers.getAnswerText()))
+						{
+							answers.setCloudAbility(1);
+							cloudableRuleFlag++;
+						}
 					}
 				}
 			}
@@ -201,166 +198,102 @@ public class ApplicationService {
 		return true;}
 		else {
 			application.setCloudable("No");
+			application.setCloudProvider("Not Applicable");
+			application.setMigrationPattern("Not Applicable");
 			return false;}
 	}
 	
-public boolean cloudProviderCheck(int applicationId){
-		int count = 0,numberOfRules = 0;
-		List<Answers> allAnswers = new ArrayList<>();
-		List<Answers> answers = new ArrayList<>();
+public void cloudProviderCheck(int applicationId){
+		
 		Application application=new Application();
 		application = applicationRepository.findByApplicationId(applicationId);
-		allAnswers = answerRepository.findAll();
-		for (Answers getAnswers : allAnswers) {
-			if(applicationId==getAnswers.getApplicationId())
-			{
-				answers.add(getAnswers);
-			}
-			
-		}
-		List<CloudProviderRule> cloudProviderRuleList=new ArrayList<CloudProviderRule>();
-		for(CloudProviderRule cloudProviderRuleClientName:cloudProviderRuleRepository.findAll()) {
-			{
-				cloudProviderRuleList.add(cloudProviderRuleClientName);
-			}
-		}
-		numberOfRules = cloudProviderRuleList.size();
-		for (Answers userAnswers : answers) {
-			for(CloudProviderRule cloudProviderRules : cloudProviderRuleList)
-			{
-				String[] cloudProviderArray = cloudProviderRules.getCloudProviderRule().split(",");
-				if(userAnswers.getQuestionId() == Integer.parseInt(cloudProviderRules.getQuestionId()))
+		List<Answers> allanswers = answerRepository.findByApplicationId(applicationId);
+		for(CloudProvider cloudProvider:cloudProviderRepository.findByClientId(application.getClientId()))
+		{
+			int count = 0,numberOfRules = 0;
+			for(CloudProviderRule getCloudProviderRules:cloudProviderRuleRepository.findByCloudProviderId(cloudProvider.getCloudProviderId()))
+			{   
+				String[] cloudProviderRuleArray=getCloudProviderRules.getCloudProviderRule().split(",");
+				numberOfRules++;
+				
+				for(Answers answers:allanswers)
 				{
-					
-					for(String cloudProviderArrayValue:cloudProviderArray)
+					if(answers.getQuestionId()==Integer.parseInt(getCloudProviderRules.getQuestionId()))
 					{
-						if(cloudProviderArrayValue==userAnswers.getAnswerText())
+						
+						for(int i=0;i<cloudProviderRuleArray.length;i++)
 						{
-							count = count+1;
-						}
-					}
-//					if(cloudProviderRules.getCloudProviderRule().contains(userAnswers.getAnswerText()))
-//					{
-//						count = count+1;
-//					}
-					
-				}
-			}
-			
-		}
-		
-		if(count == numberOfRules)
-		{
-			application.setCloudProvider("GITC");
-			application.setIsSaved(1);
-			applicationRepository.save(application);
-			return false;
-		}
-		
-		else 
-		{
-			application.setCloudProvider("AWS");
-			application.setIsSaved(1);
-			applicationRepository.save(application);
-			return true;
-		}		
-	}
-
-public void migrationCheck(int applicationId,int gitcCheck){
-	
-	int migrationFinal=0;
-	List<MigrationRule> migrationRuleByClientName = new ArrayList<MigrationRule>();
-	for(MigrationRule migrationRuleAllRule:migrationRuleRepository.findAll())
-	{
-		{
-			migrationRuleByClientName.add(migrationRuleAllRule);
-		}
-	}
-	List<Answers> answerlist = new ArrayList<Answers>();
-	for(Answers answers:answerRepository.findAll())
-	{
-		if(answers.getApplicationId()==applicationId)
-		{
-			answerlist.add(answers);
-		}
-	}
-	
-
-	for(Migration migration:migrationRepository.findAll())
-	{
-		System.out.println("migration id"+migration.getMigrationId());
-		
-		int count=0;
-		for(MigrationRule migrationRuleCount:migrationRuleRepository.findAll())
-		{
-			if(migration.getMigrationId()==migrationRuleCount.getMigrationId())
-			{
-				count++;
-			}
-		}
-		
-		
-		int countAfter=0;
-		for(MigrationRule migrationRule:migrationRuleRepository.findAll()){
-			String[] migrationRuleArray = migrationRule.getMigrationRule().split(",");
-			
-			for(Answers answer:answerlist) 
-			{
-				if(migration.getMigrationId()==migrationRule.getMigrationId())
-				{
-					if(Integer.parseInt(migrationRule.getQuestionId())==answer.getQuestionId()) {
-					
-					for(int i=0;i<migrationRuleArray.length;i++)
-					{
-							System.out.println(migrationRuleArray[i]);
-							System.out.println(migrationRuleArray[i]+"=="+answer.getAnswerText());
-							if(migrationRuleArray[i].equals(answer.getAnswerText()))
-							{
-								System.out.println(migrationRuleArray[i]+"=********="+answer.getAnswerText());
-								countAfter++;
-							}
-					}
-//					for(String migrationRuleArrayValue:migrationRuleArray)
-//					{
-//						
-//						if(migrationRuleArrayValue==answer.getAnswerText())
-//						{
-//							System.out.println(migrationRuleArrayValue+"=="+answer.getAnswerText());
-//							countAfter++;
-//							System.out.println(countAfter+"countAfter````````````````````````"+countAfter);
-//						}
-//					}
+								if(cloudProviderRuleArray[i].equals(answers.getAnswerText()))
+								{
+									
+									count++;
+									System.out.println(answers.getAnswerText()+"=="+count);
+								}
+						}					
 					}
 				}
 			}
-		}
-		System.out.println("<<<<<<<<<<<<count "+count+"=="+countAfter+">>>>>>>>>>>>>>>>>>");
-		if(count==countAfter) {
+			System.out.println(count);
 			if(count>0)
 			{
-				if(gitcCheck==0)
-				{
-					Application application=new Application();
-					application=applicationRepository.findByApplicationId(applicationId);
-					application.setMigrationPattern(migration.getMigrationPattern());
-				}
-				migrationFinal++;
+				application.setCloudProvider(cloudProvider.getCloudProviders());
+				break;
+			}
+			if(numberOfRules==count)
+			{
+				
+				application.setCloudProvider(cloudProvider.getCloudProviders());
+				break;
 			}
 		}
 		
+		
 	}
 
+
+public void migrationCheck(int applicationId){
+	int migrationFinal=0;
+	Application application=new Application();
+	application = applicationRepository.findByApplicationId(applicationId);
+	List<Answers> allanswers = answerRepository.findByApplicationId(applicationId);
+	for(Migration migration:migrationRepository.findByClientId(application.getClientId()))
+	{
+		int count = 0,numberOfRules = 0;	
+		for(MigrationRule migrationRule:migrationRuleRepository.findByMigrationId(migration.getMigrationId()))
+		{
+			String[] migrationRuleArray = migrationRule.getMigrationRule().split(",");
+			numberOfRules++;
+			for(Answers answers:allanswers)
+			{
+				if(answers.getQuestionId()==Integer.parseInt(migrationRule.getQuestionId()))
+				{
+					for(int i=0;i<migrationRuleArray.length;i++)
+					{
+						
+							if(migrationRuleArray[i].equals(answers.getAnswerText()))
+							{
+								count++;
+							}
+					}
+				}
+			}
+		}
+		if(count==numberOfRules) {
+		application.setMigrationPattern(migration.getMigrationPattern());
+		applicationRepository.save(application);
+		migrationFinal++;
+		break;
+		}
+		
 	if(migrationFinal==0)
 	{
-		Application application=new Application();
-		application=applicationRepository.findByApplicationId(applicationId);
-		application.setMigrationPattern("Rehost");
+		application.setMigrationPattern(migration.getMigrationPattern());
 	}
-	System.out.println("~~~~~~~~~~~~~~~~~~~~~~priya~");
-}
-
+		
+			}
 	
-
+		
+	}
 	public void summaryReport() throws FileNotFoundException{
 		
 		int summaryReportCount=1;
