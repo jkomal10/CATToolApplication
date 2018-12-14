@@ -146,6 +146,7 @@ new Angular5Csv( this.applicationTemplate,filename, options);
    assessApplication(formvalues){
     this.logger.log(JSON.stringify(formvalues));
     this.logger.log(formvalues.applicationId)
+    console.log(JSON.stringify(formvalues));
     this.applicationService.sendMsgtoOtherComponent(formvalues);
      this.router.navigate(['/application/assesst-application']);
 

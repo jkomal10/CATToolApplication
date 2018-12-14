@@ -20,7 +20,7 @@
                                      <vg-fullscreen></vg-fullscreen>
                                     </vg-controls>
                                 <video #media [vgMedia]="media" id="singleVideo" preload="auto" crossorigin style="height:300px">
-                                    <source src="../assets/video/videoplayback.mp4" type="video/mp4">
+                                    <source src="../assets/video/videoplay.mp4" type="video/mp4">
                                 </video>
                             </vg-player>
                     </div>
@@ -73,7 +73,8 @@
         <html lang="en">
                 <body>
                 <div class="jumbotron text-center"> 
-                  <h1  class="text-capitalize">Welcome <div *ngIf="firstName!='null'">{{firstName}}&ngsp;{{lastName}}</div></h1> 
+                  <h1  class="text-capitalize">Welcome {{firstName}}</h1>
+                     <!-- <div *ngIf="firstName!='null'">{{firstName}}</div>  -->
                   <br>
                   <vg-player>
                       <vg-controls>
@@ -89,7 +90,7 @@
                            <vg-fullscreen></vg-fullscreen>
                           </vg-controls>
                           <video #media [vgMedia]="media" id="singleVideo" preload="auto" crossorigin style="height:300px">
-                              <source src="../assets/video/videoplayback.mp4" type="video/mp4">
+                              <source src="../assets/video/videoplay.mp4" type="video/mp4">
                           </video>
                       </vg-player>
                 </div>

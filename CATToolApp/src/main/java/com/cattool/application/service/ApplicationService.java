@@ -227,7 +227,6 @@ public class ApplicationService {
 					}
 				}
 			}
-			System.out.println(count);
 			if (count > 0) {
 				application.setCloudProvider(cloudProvider.getCloudProviders());
 				break;

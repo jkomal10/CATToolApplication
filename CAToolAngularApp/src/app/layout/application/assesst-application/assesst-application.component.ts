@@ -64,10 +64,14 @@ export class AssesstApplicationComponent implements OnInit {
     this.applicationService.question.subscribe(data => {
       this.application = data;
       });
-     this.userRoleService.question.subscribe(data => {
-      this.application = data;
-      
-    });
+      if(this.myStorage.getCurrentUserObject().isAdmin==1)
+      {
+        this.userRoleService.question.subscribe(data => {
+          this.application = data;
+          
+        });
+      }
+    
 
       this.assessmentService.getAnswers(this.application.applicationId).subscribe(result => {
         this.AnswersData = result;

@@ -110,10 +110,23 @@ public class ApplicationController {
 	}
 
 	@GetMapping("AllRuleCheck/{applicationId}")
-	public void allRuleCheck(@PathVariable("applicationId") int applicationId) {
+	public void allRuleCheck(@PathVariable int applicationId) {
+		System.out.println(applicationId);
 		System.out.println("Rule check!!");
 		applicationService.allRuleCheck(applicationId);
 	}
+	
+	@GetMapping("migrationCheck/{applicationId}")
+	public void migrationCheck(@PathVariable("applicationId") int applicationId) {
+		System.out.println("migration rule check!!!!");
+		applicationService.migrationCheck(applicationId);
+	}
+	
+	@GetMapping("/cloudProviderCheck/{applicationId}")
+	public void cloudProviderCheck(@PathVariable("applicationId") int applicationId) {
+		System.out.println("Cloud provider rule check!!");
+		applicationService.cloudProviderCheck(applicationId);
+	} 
 	
 	@GetMapping("/summaryReport")
 	public void summaryRepory() throws FileNotFoundException

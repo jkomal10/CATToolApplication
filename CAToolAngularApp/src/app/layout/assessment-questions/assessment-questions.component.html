@@ -1,7 +1,7 @@
 <div>
   <form role="form" #addAssessmentQuestionsForm="ngForm" (ngSubmit)="addQuestions()">
     <input type="submit" class="btn btn-info" value="Add Questions" (click)="addQuestions()">&ngsp;&ngsp;
-    <input type="submit" class="btn btn-info" value="Import Questions" (click)="importQuestions()">&ngsp;&ngsp;
+    <!-- <input type="submit" class="btn btn-info" value="Import Questions" (click)="importQuestions()">&ngsp;&ngsp; -->
     <input type="button" class="btn btn-info" value="Export Questions" (click)="exportCsv()">
     <br>
     <br>
@@ -31,10 +31,10 @@
           <td width="20%">{{questions.questionDescription}}</td>
           <td width="15%">{{questions.questionType}}</td>
           <td width="10%">{{questions.questionDisplayOrder}}</td>
-          <td width="11%">
-            <button title="deactivate question" (click)="deactivate()" style="font-size:16px" type="button" class="button button">
+          <td width="9%">
+            <!-- <button title="deactivate question" (click)="deactivate()" style="font-size:16px" type="button" class="button button">
               <i class="fa fa-key"></i>
-            </button>&nbsp;
+            </button>&nbsp; -->
             <button title="Edit question" (click)="updateQuestions(questions)" style="font-size:16px" class="button button">
               <i class="fa fa-edit"></i>
             </button>&nbsp;
