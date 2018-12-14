@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cattool.application.dao.ApplicationDAO;
+import com.cattool.application.dao.service.ApplicationDAOService;
 import com.cattool.application.entity.Answers;
 import com.cattool.application.entity.Application;
 import com.cattool.application.entity.AssessmentQuestions;
@@ -72,26 +74,26 @@ public class ApplicationService {
 	@Autowired
 	MigrationRepository migrationRepository;
 
+	@Autowired
+	ApplicationDAOService applicationDaoService;
+	
 	Boolean isDeactivate = false;
 	Boolean isDelete = false;
 	int isFinalizeValue = 1;
 	Boolean isDeleted = false;
 
 	public int getAllAppsCount(int clientId) {
-		int appsCount = 0;
-
-		List<Application> applicationList = new ArrayList<Application>();
-		applicationList = applicationRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate,
-				isDeleted);
-
-		appsCount = applicationList.size();
-		return appsCount;
+		return applicationDaoService.getAllApplicationCount(clientId);
 	}
+	
+
+	
 
 	public List<Application> getAllApplication(int clientId) {
 		List<Application> applicationList = new ArrayList<>();
 		applicationList = applicationRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate,
 				isDeleted);
+//		List<ApplicationDAO> applicationList = 
 		return applicationList;
 	}
 
