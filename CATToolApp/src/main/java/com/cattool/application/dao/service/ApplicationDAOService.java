@@ -138,9 +138,7 @@ public class ApplicationDAOService {
 
 	public void deactivateApplicationById(int applicationId) {
 		Application application = getApplicationByApplicationId(applicationId);
-		application.setApplicationId(applicationId);
 		application.setDeactivate(true);
-		application.setUserId(applicationRepository.findByApplicationId(applicationId).getUserId());
 		applicationRepository.save(application);
 	}
 

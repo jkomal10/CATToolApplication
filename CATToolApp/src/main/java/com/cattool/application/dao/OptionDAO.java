@@ -1,4 +1,4 @@
-package com.cattool.application.dao.service;
+package com.cattool.application.dao;
 
 import java.io.Serializable;
 

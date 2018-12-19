@@ -72,13 +72,13 @@ public class AssessmentQuestionsController {
 //	}
 	
 	@GetMapping("/getAllMigrationPattern/{migrationId}/{clientId}")
-	public List<AssessmentQuestionsDAO> getAllMigrationPattern(@PathVariable("migrationId") int migrationId,@PathVariable int clientId)
+	public List<AssessmentQuestions> getAllMigrationPattern(@PathVariable("migrationId") int migrationId,@PathVariable int clientId)
 	{
 		return assessmentQuestionsService.getAllMigrationPattern(migrationId,clientId);
 	}
 	
 	@GetMapping("/getAllCloudProviderRule/{cloudProviderId}/{clientId}")
-	public List<AssessmentQuestionsDAO> getAllcloudProviderRule(@PathVariable("cloudProviderId") int cloudProviderId,@PathVariable int clientId)
+	public List<AssessmentQuestions> getAllcloudProviderRule(@PathVariable("cloudProviderId") int cloudProviderId,@PathVariable int clientId)
 	{
 		return assessmentQuestionsService.getAllcloudProviderRule(cloudProviderId,clientId);
 	}

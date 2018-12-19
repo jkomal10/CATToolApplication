@@ -10,8 +10,6 @@ import com.cattool.application.dao.AssessmentQuestionsDAO;
 import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.CloudProviderRule;
 import com.cattool.application.entity.CloudableRule;
-import com.cattool.application.entity.MigrationRule;
-import com.cattool.application.exception.ExceptionMessages;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
 import com.cattool.application.repository.CloudProviderRuleRepository;
 import com.cattool.application.repository.CloudableRuleRepository;
@@ -40,8 +38,9 @@ public class AssessmentQuestionsDAOService {
 	@Autowired
 	OptionRepository optionRepository;
 	
+	
 	int isActive=0;
-	Boolean isDelete=false;
+	int isDelete=1;//Boolean isDelete=false;
 	
 	
 	public List<AssessmentQuestionsDAO> getAllAssessmentQuestion(int clientId){
@@ -79,19 +78,24 @@ public class AssessmentQuestionsDAOService {
 	
 	public void saveQuestions(AssessmentQuestions assessmentQuestions)
 	{
-			assessmentQuestionsRepository.save(assessmentQuestions);
+			saveQuestion(assessmentQuestions);
 			CloudableRule cloudableRule = new CloudableRule();
 			if(assessmentQuestions.getAssessmentTypeForCloudable() != null)
 			{
-				saveCloudableRule(cloudableRule,assessmentQuestions);
+				saveCloudableRule(cloudableRule,toDao(assessmentQuestions));
 			}
 	}
+	
+	public void saveQuestion(AssessmentQuestions assessmentQuestions)
+	{
+		assessmentQuestionsRepository.save(assessmentQuestions);
+	}
 
-	private void saveCloudableRule(CloudableRule cloudableRule,AssessmentQuestions assessmentQuestions) {
-		cloudableRule.setQuestionId(assessmentQuestions.getQuestionId());
-		cloudableRule.setQuestionText(assessmentQuestions.getQuestionText());
-		cloudableRule.setClientId(assessmentQuestions.getClientId());
-		cloudableRule.setQuestionDisplayOrder(assessmentQuestions.getQuestionDisplayOrder());
+	private void saveCloudableRule(CloudableRule cloudableRule,AssessmentQuestionsDAO assessmentQuestionsDAO) {
+		cloudableRule.setQuestionId(assessmentQuestionsDAO.getQuestionId());
+		cloudableRule.setQuestionText(assessmentQuestionsDAO.getQuestionText());
+		cloudableRule.setClientId(assessmentQuestionsDAO.getClientId());
+		cloudableRule.setQuestionDisplayOrder(assessmentQuestionsDAO.getQuestionDisplayOrder());
 		cloudableRuleRepository .save(cloudableRule);
 	}
 	
@@ -166,6 +170,44 @@ public class AssessmentQuestionsDAOService {
 	
 	public List<AssessmentQuestions> getAssessmentQuestions(int clientId) {
 		return assessmentQuestionsRepository.findByClientIdAndIsActive(clientId, 0);
+	}
+	
+	public void saveCloudableRule(CloudableRule cloudableRule)
+	{
+		cloudableRuleRepository.save(cloudableRule);
+	}
+	
+	public CloudableRule getCloudableRuleByQuestionId(int questionId)
+	{
+		return cloudableRuleRepository.findByQuestionId(questionId);
+	}
+	
+	public AssessmentQuestions getQuestionsByQuestionId(int questionId)
+	{
+		return assessmentQuestionsRepository.getByQuestionId(questionId);
+	}
+
+	public void deleteMigrationRuleByQuestionId(int questionId) {
+		migrationRuleRepository.deleteByQuestionId(Integer.toString(questionId));
+	}
+
+	public void deleteCloudProviderByQuestionId(int questionId) {
+		cloudProviderRuleRepository.deleteByQuestionId(Integer.toString(questionId));
+	}
+
+	public void deleteOptionByQuestionId(int questionId) {
+		optionRepository.deleteByQuestionId(Integer.toString(questionId));
+	}
+	
+	public void setCloudableRule(AssessmentQuestions assessmentQuestion)
+	{
+		CloudableRule cloudableRule = getCloudableRuleByQuestionId(assessmentQuestion.getQuestionId());
+		cloudableRule.setCloudableRuleId(cloudableRule.getCloudableRuleId());
+		cloudableRule.setQuestionId(assessmentQuestion.getQuestionId());
+		cloudableRule.setQuestionText(assessmentQuestion.getQuestionText());
+		cloudableRule.setClientId(assessmentQuestion.getClientId());
+		cloudableRule.setQuestionDisplayOrder(assessmentQuestion.getQuestionDisplayOrder());
+		saveCloudableRule(cloudableRule);
 	}
 
 }
