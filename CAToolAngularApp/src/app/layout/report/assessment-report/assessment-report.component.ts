@@ -17,7 +17,7 @@ export class AssessmentReportComponent implements OnInit {
   applicationList: any = [];
   dropdownSelect:boolean;
   genereteAppReport:string;
-  appIds:string="";
+  appIds:string;
   applications:any;
   viewClick:boolean=false;
   viewAllReports:any=[];
@@ -40,11 +40,11 @@ export class AssessmentReportComponent implements OnInit {
 
   ngOnInit() {
     this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
-    this.applicationService.getAllFinalizeAplication(this.clientIdValue).subscribe(result => 
-      {
-      this.applicationList= result ;
-      // console.log(JSON.stringify(this.applicationList));
-      });
+    // this.applicationService.getAllFinalizeAplication(this.clientIdValue).subscribe(result => 
+    //   {
+    //   this.applicationList= result ;
+    //   // console.log(JSON.stringify(this.applicationList));
+    //   });
   }
 
   submit(formValues:any){
@@ -54,14 +54,15 @@ export class AssessmentReportComponent implements OnInit {
   }
 
   getApplication(){
-    if((this.fromDate==null || this.fromDate==null) || this.fromDate>this.toDate)
+    if((this.fromDate==null || this.toDate==null) || this.fromDate>this.toDate)
     {
       alert("Please select Valid date");
   }
     else{
+      console.log("APPLICATIONS");
       this.dropdownSelect=true;
     this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
-    this.applicationService.getAllFinalizeAplication(this.clientIdValue).subscribe(result => 
+    this.applicationService.getAllFinalizeAplication(this.clientIdValue,this.fromDate,this.toDate).subscribe(result => 
       {
       this.applicationList= result ;
       // console.log(JSON.stringify(this.applicationList));
@@ -73,9 +74,13 @@ export class AssessmentReportComponent implements OnInit {
   
   generateReport(){
     this.dropdownSelect=false;
-    if((this.fromDate==null || this.fromDate==null) || this.fromDate>this.toDate)
+    if((this.fromDate==null || this.toDate==null) || this.fromDate>this.toDate)
     {
       alert("Please select Valid date");
+  }
+  if(this.appIds==null)
+  {
+    alert("Please select Application Name for which you want to generate report date");
   }
     console.log(this.appIds);
     this.applications=this.appIds.split(",");
@@ -92,7 +97,7 @@ export class AssessmentReportComponent implements OnInit {
     //    window.open(fileURL);
     // });
     this.dropdownSelect=false;
-    if((this.fromDate==null || this.fromDate==null) || this.fromDate>this.toDate)
+    if((this.fromDate==null || this.toDate==null) || this.fromDate>this.toDate)
     {
       alert("Please select Valid date");
   }
@@ -114,7 +119,7 @@ export class AssessmentReportComponent implements OnInit {
 
   zipExport()
   {
-    if((this.fromDate==null || this.fromDate==null) || this.fromDate>this.toDate)
+    if((this.fromDate==null || this.toDate==null) || this.fromDate>this.toDate)
     {
       alert("Please select Valid date");
   }

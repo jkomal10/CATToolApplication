@@ -1,5 +1,6 @@
 package com.cattool.assessment.Report.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,4 +22,6 @@ public interface ApplicationRepository extends JpaRepository<Application, Long>{
 	List<Application> findByClientIdAndIsDeactivate(int clientId,Boolean isDeactivate);
 	List<Application> findByClientIdAndIsDeleted(int clientId,Boolean isDeleted);
 	List<Application> findByClientId(int clientId);
+	List<Application> findByClientIdAndIsDeletedAndIsFinalizeAndAssessApplicationTimeBetween(int clientId, Boolean isDelete,
+			int isFinalizeValue, Date fromDate, Date toDate);
 }

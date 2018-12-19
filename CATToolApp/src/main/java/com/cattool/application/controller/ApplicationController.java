@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cattool.application.dao.ApplicationDAO;
 import com.cattool.application.entity.Application;
 import com.cattool.application.service.ApplicationService;
 
@@ -33,37 +34,36 @@ public class ApplicationController {
     }
 	
 	@GetMapping("/getAll/{clientId}")
-	public List<Application>getAllApplication(@PathVariable int clientId)
+	public List<ApplicationDAO> getAllApplication(@PathVariable int clientId)
 	{
 		System.out.println("Get all application!!");
 		return applicationService.getAllApplication(clientId);
 	}
 	
 	@GetMapping("/getAllFinalizeAplication/{clientId}")
-	public List<Application>getAllFinalizeAplication(@PathVariable int clientId)
+	public List<ApplicationDAO>getAllFinalizeAplication(@PathVariable int clientId)
 	{
 		System.out.println("Get all application!!");
 		return applicationService.getAllFinalizeAplication(clientId);
 	}
 	
 	@GetMapping("/getApplicationById/{applicationId}")
-	public Application getApplicationById(@PathVariable("applicationId") int id) {
+	public ApplicationDAO getApplicationById(@PathVariable("applicationId") int id) {
 		System.out.println("Get application by id!!");
-		return applicationService.GetSingleApplication(id);	
+		return applicationService.getApplicationById(id);	
 	}
 
 	@PostMapping("/saveApplication/create")
-	public Application saveApplication(@RequestBody Application application)
+	public void saveApplication(@RequestBody Application application)
 	{
-		System.out.println("Save application!!");
-		return applicationService.saveApplication(application);
+		applicationService.saveApplication(application);
 	}
 	
 	@GetMapping("/getApplicationByName{applicationName}")
-	public Application getApplicationByName(@PathVariable String applicationName)
+	public ApplicationDAO getApplicationByName(@PathVariable String applicationName)
 	{
 		System.out.println("Get application by name!!");
-		Application application=applicationService.findbyApplicationName(applicationName);
+		ApplicationDAO application=applicationService.findbyApplicationName(applicationName);
 		if(application!=null) {
 			return applicationService.findbyApplicationName(applicationName);
 	    }
@@ -73,7 +73,7 @@ public class ApplicationController {
 	}
 	
 	@GetMapping("/getApplicationByUserName/{userName}")
-	public Application getAppByUser(@PathVariable("userName") String userName) {
+	public ApplicationDAO getAppByUser(@PathVariable("userName") String userName) {
 		System.out.println("Get application by username!!");
 		return applicationService.getApplicationByUserName(userName);
 	}
@@ -103,7 +103,7 @@ public class ApplicationController {
 	}
 	
 	@GetMapping("/getAllReassessment/{clientId}")
-	public List<Application>getAllReassessment(@PathVariable int clientId)
+	public List<ApplicationDAO>getAllReassessment(@PathVariable int clientId)
 	{
 		System.out.println("Get all reassessment!!");
 		return applicationService.getAllReassessment(clientId);

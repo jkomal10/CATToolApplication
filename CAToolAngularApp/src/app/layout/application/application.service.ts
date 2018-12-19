@@ -15,9 +15,9 @@ export class ApplicationService {
       return this.http.get(this.myStorage.getdomainURL()+`/application/getAll/`+clientId);
     }
 
-    getAllFinalizeAplication(clientId : number): Observable<Object>{
+    getAllFinalizeAplication(clientId : number,fromDate:Date,toDate:Date): Observable<Object>{
       console.log("**********************************"+this.myStorage.getdomainURL() );
-       return this.http.get(this.myStorage.getdomainURL()+`/application/getAllFinalizeAplication/`+clientId);
+       return this.http.get(this.myStorage.getreportURL()+`/assessment/report/getAllFinalizeAplication/`+clientId+`/`+fromDate+`/`+toDate);
      }
   
     createApplication(application: Object): Observable<Object> {

@@ -59,6 +59,9 @@ public class ReportService {
 	@Autowired
 	ReportPDFRepository reportPDFRepository;
 	
+	int isFinalizeValue = 1;
+	Boolean isDelete = false;
+	
 public String[] summaryReport(String apps) throws FileNotFoundException{
 	  System.out.println(apps);
 		String arr[]=apps.split(",");
@@ -139,7 +142,7 @@ public String[] summaryReport(String apps) throws FileNotFoundException{
 					JRBeanCollectionDataSource jds=new JRBeanCollectionDataSource(summaryReportList);
 					Map<String,Object> parametres=new HashMap<String,Object>();
 					parametres.put("ItemDataSource", jds);
-					InputStream reportStream = new FileInputStream("\\Users\\priyanj\\Volkswagen\\jasperTemplate\\template.jrxml");
+					InputStream reportStream = new FileInputStream("\\Users\\suvsahoo\\Volkswagen\\jasperTemplate\\template.jrxml");
 					JasperReport report;
 					try {
 						ReportPDF pdf=new ReportPDF();
@@ -214,7 +217,7 @@ public void zipExport(Date fromDate, Date toDate) throws IOException {
 	
 	for(ReportPDF viewAllReports:reportPDFRepository.findAllByGeneratedDateTimeBetween(fromDate,toDate))
 		{
-		FileOutputStream fos = new FileOutputStream("/hsjd/" + viewAllReports.getApplicationName() + ".zip");
+		FileOutputStream fos = new FileOutputStream("/report/" + viewAllReports.getApplicationName() + ".zip");
 		ZipOutputStream zipOS = new ZipOutputStream(fos);
 		
 		ZipEntry zipEntry = new ZipEntry(viewAllReports.getApplicationName()+".pdf");
@@ -225,6 +228,11 @@ public void zipExport(Date fromDate, Date toDate) throws IOException {
 		zipOS.close();
 		}
 	
+}
+
+public List<Application> getAllFinalizeAplication(int clientId,Date fromDate, Date toDate) {
+
+	return applicationRepository.findByClientIdAndIsDeletedAndIsFinalizeAndAssessApplicationTimeBetween(clientId, isDelete, isFinalizeValue, fromDate, toDate);
 }
 
 
