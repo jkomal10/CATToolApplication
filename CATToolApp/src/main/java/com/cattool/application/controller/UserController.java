@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cattool.application.dao.UsersDao;
 import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.ClientMaster;
 import com.cattool.application.entity.Users;
@@ -34,7 +35,7 @@ public class UserController {
 	UserService	userService; 
 	
 	@GetMapping("/getAll/{clientId}")
-	public List<Users> findAllUsers(@PathVariable int clientId)
+	public List<UsersDao> findAllUsers(@PathVariable int clientId)
 	{
 		LOGGER.error("Get all user");
 		return userService.findAllUsers(clientId);
@@ -55,15 +56,15 @@ public class UserController {
 	
 	
 	@GetMapping("/getById/{userName}/{password}")
-	public Users findById(@PathVariable String userName,HttpServletRequest request,HttpServletResponse response, @PathVariable String password)
+	public UsersDao findById(@PathVariable String userName,HttpServletRequest request,HttpServletResponse response, @PathVariable String password)
 	{
 		return userService.findById(userName,password);
 	}
 	
 	@PostMapping("/addUser/create/{createdBy}")
-	public Users saveUser(@RequestBody Users user,@PathVariable String createdBy)
+	public void saveUser(@RequestBody Users user,@PathVariable String createdBy)
 	{
-		return userService.saveUser(user,createdBy);
+		userService.saveUser(user,createdBy);
 	}
 	
 	 
@@ -79,8 +80,9 @@ public class UserController {
 	}
 	
 	@GetMapping("changePassword/{userName}/{password}/{company}")
-	public Users setPassword(@PathVariable String userName,@PathVariable String password,@PathVariable String company) {
-		return userService.changePassword(userName, password,company);
+	public void setPassword(@PathVariable String userName,@PathVariable String password,@PathVariable String company) {
+		System.out.println("change password");
+		userService.changePassword(userName, password,company);
 	}
 	
 	@PutMapping("/deactivateUser/{userId}")

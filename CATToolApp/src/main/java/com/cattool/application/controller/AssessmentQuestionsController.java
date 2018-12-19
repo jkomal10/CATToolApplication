@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.cattool.application.dao.AssessmentQuestionsDAO;
 import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.CloudableRule;
 import com.cattool.application.entity.MigrationRule;
@@ -35,13 +37,13 @@ public class AssessmentQuestionsController {
 //	}
 	
 	@GetMapping("/getCloudableQuestion/{clientId}")
-	public List<AssessmentQuestions> getQuestionsforCloudable(@PathVariable int clientId)
+	public List<AssessmentQuestionsDAO> getQuestionsforCloudable(@PathVariable int clientId)
 	{
 		return assessmentQuestionsService.getQuestionsforCloudable(clientId);
 	}
 		
 	@GetMapping("/getAllQuestions/{clientId}")
-	public List<AssessmentQuestions> getAllquestionsByClientId(@PathVariable int clientId)
+	public List<AssessmentQuestionsDAO> getAllquestionsByClientId(@PathVariable int clientId)
 	{
 		return assessmentQuestionsService.getAllquestionsByClientId(clientId);
 	}
@@ -70,13 +72,13 @@ public class AssessmentQuestionsController {
 //	}
 	
 	@GetMapping("/getAllMigrationPattern/{migrationId}/{clientId}")
-	public List<AssessmentQuestions> getAllMigrationPattern(@PathVariable("migrationId") int migrationId,@PathVariable int clientId)
+	public List<AssessmentQuestionsDAO> getAllMigrationPattern(@PathVariable("migrationId") int migrationId,@PathVariable int clientId)
 	{
 		return assessmentQuestionsService.getAllMigrationPattern(migrationId,clientId);
 	}
 	
 	@GetMapping("/getAllCloudProviderRule/{cloudProviderId}/{clientId}")
-	public List<AssessmentQuestions> getAllcloudProviderRule(@PathVariable("cloudProviderId") int cloudProviderId,@PathVariable int clientId)
+	public List<AssessmentQuestionsDAO> getAllcloudProviderRule(@PathVariable("cloudProviderId") int cloudProviderId,@PathVariable int clientId)
 	{
 		return assessmentQuestionsService.getAllcloudProviderRule(cloudProviderId,clientId);
 	}

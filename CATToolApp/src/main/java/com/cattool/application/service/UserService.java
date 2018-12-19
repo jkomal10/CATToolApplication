@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
+
+import com.cattool.application.dao.UsersDao;
+import com.cattool.application.dao.service.UsersDAOService;
 import com.cattool.application.encryption.EncryptPassword;
 import com.cattool.application.entity.ClientMaster;
 import com.cattool.application.entity.Users;
@@ -29,94 +32,48 @@ public class UserService {
 	
 	@Autowired
 	ClientMasterRepository clientMasterRepository;
+	
+	@Autowired
+	UsersDAOService usersDAOService;
     
 	boolean isDeactivate=false;
 	int isDeleted = 0;
 	public int getUserCount(int clientId) {
-
-		List<Users> usersList = userRepository.findAll();
-		int count = 0;
-		
-		usersList=userRepository.findByClientIdAndIsDeleted(clientId, isDeleted);
-		count = usersList.size();
-		return count;
+		return usersDAOService.getUserCount(clientId);
 	}
 
-	public List<Users> findAllUsers(int clientId) {
-
-		List<Users> userList = new ArrayList<Users>();
-		
-		try {
-
-			userList=userRepository.findByClientIdAndIsDeleted(clientId, isDeleted);
-			System.out.println(userList);
-
-//			userList=userRepository.findByClientIdAndIsDeactivate(clientId, isDeactivate);
-
-			LOGGER.info("Successfully get all users");
-			return userList;
-		} catch (Exception e) {
-			LOGGER.error(ExceptionMessages.GetUserDetails + e);
-			System.out.println(ExceptionMessages.GetUserDetails + e);
-		}
-		return null;
-
+	public List<UsersDao> findAllUsers(int clientId) {
+		return usersDAOService.getAllUsersList(clientId);
 	}
 
-	public Users findById(String userName, String password) {
-		Users userDb = new Users();
+	public UsersDao findById(String userName, String password) {
+		UsersDao userDao=new UsersDao();
 		try {
-			userDb = userRepository.findByUserName(userName);
-			if(userDb!=null)
+			userDao = usersDAOService.getUserByUsername(userName,password);
+			if(userDao!=null)
 			{
-				//String decryptedPassword = EncryptPassword.decrypt(userDb.getPassword());    
-				if(password.equals(password))
-				{
-			int lastLogInDateInInt = (int) (new Date().getTime() / 1000);
-			if (userDb != null) {
-				if (password.equals(userDb.getPassword())) {
-					userDb.setLastLogin(lastLogInDateInInt);
-					LOGGER.info("Successfully get password");
-					return userDb;
-				} else {
-					LOGGER.error(ExceptionMessages.WrongPassword);
-					throw new CATException(ExceptionMessages.WrongPassword);
-				}
-			} else {
-				LOGGER.error(ExceptionMessages.InvalidName);
-				throw new CATException(ExceptionMessages.InvalidName);
-			}
-
-		} }}catch (Exception e) {
-			LOGGER.error(ExceptionMessages.InvalidName);
+				int lastLogInDateInInt = (int) (new Date().getTime() / 1000);
+				usersDAOService.setLastLogin(userDao.getUserId(), lastLogInDateInInt);
+				return userDao;
+		 }
+		}catch (Exception e) {
 			System.out.println(ExceptionMessages.InvalidName + e);
 		}
-
-		return userDb;
-
+		return userDao;
 	}
 
-	public Users saveUser(Users user, String createdBy) {
+	public void saveUser(Users user, String createdBy) {
 		try {
-			user.setCreatedBy(createdBy);
-			LOGGER.info("Successfully save user details");
-			//String encryptedPassword = EncryptPassword.encrypt(user.getPassword());
-			user.setPassword("Cg@123");
-			return userRepository.save(user);
+			usersDAOService.saveUser(user,createdBy);
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.AddUserError);
 		}
-		return user;
 
 	}
 
 	public void deleteById(int clientId,int userId) {
 		try {
-			Users user = new Users();
-			user = userRepository.findByClientIdAndUserId(clientId, userId);
-			user.setIsDeleted(1);
-			userRepository.save(user);
-			System.out.println(user);
+			usersDAOService.setIsDelete(clientId,userId);
 			LOGGER.info("Succfully deleted the user");
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.DeletsUser);
@@ -124,25 +81,10 @@ public class UserService {
 		}
 
 	}
-
+	
 	public void updateUsers(Users user, String modifiedBy) {
 		try {
-			Users users = new Users();
-			users = userRepository.findByUserId(user.getUserId());
-			users.setUserId(user.getUserId());
-			users.setUserName(user.getUserName());
-			users.setFirstName(user.getFirstName());
-			users.setLastName(user.getLastName());
-			users.setPassword(user.getPassword());
-			users.setIpAddress(user.getIpAddress());
-			users.setLastLogin(user.getLastLogin());
-			users.setCompany(user.getCompany());
-			users.setIsDeleted(user.getIsDeleted());
-			users.setCreatedBy(user.getCreatedBy());
-			users.setCreatedDateTime(users.getCreatedDateTime());
-			users.setModifiedBy(modifiedBy);
-			users.setModifiedDateTime(user.getModifiedDateTime());
-			userRepository.save(users);
+			usersDAOService.setUpdatedUser(user, modifiedBy);
 			LOGGER.info("Succfully update the user");
 
 		} catch (Exception e) {
@@ -151,37 +93,15 @@ public class UserService {
 		}
 
 	}
+	
 
-	public Users changePassword(String userName, String password, String newPassword) {
-		Users user = new Users();
-		try {
-			user = userRepository.findByUserName(userName);
-			if (password.equals(user.getPassword())) {
-				user.setUserId(user.getUserId());
-				user.setPassword(password);
-				userRepository.save(user);
-				LOGGER.info("Succfully changed the password");
-				System.out.println("Password changed");
-				return user;
-			} else {
-				System.out.println("not updated");
-				LOGGER.error(ExceptionMessages.UpdateUserPassword);
-				System.out.println(ExceptionMessages.UpdateUserPassword);
-			}
-		} catch (Exception e) {
-			LOGGER.error(ExceptionMessages.UpdatePassword + e);
-			System.out.println(ExceptionMessages.UpdatePassword + e);
-		}
-		return null;
-
+	public void changePassword(String userName, String password, String newPassword) {
+		usersDAOService.setUserNameAndPassword(userName, password, newPassword);
 	}
 
 	public void deactivateUser(int userId) {
-		Users users = new Users();
 		try {
-			users = userRepository.findByUserId(userId);
-			users.setDeactivate(true);
-			users.setUserId(users.getUserId());
+			usersDAOService.getUserById(userId);
 			LOGGER.info("User is deactivated succfully");
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.DeactivateUser + e);
@@ -189,39 +109,44 @@ public class UserService {
 		}
 
 	}
-
+	
 	public String findUserId(int clientId, String userName) {
-		List<Users> userList = new ArrayList<Users>();
-		Users userbyId = new Users();
-		userList=userRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate, isDeleted);
-		
-		for(Users alluser : userList)
-		{
-			if(alluser.getUserName().equals(userName))
-			{
-				int id = alluser.getUserId();
-				String json = "{\"id\" : "+id+"}";
-				return json;
-			}
-		}
-		
-		userbyId.setUserName(userName);
-		userbyId.setClientId(clientId);
-		userbyId.setPassword("Cg@123");
-		int id = userRepository.save(userbyId).getUserId();
-		String json = "{\"id\" : "+id+"}";
-		return json;
+		return usersDAOService.findUserId(clientId, userName);
 	}
-	//"{\"id\" : "+id+"}" 
 	
 	public ClientMaster getClientNameByClientId(int clientId) {
-		ClientMaster client=new ClientMaster();
-		client=clientMasterRepository.findByClientId(clientId);
-		String clientName=client.getClientName();
-		System.out.println(client.getClientName());
-		String json="{\"clientName\" : "+clientName+"}" ;
-		return client;
+		return usersDAOService.getClientNameByClientId(clientId);
 	}
+	
+	
+	
+	
+
+//	public String findUserId(int clientId, String userName) {
+//		List<Users> userList = new ArrayList<Users>();
+//		Users userbyId = new Users();
+//		userList=userRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate, isDeleted);
+//		
+//		for(Users alluser : userList)
+//		{
+//			if(alluser.getUserName().equals(userName))
+//			{
+//				int id = alluser.getUserId();
+//				String json = "{\"id\" : "+id+"}";
+//				return json;
+//			}
+//		}
+//		
+//		userbyId.setUserName(userName);
+//		userbyId.setClientId(clientId);
+//		userbyId.setPassword("Cg@123");
+//		int id = userRepository.save(userbyId).getUserId();
+//		String json = "{\"id\" : "+id+"}";
+//		return json;
+//	}
+	//"{\"id\" : "+id+"}" 
+	
+	
 	
 //	public String getClientNameByClientId(int clientId) {
 //		ClientMaster client=new ClientMaster();

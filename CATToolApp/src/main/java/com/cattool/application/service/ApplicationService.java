@@ -272,6 +272,7 @@ public class ApplicationService {
 
 			if (migrationFinal == 0) {
 				application.setMigrationPattern(migration.getMigrationPattern());
+				applicationRepository.save(application);
 			}
 
 		}

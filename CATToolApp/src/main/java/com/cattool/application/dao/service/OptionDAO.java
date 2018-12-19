@@ -1,22 +1,16 @@
-package com.cattool.application.entity;
+package com.cattool.application.dao.service;
+
+import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-public class QuestionOption {
+public class OptionDAO implements Serializable{
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int optionId;
-	
-	@Column()
 	private String questionId;
-	
-	@Column
 	private String optionText;
 
 	
@@ -26,8 +20,6 @@ public class QuestionOption {
 	public void setOptionId(int optionId) {
 		this.optionId = optionId;
 	}
-
-
 	public String getOptionText() {
 		return optionText;
 	}
@@ -42,26 +34,9 @@ public class QuestionOption {
 		this.questionId = questionId;
 	}
 	
-	public QuestionOption() {
-		super();
-	}
-
-	public QuestionOption(int optionId, String questionId, String optionText) {
-
-		super();
-		this.optionId = optionId;
-		this.questionId = questionId;
-		this.optionText = optionText;
-	}
 	@Override
 	public String toString() {
-
 		return "QuestionOption [optionId=" + optionId + ", questionId=" + questionId + ", optionText=" + optionText
 				+ "]";
 	}
-	
-	
-	
-	
-	
 }

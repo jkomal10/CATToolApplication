@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cattool.application.dao.service.OptionDAO;
+import com.cattool.application.dao.service.OptionDAOService;
 import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.QuestionOption;
 import com.cattool.application.repository.OptionRepository;
@@ -13,15 +15,15 @@ import com.cattool.application.repository.OptionRepository;
 public class OptionService {
 
 	@Autowired
-	private OptionRepository optionRepository; 
+	private OptionDAOService optionDAOService;
 	
-	public List<QuestionOption> getAll()
+	public List<OptionDAO> getAll()
 	{
-		return optionRepository.findAll();
+		return optionDAOService.getAll();
 	}
 
 	public QuestionOption saveQuestionOption(QuestionOption questionOption) {
-		return optionRepository.save(questionOption);
+		return optionDAOService.saveQuestionOption(questionOption);
 		
 	}
 }

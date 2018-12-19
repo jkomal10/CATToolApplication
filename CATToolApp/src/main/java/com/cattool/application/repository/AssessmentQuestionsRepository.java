@@ -18,5 +18,6 @@ public interface AssessmentQuestionsRepository extends JpaRepository<AssessmentQ
 	public List<AssessmentQuestions> findByClientIdAndIsActiveAndIsDelete(int clientId, int isActive, int isDelete);
 	public List<AssessmentQuestions> findByClientIdAndAssessmentTypeForCloudableAndIsActiveAndIsDelete(int clientId,
 			String string, int isActive, int isDelete);
+	public List<AssessmentQuestions> findByClientIdAndIsActiveAndIsDelete(int clientId, int isActive, Boolean isDelete);
 
 }

@@ -1,30 +1,16 @@
-package com.cattool.application.entity;
+package com.cattool.application.dao;
 
+import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.EntityListeners;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@EntityListeners(AuditingEntityListener.class)
-@Table(name="users_table")
-public class Users {
+public class UsersDao implements Serializable{
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
-    @Column(unique = true)
 	private String userName;
 	private String firstName;
 	private String lastName;
@@ -145,7 +131,7 @@ public class Users {
 		this.clientId = clientId;
 	}
 	
-	public Users() {
+	public UsersDao() {
 		super();
 	}
 	@Override

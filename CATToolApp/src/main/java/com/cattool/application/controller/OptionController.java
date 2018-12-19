@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cattool.application.dao.service.OptionDAO;
 import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.QuestionOption;
 import com.cattool.application.repository.OptionRepository;
@@ -23,7 +24,7 @@ public class OptionController {
 	private OptionService optionService;
 
 	@GetMapping("/getAll")
-	public List<QuestionOption> getAll()
+	public List<OptionDAO> getAll()
 	{
 		return optionService.getAll();
 	}
