@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import com.cattool.assessment.Report.entity.Application;
 import com.cattool.assessment.Report.entity.ReportPDF;
 import com.cattool.assessment.Report.repository.service.ReportService;
 
@@ -28,6 +30,13 @@ public class ReportController {
 	
 	public void checkAssessmentReportController() {
 		System.out.println("Assessment Report Controller!!!");
+	}
+	
+	@GetMapping("/getAllFinalizeAplication/{clientId}/{fromDate}/{toDate}")
+	public List<Application>getAllFinalizeAplication(@PathVariable int clientId,@PathVariable Date fromDate,@PathVariable Date toDate)
+	{
+		System.out.println("Get all application!!");
+		return assessmentReportService.getAllFinalizeAplication(clientId,fromDate,toDate);
 	}
 	
 	@GetMapping("/get/report")

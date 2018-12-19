@@ -218,9 +218,10 @@ public class AssessmentQuestionsService{
 
 	public List<AssessmentQuestions> getQuestionsforCloudable(int clientId) {
       List<AssessmentQuestions> list=new ArrayList<AssessmentQuestions>();
+      System.out.println(clientId);
 		list = assessmentQuestionsRepository.findByClientIdAndAssessmentTypeForCloudableAndIsDelete(clientId,"true",isDelete);
 		System.out.println(list);
-		return list;
+		return null;
 	}
 
 }
