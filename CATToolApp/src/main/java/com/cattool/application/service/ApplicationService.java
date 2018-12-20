@@ -204,7 +204,6 @@ public class ApplicationService {
 	}
 
 	public void migrationCheck(int applicationId) {
-		int migrationFinal = 0;
 		ApplicationDAO application = new ApplicationDAO();
 		application = applicationDaoService.getApplicationById(applicationId);
 		
@@ -212,6 +211,7 @@ public class ApplicationService {
 		
 		for (MigrationDAO migrationDAO : migrationPatternDAOService.findMigrationRules(application.getClientId())) {
 			int count = 0, numberOfRules = 0;
+			System.out.println(migrationDAO.getMigrationPattern());
 			for (MigrationRuleDAO migrationRuleDAO : migrationDAO.getMigrationRule()) {
 				String[] migrationRuleArray = migrationRuleDAO.getMigrationRule().split(",");
 				numberOfRules++;
@@ -226,10 +226,26 @@ public class ApplicationService {
 					}
 				}
 			}
-			if (count == numberOfRules) {
-				applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
+			if(migrationDAO.getPermission().equalsIgnoreCase("AND"))
+			{
+				if (count == numberOfRules) {
+					applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
+					break;
+				}
 			}
-
+			else if(migrationDAO.getPermission().equalsIgnoreCase("OR"))
+			{
+				if (count >=1) {
+					applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
+					break;
+				}
+			}
+			else
+			{
+				applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
+				break;
+			}
+			
 		}
 	}
 

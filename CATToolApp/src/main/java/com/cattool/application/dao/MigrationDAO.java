@@ -8,6 +8,7 @@ public class MigrationDAO {
 	private String migrationPattern;
 	private int clientId;
 	private List<MigrationRuleDAO> migrationRule;
+	public String permission;
 	public int getMigrationId() {
 		return migrationId;
 	}
@@ -32,10 +33,17 @@ public class MigrationDAO {
 	public void setMigrationRule(List<MigrationRuleDAO> migrationRule) {
 		this.migrationRule = migrationRule;
 	}
+	
+	public String getPermission() {
+		return permission;
+	}
+	public void setPermission(String permission) {
+		this.permission = permission;
+	}
 	@Override
 	public String toString() {
 		return "MigrationDAO [migrationId=" + migrationId + ", migrationPattern=" + migrationPattern + ", clientId="
-				+ clientId + ", migrationRule=" + migrationRule + "]";
+				+ clientId + ", migrationRule=" + migrationRule + ", permission=" + permission + "]";
 	}
 	
 	

@@ -1,9 +1,7 @@
 package com.cattool.application.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,9 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cattool.application.dao.AssessmentQuestionsDAO;
 import com.cattool.application.entity.AssessmentQuestions;
-import com.cattool.application.entity.CloudableRule;
-import com.cattool.application.entity.MigrationRule;
-import com.cattool.application.entity.QuestionOption;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
 import com.cattool.application.service.AssessmentQuestionsService;
 @CrossOrigin(origins = "http://localhost:4200")

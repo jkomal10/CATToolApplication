@@ -56,28 +56,28 @@ public class AssessmentQuestionsService{
 		}
 	}
 	
-	public void updateQuestions(AssessmentQuestionsDAO assessmentQuestions)
+	public void updateQuestions(AssessmentQuestionsDAO assessmentQuestionsDAO)
 	{
 		try {
-			assessmentQuestionsDAOService.deleteOptionByQuestionId(assessmentQuestions.getQuestionId());
-			if(assessmentQuestions.getAssessmentTypeForCloudProvider()!="true")
+			assessmentQuestionsDAOService.deleteOptionByQuestionId(assessmentQuestionsDAO.getQuestionId());
+			if(assessmentQuestionsDAO.getAssessmentTypeForCloudProvider()!="true")
 			{
-				assessmentQuestionsDAOService.deleteCloudProviderByQuestionId(assessmentQuestions.getQuestionId());
+				assessmentQuestionsDAOService.deleteCloudProviderByQuestionId(assessmentQuestionsDAO.getQuestionId());
 			}
-			if(assessmentQuestions.getAssessmentTypeForMigration()!="true")
+			if(assessmentQuestionsDAO.getAssessmentTypeForMigration()!="true")
 			{
-				assessmentQuestionsDAOService.deleteMigrationRuleByQuestionId(assessmentQuestions.getQuestionId());
+				assessmentQuestionsDAOService.deleteMigrationRuleByQuestionId(assessmentQuestionsDAO.getQuestionId());
 			}
 			
-			if(assessmentQuestions.getAssessmentTypeForCloudable() == "true")
+			if(assessmentQuestionsDAO.getAssessmentTypeForCloudable() == "true")
 			{
-				assessmentQuestionsDAOService.setCloudableRule(assessmentQuestions);
+				assessmentQuestionsDAOService.setCloudableRule(assessmentQuestionsDAO);
 			}
 			else
 			{
-				assessmentQuestionsDAOService.deleteCloudableRuleByQuestionId(assessmentQuestions.getQuestionId());
+				assessmentQuestionsDAOService.deleteCloudableRuleByQuestionId(assessmentQuestionsDAO.getQuestionId());
 			}
-			assessmentQuestionsDAOService.saveQuestion(assessmentQuestions);
+			assessmentQuestionsDAOService.saveQuestion(assessmentQuestionsDAO);
 		} catch (Exception e) {
 		}
 	}
