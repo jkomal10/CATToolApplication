@@ -7,9 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cattool.application.dao.AssessmentQuestionsDAO;
+import com.cattool.application.dao.CloudProviderRuleDAO;
 import com.cattool.application.dao.CloudableRuleDAO;
+import com.cattool.application.dao.MigrationRuleDAO;
+import com.cattool.application.dao.OptionDAO;
 import com.cattool.application.entity.AssessmentQuestions;
+import com.cattool.application.entity.CloudProviderRule;
 import com.cattool.application.entity.CloudableRule;
+import com.cattool.application.entity.MigrationRule;
+import com.cattool.application.entity.QuestionOption;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
 import com.cattool.application.repository.CloudProviderRuleRepository;
 import com.cattool.application.repository.CloudableRuleRepository;
@@ -52,6 +58,7 @@ public class AssessmentQuestionsDAOService {
 	}
 	
 	public List<AssessmentQuestionsDAO> toGetAllAssessmentQuestionDao(List<AssessmentQuestions> assessmentQuestionList,List<AssessmentQuestionsDAO> assessmentQuestionDAOList){
+		
 		for(AssessmentQuestions assessmentQuestion:assessmentQuestionList)
 		{
 			assessmentQuestionDAOList.add(toDao(assessmentQuestion));
@@ -170,9 +177,68 @@ public class AssessmentQuestionsDAOService {
 		assessmentQuestionsDAO.setQuestionDisplayOrder(assessmentQuestion.getQuestionDisplayOrder());
 		assessmentQuestionsDAO.setQuestionText(assessmentQuestion.getQuestionText());
 		assessmentQuestionsDAO.setQuestionType(assessmentQuestion.getQuestionType());
+		
+		List<OptionDAO> optionDAOs = new ArrayList<>();
+		for(QuestionOption questionOption:assessmentQuestion.getQuestionOption())
+		{
+			optionDAOs.add(toOptiontoDAO(questionOption));
+		}
+		assessmentQuestionsDAO.setQuestionOption(optionDAOs);
+		
+		List<MigrationRuleDAO> migrationRuleDAOs = new ArrayList<>();
+		for(MigrationRule migrationRule:assessmentQuestion.getMigrationRule())
+		{
+			migrationRuleDAOs.add(toMigrationRuleDAO(migrationRule));
+		}
+		assessmentQuestionsDAO.setMigrationRule(migrationRuleDAOs);
+		
+		List<CloudProviderRuleDAO> cloudProviderRuleDAOs=new ArrayList<>();
+		for(CloudProviderRule cloudProviderRule:assessmentQuestion.getCloudProviderRules())
+		{
+			cloudProviderRuleDAOs.add(toCloudProviderRuleDAO(cloudProviderRule));
+		}
+		assessmentQuestionsDAO.setCloudProviderRules(cloudProviderRuleDAOs);
 		return assessmentQuestionsDAO;
+		
+		
 	}
 	
+	private OptionDAO toOptiontoDAO(QuestionOption questionOption) {
+		
+		OptionDAO optionDAO = new OptionDAO();
+		optionDAO.setOptionId(questionOption.getOptionId());
+		optionDAO.setOptionText(questionOption.getOptionText());
+		optionDAO.setQuestionId(questionOption.getQuestionId());
+		
+		return optionDAO;
+
+	}
+	
+private MigrationRuleDAO toMigrationRuleDAO(MigrationRule migrationRule) {
+		
+	MigrationRuleDAO migrationRuleDAO = new MigrationRuleDAO();
+	migrationRuleDAO.setClientId(migrationRule.getClientId());
+	migrationRuleDAO.setMigrationId(migrationRule.getMigrationId());
+	migrationRuleDAO.setMigrationRule(migrationRule.getMigrationRule());
+	migrationRuleDAO.setMigrationRuleId(migrationRule.getMigrationRuleId());
+	migrationRuleDAO.setQuestionId(migrationRule.getQuestionId());
+	migrationRuleDAO.setQuestionText(migrationRule.getQuestionText());
+	return migrationRuleDAO;
+	}
+
+private CloudProviderRuleDAO toCloudProviderRuleDAO(CloudProviderRule cloudProviderRule) {
+	
+	CloudProviderRuleDAO cloudProviderRuleDAO = new CloudProviderRuleDAO();
+	cloudProviderRuleDAO.setClientId(cloudProviderRule.getClientId());
+	cloudProviderRuleDAO.setCloudProviderId(cloudProviderRule.getCloudProviderId());
+	cloudProviderRuleDAO.setCloudProviderRule(cloudProviderRule.getCloudProviderRule());
+	cloudProviderRuleDAO.setCloudProviderRuleId(cloudProviderRule.getCloudProviderRuleId());
+	cloudProviderRuleDAO.setExecutionOrder(cloudProviderRule.getExecutionOrder());
+	cloudProviderRuleDAO.setQuestionId(cloudProviderRule.getQuestionId());
+	cloudProviderRuleDAO.setQuestionText(cloudProviderRule.getQuestionText());
+	return cloudProviderRuleDAO;
+	}
+
 	private void saveCloudableRule(CloudableRuleDAO cloudableRuleDAO,AssessmentQuestionsDAO assessmentQuestionsDAO) {
 		cloudableRuleDAO.setQuestionId(assessmentQuestionsDAO.getQuestionId());
 		cloudableRuleDAO.setQuestionText(assessmentQuestionsDAO.getQuestionText());
@@ -182,31 +248,88 @@ public class AssessmentQuestionsDAOService {
 	}
 	
 	
-	public AssessmentQuestions toService(AssessmentQuestionsDAO assessmentQuestion) {
-		// TODO Auto-generated method stub
-		AssessmentQuestions assessmentQuestionsDAO = new AssessmentQuestions();
-		assessmentQuestionsDAO.setQuestionId(assessmentQuestion.getQuestionId());
-		assessmentQuestionsDAO.setAssessmentTypeForCloudable(assessmentQuestion.getAssessmentTypeForCloudable());
-		assessmentQuestionsDAO.setAssessmentTypeForCloudProvider(assessmentQuestion.getAssessmentTypeForCloudProvider());
-		assessmentQuestionsDAO.setAssessmentTypeForMigration(assessmentQuestion.getAssessmentTypeForMigration());
-		assessmentQuestionsDAO.setClientId(assessmentQuestion.getClientId());
-		assessmentQuestionsDAO.setIsActive(assessmentQuestion.getIsActive());
-		assessmentQuestionsDAO.setIsDelete(assessmentQuestion.getIsDelete());
-		assessmentQuestionsDAO.setNumberOfOption(assessmentQuestion.getNumberOfOption());
-		assessmentQuestionsDAO.setQuestionDescription(assessmentQuestion.getQuestionDescription());
-		assessmentQuestionsDAO.setQuestionDisplayOrder(assessmentQuestion.getQuestionDisplayOrder());
-		assessmentQuestionsDAO.setQuestionText(assessmentQuestion.getQuestionText());
-		assessmentQuestionsDAO.setQuestionType(assessmentQuestion.getQuestionType());
-		return assessmentQuestionsDAO;
+	public AssessmentQuestions toService(AssessmentQuestionsDAO assessmentQuestionDao) {
+		AssessmentQuestions assessmentQuestion = new AssessmentQuestions();
+		assessmentQuestion.setQuestionId(assessmentQuestionDao.getQuestionId());
+		assessmentQuestion.setAssessmentTypeForCloudable(assessmentQuestionDao.getAssessmentTypeForCloudable());
+		assessmentQuestion.setAssessmentTypeForCloudProvider(assessmentQuestionDao.getAssessmentTypeForCloudProvider());
+		assessmentQuestion.setAssessmentTypeForMigration(assessmentQuestionDao.getAssessmentTypeForMigration());
+		assessmentQuestion.setClientId(assessmentQuestionDao.getClientId());
+		assessmentQuestion.setIsActive(assessmentQuestionDao.getIsActive());
+		assessmentQuestion.setIsDelete(assessmentQuestionDao.getIsDelete());
+		assessmentQuestion.setNumberOfOption(assessmentQuestionDao.getNumberOfOption());
+		assessmentQuestion.setQuestionDescription(assessmentQuestionDao.getQuestionDescription());
+		assessmentQuestion.setQuestionDisplayOrder(assessmentQuestionDao.getQuestionDisplayOrder());
+		assessmentQuestion.setQuestionText(assessmentQuestionDao.getQuestionText());
+		assessmentQuestion.setQuestionType(assessmentQuestionDao.getQuestionType());
+		
+		List<QuestionOption> optionList = new ArrayList<>();
+		for(OptionDAO questionOption:assessmentQuestionDao.getQuestionOption())
+		{
+			optionList.add(toOption(questionOption));
+		}
+		assessmentQuestion.setQuestionOption(optionList);
+		
+		List<MigrationRule> migrationRuleList = new ArrayList<>();
+		for(MigrationRuleDAO migrationRuleDAOs:assessmentQuestionDao.getMigrationRule())
+		{
+			migrationRuleList.add(toMigrationRule(migrationRuleDAOs));
+		}
+		assessmentQuestion.setMigrationRule(migrationRuleList);
+		
+		List<CloudProviderRule> cloudProviderRuleList=new ArrayList<>();
+		for(CloudProviderRuleDAO cloudProviderRuleDAO:assessmentQuestionDao.getCloudProviderRules())
+		{
+			cloudProviderRuleList.add(toCloudProviderRule(cloudProviderRuleDAO));
+		}
+		assessmentQuestion.setCloudProviderRules(cloudProviderRuleList);
+		return assessmentQuestion;
 	}
+	
+private QuestionOption toOption(OptionDAO optionDAO) {
+		
+	QuestionOption option = new QuestionOption();
+	option.setOptionId(optionDAO.getOptionId());
+	option.setOptionText(optionDAO.getOptionText());
+	option.setQuestionId(optionDAO.getQuestionId());
+		
+	return option;
+
+	}
+	
+private MigrationRule toMigrationRule(MigrationRuleDAO migrationRuleDAO) {
+		
+	MigrationRule migrationRule = new MigrationRule();
+	migrationRule.setClientId(migrationRuleDAO.getClientId());
+	migrationRule.setMigrationId(migrationRuleDAO.getMigrationId());
+	migrationRule.setQuestionText(migrationRuleDAO.getQuestionText());
+	migrationRule.setMigrationRule(migrationRuleDAO.getMigrationRule());
+	migrationRule.setMigrationRuleId(migrationRuleDAO.getMigrationRuleId());
+	migrationRule.setQuestionId(migrationRuleDAO.getQuestionId());
+	return migrationRule;
+	}
+
+private CloudProviderRule toCloudProviderRule(CloudProviderRuleDAO cloudProviderRuleDao) {
+	
+	CloudProviderRule cloudProviderRule = new CloudProviderRule();
+	cloudProviderRule.setClientId(cloudProviderRuleDao.getClientId());
+	cloudProviderRule.setCloudProviderId(cloudProviderRuleDao.getCloudProviderId());
+	cloudProviderRule.setCloudProviderRule(cloudProviderRuleDao.getCloudProviderRule());
+	cloudProviderRule.setCloudProviderRuleId(cloudProviderRuleDao.getCloudProviderRuleId());
+	cloudProviderRule.setExecutionOrder(cloudProviderRuleDao.getExecutionOrder());
+	cloudProviderRule.setQuestionId(cloudProviderRuleDao.getQuestionId());
+	cloudProviderRule.setQuestionText(cloudProviderRuleDao.getQuestionText());
+	return cloudProviderRule;
+	}
+
 
 	public void saveQuestion(AssessmentQuestionsDAO assessmentQuestions) {
 		assessmentQuestionsRepository.save(toService(assessmentQuestions));
 	}
 
-//	public List<AssessmentQuestions> getQuestions(int clientId) {
-//		System.out.println(assessmentQuestionsRepository.findByClientIdAndIsActiveAndIsDelete(clientId, isActive, 0));
-//		return assessmentQuestionsRepository.findByClientIdAndIsActiveAndIsDelete(clientId, isActive, 0);
-//	}
+	public List<AssessmentQuestions> getQuestions(int clientId) {
+		System.out.println(assessmentQuestionsRepository.findByClientIdAndIsActiveAndIsDelete(clientId, isActive, 0));
+		return assessmentQuestionsRepository.findByClientIdAndIsActiveAndIsDelete(clientId, isActive, 0);
+	}
 
 }

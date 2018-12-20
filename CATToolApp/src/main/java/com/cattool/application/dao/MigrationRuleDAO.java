@@ -3,20 +3,23 @@ package com.cattool.application.dao;
 public class MigrationRuleDAO {
 	
 	private int migrationRuleId;
-	private int questionId;
+	private String questionId;
 	private int migrationId;
 	private String migrationRule;
+	private int executionOrder;
+	private String questionText;
 	private int clientId;
+	
 	public int getMigrationRuleId() {
 		return migrationRuleId;
 	}
 	public void setMigrationRuleId(int migrationRuleId) {
 		this.migrationRuleId = migrationRuleId;
 	}
-	public int getQuestionId() {
+	public String getQuestionId() {
 		return questionId;
 	}
-	public void setQuestionId(int questionId) {
+	public void setQuestionId(String questionId) {
 		this.questionId = questionId;
 	}
 	public int getMigrationId() {
@@ -31,6 +34,18 @@ public class MigrationRuleDAO {
 	public void setMigrationRule(String migrationRule) {
 		this.migrationRule = migrationRule;
 	}
+	public int getExecutionOrder() {
+		return executionOrder;
+	}
+	public void setExecutionOrder(int executionOrder) {
+		this.executionOrder = executionOrder;
+	}
+	public String getQuestionText() {
+		return questionText;
+	}
+	public void setQuestionText(String questionText) {
+		this.questionText = questionText;
+	}
 	public int getClientId() {
 		return clientId;
 	}
@@ -39,9 +54,9 @@ public class MigrationRuleDAO {
 	}
 	@Override
 	public String toString() {
-		return "MigrationRuleDAO [migrationRuleId=" + migrationRuleId + ", questionId=" + questionId + ", migrationId="
-				+ migrationId + ", migrationRule=" + migrationRule + ", clientId=" + clientId + "]";
+		return "MigrationRule [migrationRuleId=" + migrationRuleId + ", questionId=" + questionId + ", migrationId="
+				+ migrationId + ", migrationRule=" + migrationRule + ", executionOrder=" + executionOrder
+				+ ", questionText=" + questionText + ", clientId=" + clientId + "]";
 	}
-
 	
 }

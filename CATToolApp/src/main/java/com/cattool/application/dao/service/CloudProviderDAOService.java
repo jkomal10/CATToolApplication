@@ -59,7 +59,7 @@ public class CloudProviderDAOService {
 		cloudProviderRuleDAO.setClientId(cloudProviderRule.getClientId());
 		cloudProviderRuleDAO.setCloudProviderRule(cloudProviderRule.getCloudProviderRule());
 		cloudProviderRuleDAO.setCloudProviderRuleId(cloudProviderRule.getCloudProviderRuleId());
-		cloudProviderRuleDAO.setQuestionId(Integer.parseInt(cloudProviderRule.getQuestionId()));
+		cloudProviderRuleDAO.setQuestionId(cloudProviderRule.getQuestionId());
 		
 		return cloudProviderRuleDAO;
 	}

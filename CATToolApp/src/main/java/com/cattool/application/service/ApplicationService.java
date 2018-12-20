@@ -178,7 +178,7 @@ public class ApplicationService {
 				numberOfRules++;
 
 				for (AnswersDAO answers : allanswers) {
-					if (answers.getQuestionId() == cloudProviderRuleDAO.getQuestionId()) {
+					if (answers.getQuestionId() == Integer.parseInt(cloudProviderRuleDAO.getQuestionId())) {
 
 						for (int i = 0; i < cloudProviderRuleArray.length; i++) {
 							if (cloudProviderRuleArray[i].equals(answers.getAnswerText())) {
@@ -216,7 +216,7 @@ public class ApplicationService {
 				String[] migrationRuleArray = migrationRuleDAO.getMigrationRule().split(",");
 				numberOfRules++;
 				for (AnswersDAO answers : allanswers) {
-					if (answers.getQuestionId() == migrationRuleDAO.getQuestionId() ) {
+					if (answers.getQuestionId() == Integer.parseInt(migrationRuleDAO.getQuestionId()) ) {
 						for (int i = 0; i < migrationRuleArray.length; i++) {
 
 							if (migrationRuleArray[i].equals(answers.getAnswerText())) {

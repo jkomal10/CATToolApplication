@@ -29,6 +29,7 @@ export class AssesstApplicationService {
   } 
     
   getAnswers(applicationId: number): Observable<Object> {
+    console.log(this.http.get(`${this.UpdateAnswersUrl}` + `/` + applicationId));
     return  this.http.get(`${this.UpdateAnswersUrl}` + `/` + applicationId);
   }
 

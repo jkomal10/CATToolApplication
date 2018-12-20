@@ -94,7 +94,6 @@ public class AssessmentQuestionsService{
 				}
 			}
 			LOGGER.info("Succfully get all the migration pattern list for dicision tree");
-			System.out.println(assessmentQuestionsList);
 			return assessmentQuestionsList;
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.MigrationPattern +e);
@@ -114,7 +113,6 @@ public class AssessmentQuestionsService{
 				}
 				
 			}
-			System.out.println(assessmentQuestionsList);
 			LOGGER.info("Succfully get all the cloud provider list for dicision tree");
 			return assessmentQuestionsList;
 		} catch (Exception e) {
@@ -127,9 +125,9 @@ public class AssessmentQuestionsService{
 		return assessmentQuestionsDAOService.getAllAssessmentQuestion(clientId);
 	}
 	
-//	public List<AssessmentQuestions> getQuestions(int clientId) {
-//		return assessmentQuestionsDAOService.getQuestions(clientId);
-//	}
+	public List<AssessmentQuestions> getQuestions(int clientId) {
+		return assessmentQuestionsDAOService.getQuestions(clientId);
+	}
 	
 //	public List<AssessmentQuestionsDAO> getAllMigrationPattern(int migrationId, int clientId) {
 //	List<AssessmentQuestionsDAO> assessmentQuestionsList=new ArrayList<AssessmentQuestionsDAO>();

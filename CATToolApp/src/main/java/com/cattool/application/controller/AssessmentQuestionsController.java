@@ -20,14 +20,18 @@ import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.CloudableRule;
 import com.cattool.application.entity.MigrationRule;
 import com.cattool.application.entity.QuestionOption;
+import com.cattool.application.repository.AssessmentQuestionsRepository;
 import com.cattool.application.service.AssessmentQuestionsService;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/assessmentQuestions")
-public class AssessmentQuestionsController {
+public class AssessmentQuestionsController {//assessmentQuestions/getAllQuestions/0
 	
 	@Autowired
 	AssessmentQuestionsService  assessmentQuestionsService;
+	
+	@Autowired
+	AssessmentQuestionsRepository AssessmentQuestionsRepository;
 
 	
 	@GetMapping("/getCloudableQuestion/{clientId}")
@@ -45,6 +49,7 @@ public class AssessmentQuestionsController {
 //	@GetMapping("/getAllQuestions/{clientId}")
 //	public List<AssessmentQuestions> getAllquestionsByClientId(@PathVariable int clientId)
 //	{
+//		System.out.println(assessmentQuestionsService.getQuestions(clientId));
 //		return assessmentQuestionsService.getQuestions(clientId);
 //	}
 	
