@@ -53,6 +53,7 @@ public class AssessmentQuestionsDAOService {
 		for(AssessmentQuestions assessmentQuestion:assessmentQuestionList)
 		{
 			assessmentQuestionDAOList.add(toDao(assessmentQuestion));
+			System.out.println(assessmentQuestionDAOList);
 		}
 		return assessmentQuestionDAOList;
 	}
@@ -72,6 +73,10 @@ public class AssessmentQuestionsDAOService {
 		assessmentQuestionsDAO.setQuestionDisplayOrder(assessmentQuestion.getQuestionDisplayOrder());
 		assessmentQuestionsDAO.setQuestionText(assessmentQuestion.getQuestionText());
 		assessmentQuestionsDAO.setQuestionType(assessmentQuestion.getQuestionType());
+		assessmentQuestionsDAO.setQuestionOption(assessmentQuestion.getQuestionOption());
+		assessmentQuestionsDAO.setMigrationRule(assessmentQuestion.getMigrationRule());
+		assessmentQuestionsDAO.setCloudProviderRules(assessmentQuestion.getCloudProviderRules());
+		System.out.println(assessmentQuestionsDAO);
 		return assessmentQuestionsDAO;
 	}
 	
