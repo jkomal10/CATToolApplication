@@ -93,6 +93,16 @@ public class ApplicationDAOService {
 		applicationDAO.setCreatedBy(application.getCreatedBy());
 		applicationDAO.setModifiedBy(application.getModifiedBy());
 		applicationDAO.setUserId(application.getUserId());
+		applicationDAO.setIsSaved(application.getIsSaved());
+		applicationDAO.setAssessApplicationTime(application.getAssessApplicationTime());
+		applicationDAO.setAssessment(application.isAssessment());
+		applicationDAO.setCreatedDate(application.getCreatedDate());
+		applicationDAO.setDeactivate(application.isDeactivate());
+		applicationDAO.setDeleted(application.isDeleted());
+		applicationDAO.setDeletedDateTime(application.getDeletedDateTime());
+		applicationDAO.setIsFinalize(application.getIsFinalize());
+		applicationDAO.setModifiedDateTime(application.getModifiedDateTime());
+		applicationDAO.setVerified(application.isVerified());
 		return applicationDAO;
 	}
 
@@ -154,7 +164,7 @@ public class ApplicationDAOService {
 		return applicationDAOlist;
 	}
 
-	public void saveApplication(ApplicationDAO application) {
+	public void saveApplicationRuleCheck(ApplicationDAO application) {
 		Application applications = getApplicationByApplicationId(application.getApplicationId());
 		applications.setApplicationId(application.getApplicationId());
 		applications.setIsFinalize(1);
@@ -209,8 +219,36 @@ public class ApplicationDAOService {
 		return applications;
 	}
 
-	public void saveApplication(Application application) {
-		applicationRepository.save(application);
+	public void saveApplication(ApplicationDAO application) {
+		
+		applicationRepository.save(ToApplication(application));
+	}
+
+	private Application ToApplication(ApplicationDAO application) {
+		Application app = new Application();
+		app.setApplicationName(application.getApplicationName());
+		app.setApplicationDescription(application.getApplicationDescription());
+		app.setApplicationId(application.getApplicationId());
+		app.setAssessApplicationTime(application.getAssessApplicationTime());
+		app.setAssessment(application.isAssessment());
+		app.setClientId(application.getClientId());
+		app.setCloudProvider(application.getCloudProvider());
+		app.setCreatedBy(application.getCreatedBy());
+		app.setCreatedDate(application.getCreatedDate());
+		app.setDeactivate(application.isDeactivate());
+		app.setDeleted(application.isDeleted());
+		app.setDeletedDateTime(application.getDeletedDateTime());
+		app.setFinalize(application.getIsFinalize());
+		app.setIsCloudable(application.getIsCloudable());
+		app.setIsSaved(application.getIsSaved());
+		app.setUserId(application.getUserId());
+		app.setVerified(application.isVerified());
+		app.setMigrationPattern(application.getMigrationPattern());
+		app.setModifiedBy(application.getModifiedBy());
+		app.setModifiedDateTime(application.getModifiedDateTime());
+		app.setCreatedDate(application.getCreatedDate());
+		
+		return app;
 	}
 
 	public void updateApplication(int applicationId, Application application) {

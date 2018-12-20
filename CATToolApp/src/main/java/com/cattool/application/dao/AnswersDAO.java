@@ -1,14 +1,14 @@
 package com.cattool.application.dao;
 
-import javax.persistence.Column;
-
 public class AnswersDAO {
 	
 	private int answerId;
 	private int applicationId;
 	private int questionId;
 	private String answerText;
-//	private int cloudAbility;
+	private int cloudAbility;
+	private int optionId;
+
 	public int getAnswerId() {
 		return answerId;
 	}
@@ -33,17 +33,25 @@ public class AnswersDAO {
 	public void setAnswerText(String answerText) {
 		this.answerText = answerText;
 	}
-//	public int getCloudAbility() {
-//		return cloudAbility;
-//	}
-//	public void setCloudAbility(int cloudAbility) {
-//		this.cloudAbility = cloudAbility;
-//	}
+	public int getCloudAbility() {
+		return cloudAbility;
+	}
+	public void setCloudAbility(int cloudAbility) {
+		this.cloudAbility = cloudAbility;
+	}
+
+	public int getOptionId() {
+		return optionId;
+	}
+	public void setOptionId(int optionId) {
+		this.optionId = optionId;
+	}
 	@Override
 	public String toString() {
 		return "AnswersDAO [answerId=" + answerId + ", applicationId=" + applicationId + ", questionId=" + questionId
-				+ ", answerText=" + answerText + "]";
+				+ ", answerText=" + answerText + ", cloudAbility=" + cloudAbility + ", optionId=" + optionId + "]";
 	}
+	
 	
 
 }

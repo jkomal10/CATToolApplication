@@ -63,20 +63,20 @@ export class ForCloudableComponent implements OnInit {
     });
 
     this.forCloudableService.collectQuestion(this.myStorage.getCurrentUserObject().clientId).subscribe(result => {
-      this.questions = result;
+      this.questions = result;console.log(this.questions);
     });
 
     this.forCloudableService.collectOptions().subscribe(result => {
       this.options = result;
     })
 
-       this.forCloudableService.collectQuestion(this.myStorage.getCurrentUserObject().clientId).subscribe(result=>{
-         this.questions=result;
-       });
+      //  this.forCloudableService.collectQuestion(this.myStorage.getCurrentUserObject().clientId).subscribe(result=>{
+      //    this.questions=result;
+      //  });
 
-       this.forCloudableService.collectOptions().subscribe(result =>{
-         this.options=result;
-       })
+      //  this.forCloudableService.collectOptions().subscribe(result =>{
+      //    this.options=result;
+      //  })
   }
   someClickHandler(info: any): void {
     this.message = info.id + ' - ' + info.firstName;

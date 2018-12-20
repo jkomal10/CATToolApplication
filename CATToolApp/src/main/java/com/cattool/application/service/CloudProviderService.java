@@ -23,8 +23,7 @@ public class CloudProviderService {
 	@Autowired
 	CloudProviderRuleRepository cloudProviderRuleRepository;
 	
-	@Autowired
-	AssessmentQuestionsRepository assessmentQuestionsRepository;
+
 	
 	public List<CloudProvider> getAllcloudProvider(int clientId){
 		List<CloudProvider> providerList=new ArrayList<CloudProvider>();

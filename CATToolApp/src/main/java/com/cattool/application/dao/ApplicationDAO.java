@@ -6,24 +6,44 @@ import java.util.Date;
 public class ApplicationDAO implements Serializable {
 
 	private int applicationId;
-
+	
 	private String applicationName;
-
+	
 	private String applicationDescription;
-
+	
 	private String isCloudable;
-
+	
 	private String MigrationPattern;
-
+	
 	private String cloudProvider;
-
-	private int userId;
-
+	
+	private boolean isAssessment;
+	
+	private int isFinalize;
+	
+	private boolean isDeleted;
+	
+	private boolean isDeactivate;
+	
+	private Date deletedDateTime;
+	
+	private boolean isVerified;
+	
+	private Date createdDate;
+	
+	private Date modifiedDateTime;
+	
 	private String createdBy;
-
+	
 	private String modifiedBy;
-
+	
+	private int userId;
+	
+	private int isSaved;
+	
 	private int clientId;
+	
+	private Date assessApplicationTime;
 
 	public int getApplicationId() {
 		return applicationId;
@@ -73,12 +93,68 @@ public class ApplicationDAO implements Serializable {
 		this.cloudProvider = cloudProvider;
 	}
 
-	public int getUserId() {
-		return userId;
+	public boolean isAssessment() {
+		return isAssessment;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setAssessment(boolean isAssessment) {
+		this.isAssessment = isAssessment;
+	}
+
+	public int getIsFinalize() {
+		return isFinalize;
+	}
+
+	public void setIsFinalize(int isFinalize) {
+		this.isFinalize = isFinalize;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public boolean isDeactivate() {
+		return isDeactivate;
+	}
+
+	public void setDeactivate(boolean isDeactivate) {
+		this.isDeactivate = isDeactivate;
+	}
+
+	public Date getDeletedDateTime() {
+		return deletedDateTime;
+	}
+
+	public void setDeletedDateTime(Date deletedDateTime) {
+		this.deletedDateTime = deletedDateTime;
+	}
+
+	public boolean isVerified() {
+		return isVerified;
+	}
+
+	public void setVerified(boolean isVerified) {
+		this.isVerified = isVerified;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getModifiedDateTime() {
+		return modifiedDateTime;
+	}
+
+	public void setModifiedDateTime(Date modifiedDateTime) {
+		this.modifiedDateTime = modifiedDateTime;
 	}
 
 	public String getCreatedBy() {
@@ -97,6 +173,22 @@ public class ApplicationDAO implements Serializable {
 		this.modifiedBy = modifiedBy;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getIsSaved() {
+		return isSaved;
+	}
+
+	public void setIsSaved(int isSaved) {
+		this.isSaved = isSaved;
+	}
+
 	public int getClientId() {
 		return clientId;
 	}
@@ -105,13 +197,14 @@ public class ApplicationDAO implements Serializable {
 		this.clientId = clientId;
 	}
 
-	@Override
-	public String toString() {
-		return "ApplicationDAO [applicationId=" + applicationId + ", applicationName=" + applicationName
-				+ ", applicationDescription=" + applicationDescription + ", isCloudable=" + isCloudable
-				+ ", MigrationPattern=" + MigrationPattern + ", cloudProvider=" + cloudProvider + ", userId=" + userId
-				+ ", createdBy=" + createdBy + ", modifiedBy=" + modifiedBy + ", clientId=" + clientId + "]";
+	public Date getAssessApplicationTime() {
+		return assessApplicationTime;
 	}
+
+	public void setAssessApplicationTime(Date assessApplicationTime) {
+		this.assessApplicationTime = assessApplicationTime;
+	}
+	
 
 	
 }

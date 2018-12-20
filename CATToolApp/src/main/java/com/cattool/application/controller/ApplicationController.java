@@ -54,7 +54,7 @@ public class ApplicationController {
 	}
 
 	@PostMapping("/saveApplication/create")
-	public void saveApplication(@RequestBody Application application)
+	public void saveApplication(@RequestBody ApplicationDAO application)
 	{
 		applicationService.saveApplication(application);
 	}
