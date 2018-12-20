@@ -228,12 +228,6 @@ public class ApplicationService {
 			}
 			if (count == numberOfRules) {
 				applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
-				migrationFinal++;
-				break;
-			}
-
-			if (migrationFinal == 0) {
-				applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
 			}
 
 		}

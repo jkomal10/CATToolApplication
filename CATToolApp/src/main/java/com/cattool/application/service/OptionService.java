@@ -22,7 +22,7 @@ public class OptionService {
 		return optionDAOService.getAll();
 	}
 
-	public QuestionOption saveQuestionOption(QuestionOption questionOption) {
+	public QuestionOption saveQuestionOption(OptionDAO questionOption) {
 		return optionDAOService.saveQuestionOption(questionOption);
 		
 	}

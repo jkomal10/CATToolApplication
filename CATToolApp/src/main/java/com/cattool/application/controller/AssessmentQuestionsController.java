@@ -28,13 +28,7 @@ public class AssessmentQuestionsController {
 	
 	@Autowired
 	AssessmentQuestionsService  assessmentQuestionsService;
-	
-//	@GetMapping("/getAllQuestions")
-//	public List<AssessmentQuestions> getAllquestions()
-//	{
-//		System.out.println("Get all question!!");
-//		return assessmentQuestionsService.getAllquestions();
-//	}
+
 	
 	@GetMapping("/getCloudableQuestion/{clientId}")
 	public List<AssessmentQuestionsDAO> getQuestionsforCloudable(@PathVariable int clientId)
@@ -48,10 +42,16 @@ public class AssessmentQuestionsController {
 		return assessmentQuestionsService.getAllquestionsByClientId(clientId);
 	}
 	
+//	@GetMapping("/getAllQuestions/{clientId}")
+//	public List<AssessmentQuestions> getAllquestionsByClientId(@PathVariable int clientId)
+//	{
+//		return assessmentQuestionsService.getQuestions(clientId);
+//	}
+	
 	@PostMapping("/saveAssessmentQuestions/create")
-	public void saveAssessmentQuestions(@RequestBody AssessmentQuestions assessmentQuestions)
+	public void saveAssessmentQuestions(@RequestBody AssessmentQuestionsDAO assessmentQuestionsDAO)
 	{
-		assessmentQuestionsService.saveQuestions(assessmentQuestions);
+		assessmentQuestionsService.saveQuestions(assessmentQuestionsDAO);
 	}
 	
 	@DeleteMapping("/deleteQuestions/{questionId}")
@@ -61,7 +61,7 @@ public class AssessmentQuestionsController {
 	}
 	
 	@PutMapping("/updateQuestions/update")
-	public void updateQuestionById(@RequestBody AssessmentQuestions assessmentQuestions) {
+	public void updateQuestionById(@RequestBody AssessmentQuestionsDAO assessmentQuestions) {
 		assessmentQuestionsService.updateQuestions(assessmentQuestions);
 	}
 	

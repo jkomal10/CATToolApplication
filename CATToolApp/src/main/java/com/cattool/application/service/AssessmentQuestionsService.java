@@ -18,6 +18,7 @@ import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.CloudProviderRule;
 import com.cattool.application.entity.MigrationRule;
 import com.cattool.application.exception.ExceptionMessages;
+import com.cattool.application.repository.AssessmentQuestionsRepository;
 
 
 @Transactional
@@ -29,14 +30,19 @@ public class AssessmentQuestionsService{
 	@Autowired
 	AssessmentQuestionsDAOService assessmentQuestionsDAOService;
 	
+	@Autowired
+	AssessmentQuestionsRepository assessmentQuestionsRepository;
+	
 	int isActive=0;
 	int isDelete=1;//Boolean isDelete=false;
+	
+	
 
 	public List<AssessmentQuestionsDAO> getAllquestionsByClientId(int clientId) {
 		return assessmentQuestionsDAOService.getAllAssessmentQuestion(clientId);
 	}
 	
-	public void saveQuestions(AssessmentQuestions assessmentQuestions)
+	public void saveQuestions(AssessmentQuestionsDAO assessmentQuestions)
 	{
 		assessmentQuestionsDAOService.saveQuestions(assessmentQuestions);
 	}
@@ -44,12 +50,15 @@ public class AssessmentQuestionsService{
 	public void deleteQuestions(int questionId)
 	{
 		assessmentQuestionsDAOService.deleteQuestions(questionId);
+		if(assessmentQuestionsDAOService.getCloudableRuleById(questionId)!=null)
+		{
+			assessmentQuestionsDAOService.deleteCloudableRule(assessmentQuestionsDAOService.getCloudableRuleById(questionId).getCloudableRuleId());
+		}
 	}
 	
-	public void updateQuestions(AssessmentQuestions assessmentQuestions)
+	public void updateQuestions(AssessmentQuestionsDAO assessmentQuestions)
 	{
 		try {
-			AssessmentQuestions assessmentQuestion=new AssessmentQuestions();
 			assessmentQuestionsDAOService.deleteOptionByQuestionId(assessmentQuestions.getQuestionId());
 			if(assessmentQuestions.getAssessmentTypeForCloudProvider()!="true")
 			{
@@ -59,9 +68,6 @@ public class AssessmentQuestionsService{
 			{
 				assessmentQuestionsDAOService.deleteMigrationRuleByQuestionId(assessmentQuestions.getQuestionId());
 			}
-			assessmentQuestion=assessmentQuestionsDAOService.getQuestionsByQuestionId(assessmentQuestions.getQuestionId());
-			assessmentQuestion.setQuestionId(assessmentQuestions.getQuestionId());
-			assessmentQuestion=assessmentQuestions;
 			
 			if(assessmentQuestions.getAssessmentTypeForCloudable() == "true")
 			{
@@ -69,30 +75,12 @@ public class AssessmentQuestionsService{
 			}
 			else
 			{
-				assessmentQuestionsDAOService.deleteCloudableRuleByQuestionId(assessmentQuestion.getQuestionId());
+				assessmentQuestionsDAOService.deleteCloudableRuleByQuestionId(assessmentQuestions.getQuestionId());
 			}
-			assessmentQuestionsDAOService.saveQuestion(assessmentQuestion);
+			assessmentQuestionsDAOService.saveQuestion(assessmentQuestions);
 		} catch (Exception e) {
 		}
 	}
-	
-//	public List<AssessmentQuestionsDAO> getAllMigrationPattern(int migrationId, int clientId) {
-//		List<AssessmentQuestionsDAO> assessmentQuestionsList=new ArrayList<AssessmentQuestionsDAO>();
-//		try {
-//			for(AssessmentQuestions assessmentQuestions:assessmentQuestionsDAOService.getAssessmentQuestions(clientId)) {
-//				for(MigrationRule migrationRule:assessmentQuestions.getMigrationRule()) {
-//					if(migrationId==migrationRule.getMigrationId ()) {
-//						assessmentQuestionsList.add(assessmentQuestionsDAOService.toDao(assessmentQuestions));
-//						break;
-//					}
-//				}
-//			}
-//			System.out.println(assessmentQuestionsList);
-//			return assessmentQuestionsList;
-//		} catch (Exception e) {
-//		}
-//		return assessmentQuestionsList;
-//	}
 	
 	public List<AssessmentQuestions> getAllMigrationPattern(int migrationId, int clientId) {
 		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<AssessmentQuestions>();
@@ -138,5 +126,28 @@ public class AssessmentQuestionsService{
 	public List<AssessmentQuestionsDAO> getQuestionsforCloudable(int clientId) {
 		return assessmentQuestionsDAOService.getAllAssessmentQuestion(clientId);
 	}
+	
+//	public List<AssessmentQuestions> getQuestions(int clientId) {
+//		return assessmentQuestionsDAOService.getQuestions(clientId);
+//	}
+	
+//	public List<AssessmentQuestionsDAO> getAllMigrationPattern(int migrationId, int clientId) {
+//	List<AssessmentQuestionsDAO> assessmentQuestionsList=new ArrayList<AssessmentQuestionsDAO>();
+//	try {
+//		for(AssessmentQuestions assessmentQuestions:assessmentQuestionsDAOService.getAssessmentQuestions(clientId)) {
+//			for(MigrationRule migrationRule:assessmentQuestions.getMigrationRule()) {
+//				if(migrationId==migrationRule.getMigrationId ()) {
+//					assessmentQuestionsList.add(assessmentQuestionsDAOService.toDao(assessmentQuestions));
+//					break;
+//				}
+//			}
+//		}
+//		System.out.println(assessmentQuestionsList);
+//		return assessmentQuestionsList;
+//	} catch (Exception e) {
+//	}
+//	return assessmentQuestionsList;
+//}
+	
 
 }

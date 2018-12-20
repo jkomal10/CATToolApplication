@@ -39,9 +39,17 @@ public class OptionDAOService {
 		return optionDao;
 	}
 	
-	public QuestionOption saveQuestionOption(QuestionOption questionOption) {
-		return optionRepository.save(questionOption);
+	public QuestionOption saveQuestionOption(OptionDAO questionOption) {
+		return optionRepository.save(toOption(questionOption));
 		
+	}
+	
+	private QuestionOption toOption(OptionDAO questionOption) {
+		QuestionOption optionDao=new QuestionOption();
+		optionDao.setOptionId(questionOption.getOptionId());
+		optionDao.setOptionText(questionOption.getOptionText());
+		optionDao.setQuestionId(questionOption.getQuestionId());
+		return optionDao;
 	}
 
 }

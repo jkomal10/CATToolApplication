@@ -62,7 +62,7 @@ public class UserService {
 		return userDao;
 	}
 
-	public void saveUser(Users user, String createdBy) {
+	public void saveUser(UsersDao user, String createdBy) {
 		try {
 			usersDAOService.saveUser(user,createdBy);
 		} catch (Exception e) {
@@ -82,7 +82,7 @@ public class UserService {
 
 	}
 	
-	public void updateUsers(Users user, String modifiedBy) {
+	public void updateUsers(UsersDao user, String modifiedBy) {
 		try {
 			usersDAOService.setUpdatedUser(user, modifiedBy);
 			LOGGER.info("Succfully update the user");
