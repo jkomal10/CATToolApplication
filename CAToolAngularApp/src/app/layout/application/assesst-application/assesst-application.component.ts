@@ -74,12 +74,12 @@ export class AssesstApplicationComponent implements OnInit {
     
 
       this.assessmentService.getAnswers(this.application.applicationId).subscribe(result => {
-        this.AnswersData = result;
+        this.AnswersData = result;console.log(this.AnswersData);
        
       });
 
     this.assessmentService.CollecOptiontData(this.clientIdValue).subscribe(result => {
-        this.AllData = result ;
+        this.AllData = result ;console.log(this.AllData);
          });
       }
   onSelect(obj){

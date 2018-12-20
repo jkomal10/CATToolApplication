@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.cattool.application.dao.AnswersDAO;
 import com.cattool.application.entity.Answers;
 import com.cattool.application.service.AnswersService;
 
@@ -24,23 +26,23 @@ public class AnswersController {
 	AnswersService answersService;
 	
 	@GetMapping("getAll")
-	public List<Answers> getAllAnswers()
+	public List<AnswersDAO> getAllAnswers()
 	{
 		return answersService.getAllAnswers();
 	}
 	@GetMapping("/getAnswersByApplicationId/{applicationId}")
-	public List<Answers> getAnswersByApplicationId(@PathVariable("applicationId") int id) {
-	 return answersService.GetSingleApplication(id);	
+	public List<AnswersDAO> getAnswersByApplicationId(@PathVariable int applicationId) {
+	 return answersService.GetSingleApplication(applicationId);	
 	}
 	
 	@PostMapping("/save/create")
-	public void saveAnswers(@RequestBody  List<Answers> answers)
+	public void saveAnswers(@RequestBody  List<AnswersDAO> answers)
 	{
 		answersService.saveAnswers(answers);
 		
 	}
 	@PutMapping("/update")
-	public void update(@RequestBody List<Answers> answerList) {
+	public void update(@RequestBody List<AnswersDAO> answerList) {
 		answersService.updateAns(answerList);
 	}
 

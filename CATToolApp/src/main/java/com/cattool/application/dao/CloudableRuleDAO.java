@@ -1,9 +1,5 @@
 package com.cattool.application.dao;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 public class CloudableRuleDAO {
 	
 	private int cloudableRuleId;
@@ -20,12 +16,6 @@ public class CloudableRuleDAO {
 	}
 	public void setQuestionDisplayOrder(int questionDisplayOrder) {
 		this.questionDisplayOrder = questionDisplayOrder;
-	}
-	public int getCloudableRuleId() {
-		return cloudableRuleId;
-	}
-	public void setCloudableRuleId(int cloudableRuleId) {
-		this.cloudableRuleId = cloudableRuleId;
 	}
 	public int getQuestionId() {
 		return questionId;
@@ -57,12 +47,16 @@ public class CloudableRuleDAO {
 	public void setClientId(int clientId) {
 		this.clientId = clientId;
 	}
+	public int getCloudableRuleId() {
+		return cloudableRuleId;
+	}
+	public void setCloudableRuleId(int cloudableRuleId) {
+		this.cloudableRuleId = cloudableRuleId;
+	}
 	@Override
 	public String toString() {
-		return "CloudableRule [cloudableRuleId=" + cloudableRuleId + ", questionId=" + questionId + ", cloudableRule="
-				+ cloudableRule + ", executionOrder=" + executionOrder + ", questionText=" + questionText
-				+ ", clientId=" + clientId + ", questionDisplayOrder=" + questionDisplayOrder + "]";
+		return "CloudableRuleDAO [cloudableRuleId=" + cloudableRuleId + ", questionId=" + questionId
+				+ ", cloudableRule=" + cloudableRule + ", executionOrder=" + executionOrder + ", questionText="
+				+ questionText + ", clientId=" + clientId + ", questionDisplayOrder=" + questionDisplayOrder + "]";
 	}
-	
-	
 }

@@ -83,7 +83,7 @@ public class ApplicationService {
 		return applicationDaoService.getApplicationById(applicationId);
 	}
 
-	public void saveApplication(Application application) {
+	public void saveApplication(ApplicationDAO application) {
 		applicationDaoService.saveApplication(application);
 	}
 
@@ -120,7 +120,7 @@ public class ApplicationService {
 	
 	public void allRuleCheck(int applicationId) {
 		ApplicationDAO application = applicationDaoService.getApplicationById(applicationId);
-		applicationDaoService.saveApplication(application);
+		applicationDaoService.saveApplicationRuleCheck(application);
 		boolean cloudabilityCheck = cloudableCheck(applicationId);
 		if (cloudabilityCheck) {
 			cloudProviderCheck(applicationId);

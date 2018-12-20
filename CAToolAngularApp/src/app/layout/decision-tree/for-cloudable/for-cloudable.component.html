@@ -43,7 +43,7 @@
           <span *ngFor="let question of questions;let k = index">
             <span *ngIf="rules[i].questionId==questions[k].questionId && rules[i].questionId!=0">{{question.questionType}}</span>
           </span>
-          <br>
+          <!-- <br> -->
               <span *ngIf="check(rules[i].questionId)"></span>
               <span>
               {{optionsList}}
