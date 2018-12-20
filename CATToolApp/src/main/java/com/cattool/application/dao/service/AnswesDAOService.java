@@ -28,7 +28,6 @@ public class AnswesDAOService {
 	public List<AnswersDAO> findAnswers(int applicationId) {
 		
 		List<AnswersDAO> answersDAOs = new ArrayList<AnswersDAO>();
-		AnswersDAO answersDAO = new AnswersDAO();
 		for(Answers answer : answerRepository.findByApplicationId(applicationId))
 		{
 			answersDAOs.add(ToAnsDAO(answer));
@@ -63,17 +62,9 @@ public class AnswesDAOService {
 	public void saveAnswers(List<AnswersDAO> AnswersList) {
 		int count=0;
 		int applicationIdFromUI=0;
-		List<Answers> ansList=new ArrayList<Answers>();
 		for(AnswersDAO answers : AnswersList )
 		{ 
 			Answers answersObject=ToAnswers(answers);
-//			answersObject=answers;
-//			answersObject.setApplicationId(answers.getApplicationId());
-//			answersObject.setAnswerId(answers.getAnswerId());
-//			answersObject.setAnswerText(answers.getAnswerText());
-//			answersObject.setCloudAbility(answers.getCloudAbility());
-//			answersObject.setOptionId(answers.getOptionId());
-//			answersObject.setQuestionId(answers.getQuestionId());
 			if(answersObject.getAnswerText()!=null )
 			{
 			}
@@ -115,18 +106,18 @@ public class AnswesDAOService {
 		answers.setCloudAbility(answer.getCloudAbility());
 		answers.setOptionId(answer.getOptionId());
 		answers.setQuestionId(answer.getQuestionId());
-		return null;
+		return answers;
 	}
 
 	public List<AnswersDAO> GetSingleApplication(int applicationId) {
 		List<Answers> ansList=new ArrayList<>();
-		List<AnswersDAO> answersDAO = new ArrayList<AnswersDAO>();
+		List<AnswersDAO> answersDAOlist = new ArrayList<AnswersDAO>();
 		ansList=answersRepository.findByApplicationId(applicationId);
 		for(Answers answers:ansList)
 		{
-			answersDAO.add(ToDAO(answers));
+			answersDAOlist.add(ToDAO(answers));
 		}
-		return answersDAO;
+		return answersDAOlist;
 	}
 
 	public void updateAns(List<AnswersDAO> answerList) {

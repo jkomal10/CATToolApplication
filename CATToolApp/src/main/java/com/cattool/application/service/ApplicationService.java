@@ -178,7 +178,7 @@ public class ApplicationService {
 				numberOfRules++;
 
 				for (AnswersDAO answers : allanswers) {
-					if (answers.getQuestionId() == cloudProviderRuleDAO.getQuestionId()) {
+					if (answers.getQuestionId() == Integer.parseInt(cloudProviderRuleDAO.getQuestionId())) {
 
 						for (int i = 0; i < cloudProviderRuleArray.length; i++) {
 							if (cloudProviderRuleArray[i].equals(answers.getAnswerText())) {
@@ -204,7 +204,6 @@ public class ApplicationService {
 	}
 
 	public void migrationCheck(int applicationId) {
-		int migrationFinal = 0;
 		ApplicationDAO application = new ApplicationDAO();
 		application = applicationDaoService.getApplicationById(applicationId);
 		
@@ -212,11 +211,12 @@ public class ApplicationService {
 		
 		for (MigrationDAO migrationDAO : migrationPatternDAOService.findMigrationRules(application.getClientId())) {
 			int count = 0, numberOfRules = 0;
+			System.out.println(migrationDAO.getMigrationPattern());
 			for (MigrationRuleDAO migrationRuleDAO : migrationDAO.getMigrationRule()) {
 				String[] migrationRuleArray = migrationRuleDAO.getMigrationRule().split(",");
 				numberOfRules++;
 				for (AnswersDAO answers : allanswers) {
-					if (answers.getQuestionId() == migrationRuleDAO.getQuestionId() ) {
+					if (answers.getQuestionId() == Integer.parseInt(migrationRuleDAO.getQuestionId()) ) {
 						for (int i = 0; i < migrationRuleArray.length; i++) {
 
 							if (migrationRuleArray[i].equals(answers.getAnswerText())) {
@@ -226,16 +226,26 @@ public class ApplicationService {
 					}
 				}
 			}
-			if (count == numberOfRules) {
+			if(migrationDAO.getPermission().equalsIgnoreCase("AND"))
+			{
+				if (count == numberOfRules) {
+					applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
+					break;
+				}
+			}
+			else if(migrationDAO.getPermission().equalsIgnoreCase("OR"))
+			{
+				if (count >=1) {
+					applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
+					break;
+				}
+			}
+			else
+			{
 				applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
-				migrationFinal++;
 				break;
 			}
-
-			if (migrationFinal == 0) {
-				applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
-			}
-
+			
 		}
 	}
 

@@ -45,6 +45,7 @@ public class MigrationPatternDAOService {
 		migrationDAO.setMigrationId(migration.getMigrationId());
 		migrationDAO.setMigrationPattern(migration.getMigrationPattern());
 		migrationDAO.setMigrationRule(migrationRuleDAO);
+		migrationDAO.setPermission(migration.getPermission());
 		
 		return migrationDAO;
 	}
@@ -57,7 +58,7 @@ public class MigrationPatternDAOService {
 		migrationRuleDAO.setMigrationId(migrationRule.getMigrationId());
 		migrationRuleDAO.setMigrationRule(migrationRule.getMigrationRule());
 		migrationRuleDAO.setMigrationRuleId(migrationRule.getMigrationRuleId());
-		migrationRuleDAO.setQuestionId(Integer.parseInt(migrationRule.getQuestionId()));
+		migrationRuleDAO.setQuestionId(migrationRule.getQuestionId());
 		
 		return migrationRuleDAO;
 	}

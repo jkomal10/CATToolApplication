@@ -1,6 +1,7 @@
 package com.cattool.application.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,15 +39,15 @@ public class AssessmentQuestionsDAO implements Serializable{
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="questionId", referencedColumnName="questionId")
-    private List<MigrationRule> migrationRule;
+    private List<MigrationRuleDAO> migrationRule;
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="questionId", referencedColumnName="questionId")
-    private List<QuestionOption> questionOption;
+    private List<OptionDAO> questionOption;
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="questionId", referencedColumnName="questionId")
-    private List<CloudProviderRule> cloudProviderRules;
+    private List<CloudProviderRuleDAO> cloudProviderRules;
 	
 	public int getQuestionId() {
 		return questionId;
@@ -144,23 +145,27 @@ public class AssessmentQuestionsDAO implements Serializable{
 	public void setClientId(int clientId) {
 		this.clientId = clientId;
 	}
-	public List<MigrationRule> getMigrationRule() {
+	public List<MigrationRuleDAO> getMigrationRule() {
 		return migrationRule;
 	}
-	public void setMigrationRule(List<MigrationRule> migrationRule) {
+	public void setMigrationRule(List<MigrationRuleDAO> migrationRule) {
 		this.migrationRule = migrationRule;
 	}
-	public List<QuestionOption> getQuestionOption() {
+	public List<OptionDAO> getQuestionOption() {
 		return questionOption;
 	}
-	public void setQuestionOption(List<QuestionOption> questionOption) {
+	public void setQuestionOption(List<OptionDAO> questionOption) {
 		this.questionOption = questionOption;
 	}
-	public List<CloudProviderRule> getCloudProviderRules() {
+	public List<CloudProviderRuleDAO> getCloudProviderRules() {
 		return cloudProviderRules;
 	}
-	public void setCloudProviderRules(List<CloudProviderRule> cloudProviderRules) {
+	public void setCloudProviderRules(List<CloudProviderRuleDAO> cloudProviderRules) {
 		this.cloudProviderRules = cloudProviderRules;
+	}
+	public AssessmentQuestionsDAO() {
+		this.questionOption = new ArrayList<OptionDAO>();
+		
 	}
 	@Override
 	public String toString() {

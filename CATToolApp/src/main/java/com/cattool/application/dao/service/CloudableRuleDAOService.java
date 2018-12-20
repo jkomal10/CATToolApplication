@@ -25,9 +25,19 @@ public class CloudableRuleDAOService {
 		}
 		return cloudableRuleDAO;
 	}
-	private CloudableRuleDAO ToDAO(CloudableRule cloudableRule) {
+	public CloudableRuleDAO ToDAO(CloudableRule cloudableRule) {
 
 		CloudableRuleDAO cloudableRuleDAO = new CloudableRuleDAO();
+		cloudableRuleDAO.setClientId(cloudableRule.getClientId());
+		cloudableRuleDAO.setCloudableRule(cloudableRule.getCloudableRule());
+		cloudableRuleDAO.setCloudableRuleId(cloudableRule.getCloudableRuleId());
+		cloudableRuleDAO.setQuestionId(cloudableRule.getQuestionId());
+		return cloudableRuleDAO;
+	}
+	
+	public CloudableRule toCloudableRule(CloudableRuleDAO cloudableRule)
+	{
+		CloudableRule cloudableRuleDAO = new CloudableRule();
 		cloudableRuleDAO.setClientId(cloudableRule.getClientId());
 		cloudableRuleDAO.setCloudableRule(cloudableRule.getCloudableRule());
 		cloudableRuleDAO.setCloudableRuleId(cloudableRule.getCloudableRuleId());

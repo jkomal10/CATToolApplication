@@ -62,7 +62,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/addUser/create/{createdBy}")
-	public void saveUser(@RequestBody Users user,@PathVariable String createdBy)
+	public void saveUser(@RequestBody UsersDao user,@PathVariable String createdBy)
 	{
 		userService.saveUser(user,createdBy);
 	}
@@ -75,7 +75,7 @@ public class UserController {
 	}
 	
 	@PutMapping("/updateUser/update/{modifiedBy}")
-	public void updateUserId(@RequestBody Users user,@PathVariable String modifiedBy) {
+	public void updateUserId(@RequestBody UsersDao user,@PathVariable String modifiedBy) {
 		userService.updateUsers(user,modifiedBy);
 	}
 	

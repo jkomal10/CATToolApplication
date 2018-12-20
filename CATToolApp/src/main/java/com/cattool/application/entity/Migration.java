@@ -14,7 +14,7 @@ public class Migration {
 	private String migrationPattern;
 	private int evaluationOrder;
 	private int clientId;
-	
+	private String permission;
 	public int getMigrationId() {
 		return migrationId;
 	}
@@ -39,14 +39,16 @@ public class Migration {
 	public void setClientId(int clientId) {
 		this.clientId = clientId;
 	}
-	public Migration() {
-		super();
+	public String getPermission() {
+		return permission;
+	}
+	public void setPermission(String permission) {
+		this.permission = permission;
 	}
 	@Override
 	public String toString() {
 		return "Migration [migrationId=" + migrationId + ", migrationPattern=" + migrationPattern + ", evaluationOrder="
-				+ evaluationOrder + ", clientId=" + clientId + "]";
+				+ evaluationOrder + ", clientId=" + clientId + ", permission=" + permission + "]";
 	}
-
 	
 }

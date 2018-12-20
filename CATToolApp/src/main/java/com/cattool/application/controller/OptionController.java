@@ -30,7 +30,7 @@ public class OptionController {
 	}
    
 	@PostMapping("/save/create")
-	public void saveQuestionOption(@RequestBody QuestionOption questionOption)
+	public void saveQuestionOption(@RequestBody OptionDAO questionOption)
 	{
 		optionService.saveQuestionOption(questionOption);
 	}

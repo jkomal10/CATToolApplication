@@ -66,7 +66,9 @@ export class AssesstApplicationComponent implements OnInit {
       });
       if(this.myStorage.getCurrentUserObject().isAdmin==1)
       {
+
         this.userRoleService.question.subscribe(data => {
+          console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
           this.application = data;
           
         });
@@ -74,11 +76,13 @@ export class AssesstApplicationComponent implements OnInit {
     
 
       this.assessmentService.getAnswers(this.application.applicationId).subscribe(result => {
+        console.log("*********************************************");
         this.AnswersData = result;console.log(this.AnswersData);
        
       });
 
     this.assessmentService.CollecOptiontData(this.clientIdValue).subscribe(result => {
+      console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
         this.AllData = result ;console.log(this.AllData);
          });
       }

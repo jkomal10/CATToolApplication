@@ -5,15 +5,18 @@ public class CloudableRuleDAO {
 	private int cloudableRuleId;
 	private int questionId;
 	private String cloudableRule;
+	private int executionOrder;
+	private String questionText;
 	private int clientId;
+	private int questionDisplayOrder;
 	
-	public int getCloudableRuleId() {
-		return cloudableRuleId;
+	
+	public int getQuestionDisplayOrder() {
+		return questionDisplayOrder;
 	}
-	public void setCloudableRuleId(int cloudableRuleId) {
-		this.cloudableRuleId = cloudableRuleId;
+	public void setQuestionDisplayOrder(int questionDisplayOrder) {
+		this.questionDisplayOrder = questionDisplayOrder;
 	}
-
 	public int getQuestionId() {
 		return questionId;
 	}
@@ -26,19 +29,34 @@ public class CloudableRuleDAO {
 	public void setCloudableRule(String cloudableRule) {
 		this.cloudableRule = cloudableRule;
 	}
+	public int getExecutionOrder() {
+		return executionOrder;
+	}
+	public void setExecutionOrder(int executionOrder) {
+		this.executionOrder = executionOrder;
+	}
+	public String getQuestionText() {
+		return questionText;
+	}
+	public void setQuestionText(String questionText) {
+		this.questionText = questionText;
+	}
 	public int getClientId() {
 		return clientId;
 	}
 	public void setClientId(int clientId) {
 		this.clientId = clientId;
 	}
+	public int getCloudableRuleId() {
+		return cloudableRuleId;
+	}
+	public void setCloudableRuleId(int cloudableRuleId) {
+		this.cloudableRuleId = cloudableRuleId;
+	}
 	@Override
 	public String toString() {
 		return "CloudableRuleDAO [cloudableRuleId=" + cloudableRuleId + ", questionId=" + questionId
-				+ ", cloudableRule=" + cloudableRule + ", clientId=" + clientId + "]";
+				+ ", cloudableRule=" + cloudableRule + ", executionOrder=" + executionOrder + ", questionText="
+				+ questionText + ", clientId=" + clientId + ", questionDisplayOrder=" + questionDisplayOrder + "]";
 	}
-	
-	
-	
-
 }

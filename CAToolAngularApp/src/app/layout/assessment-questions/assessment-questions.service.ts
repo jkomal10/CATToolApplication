@@ -14,6 +14,7 @@ export class AssessmentQuestionsService {
   }
 
   getAllQuestions(clientId : number) {
+    console.log(this.myStorage.getdomainURL()+`/assessmentQuestions/getAllQuestions/`+clientId);
     return  this.http.get(this.myStorage.getdomainURL()+`/assessmentQuestions/getAllQuestions/`+clientId);
   }
 
