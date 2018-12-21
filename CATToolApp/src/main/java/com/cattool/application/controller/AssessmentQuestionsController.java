@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cattool.application.dao.AssessmentQuestionsDAO;
-import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
 import com.cattool.application.service.AssessmentQuestionsService;
 @CrossOrigin(origins = "http://localhost:4200")
@@ -65,20 +64,15 @@ public class AssessmentQuestionsController {//assessmentQuestions/getAllQuestion
 		assessmentQuestionsService.updateQuestions(assessmentQuestions);
 	}
 	
-//	@GetMapping("/getAllCloudableQuestions/{clientId}")
-//	public List<AssessmentQuestions> getCloudableQuestions(@PathVariable int clientId)
-//	{
-//		return assessmentQuestionsService.getCloudableQuestions(clientId);
-//	}
 	
 	@GetMapping("/getAllMigrationPattern/{migrationId}/{clientId}")
-	public List<AssessmentQuestions> getAllMigrationPattern(@PathVariable("migrationId") int migrationId,@PathVariable int clientId)
+	public List<AssessmentQuestionsDAO> getAllMigrationPattern(@PathVariable("migrationId") int migrationId,@PathVariable int clientId)
 	{
 		return assessmentQuestionsService.getAllMigrationPattern(migrationId,clientId);
 	}
 	
 	@GetMapping("/getAllCloudProviderRule/{cloudProviderId}/{clientId}")
-	public List<AssessmentQuestions> getAllcloudProviderRule(@PathVariable("cloudProviderId") int cloudProviderId,@PathVariable int clientId)
+	public List<AssessmentQuestionsDAO> getAllcloudProviderRule(@PathVariable("cloudProviderId") int cloudProviderId,@PathVariable int clientId)
 	{
 		return assessmentQuestionsService.getAllcloudProviderRule(cloudProviderId,clientId);
 	}

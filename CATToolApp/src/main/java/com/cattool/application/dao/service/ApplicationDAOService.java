@@ -6,13 +6,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.cattool.application.dao.AnswersDAO;
 import com.cattool.application.dao.ApplicationDAO;
-import com.cattool.application.dao.CloudableRuleDAO;
 import com.cattool.application.entity.Answers;
 import com.cattool.application.entity.Application;
-import com.cattool.application.entity.CloudableRule;
 import com.cattool.application.entity.Users;
 import com.cattool.application.repository.AnswersRepository;
 import com.cattool.application.repository.ApplicationRepository;

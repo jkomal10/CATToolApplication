@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cattool.application.dao.AnswersDAO;
-import com.cattool.application.entity.Answers;
 import com.cattool.application.service.AnswersService;
 
 @CrossOrigin(origins = "http://localhost:4200")

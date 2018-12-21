@@ -1,22 +1,14 @@
 package com.cattool.application.dao.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.cattool.application.dao.ApplicationDAO;
-import com.cattool.application.dao.AssessmentQuestionsDAO;
 import com.cattool.application.dao.UsersDao;
-import com.cattool.application.entity.Application;
-import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.ClientMaster;
 import com.cattool.application.entity.Users;
-import com.cattool.application.exception.CATException;
 import com.cattool.application.exception.ExceptionMessages;
 import com.cattool.application.repository.ClientMasterRepository;
 import com.cattool.application.repository.UserRepository;

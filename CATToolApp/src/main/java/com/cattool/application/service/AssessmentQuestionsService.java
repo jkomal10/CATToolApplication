@@ -13,12 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.cattool.application.dao.AssessmentQuestionsDAO;
+import com.cattool.application.dao.CloudProviderRuleDAO;
+import com.cattool.application.dao.MigrationRuleDAO;
 import com.cattool.application.dao.service.AssessmentQuestionsDAOService;
 import com.cattool.application.entity.AssessmentQuestions;
-import com.cattool.application.entity.CloudProviderRule;
-import com.cattool.application.entity.MigrationRule;
 import com.cattool.application.exception.ExceptionMessages;
-import com.cattool.application.repository.AssessmentQuestionsRepository;
 
 
 @Transactional
@@ -29,9 +28,6 @@ public class AssessmentQuestionsService{
 	
 	@Autowired
 	AssessmentQuestionsDAOService assessmentQuestionsDAOService;
-	
-	@Autowired
-	AssessmentQuestionsRepository assessmentQuestionsRepository;
 	
 	int isActive=0;
 	int isDelete=1;//Boolean isDelete=false;
@@ -82,38 +78,40 @@ public class AssessmentQuestionsService{
 		}
 	}
 	
-	public List<AssessmentQuestions> getAllMigrationPattern(int migrationId, int clientId) {
-		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<AssessmentQuestions>();
+	public List<AssessmentQuestionsDAO> getAllMigrationPattern(int migrationId, int clientId) {
+		List<AssessmentQuestionsDAO> assessmentQuestionsdaoList=new ArrayList<AssessmentQuestionsDAO>();
 		try {
-			for(AssessmentQuestions assessmentQuestions:assessmentQuestionsDAOService.getAssessmentQuestions(clientId)) {
-				for(MigrationRule migrationRule:assessmentQuestions.getMigrationRule()) {
-					if(migrationId==migrationRule.getMigrationId ()) {
-						assessmentQuestionsList.add(assessmentQuestions);
+			for(AssessmentQuestionsDAO assessmentQuestionsDAO:assessmentQuestionsDAOService.getAllAssessmentQuestion(clientId)) {
+				for(MigrationRuleDAO migrationRuleDAO:assessmentQuestionsDAO.getMigrationRule()) {
+					if(migrationId==migrationRuleDAO.getMigrationId ()) {
+						assessmentQuestionsdaoList.add(assessmentQuestionsDAO);
 						break;
 					}
 				}
 			}
 			LOGGER.info("Succfully get all the migration pattern list for dicision tree");
-			return assessmentQuestionsList;
+			System.out.println(assessmentQuestionsdaoList);
+			return assessmentQuestionsdaoList;
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.MigrationPattern +e);
 		}
-		return assessmentQuestionsList;
+		return assessmentQuestionsdaoList;
 	}
 	
-	public List<AssessmentQuestions> getAllcloudProviderRule(int cloudProviderId, int clientId) {
-		List<AssessmentQuestions> assessmentQuestionsList=new ArrayList<AssessmentQuestions>();
+	public List<AssessmentQuestionsDAO> getAllcloudProviderRule(int cloudProviderId, int clientId) {
+		List<AssessmentQuestionsDAO> assessmentQuestionsList=new ArrayList<AssessmentQuestionsDAO>();
 		try {
-			for(AssessmentQuestions assessmentQuestions:assessmentQuestionsDAOService.getAssessmentQuestions(clientId)) {
-				for(CloudProviderRule cloudProviderRule:assessmentQuestions.getCloudProviderRules()) {
+			for(AssessmentQuestionsDAO assessmentQuestionsDAO:assessmentQuestionsDAOService.getAllAssessmentQuestion(clientId)) {
+				for(CloudProviderRuleDAO cloudProviderRule:assessmentQuestionsDAO.getCloudProviderRules()) {
 					if(cloudProviderId==cloudProviderRule.getCloudProviderId()) {
-						assessmentQuestionsList.add(assessmentQuestions);
+						assessmentQuestionsList.add(assessmentQuestionsDAO);
 						break;
 					}
 				}
 				
 			}
 			LOGGER.info("Succfully get all the cloud provider list for dicision tree");
+			System.out.println(assessmentQuestionsList);
 			return assessmentQuestionsList;
 		} catch (Exception e) {
 			LOGGER.error(ExceptionMessages.MigrationPattern +e);

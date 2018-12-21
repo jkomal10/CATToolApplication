@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cattool.application.entity.CloudProvider;
 import com.cattool.application.entity.CloudProviderRule;
-import com.cattool.application.repository.AssessmentQuestionsRepository;
 import com.cattool.application.repository.CloudProviderRepository;
 import com.cattool.application.repository.CloudProviderRuleRepository;
 

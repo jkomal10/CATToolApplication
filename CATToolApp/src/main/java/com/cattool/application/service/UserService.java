@@ -1,24 +1,16 @@
 package com.cattool.application.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.security.MessageDigest;
-
 import com.cattool.application.dao.UsersDao;
 import com.cattool.application.dao.service.UsersDAOService;
-import com.cattool.application.encryption.EncryptPassword;
 import com.cattool.application.entity.ClientMaster;
-import com.cattool.application.entity.Users;
-import com.cattool.application.exception.CATException;
 import com.cattool.application.exception.ExceptionMessages;
 import com.cattool.application.repository.ClientMasterRepository;
 import com.cattool.application.repository.UserRepository;

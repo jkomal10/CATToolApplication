@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cattool.application.dao.OptionDAO;
 import com.cattool.application.dao.service.OptionDAOService;
-import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.QuestionOption;
-import com.cattool.application.repository.OptionRepository;
 
 @Service
 public class OptionService {

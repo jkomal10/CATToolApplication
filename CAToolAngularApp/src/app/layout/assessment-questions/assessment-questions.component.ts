@@ -77,7 +77,7 @@ export class AssessmentQuestionsComponent implements OnInit {
         console.log(data);
       },
       error => console.log('ERROR: ' + error));
-      this.router.navigate(['/assessment-questions']);
+      //this.router.navigate(['/assessment-questions']);
   }
 
   updateQuestions(questions: AssessmentQuestions){

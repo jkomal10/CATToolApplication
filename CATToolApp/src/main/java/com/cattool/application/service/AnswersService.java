@@ -1,15 +1,10 @@
 package com.cattool.application.service;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cattool.application.dao.AnswersDAO;
 import com.cattool.application.dao.service.AnswesDAOService;
-import com.cattool.application.entity.Answers;
-import com.cattool.application.entity.Application;
 import com.cattool.application.repository.AnswersRepository;
 import com.cattool.application.repository.ApplicationRepository;
 

@@ -262,64 +262,66 @@ private CloudProviderRuleDAO toCloudProviderRuleDAO(CloudProviderRule cloudProvi
 		assessmentQuestion.setQuestionDisplayOrder(assessmentQuestionDao.getQuestionDisplayOrder());
 		assessmentQuestion.setQuestionText(assessmentQuestionDao.getQuestionText());
 		assessmentQuestion.setQuestionType(assessmentQuestionDao.getQuestionType());
-		
 		List<QuestionOption> optionList = new ArrayList<>();
 		for(OptionDAO questionOption:assessmentQuestionDao.getQuestionOption())
 		{
 			optionList.add(toOption(questionOption));
 		}
 		assessmentQuestion.setQuestionOption(optionList);
-		
-		List<MigrationRule> migrationRuleList = new ArrayList<>();
-		for(MigrationRuleDAO migrationRuleDAOs:assessmentQuestionDao.getMigrationRule())
+		if(assessmentQuestionDao.getMigrationRule()!=null)
 		{
-			migrationRuleList.add(toMigrationRule(migrationRuleDAOs));
+			List<MigrationRule> migrationRuleList = new ArrayList<>();
+			for(MigrationRuleDAO migrationRuleDAOs:assessmentQuestionDao.getMigrationRule())
+			{
+				migrationRuleList.add(toMigrationRule(migrationRuleDAOs));
+			}
+			assessmentQuestion.setMigrationRule(migrationRuleList);
 		}
-		assessmentQuestion.setMigrationRule(migrationRuleList);
 		
-		List<CloudProviderRule> cloudProviderRuleList=new ArrayList<>();
-		for(CloudProviderRuleDAO cloudProviderRuleDAO:assessmentQuestionDao.getCloudProviderRules())
+		if(assessmentQuestionDao.getCloudProviderRules()!=null)
 		{
-			cloudProviderRuleList.add(toCloudProviderRule(cloudProviderRuleDAO));
+			List<CloudProviderRule> cloudProviderRuleList=new ArrayList<>();
+			for(CloudProviderRuleDAO cloudProviderRuleDAO:assessmentQuestionDao.getCloudProviderRules())
+			{
+				cloudProviderRuleList.add(toCloudProviderRule(cloudProviderRuleDAO));
+			}
+			assessmentQuestion.setCloudProviderRules(cloudProviderRuleList);
 		}
-		assessmentQuestion.setCloudProviderRules(cloudProviderRuleList);
 		return assessmentQuestion;
 	}
 	
 private QuestionOption toOption(OptionDAO optionDAO) {
 		
-	QuestionOption option = new QuestionOption();
-	option.setOptionId(optionDAO.getOptionId());
-	option.setOptionText(optionDAO.getOptionText());
-	option.setQuestionId(optionDAO.getQuestionId());
-		
-	return option;
-
+		QuestionOption option = new QuestionOption();
+		option.setOptionId(optionDAO.getOptionId());
+		option.setOptionText(optionDAO.getOptionText());
+		option.setQuestionId(optionDAO.getQuestionId());
+		return option;
 	}
 	
 private MigrationRule toMigrationRule(MigrationRuleDAO migrationRuleDAO) {
 		
-	MigrationRule migrationRule = new MigrationRule();
-	migrationRule.setClientId(migrationRuleDAO.getClientId());
-	migrationRule.setMigrationId(migrationRuleDAO.getMigrationId());
-	migrationRule.setQuestionText(migrationRuleDAO.getQuestionText());
-	migrationRule.setMigrationRule(migrationRuleDAO.getMigrationRule());
-	migrationRule.setMigrationRuleId(migrationRuleDAO.getMigrationRuleId());
-	migrationRule.setQuestionId(migrationRuleDAO.getQuestionId());
-	return migrationRule;
+		MigrationRule migrationRule = new MigrationRule();
+		migrationRule.setClientId(migrationRuleDAO.getClientId());
+		migrationRule.setMigrationId(migrationRuleDAO.getMigrationId());
+		migrationRule.setQuestionText(migrationRuleDAO.getQuestionText());
+		migrationRule.setMigrationRule(migrationRuleDAO.getMigrationRule());
+		migrationRule.setMigrationRuleId(migrationRuleDAO.getMigrationRuleId());
+		migrationRule.setQuestionId(migrationRuleDAO.getQuestionId());
+		return migrationRule;
 	}
 
 private CloudProviderRule toCloudProviderRule(CloudProviderRuleDAO cloudProviderRuleDao) {
 	
-	CloudProviderRule cloudProviderRule = new CloudProviderRule();
-	cloudProviderRule.setClientId(cloudProviderRuleDao.getClientId());
-	cloudProviderRule.setCloudProviderId(cloudProviderRuleDao.getCloudProviderId());
-	cloudProviderRule.setCloudProviderRule(cloudProviderRuleDao.getCloudProviderRule());
-	cloudProviderRule.setCloudProviderRuleId(cloudProviderRuleDao.getCloudProviderRuleId());
-	cloudProviderRule.setExecutionOrder(cloudProviderRuleDao.getExecutionOrder());
-	cloudProviderRule.setQuestionId(cloudProviderRuleDao.getQuestionId());
-	cloudProviderRule.setQuestionText(cloudProviderRuleDao.getQuestionText());
-	return cloudProviderRule;
+		CloudProviderRule cloudProviderRule = new CloudProviderRule();
+		cloudProviderRule.setClientId(cloudProviderRuleDao.getClientId());
+		cloudProviderRule.setCloudProviderId(cloudProviderRuleDao.getCloudProviderId());
+		cloudProviderRule.setCloudProviderRule(cloudProviderRuleDao.getCloudProviderRule());
+		cloudProviderRule.setCloudProviderRuleId(cloudProviderRuleDao.getCloudProviderRuleId());
+		cloudProviderRule.setExecutionOrder(cloudProviderRuleDao.getExecutionOrder());
+		cloudProviderRule.setQuestionId(cloudProviderRuleDao.getQuestionId());
+		cloudProviderRule.setQuestionText(cloudProviderRuleDao.getQuestionText());
+		return cloudProviderRule;
 	}
 
 
@@ -328,7 +330,6 @@ private CloudProviderRule toCloudProviderRule(CloudProviderRuleDAO cloudProvider
 	}
 
 	public List<AssessmentQuestions> getQuestions(int clientId) {
-		System.out.println(assessmentQuestionsRepository.findByClientIdAndIsActiveAndIsDelete(clientId, isActive, 0));
 		return assessmentQuestionsRepository.findByClientIdAndIsActiveAndIsDelete(clientId, isActive, 0);
 	}
 
