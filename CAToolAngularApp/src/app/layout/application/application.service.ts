@@ -33,7 +33,7 @@ export class ApplicationService {
     }
     
     updateApplication(value: any): Observable<Object> {
-      return this.http.put(this.myStorage.getdomainURL()+`/application/updateApplictaion`, value);
+      return this.http.put(this.myStorage.getdomainURL()+`/application/updateApplictaion/`+this.myStorage.getClientName() ,value);
     }
 
     deactivate(applicationId: number): Observable<any> {

@@ -19,5 +19,8 @@ export class Application{
     isSaved:number;
     userId:number;
     clientId:number;
+    recommendedCloudable:string;
+    recommendedCloudProvider:string;
+    recommendedMigrationPattern:string;
 
 }

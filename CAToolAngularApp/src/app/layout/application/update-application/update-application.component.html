@@ -16,6 +16,37 @@
                 </label>
                 <input type="text" class="form-control" id="applicationDescription" required [(ngModel)]="app.applicationDescription" name="applicationDescription">
             </div>
+            <div class="form-group">
+                <label>
+                    <font color="green">Is cloudable? (Recommended)</font>
+                </label>
+                <input type="text" class="form-control" id="recommendedCloudable" required [(ngModel)]="app.recommendedCloudable" name="recommendedCloudable">
+            </div>
+            <div class="form-group">
+                <label>
+                    <font color="green">Recommended Cloud Provider</font>
+                </label>
+                <!-- <select class="form-control" [(ngModel)]="app.recommendedCloudProvider" name="recommendedCloudProvider" (change)="onSelectCloudProvider($event.target.value)"> -->
+                    <select class="form-control" [(ngModel)]="app.recommendedCloudProvider" name="recommendedCloudProvider">
+                    <option selected disabled></option>
+                    <option *ngFor="let cloudprovider of cloudProviders;let i= index" value={{cloudprovider.cloudProviders}}>
+                        {{cloudprovider.cloudProviders}}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>
+                    <font color="green">Recommended Migration Pattern</font>
+                </label>
+                <!-- <select class="form-control" [(ngModel)]="app.recommendedMigrationPattern" name="recommendedMigrationPattern" (change)="onSelectMigrationPatternr($event.target.value)"> -->
+                    <select class="form-control" [(ngModel)]="app.recommendedMigrationPattern" name="recommendedMigrationPattern">
+                    <option selected disabled></option>
+                    <option *ngFor="let MigrationPattern of migrationPatterns;let i= index" value={{MigrationPattern.migrationPattern}}>
+                        {{MigrationPattern.migrationPattern}}
+                    </option>
+
+                </select>
+            </div>
         </div>
         <button type="submit" class="btn btn-success">Submit</button>
     </form>

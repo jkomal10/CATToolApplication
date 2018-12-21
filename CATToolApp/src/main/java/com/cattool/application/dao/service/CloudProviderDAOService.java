@@ -48,6 +48,7 @@ public class CloudProviderDAOService {
 		CloudProviderDAO.setCloudProviderId(cloudProvider.getCloudProviderId());
 		CloudProviderDAO.setCloudProviders(cloudProvider.getCloudProviders());
 		CloudProviderDAO.setCloudProviderRules(cloudProviderRuleDAO);
+		CloudProviderDAO.setPermission(cloudProvider.getPermission());
 		return CloudProviderDAO;
 	}
 

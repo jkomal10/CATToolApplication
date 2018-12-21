@@ -84,6 +84,15 @@ public class Application {
 	@Column
 	private Date assessApplicationTime;
 	
+	@Column
+	private String recommendedCloudable;
+	
+	@Column
+	private String recommendedCloudProvider;
+	
+	@Column
+	private String recommendedMigrationPattern;
+	
 	
 	public int getApplicationId() {
 		return applicationId;
@@ -264,6 +273,32 @@ public class Application {
 	public void setAssessApplicationTime(Date assessApplicationTime) {
 		this.assessApplicationTime = assessApplicationTime;
 	}
+	
+	
+
+	public String getRecommendedCloudable() {
+		return recommendedCloudable;
+	}
+
+	public void setRecommendedCloudable(String recommendedCloudable) {
+		this.recommendedCloudable = recommendedCloudable;
+	}
+
+	public String getRecommendedCloudProvider() {
+		return recommendedCloudProvider;
+	}
+
+	public void setRecommendedCloudProvider(String recommendedCloudProvider) {
+		this.recommendedCloudProvider = recommendedCloudProvider;
+	}
+
+	public String getRecommendedMigrationPattern() {
+		return recommendedMigrationPattern;
+	}
+
+	public void setRecommendedMigrationPattern(String recommendedMigrationPattern) {
+		this.recommendedMigrationPattern = recommendedMigrationPattern;
+	}
 
 	@Override
 	public String toString() {
@@ -274,7 +309,11 @@ public class Application {
 				+ isDeactivate + ", deletedDateTime=" + deletedDateTime + ", isVerified=" + isVerified
 				+ ", createdDate=" + createdDate + ", modifiedDateTime=" + modifiedDateTime + ", createdBy=" + createdBy
 				+ ", modifiedBy=" + modifiedBy + ", userId=" + userId + ", isSaved=" + isSaved + ", clientId="
-				+ clientId + ", assessApplicationTime=" + assessApplicationTime + "]";
+				+ clientId + ", assessApplicationTime=" + assessApplicationTime + ", recommendedCloudable="
+				+ recommendedCloudable + ", recommendedCloudProvider=" + recommendedCloudProvider
+				+ ", recommendedMigrationPattern=" + recommendedMigrationPattern + "]";
 	}
+
+	
 
 }

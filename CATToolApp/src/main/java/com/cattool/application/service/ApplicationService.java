@@ -95,8 +95,8 @@ public class ApplicationService {
 		return applicationDaoService.getApplicationByUserName(userName);
 	}
 
-	public void updateApplication(int applicationId, Application application) {
-		applicationDaoService.updateApplication(applicationId,application);
+	public void updateApplication(String clientName, ApplicationDAO application) {
+		applicationDaoService.updateApplication(clientName,application);
 	}
 
 	public void deleteApplicationById(int id) {
@@ -153,11 +153,12 @@ public class ApplicationService {
 			}
 		}
 		if (cloudableRuleFlag == cloudableRuleListByClientId.size()) {
-			applicationDaoService.setCloudabilityForApplication(application,"Yes");
-
+//			applicationDaoService.setCloudabilityForApplication(application,"Yes");
+			applicationDaoService.setCloudabilityForApplication(applicationId,"Yes");
 			return true;
 		} else {
-			applicationDaoService.setCloudabilityForApplication(application,"No");
+//			applicationDaoService.setCloudabilityForApplication(application,"No");
+			applicationDaoService.setCloudabilityForApplication(applicationId,"No");
 			return false;
 		}
 	}
@@ -168,6 +169,7 @@ public class ApplicationService {
 		application = applicationDaoService.getApplicationById(applicationId);
 		List<AnswersDAO> allanswers = new ArrayList<>();
 		allanswers = answesDAOService.findAnswers(applicationId);
+		System.out.println("**************");
 		for (CloudProviderDAO cloudProvider : CloudProviderDAOService.findCloudProviderRules(application.getClientId()))
 		{
 			
@@ -188,15 +190,21 @@ public class ApplicationService {
 					}
 				}
 			}
-			System.out.println("count "+count+"numberOfRules "+numberOfRules);
+			System.out.println(cloudProvider.getPermission());
+			
+			if("OR".equalsIgnoreCase(cloudProvider.getPermission()))
+			{
 				if (count > 0) {
 					applicationDaoService.setCloudprovider(application,cloudProvider.getCloudProviders());
+					System.out.println(cloudProvider.getCloudProviders());
 					break;
 				}
-				if (numberOfRules == count) {
-					applicationDaoService.setCloudprovider(application,cloudProvider.getCloudProviders());
-					break;
-				}
+			}
+			if (numberOfRules == count) {
+				applicationDaoService.setCloudprovider(application,cloudProvider.getCloudProviders());
+				System.out.println(cloudProvider.getCloudProviders());
+				break;
+			}
 		}
 			
 		

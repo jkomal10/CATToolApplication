@@ -8,6 +8,7 @@ public class CloudProviderDAO {
 	private String cloudProviders;
 	private int clientId;
 	private List<CloudProviderRuleDAO> cloudProviderRules;
+	private String permission;
 	public int getCloudProviderId() {
 		return cloudProviderId;
 	}
@@ -32,11 +33,23 @@ public class CloudProviderDAO {
 	public void setCloudProviderRules(List<CloudProviderRuleDAO> cloudProviderRules) {
 		this.cloudProviderRules = cloudProviderRules;
 	}
+	
+	public String getPermission() {
+		return permission;
+	}
+	public void setPermission(String permission) {
+		this.permission = permission;
+	}
 	@Override
 	public String toString() {
 		return "CloudProviderDAO [cloudProviderId=" + cloudProviderId + ", cloudProviders=" + cloudProviders
-				+ ", clientId=" + clientId + ", cloudProviderRules=" + cloudProviderRules + "]";
+				+ ", clientId=" + clientId + ", cloudProviderRules=" + cloudProviderRules + ", permission=" + permission
+				+ ", getCloudProviderId()=" + getCloudProviderId() + ", getCloudProviders()=" + getCloudProviders()
+				+ ", getClientId()=" + getClientId() + ", getCloudProviderRules()=" + getCloudProviderRules()
+				+ ", getPermission()=" + getPermission() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
+	
 	
 	
 	

@@ -14,6 +14,7 @@ public class CloudProvider {
 	private String cloudProviders;
 	private int evaluationOrder;
 	private int clientId;
+	private String permission;
 	
 	public CloudProvider() {
 		super();
@@ -43,11 +44,20 @@ public class CloudProvider {
 	public void setClientId(int clientId) {
 		this.clientId = clientId;
 	}
+	
+	public String getPermission() {
+		return permission;
+	}
+	public void setPermission(String permission) {
+		this.permission = permission;
+	}
 	@Override
 	public String toString() {
 		return "CloudProvider [cloudProviderId=" + cloudProviderId + ", cloudProviders=" + cloudProviders
-				+ ", evaluationOrder=" + evaluationOrder + ", clientId=" + clientId + "]";
+				+ ", evaluationOrder=" + evaluationOrder + ", clientId=" + clientId + ", permission=" + permission
+				+ "]";
 	}
+	
 
 	
 }

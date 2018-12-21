@@ -3,6 +3,8 @@ package com.cattool.application.dao;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
+
 public class ApplicationDAO implements Serializable {
 
 	private int applicationId;
@@ -44,6 +46,12 @@ public class ApplicationDAO implements Serializable {
 	private int clientId;
 	
 	private Date assessApplicationTime;
+	
+	private String recommendedCloudable;
+	
+	private String recommendedCloudProvider;
+	
+	private String recommendedMigrationPattern;
 
 	public int getApplicationId() {
 		return applicationId;
@@ -204,6 +212,46 @@ public class ApplicationDAO implements Serializable {
 	public void setAssessApplicationTime(Date assessApplicationTime) {
 		this.assessApplicationTime = assessApplicationTime;
 	}
+
+	public String getRecommendedCloudable() {
+		return recommendedCloudable;
+	}
+
+	public void setRecommendedCloudable(String recommendedCloudable) {
+		this.recommendedCloudable = recommendedCloudable;
+	}
+
+	public String getRecommendedCloudProvider() {
+		return recommendedCloudProvider;
+	}
+
+	public void setRecommendedCloudProvider(String recommendedCloudProvider) {
+		this.recommendedCloudProvider = recommendedCloudProvider;
+	}
+
+	public String getRecommendedMigrationPattern() {
+		return recommendedMigrationPattern;
+	}
+
+	public void setRecommendedMigrationPattern(String recommendedMigrationPattern) {
+		this.recommendedMigrationPattern = recommendedMigrationPattern;
+	}
+
+	@Override
+	public String toString() {
+		return "ApplicationDAO [applicationId=" + applicationId + ", applicationName=" + applicationName
+				+ ", applicationDescription=" + applicationDescription + ", isCloudable=" + isCloudable
+				+ ", MigrationPattern=" + MigrationPattern + ", cloudProvider=" + cloudProvider + ", isAssessment="
+				+ isAssessment + ", isFinalize=" + isFinalize + ", isDeleted=" + isDeleted + ", isDeactivate="
+				+ isDeactivate + ", deletedDateTime=" + deletedDateTime + ", isVerified=" + isVerified
+				+ ", createdDate=" + createdDate + ", modifiedDateTime=" + modifiedDateTime + ", createdBy=" + createdBy
+				+ ", modifiedBy=" + modifiedBy + ", userId=" + userId + ", isSaved=" + isSaved + ", clientId="
+				+ clientId + ", assessApplicationTime=" + assessApplicationTime + ", recommendedCloudable="
+				+ recommendedCloudable + ", recommendedCloudProvider=" + recommendedCloudProvider
+				+ ", recommendedMigrationPattern=" + recommendedMigrationPattern + "]";
+	}
+	
+	
 	
 
 	

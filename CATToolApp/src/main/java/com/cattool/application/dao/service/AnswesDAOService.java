@@ -42,6 +42,8 @@ public class AnswesDAOService {
 		AnswersDAO answersDAO = new AnswersDAO();
 			answersDAO.setAnswerId(answer.getAnswerId());
 			answersDAO.setAnswerText(answer.getAnswerText());
+			answersDAO.setCloudAbility(answer.getCloudAbility());
+			answersDAO.setOptionId(answer.getOptionId());
 			answersDAO.setApplicationId(answer.getApplicationId());
 			answersDAO.setQuestionId(answer.getQuestionId());
 		return answersDAO;
@@ -124,13 +126,7 @@ public class AnswesDAOService {
 		
 		for(AnswersDAO answer: answerList )
 		{ 
-		Answers answerObj=new Answers();
-			answerObj.setAnswerId(answer.getAnswerId());
-			answerObj.setOptionId(answer.getOptionId());
-			answerObj.setApplicationId(answer.getApplicationId());
-			answerObj.setCloudAbility(answer.getCloudAbility());
-			answerObj.setQuestionId(answer.getQuestionId());
-			answerObj.setAnswerText(answer.getAnswerText());
+		Answers answerObj=ToAnswers(answer);
 			answersRepository.save(answerObj);
 		}
 		

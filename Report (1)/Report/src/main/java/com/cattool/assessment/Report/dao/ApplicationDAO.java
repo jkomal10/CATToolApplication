@@ -1,117 +1,64 @@
-package com.cattool.assessment.Report.entity;
+package com.cattool.assessment.Report.dao;
 
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-@Entity
-@EntityListeners(AuditingEntityListener.class)
-public class Application {
+public class ApplicationDAO {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int applicationId;
+private int applicationId;
 	
-	@Column
 	private String applicationName;
 	
-	@Column
 	private String applicationDescription;
 	
-	@Column
 	private String isCloudable;
 	
-	@Column
 	private String MigrationPattern;
 	
-	@Column
 	private String cloudProvider;
 	
-	@Column
 	private boolean isAssessment;
 	
-	@Column
 	private int isFinalize;
 	
-	@Column
 	private boolean isDeleted;
 	
-	@Column
 	private boolean isDeactivate;
 	
-	@Column
 	private Date deletedDateTime;
 	
-	@Column
 	private boolean isVerified;
 	
-	@Column
-	@CreatedDate
 	private Date createdDate;
 	
-	@Column 
-	@LastModifiedDate
 	private Date modifiedDateTime;
 	
-	@Column
-	@CreatedBy
 	private String createdBy;
 	
-	@Column
-	@LastModifiedBy
 	private String modifiedBy;
 	
-	@Column
 	private int userId;
 	
-	@Column
 	private int isSaved;
 	
-	@Column
 	private int clientId;
 	
-	@Column
 	private Date assessApplicationTime;
 	
-	@Column
 	private String recommendedCloudable;
 	
-	@Column
 	private String recommendedCloudProvider;
 	
-	@Column
 	private String recommendedMigrationPattern;
-	
-	
+
 	public int getApplicationId() {
 		return applicationId;
-	}
-
-	public int getIsFinalize() {
-		return isFinalize;
-	}
-
-	public void setIsFinalize(int isFinalize) {
-		this.isFinalize = isFinalize;
-	}
-
-	public int getIsSaved() {
-		return isSaved;
-	}
-
-	public void setIsSaved(int isSaved) {
-		this.isSaved = isSaved;
 	}
 
 	public void setApplicationId(int applicationId) {
@@ -134,12 +81,28 @@ public class Application {
 		this.applicationDescription = applicationDescription;
 	}
 
-	public String isCloudable() {
+	public String getIsCloudable() {
 		return isCloudable;
 	}
 
-	public void setCloudable(String isCloudable) {
+	public void setIsCloudable(String isCloudable) {
 		this.isCloudable = isCloudable;
+	}
+
+	public String getMigrationPattern() {
+		return MigrationPattern;
+	}
+
+	public void setMigrationPattern(String migrationPattern) {
+		MigrationPattern = migrationPattern;
+	}
+
+	public String getCloudProvider() {
+		return cloudProvider;
+	}
+
+	public void setCloudProvider(String cloudProvider) {
+		this.cloudProvider = cloudProvider;
 	}
 
 	public boolean isAssessment() {
@@ -150,11 +113,11 @@ public class Application {
 		this.isAssessment = isAssessment;
 	}
 
-	public int isFinalize() {
+	public int getIsFinalize() {
 		return isFinalize;
 	}
 
-	public void setFinalize(int isFinalize) {
+	public void setIsFinalize(int isFinalize) {
 		this.isFinalize = isFinalize;
 	}
 
@@ -230,32 +193,12 @@ public class Application {
 		this.userId = userId;
 	}
 
-	public String getMigrationPattern() {
-		return MigrationPattern;
+	public int getIsSaved() {
+		return isSaved;
 	}
 
-	public void setMigrationPattern(String migrationPattern) {
-		MigrationPattern = migrationPattern;
-	}
-
-	public String getCloudProvider() {
-		return cloudProvider;
-	}
-
-	public void setCloudProvider(String cloudProvider) {
-		this.cloudProvider = cloudProvider;
-	}
-	
-	public Application() {
-		super();
-	}
-
-	public String getIsCloudable() {
-		return isCloudable;
-	}
-
-	public void setIsCloudable(String isCloudable) {
-		this.isCloudable = isCloudable;
+	public void setIsSaved(int isSaved) {
+		this.isSaved = isSaved;
 	}
 
 	public int getClientId() {
@@ -274,7 +217,6 @@ public class Application {
 		this.assessApplicationTime = assessApplicationTime;
 	}
 
-	
 	public String getRecommendedCloudable() {
 		return recommendedCloudable;
 	}
@@ -301,7 +243,7 @@ public class Application {
 
 	@Override
 	public String toString() {
-		return "Application [applicationId=" + applicationId + ", applicationName=" + applicationName
+		return "ApplicationDAO [applicationId=" + applicationId + ", applicationName=" + applicationName
 				+ ", applicationDescription=" + applicationDescription + ", isCloudable=" + isCloudable
 				+ ", MigrationPattern=" + MigrationPattern + ", cloudProvider=" + cloudProvider + ", isAssessment="
 				+ isAssessment + ", isFinalize=" + isFinalize + ", isDeleted=" + isDeleted + ", isDeactivate="
@@ -310,23 +252,9 @@ public class Application {
 				+ ", modifiedBy=" + modifiedBy + ", userId=" + userId + ", isSaved=" + isSaved + ", clientId="
 				+ clientId + ", assessApplicationTime=" + assessApplicationTime + ", recommendedCloudable="
 				+ recommendedCloudable + ", recommendedCloudProvider=" + recommendedCloudProvider
-				+ ", recommendedMigrationPattern=" + recommendedMigrationPattern + ", getApplicationId()="
-				+ getApplicationId() + ", getIsFinalize()=" + getIsFinalize() + ", getIsSaved()=" + getIsSaved()
-				+ ", getApplicationName()=" + getApplicationName() + ", getApplicationDescription()="
-				+ getApplicationDescription() + ", isCloudable()=" + isCloudable() + ", isAssessment()="
-				+ isAssessment() + ", isFinalize()=" + isFinalize() + ", isDeleted()=" + isDeleted()
-				+ ", isDeactivate()=" + isDeactivate() + ", getDeletedDateTime()=" + getDeletedDateTime()
-				+ ", isVerified()=" + isVerified() + ", getCreatedDate()=" + getCreatedDate()
-				+ ", getModifiedDateTime()=" + getModifiedDateTime() + ", getCreatedBy()=" + getCreatedBy()
-				+ ", getModifiedBy()=" + getModifiedBy() + ", getUserId()=" + getUserId() + ", getMigrationPattern()="
-				+ getMigrationPattern() + ", getCloudProvider()=" + getCloudProvider() + ", getIsCloudable()="
-				+ getIsCloudable() + ", getClientId()=" + getClientId() + ", getAssessApplicationTime()="
-				+ getAssessApplicationTime() + ", getRecommendedCloudable()=" + getRecommendedCloudable()
-				+ ", getRecommendedCloudProvider()=" + getRecommendedCloudProvider()
-				+ ", getRecommendedMigrationPattern()=" + getRecommendedMigrationPattern() + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", recommendedMigrationPattern=" + recommendedMigrationPattern + "]";
 	}
-
+	
 	
 
 }

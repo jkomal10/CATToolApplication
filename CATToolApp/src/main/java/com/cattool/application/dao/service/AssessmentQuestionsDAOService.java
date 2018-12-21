@@ -62,39 +62,11 @@ public class AssessmentQuestionsDAOService {
 		for(AssessmentQuestions assessmentQuestion:assessmentQuestionList)
 		{
 			assessmentQuestionDAOList.add(toDao(assessmentQuestion));
-			System.out.println(assessmentQuestionDAOList);
 		}
 		return assessmentQuestionDAOList;
 	}
 	
-<<<<<<< HEAD
-	public AssessmentQuestionsDAO toDao(AssessmentQuestions assessmentQuestion) {
-		// TODO Auto-generated method stub
-		AssessmentQuestionsDAO assessmentQuestionsDAO = new AssessmentQuestionsDAO();
-		assessmentQuestionsDAO.setQuestionId(assessmentQuestion.getQuestionId());
-		assessmentQuestionsDAO.setAssessmentTypeForCloudable(assessmentQuestion.getAssessmentTypeForCloudable());
-		assessmentQuestionsDAO.setAssessmentTypeForCloudProvider(assessmentQuestion.getAssessmentTypeForCloudProvider());
-		assessmentQuestionsDAO.setAssessmentTypeForMigration(assessmentQuestion.getAssessmentTypeForMigration());
-		assessmentQuestionsDAO.setClientId(assessmentQuestion.getClientId());
-		assessmentQuestionsDAO.setIsActive(assessmentQuestion.getIsActive());
-		assessmentQuestionsDAO.setIsDelete(assessmentQuestion.getIsDelete());
-		assessmentQuestionsDAO.setNumberOfOption(assessmentQuestion.getNumberOfOption());
-		assessmentQuestionsDAO.setQuestionDescription(assessmentQuestion.getQuestionDescription());
-		assessmentQuestionsDAO.setQuestionDisplayOrder(assessmentQuestion.getQuestionDisplayOrder());
-		assessmentQuestionsDAO.setQuestionText(assessmentQuestion.getQuestionText());
-		assessmentQuestionsDAO.setQuestionType(assessmentQuestion.getQuestionType());
-		assessmentQuestionsDAO.setQuestionOption(assessmentQuestion.getQuestionOption());
-		assessmentQuestionsDAO.setMigrationRule(assessmentQuestion.getMigrationRule());
-		assessmentQuestionsDAO.setCloudProviderRules(assessmentQuestion.getCloudProviderRules());
-		System.out.println(assessmentQuestionsDAO);
-		return assessmentQuestionsDAO;
-	}
-	
-	
-	public void saveQuestions(AssessmentQuestions assessmentQuestions)
-=======
 	public void saveQuestions(AssessmentQuestionsDAO assessmentQuestions)
->>>>>>> c777b46dcffac9a037dd90f3d8fa1600fd0c6aa0
 	{
 			assessmentQuestionsRepository.save(toService(assessmentQuestions));
 			CloudableRuleDAO cloudableRuleDAO = new CloudableRuleDAO();

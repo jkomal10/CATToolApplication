@@ -103,6 +103,9 @@ public class ApplicationDAOService {
 		applicationDAO.setIsFinalize(application.getIsFinalize());
 		applicationDAO.setModifiedDateTime(application.getModifiedDateTime());
 		applicationDAO.setVerified(application.isVerified());
+		applicationDAO.setRecommendedCloudable(application.getRecommendedCloudable());
+		applicationDAO.setRecommendedCloudProvider(application.getRecommendedCloudProvider());
+		applicationDAO.setRecommendedMigrationPattern(application.getRecommendedMigrationPattern());
 		return applicationDAO;
 	}
 
@@ -180,9 +183,9 @@ public class ApplicationDAOService {
 		answerRepository.save(answer);
 	}
 
-	public void setCloudabilityForApplication(ApplicationDAO application, String string) {
-		Application applications = getApplicationByApplicationId(application.getApplicationId());
-		applications.setApplicationId(application.getApplicationId());
+	public void setCloudabilityForApplication(int applicationId, String string) {
+		Application applications = getApplicationByApplicationId(applicationId);
+		applications.setApplicationId(applicationId);
 		if (string.equals("Yes"))
 			applications.setCloudable("Yes");
 		else {
@@ -247,19 +250,17 @@ public class ApplicationDAOService {
 		app.setModifiedBy(application.getModifiedBy());
 		app.setModifiedDateTime(application.getModifiedDateTime());
 		app.setCreatedDate(application.getCreatedDate());
-		
+		app.setRecommendedCloudable(application.getRecommendedCloudable());
+		app.setRecommendedCloudProvider(application.getRecommendedCloudProvider());
+		app.setRecommendedMigrationPattern(application.getRecommendedMigrationPattern());
 		return app;
 	}
 
-	public void updateApplication(int applicationId, Application application) {
-//		Application app = new Application();
-		Application app = getApplicationByApplicationId(application.getApplicationId());
-		app.setApplicationId(application.getApplicationId());
-		app.setApplicationName(application.getApplicationName());
-		app.setApplicationDescription(application.getApplicationDescription());
-		app.setMigrationPattern(application.getMigrationPattern());
-		app.setUserId(application.getUserId());
-		applicationRepository.save(application);
+	public void updateApplication(String clientName, ApplicationDAO application) {
+		Application app = ToApplication(application);
+		app.setModifiedBy(clientName);
+		applicationRepository.save(app);
 	}
 
 }
+

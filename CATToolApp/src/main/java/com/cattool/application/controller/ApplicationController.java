@@ -78,10 +78,10 @@ public class ApplicationController {
 		return applicationService.getApplicationByUserName(userName);
 	}
 	
-	@PutMapping("/updateApplictaion")
-	public void updateApplication (@RequestBody Application application) {
+	@PutMapping("/updateApplictaion/{clientName}")
+	public void updateApplication (@PathVariable String clientName,@RequestBody ApplicationDAO application) {
 		System.out.println("Update application!!");
-		applicationService.updateApplication(application.getApplicationId(),application);
+		applicationService.updateApplication(clientName,application);
 	}
 		
 	@DeleteMapping("/deleteApplicationById/{applicationId}")
