@@ -4,19 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-
-import com.cattool.application.entity.CloudProviderRule;
-import com.cattool.application.entity.MigrationRule;
-import com.cattool.application.entity.QuestionOption;
 
 public class AssessmentQuestionsDAO implements Serializable{
 
