@@ -24,4 +24,5 @@ public interface ApplicationRepository extends JpaRepository<Application, Long>{
 	List<Application> findByClientId(int clientId);
 	List<Application> findByClientIdAndIsDeletedAndIsFinalizeAndAssessApplicationTimeBetween(int clientId, Boolean isDelete,
 			int isFinalizeValue, Date fromDate, Date toDate);
+	List<Application> findByIsFinalize(int isFinalizeValue);
 }

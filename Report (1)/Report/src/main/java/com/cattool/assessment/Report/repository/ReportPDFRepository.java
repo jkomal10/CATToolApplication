@@ -16,8 +16,7 @@ public interface ReportPDFRepository extends JpaRepository<ReportPDF, Long>{
 
 	byte[] findPdfFilesByApplicationName(String appName);
 
-	Object findByApplicationName(String string);
+	ReportPDF findByApplicationName(String string);
 
-//	boolean findByApplicationName(String string);
 
 }

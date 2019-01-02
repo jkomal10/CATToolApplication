@@ -96,8 +96,4 @@ public class UserController {
 		return userService.getClientNameByClientId(clientId);
 	}
 	
-//	@GetMapping("/get/client/{clientId}")
-//	public String getClient(@PathVariable int clientId) {
-//		return userService.getClientNameByClientId(clientId);
-//	}
 }

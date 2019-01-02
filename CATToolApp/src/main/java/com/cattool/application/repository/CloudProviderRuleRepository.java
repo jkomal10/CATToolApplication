@@ -9,12 +9,8 @@ public interface CloudProviderRuleRepository extends JpaRepository<CloudProvider
 
 	void deleteByQuestionId(String string);
 
-//	SList<CloudProviderRule> findAllByCloudProviderId();
 
 	List<CloudProviderRule> findByCloudProviderId(int cloudProviderId);
 
-//	Object findAllByCloudProviderId();
-
-//	Object findByCloudProviderId();
 
 }

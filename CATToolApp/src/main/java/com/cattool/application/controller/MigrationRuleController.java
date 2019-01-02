@@ -23,10 +23,10 @@ public class MigrationRuleController {
 	
 	
 	
-	@GetMapping("/getAllMigrationRule")
-	public List<MigrationRule> getAllApplication()
+	@GetMapping("/getAllMigrationRule/{clientId}")
+	public List<MigrationRule> getAllApplication(@PathVariable int clientId)
 	{
-		return migrationRuleService.getAllmigrationRule();
+		return migrationRuleService.getAllmigrationRule(clientId);
 	}
 	
 	@GetMapping("/getAll/{clientId}")

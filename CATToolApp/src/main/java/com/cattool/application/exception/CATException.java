@@ -5,9 +5,6 @@ public class CATException extends Exception{
 	private static String ExceptionMessage;
    
 	private static final long serialVersionUID = 1860734129029308300L;
-//	public CATException() {
-//		System.out.println("Exception in Java");
-//	}
 	
 	public CATException(String message)
 	{

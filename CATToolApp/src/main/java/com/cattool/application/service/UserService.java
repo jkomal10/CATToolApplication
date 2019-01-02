@@ -110,42 +110,6 @@ public class UserService {
 		return usersDAOService.getClientNameByClientId(clientId);
 	}
 	
-	
-	
-	
-
-//	public String findUserId(int clientId, String userName) {
-//		List<Users> userList = new ArrayList<Users>();
-//		Users userbyId = new Users();
-//		userList=userRepository.findByClientIdAndIsDeactivateAndIsDeleted(clientId, isDeactivate, isDeleted);
-//		
-//		for(Users alluser : userList)
-//		{
-//			if(alluser.getUserName().equals(userName))
-//			{
-//				int id = alluser.getUserId();
-//				String json = "{\"id\" : "+id+"}";
-//				return json;
-//			}
-//		}
-//		
-//		userbyId.setUserName(userName);
-//		userbyId.setClientId(clientId);
-//		userbyId.setPassword("Cg@123");
-//		int id = userRepository.save(userbyId).getUserId();
-//		String json = "{\"id\" : "+id+"}";
-//		return json;
-//	}
-	//"{\"id\" : "+id+"}" 
-	
-	
-	
-//	public String getClientNameByClientId(int clientId) {
-//		ClientMaster client=new ClientMaster();
-//		client=clientMasterRepository.findByClientId(clientId);
-//		System.out.println(client.getClientName());
-//		return client.getClientName();
-//	}
 
 	
 }

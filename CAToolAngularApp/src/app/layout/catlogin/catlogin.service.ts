@@ -22,7 +22,7 @@ export class CatloginService {
 
 
   getClientByClientId(clientId:number):Observable<any>{
-    console.log(this.http.get(`http://localhost:8090/user/get/client/`+clientId));
+   
     return this.http.get(`http://localhost:8090/user/get/client/`+clientId);
   }
 

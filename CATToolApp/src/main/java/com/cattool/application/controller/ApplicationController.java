@@ -128,11 +128,4 @@ public class ApplicationController {
 		applicationService.cloudProviderCheck(applicationId);
 	} 
 	
-	@GetMapping("/summaryReport")
-	public void summaryRepory() throws FileNotFoundException
-	{
-		System.out.println("Summary Report works!!");
-		applicationService.summaryReport();
-	}
-
 }

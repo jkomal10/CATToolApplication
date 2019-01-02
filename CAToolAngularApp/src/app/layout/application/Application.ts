@@ -15,7 +15,6 @@ export class Application{
     modifiedDateTime:Date;
     createdBy:string;
     modifiedBy:string;
-    // applicationType:String;
     isSaved:number;
     userId:number;
     clientId:number;

@@ -9,5 +9,4 @@ export class Answers{
     cteatedTime : Date;
     modifiedBy : String;
     modifiedTime : Date;
-   // constructor( public id: number, public answerText : String){}
 }

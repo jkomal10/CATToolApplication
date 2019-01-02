@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Router } from '@angular/router';
 
 import { Application } from '../Application';
@@ -24,9 +24,9 @@ export class UpdateApplicationComponent implements OnInit {
   constructor(private router: Router, private applicationService: ApplicationService, private migrationPatternService:ForMigrationPatternService, private cloudProviderService:ForCloudProviderService) { }
   
   ngOnInit() {
-    this.applicationService.question.subscribe(data => {this.app= data;console.log(this.app)}); 
-    this.migrationPatternService.getAllMigrationData().subscribe(data => {this.migrationPatterns=data;console.log(this.migrationPatterns)});
-    this.cloudProviderService.CollectData().subscribe(data=>{this.cloudProviders = data;console.log(this.cloudProviders)});
+    this.applicationService.question.subscribe(data => {this.app= data}); 
+    this.migrationPatternService.getAllMigrationData().subscribe(data => {this.migrationPatterns=data});
+    this.cloudProviderService.CollectData().subscribe(data=>{this.cloudProviders = data});
     
   }
 
@@ -35,7 +35,7 @@ export class UpdateApplicationComponent implements OnInit {
    this.updatedCloudProvider=event;
   }
   onSelectMigrationPatternr(event:string){
-    console.log(event);
+    
    this.updatedMigrationPattern=event;
   }
   updateActive(application) {
@@ -45,7 +45,7 @@ export class UpdateApplicationComponent implements OnInit {
     this.router.navigate(['/application']);
   }
   onSubmit(formvalues){
-    console.log(formvalues);
+   
     this.application=formvalues;
     this.updateActive(this.application);
   }

@@ -12,7 +12,6 @@ import com.cattool.application.entity.Answers;
 public interface AnswersRepository extends JpaRepository<Answers, Long> {
 
 	List<Answers> findByApplicationId(int applicationId);
-//	List<Answers> findByApplicationId(int applicationId);
 	Answers deleteByApplicationId(int applicationId);
 	Answers findByAnswerId(int answerId);
 	

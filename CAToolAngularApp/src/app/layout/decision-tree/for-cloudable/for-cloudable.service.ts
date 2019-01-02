@@ -12,7 +12,7 @@ export class ForCloudableService {
   private collectRulesUrl="http://localhost:8090/cloudableRule/getAll";
   private CollectCloudableQuestionUrl="http://localhost:8090/assessmentQuestions/getCloudableQuestion";
   private baseUrl = 'http://localhost:8090/cloudableRule/save';
-  // private url= 'http://localhost:8090/assessmentQuestions/getAllCloudableQuestions';
+  
   clientIdValue : number;
   constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
 

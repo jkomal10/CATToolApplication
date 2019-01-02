@@ -173,9 +173,10 @@ public class ApplicationDAOService {
 		applicationRepository.save(applications);
 	}
 
-	public void setCloudableInAns(AnswersDAO answers) {
-		Answers answer = answerRepository.findByAnswerId(answers.getAnswerId());
-		answer.setAnswerId(answers.getAnswerId());
+	public void setCloudableInAns(int id) {
+		Answers answer = answerRepository.findByAnswerId(id);
+		System.out.println(id);
+		answer.setAnswerId(id);
 		answer.setCloudAbility(1);
 		answerRepository.save(answer);
 	}

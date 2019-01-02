@@ -28,8 +28,7 @@ export class SetEvaluationOrderComponent implements OnInit {
   }
 
   setEvaluationOrder(){
-    console.log("save");
-    console.log(this.AllData);
+
     this.forCloudProviderService.saveEvaluationOrder(this.AllData).subscribe();
   }
 

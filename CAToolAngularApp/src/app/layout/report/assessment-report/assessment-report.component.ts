@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationService } from '../../application/application.service';
 import { LocalStorageService } from '../../utility/service/localStorage.service';
 import { AssessmentReportService } from './assessment-report.service';
@@ -26,8 +25,6 @@ export class AssessmentReportComponent implements OnInit {
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() + 2);
     this.minDate.setFullYear(this.minDate.getFullYear() - 2);
-    // console.log(this.maxDate);
-    // console.log(this.minDate);
     
   }
 
@@ -35,22 +32,14 @@ export class AssessmentReportComponent implements OnInit {
   selectedAppIds(value:any)
   {
     this.appIds = this.appIds+","+value;
-    console.log(this.appIds);
   }
 
   ngOnInit() {
     this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
-    // this.applicationService.getAllFinalizeAplication(this.clientIdValue).subscribe(result => 
-    //   {
-    //   this.applicationList= result ;
-    //   // console.log(JSON.stringify(this.applicationList));
-    //   });
   }
 
   submit(formValues:any){
-    // console.log(formValues);
     console.log(this.genereteAppReport);
-    // console.log(this.toDate);
   }
 
   getApplication(){
@@ -59,13 +48,11 @@ export class AssessmentReportComponent implements OnInit {
       alert("Please select Valid date");
   }
     else{
-      console.log("APPLICATIONS");
       this.dropdownSelect=true;
     this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
     this.applicationService.getAllFinalizeAplication(this.clientIdValue,this.fromDate,this.toDate).subscribe(result => 
       {
       this.applicationList= result ;
-      // console.log(JSON.stringify(this.applicationList));
       });
     }
     
@@ -82,20 +69,12 @@ export class AssessmentReportComponent implements OnInit {
   {
     alert("Please select Application Name for which you want to generate report date");
   }
-    console.log(this.appIds);
     this.applications=this.appIds.split(",");
-    console.log(this.applications);
     
     this.assessmentReportService.generateReport(this.appIds).subscribe(result => this.applications= result);
-    // console.log(this.applications);
   }
   ViewReport()
   {
-    //    this.assessmentReportService.viewReport(this.appIds).subscribe((response)=>{
-    //    let file = new Blob([response], { type: 'application/pdf' });
-    //    var fileURL = URL.createObjectURL(file);
-    //    window.open(fileURL);
-    // });
     this.dropdownSelect=false;
     if((this.fromDate==null || this.toDate==null) || this.fromDate>this.toDate)
     {
@@ -104,12 +83,11 @@ export class AssessmentReportComponent implements OnInit {
   else{
     this.viewClick=true;
     this.assessmentReportService.viewGeneratedReport(this.fromDate,this.toDate).subscribe(result=>{this.viewAllReports=result,console.log(this.viewAllReports)});
-    console.log(this.viewAllReports)
   }
   }
 
   generatePDFview(applicationName:string){
-    console.log(applicationName);
+    
     this.assessmentReportService.viewReportInBrowser(applicationName).subscribe((response)=>{
          let file = new Blob([response], { type: 'application/pdf' });
          var fileURL = URL.createObjectURL(file);

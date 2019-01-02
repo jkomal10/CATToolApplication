@@ -19,7 +19,7 @@ import com.cattool.application.service.AssessmentQuestionsService;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/assessmentQuestions")
-public class AssessmentQuestionsController {//assessmentQuestions/getAllQuestions/0
+public class AssessmentQuestionsController {
 	
 	@Autowired
 	AssessmentQuestionsService  assessmentQuestionsService;
@@ -40,12 +40,6 @@ public class AssessmentQuestionsController {//assessmentQuestions/getAllQuestion
 		return assessmentQuestionsService.getAllquestionsByClientId(clientId);
 	}
 	
-//	@GetMapping("/getAllQuestions/{clientId}")
-//	public List<AssessmentQuestions> getAllquestionsByClientId(@PathVariable int clientId)
-//	{
-//		System.out.println(assessmentQuestionsService.getQuestions(clientId));
-//		return assessmentQuestionsService.getQuestions(clientId);
-//	}
 	
 	@PostMapping("/saveAssessmentQuestions/create")
 	public void saveAssessmentQuestions(@RequestBody AssessmentQuestionsDAO assessmentQuestionsDAO)

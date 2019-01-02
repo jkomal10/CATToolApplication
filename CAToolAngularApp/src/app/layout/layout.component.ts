@@ -10,16 +10,14 @@ import { Users } from './user/Users';
     styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-    // users: Users = new Users();
-    // usersdata : any;
+   
     collapedSideBar: boolean;
 
     constructor() {}
-    //private loginService :LoginService
+    
 
     ngOnInit() {
-        // this.loginService.question.subscribe(data => {this.usersdata= data;});
-        // console.log(this.usersdata+'+++++++++++++++++++++++++++++++++++++++????????????????????++++++++++++++++++++++++');
+        
     }
 
     receiveCollapsed($event) {

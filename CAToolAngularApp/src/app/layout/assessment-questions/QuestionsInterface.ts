@@ -1,8 +1,8 @@
 import { QuestionOption } from "./Option";
 import { MigrationRule } from "./MigrationRule";
 import { CloudProviderRule } from "./CloudProviderRule";
-export class AssessmentQuestions{
 
+export interface IQuestions{
     questionId : number;
     questionText : string;
     questionDescription : string;
@@ -21,8 +21,7 @@ export class AssessmentQuestions{
     answerValues : string;
     executionOrder:number;
     clientId : number;
-    public questionOption : Array<QuestionOption> = [];
-    public migrationRule : Array<MigrationRule> = [];
-    public cloudProviderRules : Array<CloudProviderRule> = [];
-
+     questionOption : Array<QuestionOption> ;
+     migrationRule : Array<MigrationRule> ;
+     cloudProviderRules : Array<CloudProviderRule>;
 }

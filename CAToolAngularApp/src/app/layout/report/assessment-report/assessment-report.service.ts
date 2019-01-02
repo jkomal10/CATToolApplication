@@ -12,10 +12,7 @@ export class AssessmentReportService {
 
   generateReport(genereteAppReport:any)
   {
-    console.log(genereteAppReport);
-    // return null;
     return this.http.get(this.myStorage.getreportURL()+`/assessment/report/generateReport/`+genereteAppReport);
-    // return  this.http.get(this.myStorage.getdomainURL()+`/application/summaryReport`);
 
   }
 
