@@ -26,7 +26,7 @@
                 <label>
                     <font color="green">Recommended Cloud Provider</font>
                 </label>
-                <!-- <select class="form-control" [(ngModel)]="app.recommendedCloudProvider" name="recommendedCloudProvider" (change)="onSelectCloudProvider($event.target.value)"> -->
+               
                     <select class="form-control" [(ngModel)]="app.recommendedCloudProvider" name="recommendedCloudProvider">
                     <option selected disabled></option>
                     <option *ngFor="let cloudprovider of cloudProviders;let i= index" value={{cloudprovider.cloudProviders}}>
@@ -38,7 +38,7 @@
                 <label>
                     <font color="green">Recommended Migration Pattern</font>
                 </label>
-                <!-- <select class="form-control" [(ngModel)]="app.recommendedMigrationPattern" name="recommendedMigrationPattern" (change)="onSelectMigrationPatternr($event.target.value)"> -->
+               
                     <select class="form-control" [(ngModel)]="app.recommendedMigrationPattern" name="recommendedMigrationPattern">
                     <option selected disabled></option>
                     <option *ngFor="let MigrationPattern of migrationPatterns;let i= index" value={{MigrationPattern.migrationPattern}}>

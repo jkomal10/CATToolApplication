@@ -30,7 +30,7 @@ public class AssessmentQuestionsService{
 	AssessmentQuestionsDAOService assessmentQuestionsDAOService;
 	
 	int isActive=0;
-	int isDelete=1;//Boolean isDelete=false;
+	int isDelete=1;
 	
 	
 
@@ -127,23 +127,6 @@ public class AssessmentQuestionsService{
 		return assessmentQuestionsDAOService.getQuestions(clientId);
 	}
 	
-//	public List<AssessmentQuestionsDAO> getAllMigrationPattern(int migrationId, int clientId) {
-//	List<AssessmentQuestionsDAO> assessmentQuestionsList=new ArrayList<AssessmentQuestionsDAO>();
-//	try {
-//		for(AssessmentQuestions assessmentQuestions:assessmentQuestionsDAOService.getAssessmentQuestions(clientId)) {
-//			for(MigrationRule migrationRule:assessmentQuestions.getMigrationRule()) {
-//				if(migrationId==migrationRule.getMigrationId ()) {
-//					assessmentQuestionsList.add(assessmentQuestionsDAOService.toDao(assessmentQuestions));
-//					break;
-//				}
-//			}
-//		}
-//		System.out.println(assessmentQuestionsList);
-//		return assessmentQuestionsList;
-//	} catch (Exception e) {
-//	}
-//	return assessmentQuestionsList;
-//}
 	
 
 }

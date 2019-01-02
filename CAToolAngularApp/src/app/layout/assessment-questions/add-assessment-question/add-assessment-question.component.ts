@@ -62,9 +62,9 @@ export class AddAssessmentQuestionComponent implements OnInit {
        for (let index = 0; index < this.optionText.length; index++) {
          var option : QuestionOption = new QuestionOption();
          option.optionText=this.optionText[index];
-        //  console.log(option);
+       
          this.question.questionOption[index]=option;
-        //  console.log(this.question.questionOption[index]);
+       
       }
       for(let index = 0; index < this.MigrationData.length; index++){
         if(this.MigrationData[index].migrationPattern!=false){
@@ -86,7 +86,7 @@ export class AddAssessmentQuestionComponent implements OnInit {
       }
       this.question.clientId=this.myStorage.getCurrentUserObject().clientId;
       this.question.createdBy=this.myStorage.getCurrentUserObject().userName;
-      console.log(this.question);
+    
       this.questionService.createQuestionn(this.question).subscribe(
       );
       location.reload();
@@ -99,7 +99,7 @@ export class AddAssessmentQuestionComponent implements OnInit {
   }
 
   assessmentTypeForMigrationClick(event){
-    console.log(event.target.checked);
+   
     this.assessmentTypeForMigrationValue=event.target.checked;
     this.questionService.getMigrationData().subscribe(result => 
       {

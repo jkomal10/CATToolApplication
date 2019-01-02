@@ -1,22 +1,16 @@
-import { Component, OnInit, Optional, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AssessmentQuestionsService } from '../../assessment-questions/assessment-questions.service';
+
 import { Subject } from 'rxjs';
-import { AssessmentQuestions } from '../../assessment-questions/Question'
+
 import { AssesstApplicationService } from './assesst-application.service';
-import { DataTablesModule } from 'angular-datatables';
+
 
 import { ApplicationService } from '../application.service';
-import { IfStmt } from '@angular/compiler';
+
 import { LocalStorageService } from '../../utility/service/localStorage.service';
 import { Answers } from './Answers';
-import {
-  NgModel,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  NG_ASYNC_VALIDATORS,
-} from '@angular/forms';
-import { QuestionOption } from '../../decision-tree/for-migration-pattern/QuestionOption';
+
 import { UserRoleService } from '../../user/user-role/user-role.service';
 @Component({
   selector: 'app-assesst-application',
@@ -68,7 +62,6 @@ export class AssesstApplicationComponent implements OnInit {
       {
 
         this.userRoleService.question.subscribe(data => {
-          console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
           this.application = data;
           
         });
@@ -76,14 +69,14 @@ export class AssesstApplicationComponent implements OnInit {
     
 
       this.assessmentService.getAnswers(this.application.applicationId).subscribe(result => {
-        console.log("*********************************************");
-        this.AnswersData = result;console.log(this.AnswersData);
+       
+        this.AnswersData = result;
        
       });
 
     this.assessmentService.CollecOptiontData(this.clientIdValue).subscribe(result => {
-      console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-        this.AllData = result ;console.log(this.AllData);
+     
+        this.AllData = result;
          });
       }
   onSelect(obj){
@@ -128,7 +121,7 @@ export class AssesstApplicationComponent implements OnInit {
         let answer : Answers =new Answers();
         answer.applicationId=this.application.applicationId;
         answer.questionId=this.AllData[index].questionId;
-        answer.optionId=75;
+        answer.optionId=286;
         this.AnswersData[ansCount]=answer;
          ansCount++
 
@@ -210,7 +203,7 @@ export class AssesstApplicationComponent implements OnInit {
               {
                 if(this.AnswersData[x].questionId===qid){
                   this.AnswersData[x].answerText=this.AnswersData[x].answerText.replace(optionObject.optionText+",",'');
-                 console.log(this.AnswersData[x].answerText+"inside unchecked");
+                 
                 }
               }
 

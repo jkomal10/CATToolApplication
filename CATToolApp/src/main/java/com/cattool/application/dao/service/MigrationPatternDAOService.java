@@ -1,6 +1,7 @@
 package com.cattool.application.dao.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,6 @@ public class MigrationPatternDAOService {
 	MigrationRuleRepository migrationRuleRepository;
 	
 	public List<MigrationDAO> findMigrationRules(int clientId){
-		
 		List<MigrationDAO> MigrationDAOs = new ArrayList<MigrationDAO>();
 		for (Migration migration : migrationRepository.findByClientId(clientId)) {
 			
@@ -59,7 +59,7 @@ public class MigrationPatternDAOService {
 		migrationRuleDAO.setMigrationRule(migrationRule.getMigrationRule());
 		migrationRuleDAO.setMigrationRuleId(migrationRule.getMigrationRuleId());
 		migrationRuleDAO.setQuestionId(migrationRule.getQuestionId());
-		
+		migrationRuleDAO.setOptionId(migrationRule.getOptionId());
 		return migrationRuleDAO;
 	}
 

@@ -41,9 +41,7 @@ export class UpdateQuestionComponent implements OnInit {
     console.log(this.que);
     this.numberOfOptions=0;
     let option =this.optionsValues;
-    // console.log(this.que.questionOption.length);
-    // console.log(this.question.questionOption.length);
-    // console.log(this.numberOfOptions);
+   
     this.numberOfOptions=this.question.questionOption.length;
     for (let index = 0; index < this.numberOfOptions; index++) {
       this.OptionsArray[index]=this.question.questionOption[index].optionText;
@@ -52,13 +50,12 @@ export class UpdateQuestionComponent implements OnInit {
   }
 
   assessmentTypeForMigrationClick(event){
-    console.log(event.target.checked);
+    
     this.assessmentTypeForMigrationValue=event.target.checked;
     this.assessmentQuestionsService.getMigrationData().subscribe(result => 
       {
           this.MigrationData = result ;
-          console.log(JSON.stringify(this.MigrationData));
-          console.log("********************************************************");
+         
           for (let index = 0; index < this.MigrationData.length ; index++) {
           this.MigrationDataArray[index] = this.MigrationData[index].migrationPattern; 
       }
@@ -96,9 +93,9 @@ export class UpdateQuestionComponent implements OnInit {
      for (let index = 0; index < this.OptionsArray.length; index++) {
       var option : QuestionOption = new QuestionOption();
       option.optionText=this.OptionsArray[index];
-      // this.questionUpdate
+    
       this.questionUpdate.questionOption[index]=option;
-        // console.log(this.questionUpdate.questionOption[index]);
+        
      }
 
      for (let index = 0; index < this.MigrationData.length; index++) {
@@ -109,7 +106,7 @@ export class UpdateQuestionComponent implements OnInit {
         migration.clientId=this.myStorage.getCurrentUserObject().clientId;
         migration.questionText=this.updatedQuestion.questionText;
         this.questionUpdate.migrationRule[index]=migration;
-        console.log(this.questionUpdate.migrationRule[index]);
+       
        }
        
      }

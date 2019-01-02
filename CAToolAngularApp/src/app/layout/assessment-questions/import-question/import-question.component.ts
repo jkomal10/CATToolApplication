@@ -44,8 +44,7 @@ export class ImportQuestionComponent implements OnInit {
     else{
       alert("please enter a csv file");
     }
-        console.log(this.filename[0]+"___________");
-        console.log(this.link+"**************");
+        
   }
 
   getDataRecordsArrayFromCSVFile(csvRecordsArray : any,headerLength : any){
@@ -61,12 +60,8 @@ export class ImportQuestionComponent implements OnInit {
          this.lines.push(dataArr);
       }
     }
-    console.log(this.lines.length);
-    for (var i = 0; i < this.lines.length; i++)
-      {
-        
-      console.log("adduser of row"+this.lines[i][0]);
-      }
+   
+   
     return null;
   }
 
@@ -106,10 +101,7 @@ export class ImportQuestionComponent implements OnInit {
       this.AssessmentQuestion.questionText =this.lines[i][13];
       this.AssessmentQuestion.questionType = this.lines[i][14];
 
-      console.log("this.lines[i][0]"+this.lines[i][0]);
-      console.log("this.lines[i][1]"+this.lines[i][1]);
-      console.log("this.lines[i][2]"+this.lines[i][2]);
-      console.log("this.lines[i][3]"+this.lines[i][3]);
+     
       this.assessmentQuestionsService.createQuestionn(this.AssessmentQuestion)
     .subscribe(data => console.log(data), error => console.log(error));
     console.log("success");

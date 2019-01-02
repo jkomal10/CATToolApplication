@@ -15,14 +15,9 @@ import { AuthGuard } from './shared';
 import { AssessmentQuestionsService } from './layout/assessment-questions/assessment-questions.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FormsModule } from '@angular/forms';
-// AoT requires an exported function for factories
+
 export const createTranslateLoader = (http: HttpClient) => {
-    /* for development
-    return new TranslateHttpLoader(
-        http,
-        '/start-angular/SB-Admin-BS4-Angular-6/master/dist/assets/i18n/',
-        '.json'
-    ); */
+ 
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
 

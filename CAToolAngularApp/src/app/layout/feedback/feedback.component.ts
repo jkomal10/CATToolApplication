@@ -28,28 +28,28 @@ export class FeedbackComponent implements OnInit {
   }
 
   oneStar(){
-    console.log("One Star");
+
     this.rating=1;
   }
 
   twoStar(){
     this.rating=2;
-    console.log("Two Star");
+    
   }
 
   threeStar(){
     this.rating=3;
-    console.log("Three Star");
+    
   }
 
   fourStar(){
     this.rating=4;
-    console.log("Four Star");
+   
   }
 
   fiveStar(){
     this.rating=5;
-    console.log("Five Star");
+    
   }
 
   feedback(){

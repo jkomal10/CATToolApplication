@@ -17,7 +17,7 @@ import com.cattool.application.dao.service.ApplicationDAOService;
 import com.cattool.application.entity.Answers;
 import com.cattool.application.entity.Application;
 import com.cattool.application.entity.AssessmentQuestions;
-import com.cattool.application.entity.SummaryReport;
+
 import com.cattool.application.repository.AnswersRepository;
 import com.cattool.application.repository.ApplicationRepository;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
@@ -30,6 +30,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import net.sf.jasperreports.engine.JRException;
@@ -145,7 +146,7 @@ public class ApplicationService {
 				if (cloudableRule.getQuestionId() == (answers.getQuestionId())) {
 					for (int i = 0; i < cloudableRuleArray.length; i++) {
 						if (cloudableRuleArray[i].equals(answers.getAnswerText())) {
-							applicationDaoService.setCloudableInAns(answers);
+							applicationDaoService.setCloudableInAns(answers.getAnswerId());
 							cloudableRuleFlag++;
 						}
 					}
@@ -153,11 +154,9 @@ public class ApplicationService {
 			}
 		}
 		if (cloudableRuleFlag == cloudableRuleListByClientId.size()) {
-//			applicationDaoService.setCloudabilityForApplication(application,"Yes");
 			applicationDaoService.setCloudabilityForApplication(applicationId,"Yes");
 			return true;
 		} else {
-//			applicationDaoService.setCloudabilityForApplication(application,"No");
 			applicationDaoService.setCloudabilityForApplication(applicationId,"No");
 			return false;
 		}
@@ -211,32 +210,78 @@ public class ApplicationService {
 
 	}
 
+//	public void migrationCheck(int applicationId) {
+//		ApplicationDAO application = new ApplicationDAO();
+//		application = applicationDaoService.getApplicationById(applicationId);
+//		
+//		List<AnswersDAO> allanswers = answesDAOService.findAnswers(applicationId);
+//		
+//		for (MigrationDAO migrationDAO : migrationPatternDAOService.findMigrationRules(application.getClientId())) {
+//			int count = 0, numberOfRules = 0;
+//			System.out.println(migrationDAO.getMigrationPattern());
+//			for (MigrationRuleDAO migrationRuleDAO : migrationDAO.getMigrationRule()) {
+//				String[] migrationRuleArray = migrationRuleDAO.getMigrationRule().split(",");
+//				numberOfRules++;
+//				for (AnswersDAO answers : allanswers) {
+//					if (answers.getQuestionId() == Integer.parseInt(migrationRuleDAO.getQuestionId()) ) {
+//						for (int i = 0; i < migrationRuleArray.length; i++) {
+//
+//							if (migrationRuleArray[i].equals(answers.getAnswerText())) {
+//								count++;
+//							}
+//						}
+//					}
+//				}
+//			}
+//			if(migrationDAO.getPermission().equalsIgnoreCase("AND"))
+//			{
+//				if (count == numberOfRules) {
+//					applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
+//					break;
+//				}
+//			}
+//			else if(migrationDAO.getPermission().equalsIgnoreCase("OR"))
+//			{
+//				if (count >=1) {
+//					applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
+//					break;
+//				}
+//			}
+//			else
+//			{
+//				applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
+//				break;
+//			}
+//			
+//		}
+//	}
+
 	public void migrationCheck(int applicationId) {
 		ApplicationDAO application = new ApplicationDAO();
 		application = applicationDaoService.getApplicationById(applicationId);
-		
 		List<AnswersDAO> allanswers = answesDAOService.findAnswers(applicationId);
 		
+		
 		for (MigrationDAO migrationDAO : migrationPatternDAOService.findMigrationRules(application.getClientId())) {
-			int count = 0, numberOfRules = 0;
-			System.out.println(migrationDAO.getMigrationPattern());
+			int count = 0;
+			HashSet  numberOfRules= new HashSet();
 			for (MigrationRuleDAO migrationRuleDAO : migrationDAO.getMigrationRule()) {
-				String[] migrationRuleArray = migrationRuleDAO.getMigrationRule().split(",");
-				numberOfRules++;
 				for (AnswersDAO answers : allanswers) {
 					if (answers.getQuestionId() == Integer.parseInt(migrationRuleDAO.getQuestionId()) ) {
-						for (int i = 0; i < migrationRuleArray.length; i++) {
-
-							if (migrationRuleArray[i].equals(answers.getAnswerText())) {
+						numberOfRules.add(migrationRuleDAO.getQuestionId());
+							if (migrationRuleDAO.getOptionId()==answers.getOptionId())
+							{
 								count++;
+								break;
 							}
-						}
+//						}
 					}
 				}
 			}
 			if(migrationDAO.getPermission().equalsIgnoreCase("AND"))
 			{
-				if (count == numberOfRules) {
+				if (count == numberOfRules.size()) {
+					System.out.println(count +"***********"+numberOfRules);
 					applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
 					break;
 				}
@@ -244,12 +289,16 @@ public class ApplicationService {
 			else if(migrationDAO.getPermission().equalsIgnoreCase("OR"))
 			{
 				if (count >=1) {
+					System.out.println(count +"***********"+numberOfRules);
+					System.out.println(count+"*********");
 					applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
 					break;
 				}
 			}
 			else
 			{
+				System.out.println(count +"***********"+numberOfRules);
+				System.out.println("**********");
 				applicationDaoService.setMigrationPattern(application, migrationDAO.getMigrationPattern());
 				break;
 			}
@@ -263,78 +312,6 @@ public class ApplicationService {
 	}
 	
 
-	public void summaryReport() throws FileNotFoundException {
-
-		int summaryReportCount = 1;
-		List<SummaryReport> summaryReportList = new ArrayList<SummaryReport>();
-		List<Application> appList = new ArrayList<Application>();
-		List<AssessmentQuestions> assessmentQuestionsList = new ArrayList<AssessmentQuestions>();
-		for (AssessmentQuestions assessmentQuestions : assessmentQuestionsRepository.findAll()) {
-			if ("true".equals(assessmentQuestions.getAssessmentTypeForCloudable())) {
-				assessmentQuestionsList.add(assessmentQuestions);
-			}
-		}
-
-		for (Application application : applicationRepository.findAll()) {
-			List<Answers> answerList = new ArrayList<Answers>();
-			if (application.getIsFinalize() == 1) {
-				appList.add(application);
-				for (AssessmentQuestions assessmentQuestions : assessmentQuestionsList) {
-
-					for (Answers answer : answerRepository.findAll()) {
-						if (answer.getApplicationId() == application.getApplicationId()) {
-							if (answer.getQuestionId() == assessmentQuestions.getQuestionId()) {
-								answerList.add(answer);
-							}
-						}
-					}
-				}
-
-				List<String> answerTextList = new ArrayList<String>();
-				for (Answers answer : answerList) {
-					answerTextList.add(answer.getAnswerText());
-				}
-				for (AssessmentQuestions assessmentQuestions : assessmentQuestionsList) {
-
-					SummaryReport summaryReport = new SummaryReport();
-					summaryReport.setApplicationName(application.getApplicationName());
-					summaryReport.setApplicationDescription(application.getApplicationDescription());
-					for (Answers answer : answerList) {
-						if (answer.getQuestionId() == assessmentQuestions.getQuestionId()) {
-							summaryReport.setAnswerText(answer.getAnswerText());
-							if (answer.isCloudAbility() == 1) {
-								summaryReport.setCloudability("1");
-							} else {
-								summaryReport.setCloudability("0");
-							}
-
-						}
-
-					}
-					summaryReport.setQuestionText(assessmentQuestions.getQuestionText());
-					summaryReport.setAssessment_type("Yes");
-					summaryReportList.add(summaryReport);
-				}
-
-				JRBeanCollectionDataSource jds = new JRBeanCollectionDataSource(summaryReportList);
-				Map<String, Object> parametres = new HashMap<String, Object>();
-				parametres.put("ItemDataSource", jds);
-				InputStream reportStream = new FileInputStream(
-						"\\Users\\priyanj\\Volkswagen\\jasperTemplate\\template.jrxml");
-				JasperReport report;
-				try {
-					report = JasperCompileManager.compileReport(reportStream);
-					JasperPrint jasperPrint = JasperFillManager.fillReport(report, parametres, jds);
-					JasperExportManager.exportReportToPdfFile(jasperPrint,
-							"/hsjd/CloudRreport" + summaryReportCount + ".pdf");
-					summaryReportCount++;
-				} catch (JRException e) {
-					e.printStackTrace();
-				}
-			}
-			summaryReportList.clear();
-		}
-	}
 
 	
 

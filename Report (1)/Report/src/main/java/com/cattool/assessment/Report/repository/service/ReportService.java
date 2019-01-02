@@ -16,6 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cattool.assessment.Report.dao.AnswersDAO;
+import com.cattool.assessment.Report.dao.ApplicationDAO;
+import com.cattool.assessment.Report.dao.AssessmentQuestionsDAO;
+import com.cattool.assessment.Report.dao.ReportPDFDAO;
+import com.cattool.assessment.Report.dao.SummaryReportDAO;
+import com.cattool.assessment.Report.dao.service.ReportDAOService;
 import com.cattool.assessment.Report.entity.Answers;
 import com.cattool.assessment.Report.entity.Application;
 import com.cattool.assessment.Report.entity.AssessmentQuestions;
@@ -51,6 +57,9 @@ public class ReportService {
 
 	@Autowired
 	ReportPDFRepository reportPDFRepository;
+	
+	@Autowired
+	ReportDAOService reportDAOService;
 
 	int isFinalizeValue = 1;
 	Boolean isDelete = false;
@@ -59,32 +68,24 @@ public class ReportService {
 		String arr[] = apps.split(",");
 
 		byte[] reportArray = null;
-		byte[] reports = null;
 
 		for (int i = 0; i < arr.length; i++) {
 			int summaryReportCount = 1;
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			List<SummaryReport> summaryReportList = new ArrayList<SummaryReport>();
-			List<Application> appList = new ArrayList<Application>();
-			List<AssessmentQuestions> assessmentQuestionsList = new ArrayList<AssessmentQuestions>();
-			for (AssessmentQuestions assessmentQuestions : assessmentQuestionsRepository.findAll()) {
+			List<SummaryReportDAO> summaryReportList = new ArrayList<SummaryReportDAO>();
+			List<AssessmentQuestionsDAO> assessmentQuestionsList = new ArrayList<AssessmentQuestionsDAO>();
+			for (AssessmentQuestionsDAO assessmentQuestions : reportDAOService.getQuestions()) {
 				if ("true".equals(assessmentQuestions.getAssessmentTypeForCloudable())) {
 					assessmentQuestionsList.add(assessmentQuestions);
 				}
 			}
           
-			System.out.println("****************************");
-			System.out.println(applicationRepository.findAll()); 
-			
-			for (Application application : applicationRepository.findAll()) {
-				List<Answers> answerList = new ArrayList<Answers>();
-				// if(application.getIsFinalize()==1)
-				// {
-				// appList.add(application);
+			for (ApplicationDAO application : reportDAOService.getApplications()) {
+				List<AnswersDAO> answerList = new ArrayList<AnswersDAO>();
 				if (application.getApplicationName().equals(arr[i])) {
-					for (AssessmentQuestions assessmentQuestions : assessmentQuestionsList) {
+					for (AssessmentQuestionsDAO assessmentQuestions : assessmentQuestionsList) {
 
-						for (Answers answer : answerRepository.findAll()) {
+						for (AnswersDAO answer : reportDAOService.getAnswers()) {
 							if (answer.getApplicationId() == application.getApplicationId()) {
 								if (answer.getQuestionId() == assessmentQuestions.getQuestionId()) {
 									answerList.add(answer);
@@ -94,18 +95,18 @@ public class ReportService {
 					}
 
 					List<String> answerTextList = new ArrayList<String>();
-					for (Answers answer : answerList) {
+					for (AnswersDAO answer : answerList) {
 						answerTextList.add(answer.getAnswerText());
 					}
-					for (AssessmentQuestions assessmentQuestions : assessmentQuestionsList) {
+					for (AssessmentQuestionsDAO assessmentQuestions : assessmentQuestionsList) {
 
-						SummaryReport summaryReport = new SummaryReport();
+						SummaryReportDAO summaryReport = new SummaryReportDAO();
 						summaryReport.setApplicationName(application.getApplicationName());
 						summaryReport.setApplicationDescription(application.getApplicationDescription());
-						for (Answers answer : answerList) {
+						for (AnswersDAO answer : answerList) {
 							if (answer.getQuestionId() == assessmentQuestions.getQuestionId()) {
 								summaryReport.setAnswerText(answer.getAnswerText());
-								if (answer.isCloudAbility() == 1) {
+								if (answer.getCloudAbility() == 1) {
 									summaryReport.setCloudability("1");
 								} else {
 									summaryReport.setCloudability("0");
@@ -118,7 +119,6 @@ public class ReportService {
 						summaryReport.setAssessment_type("Yes");
 						summaryReportList.add(summaryReport);
 					}
-
 					JRBeanCollectionDataSource jds = new JRBeanCollectionDataSource(summaryReportList);
 					Map<String, Object> parametres = new HashMap<String, Object>();
 					parametres.put("ItemDataSource", jds);
@@ -126,8 +126,6 @@ public class ReportService {
 							"\\Users\\suvsahoo\\Volkswagen\\jasperTemplate\\template.jrxml");
 					JasperReport report;
 					try {
-						ReportPDF pdf = new ReportPDF();
-
 						report = JasperCompileManager.compileReport(reportStream);
 						ByteArrayOutputStream array = new ByteArrayOutputStream();
 						JasperPrint jasperPrint = JasperFillManager.fillReport(report, parametres, jds);
@@ -135,11 +133,8 @@ public class ReportService {
 						JasperExportManager.exportReportToPdfStream(jasperPrint, bos);
 						reportArray = bos.toByteArray();
 						ReportPDF reportPDF = new ReportPDF();
-						if (reportPDFRepository.findByApplicationName(arr[i]) == null) {
-							reportPDF.setPdfFiles(reportArray);
-							reportPDF.setApplicationName(arr[i]);
-							reportPDFRepository.save(reportPDF);
-						}
+						
+						reportDAOService.saveByteArrayOfPdf(reportArray,arr[i]);
 						summaryReportCount++;
 					} catch (JRException e) {
 						e.printStackTrace();
@@ -147,23 +142,17 @@ public class ReportService {
 				}
 				summaryReportList.clear();
 			}
-
-		}
-		for (int c = 0; c < arr.length; c++) {
-			System.out.println(arr[c]);
 		}
 		return arr;
 	}
 
-	public List<ReportPDF> viewReport(Date fromDate, Date toDate) {
-
-		List<ReportPDF> viewAllReports = reportPDFRepository.findAllByGeneratedDateTimeBetween(fromDate, toDate);
-
+	public List<ReportPDFDAO> viewReport(Date fromDate, Date toDate) {
+		List<ReportPDFDAO> viewAllReports = reportDAOService.viewReport(fromDate,toDate);
 		return viewAllReports;
 	}
 
 	public byte[] viewReportInBrowser(String appName) {
-		for (ReportPDF reports : reportPDFRepository.findAll()) {
+		for (ReportPDFDAO reports : reportDAOService.viewReportInbrowser()) {
 			if (reports.getApplicationName().equals(appName))
 				return reports.getPdfFiles();
 		}
@@ -172,7 +161,7 @@ public class ReportService {
 
 	public void zipExport(Date fromDate, Date toDate) throws IOException {
 
-		for (ReportPDF viewAllReports : reportPDFRepository.findAllByGeneratedDateTimeBetween(fromDate, toDate)) {
+		for (ReportPDFDAO viewAllReports : reportDAOService.zipReortApplications(fromDate, toDate)) {
 			FileOutputStream fos = new FileOutputStream("/report/" + viewAllReports.getApplicationName() + ".zip");
 			ZipOutputStream zipOS = new ZipOutputStream(fos);
 
@@ -186,10 +175,10 @@ public class ReportService {
 
 	}
 
-	public List<Application> getAllFinalizeAplication(int clientId, Date fromDate, Date toDate) {
+	public List<ApplicationDAO> getAllFinalizeAplication(int clientId, Date fromDate, Date toDate) {
 
-		return applicationRepository.findByClientIdAndIsDeletedAndIsFinalizeAndAssessApplicationTimeBetween(clientId,
-				isDelete, isFinalizeValue, fromDate, toDate);
+		List<ApplicationDAO> applicationDAOList = reportDAOService.getfinalizedApplication(clientId, fromDate,  toDate);
+		return applicationDAOList;
 	}
 
 }

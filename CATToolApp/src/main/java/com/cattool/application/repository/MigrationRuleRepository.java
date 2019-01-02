@@ -16,4 +16,7 @@ public interface MigrationRuleRepository extends JpaRepository<MigrationRule, Lo
 	void deleteByQuestionId(String string);
 
 	List<MigrationRule> findByMigrationId(int migrationId);
+
+	MigrationRule findByMigrationRuleId(int migrationRuleId);
+	//List<MigrationRule> findDistinctByQuestionId();
 }

@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.cattool.assessment.Report.dao.ApplicationDAO;
+import com.cattool.assessment.Report.dao.ReportPDFDAO;
 import com.cattool.assessment.Report.entity.Application;
 import com.cattool.assessment.Report.entity.ReportPDF;
 import com.cattool.assessment.Report.repository.service.ReportService;
@@ -27,7 +28,7 @@ public class ReportController {
 	ReportService assessmentReportService;
 	
 	@GetMapping("/getAllFinalizeAplication/{clientId}/{fromDate}/{toDate}")
-	public List<Application>getAllFinalizeAplication(@PathVariable int clientId,@PathVariable Date fromDate,@PathVariable Date toDate)
+	public List<ApplicationDAO>getAllFinalizeAplication(@PathVariable int clientId,@PathVariable Date fromDate,@PathVariable Date toDate)
 	{
 		return assessmentReportService.getAllFinalizeAplication(clientId,fromDate,toDate);
 	}
@@ -39,7 +40,7 @@ public class ReportController {
 	}
 	
 	@GetMapping("viewReport/{fromDate}/{toDate}")
-	public List<ReportPDF> viewReport(@PathVariable Date fromDate,@PathVariable Date toDate)
+	public List<ReportPDFDAO> viewReport(@PathVariable Date fromDate,@PathVariable Date toDate)
 	{
 		return assessmentReportService.viewReport(fromDate,toDate);
 	}

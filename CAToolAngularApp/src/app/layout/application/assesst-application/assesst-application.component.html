@@ -54,9 +54,8 @@
               <td width="70%">Question{{i+1}}. {{row.questionText}}</td>
               <td width="30%" *ngIf="AllData[i].questionType==='Multiple Choice Multiple Answer'; else dropdownbox">
                 <div *ngFor="let option of AllData[i]['questionOption'] ;let j = index">
-                  <!-- <div *ngIf="AnswersData[i].optionId===option.optionId" ? check=1 : check=0> -->
+                  
                   <input type="checkbox" [checked]="AnswersData[i].answerText.indexOf(option.optionText)!== -1?true:false" (change)="selectChangeHandler(option,$event,AllData[i].questionId)"/> {{option.optionText}}
-                  <!-- </div> -->
                 </div>
               </td>
               <ng-template #dropdownbox>

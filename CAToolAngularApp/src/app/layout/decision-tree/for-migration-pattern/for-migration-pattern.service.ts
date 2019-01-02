@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { LocalStorageService } from '../../utility/service/localStorage.service';
+import { AssessmentQuestions } from '../../assessment-questions/update-question/Question';
+import { IQuestions } from '../../assessment-questions/QuestionsInterface';
 
 @Injectable({
   providedIn: 'root'
@@ -41,4 +43,10 @@ export class ForMigrationPatternService {
   sendMsgtoOtherComponent(messsage){
       this.comptransfer.next(messsage);
   } 
+
+  getAllmigrationRules()
+  {
+    this.clientIdValue=this.myStorage.getCurrentUserObject().clientId;
+    return this.http.get(this.myStorage.getdomainURL() +`/migrationRule/getAllMigrationRule/`+ this.clientIdValue);
+  }
 }

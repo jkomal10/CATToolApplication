@@ -11,12 +11,12 @@ export class ApplicationService {
   constructor(private http:HttpClient,private myStorage:LocalStorageService) { }
 
    getAllAplication(clientId : number): Observable<Object>{
-     console.log("**********************************"+this.myStorage.getdomainURL() );
+    
       return this.http.get(this.myStorage.getdomainURL()+`/application/getAll/`+clientId);
     }
 
     getAllFinalizeAplication(clientId : number,fromDate:Date,toDate:Date): Observable<Object>{
-      console.log("**********************************"+this.myStorage.getdomainURL() );
+      
        return this.http.get(this.myStorage.getreportURL()+`/assessment/report/getAllFinalizeAplication/`+clientId+`/`+fromDate+`/`+toDate);
      }
   

@@ -28,7 +28,7 @@ export class ReportComponent implements OnInit {
   }
 
   summaryReport(){
-    // this.reportService.summaryReport().subscribe();
+    
     this.router.navigate(['/report/assessment-report']);
   }
 

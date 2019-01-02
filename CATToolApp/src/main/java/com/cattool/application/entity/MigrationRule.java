@@ -16,6 +16,7 @@ public class MigrationRule {
 	private int executionOrder;
 	private String questionText;
 	private int clientId;
+	private int optionId;
 	
 	public int getMigrationRuleId() {
 		return migrationRuleId;
@@ -62,11 +63,19 @@ public class MigrationRule {
 	public MigrationRule() {
 		super();
 	}
+	
+	public int getOptionId() {
+		return optionId;
+	}
+	public void setOptionId(int optionId) {
+		this.optionId = optionId;
+	}
 	@Override
 	public String toString() {
 		return "MigrationRule [migrationRuleId=" + migrationRuleId + ", questionId=" + questionId + ", migrationId="
 				+ migrationId + ", migrationRule=" + migrationRule + ", executionOrder=" + executionOrder
-				+ ", questionText=" + questionText + ", clientId=" + clientId + "]";
+				+ ", questionText=" + questionText + ", clientId=" + clientId + ", optionId=" + optionId + "]";
 	}
+	
 	
 }

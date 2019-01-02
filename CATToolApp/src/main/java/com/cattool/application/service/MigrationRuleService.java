@@ -21,9 +21,9 @@ public class MigrationRuleService {
 	MigrationRepository migrationRepository;
 	
 	
-	public List<MigrationRule> getAllmigrationRule()
+	public List<MigrationRule> getAllmigrationRule(int clientId)
 	{
-		return migrationRuleRepository.findAll();
+		return migrationRuleRepository.findByClientId(clientId);
 	}
 	
 	public List<Migration> getAllMigrationPatterns(int clientId){
@@ -34,13 +34,28 @@ public class MigrationRuleService {
 	
 	public void updateMigrationRule(List<MigrationRule> migrationRulelist, int clientId)
 	{
-		MigrationRule migrationRuleObject=new MigrationRule();
-		for(MigrationRule migrationRule:migrationRulelist) {
-			migrationRuleObject=migrationRule;
-			migrationRuleObject.setClientId(clientId);
-			migrationRuleObject.setMigrationId(migrationRule.getMigrationId());
-			migrationRuleRepository.save(migrationRuleObject);
-		}
+		migrationRuleRepository.deleteAll();
+		migrationRuleRepository.saveAll(migrationRulelist);
+//		List<MigrationRule> MigrationRuleList = new ArrayList<MigrationRule>(); 
+//		MigrationRule migrationRuleObject=new MigrationRule();
+//		System.out.println("***********************");
+//		for(MigrationRule migrationRule:migrationRulelist) {
+//			System.out.println(migrationRule);
+//			migrationRuleObject.setMigrationRuleId(migrationRule.getMigrationRuleId());
+//			migrationRuleObject.setQuestionId(migrationRule.getQuestionId());
+//			migrationRuleObject.setMigrationId(migrationRule.getMigrationId());
+//			migrationRuleObject.setMigrationRule(migrationRule.getMigrationRule());
+//			migrationRuleObject.setExecutionOrder(migrationRule.getExecutionOrder());
+//			migrationRuleObject.setQuestionText(migrationRule.getQuestionText());
+//			migrationRuleObject.setClientId(clientId);
+//			migrationRuleObject.setOptionId(migrationRule.getOptionId());
+////			migrationRuleObject=migrationRule;
+////			migrationRuleObject.setClientId(clientId);
+////			migrationRuleObject.setMigrationId(migrationRule.getMigrationId());
+////			System.out.println(migrationRuleObject);
+//			migrationRuleRepository.save(migrationRuleObject);
+		;
+//		}
 	}
 	
 }

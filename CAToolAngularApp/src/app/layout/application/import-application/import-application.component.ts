@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApplicationService } from '../application.service';
-import { HttpClient } from '@angular/common/http';
+
 import { Router } from '@angular/router';
 import { Application } from '../Application';
 import { UsersService } from '../../user/user.service';
@@ -89,14 +89,14 @@ export class ImportApplicationComponent implements OnInit {
       var userName = this.lines[i][2];
       this.getuserIdByName(userName);
       this.router.navigate(['/application']);
-      console.log(this.value);
+      
 
     }
   }
 
   getuserIdByName(userName) {
     this.userService.getUserByUserName(this.myStorage.getCurrentUserObject().clientId, userName).subscribe(data => {
-      this.value = data, console.log(this.value)
+      this.value = data
 
 
       for (var i = 0; i < 1; i++) {

@@ -27,7 +27,7 @@ export class ForMigrationPatternComponent implements OnInit {
       {
       this.migrationPatternData = result ;
       this.dtTrigger.next();
-      console.log(this.migrationPatternData );
+     
       });
   }
 

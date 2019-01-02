@@ -29,7 +29,7 @@
     <tbody>
       <tr *ngFor="let size of rules;let i = index">
         <td>Question
-          <!-- <br>Excution Order -->
+          
           <br>Question type
           <br>Options
           <br>Cloudable Rule
@@ -37,13 +37,11 @@
         <td>
           <span name="questionText"> {{rules[i].questionText}}</span>
           <br>
-          <!-- <input style="width: 8%" type="number" #executionOrder name="executionOrder{{i}}" [(ngModel)]="executionOrders[i]" placeholder="{{rules[i].executionOrder}}"
-          />
-          <br> -->
+          
           <span *ngFor="let question of questions;let k = index">
             <span *ngIf="rules[i].questionId==questions[k].questionId && rules[i].questionId!=0">{{question.questionType}}</span>
           </span>
-          <!-- <br> -->
+          
               <span *ngIf="check(rules[i].questionId)"></span>
               <span>
               {{optionsList}}

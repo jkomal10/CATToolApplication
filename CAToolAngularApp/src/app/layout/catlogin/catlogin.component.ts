@@ -34,7 +34,7 @@ export class CATloginComponent implements OnInit {
                  this.loginService.getClientByClientId(this.myStorage.getCurrentUserObject().clientId).subscribe(
                      (data)=>{
                         this.client=data;
-                        console.log(JSON.stringify(this.client));
+                       
                         this.myStorage.setClientName(this.client.clientName);
                      }
                  );

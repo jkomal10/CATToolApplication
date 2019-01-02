@@ -49,7 +49,7 @@ public class AssessmentQuestionsDAOService {
 	
 	
 	int isActive=0;
-	int isDelete=1;//Boolean isDelete=false;
+	int isDelete=1;
 	
 	public List<AssessmentQuestionsDAO> getAllAssessmentQuestion(int clientId){
 		List<AssessmentQuestionsDAO> assessmentQuestionDAOList=new ArrayList<AssessmentQuestionsDAO>();
@@ -163,7 +163,6 @@ public class AssessmentQuestionsDAOService {
 	}
 	
 	public AssessmentQuestionsDAO toDao(AssessmentQuestions assessmentQuestion) {
-		// TODO Auto-generated method stub
 		AssessmentQuestionsDAO assessmentQuestionsDAO = new AssessmentQuestionsDAO();
 		assessmentQuestionsDAO.setQuestionId(assessmentQuestion.getQuestionId());
 		assessmentQuestionsDAO.setAssessmentTypeForCloudable(assessmentQuestion.getAssessmentTypeForCloudable());

@@ -6,4 +6,5 @@ export class MigrationRule{
 	executionOrder : number;
 	questionText : String;
 	clientId : number;
+	optionId : number;
 }
