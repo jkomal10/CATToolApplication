@@ -155,6 +155,8 @@ export class MigrationPatternsComponent implements OnInit {
              
               for (let index = 0; index < this.allMigrationRules.length; index++) {
                 
+                if(this.allMigrationRules[index].migrationId==this.migrationIdValue)
+                {
                 if(this.allMigrationRules[index].questionId==qid)
                 {
                   
@@ -173,7 +175,7 @@ export class MigrationPatternsComponent implements OnInit {
                   }
                  
                 }
-
+                 }
               }
               if(flag==0){
                 // console.log(this.allMigrationRules.length);
@@ -189,7 +191,9 @@ export class MigrationPatternsComponent implements OnInit {
               this.allMigrationRules[this.allMigrationRules.length]=migrationRuleNewObject;
              // this.RuleId++;
             }
-          }else{
+          }
+          // }
+          else{
             for (let index = 0; index < this.allMigrationRules.length; index++) 
             {
               
@@ -213,6 +217,8 @@ export class MigrationPatternsComponent implements OnInit {
     for (let index = 0; index < this.allMigrationRules.length; index++) {
       // console.log(this.allMigrationRules[index].questionId);
       // console.log(opnObject.questionId+"   "+ this.allMigrationRules[index].questionId);
+      if(this.allMigrationRules[index].migrationId==this.migrationIdValue)
+      {
      if(opnObject.questionId==this.allMigrationRules[index].questionId)
      {
       //  console.log("********");
@@ -224,6 +230,7 @@ export class MigrationPatternsComponent implements OnInit {
         // this.checked=true;
        }
      }
+    }
     //  else{
       
     //   console.log(true);

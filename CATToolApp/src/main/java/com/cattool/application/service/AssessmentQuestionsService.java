@@ -123,6 +123,10 @@ public class AssessmentQuestionsService{
 		return assessmentQuestionsDAOService.getAllAssessmentQuestion(clientId);
 	}
 	
+	public List<AssessmentQuestions> findCloudableQuestions(int clientId) {
+		return assessmentQuestionsDAOService.findCloudableQuestions(clientId);
+	}
+	
 	public List<AssessmentQuestions> getQuestions(int clientId) {
 		return assessmentQuestionsDAOService.getQuestions(clientId);
 	}

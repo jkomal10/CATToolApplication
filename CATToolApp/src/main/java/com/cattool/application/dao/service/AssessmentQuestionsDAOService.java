@@ -50,11 +50,18 @@ public class AssessmentQuestionsDAOService {
 	
 	int isActive=0;
 	int isDelete=1;
+	String assessmentTypeForCloudable = "true";
 	
 	public List<AssessmentQuestionsDAO> getAllAssessmentQuestion(int clientId){
 		List<AssessmentQuestionsDAO> assessmentQuestionDAOList=new ArrayList<AssessmentQuestionsDAO>();
 		List<AssessmentQuestions> assessmentQuestionList=assessmentQuestionsRepository.findByClientIdAndIsActiveAndIsDelete(clientId, isActive, 0);
 		return toGetAllAssessmentQuestionDao(assessmentQuestionList,assessmentQuestionDAOList);
+	}
+	
+	public List<AssessmentQuestions> findCloudableQuestions(int clientId)
+	{
+		System.out.println(assessmentQuestionsRepository.findByClientIdAndIsActiveAndIsDeleteAndAssessmentTypeForCloudable(clientId, isActive, 0, assessmentTypeForCloudable));
+		return assessmentQuestionsRepository.findByClientIdAndIsActiveAndIsDeleteAndAssessmentTypeForCloudable(clientId, isActive, 0, assessmentTypeForCloudable);
 	}
 	
 	public List<AssessmentQuestionsDAO> toGetAllAssessmentQuestionDao(List<AssessmentQuestions> assessmentQuestionList,List<AssessmentQuestionsDAO> assessmentQuestionDAOList){

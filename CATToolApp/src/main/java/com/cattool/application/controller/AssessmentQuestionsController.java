@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cattool.application.dao.AssessmentQuestionsDAO;
+import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.repository.AssessmentQuestionsRepository;
 import com.cattool.application.service.AssessmentQuestionsService;
 @CrossOrigin(origins = "http://localhost:4200")
@@ -32,6 +33,12 @@ public class AssessmentQuestionsController {
 	public List<AssessmentQuestionsDAO> getQuestionsforCloudable(@PathVariable int clientId)
 	{
 		return assessmentQuestionsService.getQuestionsforCloudable(clientId);
+	}
+	
+	@GetMapping("/getQuestions/{clientId}")
+	public List<AssessmentQuestions> findCloudableQuestions(@PathVariable int clientId)
+	{
+		return assessmentQuestionsService.findCloudableQuestions(clientId);
 	}
 		
 	@GetMapping("/getAllQuestions/{clientId}")
