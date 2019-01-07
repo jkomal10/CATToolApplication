@@ -6,25 +6,30 @@
         </div>
         <div>
           <table  id="question-list" class="table table-bordered table-striped table-hover ">
-            <tbody>
-              <tr width="100%" *ngFor =  "let row of AllData;let i = index">
-                <td width="70%">Question{{i+1}}. {{row.questionText}}</td>
-  
-                <td width="30%" *ngIf="AllData[i].questionType==='Multiple Choice Multiple Answer'; else dropdownbox">
-                  <div *ngFor="let option of AllData[i]['questionOption'] ;let j = index">
-                    <input type="checkbox" (change)="selectChangeHandler(option,$event,AllData[i].questionId)"> {{AllData[i].questionOption[j]['optionText']}}
-                  </div>
-                </td>
-                <ng-template #dropdownbox>
-                  <select style="width:100%" (change)="onSelect($event.target.value)" name="{{i}}" class="form-control">
-                    <option disabled></option>
-                    <option *ngFor="let singleOption of AllData[i]['questionOption'];let j = index" value={{singleOption.optionId}}>
-                      {{singleOption.optionText}}
-                    </option>
-                  </select>
-                </ng-template>
-              </tr>
-            </tbody>
+              <tbody>
+                  <tr width="100%" *ngFor ="let row of AllData;let i = index">
+                    <td width="70%">Question{{i+1}}. {{row.questionText}}</td>
+                    <td width="30%" *ngIf="AllData[i].questionType==='Multiple Choice Multiple Answer'; else dropdownbox">
+                      <div *ngFor="let option of AllData[i]['questionOption'] ;let j = index">
+                        <!-- <div *ngIf="AnswersData[i].optionId===option.optionId" ? check=1 : check=0> -->
+                        <input type="checkbox" [checked]="AnswersData[i].answerText.indexOf(option.optionText)!== -1?true:false" (change)="selectChangeHandler(option,$event,AllData[i].questionId)"/> {{option.optionText}}
+                        <!-- </div> -->
+                      </div>
+                    </td>
+                    <ng-template #dropdownbox>
+                      <ng-container *ngIf="AllData[i].questionType==='Multiple Choice Single Answer'; else others">
+                      <select style="width:100%" (change)="onSelect($event.target.value)" [(ngModel)]="AnswersData[i].optionId" name="{{i}}" class="form-control">
+                        <option *ngFor="let singleOption of AllData[i]['questionOption']; let i = index" [value]="singleOption.optionId">
+                          {{singleOption.optionText}}
+                        </option>
+                      </select>
+                    </ng-container>
+                    </ng-template>
+                    <ng-template #others>
+                        <input type="text" [(ngModel)]="AnswersData[i].answerText" name="{{i}}" size="45"/>
+                      </ng-template>
+                  </tr>
+                </tbody>
           </table>
         </div>
         <div>
@@ -59,12 +64,17 @@
                 </div>
               </td>
               <ng-template #dropdownbox>
+                <ng-container *ngIf="AllData[i].questionType==='Multiple Choice Single Answer'; else others">
                 <select style="width:100%" (change)="onSelect($event.target.value)" [(ngModel)]="AnswersData[i].optionId" name="{{i}}" class="form-control">
                   <option *ngFor="let singleOption of AllData[i]['questionOption']; let i = index" [value]="singleOption.optionId">
                     {{singleOption.optionText}}
                   </option>
                 </select>
+              </ng-container>
               </ng-template>
+              <ng-template #others>
+                  <input type="text" [(ngModel)]="AnswersData[i].answerText" name="{{i}}" size="45"/>
+                </ng-template>
             </tr>
           </tbody>
         </table>
