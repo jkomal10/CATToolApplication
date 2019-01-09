@@ -33,6 +33,13 @@ public class ApplicationController {
          return applicationService.getAllAppsCount(clientId); 
     }
 	
+//	@GetMapping("/getTotalApplicationsCount") 
+//    public int getAllApplicationCount() 
+//    { 
+//		 System.out.println("Get application count!!");
+//         return applicationService.getAllAppsCount(0); 
+//    }
+	
 	@GetMapping("/getAll/{clientId}")
 	public List<ApplicationDAO> getAllApplication(@PathVariable int clientId)
 	{
