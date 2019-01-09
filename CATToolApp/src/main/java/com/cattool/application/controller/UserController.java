@@ -47,11 +47,18 @@ public class UserController {
 		return userService.findUserId(clientId,userName);
 	}
 	
+//	
+//	@GetMapping("/getTotalUsersCount/{clientId}")
+//	public int getUserCount(@PathVariable int clientId)
+//	{
+//		return userService.getUserCount(clientId);
+//	}
 	
-	@GetMapping("/getTotalUsersCount/{clientId}")
-	public int getUserCount(@PathVariable int clientId)
+
+	@GetMapping("/getTotalUsersCount")
+	public int getUserCount()
 	{
-		return userService.getUserCount(clientId);
+		return userService.getUserCount(0);
 	}
 	
 	

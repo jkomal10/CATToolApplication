@@ -1,80 +1,28 @@
 <div *ngIf="application.isSaved==0; else isSaved">
-    <div>
-      <form #addd="ngForm" (ngSubmit)="save()">
-        <div class="form-group">
-          <h2 class="text-muted">Detailed Assessment</h2>
-        </div>
-        <div>
-          <table  id="question-list" class="table table-bordered table-striped table-hover ">
-              <tbody>
-                  <tr width="100%" *ngFor ="let row of AllData;let i = index">
-                    <td width="70%">Question{{i+1}}. {{row.questionText}}</td>
-                    <td width="30%" *ngIf="AllData[i].questionType==='Multiple Choice Multiple Answer'; else dropdownbox">
-                      <div *ngFor="let option of AllData[i]['questionOption'] ;let j = index">
-                        <!-- <div *ngIf="AnswersData[i].optionId===option.optionId" ? check=1 : check=0> -->
-                        <input type="checkbox" [checked]="AnswersData[i].answerText.indexOf(option.optionText)!== -1?true:false" (change)="selectChangeHandler(option,$event,AllData[i].questionId)"/> {{option.optionText}}
-                        <!-- </div> -->
-                      </div>
-                    </td>
-                    <ng-template #dropdownbox>
-                      <ng-container *ngIf="AllData[i].questionType==='Multiple Choice Single Answer'; else others">
-                      <select style="width:100%" (change)="onSelect($event.target.value)" [(ngModel)]="AnswersData[i].optionId" name="{{i}}" class="form-control">
-                        <option *ngFor="let singleOption of AllData[i]['questionOption']; let i = index" [value]="singleOption.optionId">
-                          {{singleOption.optionText}}
-                        </option>
-                      </select>
-                    </ng-container>
-                    </ng-template>
-                    <ng-template #others>
-                        <input type="text" [(ngModel)]="AnswersData[i].answerText" name="{{i}}" size="45"/>
-                      </ng-template>
-                  </tr>
-                </tbody>
-          </table>
-        </div>
-        <div>
-          <button type="submit" class="btn btn-info" title="saving application">Save</button>&nbsp;
-          <button type="submit" class="btn btn-info" title="saving application" (click)="finalise()">Finalise</button>&nbsp;
-        </div>
-      </form>
-    </div>
-  </div>
-  
-  <ng-template #isSaved>
-  
-    <form #add="ngForm" (ngSubmit)="onSubmit(add.value)">
+  <div>
+    <form #addd="ngForm" (ngSubmit)="save()">
       <div class="form-group">
         <h2 class="text-muted">Detailed Assessment</h2>
       </div>
       <div>
-        <table class="table table-bordered table-striped table-hover">
-          <thead>
-            <tr>
-              <th>Question</th>
-              <th>Answer</th>
-            </tr>
-          </thead>
+        <table  id="question-list" class="table table-bordered table-striped table-hover ">
           <tbody>
-            <tr width="100%" *ngFor ="let row of AllData;let i = index">
+            <tr width="100%" *ngFor =  "let row of AllData;let i = index">
               <td width="70%">Question{{i+1}}. {{row.questionText}}</td>
+
               <td width="30%" *ngIf="AllData[i].questionType==='Multiple Choice Multiple Answer'; else dropdownbox">
                 <div *ngFor="let option of AllData[i]['questionOption'] ;let j = index">
-                  
-                  <input type="checkbox" [checked]="AnswersData[i].answerText.indexOf(option.optionText)!== -1?true:false" (change)="selectChangeHandler(option,$event,AllData[i].questionId)"/> {{option.optionText}}
+                  <input type="checkbox" (change)="selectChangeHandler(option,$event,AllData[i].questionId)"> {{AllData[i].questionOption[j]['optionText']}}
                 </div>
               </td>
               <ng-template #dropdownbox>
-                <ng-container *ngIf="AllData[i].questionType==='Multiple Choice Single Answer'; else others">
-                <select style="width:100%" (change)="onSelect($event.target.value)" [(ngModel)]="AnswersData[i].optionId" name="{{i}}" class="form-control">
-                  <option *ngFor="let singleOption of AllData[i]['questionOption']; let i = index" [value]="singleOption.optionId">
+                <select style="width:100%" (change)="onSelect($event.target.value)" name="{{i}}" class="form-control">
+                  <option disabled></option>
+                  <option *ngFor="let singleOption of AllData[i]['questionOption'];let j = index" value={{singleOption.optionId}}>
                     {{singleOption.optionText}}
                   </option>
                 </select>
-              </ng-container>
               </ng-template>
-              <ng-template #others>
-                  <input type="text" [(ngModel)]="AnswersData[i].answerText" name="{{i}}" size="45"/>
-                </ng-template>
             </tr>
           </tbody>
         </table>
@@ -84,4 +32,59 @@
         <button type="submit" class="btn btn-info" title="saving application" (click)="finalise()">Finalise</button>&nbsp;
       </div>
     </form>
-  </ng-template>
+  </div>
+</div>
+
+<ng-template #isSaved>
+
+  <form #add="ngForm" (ngSubmit)="onSubmit(add.value)">
+    <div class="form-group">
+      <h2 class="text-muted">Detailed Assessment</h2>
+    </div>
+    <div>
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Answer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr width="100%" *ngFor ="let row of AllData;let i = index">
+            <td width="70%">Question{{i+1}}. {{row.questionText}}</td>
+            <td width="30%" *ngIf="AllData[i].questionType==='Multiple Choice Multiple Answer'; else dropdownbox">
+              <div *ngFor="let option of AllData[i]['questionOption'] ;let j = index">
+                <!-- <div *ngIf="AnswersData[i].optionId===option.optionId" ? check=1 : check=0> -->
+                <input type="checkbox" [checked]="AnswersData[i].answerText.indexOf(option.optionText)!== -1?true:false" (change)="selectChangeHandler(option,$event,AllData[i].questionId)"/> {{option.optionText}}
+                <!-- </div> -->
+              </div>
+            </td>
+            <!-- <ng-template #dropdownbox>
+              <select style="width:100%" (change)="onSelect($event.target.value)" [(ngModel)]="AnswersData[i].optionId" name="{{i}}" class="form-control">
+                <option *ngFor="let singleOption of AllData[i]['questionOption']; let i = index" [value]="singleOption.optionId">
+                  {{singleOption.optionText}}
+                </option>
+              </select>
+            </ng-template> -->
+            <ng-template #dropdownbox>
+              <ng-container *ngIf="AllData[i].questionType==='Multiple Choice Single Answer'; else others">
+              <select style="width:100%" (change)="onSelect($event.target.value)" [(ngModel)]="AnswersData[i].optionId" name="{{i}}" class="form-control">
+                <option *ngFor="let singleOption of AllData[i]['questionOption']; let i = index" [value]="singleOption.optionId">
+                  {{singleOption.optionText}}
+                </option>
+              </select>
+            </ng-container>
+            </ng-template>
+            <ng-template #others>
+              <input type="text" [(ngModel)]="AnswersData[i].answerText" name="{{i}}" size="45"/>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-info" title="saving application">Save</button>&nbsp;
+      <button type="submit" class="btn btn-info" title="saving application" (click)="finalise()">Finalise</button>&nbsp;
+    </div>
+  </form>
+</ng-template>

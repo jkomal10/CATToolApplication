@@ -3,10 +3,8 @@ package com.cattool.application.dao.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.cattool.application.dao.AnswersDAO;
 import com.cattool.application.dao.ApplicationDAO;
 import com.cattool.application.entity.Answers;
 import com.cattool.application.entity.Application;
@@ -175,7 +173,6 @@ public class ApplicationDAOService {
 
 	public void setCloudableInAns(int id) {
 		Answers answer = answerRepository.findByAnswerId(id);
-		System.out.println(id);
 		answer.setAnswerId(id);
 		answer.setCloudAbility(1);
 		answerRepository.save(answer);

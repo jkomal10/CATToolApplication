@@ -264,15 +264,19 @@ public class ApplicationService {
 			for (MigrationRuleDAO migrationRuleDAO : migrationDAO.getMigrationRule()) {
 				for (AnswersDAO answers : allanswers) {
 					if (answers.getQuestionId() == Integer.parseInt(migrationRuleDAO.getQuestionId()) ) {
+						System.out.println(answers.getAnswerText()+"==="+migrationRuleDAO.getMigrationRule());
+						System.out.println(answers.getOptionId()+"========"+migrationRuleDAO.getOptionId());
 						numberOfRules.add(migrationRuleDAO.getQuestionId());
 							if (migrationRuleDAO.getOptionId()==answers.getOptionId())
 							{
+								System.out.println("------------------------------------------------------------------------------");
 								count++;
 							}
 //						}
 					}
 				}
 			}
+			System.out.println(count +"=="+ numberOfRules.size());
 			if(migrationDAO.getPermission().equalsIgnoreCase("AND"))
 			{
 				if (count == numberOfRules.size()) {
