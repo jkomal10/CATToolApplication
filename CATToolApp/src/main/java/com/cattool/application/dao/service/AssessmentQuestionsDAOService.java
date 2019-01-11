@@ -46,22 +46,19 @@ public class AssessmentQuestionsDAOService {
 	
 	@Autowired
 	CloudableRuleDAOService cloudableRuleDAOService;
-	
-	
-	int isActive=0;
 	int isDelete=1;
 	String assessmentTypeForCloudable = "true";
 	
 	public List<AssessmentQuestionsDAO> getAllAssessmentQuestion(int clientId){
 		List<AssessmentQuestionsDAO> assessmentQuestionDAOList=new ArrayList<AssessmentQuestionsDAO>();
-		List<AssessmentQuestions> assessmentQuestionList=assessmentQuestionsRepository.findByClientIdAndIsActiveAndIsDelete(clientId, isActive, 0);
+		List<AssessmentQuestions> assessmentQuestionList=assessmentQuestionsRepository.findByClientIdAndIsDelete(clientId, 0);
 		return toGetAllAssessmentQuestionDao(assessmentQuestionList,assessmentQuestionDAOList);
 	}
 	
 	public List<AssessmentQuestions> findCloudableQuestions(int clientId)
 	{
-		System.out.println(assessmentQuestionsRepository.findByClientIdAndIsActiveAndIsDeleteAndAssessmentTypeForCloudable(clientId, isActive, 0, assessmentTypeForCloudable));
-		return assessmentQuestionsRepository.findByClientIdAndIsActiveAndIsDeleteAndAssessmentTypeForCloudable(clientId, isActive, 0, assessmentTypeForCloudable);
+		System.out.println(assessmentQuestionsRepository.findByClientIdAndIsDeleteAndAssessmentTypeForCloudable(clientId, 0, assessmentTypeForCloudable));
+		return assessmentQuestionsRepository.findByClientIdAndIsDeleteAndAssessmentTypeForCloudable(clientId, 0, assessmentTypeForCloudable);
 	}
 	
 	public List<AssessmentQuestionsDAO> toGetAllAssessmentQuestionDao(List<AssessmentQuestions> assessmentQuestionList,List<AssessmentQuestionsDAO> assessmentQuestionDAOList){
@@ -94,7 +91,7 @@ public class AssessmentQuestionsDAOService {
 	
 	public void deleteCloudableRule(int cloudableRuleId)
 	{
-		cloudableRuleRepository.deleteBycloudableRuleId(cloudableRuleId);
+		cloudableRuleRepository.deleteBycloudableRuleDefinitionId(cloudableRuleId);
 	}
 	
 	public List<AssessmentQuestionsDAO> getCloudableQuestions(int clientId){
@@ -128,7 +125,7 @@ public class AssessmentQuestionsDAOService {
 	}
 	
 	public List<AssessmentQuestions> getAssessmentQuestions(int clientId) {
-		return assessmentQuestionsRepository.findByClientIdAndIsActive(clientId, 0);
+		return assessmentQuestionsRepository.findByClientId(clientId);
 	}
 	
 	public void saveCloudableRule(CloudableRule cloudableRule)
@@ -176,7 +173,6 @@ public class AssessmentQuestionsDAOService {
 		assessmentQuestionsDAO.setAssessmentTypeForCloudProvider(assessmentQuestion.getAssessmentTypeForCloudProvider());
 		assessmentQuestionsDAO.setAssessmentTypeForMigration(assessmentQuestion.getAssessmentTypeForMigration());
 		assessmentQuestionsDAO.setClientId(assessmentQuestion.getClientId());
-		assessmentQuestionsDAO.setIsActive(assessmentQuestion.getIsActive());
 		assessmentQuestionsDAO.setIsDelete(assessmentQuestion.getIsDelete());
 		assessmentQuestionsDAO.setNumberOfOption(assessmentQuestion.getNumberOfOption());
 		assessmentQuestionsDAO.setQuestionDescription(assessmentQuestion.getQuestionDescription());
@@ -261,7 +257,6 @@ private CloudProviderRuleDAO toCloudProviderRuleDAO(CloudProviderRule cloudProvi
 		assessmentQuestion.setAssessmentTypeForCloudProvider(assessmentQuestionDao.getAssessmentTypeForCloudProvider());
 		assessmentQuestion.setAssessmentTypeForMigration(assessmentQuestionDao.getAssessmentTypeForMigration());
 		assessmentQuestion.setClientId(assessmentQuestionDao.getClientId());
-		assessmentQuestion.setIsActive(assessmentQuestionDao.getIsActive());
 		assessmentQuestion.setIsDelete(assessmentQuestionDao.getIsDelete());
 		assessmentQuestion.setNumberOfOption(assessmentQuestionDao.getNumberOfOption());
 		assessmentQuestion.setQuestionDescription(assessmentQuestionDao.getQuestionDescription());
@@ -336,7 +331,7 @@ private CloudProviderRule toCloudProviderRule(CloudProviderRuleDAO cloudProvider
 	}
 
 	public List<AssessmentQuestions> getQuestions(int clientId) {
-		return assessmentQuestionsRepository.findByClientIdAndIsActiveAndIsDelete(clientId, isActive, 0);
+		return assessmentQuestionsRepository.findByClientIdAndIsDelete(clientId, 0);
 	}
 
 }

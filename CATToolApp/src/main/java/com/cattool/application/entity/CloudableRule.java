@@ -1,25 +1,39 @@
 package com.cattool.application.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+
 @Entity
-@Table(name="cloudable_Rule_table")
+@Table(name="cloudable_rule_definition")
 public class CloudableRule {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int cloudableRuleId;
+	private int cloudableRuleDefinitionId;
 	private int questionId;
 	private String cloudableRule;
 	private int executionOrder;
 	private String questionText;
 	private int clientId;
 	private int questionDisplayOrder;
-	
+	@CreatedBy
+	private String createdBy;
+	@CreatedDate
+	private Date cteatedOn;
+	@LastModifiedBy
+	private String modifiedBy;
+	@LastModifiedDate
+	private Date modifiedOn;
 	
 	public int getQuestionDisplayOrder() {
 		return questionDisplayOrder;
@@ -28,10 +42,10 @@ public class CloudableRule {
 		this.questionDisplayOrder = questionDisplayOrder;
 	}
 	public int getCloudableRuleId() {
-		return cloudableRuleId;
+		return cloudableRuleDefinitionId;
 	}
 	public void setCloudableRuleId(int cloudableRuleId) {
-		this.cloudableRuleId = cloudableRuleId;
+		this.cloudableRuleDefinitionId = cloudableRuleId;
 	}
 	public int getQuestionId() {
 		return questionId;
@@ -63,12 +77,37 @@ public class CloudableRule {
 	public void setClientId(int clientId) {
 		this.clientId = clientId;
 	}
+	public String getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+	public Date getCteatedOn() {
+		return cteatedOn;
+	}
+	public void setCteatedOn(Date cteatedOn) {
+		this.cteatedOn = cteatedOn;
+	}
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+	public Date getModifiedOn() {
+		return modifiedOn;
+	}
+	public void setModifiedOn(Date modifiedOn) {
+		this.modifiedOn = modifiedOn;
+	}
 	@Override
 	public String toString() {
-		return "CloudableRule [cloudableRuleId=" + cloudableRuleId + ", questionId=" + questionId + ", cloudableRule="
-				+ cloudableRule + ", executionOrder=" + executionOrder + ", questionText=" + questionText
-				+ ", clientId=" + clientId + ", questionDisplayOrder=" + questionDisplayOrder + "]";
+		return "CloudableRule [cloudableRuleDefinitionId=" + cloudableRuleDefinitionId + ", questionId=" + questionId
+				+ ", cloudableRule=" + cloudableRule + ", executionOrder=" + executionOrder + ", questionText="
+				+ questionText + ", clientId=" + clientId + ", questionDisplayOrder=" + questionDisplayOrder
+				+ ", createdBy=" + createdBy + ", cteatedOn=" + cteatedOn + ", modifiedBy=" + modifiedBy
+				+ ", modifiedOn=" + modifiedOn + "]";
 	}
-	
 	
 }

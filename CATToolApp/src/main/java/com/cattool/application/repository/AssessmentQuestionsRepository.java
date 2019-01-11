@@ -13,11 +13,11 @@ public interface AssessmentQuestionsRepository extends JpaRepository<AssessmentQ
 	public List<AssessmentQuestions> findByClientIdAndAssessmentTypeForCloudableAndIsDelete(int clientId, String assessmentTypeForCloudable,Boolean isDelete);
 	
 	public List<AssessmentQuestions> findByClientIdAndAssessmentTypeForCloudable(int clientId, String assessmentTypeForCloudable);
-	public List<AssessmentQuestions> findByClientIdAndIsActive(int clientId,int isActive);
-	public List<AssessmentQuestions> findByClientIdAndIsActiveAndIsDelete(int clientId, int isActive, int isDelete);
-	public List<AssessmentQuestions> findByClientIdAndAssessmentTypeForCloudableAndIsActiveAndIsDelete(int clientId,
-			String string, int isActive, int isDelete);
-	public List<AssessmentQuestions> findByClientIdAndIsActiveAndIsDelete(int clientId, int isActive, Boolean isDelete);
-	public List<AssessmentQuestions> findByClientIdAndIsActiveAndIsDeleteAndAssessmentTypeForCloudable(int clientId, int isActive, int i, String assessmentTypeForCloudable);
+	public List<AssessmentQuestions> findByClientId(int clientId);
+	public List<AssessmentQuestions> findByClientIdAndIsDelete(int clientId, int isDelete);
+	public List<AssessmentQuestions> findByClientIdAndAssessmentTypeForCloudableAndIsDelete(int clientId,
+			String string, int isDelete);
+	public List<AssessmentQuestions> findByClientIdAndIsDelete(int clientId, Boolean isDelete);
+	public List<AssessmentQuestions> findByClientIdAndIsDeleteAndAssessmentTypeForCloudable(int clientId, int i, String assessmentTypeForCloudable);
 
 }

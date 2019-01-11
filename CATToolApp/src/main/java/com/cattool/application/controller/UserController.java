@@ -3,7 +3,6 @@ package com.cattool.application.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -20,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cattool.application.dao.UsersDao;
-import com.cattool.application.entity.AssessmentQuestions;
 import com.cattool.application.entity.ClientMaster;
-import com.cattool.application.entity.Users;
-import com.cattool.application.exception.CATException;
 import com.cattool.application.service.UserService;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -47,12 +43,12 @@ public class UserController {
 		return userService.findUserId(clientId,userName);
 	}
 	
-//	
-//	@GetMapping("/getTotalUsersCount/{clientId}")
-//	public int getUserCount(@PathVariable int clientId)
-//	{
-//		return userService.getUserCount(clientId);
-//	}
+	
+	@GetMapping("/getTotalUsersCount/{clientId}")
+	public int getUserCount(@PathVariable int clientId)
+	{
+		return userService.getUserCount(clientId);
+	}
 	
 
 	@GetMapping("/getTotalUsersCount")
@@ -63,7 +59,7 @@ public class UserController {
 	
 	
 	@GetMapping("/getById/{userName}/{password}")
-	public UsersDao findById(@PathVariable String userName,HttpServletRequest request,HttpServletResponse response, @PathVariable String password)
+	public UsersDao findById(@PathVariable String userName,@PathVariable String password)
 	{
 		return userService.findById(userName,password);
 	}

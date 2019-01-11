@@ -41,7 +41,10 @@ public class UserService {
 	public UsersDao findById(String userName, String password) {
 		UsersDao userDao=new UsersDao();
 		try {
-			userDao = usersDAOService.getUserByUsername(userName,password);
+			System.out.println(userName);
+			System.out.println(password);
+			userDao = usersDAOService.getUserByUserNameAndPassword(userName,password);
+			System.out.println(userDao);
 			if(userDao!=null)
 			{
 				int lastLogInDateInInt = (int) (new Date().getTime() / 1000);

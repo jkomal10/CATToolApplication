@@ -3,6 +3,7 @@ package com.cattool.application.entity;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -26,12 +27,14 @@ public class AssessmentQuestions {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int questionId;
+	@Column(name="question_text_english")
 	private String questionText;
+	private String question_text_language2;
 	private String questionDescription;
 	private String questionType;
 	private int questionDisplayOrder;
 	private int numberOfOption;
-	private int isActive;
+//	private int isActive;
 	private int isDelete;
 	private String assessmentTypeForMigration;
 	private String assessmentTypeForCloudProvider;
@@ -57,6 +60,16 @@ public class AssessmentQuestions {
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="questionId", referencedColumnName="questionId")
     private List<CloudProviderRule> cloudProviderRules;
+	
+	
+
+	public String getQuestion_text_language2() {
+		return question_text_language2;
+	}
+
+	public void setQuestion_text_language2(String question_text_language2) {
+		this.question_text_language2 = question_text_language2;
+	}
 
 	public int getQuestionId() {
 		return questionId;
@@ -106,13 +119,13 @@ public class AssessmentQuestions {
 		this.numberOfOption = numberOfOption;
 	}
 
-	public int isActive() {
-		return isActive;
-	}
-
-	public void setActive(int isActive) {
-		this.isActive = isActive;
-	}
+//	public int isActive() {
+//		return isActive;
+//	}
+//
+//	public void setActive(int isActive) {
+//		this.isActive = isActive;
+//	}
 
 	public int isDelete() {
 		return isDelete;
@@ -206,13 +219,13 @@ public class AssessmentQuestions {
 		super();
 	}
 
-	public int getIsActive() {
-		return isActive;
-	}
-
-	public void setIsActive(int isActive) {
-		this.isActive = isActive;
-	}
+//	public int getIsActive() {
+//		return isActive;
+//	}
+//
+//	public void setIsActive(int isActive) {
+//		this.isActive = isActive;
+//	}
 
 	public int getIsDelete() {
 		return isDelete;
@@ -229,19 +242,35 @@ public class AssessmentQuestions {
 	public void setClientId(int clientId) {
 		this.clientId = clientId;
 	}
+//
+//	@Override
+//	public String toString() {
+//		return "AssessmentQuestions [questionId=" + questionId + ", questionText=" + questionText
+//				+ ", question_text_language2=" + question_text_language2 + ", questionDescription="
+//				+ questionDescription + ", questionType=" + questionType + ", questionDisplayOrder="
+//				+ questionDisplayOrder + ", numberOfOption=" + numberOfOption + ", isActive=" + isActive + ", isDelete="
+//				+ isDelete + ", assessmentTypeForMigration=" + assessmentTypeForMigration
+//				+ ", assessmentTypeForCloudProvider=" + assessmentTypeForCloudProvider + ", assessmentTypeForCloudable="
+//				+ assessmentTypeForCloudable + ", createdBy=" + createdBy + ", cteatedTime=" + cteatedTime
+//				+ ", modifiedBy=" + modifiedBy + ", modifiedTime=" + modifiedTime + ", clientId=" + clientId
+//				+ ", migrationRule=" + migrationRule + ", questionOption=" + questionOption + ", cloudProviderRules="
+//				+ cloudProviderRules + "]";
+//	}
 
 	@Override
 	public String toString() {
 		return "AssessmentQuestions [questionId=" + questionId + ", questionText=" + questionText
-				+ ", questionDescription=" + questionDescription + ", questionType=" + questionType
-				+ ", questionDisplayOrder=" + questionDisplayOrder + ", numberOfOption=" + numberOfOption
-				+ ", isActive=" + isActive + ", isDelete=" + isDelete + ", assessmentTypeForMigration="
-				+ assessmentTypeForMigration + ", assessmentTypeForCloudProvider=" + assessmentTypeForCloudProvider
-				+ ", assessmentTypeForCloudable=" + assessmentTypeForCloudable + ", createdBy=" + createdBy
-				+ ", cteatedTime=" + cteatedTime + ", modifiedBy=" + modifiedBy + ", modifiedTime=" + modifiedTime
-				+ ", clientId=" + clientId + ", migrationRule=" + migrationRule + ", questionOption=" + questionOption
-				+ ", cloudProviderRules=" + cloudProviderRules + "]";
+				+ ", question_text_language2=" + question_text_language2 + ", questionDescription="
+				+ questionDescription + ", questionType=" + questionType + ", questionDisplayOrder="
+				+ questionDisplayOrder + ", numberOfOption=" + numberOfOption + ", isDelete=" + isDelete
+				+ ", assessmentTypeForMigration=" + assessmentTypeForMigration + ", assessmentTypeForCloudProvider="
+				+ assessmentTypeForCloudProvider + ", assessmentTypeForCloudable=" + assessmentTypeForCloudable
+				+ ", createdBy=" + createdBy + ", cteatedTime=" + cteatedTime + ", modifiedBy=" + modifiedBy
+				+ ", modifiedTime=" + modifiedTime + ", clientId=" + clientId + ", migrationRule=" + migrationRule
+				+ ", questionOption=" + questionOption + ", cloudProviderRules=" + cloudProviderRules + "]";
 	}
+
+	
 
 	
 	

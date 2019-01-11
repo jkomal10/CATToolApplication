@@ -21,13 +21,13 @@ export class CATloginComponent implements OnInit {
      constructor(private loginService :CatloginService,public router: Router,private myStorage:LocalStorageService) {}
  
      ngOnInit() {
+         
  }
  
      onLoggedin(formValues) { 
           this.loginService.getUserByUserNamePassword(formValues.userName,formValues.password).subscribe((data)=>{
           this.users=data;
-
-             if( this.users!=null)
+             if( this.users.userName!=null)
              {
                  this.myStorage.setCurrentUserObject(this.users);
                  this.myStorage.setLoggedInTrue('true');

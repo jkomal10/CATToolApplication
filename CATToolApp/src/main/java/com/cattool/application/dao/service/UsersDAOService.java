@@ -45,12 +45,12 @@ public class UsersDAOService {
 	}
 	
 	public UsersDao getUserByUsername(String userName, String password) {
-		return toDaoForUsers(getUserByUserNameAndPassword(userName,password));
+		return getUserByUserNameAndPassword(userName,password);
 	}
 	
-	public Users getUserByUserNameAndPassword(String userName, String password)
+	public UsersDao getUserByUserNameAndPassword(String userName, String password)
 	{
-		return userRepository.findByUserNameAndPassword(userName,password);
+		return toDaoForUsers(userRepository.findByUserNameAndPassword(userName,password));
 	}
 	
 	public UsersDao toDaoForUsers(Users users)
@@ -128,7 +128,7 @@ public class UsersDAOService {
 	public void setUserNameAndPassword(String userName, String password,String newPassword) {
 		if(getUserByUserNameAndPassword(userName,password)!=null)
 		{
-			setNewPassword(newPassword, toDaoForUsers(getUserByUserNameAndPassword(userName,password)));
+			setNewPassword(newPassword, getUserByUserNameAndPassword(userName,password));
 		}
 	}
 	
@@ -168,6 +168,5 @@ public class UsersDAOService {
 	public ClientMaster getClientNameByClientId(int clientId) {
 		return clientMasterRepository.findByClientId(clientId);
 	}
-	
 	
 }

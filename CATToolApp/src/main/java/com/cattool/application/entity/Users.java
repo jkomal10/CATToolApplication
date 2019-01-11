@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name="users_table")
+@Table(name="users")
 public class Users {
 	
 	@Id
